@@ -11,9 +11,9 @@
         "allowImportingTsExtensions": true,
         "rootDir": ".",
         "paths": {
-            "@shared/*": ["./shared/*"],
-            "@client/*": ["./client/src/*"],
-            "@server/*": ["./server/src/*"],
+            "shared/*": ["./shared/*"],
+            "client/*": ["./client/src/*"],
+            "server/*": ["./server/src/*"],
         },
     },
     "include": ["./shared"],
