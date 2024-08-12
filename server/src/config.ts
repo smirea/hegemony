@@ -1,11 +1,15 @@
-import * as path from 'path';
-import { env } from '@smirea/node-utils';
+import * as path from 'node:path';
+import { consoleSetup, env, setupDotenv } from '@smirea/node-utils';
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+setupDotenv(path.resolve(__dirname, '..'));
+consoleSetup({});
 
-require('dotenv').config({ path: path.resolve(__dirname, '', '.env.local') });
-require('dotenv').config({ path: path.resolve(__dirname, '', '.env.' + process.env.NODE_ENV) });
-require('dotenv').config({ path: path.resolve(__dirname, '', '.env') });
+const isLocalDev = env('boolean', 'IS_LOCAL', false);
+const envName = isLocalDev ? 'local' : process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
 
+const config = {
+    isLocalDev,
+    envName,
+};
 
-env({ name: ''  });
+export default config;

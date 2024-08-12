@@ -3,6 +3,7 @@
     "private": true,
     "version": "1.0.0",
     "scripts": {
+        "test": "vitest",
         "server:dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules server/src/index.ts",
         "client:dev": "rsbuild dev -c client/rsbuild.config.ts",
         "client:build": "rsbuild build -c client/rsbuild.config.ts",
@@ -30,6 +31,7 @@
         "@types/react": "^18.3.3",
         "@types/react-dom": "^18.3.0",
         "lefthook": "^1.7.11",
-        "typescript": "^5.5.2"
+        "typescript": "^5.5.2",
+        "vitest": "^2.0.5"
     }
 }
