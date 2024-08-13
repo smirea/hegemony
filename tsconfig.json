@@ -16,5 +16,7 @@
             "server/*": ["./server/src/*"],
         },
     },
-    "include": ["./shared"],
+    "include": [
+        "./shared"
+    ],
 }
