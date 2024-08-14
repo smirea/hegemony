@@ -1,20 +1,30 @@
 {
+    "ts-node": {
+        "compilerOptions": {
+          "module": "commonjs"
+        }
+    },
     "compilerOptions": {
-        "target": "ES2020",
+        "allowImportingTsExtensions": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "isolatedModules": true,
         "lib": ["ES2020"],
         "module": "ESNext",
+        "moduleResolution": "Node",
         "noEmit": true,
-        "strict": true,
-        "skipLibCheck": true,
-        "isolatedModules": true,
-        "useDefineForClassFields": true,
-        "allowImportingTsExtensions": true,
-        "rootDir": ".",
         "paths": {
-            "shared/*": ["./shared/*"],
             "client/*": ["./client/src/*"],
+            "packages/*": ["./packages/*"],
             "server/*": ["./server/src/*"],
+            "shared/*": ["./shared/*"],
         },
+        "rootDir": ".",
+        "skipLibCheck": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "target": "ES2020",
+        "useDefineForClassFields": true,
     },
     "include": [
         "./shared"

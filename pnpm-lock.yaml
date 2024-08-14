@@ -17,6 +17,9 @@ dependencies:
   '@tanstack/react-query':
     specifier: ^5.51.21
     version: 5.51.21(react@18.3.1)
+  '@types/lodash':
+    specifier: ^4.17.7
+    version: 4.17.7
   dotenv:
     specifier: ^16.4.5
     version: 16.4.5
@@ -41,6 +44,9 @@ dependencies:
   ts-node-dev:
     specifier: ^2.0.0
     version: 2.0.0(@types/node@22.1.0)(typescript@5.5.2)
+  zod:
+    specifier: ^3.23.8
+    version: 3.23.8
 
 devDependencies:
   '@eslint/compat':
@@ -1073,6 +1079,10 @@ packages:
   /@types/json5@0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
+
+  /@types/lodash@4.17.7:
+    resolution: {integrity: sha512-8wTvZawATi/lsmNu10/j2hk1KEP0IvjubqPE3cu1Xz7xfXXt5oCq3SNUz4fMIP4XGF9Ky+Ue2tBA3hcS7LSBlA==}
+    dev: false
 
   /@types/node@22.1.0:
     resolution: {integrity: sha512-AOmuRF0R2/5j1knA3c6G3HOk523Ga+l+ZXltX8SF1+5oqcXijjfTd8fY3XRZqSihEu9XhtQnKYLmkFaoxgsJHw==}
@@ -4320,6 +4330,10 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+    dev: false
 
   github.com/smirea/smirea-node-utils/5c1dd8f217b2b671bedb2c94b188d7b26f481487:
     resolution: {commit: 5c1dd8f217b2b671bedb2c94b188d7b26f481487, repo: git+ssh://git@github.com/smirea/smirea-node-utils.git, type: git}

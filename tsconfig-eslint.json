@@ -1,15 +1,16 @@
 {
 	"extends": "./tsconfig.json",
 	"include": [
-		"client/**/*.ts",
-		"client/**/*.tsx",
-		"server/**/*.tsx",
-		"server/**/*.ts",
-		"shared/**/*.tsx",
-		"shared/**/*.ts",
+		"*.js",
 		"*.ts",
 		"*.tsx",
-		"*.js",
-		"*.mjs"
+		"*.mjs",
+		"client/**/*.ts",
+		"client/**/*.tsx",
+		"packages/**/*.ts",
+		"scripts/**/*.ts",
+		"server/**/*.ts",
+		"shared/**/*.ts",
+		"shared/**/*.tsx"
 	]
 }
