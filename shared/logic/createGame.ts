@@ -1,36 +1,71 @@
-import { actions } from './actions';
-import { Game, GameState, Player, PolicyName, PolicyEnum, RoleName, RoleEnum, RunContext } from './types';
+import _ from 'lodash';
+import { ActionEventDefinition, ActionName, actions } from './actions';
+import { Game, GameState, Player, PolicyName, PolicyEnum, RoleName, RoleEnum, RunContext, BaseRole } from './types';
+import chalk from 'chalk';
 
 export default function createGame({
-    requestUserInput,
+    requestPlayerInput,
+    debug,
 }: {
-    requestUserInput: Game['requestPlayerInput'];
+    requestPlayerInput: Game['requestPlayerInput'],
+    debug?: boolean,
 }) {
     const tick: Game['tick'] = async () => {
-        if (!state.actionQueue.length) return;
+        if (state.currentActionIndex >= state.actionQueue.length) return;
 
-        const { type, data } = state.actionQueue.shift()!;
+        const event = state.actionQueue[state.currentActionIndex];
+        const { type } = event;
 
-        if (actions[type].condition && !actions[type].condition(ctx)) {
-            throw new Error(`Action(${type}) condition not met`);
+        if (debug) {
+            console.log(
+                chalk.bold(`${String(state.currentActionIndex).padStart(3)} tick:`), event.type.padEnd(35),
+                event.data
+            );
+        }
+
+        const actionContext: RunContext = {
+            ...ctx,
+            queueIndex: state.currentActionIndex + 1,
+            currentRoleState: state.currentRole
+                ? state.roles[state.currentRole]
+                : null as any,
+        };
+        actionContext.next = createNext(actionContext);
+
+        if (actions[type].condition) {
+            // @ts-ignore
+            const errors = actions[type].condition(actionContext, event.data)
+                .filter(c => !c[1])
+                .map(c => c[0]);
+            if (errors.length > 0) {
+                throw new Error(`Action(${type}) condition not met: ${errors.join(', ')}`);
+            }
         }
 
         // @ts-ignore
-        return await actions[type].run(ctx, data);
+        await actions[event.type].run(actionContext, event.data);
+
+        ++state.currentActionIndex;;
     };
 
-    const next: (event: any) => void = event => {
-        if (typeof event === 'string') {
-            state.actionQueue.push({ type: event } as any);
-            result.state.actionHistory.push({ type: event } as any);
-        } else {
-            state.actionQueue.push(event);
-            result.state.actionHistory.push(event);
-        }
-    };
+    const createNext = (context: RunContext) => {
+        return ((event: any) => {
+            let formattedEvent: ActionEventDefinition = event;
+            if (typeof event === 'string') {
+                formattedEvent = { type: event } as any;
+            }
+            if (context.queueIndex == null) {
+                state.actionQueue.push(formattedEvent);
+            } else {
+                state.actionQueue.splice(context.queueIndex, 0, formattedEvent);
+                ++context.queueIndex;
+            }
+        }) satisfies Game['next'];
+    }
 
     const getRoleState = () => ({
         loans: 0,
+        usedActions: [],
         resources: {
             money: 0,
             influence: 0,
@@ -39,23 +74,23 @@ export default function createGame({
             education: 0,
             luxury: 0,
         },
-    });
+    } satisfies BaseRole);
 
     const state: GameState = {
         players: [] as Player[],
         settings: {},
         round: 0,
         turn: 0,
-        currentRole: 0,
+        currentRole: RoleEnum.workingClass,
         board: {
             policies: {
-                [PolicyEnum.fiscalPolicy]: 3,
-                [PolicyEnum.laborMarket]: 2,
-                [PolicyEnum.taxation]: 1,
-                [PolicyEnum.healthcare]: 2,
-                [PolicyEnum.education]: 3,
-                [PolicyEnum.foreignTrade]: 2,
-                [PolicyEnum.immigration]: 2,
+                [PolicyEnum.fiscalPolicy]: 2,
+                [PolicyEnum.laborMarket]: 1,
+                [PolicyEnum.taxation]: 0,
+                [PolicyEnum.healthcare]: 1,
+                [PolicyEnum.education]: 2,
+                [PolicyEnum.foreignTrade]: 1,
+                [PolicyEnum.immigration]: 1,
             },
             policyProposals: {} as Record<PolicyName, { role: RoleName; value: number }>,
         },
@@ -73,24 +108,37 @@ export default function createGame({
                 ...getRoleState()
             },
         },
-        actionHistory: [],
+        currentActionIndex: 0,
+        nextActionIndex: 0,
         actionQueue: [],
     };
 
     const ctx: RunContext = {
         state,
-        requestPlayerInput: requestUserInput,
-        next: next as any,
+        debug,
+        queueIndex: null,
+        currentRoleState: null as any,
+        requestPlayerInput: async (type, ...args) => {
+            if (debug) console.log(chalk.blue('    user:'), chalk.red(type.padEnd(20)), args[0]);
+            const result = await requestPlayerInput(type, ...args);
+            if (debug) console.log(chalk.blue('    user:'), chalk.blue('result'.padEnd(20)), result);
+            return result;
+        },
+        next: null as any,
     }
+    ctx.next = createNext(ctx);
 
     const result: Game = {
-        ...ctx,
+        ..._.omit(ctx, ['currentRoleState']),
         tick,
-        flush: async () => {
+        flush: async ({ to, after } = {}) => {
+            if (to && after) throw new Error('flush: to and after are mutually exclusive');
             let count = 0;
             while (state.actionQueue.length) {
-                if (++count > 20) throw new Error('Infinite loop breaker');
                 await tick();
+                if (++count > 50) throw new Error('Infinite loop breaker');
+                if (to && state.actionQueue[state.currentActionIndex].type === to) break;
+                if (after && state.actionQueue[state.currentActionIndex - 1].type === after) break;
             }
         },
     };

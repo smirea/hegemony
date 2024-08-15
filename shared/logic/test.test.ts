@@ -1,55 +1,67 @@
-import { beforeEach, expect, test, vi } from 'vitest';
+import { beforeEach, expect, test, describe, vi } from 'vitest';
 import createGame from './createGame';
 import { Game, Player, PolicyEnum, RoleEnum } from './types';
-import { describe } from 'node:test';
+import { ActionName, roleActionEvent } from './actions';
 
 let game: Game = null as any;
-const requestUserInput = vi.fn<Game['requestPlayerInput']>();
+const noResponseSymbol = Symbol('nope');
+let playerInput: any = noResponseSymbol;
 const working: Player = { name: 'working', role: RoleEnum.workingClass };
 const middle: Player = { name: 'middle', role: RoleEnum.middleClass };
 const capitalist: Player = { name: 'capitalist', role: RoleEnum.capitalist };
 const state: Player = { name: 'state', role: RoleEnum.state };
 
-const flushAction = async (...args: Parameters<Game['next']>) => {
-    game.next(...args);
-    return await game.flush();
+const tick = async (n?: number | ActionName) => {
+    n ??= 1;
+    if (typeof n === 'number') for (let i = 0; i < n; ++i) await game.tick();
+    else await game.flush({ after: n });
 }
 
+const requestPlayerInput = vi.fn<Game['requestPlayerInput']>();
+
 beforeEach(() => {
-    game = createGame({ requestUserInput: requestUserInput as any });
-    game.state.players = [working, middle, capitalist, state];
+    game = createGame({ requestPlayerInput: requestPlayerInput as any });
+    game.state.players = [working, capitalist];
+    requestPlayerInput.mockReset();
+    requestPlayerInput.mockImplementation(async (...data: any) => {
+        if (playerInput === noResponseSymbol) {
+            throw new Error('test-error: player response not set for: ' + JSON.stringify(data));
+        }
+        const r = playerInput;
+        playerInput = noResponseSymbol;
+        return r;
+    });
 });
 
-void describe('game:start', () => {
+describe('game:start', () => {
     test('sorts players by role', async () => {
-        await flushAction('game:start');
+        game.next('game:start');
+        await tick();
         expect(game.state.players).toEqual([working, middle, capitalist, state]);
-    });
-
-    test('sets currentRole to 0', async () => {
-        await flushAction('game:start');
         expect(game.state.currentRole).toBe(0);
     });
 });
 
-void describe('started game', () => {
+describe('started game', () => {
     beforeEach(async () => {
-        requestUserInput.mockResolvedValue({
-            type: 'workingClass:basic:proposeBill',
-            data: { policy: PolicyEnum.fiscalPolicy, value: 3 },
+        playerInput = roleActionEvent('action:basic:proposeBill', {
+            policy: PolicyEnum.fiscalPolicy,
+            value: 1,
         });
-        await flushAction('game:start');
+        game.next('game:start');
+        await tick();
     });
 
-    void describe('workingClass:turn:start', () => {
+    describe('workingClass:turn:start', () => {
         test.only('request input', async () => {
-            expect(requestUserInput).toHaveBeenCalledOnce();
-            expect(requestUserInput).toHaveBeenCalledWith('pickAction', {
+            await tick('action:basic:proposeBill');
+            expect(requestPlayerInput).toHaveBeenCalledOnce();
+            expect(requestPlayerInput).toHaveBeenCalledWith('pickAction', {
                 role: RoleEnum.workingClass,
             });
             expect(game.state.board.policyProposals.fiscalPolicy).toEqual({
                 role: RoleEnum.workingClass,
-                value: 3,
+                value: 1,
             });
         });
     });

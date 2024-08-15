@@ -145,7 +145,7 @@ export default [
             'func-call-spacing': 1,
             'key-spacing': 1,
             'keyword-spacing': 1,
-            'no-console': 2,
+            // 'no-console': 2,
             'no-multi-spaces': 1,
             'no-trailing-spaces': 1,
             'no-unsafe-optional-chaining': 2,

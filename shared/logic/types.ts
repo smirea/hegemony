@@ -1,5 +1,6 @@
 import { AnyObject } from 'shared/types';
 import {
+    ActionName,
     type ActionEventDefinition,
     type ActionEventMap,
     type PlayerActionMap,
@@ -43,24 +44,35 @@ export interface Player {
     name: string;
 }
 
+export interface BaseRole {
+    loans: number;
+    usedActions: Array<'basic' | 'free'>;
+    resources: Record<Resource, number>;
+}
+
+interface WorkingClassRole extends BaseRole { }
+interface MiddleClassRole extends BaseRole { }
+interface CapitalistRole extends BaseRole { }
+interface StateRole extends BaseRole { }
+
 export interface GameState {
     players: Player[];
     settings: AnyObject;
     round: number;
     turn: number;
-    currentRole: number;
+    currentRole: null | RoleName;
     board: {
         policies: Record<PolicyName, number>;
         policyProposals: Partial<Record<PolicyName, { role: RoleName; value: number }>>;
     };
-    roles: Record<
-        RoleName,
-        {
-            loans: number;
-            resources: Record<Resource, number>;
-        }
-    >;
-    actionHistory: ActionEventDefinition[];
+    roles: {
+        workingClass: WorkingClassRole;
+        middleClass: MiddleClassRole;
+        capitalist: CapitalistRole;
+        state: StateRole;
+    };
+    nextActionIndex: number;
+    currentActionIndex: number;
     actionQueue: ActionEventDefinition[];
 }
 
@@ -74,18 +86,24 @@ export interface Game {
     ) => Promise<PlayerActionMap[T]['output']>;
     tick: () => Promise<void>;
     // calls .tick() until the queue is empty
-    flush: () => Promise<void>;
-    next: <T extends keyof ActionEventMap>(
+    flush: (config?: { to?: ActionName, after?: ActionName }) => Promise<void>;
+    next: <T extends ActionName>(
         event: ActionEventMap[T] extends { data: infer D } ? { type: T; data: D } : T | { type: T }
     ) => void;
 }
 
-export type RunContext = Omit<Game, 'tick' | 'flush'>;
+export interface RunContext extends Omit<Game, 'tick' | 'flush'> {
+    debug?: boolean;
+    /** where will actions be added on the queue when calling next(...). null = root */
+    queueIndex: number | null;
+    currentRoleState: WorkingClassRole | MiddleClassRole | CapitalistRole | StateRole;
+}
 
 export interface Action<Type extends string, Data extends AnyObject | undefined = undefined> {
     readonly type: Type;
     readonly data?: Data;
-    readonly condition?: (ctx: RunContext) => boolean;
+    readonly condition?: (ctx: RunContext, data: Data extends undefined ? never : Data) =>
+        Array<[string, boolean]>;
     readonly run: (ctx: RunContext, data: Data extends undefined ? never : Data) => void | Promise<void>;
 }
 
