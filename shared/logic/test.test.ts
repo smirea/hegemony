@@ -1,7 +1,8 @@
 import { beforeEach, expect, test, describe, vi } from 'vitest';
+
 import createGame from './createGame';
-import { Game, Player, PolicyEnum, RoleEnum } from './types';
-import { ActionName, roleActionEvent } from './actions';
+import { type ActionName, type Game, type Player, PolicyEnum, RoleEnum } from './types';
+import { roleActionEvent } from './actions/utils';
 
 let game: Game = null as any;
 const noResponseSymbol = Symbol('nope');
@@ -15,7 +16,7 @@ const tick = async (n?: number | ActionName) => {
     n ??= 1;
     if (typeof n === 'number') for (let i = 0; i < n; ++i) await game.tick();
     else await game.flush({ after: n });
-}
+};
 
 const requestPlayerInput = vi.fn<Game['requestPlayerInput']>();
 
@@ -44,7 +45,7 @@ describe('game:start', () => {
 
 describe('started game', () => {
     beforeEach(async () => {
-        playerInput = roleActionEvent('action:basic:proposeBill', {
+        playerInput = roleActionEvent('action:basic:propose-bill', {
             policy: PolicyEnum.fiscalPolicy,
             value: 1,
         });
@@ -54,7 +55,7 @@ describe('started game', () => {
 
     describe('workingClass:turn:start', () => {
         test.only('request input', async () => {
-            await tick('action:basic:proposeBill');
+            await tick('action:basic:propose-bill');
             expect(requestPlayerInput).toHaveBeenCalledOnce();
             expect(requestPlayerInput).toHaveBeenCalledWith('pickAction', {
                 role: RoleEnum.workingClass,

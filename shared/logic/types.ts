@@ -1,11 +1,7 @@
-import { AnyObject } from 'shared/types';
-import {
-    ActionName,
-    type ActionEventDefinition,
-    type ActionEventMap,
-    type PlayerActionMap,
-    type PlayerActionType,
-} from './actions';
+import type { AnyObject } from 'shared/types';
+import type { createActions } from './actions';
+
+type ActionDefs = ReturnType<typeof createActions>;
 
 export const RoleEnum = {
     workingClass: 'workingClass',
@@ -50,10 +46,14 @@ export interface BaseRole {
     resources: Record<Resource, number>;
 }
 
-interface WorkingClassRole extends BaseRole { }
-interface MiddleClassRole extends BaseRole { }
-interface CapitalistRole extends BaseRole { }
-interface StateRole extends BaseRole { }
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface WorkingClassRole extends BaseRole {}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface MiddleClassRole extends BaseRole {}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface CapitalistRole extends BaseRole {}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface StateRole extends BaseRole {}
 
 export interface GameState {
     players: Player[];
@@ -86,9 +86,9 @@ export interface Game {
     ) => Promise<PlayerActionMap[T]['output']>;
     tick: () => Promise<void>;
     // calls .tick() until the queue is empty
-    flush: (config?: { to?: ActionName, after?: ActionName }) => Promise<void>;
+    flush: (config?: { to?: ActionName; after?: ActionName }) => Promise<void>;
     next: <T extends ActionName>(
-        event: ActionEventMap[T] extends { data: infer D } ? { type: T; data: D } : T | { type: T }
+        event: ActionEventMap[T] extends { data: infer D } ? { type: T; data: D } : T | { type: T },
     ) => void;
 }
 
@@ -102,9 +102,14 @@ export interface RunContext extends Omit<Game, 'tick' | 'flush'> {
 export interface Action<Type extends string, Data extends AnyObject | undefined = undefined> {
     readonly type: Type;
     readonly data?: Data;
-    readonly condition?: (ctx: RunContext, data: Data extends undefined ? never : Data) =>
-        Array<[string, boolean]>;
-    readonly run: (ctx: RunContext, data: Data extends undefined ? never : Data) => void | Promise<void>;
+    readonly condition?: (
+        ctx: RunContext,
+        data: Data extends undefined ? never : Data,
+    ) => Array<[string, boolean]>;
+    readonly run: (
+        ctx: RunContext,
+        data: Data extends undefined ? never : Data,
+    ) => void | Promise<void>;
 }
 
 export type ActionEvent<T extends string, D = undefined> = D extends undefined
@@ -116,3 +121,27 @@ export type GetActionData<A extends Action<string, any>> =
 
 export type GetActionEventData<A extends ActionEvent<string, any>> =
     A extends ActionEvent<string, infer D> ? D : never;
+
+type RoleActionMap = ActionDefs['roleActions'];
+export type RoleActionName = keyof RoleActionMap;
+export type RoleActionDefinition = RoleActionMap[RoleActionName];
+export type RoleActionEventMap = {
+    [K in keyof RoleActionMap]: ActionEventFromAction<RoleActionMap[K]>;
+};
+
+export type PlayerActionMap = ActionDefs['playerInputActions'];
+export type PlayerActionType = keyof PlayerActionMap;
+
+export type ActionEventFromAction<A extends Action<string> | Action<string, any>> =
+    A extends Action<string, undefined>
+        ? ActionEvent<A['type']>
+        : A extends Action<string, infer D>
+          ? ActionEvent<A['type'], D>
+          : never;
+
+export type ActionMap = ActionDefs['actions'];
+export type ActionName = keyof ActionMap;
+export type ActionEventMap = {
+    [K in ActionName]: ActionEventFromAction<ActionMap[K]>;
+};
+export type ActionEventDefinition = ActionEventMap[ActionName];

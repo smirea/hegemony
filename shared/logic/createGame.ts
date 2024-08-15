@@ -1,15 +1,29 @@
 import _ from 'lodash';
-import { ActionEventDefinition, ActionName, actions } from './actions';
-import { Game, GameState, Player, PolicyName, PolicyEnum, RoleName, RoleEnum, RunContext, BaseRole } from './types';
 import chalk from 'chalk';
+
+import {
+    type Game,
+    type GameState,
+    type Player,
+    type PolicyName,
+    PolicyEnum,
+    type RoleName,
+    type RunContext,
+    type BaseRole,
+    type ActionEventDefinition,
+    RoleEnum,
+} from './types';
+import { createActions } from './actions';
 
 export default function createGame({
     requestPlayerInput,
     debug,
 }: {
-    requestPlayerInput: Game['requestPlayerInput'],
-    debug?: boolean,
+    requestPlayerInput: Game['requestPlayerInput'];
+    debug?: boolean;
 }) {
+    const { actions } = createActions();
+
     const tick: Game['tick'] = async () => {
         if (state.currentActionIndex >= state.actionQueue.length) return;
 
@@ -18,25 +32,26 @@ export default function createGame({
 
         if (debug) {
             console.log(
-                chalk.bold(`${String(state.currentActionIndex).padStart(3)} tick:`), event.type.padEnd(35),
-                event.data
+                chalk.bold(`${String(state.currentActionIndex).padStart(3)} tick:`),
+                event.type.padEnd(35),
+                event.data,
             );
         }
 
         const actionContext: RunContext = {
             ...ctx,
             queueIndex: state.currentActionIndex + 1,
-            currentRoleState: state.currentRole
-                ? state.roles[state.currentRole]
-                : null as any,
+            currentRoleState: state.currentRole ? state.roles[state.currentRole] : (null as any),
         };
         actionContext.next = createNext(actionContext);
 
         if (actions[type].condition) {
             // @ts-ignore
-            const errors = actions[type].condition(actionContext, event.data)
-                .filter(c => !c[1])
-                .map(c => c[0]);
+            const errors = actions[type]
+                // @ts-ignore
+                .condition(actionContext, event.data)
+                .filter((c: any) => !c[1])
+                .map((c: any) => c[0]);
             if (errors.length > 0) {
                 throw new Error(`Action(${type}) condition not met: ${errors.join(', ')}`);
             }
@@ -45,7 +60,7 @@ export default function createGame({
         // @ts-ignore
         await actions[event.type].run(actionContext, event.data);
 
-        ++state.currentActionIndex;;
+        ++state.currentActionIndex;
     };
 
     const createNext = (context: RunContext) => {
@@ -61,20 +76,21 @@ export default function createGame({
                 ++context.queueIndex;
             }
         }) satisfies Game['next'];
-    }
+    };
 
-    const getRoleState = () => ({
-        loans: 0,
-        usedActions: [],
-        resources: {
-            money: 0,
-            influence: 0,
-            food: 0,
-            healthcare: 0,
-            education: 0,
-            luxury: 0,
-        },
-    } satisfies BaseRole);
+    const getRoleState = () =>
+        ({
+            loans: 0,
+            usedActions: [],
+            resources: {
+                money: 0,
+                influence: 0,
+                food: 0,
+                healthcare: 0,
+                education: 0,
+                luxury: 0,
+            },
+        }) satisfies BaseRole;
 
     const state: GameState = {
         players: [] as Player[],
@@ -96,16 +112,16 @@ export default function createGame({
         },
         roles: {
             [RoleEnum.workingClass]: {
-                ...getRoleState()
+                ...getRoleState(),
             },
             [RoleEnum.middleClass]: {
-                ...getRoleState()
+                ...getRoleState(),
             },
             [RoleEnum.capitalist]: {
-                ...getRoleState()
+                ...getRoleState(),
             },
             [RoleEnum.state]: {
-                ...getRoleState()
+                ...getRoleState(),
             },
         },
         currentActionIndex: 0,
@@ -121,11 +137,12 @@ export default function createGame({
         requestPlayerInput: async (type, ...args) => {
             if (debug) console.log(chalk.blue('    user:'), chalk.red(type.padEnd(20)), args[0]);
             const result = await requestPlayerInput(type, ...args);
-            if (debug) console.log(chalk.blue('    user:'), chalk.blue('result'.padEnd(20)), result);
+            if (debug)
+                console.log(chalk.blue('    user:'), chalk.blue('result'.padEnd(20)), result);
             return result;
         },
         next: null as any,
-    }
+    };
     ctx.next = createNext(ctx);
 
     const result: Game = {
