@@ -12,8 +12,12 @@ import {
     type BaseRole,
     type ActionEventDefinition,
     RoleEnum,
+    type RoleActionDefinition,
 } from './types';
 import { createActions } from './actions';
+
+const isRoleAction = (action: any): action is RoleActionDefinition =>
+    !!(action as RoleActionDefinition).roles;
 
 export default function createGame({
     requestPlayerInput,
@@ -22,13 +26,13 @@ export default function createGame({
     requestPlayerInput: Game['requestPlayerInput'];
     debug?: boolean;
 }) {
-    const { actions } = createActions();
+    const { getAction } = createActions();
 
     const tick: Game['tick'] = async () => {
         if (state.currentActionIndex >= state.actionQueue.length) return;
 
         const event = state.actionQueue[state.currentActionIndex];
-        const { type } = event;
+        const action = getAction(event.type);
 
         if (debug) {
             console.log(
@@ -45,20 +49,24 @@ export default function createGame({
         };
         actionContext.next = createNext(actionContext);
 
-        if (actions[type].condition) {
+        if (isRoleAction(action) && !(action.roles as any[]).includes(state.currentRole!)) {
+            throw new Error(`Action(${action.type}) is not valid for: ${state.currentRole}`);
+        }
+
+        if (action.condition) {
             // @ts-ignore
-            const errors = actions[type]
+            const errors = action
                 // @ts-ignore
                 .condition(actionContext, event.data)
                 .filter((c: any) => !c[1])
                 .map((c: any) => c[0]);
             if (errors.length > 0) {
-                throw new Error(`Action(${type}) condition not met: ${errors.join(', ')}`);
+                throw new Error(`Action(${action.type}) condition not met: ${errors.join(', ')}`);
             }
         }
 
         // @ts-ignore
-        await actions[event.type].run(actionContext, event.data);
+        await action.run(actionContext, event.data);
 
         ++state.currentActionIndex;
     };
@@ -113,12 +121,15 @@ export default function createGame({
         roles: {
             [RoleEnum.workingClass]: {
                 ...getRoleState(),
+                availableVotingCubes: 25,
             },
             [RoleEnum.middleClass]: {
                 ...getRoleState(),
+                availableVotingCubes: 25,
             },
             [RoleEnum.capitalist]: {
                 ...getRoleState(),
+                availableVotingCubes: 25,
             },
             [RoleEnum.state]: {
                 ...getRoleState(),

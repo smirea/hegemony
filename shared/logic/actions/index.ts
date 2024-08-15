@@ -5,9 +5,8 @@ import createPlayerInputActions from './createPlayerInputActions';
 import { type CreateActionsContext } from './utils';
 
 interface CreateActionsResult extends CreateActionsContext {
-    actions: ReturnType<typeof createCommonActions>['roleActions'] &
-        ReturnType<typeof createGameActions>;
-    roleActions: ReturnType<typeof createCommonActions>['roleActions'];
+    actions: ReturnType<typeof createCommonActions> & ReturnType<typeof createGameActions>;
+    roleActions: ReturnType<typeof createCommonActions>;
     playerInputActions: ReturnType<typeof createPlayerInputActions>;
 }
 
@@ -33,7 +32,7 @@ export function createActions(): CreateActionsResult {
     const commonActions = createCommonActions();
 
     const roleActions = {
-        ...commonActions.roleActions,
+        ...commonActions,
     };
 
     const actions = {

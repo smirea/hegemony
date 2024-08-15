@@ -1,23 +1,36 @@
 import type { AnyObject } from 'shared/types';
-import type { Action, ActionEventMap, ActionMap, ActionName, RoleActionEventMap } from '../types';
+import type {
+    Action,
+    ActionEventMap,
+    ActionMap,
+    ActionName,
+    RoleActionEventMap,
+    RoleName,
+} from '../types';
 
-export interface RoleAction<T extends string, D extends AnyObject | undefined = undefined>
-    extends Action<T, D> {
-    name: string;
-    description: string;
-    isFreeAction?: boolean;
+export interface RoleAction<
+    Type extends string,
+    Roles extends RoleName,
+    Data extends AnyObject | undefined = undefined,
+> extends Action<Type, Roles, Data> {
+    readonly isFreeAction?: boolean;
+    readonly roles: readonly Roles[];
 }
 
-export function roleAction<T extends string, D extends AnyObject | undefined = undefined>(
-    action: RoleAction<T, D>,
-): { [K in T]: RoleAction<T, D> } {
-    return { [action.type]: action } as { [K in T]: RoleAction<T, D> };
+export function roleAction<
+    T extends string,
+    R extends RoleName,
+    D extends AnyObject | undefined = undefined,
+>(action: RoleAction<T, R, D>): { [K in T]: RoleAction<T, R, D> } {
+    return { [action.type]: action } as { [K in T]: RoleAction<T, R, D> };
 }
 
-export function action<T extends string, D extends AnyObject | undefined = undefined>(
-    action: Action<T, D>,
-): { [K in T]: Action<T, D> } {
-    return { [action.type]: action } as { [K in T]: Action<T, D> };
+export function action<
+    T extends string,
+    R extends RoleName,
+    D extends AnyObject | undefined = undefined,
+>(action: Action<T, R, D>): { [K in T]: Action<T, R, D> } {
+    return { [action.type]: action } as { [K in T]: Action<T, R, D> };
 }
 
 export function actionEvent<T extends ActionName>(

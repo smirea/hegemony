@@ -46,12 +46,15 @@ export interface BaseRole {
     resources: Record<Resource, number>;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface WorkingClassRole extends BaseRole {}
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface MiddleClassRole extends BaseRole {}
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface CapitalistRole extends BaseRole {}
+interface WorkingClassRole extends BaseRole {
+    availableVotingCubes: number;
+}
+interface MiddleClassRole extends BaseRole {
+    availableVotingCubes: number;
+}
+interface CapitalistRole extends BaseRole {
+    availableVotingCubes: number;
+}
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface StateRole extends BaseRole {}
 
@@ -92,22 +95,36 @@ export interface Game {
     ) => void;
 }
 
-export interface RunContext extends Omit<Game, 'tick' | 'flush'> {
+type RoleMap = {
+    workingClass: WorkingClassRole;
+    middleClass: MiddleClassRole;
+    capitalist: CapitalistRole;
+    state: StateRole;
+};
+
+export interface RunContext<CurrenRole extends null | RoleName = null>
+    extends Omit<Game, 'tick' | 'flush'> {
     debug?: boolean;
     /** where will actions be added on the queue when calling next(...). null = root */
     queueIndex: number | null;
-    currentRoleState: WorkingClassRole | MiddleClassRole | CapitalistRole | StateRole;
+    currentRoleState: CurrenRole extends RoleName ? RoleMap[CurrenRole] : null;
 }
 
-export interface Action<Type extends string, Data extends AnyObject | undefined = undefined> {
+export interface Action<
+    Type extends string,
+    CurrenRole extends null | RoleName = null,
+    Data extends AnyObject | undefined = undefined,
+> {
     readonly type: Type;
+    /** short description for quick overview. full details added in UI */
+    readonly info?: string;
     readonly data?: Data;
     readonly condition?: (
-        ctx: RunContext,
+        ctx: RunContext<CurrenRole>,
         data: Data extends undefined ? never : Data,
     ) => Array<[string, boolean]>;
     readonly run: (
-        ctx: RunContext,
+        ctx: RunContext<CurrenRole>,
         data: Data extends undefined ? never : Data,
     ) => void | Promise<void>;
 }
@@ -132,10 +149,10 @@ export type RoleActionEventMap = {
 export type PlayerActionMap = ActionDefs['playerInputActions'];
 export type PlayerActionType = keyof PlayerActionMap;
 
-export type ActionEventFromAction<A extends Action<string> | Action<string, any>> =
-    A extends Action<string, undefined>
+export type ActionEventFromAction<A> =
+    A extends Action<string, any, undefined>
         ? ActionEvent<A['type']>
-        : A extends Action<string, infer D>
+        : A extends Action<string, any, infer D>
           ? ActionEvent<A['type'], D>
           : never;
 
