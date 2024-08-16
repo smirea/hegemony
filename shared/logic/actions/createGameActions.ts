@@ -23,7 +23,7 @@ export default function createGameActions({ getAction, validateEvent }: CreateAc
         ...action({
             type: 'game:round:start',
             async run({ state, debug, next }) {
-                state.currentRole = null;
+                state.currentRoleName = null;
                 ++state.round;
                 state.turn = 0;
                 if (debug) console.log(chalk.green.bold('——— round:'), state.round);
@@ -40,8 +40,10 @@ export default function createGameActions({ getAction, validateEvent }: CreateAc
         }),
         ...action({
             type: 'game:role:turn',
-            async run({ next, requestPlayerInput, currentRoleState, state }) {
-                const action = await requestPlayerInput('pickAction', { role: state.currentRole! });
+            async run({ next, requestPlayerInput, currentRole: currentRoleState, state }) {
+                const action = await requestPlayerInput('pickAction', {
+                    role: state.currentRoleName!,
+                });
                 validateEvent(action);
                 if (getAction(action.type)) {
                     currentRoleState.usedActions.push('free');
@@ -55,25 +57,25 @@ export default function createGameActions({ getAction, validateEvent }: CreateAc
         ...action({
             type: 'game:role:next',
             async run({ state, next }): Promise<void> {
-                if (state.currentRole == state.players[state.players.length - 1].role) {
+                if (state.currentRoleName == state.players[state.players.length - 1].role) {
                     return next('game:turn:end');
                 }
-                if (state.currentRole == null) {
-                    state.currentRole = state.players[0].role;
+                if (state.currentRoleName == null) {
+                    state.currentRoleName = state.players[0].role;
                 } else {
-                    state.currentRole =
+                    state.currentRoleName =
                         state.players[
-                            state.players.findIndex(p => p.role === state.currentRole) + 1
+                            state.players.findIndex(p => p.role === state.currentRoleName) + 1
                         ].role;
                 }
 
-                state.roles[state.currentRole!].usedActions = [];
+                state.roles[state.currentRoleName!].usedActions = [];
                 next('game:role:turn');
             },
         }),
         ...action({
             type: 'game:role:current',
-            async run({ currentRoleState, next }): Promise<void> {
+            async run({ currentRole: currentRoleState, next }): Promise<void> {
                 if (currentRoleState.usedActions.length >= 2) return next('game:role:next');
                 return next('game:role:turn');
             },

@@ -39,7 +39,7 @@ describe('game:start', () => {
         game.next('game:start');
         await tick();
         expect(game.state.players).toEqual([working, middle, capitalist, state]);
-        expect(game.state.currentRole).toBe(0);
+        expect(game.state.currentRoleName).toBe(0);
     });
 });
 

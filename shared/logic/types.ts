@@ -25,6 +25,7 @@ export const PolicyEnum = {
 export type PolicyName = (typeof PolicyEnum)[keyof typeof PolicyEnum];
 
 export const ResourceEnum = {
+    /** do not access directly, use ctx.{getMoney/addMoney/spendMoney} that accounts for capitalist */
     money: 'money',
     influence: 'influence',
     food: 'food',
@@ -41,29 +42,36 @@ export interface Player {
 }
 
 export interface BaseRole {
+    id: RoleName;
+    score: number;
     loans: number;
     usedActions: Array<'basic' | 'free'>;
     resources: Record<Resource, number>;
 }
 
 interface WorkingClassRole extends BaseRole {
+    id: typeof RoleEnum.workingClass;
     availableVotingCubes: number;
 }
 interface MiddleClassRole extends BaseRole {
+    id: typeof RoleEnum.middleClass;
     availableVotingCubes: number;
 }
 interface CapitalistRole extends BaseRole {
+    id: typeof RoleEnum.capitalist;
     availableVotingCubes: number;
+    resources: BaseRole['resources'] & { capital: number };
 }
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface StateRole extends BaseRole {}
+interface StateRole extends BaseRole {
+    id: typeof RoleEnum.state;
+}
 
 export interface GameState {
     players: Player[];
     settings: AnyObject;
     round: number;
     turn: number;
-    currentRole: null | RoleName;
+    currentRoleName: null | RoleName;
     board: {
         policies: Record<PolicyName, number>;
         policyProposals: Partial<Record<PolicyName, { role: RoleName; value: number }>>;
@@ -95,7 +103,7 @@ export interface Game {
     ) => void;
 }
 
-type RoleMap = {
+export type RoleMap = {
     workingClass: WorkingClassRole;
     middleClass: MiddleClassRole;
     capitalist: CapitalistRole;
@@ -107,7 +115,16 @@ export interface RunContext<CurrenRole extends null | RoleName = null>
     debug?: boolean;
     /** where will actions be added on the queue when calling next(...). null = root */
     queueIndex: number | null;
-    currentRoleState: CurrenRole extends RoleName ? RoleMap[CurrenRole] : null;
+    currentRole: CurrenRole extends RoleName ? RoleMap[CurrenRole] : null;
+    /** accounts for capitalist */
+    getMoney: (role: RoleName) => number;
+    /** accounts for capitalist */
+    addMoney: (role: RoleName, amount: number, source: 'money' | 'capital') => void;
+    spendMoney: (
+        role: RoleName,
+        amount: number,
+        config?: { source?: 'money' | 'capital'; canTakeLoans?: boolean },
+    ) => void;
 }
 
 export interface Action<

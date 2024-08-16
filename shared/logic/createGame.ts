@@ -19,6 +19,11 @@ import { createActions } from './actions';
 const isRoleAction = (action: any): action is RoleActionDefinition =>
     !!(action as RoleActionDefinition).roles;
 
+type RunContextNoRole = Omit<
+    RunContext<RoleName>,
+    'currentRole' | 'getMoney' | 'addMoney' | 'spendMoney'
+>;
+
 export default function createGame({
     requestPlayerInput,
     debug,
@@ -42,15 +47,60 @@ export default function createGame({
             );
         }
 
-        const actionContext: RunContext = {
+        const actionContext: RunContext<RoleName> = {
             ...ctx,
             queueIndex: state.currentActionIndex + 1,
-            currentRoleState: state.currentRole ? state.roles[state.currentRole] : (null as any),
+            currentRole: state.currentRoleName ? state.roles[state.currentRoleName] : (null as any),
+            getMoney: role => {
+                const r = actionContext.state.roles[role];
+                if (r.id === RoleEnum.capitalist) {
+                    return r.resources.capital + r.resources.money;
+                }
+                return r.resources.money;
+            },
+            addMoney: (role, amount, source = 'money') => {
+                const r = actionContext.state.roles[role];
+                if (r.id !== RoleEnum.capitalist) {
+                    r.resources.money += amount;
+                    return;
+                }
+                r.resources[source] += amount;
+            },
+            spendMoney: (role, amount, { source = 'money', canTakeLoans = false } = {}) => {
+                const r = actionContext.state.roles[role];
+                if (r.id !== RoleEnum.capitalist) {
+                    r.resources.money -= amount;
+                    if (r.resources.money < 0) {
+                        if (!canTakeLoans) throw new Error('not enough money');
+                        const numLoans = Math.ceil((r.resources.money / 50) * -1);
+                        r.resources.money += numLoans * 50;
+                        r.loans += numLoans;
+                    }
+                    return;
+                }
+                if (amount <= r.resources[source]) {
+                    r.resources[source] -= amount;
+                } else {
+                    let remaining = amount - r.resources[source];
+                    r.resources[source] = 0;
+                    const other = source === 'money' ? 'capital' : 'money';
+                    if (r.resources[other] >= remaining) {
+                        r.resources[other] -= remaining;
+                    } else {
+                        if (!canTakeLoans) throw new Error('not enough money');
+                        remaining -= r.resources[other];
+                        r.resources[other] = 0;
+                        const numLoans = Math.ceil(remaining / 50);
+                        r.resources.capital += numLoans * 50;
+                        r.loans += numLoans;
+                    }
+                }
+            },
         };
         actionContext.next = createNext(actionContext);
 
-        if (isRoleAction(action) && !(action.roles as any[]).includes(state.currentRole!)) {
-            throw new Error(`Action(${action.type}) is not valid for: ${state.currentRole}`);
+        if (isRoleAction(action) && !(action.roles as any[]).includes(state.currentRoleName!)) {
+            throw new Error(`Action(${action.type}) is not valid for: ${state.currentRoleName}`);
         }
 
         if (action.condition) {
@@ -71,7 +121,7 @@ export default function createGame({
         ++state.currentActionIndex;
     };
 
-    const createNext = (context: RunContext) => {
+    const createNext = (context: RunContextNoRole) => {
         return ((event: any) => {
             let formattedEvent: ActionEventDefinition = event;
             if (typeof event === 'string') {
@@ -88,6 +138,7 @@ export default function createGame({
 
     const getRoleState = () =>
         ({
+            score: 0,
             loans: 0,
             usedActions: [],
             resources: {
@@ -98,14 +149,14 @@ export default function createGame({
                 education: 0,
                 luxury: 0,
             },
-        }) satisfies BaseRole;
+        }) satisfies Omit<BaseRole, 'id'>;
 
     const state: GameState = {
         players: [] as Player[],
         settings: {},
         round: 0,
         turn: 0,
-        currentRole: RoleEnum.workingClass,
+        currentRoleName: RoleEnum.workingClass,
         board: {
             policies: {
                 [PolicyEnum.fiscalPolicy]: 2,
@@ -120,18 +171,26 @@ export default function createGame({
         },
         roles: {
             [RoleEnum.workingClass]: {
+                id: RoleEnum.workingClass,
                 ...getRoleState(),
                 availableVotingCubes: 25,
             },
             [RoleEnum.middleClass]: {
+                id: RoleEnum.middleClass,
                 ...getRoleState(),
                 availableVotingCubes: 25,
             },
             [RoleEnum.capitalist]: {
+                id: RoleEnum.capitalist,
                 ...getRoleState(),
                 availableVotingCubes: 25,
+                resources: {
+                    ...getRoleState().resources,
+                    capital: 0,
+                },
             },
             [RoleEnum.state]: {
+                id: RoleEnum.state,
                 ...getRoleState(),
             },
         },
@@ -140,11 +199,10 @@ export default function createGame({
         actionQueue: [],
     };
 
-    const ctx: RunContext = {
+    const ctx: RunContextNoRole = {
         state,
         debug,
         queueIndex: null,
-        currentRoleState: null as any,
         requestPlayerInput: async (type, ...args) => {
             if (debug) console.log(chalk.blue('    user:'), chalk.red(type.padEnd(20)), args[0]);
             const result = await requestPlayerInput(type, ...args);
@@ -157,7 +215,7 @@ export default function createGame({
     ctx.next = createNext(ctx);
 
     const result: Game = {
-        ..._.omit(ctx, ['currentRoleState']),
+        ...ctx,
         tick,
         flush: async ({ to, after } = {}) => {
             if (to && after) throw new Error('flush: to and after are mutually exclusive');
