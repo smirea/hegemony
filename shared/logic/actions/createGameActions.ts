@@ -39,22 +39,6 @@ export default function createGameActions({ getAction, validateEvent }: CreateAc
             },
         }),
         ...action({
-            type: 'game:role:turn',
-            async run({ next, requestPlayerInput, currentRole: currentRoleState, state }) {
-                const action = await requestPlayerInput('pickAction', {
-                    role: state.currentRoleName!,
-                });
-                validateEvent(action);
-                if (getAction(action.type)) {
-                    currentRoleState.usedActions.push('free');
-                } else {
-                    currentRoleState.usedActions.push('basic');
-                }
-                next(action);
-                next('game:role:current');
-            },
-        }),
-        ...action({
             type: 'game:role:next',
             async run({ state, next }): Promise<void> {
                 if (state.currentRoleName == state.players[state.players.length - 1].role) {
@@ -71,6 +55,22 @@ export default function createGameActions({ getAction, validateEvent }: CreateAc
 
                 state.roles[state.currentRoleName!].usedActions = [];
                 next('game:role:turn');
+            },
+        }),
+        ...action({
+            type: 'game:role:turn',
+            async run({ next, requestPlayerInput, currentRole: currentRoleState, state }) {
+                const action = await requestPlayerInput('pick-action', {
+                    role: state.currentRoleName!,
+                });
+                validateEvent(action);
+                if (getAction(action.type)) {
+                    currentRoleState.usedActions.push('free');
+                } else {
+                    currentRoleState.usedActions.push('basic');
+                }
+                next(action);
+                next('game:role:current');
             },
         }),
         ...action({

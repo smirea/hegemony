@@ -1,6 +1,12 @@
 import { type AnyObject } from 'shared/types';
 
-import { type ActionEventFromAction, type RoleActionDefinition, type RoleName } from '../types';
+import {
+    type Industry,
+    type WorkerType,
+    type ActionEventFromAction,
+    type RoleActionDefinition,
+    type RoleName,
+} from '../types';
 
 interface PlayerInputAction<
     Type extends string,
@@ -27,8 +33,32 @@ function playerInputAction<
 export default function createPlayerInputActions() {
     return {
         ...playerInputAction({
-            type: 'pickAction',
+            type: 'pick-action',
             async run(_: { role: RoleName }): Promise<ActionEventFromAction<RoleActionDefinition>> {
+                throw new Error('implement me');
+            },
+        }),
+        ...playerInputAction({
+            type: 'educate-worker',
+            async run(_: { role: RoleName }): Promise<{ id: number; type: WorkerType }> {
+                throw new Error('implement me');
+            },
+        }),
+        ...playerInputAction({
+            type: 'adjust-prices',
+            async run(_: { role: RoleName }): Promise<Partial<Record<Industry, number>>> {
+                throw new Error('implement me');
+            },
+        }),
+        ...playerInputAction({
+            type: 'swap-workers',
+            async run(_: { role: RoleName }): Promise<Array<[id1: number, id2: number]>> {
+                throw new Error('implement me');
+            },
+        }),
+        ...playerInputAction({
+            type: 'commit-workers',
+            async run(_: { role: RoleName }): Promise<{ companyId: number }> {
                 throw new Error('implement me');
             },
         }),

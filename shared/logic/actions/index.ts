@@ -1,12 +1,12 @@
 import { type ActionMap, type ActionName } from '../types';
-import createCommonActions from './createCommonActions';
+import createRoleActions from './createRoleActions';
 import createGameActions from './createGameActions';
 import createPlayerInputActions from './createPlayerInputActions';
 import { type CreateActionsContext } from './utils';
 
 interface CreateActionsResult extends CreateActionsContext {
-    actions: ReturnType<typeof createCommonActions> & ReturnType<typeof createGameActions>;
-    roleActions: ReturnType<typeof createCommonActions>;
+    actions: ReturnType<typeof createRoleActions> & ReturnType<typeof createGameActions>;
+    roleActions: ReturnType<typeof createRoleActions>;
     playerInputActions: ReturnType<typeof createPlayerInputActions>;
 }
 
@@ -29,7 +29,7 @@ export function createActions(): CreateActionsResult {
         validateEvent,
     };
 
-    const commonActions = createCommonActions();
+    const commonActions = createRoleActions();
 
     const roleActions = {
         ...commonActions,

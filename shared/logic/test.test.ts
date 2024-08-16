@@ -57,7 +57,7 @@ describe('started game', () => {
         test.only('request input', async () => {
             await tick('action:basic:propose-bill');
             expect(requestPlayerInput).toHaveBeenCalledOnce();
-            expect(requestPlayerInput).toHaveBeenCalledWith('pickAction', {
+            expect(requestPlayerInput).toHaveBeenCalledWith('pick-action', {
                 role: RoleEnum.workingClass,
             });
             expect(game.state.board.policyProposals.fiscalPolicy).toEqual({

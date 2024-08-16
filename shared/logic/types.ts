@@ -49,18 +49,27 @@ export interface BaseRole {
     resources: Record<Resource, number>;
 }
 
+export type Industry = 'food' | 'healthcare' | 'education' | 'luxury';
+export type WorkerType = Industry | 'unskilled';
+
 interface WorkingClassRole extends BaseRole {
     id: typeof RoleEnum.workingClass;
     availableVotingCubes: number;
+    workers: Array<{ id: number; type: WorkerType; company: null | number; committed?: boolean }>;
+    availableWorkers: Record<WorkerType, number>;
 }
 interface MiddleClassRole extends BaseRole {
     id: typeof RoleEnum.middleClass;
     availableVotingCubes: number;
+    workers: Array<{ id: number; type: WorkerType; company: null | number; committed?: boolean }>;
+    availableWorkers: Record<WorkerType, number>;
+    prices: Record<Industry, number>;
 }
 interface CapitalistRole extends BaseRole {
     id: typeof RoleEnum.capitalist;
     availableVotingCubes: number;
     resources: BaseRole['resources'] & { capital: number };
+    prices: Record<Industry, number>;
 }
 interface StateRole extends BaseRole {
     id: typeof RoleEnum.state;
@@ -82,6 +91,7 @@ export interface GameState {
         capitalist: CapitalistRole;
         state: StateRole;
     };
+    nextWorkerId: number;
     nextActionIndex: number;
     currentActionIndex: number;
     actionQueue: ActionEventDefinition[];
@@ -119,12 +129,13 @@ export interface RunContext<CurrenRole extends null | RoleName = null>
     /** accounts for capitalist */
     getMoney: (role: RoleName) => number;
     /** accounts for capitalist */
-    addMoney: (role: RoleName, amount: number, source: 'money' | 'capital') => void;
+    addMoney: (role: RoleName, amount: number, source?: 'money' | 'capital') => void;
     spendMoney: (
         role: RoleName,
         amount: number,
         config?: { source?: 'money' | 'capital'; canTakeLoans?: boolean },
     ) => void;
+    getProsperity: (role: typeof RoleEnum.workingClass | typeof RoleEnum.middleClass) => number;
 }
 
 export interface Action<

@@ -19,10 +19,7 @@ import { createActions } from './actions';
 const isRoleAction = (action: any): action is RoleActionDefinition =>
     !!(action as RoleActionDefinition).roles;
 
-type RunContextNoRole = Omit<
-    RunContext<RoleName>,
-    'currentRole' | 'getMoney' | 'addMoney' | 'spendMoney'
->;
+type RunContextNoRole = Omit<RunContext<RoleName>, 'currentRole'>;
 
 export default function createGame({
     requestPlayerInput,
@@ -51,51 +48,6 @@ export default function createGame({
             ...ctx,
             queueIndex: state.currentActionIndex + 1,
             currentRole: state.currentRoleName ? state.roles[state.currentRoleName] : (null as any),
-            getMoney: role => {
-                const r = actionContext.state.roles[role];
-                if (r.id === RoleEnum.capitalist) {
-                    return r.resources.capital + r.resources.money;
-                }
-                return r.resources.money;
-            },
-            addMoney: (role, amount, source = 'money') => {
-                const r = actionContext.state.roles[role];
-                if (r.id !== RoleEnum.capitalist) {
-                    r.resources.money += amount;
-                    return;
-                }
-                r.resources[source] += amount;
-            },
-            spendMoney: (role, amount, { source = 'money', canTakeLoans = false } = {}) => {
-                const r = actionContext.state.roles[role];
-                if (r.id !== RoleEnum.capitalist) {
-                    r.resources.money -= amount;
-                    if (r.resources.money < 0) {
-                        if (!canTakeLoans) throw new Error('not enough money');
-                        const numLoans = Math.ceil((r.resources.money / 50) * -1);
-                        r.resources.money += numLoans * 50;
-                        r.loans += numLoans;
-                    }
-                    return;
-                }
-                if (amount <= r.resources[source]) {
-                    r.resources[source] -= amount;
-                } else {
-                    let remaining = amount - r.resources[source];
-                    r.resources[source] = 0;
-                    const other = source === 'money' ? 'capital' : 'money';
-                    if (r.resources[other] >= remaining) {
-                        r.resources[other] -= remaining;
-                    } else {
-                        if (!canTakeLoans) throw new Error('not enough money');
-                        remaining -= r.resources[other];
-                        r.resources[other] = 0;
-                        const numLoans = Math.ceil(remaining / 50);
-                        r.resources.capital += numLoans * 50;
-                        r.loans += numLoans;
-                    }
-                }
-            },
         };
         actionContext.next = createNext(actionContext);
 
@@ -174,11 +126,33 @@ export default function createGame({
                 id: RoleEnum.workingClass,
                 ...getRoleState(),
                 availableVotingCubes: 25,
+                workers: [],
+                availableWorkers: {
+                    food: 0,
+                    healthcare: 0,
+                    education: 0,
+                    luxury: 0,
+                    unskilled: 0,
+                },
             },
             [RoleEnum.middleClass]: {
                 id: RoleEnum.middleClass,
                 ...getRoleState(),
                 availableVotingCubes: 25,
+                workers: [],
+                availableWorkers: {
+                    food: 0,
+                    healthcare: 0,
+                    education: 0,
+                    luxury: 0,
+                    unskilled: 0,
+                },
+                prices: {
+                    food: 0,
+                    healthcare: 0,
+                    education: 0,
+                    luxury: 0,
+                },
             },
             [RoleEnum.capitalist]: {
                 id: RoleEnum.capitalist,
@@ -188,12 +162,19 @@ export default function createGame({
                     ...getRoleState().resources,
                     capital: 0,
                 },
+                prices: {
+                    food: 0,
+                    healthcare: 0,
+                    education: 0,
+                    luxury: 0,
+                },
             },
             [RoleEnum.state]: {
                 id: RoleEnum.state,
                 ...getRoleState(),
             },
         },
+        nextWorkerId: 0,
         currentActionIndex: 0,
         nextActionIndex: 0,
         actionQueue: [],
@@ -211,6 +192,55 @@ export default function createGame({
             return result;
         },
         next: null as any,
+        getMoney: role => {
+            const r = ctx.state.roles[role];
+            if (r.id === RoleEnum.capitalist) {
+                return r.resources.capital + r.resources.money;
+            }
+            return r.resources.money;
+        },
+        addMoney: (role, amount, source = 'money') => {
+            const r = ctx.state.roles[role];
+            if (r.id !== RoleEnum.capitalist) {
+                r.resources.money += amount;
+                return;
+            }
+            r.resources[source] += amount;
+        },
+        spendMoney: (role, amount, { source = 'money', canTakeLoans = false } = {}) => {
+            const r = ctx.state.roles[role];
+            if (r.id !== RoleEnum.capitalist) {
+                r.resources.money -= amount;
+                if (r.resources.money < 0) {
+                    if (!canTakeLoans) throw new Error('not enough money');
+                    const numLoans = Math.ceil((r.resources.money / 50) * -1);
+                    r.resources.money += numLoans * 50;
+                    r.loans += numLoans;
+                }
+                return;
+            }
+            if (amount <= r.resources[source]) {
+                r.resources[source] -= amount;
+            } else {
+                let remaining = amount - r.resources[source];
+                r.resources[source] = 0;
+                const other = source === 'money' ? 'capital' : 'money';
+                if (r.resources[other] >= remaining) {
+                    r.resources[other] -= remaining;
+                } else {
+                    if (!canTakeLoans) throw new Error('not enough money');
+                    remaining -= r.resources[other];
+                    r.resources[other] = 0;
+                    const numLoans = Math.ceil(remaining / 50);
+                    r.resources.capital += numLoans * 50;
+                    r.loans += numLoans;
+                }
+            }
+        },
+        getProsperity: role => {
+            const r = state.roles[role];
+            return _.clamp(Math.ceil(r.workers.length / 3), 3, 10);
+        },
     };
     ctx.next = createNext(ctx);
 
