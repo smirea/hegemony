@@ -2,7 +2,7 @@ import { beforeEach, expect, test, describe, vi } from 'vitest';
 
 import createGame from './createGame';
 import { type ActionName, type Game, type Player, PolicyEnum, RoleEnum } from './types';
-import { roleActionEvent } from './actions/utils';
+import { type ActionFactoryContext, roleActionEvent } from './actions/utils';
 
 let game: Game = null as any;
 const noResponseSymbol = Symbol('nope');
@@ -18,7 +18,7 @@ const tick = async (n?: number | ActionName) => {
     else await game.flush({ after: n });
 };
 
-const requestPlayerInput = vi.fn<Game['requestPlayerInput']>();
+const requestPlayerInput = vi.fn<ActionFactoryContext['requestPlayerInput']>();
 
 beforeEach(() => {
     game = createGame({ requestPlayerInput: requestPlayerInput as any });

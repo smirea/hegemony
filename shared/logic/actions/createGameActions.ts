@@ -3,7 +3,11 @@ import chalk from 'chalk';
 import { RoleEnum } from '../types';
 import { action, type CreateActionsContext } from './utils';
 
-export default function createGameActions({ getAction, validateEvent }: CreateActionsContext) {
+export default function createGameActions({
+    getAction,
+    validateEvent,
+    requestPlayerInput,
+}: CreateActionsContext) {
     return {
         ...action({
             type: 'game:start',
@@ -59,12 +63,12 @@ export default function createGameActions({ getAction, validateEvent }: CreateAc
         }),
         ...action({
             type: 'game:role:turn',
-            async run({ next, requestPlayerInput, currentRole: currentRoleState, state }) {
+            async run({ next, currentRole: currentRoleState, state }) {
                 const action = await requestPlayerInput('pick-action', {
                     role: state.currentRoleName!,
                 });
                 validateEvent(action);
-                if (getAction(action.type)) {
+                if (getAction(action.type).isFreeAction) {
                     currentRoleState.usedActions.push('free');
                 } else {
                     currentRoleState.usedActions.push('basic');

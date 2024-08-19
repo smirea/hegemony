@@ -1,3 +1,5 @@
+import { type CompanyDefinition } from './companies';
+
 import type { AnyObject } from 'shared/types';
 import type { createActions } from './actions';
 
@@ -34,6 +36,15 @@ export const ResourceEnum = {
     luxury: 'luxury',
 } as const;
 
+export const WorkerTypeEnum = {
+    influence: ResourceEnum.influence,
+    food: ResourceEnum.food,
+    healthcare: ResourceEnum.healthcare,
+    education: ResourceEnum.education,
+    luxury: ResourceEnum.luxury,
+    unskilled: 'unskilled',
+} as const;
+
 export type Resource = (typeof ResourceEnum)[keyof typeof ResourceEnum];
 
 export interface Player {
@@ -50,35 +61,70 @@ export interface BaseRole {
 }
 
 export type Industry = 'food' | 'healthcare' | 'education' | 'luxury';
-export type WorkerType = Industry | 'unskilled';
+export type WorkerType = keyof typeof WorkerTypeEnum;
 
 export interface WorkingClassRole extends BaseRole {
     id: typeof RoleEnum.workingClass;
     availableVotingCubes: number;
-    workers: Array<{ id: number; type: WorkerType; company: null | number; committed?: boolean }>;
+    workers: Record<CompanyWorker['id'], CompanyWorker>;
     availableWorkers: Record<WorkerType, number>;
+    strikeTokens: number;
 }
 export interface MiddleClassRole extends BaseRole {
     id: typeof RoleEnum.middleClass;
     availableVotingCubes: number;
-    workers: Array<{ id: number; type: WorkerType; company: null | number; committed?: boolean }>;
+    workers: Record<CompanyWorker['id'], CompanyWorker>;
     availableWorkers: Record<WorkerType, number>;
     prices: Record<Industry, number>;
+    /** built companies */
+    companies: Record<Company['id'], Company>;
+    /** which companies are available to purchase */
+    companyMarket: string[];
+    companyDeck: string[];
 }
 export interface CapitalistRole extends BaseRole {
     id: typeof RoleEnum.capitalist;
     availableVotingCubes: number;
     resources: BaseRole['resources'] & { capital: number };
     prices: Record<Industry, number>;
+    /** built companies */
+    companies: Record<Company['id'], Company>;
+    /** which companies are available to purchase */
+    companyMarket: string[];
+    companyDeck: string[];
+    automationTokens: number;
 }
 export interface StateRole extends BaseRole {
     id: typeof RoleEnum.state;
     legitimacy: Record<RoleNameNoState, number>;
     legitimacyTokens: Record<RoleNameNoState, number>;
+    companies: Record<Company['id'], Company>;
+    companyDeck: string[];
+}
+
+export interface Company {
+    id: CompanyDefinition['id'];
+    workers: Array<CompanyWorker['id']>;
+    wages: number;
+    automationToken?: boolean;
+    strike?: boolean;
+}
+
+export interface CompanyWorker {
+    id: number;
+    role: RoleMap['workingClass']['id'] | RoleMap['middleClass']['id'];
+    type: WorkerType;
+    company: null | Company['id'];
+    committed?: boolean;
 }
 
 export type RoleNameNoState =
     | RoleMap['workingClass']['id']
+    | RoleMap['middleClass']['id']
+    | RoleMap['capitalist']['id'];
+
+export type RoleNameNoWorkingClass =
+    | RoleMap['state']['id']
     | RoleMap['middleClass']['id']
     | RoleMap['capitalist']['id'];
 
@@ -108,12 +154,6 @@ export interface GameState {
 
 export interface Game {
     state: GameState;
-    requestPlayerInput: <T extends PlayerActionType>(
-        type: T,
-        ...args: PlayerActionMap[T]['input'] extends undefined
-            ? []
-            : [NonNullable<PlayerActionMap[T]['input']>]
-    ) => Promise<PlayerActionMap[T]['output']>;
     tick: () => Promise<void>;
     // calls .tick() until the queue is empty
     flush: (config?: { to?: ActionName; after?: ActionName }) => Promise<void>;
@@ -129,22 +169,13 @@ export type RoleMap = {
     state: StateRole;
 };
 
-export interface RunContext<CurrenRole extends null | RoleName = null>
-    extends Omit<Game, 'tick' | 'flush'> {
+export interface RunContext<CurrenRole extends null | RoleName = null> {
+    state: Game['state'];
+    next: Game['next'];
     debug?: boolean;
     /** where will actions be added on the queue when calling next(...). null = root */
     queueIndex: number | null;
     currentRole: CurrenRole extends RoleName ? RoleMap[CurrenRole] : null;
-    /** accounts for capitalist */
-    getMoney: (role: RoleName) => number;
-    /** accounts for capitalist */
-    addMoney: (role: RoleName, amount: number, source?: 'money' | 'capital') => void;
-    spendMoney: (
-        role: RoleName,
-        amount: number,
-        config?: { source?: 'money' | 'capital'; canTakeLoans?: boolean },
-    ) => void;
-    getProsperity: (role: typeof RoleEnum.workingClass | typeof RoleEnum.middleClass) => number;
 }
 
 export interface Action<
@@ -199,3 +230,41 @@ export type ActionEventMap = {
     [K in ActionName]: ActionEventFromAction<ActionMap[K]>;
 };
 export type ActionEventDefinition = ActionEventMap[ActionName];
+
+export interface ActionFactoryContext {
+    getCompanyDefinition: (id: CompanyDefinition['id']) => CompanyDefinition;
+    requestPlayerInput: <T extends PlayerActionType>(
+        type: T,
+        ...args: PlayerActionMap[T]['input'] extends undefined
+            ? []
+            : [NonNullable<PlayerActionMap[T]['input']>]
+    ) => Promise<PlayerActionMap[T]['output']>;
+    /** accounts for capitalist */
+    getMoney: (role: RoleName) => number;
+    /** accounts for capitalist */
+    addMoney: (role: RoleName, amount: number, source?: 'money' | 'capital') => void;
+    spendMoney: (
+        role: RoleName,
+        amount: number,
+        config?: { source?: 'money' | 'capital'; canTakeLoans?: boolean },
+    ) => void;
+    getProsperity: (role: typeof RoleEnum.workingClass | typeof RoleEnum.middleClass) => number;
+    getWorkerById: (id: CompanyWorker['id']) => {
+        worker: CompanyWorker;
+        role: WorkingClassRole | MiddleClassRole;
+    };
+}
+
+export interface RoleAction<
+    Type extends string,
+    Roles extends RoleName,
+    Data extends AnyObject | undefined = undefined,
+> extends Action<Type, Roles, Data> {
+    readonly isFreeAction?: boolean;
+    readonly roles: readonly Roles[];
+}
+
+export interface CreateActionsContext extends ActionFactoryContext {
+    getAction: <T extends ActionName>(type: T) => ActionMap[T];
+    validateEvent: (event: any) => event is { type: ActionName };
+}

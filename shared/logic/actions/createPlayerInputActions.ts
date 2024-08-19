@@ -7,7 +7,11 @@ import {
     type RoleActionDefinition,
     type RoleName,
     type RoleNameNoState,
+    type Company,
+    type CompanyWorker,
+    type RoleNameNoWorkingClass,
 } from '../types';
+import { type CompanyDefinition } from '../companies';
 
 interface PlayerInputAction<
     Type extends string,
@@ -40,7 +44,7 @@ export default function createPlayerInputActions() {
             },
         }),
         ...playerInputAction({
-            type: 'educate-worker',
+            type: 'workers:educate',
             async run(_: { role: RoleName }): Promise<{ id: number; type: WorkerType }> {
                 throw new Error('implement me');
             },
@@ -52,13 +56,13 @@ export default function createPlayerInputActions() {
             },
         }),
         ...playerInputAction({
-            type: 'swap-workers',
+            type: 'workers:swap',
             async run(_: { role: RoleName }): Promise<Array<[id1: number, id2: number]>> {
                 throw new Error('implement me');
             },
         }),
         ...playerInputAction({
-            type: 'commit-workers',
+            type: 'workers:commit',
             async run(_: { role: RoleName }): Promise<{ companyId: number }> {
                 throw new Error('implement me');
             },
@@ -66,6 +70,35 @@ export default function createPlayerInputActions() {
         ...playerInputAction({
             type: 'state:pick-role',
             async run(): Promise<RoleNameNoState> {
+                throw new Error('implement me');
+            },
+        }),
+        ...playerInputAction({
+            type: 'company:build',
+            async run(_: { role: RoleName }): Promise<{ companyId: CompanyDefinition['id'] }> {
+                throw new Error('implement me');
+            },
+        }),
+        ...playerInputAction({
+            type: 'company:build:assign-workers',
+            async run(_: {
+                role: RoleName;
+                company: Company['id'];
+            }): Promise<CompanyWorker['id'][]> {
+                throw new Error('implement me');
+            },
+        }),
+        ...playerInputAction({
+            type: 'company:sell',
+            async run(_: { role: RoleName }): Promise<Company['id']> {
+                throw new Error('implement me');
+            },
+        }),
+        ...playerInputAction({
+            type: 'company:strike',
+            async run(_: {
+                role: RoleName;
+            }): Promise<Array<{ companyId: Company['id']; role: RoleNameNoWorkingClass }>> {
                 throw new Error('implement me');
             },
         }),

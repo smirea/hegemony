@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import chalk from 'chalk';
+import { type AnyObject } from 'shared/types';
 
 import {
     type Game,
@@ -13,22 +14,116 @@ import {
     type ActionEventDefinition,
     RoleEnum,
     type RoleActionDefinition,
+    type ActionFactoryContext,
 } from './types';
 import { createActions } from './actions';
+import defaultCompanies, { type CompanyDefinition } from './companies';
 
 const isRoleAction = (action: any): action is RoleActionDefinition =>
     !!(action as RoleActionDefinition).roles;
 
 type RunContextNoRole = Omit<RunContext<RoleName>, 'currentRole'>;
 
+function createMap<Item extends AnyObject, K extends keyof Item>(
+    logName: string,
+    data: readonly Item[],
+    key: K,
+): { [k2 in Item[K]]: Item } {
+    const result: { [k2 in Item[K]]: Item } = {} as any;
+
+    for (const item of data) {
+        if (item[key] in result) {
+            throw new Error(`${logName} key "${item[key]}" already exists`);
+        }
+        result[item[key]] = item;
+    }
+
+    return result;
+}
+
 export default function createGame({
-    requestPlayerInput,
+    companies = defaultCompanies,
+    requestPlayerInput: defaultRequestPlayerInput,
     debug,
 }: {
-    requestPlayerInput: Game['requestPlayerInput'];
+    requestPlayerInput: ActionFactoryContext['requestPlayerInput'];
     debug?: boolean;
+    companies?: CompanyDefinition[];
 }) {
-    const { getAction } = createActions();
+    const companyMap = createMap('company', companies, 'id');
+
+    const actionFactoryContext: ActionFactoryContext = {
+        requestPlayerInput: async (type, ...args) => {
+            if (debug) console.log(chalk.blue('    user:'), chalk.red(type.padEnd(20)), args[0]);
+            const result = await defaultRequestPlayerInput(type, ...args);
+            if (debug)
+                console.log(chalk.blue('    user:'), chalk.blue('result'.padEnd(20)), result);
+            return result;
+        },
+        getCompanyDefinition: (id: string) => {
+            if (!companyMap[id]) throw new Error(`company ${id} not found`);
+            return companyMap[id];
+        },
+        addMoney: (role, amount, source = 'money') => {
+            const r = ctx.state.roles[role];
+            if (r.id !== RoleEnum.capitalist) {
+                r.resources.money += amount;
+                return;
+            }
+            r.resources[source] += amount;
+        },
+        spendMoney: (role, amount, { source = 'money', canTakeLoans = false } = {}) => {
+            const r = ctx.state.roles[role];
+            if (r.id !== RoleEnum.capitalist) {
+                r.resources.money -= amount;
+                if (r.resources.money < 0) {
+                    if (!canTakeLoans) throw new Error('not enough money');
+                    const numLoans = Math.ceil((r.resources.money / 50) * -1);
+                    r.resources.money += numLoans * 50;
+                    r.loans += numLoans;
+                }
+                return;
+            }
+            if (amount <= r.resources[source]) {
+                r.resources[source] -= amount;
+            } else {
+                let remaining = amount - r.resources[source];
+                r.resources[source] = 0;
+                const other = source === 'money' ? 'capital' : 'money';
+                if (r.resources[other] >= remaining) {
+                    r.resources[other] -= remaining;
+                } else {
+                    if (!canTakeLoans) throw new Error('not enough money');
+                    remaining -= r.resources[other];
+                    r.resources[other] = 0;
+                    const numLoans = Math.ceil(remaining / 50);
+                    r.resources.capital += numLoans * 50;
+                    r.loans += numLoans;
+                }
+            }
+        },
+        getMoney: role => {
+            const r = ctx.state.roles[role];
+            if (r.id === RoleEnum.capitalist) {
+                return r.resources.capital + r.resources.money;
+            }
+            return r.resources.money;
+        },
+        getProsperity: role => {
+            const r = state.roles[role];
+            return _.clamp(Math.ceil(_.size(r.workers) / 3), 3, 10);
+        },
+        getWorkerById(id) {
+            const role =
+                id in state.roles.workingClass.workers
+                    ? state.roles.workingClass
+                    : state.roles.middleClass;
+
+            return { role, worker: role.workers[id] };
+        },
+    };
+
+    const { getAction } = createActions(actionFactoryContext);
 
     const tick: Game['tick'] = async () => {
         if (state.currentActionIndex >= state.actionQueue.length) return;
@@ -133,7 +228,9 @@ export default function createGame({
                 ...getRoleState(),
                 availableVotingCubes: 25,
                 workers: [],
+                strikeTokens: 5,
                 availableWorkers: {
+                    influence: 0,
                     food: 0,
                     healthcare: 0,
                     education: 0,
@@ -144,9 +241,13 @@ export default function createGame({
             [RoleEnum.middleClass]: {
                 id: RoleEnum.middleClass,
                 ...getRoleState(),
+                companies: {},
+                companyDeck: [],
+                companyMarket: [],
                 availableVotingCubes: 25,
                 workers: [],
                 availableWorkers: {
+                    influence: 0,
                     food: 0,
                     healthcare: 0,
                     education: 0,
@@ -163,7 +264,11 @@ export default function createGame({
             [RoleEnum.capitalist]: {
                 id: RoleEnum.capitalist,
                 ...getRoleState(),
+                companies: {},
+                companyDeck: [],
+                companyMarket: [],
                 availableVotingCubes: 25,
+                automationTokens: 4,
                 resources: {
                     ...getRoleState().resources,
                     capital: 0,
@@ -177,6 +282,7 @@ export default function createGame({
             },
             [RoleEnum.state]: {
                 id: RoleEnum.state,
+                ...getRoleState(),
                 legitimacy: {
                     [RoleEnum.workingClass]: 2,
                     [RoleEnum.middleClass]: 2,
@@ -187,7 +293,8 @@ export default function createGame({
                     [RoleEnum.middleClass]: 0,
                     [RoleEnum.capitalist]: 0,
                 },
-                ...getRoleState(),
+                companies: {},
+                companyDeck: [],
             },
         },
         nextWorkerId: 0,
@@ -200,63 +307,7 @@ export default function createGame({
         state,
         debug,
         queueIndex: null,
-        requestPlayerInput: async (type, ...args) => {
-            if (debug) console.log(chalk.blue('    user:'), chalk.red(type.padEnd(20)), args[0]);
-            const result = await requestPlayerInput(type, ...args);
-            if (debug)
-                console.log(chalk.blue('    user:'), chalk.blue('result'.padEnd(20)), result);
-            return result;
-        },
         next: null as any,
-        getMoney: role => {
-            const r = ctx.state.roles[role];
-            if (r.id === RoleEnum.capitalist) {
-                return r.resources.capital + r.resources.money;
-            }
-            return r.resources.money;
-        },
-        addMoney: (role, amount, source = 'money') => {
-            const r = ctx.state.roles[role];
-            if (r.id !== RoleEnum.capitalist) {
-                r.resources.money += amount;
-                return;
-            }
-            r.resources[source] += amount;
-        },
-        spendMoney: (role, amount, { source = 'money', canTakeLoans = false } = {}) => {
-            const r = ctx.state.roles[role];
-            if (r.id !== RoleEnum.capitalist) {
-                r.resources.money -= amount;
-                if (r.resources.money < 0) {
-                    if (!canTakeLoans) throw new Error('not enough money');
-                    const numLoans = Math.ceil((r.resources.money / 50) * -1);
-                    r.resources.money += numLoans * 50;
-                    r.loans += numLoans;
-                }
-                return;
-            }
-            if (amount <= r.resources[source]) {
-                r.resources[source] -= amount;
-            } else {
-                let remaining = amount - r.resources[source];
-                r.resources[source] = 0;
-                const other = source === 'money' ? 'capital' : 'money';
-                if (r.resources[other] >= remaining) {
-                    r.resources[other] -= remaining;
-                } else {
-                    if (!canTakeLoans) throw new Error('not enough money');
-                    remaining -= r.resources[other];
-                    r.resources[other] = 0;
-                    const numLoans = Math.ceil(remaining / 50);
-                    r.resources.capital += numLoans * 50;
-                    r.loans += numLoans;
-                }
-            }
-        },
-        getProsperity: role => {
-            const r = state.roles[role];
-            return _.clamp(Math.ceil(r.workers.length / 3), 3, 10);
-        },
     };
     ctx.next = createNext(ctx);
 

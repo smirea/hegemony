@@ -2,20 +2,11 @@ import type { AnyObject } from 'shared/types';
 import type {
     Action,
     ActionEventMap,
-    ActionMap,
     ActionName,
+    RoleAction,
     RoleActionEventMap,
     RoleName,
 } from '../types';
-
-export interface RoleAction<
-    Type extends string,
-    Roles extends RoleName,
-    Data extends AnyObject | undefined = undefined,
-> extends Action<Type, Roles, Data> {
-    readonly isFreeAction?: boolean;
-    readonly roles: readonly Roles[];
-}
 
 export function roleAction<
     T extends string,
@@ -45,9 +36,4 @@ export function roleActionEvent<T extends keyof RoleActionEventMap>(
     ...args: RoleActionEventMap[T] extends { data: any } ? [RoleActionEventMap[T]['data']] : []
 ): RoleActionEventMap[T] {
     return { type, data: args[0] } as any;
-}
-
-export interface CreateActionsContext {
-    getAction: <T extends ActionName>(type: T) => ActionMap[T];
-    validateEvent: (event: any) => event is { type: ActionName };
 }
