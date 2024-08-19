@@ -1,4 +1,5 @@
 import * as path from 'node:path';
+
 import { consoleSetup, env, setupDotenv } from '@smirea/node-utils';
 
 setupDotenv(path.resolve(__dirname, '..'));

@@ -12,25 +12,21 @@ const outputFile = path.join(root, 'types.ts');
 const startTag = '// --- start: generated via codemod-createMachine-types.ts ---';
 const endTag = '// --- end: generated via codemod-createMachine-types.ts ---\n';
 
-const dirs = [
-    path.join(root, 'shared'),
-];
+const dirs = [path.join(root, 'shared')];
 
 function init() {
     for (const dir of dirs) {
         for (const file of readdirRecursiveSync(dir)) {
             if (!file.endsWith('.ts')) continue;
             const content = fs.readFileSync(file, 'utf-8');
-            const reg = /createStateMachine/g
+            const reg = /createStateMachine/g;
             const match = content.match(reg);
             if (!match) continue;
             // eslint-disable-next-line @typescript-eslint/no-require-imports
             require(file);
         }
     }
-    let str = [
-        'const stateMachineDefinition = {',
-    ];
+    const str = ['const stateMachineDefinition = {'];
     for (const [k, v] of Object.entries(stateMachineConfigs)) {
         const events: Set<string> = new Set();
         for (const { on: map } of Object.values(v.states) as any) {
@@ -40,7 +36,7 @@ function init() {
         str.push(`    ${k}: {`);
         str.push(`        states: ${f(Object.keys(v.states))},`);
         str.push(`        events: ${f(Array.from(events.values()))},`);
-        str.push(`    },`);
+        str.push('    },');
     }
     str.unshift(startTag);
     str.push('} as const;');
@@ -50,7 +46,6 @@ function init() {
     const endIndex = content.indexOf(endTag) + endTag.length;
     const newContent = content.slice(0, startIndex) + str.join('\n') + content.slice(endIndex);
     fs.writeFileSync(outputFile, newContent);
-
 }
 
 function* readdirRecursiveSync(dir: string): Generator<string> {

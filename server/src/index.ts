@@ -2,12 +2,12 @@ async function init() {
     console.log('Server is running...');
 }
 
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', err => {
     console.error(err);
     process.exit(1);
 });
 
-init()
+void init()
     .catch(err => {
         console.error(err);
         process.exit(1);

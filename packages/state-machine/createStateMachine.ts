@@ -1,21 +1,24 @@
 type State<StateName extends string, EventName extends string> =
     | { type: 'final' }
     | {
-        on: {
-            [k in EventName]?:
-            | StateName
-            | {
-                target: StateName;
-                action?: () => void;
-            }
-        };
-    };
+          on: {
+              [k in EventName]?:
+                  | StateName
+                  | {
+                        target: StateName;
+                        action?: () => void;
+                    };
+          };
+      };
 
 export interface StateMachine<
     StateName extends string,
     EventName extends string,
     Context extends Record<string, any>,
-    States extends Record<StateName, State<StateName, EventName>> = Record<StateName, State<StateName, EventName>>
+    _States extends Record<StateName, State<StateName, EventName>> = Record<
+        StateName,
+        State<StateName, EventName>
+    >,
 > {
     readonly id: string;
     readonly initial: StateName;
@@ -32,7 +35,9 @@ export default function createMachine<
     EventName extends string,
     Context extends Record<string, any> = never,
 >(
-    config: Pick<StateMachine<StateName, EventName, Context>, 'id' | 'initial' | 'states'> & { context?: Context },
+    config: Pick<StateMachine<StateName, EventName, Context>, 'id' | 'initial' | 'states'> & {
+        context?: Context;
+    },
 ): StateMachine<StateName, EventName, Context> {
     if (!config.id) {
         throw new Error('State machine id is required');
@@ -51,6 +56,6 @@ export default function createMachine<
     return {
         ...config,
         context: config.context ?? ({} as Context),
-        send() { },
+        // send() { },
     };
 }

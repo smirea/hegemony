@@ -1,4 +1,4 @@
-import { observable, action, computed, autorun } from 'mobx';
+import { observable, action } from 'mobx';
 
 interface AppProviderState {
     theme: 'dark' | 'light';
@@ -7,7 +7,7 @@ interface AppProviderState {
 class AppProvider {
     @observable accessor state: AppProviderState = {
         theme: 'light',
-    }
+    };
 
     @action update(diff: Partial<AppProviderState>) {
         Object.assign(this.state, diff);

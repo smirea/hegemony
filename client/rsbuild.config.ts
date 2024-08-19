@@ -10,8 +10,5 @@ export default defineConfig({
             index: path.join(__dirname, 'src/index.tsx'),
         },
     },
-    plugins: [
-        pluginReact(),
-        pluginSass(),
-    ],
+    plugins: [pluginReact(), pluginSass()],
 });

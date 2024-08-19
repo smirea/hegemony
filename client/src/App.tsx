@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useQuery } from '@tanstack/react-query';
 import { observer } from 'mobx-react';
+
 import appProvider from './utils/appProvider';
 import { ReactQueryProvider } from './utils/setupReactQuery';
 

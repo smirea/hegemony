@@ -11,7 +11,6 @@
 		"lint:report": "eslint --cache --cache-location node_modules/.cache/eslintcache",
 		"server:dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules server/src/index.ts",
 		"test": "vitest",
-		"lint:changed": "ts-node -T ./scripts/lint-changed.ts",
 		"preinstall": "npx only-allow pnpm"
 	},
 	"dependencies": {

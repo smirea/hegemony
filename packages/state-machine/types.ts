@@ -1,9 +1,9 @@
 export type StateMachineDefinition = {
     [k in keyof typeof stateMachineDefinition]: {
-        StateName: typeof stateMachineDefinition[k]['states'][number];
-        EventName: typeof stateMachineDefinition[k]['events'][number];
-    }
-}
+        StateName: (typeof stateMachineDefinition)[k]['states'][number];
+        EventName: (typeof stateMachineDefinition)[k]['events'][number];
+    };
+};
 
 // --- start: generated via codemod-createMachine-types.ts ---
 export const stateMachineDefinition = {
