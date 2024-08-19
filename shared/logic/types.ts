@@ -66,7 +66,7 @@ export interface BaseRole {
     resources: Record<Resource, number>;
 }
 
-export type Industry = 'food' | 'healthcare' | 'education' | 'luxury';
+export type Industry = 'food' | 'healthcare' | 'education' | 'luxury' | 'influence';
 export type WorkerType = keyof typeof WorkerTypeEnum;
 
 export interface WorkingClassRole extends BaseRole {
@@ -75,32 +75,35 @@ export interface WorkingClassRole extends BaseRole {
     workers: Record<CompanyWorker['id'], CompanyWorker>;
     availableWorkers: Record<WorkerType, number>;
     strikeTokens: number;
+    unions: Partial<Record<Industry, boolean>>;
+    demonstration?: boolean;
 }
 export interface MiddleClassRole extends BaseRole {
     id: typeof RoleEnum.middleClass;
     availableVotingCubes: number;
     workers: Record<CompanyWorker['id'], CompanyWorker>;
     availableWorkers: Record<WorkerType, number>;
-    prices: Record<Industry, number>;
+    producedResources: Record<TradeableResource, number>;
+    prices: Record<TradeableResource, number>;
+    storage: Partial<Record<TradeableResource, boolean>>;
     /** built companies */
     companies: Record<Company['id'], Company>;
     /** which companies are available to purchase */
     companyMarket: string[];
     companyDeck: string[];
-    storage: Partial<Record<TradeableResource, boolean>>;
 }
 export interface CapitalistRole extends BaseRole {
     id: typeof RoleEnum.capitalist;
     availableVotingCubes: number;
     resources: BaseRole['resources'] & { capital: number };
-    prices: Record<Industry, number>;
+    prices: Record<TradeableResource, number>;
+    storage: Partial<Record<TradeableResource, boolean>>;
     /** built companies */
     companies: Record<Company['id'], Company>;
     /** which companies are available to purchase */
     companyMarket: string[];
     companyDeck: string[];
     automationTokens: number;
-    storage: Partial<Record<TradeableResource, boolean>>;
 }
 export interface StateRole extends BaseRole {
     id: typeof RoleEnum.state;
@@ -110,10 +113,12 @@ export interface StateRole extends BaseRole {
     companyDeck: string[];
 }
 
+export type WageId = 'l1' | 'l2' | 'l3';
+
 export interface Company {
     id: CompanyDefinition['id'];
     workers: Array<CompanyWorker['id']>;
-    wages: number;
+    wages: WageId;
     automationToken?: boolean;
     strike?: boolean;
 }
@@ -124,11 +129,13 @@ export interface CompanyWorker {
     type: WorkerType;
     company: null | Company['id'];
     committed?: boolean;
+    union?: boolean;
 }
 
 export type RoleNameNoState = WorkingClassRole['id'] | MiddleClassRole['id'] | CapitalistRole['id'];
-
 export type RoleNameNoWorkingClass = StateRole['id'] | MiddleClassRole['id'] | CapitalistRole['id'];
+export type RoleNameWorkingMiddleClass = WorkingClassRole['id'] | MiddleClassRole['id'];
+export type RoleNameMiddleCapitalist = MiddleClassRole['id'] | CapitalistRole['id'];
 
 export interface GameState {
     players: Player[];
@@ -250,14 +257,18 @@ export interface ActionFactoryContext {
         amount: number,
         config?: { source?: 'money' | 'capital'; canTakeLoans?: boolean },
     ) => void;
-    getProsperity: (role: WorkingClassRole['id'] | MiddleClassRole['id']) => number;
+    getProsperity: (role: RoleNameWorkingMiddleClass) => number;
     getWorkerById: (id: CompanyWorker['id']) => {
         worker: CompanyWorker;
-        role: WorkingClassRole | MiddleClassRole;
+        roleName: RoleNameWorkingMiddleClass;
+    };
+    getCompanyById: (id: Company['id']) => {
+        company: Company;
+        roleName: RoleNameNoWorkingClass;
     };
     buyFromForeignMarket: (
         state: GameState,
-        roleName: MiddleClassRole['id'] | WorkingClassRole['id'],
+        roleName: RoleNameWorkingMiddleClass,
         resource: typeof ResourceEnum.food | typeof ResourceEnum.luxury,
         count: number,
         cfg?: { payTarriff?: boolean },

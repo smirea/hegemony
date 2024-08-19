@@ -115,12 +115,22 @@ export default function createGame({
             return _.clamp(Math.ceil(_.size(r.workers) / 3), 3, 10);
         },
         getWorkerById(id) {
-            const role =
+            const roleName =
                 id in state.roles.workingClass.workers
-                    ? state.roles.workingClass
-                    : state.roles.middleClass;
+                    ? RoleEnum.workingClass
+                    : RoleEnum.middleClass;
 
-            return { role, worker: role.workers[id] };
+            return { roleName, worker: state.roles[roleName].workers[id] };
+        },
+        getCompanyById(id) {
+            const roleName =
+                id in state.roles.middleClass.companies
+                    ? RoleEnum.middleClass
+                    : id in state.roles.capitalist.companies
+                      ? RoleEnum.capitalist
+                      : RoleEnum.state;
+
+            return { roleName, company: state.roles[roleName].companies[id] };
         },
         buyFromForeignMarket(state, roleName, resource, count, { payTarriff } = {}) {
             payTarriff ??= true;
@@ -254,6 +264,7 @@ export default function createGame({
                     luxury: 0,
                     unskilled: 0,
                 },
+                unions: {},
             },
             [RoleEnum.middleClass]: {
                 id: RoleEnum.middleClass,
@@ -261,6 +272,12 @@ export default function createGame({
                 companies: {},
                 companyDeck: [],
                 companyMarket: [],
+                producedResources: {
+                    food: 0,
+                    healthcare: 0,
+                    education: 0,
+                    luxury: 0,
+                },
                 availableVotingCubes: 25,
                 workers: [],
                 availableWorkers: {

@@ -13,8 +13,9 @@ import {
     type RoleNameNoWorkingClass,
     type BuyGoodsAndServicesSources,
     type TradeableResource,
-    type MiddleClassRole,
-    type CapitalistRole,
+    type RoleNameWorkingMiddleClass,
+    type RoleNameMiddleCapitalist,
+    type WageId,
 } from '../types';
 import { type CompanyDefinition } from '../cards/companyCards';
 
@@ -81,7 +82,7 @@ export default function createPlayerInputActions() {
         playerInputAction<
             'buy-storage',
             { resource: TradeableResource },
-            { role: MiddleClassRole['id'] | CapitalistRole['id'] }
+            { role: RoleNameMiddleCapitalist }
         >('buy-storage'),
         playerInputAction<
             'buy-goods-and-services',
@@ -97,6 +98,27 @@ export default function createPlayerInputActions() {
                 maxPerSource: number;
             }
         >('buy-goods-and-services'),
+        playerInputAction<
+            'company:adjust-wages',
+            Array<{ companyId: Company['id']; wages: WageId }>,
+            { role: RoleNameNoWorkingClass }
+        >('company:adjust-wages'),
+        playerInputAction<
+            'assign-workers',
+            Array<
+                | {
+                      type: 'company';
+                      companyId: Company['id'];
+                      role: RoleNameNoWorkingClass;
+                      workers: Array<CompanyWorker['id']>;
+                  }
+                | { type: 'union'; workerId: CompanyWorker['id'] }
+            >,
+            { role: RoleNameWorkingMiddleClass }
+        >('assign-workers'),
+        playerInputAction<'company:extra-shift', { companyId: Company['id'] }>(
+            'company:extra-shift',
+        ),
     ];
 
     const result = _.keyBy(actions, 'type') as {

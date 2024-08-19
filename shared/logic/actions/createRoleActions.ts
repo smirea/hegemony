@@ -11,6 +11,10 @@ import {
     type ActionFactoryContext,
     type CapitalistRole,
     ResourceEnum,
+    type CompanyWorker,
+    type Company,
+    type RoleNameNoWorkingClass,
+    type WageId,
 } from '../types';
 import { roleAction } from './utils';
 
@@ -141,9 +145,18 @@ export default function createRoleActions({
             type: 'action:free:adjust-wages',
             roles: roles_MCS,
             info: 'raise = commit, committed = cannot lower (Labor Market)',
-            run() {
-                // todo
-                throw new Error('todo');
+            async run({ currentRole }) {
+                const toAdjust = await requestPlayerInput('company:adjust-wages', {
+                    role: currentRole.id,
+                });
+                for (const { companyId, wages } of toAdjust) {
+                    const company = currentRole.companies[companyId];
+                    company.wages = wages;
+                    for (const workerId of company.workers) {
+                        const { worker } = getWorkerById(workerId);
+                        worker.committed = true;
+                    }
+                }
             },
         }),
         ...roleAction({
@@ -261,9 +274,54 @@ export default function createRoleActions({
             type: 'action:basic:assign-workers',
             roles: [RoleEnum.workingClass, RoleEnum.middleClass],
             info: '1-3 un-employed or non-committed workers → commit (and/or Trade Union WC)',
-            run() {
-                // todo
-                throw new Error('todo');
+            async run({ currentRole, state }) {
+                const toAssign = await requestPlayerInput('assign-workers', {
+                    role: currentRole.id,
+                });
+                const emptyCompanies = new Set<{
+                    role: RoleNameNoWorkingClass;
+                    companyId: Company['id'];
+                }>();
+                const handledWorkers = new Set<CompanyWorker['id']>();
+                for (const payload of toAssign) {
+                    if (payload.type === 'union') {
+                        const { worker } = getWorkerById(payload.workerId);
+                        handledWorkers.add(worker.id);
+                        worker.company = null;
+                        worker.committed = false;
+                        worker.union = true;
+                        continue;
+                    }
+                    const { workers, companyId, role: companyOwnerRole } = payload;
+                    const company = state.roles[companyOwnerRole].companies[companyId];
+                    company.workers = workers;
+                    for (const workerId of workers) {
+                        const { worker } = getWorkerById(workerId);
+                        handledWorkers.add(worker.id);
+                        // moving unemployed workers is fine
+                        // moving WC workers out of a MC company is also fine
+                        // all other instances, we need to empty all other workers from a company
+                        if (
+                            !worker.company ||
+                            (worker.role === RoleEnum.workingClass &&
+                                companyOwnerRole === RoleEnum.middleClass)
+                        ) {
+                            worker.company = companyId;
+                            worker.committed = true;
+                            continue;
+                        }
+                        emptyCompanies.add({ role: companyOwnerRole, companyId: worker.company });
+                    }
+                }
+                for (const { role, companyId } of emptyCompanies) {
+                    const company = state.roles[role].companies[companyId];
+                    for (const workerId of company.workers) {
+                        if (handledWorkers.has(workerId)) continue;
+                        const { worker } = getWorkerById(workerId);
+                        worker.company = null;
+                        worker.committed = false;
+                    }
+                }
             },
         }),
         ...roleAction({
@@ -285,7 +343,7 @@ export default function createRoleActions({
                 currentRole.companies[companyId] = {
                     id: companyId,
                     workers: [],
-                    wages: state.board.policies.laborMarket,
+                    wages: ('l' + (state.board.policies.laborMarket + 1)) as WageId,
                 };
                 const workers = await requestPlayerInput('company:build:assign-workers', {
                     role: currentRole.id,
@@ -407,11 +465,33 @@ export default function createRoleActions({
         }),
         ...roleAction({
             type: 'action:basic:extra-shift',
-            roles: [RoleEnum.middleClass, RoleEnum.capitalist],
+            roles: [RoleEnum.middleClass],
             info: 'co with non-committed MC (+ non-committed WC) workers → commit + produce (+ pay WC)',
-            run() {
-                // todo
-                throw new Error('todo');
+            async run({ state, currentRole }) {
+                const { companyId } = await requestPlayerInput('company:extra-shift');
+                const company = state.roles[RoleEnum.middleClass].companies[companyId];
+                const uncommittedWorkingClassWorker = company.workers.find(w => {
+                    const { worker, roleName } = getWorkerById(w);
+                    return roleName === RoleEnum.workingClass && !worker.committed;
+                });
+                const def = getCompanyDefinition(companyId);
+                const wages = def.wages[company.wages];
+                const produce = (count: number) => {
+                    if (def.industry === ResourceEnum.influence) {
+                        currentRole.resources[def.industry] += count;
+                    } else {
+                        currentRole.producedResources[def.industry] += count;
+                    }
+                };
+                produce(def.production);
+                if (uncommittedWorkingClassWorker) {
+                    spendMoney(currentRole.id, wages);
+                    addMoney(RoleEnum.workingClass, wages);
+                    state.roles[RoleEnum.workingClass].workers[
+                        uncommittedWorkingClassWorker
+                    ].committed = true;
+                    produce(def.extraProduction || 0);
+                }
             },
         }),
         ...roleAction({

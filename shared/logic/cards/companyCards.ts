@@ -1,4 +1,4 @@
-import { type Industry, type RoleMap, type WorkerType } from '../types';
+import { type WageId, type Industry, type RoleMap, type WorkerType } from '../types';
 
 export interface CompanyDefinition {
     id: string;
@@ -10,7 +10,7 @@ export interface CompanyDefinition {
     extraProduction?: number;
     /** capitalist only */
     fullyAutomated?: boolean;
-    wages: [l1: number, l2: number, l3: number];
+    wages: Record<WageId, number>;
     workers: Array<{
         type: WorkerType;
         roles: Array<RoleMap['workingClass']['id'] | RoleMap['middleClass']['id']>;
