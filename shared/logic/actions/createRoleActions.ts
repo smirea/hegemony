@@ -10,12 +10,32 @@ import {
     WorkerTypeEnum,
     type ActionFactoryContext,
     type CapitalistRole,
+    ResourceEnum,
 } from '../types';
 import { roleAction } from './utils';
 
 function addLegitimacy(currentRole: StateRole, target: RoleNameNoState, value: number) {
     currentRole.legitimacy[target] = _.clamp(currentRole.legitimacy[target] + value, 1, 10);
 }
+
+const allRoles = [
+    RoleEnum.workingClass,
+    RoleEnum.middleClass,
+    RoleEnum.capitalist,
+    RoleEnum.state,
+] as const;
+
+const roles_WM = [RoleEnum.workingClass, RoleEnum.middleClass] as const;
+const roles_MC = [RoleEnum.middleClass, RoleEnum.capitalist] as const;
+const roles_WMC = [RoleEnum.workingClass, RoleEnum.middleClass, RoleEnum.capitalist] as const;
+const roles_MCS = [RoleEnum.middleClass, RoleEnum.capitalist, RoleEnum.state] as const;
+
+const buyGoodsSources_all = [
+    RoleEnum.middleClass,
+    RoleEnum.capitalist,
+    RoleEnum.state,
+    'foreign-market',
+] as const;
 
 export default function createRoleActions({
     getCompanyDefinition,
@@ -25,19 +45,8 @@ export default function createRoleActions({
     getMoney,
     getProsperity,
     getWorkerById,
+    buyFromForeignMarket,
 }: ActionFactoryContext) {
-    const allRoles = [
-        RoleEnum.workingClass,
-        RoleEnum.middleClass,
-        RoleEnum.capitalist,
-        RoleEnum.state,
-    ] as const;
-
-    const roles_WM = [RoleEnum.workingClass, RoleEnum.middleClass] as const;
-    const roles_MC = [RoleEnum.middleClass, RoleEnum.capitalist] as const;
-    const roles_WMC = [RoleEnum.workingClass, RoleEnum.middleClass, RoleEnum.capitalist] as const;
-    const roles_MCS = [RoleEnum.middleClass, RoleEnum.capitalist, RoleEnum.state] as const;
-
     const freeActions = {
         ...roleAction({
             type: 'action:free:skip',
@@ -185,9 +194,16 @@ export default function createRoleActions({
             type: 'action:free:buy-storage',
             roles: [RoleEnum.capitalist],
             info: '20¥ per tile (max 1 storage tile per type for whole game)',
-            run() {
-                // todo
-                throw new Error('todo');
+            condition: ({ currentRole }) => [
+                ['hasMoney', getMoney(currentRole.id) >= 20],
+                ['hasStorage', _.filter(currentRole.storage).length < 4],
+            ],
+            async run({ currentRole }) {
+                const { resource } = await requestPlayerInput('buy-storage', {
+                    role: currentRole.id,
+                });
+                currentRole.storage[resource] = true;
+                spendMoney(currentRole.id, 20);
             },
         }),
         ...roleAction({
@@ -321,11 +337,47 @@ export default function createRoleActions({
         }),
         ...roleAction({
             type: 'action:basic:buy-goods-and-services',
-            roles: [RoleEnum.workingClass, RoleEnum.middleClass, RoleEnum.capitalist],
+            roles: [RoleEnum.workingClass, RoleEnum.middleClass],
             info: 'up to 1 per Population × 2 sources (1 type)',
-            run() {
-                // todo
-                throw new Error('todo');
+            async run({ currentRole, state }) {
+                const toBuy = await requestPlayerInput('buy-goods-and-services', {
+                    role: currentRole.id,
+                    maxPerSource: getProsperity(currentRole.id),
+                    sources: buyGoodsSources_all,
+                    maxSources: 2,
+                });
+                for (const { resource, count, source } of toBuy) {
+                    if (source === 'foreign-market') {
+                        buyFromForeignMarket(state, currentRole.id, resource as any, count, {
+                            payTarriff: true,
+                        });
+                        continue;
+                    }
+                    const role = state.roles[source];
+                    let total = 0;
+                    if (role.id === 'state') {
+                        const price = (
+                            {
+                                [ResourceEnum.food]: 12,
+                                [ResourceEnum.luxury]: 8,
+                                [ResourceEnum.influence]: 10,
+                                [ResourceEnum.healthcare]: [0, 5, 10][
+                                    state.board.policies.healthcare
+                                ],
+                                [ResourceEnum.education]: [0, 5, 10][
+                                    state.board.policies.education
+                                ],
+                            } as const
+                        )[resource];
+                        total = count * price;
+                    } else {
+                        total = count * role.prices[resource];
+                    }
+                    spendMoney(currentRole.id, total);
+                    addMoney(role.id, total);
+                    role.resources[resource] -= count;
+                    currentRole.resources[resource] += count;
+                }
             },
         }),
         ...roleAction({

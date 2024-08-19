@@ -1,4 +1,5 @@
 import { type AnyObject } from 'shared/types';
+import _ from 'lodash';
 
 import {
     type Industry,
@@ -10,8 +11,12 @@ import {
     type Company,
     type CompanyWorker,
     type RoleNameNoWorkingClass,
+    type BuyGoodsAndServicesSources,
+    type TradeableResource,
+    type MiddleClassRole,
+    type CapitalistRole,
 } from '../types';
-import { type CompanyDefinition } from '../companies';
+import { type CompanyDefinition } from '../cards/companyCards';
 
 interface PlayerInputAction<
     Type extends string,
@@ -19,88 +24,84 @@ interface PlayerInputAction<
     Input extends AnyObject | undefined = undefined,
 > {
     type: Type;
-    input?: Input;
+    input?: Readonly<Input>;
     output: Output;
-    run: (...args: Input extends undefined ? [] : [Input]) => Promise<Output>;
+    run: (...args: Input extends undefined ? [] : [Readonly<Input>]) => Promise<Output>;
 }
 
 function playerInputAction<
     Type extends string,
     Output,
     Input extends AnyObject | undefined = undefined,
->(payload: {
-    type: Type;
-    run: (...args: Input extends undefined ? [] : [Input]) => Promise<Output>;
-}): { [K in Type]: PlayerInputAction<Type, Output, Input> } {
-    return { [payload.type]: payload } as any;
+>(type: Type): PlayerInputAction<Type, Output, Input> {
+    return {
+        type,
+        async run() {
+            throw new Error('player input action not implemented: ' + type);
+        },
+    } as any;
 }
 
 export default function createPlayerInputActions() {
-    return {
-        ...playerInputAction({
-            type: 'pick-action',
-            async run(_: { role: RoleName }): Promise<ActionEventFromAction<RoleActionDefinition>> {
-                throw new Error('implement me');
-            },
-        }),
-        ...playerInputAction({
-            type: 'workers:educate',
-            async run(_: { role: RoleName }): Promise<{ id: number; type: WorkerType }> {
-                throw new Error('implement me');
-            },
-        }),
-        ...playerInputAction({
-            type: 'adjust-prices',
-            async run(_: { role: RoleName }): Promise<Partial<Record<Industry, number>>> {
-                throw new Error('implement me');
-            },
-        }),
-        ...playerInputAction({
-            type: 'workers:swap',
-            async run(_: { role: RoleName }): Promise<Array<[id1: number, id2: number]>> {
-                throw new Error('implement me');
-            },
-        }),
-        ...playerInputAction({
-            type: 'workers:commit',
-            async run(_: { role: RoleName }): Promise<{ companyId: number }> {
-                throw new Error('implement me');
-            },
-        }),
-        ...playerInputAction({
-            type: 'state:pick-role',
-            async run(): Promise<RoleNameNoState> {
-                throw new Error('implement me');
-            },
-        }),
-        ...playerInputAction({
-            type: 'company:build',
-            async run(_: { role: RoleName }): Promise<{ companyId: CompanyDefinition['id'] }> {
-                throw new Error('implement me');
-            },
-        }),
-        ...playerInputAction({
-            type: 'company:build:assign-workers',
-            async run(_: {
+    const actions = [
+        playerInputAction<
+            'pick-action',
+            ActionEventFromAction<RoleActionDefinition>,
+            { role: RoleName }
+        >('pick-action'),
+        playerInputAction<'workers:educate', { id: number; type: WorkerType }, { role: RoleName }>(
+            'workers:educate',
+        ),
+        playerInputAction<'adjust-prices', Partial<Record<Industry, number>>, { role: RoleName }>(
+            'adjust-prices',
+        ),
+        playerInputAction<'workers:swap', Array<[id1: number, id2: number]>, { role: RoleName }>(
+            'workers:swap',
+        ),
+        playerInputAction<'workers:commit', { companyId: number }, { role: RoleName }>(
+            'workers:commit',
+        ),
+        playerInputAction<'state:pick-role', RoleNameNoState, undefined>('state:pick-role'),
+        playerInputAction<
+            'company:build',
+            { companyId: CompanyDefinition['id'] },
+            { role: RoleName }
+        >('company:build'),
+        playerInputAction<
+            'company:build:assign-workers',
+            CompanyWorker['id'][],
+            { role: RoleName; company: Company['id'] }
+        >('company:build:assign-workers'),
+        playerInputAction<'company:sell', Company['id'], { role: RoleName }>('company:sell'),
+        playerInputAction<
+            'company:strike',
+            Array<{ companyId: Company['id']; role: RoleNameNoWorkingClass }>,
+            { role: RoleName }
+        >('company:strike'),
+        playerInputAction<
+            'buy-storage',
+            { resource: TradeableResource },
+            { role: MiddleClassRole['id'] | CapitalistRole['id'] }
+        >('buy-storage'),
+        playerInputAction<
+            'buy-goods-and-services',
+            Array<{
+                resource: TradeableResource;
+                count: number;
+                source: BuyGoodsAndServicesSources;
+            }>,
+            {
                 role: RoleName;
-                company: Company['id'];
-            }): Promise<CompanyWorker['id'][]> {
-                throw new Error('implement me');
-            },
-        }),
-        ...playerInputAction({
-            type: 'company:sell',
-            async run(_: { role: RoleName }): Promise<Company['id']> {
-                throw new Error('implement me');
-            },
-        }),
-        ...playerInputAction({
-            type: 'company:strike',
-            async run(_: {
-                role: RoleName;
-            }): Promise<Array<{ companyId: Company['id']; role: RoleNameNoWorkingClass }>> {
-                throw new Error('implement me');
-            },
-        }),
+                sources: readonly BuyGoodsAndServicesSources[];
+                maxSources: number;
+                maxPerSource: number;
+            }
+        >('buy-goods-and-services'),
+    ];
+
+    const result = _.keyBy(actions, 'type') as {
+        [k in (typeof actions)[number]['type']]: (typeof actions)[number] & { type: k };
     };
+
+    return result;
 }

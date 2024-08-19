@@ -1,4 +1,4 @@
-import { type CompanyDefinition } from './companies';
+import { type CompanyDefinition } from './cards/companyCards';
 
 import type { AnyObject } from 'shared/types';
 import type { createActions } from './actions';
@@ -35,6 +35,12 @@ export const ResourceEnum = {
     education: 'education',
     luxury: 'luxury',
 } as const;
+
+export type TradeableResource =
+    | typeof ResourceEnum.food
+    | typeof ResourceEnum.healthcare
+    | typeof ResourceEnum.education
+    | typeof ResourceEnum.luxury;
 
 export const WorkerTypeEnum = {
     influence: ResourceEnum.influence,
@@ -81,6 +87,7 @@ export interface MiddleClassRole extends BaseRole {
     /** which companies are available to purchase */
     companyMarket: string[];
     companyDeck: string[];
+    storage: Partial<Record<TradeableResource, boolean>>;
 }
 export interface CapitalistRole extends BaseRole {
     id: typeof RoleEnum.capitalist;
@@ -93,6 +100,7 @@ export interface CapitalistRole extends BaseRole {
     companyMarket: string[];
     companyDeck: string[];
     automationTokens: number;
+    storage: Partial<Record<TradeableResource, boolean>>;
 }
 export interface StateRole extends BaseRole {
     id: typeof RoleEnum.state;
@@ -112,21 +120,15 @@ export interface Company {
 
 export interface CompanyWorker {
     id: number;
-    role: RoleMap['workingClass']['id'] | RoleMap['middleClass']['id'];
+    role: WorkingClassRole['id'] | MiddleClassRole['id'];
     type: WorkerType;
     company: null | Company['id'];
     committed?: boolean;
 }
 
-export type RoleNameNoState =
-    | RoleMap['workingClass']['id']
-    | RoleMap['middleClass']['id']
-    | RoleMap['capitalist']['id'];
+export type RoleNameNoState = WorkingClassRole['id'] | MiddleClassRole['id'] | CapitalistRole['id'];
 
-export type RoleNameNoWorkingClass =
-    | RoleMap['state']['id']
-    | RoleMap['middleClass']['id']
-    | RoleMap['capitalist']['id'];
+export type RoleNameNoWorkingClass = StateRole['id'] | MiddleClassRole['id'] | CapitalistRole['id'];
 
 export interface GameState {
     players: Player[];
@@ -248,11 +250,18 @@ export interface ActionFactoryContext {
         amount: number,
         config?: { source?: 'money' | 'capital'; canTakeLoans?: boolean },
     ) => void;
-    getProsperity: (role: typeof RoleEnum.workingClass | typeof RoleEnum.middleClass) => number;
+    getProsperity: (role: WorkingClassRole['id'] | MiddleClassRole['id']) => number;
     getWorkerById: (id: CompanyWorker['id']) => {
         worker: CompanyWorker;
         role: WorkingClassRole | MiddleClassRole;
     };
+    buyFromForeignMarket: (
+        state: GameState,
+        roleName: MiddleClassRole['id'] | WorkingClassRole['id'],
+        resource: typeof ResourceEnum.food | typeof ResourceEnum.luxury,
+        count: number,
+        cfg?: { payTarriff?: boolean },
+    ) => void;
 }
 
 export interface RoleAction<
@@ -268,3 +277,9 @@ export interface CreateActionsContext extends ActionFactoryContext {
     getAction: <T extends ActionName>(type: T) => ActionMap[T];
     validateEvent: (event: any) => event is { type: ActionName };
 }
+
+export type BuyGoodsAndServicesSources =
+    | MiddleClassRole['id']
+    | CapitalistRole['id']
+    | StateRole['id']
+    | 'foreign-market';

@@ -15,9 +15,10 @@ import {
     RoleEnum,
     type RoleActionDefinition,
     type ActionFactoryContext,
+    ResourceEnum,
 } from './types';
 import { createActions } from './actions';
-import defaultCompanies, { type CompanyDefinition } from './companies';
+import defaultCompanies, { type CompanyDefinition } from './cards/companyCards';
 
 const isRoleAction = (action: any): action is RoleActionDefinition =>
     !!(action as RoleActionDefinition).roles;
@@ -52,7 +53,7 @@ export default function createGame({
 }) {
     const companyMap = createMap('company', companies, 'id');
 
-    const actionFactoryContext: ActionFactoryContext = {
+    const ctx: ActionFactoryContext = {
         requestPlayerInput: async (type, ...args) => {
             if (debug) console.log(chalk.blue('    user:'), chalk.red(type.padEnd(20)), args[0]);
             const result = await defaultRequestPlayerInput(type, ...args);
@@ -65,7 +66,7 @@ export default function createGame({
             return companyMap[id];
         },
         addMoney: (role, amount, source = 'money') => {
-            const r = ctx.state.roles[role];
+            const r = runContext.state.roles[role];
             if (r.id !== RoleEnum.capitalist) {
                 r.resources.money += amount;
                 return;
@@ -73,7 +74,7 @@ export default function createGame({
             r.resources[source] += amount;
         },
         spendMoney: (role, amount, { source = 'money', canTakeLoans = false } = {}) => {
-            const r = ctx.state.roles[role];
+            const r = runContext.state.roles[role];
             if (r.id !== RoleEnum.capitalist) {
                 r.resources.money -= amount;
                 if (r.resources.money < 0) {
@@ -103,7 +104,7 @@ export default function createGame({
             }
         },
         getMoney: role => {
-            const r = ctx.state.roles[role];
+            const r = runContext.state.roles[role];
             if (r.id === RoleEnum.capitalist) {
                 return r.resources.capital + r.resources.money;
             }
@@ -121,9 +122,25 @@ export default function createGame({
 
             return { role, worker: role.workers[id] };
         },
+        buyFromForeignMarket(state, roleName, resource, count, { payTarriff } = {}) {
+            payTarriff ??= true;
+            const role = state.roles[roleName];
+            const tarriff = (
+                [
+                    { [ResourceEnum.food]: 10, [ResourceEnum.luxury]: 6 },
+                    { [ResourceEnum.food]: 5, [ResourceEnum.luxury]: 3 },
+                    { [ResourceEnum.food]: 0, [ResourceEnum.luxury]: 0 },
+                ] as const
+            )[state.board.policies.foreignTrade][resource];
+            const base = resource === ResourceEnum.food ? 10 : 6;
+            const total = (base + tarriff) * count;
+            role.resources[resource] += count;
+            ctx.spendMoney(roleName, total);
+            ctx.addMoney(RoleEnum.state, tarriff * count);
+        },
     };
 
-    const { getAction } = createActions(actionFactoryContext);
+    const { getAction } = createActions(ctx);
 
     const tick: Game['tick'] = async () => {
         if (state.currentActionIndex >= state.actionQueue.length) return;
@@ -140,7 +157,7 @@ export default function createGame({
         }
 
         const actionContext: RunContext<RoleName> = {
-            ...ctx,
+            ...runContext,
             queueIndex: state.currentActionIndex + 1,
             currentRole: state.currentRoleName ? state.roles[state.currentRoleName] : (null as any),
         };
@@ -260,6 +277,7 @@ export default function createGame({
                     education: 0,
                     luxury: 0,
                 },
+                storage: {},
             },
             [RoleEnum.capitalist]: {
                 id: RoleEnum.capitalist,
@@ -279,6 +297,7 @@ export default function createGame({
                     education: 0,
                     luxury: 0,
                 },
+                storage: {},
             },
             [RoleEnum.state]: {
                 id: RoleEnum.state,
@@ -303,16 +322,16 @@ export default function createGame({
         actionQueue: [],
     };
 
-    const ctx: RunContextNoRole = {
+    const runContext: RunContextNoRole = {
         state,
         debug,
         queueIndex: null,
         next: null as any,
     };
-    ctx.next = createNext(ctx);
+    runContext.next = createNext(runContext);
 
     const result: Game = {
-        ...ctx,
+        ...runContext,
         tick,
         flush: async ({ to, after } = {}) => {
             if (to && after) throw new Error('flush: to and after are mutually exclusive');

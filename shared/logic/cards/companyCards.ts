@@ -1,4 +1,4 @@
-import { type Industry, type RoleMap, type WorkerType } from './types';
+import { type Industry, type RoleMap, type WorkerType } from '../types';
 
 export interface CompanyDefinition {
     id: string;
@@ -31,10 +31,10 @@ const statecomapnies = [
     // todo
 ] satisfies CompanyDefinition[];
 
-const companies = [
+const companyCards = [
     ...middleClassCompanies,
     ...capitalistCompanies,
     ...statecomapnies,
 ] satisfies CompanyDefinition[];
 
-export default companies;
+export default companyCards;
