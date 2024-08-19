@@ -6,6 +6,7 @@ import {
     type ActionEventFromAction,
     type RoleActionDefinition,
     type RoleName,
+    type RoleNameNoState,
 } from '../types';
 
 interface PlayerInputAction<
@@ -59,6 +60,12 @@ export default function createPlayerInputActions() {
         ...playerInputAction({
             type: 'commit-workers',
             async run(_: { role: RoleName }): Promise<{ companyId: number }> {
+                throw new Error('implement me');
+            },
+        }),
+        ...playerInputAction({
+            type: 'state:pick-role',
+            async run(): Promise<RoleNameNoState> {
                 throw new Error('implement me');
             },
         }),

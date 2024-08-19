@@ -1,5 +1,18 @@
-import { RoleEnum, type RoleName, type PolicyName } from '../types';
+import _ from 'lodash';
+import { objectEntries } from 'shared/utils/ts';
+
+import {
+    RoleEnum,
+    type RoleName,
+    type PolicyName,
+    type StateRole,
+    type RoleNameNoState,
+} from '../types';
 import { roleAction } from './utils';
+
+function addLegitimacy(currentRole: StateRole, target: RoleNameNoState, value: number) {
+    currentRole.legitimacy[target] = _.clamp(currentRole.legitimacy[target] + value, 1, 10);
+}
 
 export default function createRoleActions() {
     const allRoles = [
@@ -212,8 +225,10 @@ export default function createRoleActions() {
             info: 'add 3 cubes to bag',
             roles: roles_WMC,
             condition: ({ currentRole }) => [['hasCubes', currentRole.availableVotingCubes >= 1]],
-            run: ({ currentRole }) => {
-                currentRole.availableVotingCubes -= 3;
+            run: ({ state, currentRole }) => {
+                const toAdd = Math.min(3, state.board.votingCubeBag[currentRole.id]);
+                currentRole.availableVotingCubes -= toAdd;
+                state.board.votingCubeBag[currentRole.id] += toAdd;
             },
         }),
         ...roleAction({
@@ -310,36 +325,55 @@ export default function createRoleActions() {
             type: 'action:basic:lobby',
             roles: [RoleEnum.capitalist],
             info: 'pay 30¥ from Capital → gain 3 🟣',
-            run() {
-                // todo
-                throw new Error('todo');
+            condition: ({ currentRole, getMoney, state }) => [
+                ['hasMoney', getMoney(currentRole.id) >= 30],
+                ['hasVotingCubes', state.board.availableInfluence >= 3],
+            ],
+            run({ state, currentRole, spendMoney }) {
+                spendMoney(currentRole.id, 30, { source: 'capital' });
+                const toAdd = Math.min(3, state.board.availableInfluence);
+                state.board.availableInfluence -= toAdd;
+                currentRole.resources.influence += toAdd;
             },
         }),
         ...roleAction({
             type: 'action:basic:meet-with-party-mps',
             roles: [RoleEnum.state],
-            info: "2x personal to class → +1 that class's Legitimacy",
-            run() {
-                // todo
-                throw new Error('todo');
+            info: "2x personal 🟣 to class → +1 that class's Legitimacy",
+            condition: ({ currentRole }) => [
+                ['hasVotingCubes', currentRole.resources.influence >= 2],
+            ],
+            async run({ currentRole, requestPlayerInput }) {
+                const target = await requestPlayerInput('state:pick-role');
+                addLegitimacy(currentRole, target, 1);
             },
         }),
         ...roleAction({
             type: 'action:basic:extra-tax',
             roles: [RoleEnum.state],
             info: 'take 10¥ from each class → -1 Legitimacy from two lowest classes',
-            run() {
-                // todo
-                throw new Error('todo');
+            run({ currentRole, spendMoney, addMoney }) {
+                spendMoney(RoleEnum.workingClass, 10, { canTakeLoans: true });
+                spendMoney(RoleEnum.middleClass, 10, { canTakeLoans: true });
+                spendMoney(RoleEnum.capitalist, 10, { canTakeLoans: true });
+                objectEntries(currentRole.legitimacy)
+                    .sort(([, a], [, b]) => a - b)
+                    .slice(0, 2)
+                    .forEach(([k]) => {
+                        addLegitimacy(currentRole, k, -1);
+                    });
+                addMoney(currentRole.id, 30);
             },
         }),
         ...roleAction({
             type: 'action:basic:campaign',
             roles: [RoleEnum.state],
             info: 'up to 3x media → personal 🟣',
-            run() {
-                // todo
-                throw new Error('todo');
+            condition: ({ state }) => [['hasVotingCubes', state.board.availableInfluence >= 1]],
+            run({ currentRole, state }) {
+                const toAdd = Math.min(3, state.board.availableInfluence);
+                state.board.availableInfluence -= toAdd;
+                currentRole.resources.influence += toAdd;
             },
         }),
     };

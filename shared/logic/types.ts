@@ -52,38 +52,47 @@ export interface BaseRole {
 export type Industry = 'food' | 'healthcare' | 'education' | 'luxury';
 export type WorkerType = Industry | 'unskilled';
 
-interface WorkingClassRole extends BaseRole {
+export interface WorkingClassRole extends BaseRole {
     id: typeof RoleEnum.workingClass;
     availableVotingCubes: number;
     workers: Array<{ id: number; type: WorkerType; company: null | number; committed?: boolean }>;
     availableWorkers: Record<WorkerType, number>;
 }
-interface MiddleClassRole extends BaseRole {
+export interface MiddleClassRole extends BaseRole {
     id: typeof RoleEnum.middleClass;
     availableVotingCubes: number;
     workers: Array<{ id: number; type: WorkerType; company: null | number; committed?: boolean }>;
     availableWorkers: Record<WorkerType, number>;
     prices: Record<Industry, number>;
 }
-interface CapitalistRole extends BaseRole {
+export interface CapitalistRole extends BaseRole {
     id: typeof RoleEnum.capitalist;
     availableVotingCubes: number;
     resources: BaseRole['resources'] & { capital: number };
     prices: Record<Industry, number>;
 }
-interface StateRole extends BaseRole {
+export interface StateRole extends BaseRole {
     id: typeof RoleEnum.state;
+    legitimacy: Record<RoleNameNoState, number>;
+    legitimacyTokens: Record<RoleNameNoState, number>;
 }
+
+export type RoleNameNoState =
+    | RoleMap['workingClass']['id']
+    | RoleMap['middleClass']['id']
+    | RoleMap['capitalist']['id'];
 
 export interface GameState {
     players: Player[];
-    settings: AnyObject;
+    settings: Record<string, never>;
     round: number;
     turn: number;
     currentRoleName: null | RoleName;
     board: {
+        votingCubeBag: Record<RoleNameNoState, number>;
         policies: Record<PolicyName, number>;
         policyProposals: Partial<Record<PolicyName, { role: RoleName; value: number }>>;
+        availableInfluence: number;
     };
     roles: {
         workingClass: WorkingClassRole;
@@ -101,9 +110,9 @@ export interface Game {
     state: GameState;
     requestPlayerInput: <T extends PlayerActionType>(
         type: T,
-        ...args: PlayerActionMap[T]['input'] extends any
-            ? [NonNullable<PlayerActionMap[T]['input']>]
-            : []
+        ...args: PlayerActionMap[T]['input'] extends undefined
+            ? []
+            : [NonNullable<PlayerActionMap[T]['input']>]
     ) => Promise<PlayerActionMap[T]['output']>;
     tick: () => Promise<void>;
     // calls .tick() until the queue is empty

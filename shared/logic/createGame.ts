@@ -110,6 +110,12 @@ export default function createGame({
         turn: 0,
         currentRoleName: RoleEnum.workingClass,
         board: {
+            availableInfluence: 25,
+            votingCubeBag: {
+                [RoleEnum.workingClass]: 0,
+                [RoleEnum.middleClass]: 0,
+                [RoleEnum.capitalist]: 0,
+            },
             policies: {
                 [PolicyEnum.fiscalPolicy]: 2,
                 [PolicyEnum.laborMarket]: 1,
@@ -171,6 +177,16 @@ export default function createGame({
             },
             [RoleEnum.state]: {
                 id: RoleEnum.state,
+                legitimacy: {
+                    [RoleEnum.workingClass]: 2,
+                    [RoleEnum.middleClass]: 2,
+                    [RoleEnum.capitalist]: 2,
+                },
+                legitimacyTokens: {
+                    [RoleEnum.workingClass]: 0,
+                    [RoleEnum.middleClass]: 0,
+                    [RoleEnum.capitalist]: 0,
+                },
                 ...getRoleState(),
             },
         },
