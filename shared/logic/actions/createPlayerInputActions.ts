@@ -16,8 +16,8 @@ import {
     type RoleNameWorkingMiddleClass,
     type RoleNameMiddleCapitalist,
     type WageId,
+    type CompanyCard,
 } from '../types';
-import { type CompanyDefinition } from '../cards/companyCards';
 
 interface PlayerInputAction<
     Type extends string,
@@ -63,11 +63,9 @@ export default function createPlayerInputActions() {
             'workers:commit',
         ),
         playerInputAction<'state:pick-role', RoleNameNoState, undefined>('state:pick-role'),
-        playerInputAction<
+        playerInputAction<'company:build', { companyId: CompanyCard['id'] }, { role: RoleName }>(
             'company:build',
-            { companyId: CompanyDefinition['id'] },
-            { role: RoleName }
-        >('company:build'),
+        ),
         playerInputAction<
             'company:build:assign-workers',
             CompanyWorker['id'][],
@@ -119,6 +117,11 @@ export default function createPlayerInputActions() {
         playerInputAction<'company:extra-shift', { companyId: Company['id'] }>(
             'company:extra-shift',
         ),
+        playerInputAction<
+            'sell-to-foreign-market',
+            Partial<Record<TradeableResource, boolean>>,
+            { role: RoleNameNoWorkingClass }
+        >('sell-to-foreign-market'),
     ];
 
     const result = _.keyBy(actions, 'type') as {

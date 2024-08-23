@@ -1,7 +1,13 @@
-import { type CompanyDefinition } from './cards/companyCards';
+import { type ForeignMarketCard } from './cards/foreignMarketCards';
+import {
+    type CapitalistMoneyResourceManager,
+    type MoneyResourceManager,
+} from './utils/ResourceManager';
 
-import type { AnyObject } from 'shared/types';
+import type Deck from './cards/Deck';
+import type ResourceManager from './utils/ResourceManager';
 import type { createActions } from './actions';
+import type { AnyObject } from 'shared/types';
 
 type ActionDefs = ReturnType<typeof createActions>;
 
@@ -58,12 +64,18 @@ export interface Player {
     name: string;
 }
 
-export interface BaseRole {
+export interface BaseRole<MoneyManager extends MoneyResourceManager = MoneyResourceManager> {
     id: RoleName;
     score: number;
-    loans: number;
     usedActions: Array<'basic' | 'free'>;
-    resources: Record<Resource, number>;
+    resources: {
+        money: MoneyManager;
+        influence: ResourceManager;
+        food: ResourceManager;
+        healthcare: ResourceManager;
+        education: ResourceManager;
+        luxury: ResourceManager;
+    };
 }
 
 export type Industry = 'food' | 'healthcare' | 'education' | 'luxury' | 'influence';
@@ -92,10 +104,9 @@ export interface MiddleClassRole extends BaseRole {
     companyMarket: string[];
     companyDeck: string[];
 }
-export interface CapitalistRole extends BaseRole {
+export interface CapitalistRole extends BaseRole<CapitalistMoneyResourceManager> {
     id: typeof RoleEnum.capitalist;
     availableVotingCubes: number;
-    resources: BaseRole['resources'] & { capital: number };
     prices: Record<TradeableResource, number>;
     storage: Partial<Record<TradeableResource, boolean>>;
     /** built companies */
@@ -122,7 +133,7 @@ type Benefit =
 export type WageId = 'l1' | 'l2' | 'l3';
 
 export interface Company {
-    id: CompanyDefinition['id'];
+    id: CompanyCard['id'];
     workers: Array<CompanyWorker['id']>;
     wages: WageId;
     automationToken?: boolean;
@@ -154,6 +165,13 @@ export interface GameState {
         policies: Record<PolicyName, number>;
         policyProposals: Partial<Record<PolicyName, { role: RoleName; value: number }>>;
         availableInfluence: number;
+        foreignMarketCard: ForeignMarketCard['id'];
+        decks: {
+            capitalistCompanies: Deck<CompanyCard[]>;
+            middleClassCompanies: Deck<CompanyCard[]>;
+            stateClassCompanies: Deck<CompanyCard[]>;
+            foreignMarket: Deck<ForeignMarketCard[]>;
+        };
     };
     roles: {
         workingClass: WorkingClassRole;
@@ -167,15 +185,9 @@ export interface GameState {
     actionQueue: ActionEventDefinition[];
 }
 
-export interface Game {
-    state: GameState;
-    tick: () => Promise<void>;
-    // calls .tick() until the queue is empty
-    flush: (config?: { to?: ActionName; after?: ActionName }) => Promise<void>;
-    next: <T extends ActionName>(
-        event: ActionEventMap[T] extends { data: infer D } ? { type: T; data: D } : T | { type: T },
-    ) => void;
-}
+export type GameNext<T extends ActionName> = (
+    event: ActionEventMap[T] extends { data: infer D } ? { type: T; data: D } : T | { type: T },
+) => void;
 
 export type RoleMap = {
     workingClass: WorkingClassRole;
@@ -185,8 +197,8 @@ export type RoleMap = {
 };
 
 export interface RunContext<CurrenRole extends null | RoleName = null> {
-    state: Game['state'];
-    next: Game['next'];
+    state: GameState;
+    next: GameNext<any>;
     debug?: boolean;
     /** where will actions be added on the queue when calling next(...). null = root */
     queueIndex: number | null;
@@ -246,41 +258,6 @@ export type ActionEventMap = {
 };
 export type ActionEventDefinition = ActionEventMap[ActionName];
 
-export interface ActionFactoryContext {
-    getCompanyDefinition: (id: CompanyDefinition['id']) => CompanyDefinition;
-    requestPlayerInput: <T extends PlayerActionType>(
-        type: T,
-        ...args: PlayerActionMap[T]['input'] extends undefined
-            ? []
-            : [NonNullable<PlayerActionMap[T]['input']>]
-    ) => Promise<PlayerActionMap[T]['output']>;
-    /** accounts for capitalist */
-    getMoney: (role: RoleName) => number;
-    /** accounts for capitalist */
-    addMoney: (role: RoleName, amount: number, source?: 'money' | 'capital') => void;
-    spendMoney: (
-        role: RoleName,
-        amount: number,
-        config?: { source?: 'money' | 'capital'; canTakeLoans?: boolean },
-    ) => void;
-    getProsperity: (role: RoleNameWorkingMiddleClass) => number;
-    getWorkerById: (id: CompanyWorker['id']) => {
-        worker: CompanyWorker;
-        roleName: RoleNameWorkingMiddleClass;
-    };
-    getCompanyById: (id: Company['id']) => {
-        company: Company;
-        roleName: RoleNameNoWorkingClass;
-    };
-    buyFromForeignMarket: (
-        state: GameState,
-        roleName: RoleNameWorkingMiddleClass,
-        resource: typeof ResourceEnum.food | typeof ResourceEnum.luxury,
-        count: number,
-        cfg?: { payTarriff?: boolean },
-    ) => void;
-}
-
 export interface RoleAction<
     Type extends string,
     Roles extends RoleName,
@@ -290,13 +267,27 @@ export interface RoleAction<
     readonly roles: readonly Roles[];
 }
 
-export interface CreateActionsContext extends ActionFactoryContext {
-    getAction: <T extends ActionName>(type: T) => ActionMap[T];
-    validateEvent: (event: any) => event is { type: ActionName };
-}
-
 export type BuyGoodsAndServicesSources =
     | MiddleClassRole['id']
     | CapitalistRole['id']
     | StateRole['id']
     | 'foreign-market';
+
+export interface CompanyCard {
+    id: string;
+    name: string;
+    cost: number;
+    industry: Industry;
+    production: number;
+    /** middle class (when WC worker) or capitalist (when automation token) */
+    extraProduction?: number;
+    /** capitalist only */
+    fullyAutomated?: boolean;
+    wages: Record<WageId, number>;
+    workers: Array<{
+        type: WorkerType;
+        roles: Array<RoleMap['workingClass']['id'] | RoleMap['middleClass']['id']>;
+        /** only for middle class companies */
+        optional?: boolean;
+    }>;
+}

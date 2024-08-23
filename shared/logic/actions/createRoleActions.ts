@@ -8,7 +8,6 @@ import {
     type StateRole,
     type RoleNameNoState,
     WorkerTypeEnum,
-    type ActionFactoryContext,
     type CapitalistRole,
     ResourceEnum,
     type CompanyWorker,
@@ -17,6 +16,8 @@ import {
     type WageId,
 } from '../types';
 import { roleAction } from './utils';
+
+import type Game from '../Game';
 
 function addLegitimacy(currentRole: StateRole, target: RoleNameNoState, value: number) {
     currentRole.legitimacy[target] = _.clamp(currentRole.legitimacy[target] + value, 1, 10);
@@ -41,16 +42,7 @@ const buyGoodsSources_all = [
     'foreign-market',
 ] as const;
 
-export default function createRoleActions({
-    getCompanyDefinition,
-    requestPlayerInput,
-    addMoney,
-    spendMoney,
-    getMoney,
-    getProsperity,
-    getWorkerById,
-    buyFromForeignMarket,
-}: ActionFactoryContext) {
+export default function createRoleActions(game: Game) {
     const freeActions = {
         ...roleAction({
             type: 'action:free:skip',
@@ -67,12 +59,12 @@ export default function createRoleActions({
             roles: allRoles,
             info: '50¥ (CC: from Capital) → discard loan (max 1 loan payoff/action)',
             condition: ({ currentRole }) => [
-                ['hasMoney', getMoney(currentRole.id) >= 50],
-                ['hasLoans', currentRole.loans > 0],
+                ['hasMoney', currentRole.resources.money.value >= 50],
+                ['hasLoans', currentRole.resources.money.loans > 0],
             ],
             run: ({ currentRole }) => {
-                currentRole.loans--;
-                spendMoney(currentRole.id, 50);
+                currentRole.resources.money.removeLoans(1);
+                currentRole.resources.money.remove(50);
             },
         }),
         ...roleAction({
@@ -82,12 +74,12 @@ export default function createRoleActions({
             condition: ({ currentRole }) => [
                 [
                     'hasHealthcare',
-                    currentRole.resources.healthcare >= getProsperity(currentRole.id),
+                    currentRole.resources.healthcare.value >= game.getProsperity(currentRole.id),
                 ],
             ],
             run({ state, currentRole }) {
-                currentRole.resources.healthcare -= getProsperity(currentRole.id);
-                currentRole.score += getProsperity(currentRole.id);
+                currentRole.resources.healthcare.remove(game.getProsperity(currentRole.id));
+                currentRole.score += game.getProsperity(currentRole.id);
                 currentRole.score += 2;
                 // todo: edge-case when there are no more unskilled workers
                 currentRole.availableWorkers.unskilled -= 1;
@@ -105,12 +97,15 @@ export default function createRoleActions({
             roles: roles_WM,
             info: 'from G&S → 1x Pop. → 1 🔴 / 🟡 → + unskilled → skilled worker',
             condition: ({ currentRole }) => [
-                ['hasEducation', currentRole.resources.education >= getProsperity(currentRole.id)],
+                [
+                    'hasEducation',
+                    currentRole.resources.education.value >= game.getProsperity(currentRole.id),
+                ],
             ],
             async run({ currentRole }) {
-                currentRole.score += getProsperity(currentRole.id);
-                currentRole.resources.education -= getProsperity(currentRole.id);
-                const { id, type } = await requestPlayerInput('workers:educate', {
+                currentRole.score += game.getProsperity(currentRole.id);
+                currentRole.resources.education.remove(game.getProsperity(currentRole.id));
+                const { id, type } = await game.requestPlayerInput('workers:educate', {
                     role: currentRole.id,
                 });
                 currentRole.workers[id].type = type;
@@ -121,11 +116,14 @@ export default function createRoleActions({
             roles: roles_WM,
             info: 'from G&S 1x Population → 1 🔴 / 🟡',
             condition: ({ currentRole }) => [
-                ['hasLuxury', currentRole.resources.luxury >= getProsperity(currentRole.id)],
+                [
+                    'hasLuxury',
+                    currentRole.resources.luxury.value >= game.getProsperity(currentRole.id),
+                ],
             ],
             run({ currentRole }) {
-                currentRole.resources.luxury -= getProsperity(currentRole.id);
-                currentRole.score += getProsperity(currentRole.id);
+                currentRole.resources.luxury.remove(game.getProsperity(currentRole.id));
+                currentRole.score += game.getProsperity(currentRole.id);
             },
         }),
         ...roleAction({
@@ -135,7 +133,7 @@ export default function createRoleActions({
             async run({ currentRole }) {
                 Object.assign(
                     currentRole.prices,
-                    await requestPlayerInput('adjust-prices', {
+                    await game.requestPlayerInput('adjust-prices', {
                         role: currentRole.id,
                     }),
                 );
@@ -146,14 +144,14 @@ export default function createRoleActions({
             roles: roles_MCS,
             info: 'raise = commit, committed = cannot lower (Labor Market)',
             async run({ currentRole }) {
-                const toAdjust = await requestPlayerInput('company:adjust-wages', {
+                const toAdjust = await game.requestPlayerInput('company:adjust-wages', {
                     role: currentRole.id,
                 });
                 for (const { companyId, wages } of toAdjust) {
                     const company = currentRole.companies[companyId];
                     company.wages = wages;
                     for (const workerId of company.workers) {
-                        const { worker } = getWorkerById(workerId);
+                        const { worker } = game.getWorkerById(workerId);
                         worker.committed = true;
                     }
                 }
@@ -170,7 +168,7 @@ export default function createRoleActions({
                 ],
             ],
             async run({ currentRole }) {
-                const tuples = await requestPlayerInput('workers:swap', {
+                const tuples = await game.requestPlayerInput('workers:swap', {
                     role: currentRole.id,
                 });
                 for (const [id1, id2] of tuples) {
@@ -186,20 +184,20 @@ export default function createRoleActions({
             type: 'action:free:give-bonus',
             roles: [RoleEnum.capitalist],
             info: '5¥ to class → commit',
-            condition: ({ currentRole }) => [['hasMoney', getMoney(currentRole.id) >= 5]],
-            async run({ currentRole }) {
-                const { companyId } = await requestPlayerInput('workers:commit', {
+            condition: ({ currentRole }) => [['hasMoney', currentRole.resources.money.value >= 5]],
+            async run({ state, currentRole }) {
+                const { companyId } = await game.requestPlayerInput('workers:commit', {
                     role: currentRole.id,
                 });
                 let targetRole: RoleName | null = null;
                 for (const workerId of currentRole.companies[companyId].workers) {
-                    const { worker } = getWorkerById(workerId);
+                    const { worker } = game.getWorkerById(workerId);
                     worker.committed = true;
                     targetRole = worker.role;
                 }
                 if (targetRole) {
-                    spendMoney(currentRole.id, 5);
-                    addMoney(targetRole, 5);
+                    currentRole.resources.money.remove(5);
+                    state.roles[targetRole].resources.money.add(5);
                 }
             },
         }),
@@ -208,15 +206,15 @@ export default function createRoleActions({
             roles: [RoleEnum.capitalist],
             info: '20¥ per tile (max 1 storage tile per type for whole game)',
             condition: ({ currentRole }) => [
-                ['hasMoney', getMoney(currentRole.id) >= 20],
+                ['hasMoney', currentRole.resources.money.value >= 20],
                 ['hasStorage', _.filter(currentRole.storage).length < 4],
             ],
             async run({ currentRole }) {
-                const { resource } = await requestPlayerInput('buy-storage', {
+                const { resource } = await game.requestPlayerInput('buy-storage', {
                     role: currentRole.id,
                 });
                 currentRole.storage[resource] = true;
-                spendMoney(currentRole.id, 20);
+                currentRole.resources.money.remove(20);
             },
         }),
         ...roleAction({
@@ -230,7 +228,7 @@ export default function createRoleActions({
                 const benefits = state.roles.state.benefits[currentRole.id];
                 for (const benefit of benefits) {
                     if (benefit.type === 'resource') {
-                        addMoney(currentRole.id, benefit.amount);
+                        currentRole.resources[benefit.resource].add(benefit.amount);
                     } else if (benefit.type === 'voting-cube') {
                         currentRole.availableVotingCubes -= benefit.amount;
                         state.board.votingCubeBag[currentRole.id] += benefit.amount;
@@ -286,7 +284,7 @@ export default function createRoleActions({
             roles: [RoleEnum.workingClass, RoleEnum.middleClass],
             info: '1-3 un-employed or non-committed workers → commit (and/or Trade Union WC)',
             async run({ currentRole, state }) {
-                const toAssign = await requestPlayerInput('assign-workers', {
+                const toAssign = await game.requestPlayerInput('assign-workers', {
                     role: currentRole.id,
                 });
                 const emptyCompanies = new Set<{
@@ -296,7 +294,7 @@ export default function createRoleActions({
                 const handledWorkers = new Set<CompanyWorker['id']>();
                 for (const payload of toAssign) {
                     if (payload.type === 'union') {
-                        const { worker } = getWorkerById(payload.workerId);
+                        const { worker } = game.getWorkerById(payload.workerId);
                         handledWorkers.add(worker.id);
                         worker.company = null;
                         worker.committed = false;
@@ -307,7 +305,7 @@ export default function createRoleActions({
                     const company = state.roles[companyOwnerRole].companies[companyId];
                     company.workers = workers;
                     for (const workerId of workers) {
-                        const { worker } = getWorkerById(workerId);
+                        const { worker } = game.getWorkerById(workerId);
                         handledWorkers.add(worker.id);
                         // moving unemployed workers is fine
                         // moving WC workers out of a MC company is also fine
@@ -328,7 +326,7 @@ export default function createRoleActions({
                     const company = state.roles[role].companies[companyId];
                     for (const workerId of company.workers) {
                         if (handledWorkers.has(workerId)) continue;
-                        const { worker } = getWorkerById(workerId);
+                        const { worker } = game.getWorkerById(workerId);
                         worker.company = null;
                         worker.committed = false;
                     }
@@ -347,16 +345,16 @@ export default function createRoleActions({
                 ],
             ],
             async run({ currentRole, state }) {
-                const { companyId } = await requestPlayerInput('company:build', {
+                const { companyId } = await game.requestPlayerInput('company:build', {
                     role: currentRole.id,
                 });
-                spendMoney(currentRole.id, getCompanyDefinition(companyId).cost);
+                currentRole.resources.money.remove(game.getCompanyDefinition(companyId).cost);
                 currentRole.companies[companyId] = {
                     id: companyId,
                     workers: [],
                     wages: ('l' + (state.board.policies.laborMarket + 1)) as WageId,
                 };
-                const workers = await requestPlayerInput('company:build:assign-workers', {
+                const workers = await game.requestPlayerInput('company:build:assign-workers', {
                     role: currentRole.id,
                     company: companyId,
                 });
@@ -371,15 +369,15 @@ export default function createRoleActions({
             info: 'company with non-committed workers → gain ¥ + workers to unemployed',
             condition: ({ currentRole }) => [['hasCompany', _.size(currentRole.companies) > 0]],
             async run({ currentRole }) {
-                const companyId = await requestPlayerInput('company:sell', {
+                const companyId = await game.requestPlayerInput('company:sell', {
                     role: currentRole.id,
                 });
                 const company = currentRole.companies[companyId];
                 for (const workerId of company.workers) {
-                    const { worker } = getWorkerById(workerId);
+                    const { worker } = game.getWorkerById(workerId);
                     worker.company = null;
                 }
-                addMoney(currentRole.id, getCompanyDefinition(companyId).cost);
+                currentRole.resources.money.remove(game.getCompanyDefinition(companyId).cost);
                 if (company.automationToken) {
                     (currentRole as CapitalistRole).automationTokens++;
                 }
@@ -399,9 +397,16 @@ export default function createRoleActions({
             type: 'action:basic:sell-to-foreign-market',
             roles: [RoleEnum.middleClass, RoleEnum.capitalist, RoleEnum.state],
             info: '1x per transaction (MC = 1x per transaction, State = only from supply)',
-            run() {
-                // todo
-                throw new Error('todo');
+            async run() {
+                // const toSell = await game.requestPlayerInput('sell-to-foreign-market', {
+                //     role: currentRole.id,
+                // });
+                // for (const [resource, count] of Object.entries(toSell)) {
+                //     if (count) {
+                //         spendMoney(currentRole.id, count * 12, { source: 'foreign-market' });
+                //         addMoney(RoleEnum.state, count * 12);
+                //     }
+                // }
             },
         }),
         ...roleAction({
@@ -409,15 +414,15 @@ export default function createRoleActions({
             roles: [RoleEnum.workingClass, RoleEnum.middleClass],
             info: 'up to 1 per Population × 2 sources (1 type)',
             async run({ currentRole, state }) {
-                const toBuy = await requestPlayerInput('buy-goods-and-services', {
+                const toBuy = await game.requestPlayerInput('buy-goods-and-services', {
                     role: currentRole.id,
-                    maxPerSource: getProsperity(currentRole.id),
+                    maxPerSource: game.getProsperity(currentRole.id),
                     sources: buyGoodsSources_all,
                     maxSources: 2,
                 });
                 for (const { resource, count, source } of toBuy) {
                     if (source === 'foreign-market') {
-                        buyFromForeignMarket(state, currentRole.id, resource as any, count, {
+                        game.buyFromForeignMarket(currentRole.id, resource as any, count, {
                             payTarriff: true,
                         });
                         continue;
@@ -442,10 +447,10 @@ export default function createRoleActions({
                     } else {
                         total = count * role.prices[resource];
                     }
-                    spendMoney(currentRole.id, total);
-                    addMoney(role.id, total);
-                    role.resources[resource] -= count;
-                    currentRole.resources[resource] += count;
+                    currentRole.resources.money.remove(total);
+                    role.resources.money.add(total);
+                    role.resources[resource].remove(count);
+                    currentRole.resources[resource].add(count);
                 }
             },
         }),
@@ -455,7 +460,7 @@ export default function createRoleActions({
             info: '1-2 tokens → non-committed cos. (L1/L2 wages) → wages ⬆ or no production and +1 🟣',
             condition: ({ currentRole }) => [['hasStrikeTokens', currentRole.strikeTokens >= 1]],
             async run({ currentRole, state }) {
-                const toStrike = await requestPlayerInput('company:strike', {
+                const toStrike = await game.requestPlayerInput('company:strike', {
                     role: currentRole.id,
                 });
                 for (const { companyId, role } of toStrike) {
@@ -479,25 +484,25 @@ export default function createRoleActions({
             roles: [RoleEnum.middleClass],
             info: 'co with non-committed MC (+ non-committed WC) workers → commit + produce (+ pay WC)',
             async run({ state, currentRole }) {
-                const { companyId } = await requestPlayerInput('company:extra-shift');
+                const { companyId } = await game.requestPlayerInput('company:extra-shift');
                 const company = state.roles[RoleEnum.middleClass].companies[companyId];
                 const uncommittedWorkingClassWorker = company.workers.find(w => {
-                    const { worker, roleName } = getWorkerById(w);
+                    const { worker, roleName } = game.getWorkerById(w);
                     return roleName === RoleEnum.workingClass && !worker.committed;
                 });
-                const def = getCompanyDefinition(companyId);
+                const def = game.getCompanyDefinition(companyId);
                 const wages = def.wages[company.wages];
                 const produce = (count: number) => {
                     if (def.industry === ResourceEnum.influence) {
-                        currentRole.resources[def.industry] += count;
+                        currentRole.resources[def.industry].add(count);
                     } else {
                         currentRole.producedResources[def.industry] += count;
                     }
                 };
                 produce(def.production);
                 if (uncommittedWorkingClassWorker) {
-                    spendMoney(currentRole.id, wages);
-                    addMoney(RoleEnum.workingClass, wages);
+                    currentRole.resources.money.remove(wages);
+                    state.roles[RoleEnum.workingClass].resources.money.add(wages);
                     state.roles[RoleEnum.workingClass].workers[
                         uncommittedWorkingClassWorker
                     ].committed = true;
@@ -519,14 +524,14 @@ export default function createRoleActions({
             roles: [RoleEnum.capitalist],
             info: 'pay 30¥ from Capital → gain 3 🟣',
             condition: ({ currentRole, state }) => [
-                ['hasMoney', getMoney(currentRole.id) >= 30],
+                ['hasMoney', currentRole.resources.money.value >= 30],
                 ['hasVotingCubes', state.board.availableInfluence >= 3],
             ],
             run({ state, currentRole }) {
-                spendMoney(currentRole.id, 30, { source: 'capital' });
+                currentRole.resources.money.remove(30, { useCapital: true });
                 const toAdd = Math.min(3, state.board.availableInfluence);
                 state.board.availableInfluence -= toAdd;
-                currentRole.resources.influence += toAdd;
+                currentRole.resources.influence.add(toAdd);
             },
         }),
         ...roleAction({
@@ -534,10 +539,10 @@ export default function createRoleActions({
             roles: [RoleEnum.state],
             info: "2x personal 🟣 to class → +1 that class's Legitimacy",
             condition: ({ currentRole }) => [
-                ['hasVotingCubes', currentRole.resources.influence >= 2],
+                ['hasVotingCubes', currentRole.resources.influence.value >= 2],
             ],
             async run({ currentRole }) {
-                const target = await requestPlayerInput('state:pick-role');
+                const target = await game.requestPlayerInput('state:pick-role');
                 addLegitimacy(currentRole, target, 1);
             },
         }),
@@ -546,16 +551,16 @@ export default function createRoleActions({
             roles: [RoleEnum.state],
             info: 'take 10¥ from each class → -1 Legitimacy from two lowest classes',
             run({ currentRole }) {
-                spendMoney(RoleEnum.workingClass, 10, { canTakeLoans: true });
-                spendMoney(RoleEnum.middleClass, 10, { canTakeLoans: true });
-                spendMoney(RoleEnum.capitalist, 10, { canTakeLoans: true });
+                currentRole.resources.money.remove(10, { canTakeLoans: true });
+                currentRole.resources.money.remove(10, { canTakeLoans: true });
+                currentRole.resources.money.remove(10, { canTakeLoans: true });
                 objectEntries(currentRole.legitimacy)
                     .sort(([, a], [, b]) => a - b)
                     .slice(0, 2)
                     .forEach(([k]) => {
                         addLegitimacy(currentRole, k, -1);
                     });
-                addMoney(currentRole.id, 30);
+                currentRole.resources.money.add(30);
             },
         }),
         ...roleAction({
@@ -566,7 +571,7 @@ export default function createRoleActions({
             run({ currentRole, state }) {
                 const toAdd = Math.min(3, state.board.availableInfluence);
                 state.board.availableInfluence -= toAdd;
-                currentRole.resources.influence += toAdd;
+                currentRole.resources.influence.add(toAdd);
             },
         }),
     };

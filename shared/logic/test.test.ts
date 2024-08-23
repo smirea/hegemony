@@ -1,8 +1,8 @@
 import { beforeEach, expect, test, describe, vi } from 'vitest';
 
-import createGame from './createGame';
-import { type ActionName, type Game, type Player, PolicyEnum, RoleEnum } from './types';
-import { type ActionFactoryContext, roleActionEvent } from './actions/utils';
+import { type ActionName, type Player, PolicyEnum, RoleEnum } from './types';
+import { roleActionEvent } from './actions/utils';
+import Game from './Game';
 
 let game: Game = null as any;
 const noResponseSymbol = Symbol('nope');
@@ -18,11 +18,13 @@ const tick = async (n?: number | ActionName) => {
     else await game.flush({ after: n });
 };
 
-const requestPlayerInput = vi.fn<ActionFactoryContext['requestPlayerInput']>();
+const requestPlayerInput = vi.fn<Game['requestPlayerInput']>();
 
 beforeEach(() => {
-    game = createGame({ requestPlayerInput: requestPlayerInput as any });
-    game.state.players = [working, capitalist];
+    game = new Game({
+        players: [working, capitalist],
+        requestPlayerInput: requestPlayerInput as any,
+    });
     requestPlayerInput.mockReset();
     requestPlayerInput.mockImplementation(async (...data: any) => {
         if (playerInput === noResponseSymbol) {

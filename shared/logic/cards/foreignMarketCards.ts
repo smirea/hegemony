@@ -3,7 +3,7 @@ interface Transaction {
     money: number;
 }
 
-interface ForeignMarketCard {
+export interface ForeignMarketCard {
     id: string;
     food: [Transaction, Transaction];
     luxury: [Transaction, Transaction];
@@ -11,6 +11,26 @@ interface ForeignMarketCard {
     education: [Transaction, Transaction];
 }
 
-const foreignMarketCards: ForeignMarketCard[] = [];
+const foreignMarketCards: ForeignMarketCard[] = [
+    {
+        id: 'food',
+        food: [
+            { resources: 1, money: 2 },
+            { resources: 3, money: 8 },
+        ],
+        luxury: [
+            { resources: 1, money: 2 },
+            { resources: 3, money: 8 },
+        ],
+        healthcare: [
+            { resources: 1, money: 2 },
+            { resources: 3, money: 8 },
+        ],
+        education: [
+            { resources: 1, money: 2 },
+            { resources: 3, money: 8 },
+        ],
+    },
+];
 
 export default foreignMarketCards;

@@ -1,20 +1,19 @@
-import {
-    type ActionFactoryContext,
-    type CreateActionsContext,
-    type ActionMap,
-    type ActionName,
-} from '../types';
+import { type ActionMap, type ActionName } from '../types';
 import createRoleActions from './createRoleActions';
 import createGameActions from './createGameActions';
 import createPlayerInputActions from './createPlayerInputActions';
 
-interface CreateActionsResult extends Omit<CreateActionsContext, keyof ActionFactoryContext> {
+import type Game from '../Game';
+
+interface CreateActionsResult {
     actions: ReturnType<typeof createRoleActions> & ReturnType<typeof createGameActions>;
     roleActions: ReturnType<typeof createRoleActions>;
     playerInputActions: ReturnType<typeof createPlayerInputActions>;
+    validateEvent: (event: any) => event is { type: ActionName };
+    getAction: <T extends ActionName>(type: T) => ActionMap[T];
 }
 
-export function createActions(factoryContext: ActionFactoryContext): CreateActionsResult {
+export function createActions(game: Game): CreateActionsResult {
     const getAction = <T extends ActionName>(type: T): ActionMap[T] => {
         // @ts-ignore
         if (!actions[type]) throw new Error(`event.type is not a valid action: ${type}`);
@@ -28,20 +27,14 @@ export function createActions(factoryContext: ActionFactoryContext): CreateActio
         return event;
     };
 
-    const ctx: CreateActionsContext = {
-        ...factoryContext,
-        getAction,
-        validateEvent,
-    };
-
-    const commonActions = createRoleActions(factoryContext);
+    const commonActions = createRoleActions(game);
 
     const roleActions = {
         ...commonActions,
     };
 
     const actions = {
-        ...createGameActions(ctx),
+        ...createGameActions(game),
         ...roleActions,
     };
 

@@ -1,13 +1,12 @@
 import chalk from 'chalk';
+import _ from 'lodash';
 
 import { RoleEnum } from '../types';
-import { action, type CreateActionsContext } from './utils';
+import { action } from './utils';
 
-export default function createGameActions({
-    getAction,
-    validateEvent,
-    requestPlayerInput,
-}: CreateActionsContext) {
+import type Game from '../Game';
+
+export default function createGameActions(game: Game) {
     return {
         ...action({
             type: 'game:start',
@@ -21,6 +20,9 @@ export default function createGameActions({
                 state.players.sort((a, b) => order.indexOf(a.role) - order.indexOf(b.role));
                 state.round = 0;
                 state.round = 0;
+                for (const deck of Object.values(state.board.decks)) {
+                    deck.shuffle();
+                }
                 next('game:round:start');
             },
         }),
@@ -30,6 +32,7 @@ export default function createGameActions({
                 state.currentRoleName = null;
                 ++state.round;
                 state.turn = 0;
+                state.board.foreignMarketCard = state.board.decks.foreignMarket.draw().id;
                 if (debug) console.log(chalk.green.bold('——— round:'), state.round);
                 next('game:role:next');
             },
@@ -64,11 +67,11 @@ export default function createGameActions({
         ...action({
             type: 'game:role:turn',
             async run({ next, currentRole: currentRoleState, state }) {
-                const action = await requestPlayerInput('pick-action', {
+                const action = await game.requestPlayerInput('pick-action', {
                     role: state.currentRoleName!,
                 });
-                validateEvent(action);
-                if (getAction(action.type).isFreeAction) {
+                game.validateEvent(action);
+                if (game.getAction(action.type).isFreeAction) {
                     currentRoleState.usedActions.push('free');
                 } else {
                     currentRoleState.usedActions.push('basic');
