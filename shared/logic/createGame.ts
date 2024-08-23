@@ -331,6 +331,11 @@ export default function createGame({
                 },
                 companies: {},
                 companyDeck: [],
+                benefits: {
+                    [RoleEnum.workingClass]: [],
+                    [RoleEnum.middleClass]: [],
+                    [RoleEnum.capitalist]: [],
+                },
             },
         },
         nextWorkerId: 0,

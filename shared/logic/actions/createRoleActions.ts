@@ -221,11 +221,22 @@ export default function createRoleActions({
         }),
         ...roleAction({
             type: 'action:free:receive-benefits',
-            roles: roles_MCS,
+            roles: roles_WMC,
             info: 'take State Benefits → State gains 1 ★',
-            run() {
-                // todo
-                throw new Error('todo');
+            condition: ({ state, currentRole }) => [
+                ['hasBenefits', state.roles.state.benefits[currentRole.id].length > 0],
+            ],
+            run({ state, currentRole }) {
+                const benefits = state.roles.state.benefits[currentRole.id];
+                for (const benefit of benefits) {
+                    if (benefit.type === 'resource') {
+                        addMoney(currentRole.id, benefit.amount);
+                    } else if (benefit.type === 'voting-cube') {
+                        currentRole.availableVotingCubes -= benefit.amount;
+                        state.board.votingCubeBag[currentRole.id] += benefit.amount;
+                    }
+                }
+                state.roles.state.benefits[currentRole.id] = [];
             },
         }),
     };

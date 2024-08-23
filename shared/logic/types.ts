@@ -105,13 +105,19 @@ export interface CapitalistRole extends BaseRole {
     companyDeck: string[];
     automationTokens: number;
 }
+
 export interface StateRole extends BaseRole {
     id: typeof RoleEnum.state;
     legitimacy: Record<RoleNameNoState, number>;
     legitimacyTokens: Record<RoleNameNoState, number>;
     companies: Record<Company['id'], Company>;
     companyDeck: string[];
+    benefits: Record<RoleNameNoState, Benefit[]>;
 }
+
+type Benefit =
+    | { type: 'resource'; resource: Resource; amount: number }
+    | { type: 'voting-cube'; amount: number };
 
 export type WageId = 'l1' | 'l2' | 'l3';
 
