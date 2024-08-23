@@ -197,9 +197,7 @@ export type RoleMap = {
 };
 
 export interface RunContext<CurrenRole extends null | RoleName = null> {
-    state: GameState;
     next: GameNext<any>;
-    debug?: boolean;
     /** where will actions be added on the queue when calling next(...). null = root */
     queueIndex: number | null;
     currentRole: CurrenRole extends RoleName ? RoleMap[CurrenRole] : null;

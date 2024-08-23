@@ -81,12 +81,6 @@ export default class Game {
         get next() {
             return this.next;
         },
-        get state() {
-            return this.state;
-        },
-        get debug() {
-            return this.debug;
-        },
     });
 
     createEmptyState(): GameState {
@@ -279,8 +273,6 @@ export default class Game {
         }
 
         const actionContext: RunContext<RoleName> = {
-            state: this.state,
-            debug: this.config.debug,
             next: null as any, // added below
             queueIndex: this.state.currentActionIndex + 1,
             currentRole: this.state.currentRoleName
@@ -391,5 +383,9 @@ export default class Game {
         this.state.roles[roleName].resources[resource].add(count);
         this.state.roles[roleName].resources.money.remove(total);
         this.state.roles[RoleEnum.state].resources.money.add(tarriff * count);
+    }
+
+    getForeignMarketCard() {
+        return this.state.board.decks.foreignMarket.seek(this.state.board.foreignMarketCard);
     }
 }

@@ -119,7 +119,7 @@ export default function createPlayerInputActions() {
         ),
         playerInputAction<
             'sell-to-foreign-market',
-            Partial<Record<TradeableResource, boolean>>,
+            Partial<Record<TradeableResource, [boolean, boolean]>>,
             { role: RoleNameNoWorkingClass }
         >('sell-to-foreign-market'),
     ];
