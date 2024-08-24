@@ -13,7 +13,7 @@ export interface ForeignMarketCard {
 
 const foreignMarketCards: ForeignMarketCard[] = [
     {
-        id: 'food',
+        id: 'test',
         food: [
             { resources: 1, money: 2 },
             { resources: 3, money: 8 },

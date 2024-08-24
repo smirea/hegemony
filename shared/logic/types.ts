@@ -8,6 +8,7 @@ import type Deck from './cards/Deck';
 import type ResourceManager from './utils/ResourceManager';
 import type { createActions } from './actions';
 import type { AnyObject } from 'shared/types';
+import type { BusinessDealCard } from './cards/businessDealCards';
 
 type ActionDefs = ReturnType<typeof createActions>;
 
@@ -19,6 +20,8 @@ export const RoleEnum = {
 } as const;
 
 export type RoleName = (typeof RoleEnum)[keyof typeof RoleEnum];
+
+export type PolicyString = `${1 | 2 | 3 | 4 | 5 | 6 | 7}${'A' | 'B' | 'C'}`;
 
 export const PolicyEnum = {
     fiscalPolicy: 'fiscalPolicy',
@@ -166,11 +169,13 @@ export interface GameState {
         policyProposals: Partial<Record<PolicyName, { role: RoleName; value: number }>>;
         availableInfluence: number;
         foreignMarketCard: ForeignMarketCard['id'];
+        businessDealCards: BusinessDealCard['id'][];
         decks: {
             capitalistCompanies: Deck<CompanyCard[]>;
             middleClassCompanies: Deck<CompanyCard[]>;
             stateClassCompanies: Deck<CompanyCard[]>;
-            foreignMarket: Deck<ForeignMarketCard[]>;
+            foreignMarketCards: Deck<ForeignMarketCard[]>;
+            businessDealCards: Deck<BusinessDealCard[]>;
         };
     };
     roles: {

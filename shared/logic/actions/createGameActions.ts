@@ -10,17 +10,17 @@ export default function createGameActions(game: Game) {
     return {
         ...action({
             type: 'game:start',
-            async run({ state, next }) {
+            async run({ next }) {
                 const order = [
                     RoleEnum.workingClass,
                     RoleEnum.middleClass,
                     RoleEnum.capitalist,
                     RoleEnum.state,
                 ];
-                state.players.sort((a, b) => order.indexOf(a.role) - order.indexOf(b.role));
-                state.round = 0;
-                state.round = 0;
-                for (const deck of Object.values(state.board.decks)) {
+                game.state.players.sort((a, b) => order.indexOf(a.role) - order.indexOf(b.role));
+                game.state.round = 0;
+                game.state.round = 0;
+                for (const deck of Object.values(game.state.board.decks)) {
                     deck.shuffle();
                 }
                 next('game:round:start');
@@ -28,47 +28,63 @@ export default function createGameActions(game: Game) {
         }),
         ...action({
             type: 'game:round:start',
-            async run({ state, debug, next }) {
-                state.currentRoleName = null;
-                ++state.round;
-                state.turn = 0;
-                state.board.foreignMarketCard = state.board.decks.foreignMarket.draw().id;
-                if (debug) console.log(chalk.green.bold('——— round:'), state.round);
+            async run({ next }) {
+                game.state.currentRoleName = null;
+                ++game.state.round;
+                game.state.turn = 0;
+                const { foreignMarketCards, businessDealCards } = game.state.board.decks;
+                game.state.board.foreignMarketCard = foreignMarketCards.draw().id;
+                if (game.ifPolicy('6A')) {
+                    game.state.board.businessDealCards = [
+                        businessDealCards.draw().id,
+                        businessDealCards.draw().id,
+                    ];
+                } else if (game.ifPolicy('6B')) {
+                    game.state.board.businessDealCards = [businessDealCards.draw().id];
+                } else {
+                    game.state.board.businessDealCards = [];
+                }
+                if (game.debug) console.log(chalk.green.bold('——— round:'), game.state.round);
                 next('game:role:next');
             },
         }),
         ...action({
             type: 'game:turn:start',
-            async run({ state, debug, next }) {
-                ++state.turn;
-                if (debug) console.log(chalk.green.bold('——— turn:'), state.turn);
+            async run({ next }) {
+                ++game.state.turn;
+                if (game.debug) console.log(chalk.green.bold('——— turn:'), game.state.turn);
                 next('game:role:next');
             },
         }),
         ...action({
             type: 'game:role:next',
-            async run({ state, next }): Promise<void> {
-                if (state.currentRoleName == state.players[state.players.length - 1].role) {
+            async run({ next }): Promise<void> {
+                if (
+                    game.state.currentRoleName ==
+                    game.state.players[game.state.players.length - 1].role
+                ) {
                     return next('game:turn:end');
                 }
-                if (state.currentRoleName == null) {
-                    state.currentRoleName = state.players[0].role;
+                if (game.state.currentRoleName == null) {
+                    game.state.currentRoleName = game.state.players[0].role;
                 } else {
-                    state.currentRoleName =
-                        state.players[
-                            state.players.findIndex(p => p.role === state.currentRoleName) + 1
+                    game.state.currentRoleName =
+                        game.state.players[
+                            game.state.players.findIndex(
+                                p => p.role === game.state.currentRoleName,
+                            ) + 1
                         ].role;
                 }
 
-                state.roles[state.currentRoleName!].usedActions = [];
+                game.state.roles[game.state.currentRoleName!].usedActions = [];
                 next('game:role:turn');
             },
         }),
         ...action({
             type: 'game:role:turn',
-            async run({ next, currentRole: currentRoleState, state }) {
+            async run({ next, currentRole: currentRoleState }) {
                 const action = await game.requestPlayerInput('pick-action', {
-                    role: state.currentRoleName!,
+                    role: game.state.currentRoleName!,
                 });
                 game.validateEvent(action);
                 if (game.getAction(action.type).isFreeAction) {
@@ -89,17 +105,17 @@ export default function createGameActions(game: Game) {
         }),
         ...action({
             type: 'game:turn:end',
-            async run({ next, state }): Promise<void> {
-                if (state.turn >= 4) return next('game:round:end');
-                ++state.turn;
+            async run({ next }): Promise<void> {
+                if (game.state.turn >= 4) return next('game:round:end');
+                ++game.state.turn;
                 next('game:round:start');
             },
         }),
         ...action({
             type: 'game:round:end',
-            async run({ next, state }): Promise<void> {
-                if (state.round >= 4) return next('game:end');
-                ++state.round;
+            async run({ next }): Promise<void> {
+                if (game.state.round >= 4) return next('game:end');
+                ++game.state.round;
                 next('game:round:start');
             },
         }),

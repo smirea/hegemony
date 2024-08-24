@@ -478,9 +478,12 @@ export default function createRoleActions(game: Game) {
             type: 'action:basic:demonstration',
             roles: [RoleEnum.workingClass],
             info: 'unemployed → open slots >= 2 → WC +1 🟣, others -★ (WC choice)',
-            run() {
-                // todo
-                throw new Error('todo');
+            condition: ({ currentRole }) => [
+                ['noDemonstration', !currentRole.demonstration],
+                ['hasUnemployedWorkers', game.workingClassCanDemonstrate()],
+            ],
+            run({ currentRole }) {
+                currentRole.demonstration = true;
             },
         }),
         ...roleAction({

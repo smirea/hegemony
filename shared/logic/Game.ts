@@ -21,6 +21,7 @@ import {
     type RoleNameNoWorkingClass,
     type ActionName,
     type GameNext,
+    type PolicyString,
 } from './types';
 import { createActions } from './actions';
 import defaultForeignMarketCards from './cards/foreignMarketCards';
@@ -30,6 +31,7 @@ import ResourceManager, {
     CapitalistMoneyResourceManager,
     MoneyResourceManager,
 } from './utils/ResourceManager';
+import businessDealCards from './cards/businessDealCards';
 
 const isRoleAction = (action: any): action is RoleActionDefinition =>
     !!(action as RoleActionDefinition).roles;
@@ -40,7 +42,8 @@ const defaultDecks: GameState['board']['decks'] = {
     capitalistCompanies: new Deck('capitalist companies', capitalistCompanies),
     middleClassCompanies: new Deck('middle class companies', middleClassCompanies),
     stateClassCompanies: new Deck('state class companies', statecomapnies),
-    foreignMarket: new Deck('foreign market', defaultForeignMarketCards),
+    foreignMarketCards: new Deck('foreign market', defaultForeignMarketCards),
+    businessDealCards: new Deck('business deal', businessDealCards),
 };
 
 interface GameConfig {
@@ -52,7 +55,7 @@ interface GameConfig {
 
 export default class Game {
     state: GameState;
-    protected debug: boolean;
+    public readonly debug: boolean;
     protected config: GameConfig;
     getAction: ReturnType<typeof createActions>['getAction'];
     validateEvent: ReturnType<typeof createActions>['validateEvent'];
@@ -97,6 +100,7 @@ export default class Game {
             currentRoleName: RoleEnum.workingClass,
             board: {
                 foreignMarketCard: null as any,
+                businessDealCards: [],
                 availableInfluence: 25,
                 votingCubeBag: {
                     [RoleEnum.workingClass]: 0,
@@ -243,6 +247,39 @@ export default class Game {
         } satisfies GameState;
     }
 
+    ifPolicy(name: PolicyString, op: '==' | '<=' | '>=' = '==') {
+        const m = name.match(/^([1-7])([ABC])$/);
+        if (!m) throw new Error(`invalid policy name "${name}"`);
+        const id = m[1] as unknown as keyof typeof map;
+        const v = m[2] as unknown as keyof typeof valueMap;
+        const map = {
+            1: PolicyEnum.fiscalPolicy,
+            2: PolicyEnum.laborMarket,
+            3: PolicyEnum.taxation,
+            4: PolicyEnum.healthcare,
+            5: PolicyEnum.education,
+            6: PolicyEnum.foreignTrade,
+            7: PolicyEnum.immigration,
+        } as const;
+        const valueMap = {
+            A: 0,
+            B: 1,
+            C: 2,
+        } as const;
+        const target = valueMap[v];
+        const current = this.state.board.policies[map[id]];
+        switch (op) {
+            case '==':
+                return target === current;
+            case '<=':
+                return current <= target;
+            case '>=':
+                return current >= target;
+            default:
+                throw new Error(`invalid operator "${op}"`);
+        }
+    }
+
     createNext<T extends ActionName>(context: RunContextNoRole): GameNext<T> {
         return ((event: any) => {
             let formattedEvent: ActionEventDefinition = event;
@@ -386,6 +423,36 @@ export default class Game {
     }
 
     getForeignMarketCard() {
-        return this.state.board.decks.foreignMarket.seek(this.state.board.foreignMarketCard);
+        return this.state.board.decks.foreignMarketCards.seek(this.state.board.foreignMarketCard);
+    }
+
+    workingClassCanDemonstrate() {
+        const unemployedWorkers = Object.values(this.state.roles.workingClass.workers).filter(
+            w => !w.company,
+        ).length;
+        if (unemployedWorkers < 2) return false;
+        const middleClassSlots = _.sum(
+            Object.values(this.state.roles.middleClass.companies).map(c => {
+                const d = this.getCompanyDefinition(c.id);
+                return d.workers.filter(w => w.optional).length;
+            }),
+        );
+        const capitalistSlots = _.sum(
+            Object.values(this.state.roles.capitalist.companies).map(c => {
+                if (c.workers.length) return 0;
+                const d = this.getCompanyDefinition(c.id);
+                if (d.fullyAutomated) return 0;
+                return d.workers.length;
+            }),
+        );
+        const stateSlots = _.sum(
+            Object.values(this.state.roles.state.companies).map(c => {
+                if (c.workers.length) return 0;
+                const d = this.getCompanyDefinition(c.id);
+                return d.workers.length;
+            }),
+        );
+
+        return unemployedWorkers + 2 >= middleClassSlots + capitalistSlots + stateSlots;
     }
 }
