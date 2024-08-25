@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import {
     type Industry,
-    type WorkerType,
+    type CompanyWorkerType,
     type ActionEventFromAction,
     type RoleActionDefinition,
     type RoleName,
@@ -17,7 +17,11 @@ import {
     type RoleNameMiddleCapitalist,
     type WageId,
     type CompanyCard,
+    type ResourceEnum,
+    type PolicyName,
+    type PolicyValue,
 } from '../types';
+import { type BusinessDealCard } from '../cards/businessDealCards';
 
 interface PlayerInputAction<
     Type extends string,
@@ -50,9 +54,16 @@ export default function createPlayerInputActions() {
             ActionEventFromAction<RoleActionDefinition>,
             { role: RoleName }
         >('pick-action'),
-        playerInputAction<'workers:educate', { id: number; type: WorkerType }, { role: RoleName }>(
+        playerInputAction<
+            'policy:propose',
+            { policy: PolicyName; value: PolicyValue },
+            { role: RoleName }
+        >('policy:propose'),
+        playerInputAction<
             'workers:educate',
-        ),
+            { id: number; type: CompanyWorkerType },
+            { role: RoleName }
+        >('workers:educate'),
         playerInputAction<'adjust-prices', Partial<Record<Industry, number>>, { role: RoleName }>(
             'adjust-prices',
         ),
@@ -122,6 +133,18 @@ export default function createPlayerInputActions() {
             Partial<Record<TradeableResource, [boolean, boolean]>>,
             { role: RoleNameNoWorkingClass }
         >('sell-to-foreign-market'),
+        playerInputAction<
+            'business-deal',
+            {
+                id: BusinessDealCard['id'];
+                storage: Partial<
+                    Record<typeof ResourceEnum.food | typeof ResourceEnum.luxury, number>
+                >;
+                freeTradeZone: Partial<
+                    Record<typeof ResourceEnum.food | typeof ResourceEnum.luxury, number>
+                >;
+            }
+        >('business-deal'),
     ];
 
     const result = _.keyBy(actions, 'type') as {

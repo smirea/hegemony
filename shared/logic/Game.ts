@@ -2,26 +2,27 @@ import _ from 'lodash';
 import chalk from 'chalk';
 
 import {
+    PolicyEnum,
+    type PolicyString,
+    type PolicyValue,
+    ResourceEnum,
+    RoleEnum,
+    type ActionEventDefinition,
+    type ActionName,
+    type Company,
+    type CompanyCard,
+    type CompanyWorker,
+    type GameNext,
     type GameState,
     type Player,
-    type PolicyName,
-    PolicyEnum,
-    type RoleName,
-    type RunContext,
-    type ActionEventDefinition,
-    RoleEnum,
-    type RoleActionDefinition,
-    ResourceEnum,
-    type CompanyCard,
-    type PlayerActionType,
     type PlayerActionMap,
-    type RoleNameWorkingMiddleClass,
-    type CompanyWorker,
-    type Company,
+    type PlayerActionType,
+    type PolicyName,
+    type RoleActionDefinition,
+    type RoleName,
     type RoleNameNoWorkingClass,
-    type ActionName,
-    type GameNext,
-    type PolicyString,
+    type RoleNameWorkingMiddleClass,
+    type RunContext,
 } from './types';
 import { createActions } from './actions';
 import defaultForeignMarketCards from './cards/foreignMarketCards';
@@ -48,9 +49,14 @@ const defaultDecks: GameState['board']['decks'] = {
 
 interface GameConfig {
     requestPlayerInput: Game['requestPlayerInput'];
-    debug?: boolean;
-    decks?: Partial<GameState['board']['decks']>;
+    debug: boolean;
+    decks: GameState['board']['decks'];
     players: Player[];
+}
+
+interface GameConfigInput extends Omit<GameConfig, 'decks' | 'debug'> {
+    decks?: Partial<GameState['board']['decks']>;
+    debug?: boolean;
 }
 
 export default class Game {
@@ -59,24 +65,42 @@ export default class Game {
     protected config: GameConfig;
     getAction: ReturnType<typeof createActions>['getAction'];
     validateEvent: ReturnType<typeof createActions>['validateEvent'];
-    protected allCompaniesDeck: Deck<CompanyCard[]>;
+    /** stores all card definittions, used for lookup only */
+    private readonly fullDecks: {
+        businessDeal: GameState['board']['decks']['businessDealCards'];
+        capitalistCompanies: GameState['board']['decks']['capitalistCompanies'];
+        middleClassCompanies: GameState['board']['decks']['middleClassCompanies'];
+        stateClassCompanies: GameState['board']['decks']['stateClassCompanies'];
+        foreignMarket: GameState['board']['decks']['foreignMarketCards'];
+        companies: Deck<CompanyCard[]>;
+    };
 
-    constructor(config: GameConfig) {
-        this.config = config;
-        this.debug = config.debug ?? false;
+    constructor(config: GameConfigInput) {
+        this.config = {
+            debug: false,
+            ...config,
+            decks: {
+                ...defaultDecks,
+                ...config.decks,
+            },
+        };
+        this.debug = this.config.debug;
         const { getAction, validateEvent } = createActions(this);
         this.getAction = getAction;
         this.validateEvent = validateEvent;
-        const decks: GameState['board']['decks'] = {
-            ...defaultDecks,
-            ...this.config.decks,
-        };
-        this.allCompaniesDeck = new Deck('all companies', [
-            ...decks.capitalistCompanies.cards,
-            ...decks.middleClassCompanies.cards,
-            ...decks.stateClassCompanies.cards,
-        ]);
         this.state = this.createEmptyState();
+        this.fullDecks = {
+            businessDeal: this.state.board.decks.businessDealCards.clone(),
+            capitalistCompanies: this.state.board.decks.capitalistCompanies.clone(),
+            middleClassCompanies: this.state.board.decks.middleClassCompanies.clone(),
+            stateClassCompanies: this.state.board.decks.stateClassCompanies.clone(),
+            foreignMarket: this.state.board.decks.foreignMarketCards.clone(),
+            companies: new Deck('all companies', [
+                ...this.config.decks.capitalistCompanies.cards,
+                ...this.config.decks.middleClassCompanies.cards,
+                ...this.config.decks.stateClassCompanies.cards,
+            ]),
+        };
     }
 
     next = this.createNext({
@@ -87,11 +111,6 @@ export default class Game {
     });
 
     createEmptyState(): GameState {
-        const decks: GameState['board']['decks'] = {
-            ...defaultDecks,
-            ...this.config.decks,
-        };
-
         return {
             players: this.config.players,
             settings: {},
@@ -116,8 +135,8 @@ export default class Game {
                     [PolicyEnum.foreignTrade]: 1,
                     [PolicyEnum.immigration]: 1,
                 },
-                policyProposals: {} as Record<PolicyName, { role: RoleName; value: number }>,
-                decks,
+                policyProposals: {} as Record<PolicyName, { role: RoleName; value: PolicyValue }>,
+                decks: this.config.decks,
             },
             roles: {
                 [RoleEnum.workingClass]: {
@@ -208,6 +227,10 @@ export default class Game {
                         luxury: 0,
                     },
                     storage: {},
+                    freeTradeZoneResources: {
+                        food: new ResourceManager({ name: 'freeTradeZone:food' }),
+                        luxury: new ResourceManager({ name: 'freeTradeZone:luxury' }),
+                    },
                 },
                 [RoleEnum.state]: {
                     id: RoleEnum.state,
@@ -278,6 +301,13 @@ export default class Game {
             default:
                 throw new Error(`invalid operator "${op}"`);
         }
+    }
+
+    getCard<T extends keyof Game['fullDecks']>(
+        type: T,
+        id: string,
+    ): ReturnType<Game['fullDecks'][T]['seek']> {
+        return this.fullDecks[type].seek(id) as any;
     }
 
     createNext<T extends ActionName>(context: RunContextNoRole): GameNext<T> {
@@ -357,7 +387,7 @@ export default class Game {
     }
 
     getCompanyDefinition(id: CompanyCard['id']): CompanyCard {
-        return this.allCompaniesDeck.seek(id, { safe: true });
+        return this.fullDecks.companies.seek(id);
     }
 
     async requestPlayerInput<T extends PlayerActionType>(
@@ -420,10 +450,6 @@ export default class Game {
         this.state.roles[roleName].resources[resource].add(count);
         this.state.roles[roleName].resources.money.remove(total);
         this.state.roles[RoleEnum.state].resources.money.add(tarriff * count);
-    }
-
-    getForeignMarketCard() {
-        return this.state.board.decks.foreignMarketCards.seek(this.state.board.foreignMarketCard);
     }
 
     workingClassCanDemonstrate() {

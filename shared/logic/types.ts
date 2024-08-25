@@ -22,6 +22,7 @@ export const RoleEnum = {
 export type RoleName = (typeof RoleEnum)[keyof typeof RoleEnum];
 
 export type PolicyString = `${1 | 2 | 3 | 4 | 5 | 6 | 7}${'A' | 'B' | 'C'}`;
+export type PolicyValue = 0 | 1 | 2;
 
 export const PolicyEnum = {
     fiscalPolicy: 'fiscalPolicy',
@@ -82,13 +83,13 @@ export interface BaseRole<MoneyManager extends MoneyResourceManager = MoneyResou
 }
 
 export type Industry = 'food' | 'healthcare' | 'education' | 'luxury' | 'influence';
-export type WorkerType = keyof typeof WorkerTypeEnum;
+export type CompanyWorkerType = keyof typeof WorkerTypeEnum;
 
 export interface WorkingClassRole extends BaseRole {
     id: typeof RoleEnum.workingClass;
     availableVotingCubes: number;
     workers: Record<CompanyWorker['id'], CompanyWorker>;
-    availableWorkers: Record<WorkerType, number>;
+    availableWorkers: Record<CompanyWorkerType, number>;
     strikeTokens: number;
     unions: Partial<Record<Industry, boolean>>;
     demonstration?: boolean;
@@ -97,7 +98,7 @@ export interface MiddleClassRole extends BaseRole {
     id: typeof RoleEnum.middleClass;
     availableVotingCubes: number;
     workers: Record<CompanyWorker['id'], CompanyWorker>;
-    availableWorkers: Record<WorkerType, number>;
+    availableWorkers: Record<CompanyWorkerType, number>;
     producedResources: Record<TradeableResource, number>;
     prices: Record<TradeableResource, number>;
     storage: Partial<Record<TradeableResource, boolean>>;
@@ -115,9 +116,13 @@ export interface CapitalistRole extends BaseRole<CapitalistMoneyResourceManager>
     /** built companies */
     companies: Record<Company['id'], Company>;
     /** which companies are available to purchase */
-    companyMarket: string[];
-    companyDeck: string[];
+    companyMarket: Array<Company['id']>;
+    companyDeck: Array<Company['id']>;
     automationTokens: number;
+    freeTradeZoneResources: {
+        [ResourceEnum.food]: ResourceManager;
+        [ResourceEnum.luxury]: ResourceManager;
+    };
 }
 
 export interface StateRole extends BaseRole {
@@ -146,7 +151,7 @@ export interface Company {
 export interface CompanyWorker {
     id: number;
     role: WorkingClassRole['id'] | MiddleClassRole['id'];
-    type: WorkerType;
+    type: CompanyWorkerType;
     company: null | Company['id'];
     committed?: boolean;
     union?: boolean;
@@ -165,8 +170,8 @@ export interface GameState {
     currentRoleName: null | RoleName;
     board: {
         votingCubeBag: Record<RoleNameNoState, number>;
-        policies: Record<PolicyName, number>;
-        policyProposals: Partial<Record<PolicyName, { role: RoleName; value: number }>>;
+        policies: Record<PolicyName, PolicyValue>;
+        policyProposals: Partial<Record<PolicyName, { role: RoleName; value: PolicyValue }>>;
         availableInfluence: number;
         foreignMarketCard: ForeignMarketCard['id'];
         businessDealCards: BusinessDealCard['id'][];
@@ -288,7 +293,7 @@ export interface CompanyCard {
     fullyAutomated?: boolean;
     wages: Record<WageId, number>;
     workers: Array<{
-        type: WorkerType;
+        type: CompanyWorkerType;
         roles: Array<RoleMap['workingClass']['id'] | RoleMap['middleClass']['id']>;
         /** only for middle class companies */
         optional?: boolean;

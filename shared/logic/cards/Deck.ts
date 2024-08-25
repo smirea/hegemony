@@ -40,4 +40,8 @@ export default class Deck<Cards extends ReadonlyArray<{ id: string }>> {
         delete this.map[id];
         return result;
     }
+
+    clone() {
+        return new Deck(this.name, this.cards);
+    }
 }

@@ -14,6 +14,7 @@ import {
     type Company,
     type RoleNameNoWorkingClass,
     type WageId,
+    type PolicyValue,
 } from '../types';
 import { roleAction } from './utils';
 
@@ -246,7 +247,7 @@ export default function createRoleActions(game: Game) {
             roles: allRoles,
             condition: (
                 { currentRole },
-                { policy, value }: { policy: PolicyName; value: number },
+                { policy, value }: { policy: PolicyName; value: PolicyValue },
             ) => [
                 [
                     'hasVotes',
@@ -258,7 +259,10 @@ export default function createRoleActions(game: Game) {
                 ['isDifferent', game.state.board.policies[policy] !== value],
                 ['isValid', value === 0 || value === 1 || value === 2],
             ],
-            run: ({ currentRole }, { policy, value }: { policy: PolicyName; value: number }) => {
+            async run(
+                { currentRole },
+                { policy, value }: { policy: PolicyName; value: PolicyValue },
+            ) {
                 game.state.board.policyProposals[policy] = {
                     role: currentRole.id,
                     value,
@@ -398,7 +402,7 @@ export default function createRoleActions(game: Game) {
                 const toSell = await game.requestPlayerInput('sell-to-foreign-market', {
                     role: currentRole.id,
                 });
-                const card = game.getForeignMarketCard();
+                const card = game.getCard('foreignMarket', game.state.board.foreignMarketCard);
                 for (const [resource, [used1, used2]] of objectEntries(toSell)) {
                     if (used1) {
                         const { money, resources } = card[resource][0];
@@ -521,9 +525,30 @@ export default function createRoleActions(game: Game) {
             type: 'action:basic:make-business-deal',
             roles: [RoleEnum.capitalist],
             info: 'pay ¥, goods to storage (tariff ¥) and/or FTZ → discard',
-            run() {
-                // todo
-                throw new Error('todo');
+            async run({ currentRole }) {
+                const { id, storage, freeTradeZone } =
+                    await game.requestPlayerInput('business-deal');
+                const card = game.getCard('businessDeal', id);
+
+                currentRole.resources.money.remove(card.cost);
+
+                if (storage.food) currentRole.resources.food.add(storage.food);
+                if (storage.luxury) currentRole.resources.luxury.add(storage.luxury);
+
+                if (freeTradeZone.food || freeTradeZone.luxury) {
+                    const tariff = card.tariffs[game.state.board.policies.foreignTrade as 0 | 1];
+                    currentRole.resources.money.remove(tariff);
+                    game.state.roles.state.resources.money.add(tariff);
+
+                    if (freeTradeZone.food)
+                        currentRole.freeTradeZoneResources.food.add(freeTradeZone.food);
+                    if (freeTradeZone.luxury)
+                        currentRole.freeTradeZoneResources.luxury.add(freeTradeZone.luxury);
+                }
+
+                game.state.board.businessDealCards = game.state.board.businessDealCards.filter(
+                    c => c !== id,
+                );
             },
         }),
         ...roleAction({

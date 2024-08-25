@@ -122,7 +122,7 @@ export default function createGameActions(game: Game) {
         ...action({
             type: 'game:end',
             async run() {
-                // noop
+                // todo
             },
         }),
     };
