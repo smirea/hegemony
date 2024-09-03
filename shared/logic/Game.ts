@@ -241,6 +241,17 @@ export default class Game {
             } catch (e) {
                 throw new Error(`Event(${event.type}) player input validation failed: ${e}`);
             }
+            if (action.validateInput) {
+                const errors = action
+                    .validateInput(result)
+                    .filter(x => !x[1])
+                    .map(x => x[0]);
+                if (errors.length > 0) {
+                    throw new Error(
+                        `Event(${event.type}) player input validation failed: ${errors.join(', ')}`,
+                    );
+                }
+            }
             event.data = result;
         }
 
@@ -473,6 +484,8 @@ export default class Game {
         }),
         roleTurn: action({
             playerInputSchema: actionEventNameSchema,
+            condition: () => [['isRoleTurn', !!this.state.currentRoleName]],
+            validateInput: type => [['currentTurn', type.startsWith(this.state.currentRoleName!)]],
             run: type => {
                 if (isFreeAction(type)) {
                     this.state.roles[this.state.currentRoleName!].state.usedActions.push('free');

@@ -37,7 +37,7 @@ beforeEach(() => {
     game = new Game({
         players: [working, capitalist],
         requestPlayerInput,
-        debug: true,
+        // debug: true,
     });
     requestPlayerInput.mockReset();
     requestPlayerInput.mockImplementation(async (...args: any) => {
@@ -74,6 +74,13 @@ describe('started game', () => {
         expect(requestPlayerInput).toHaveBeenCalledOnce();
         expect(requestPlayerInput).toHaveBeenCalledWith('game:roleTurn');
         expect(findAction('game:roleTurn').data).toEqual('workingClass:proposeBill');
+    });
+
+    test('throws if out of turn', async () => {
+        addInput('game:roleTurn', 'capitalist:proposeBill');
+        await expect(tick('game:roleTurn')).rejects.toThrow(
+            'Event(game:roleTurn) player input validation failed: currentTurn',
+        );
     });
 
     test('turn:end', async () => {
