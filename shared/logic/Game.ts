@@ -36,13 +36,13 @@ import action from './utils/action';
 
 type RunContextNoRole = Omit<RunContext<RoleName>, 'currentRole'>;
 
-const defaultDecks: GameState['board']['decks'] = {
+const getDefaultDecks = (): GameState['board']['decks'] => ({
     capitalistCompanies: new Deck('capitalist companies', capitalistCompanies),
     middleClassCompanies: new Deck('middle class companies', middleClassCompanies),
     stateClassCompanies: new Deck('state class companies', statecomapnies),
     foreignMarketCards: new Deck('foreign market', defaultForeignMarketCards),
     businessDealCards: new Deck('business deal', businessDealCards),
-};
+});
 
 interface GameConfig {
     debug: boolean;
@@ -75,7 +75,7 @@ export default class Game {
             debug: false,
             ...config,
             decks: {
-                ...defaultDecks,
+                ...getDefaultDecks(),
                 ...config.decks,
             },
         };
@@ -221,24 +221,23 @@ export default class Game {
         if (this.state.currentActionIndex >= this.state.actionQueue.length) return;
 
         const event = this.state.actionQueue[this.state.currentActionIndex];
-        const [targetName, ns1, ns2] = event.type.split('.');
+        const [targetName, key, ...rest] = event.type.split(':');
 
-        if (!targetName || !ns1 || !ns2) {
+        if (!targetName || !key || rest.length) {
             throw new Error(`malformed action event name "${event.type}"`);
         }
 
         const target: any = targetName === 'game' ? this : this.state.roles[targetName as RoleName];
         if (!target) throw new Error(`unknown action event target "${targetName}"`);
-        if (!target[ns1]) throw new Error(`unknown action event target "${targetName}.${ns1}"`);
-        if (!target[ns1][ns2])
-            throw new Error(`unknown action event target "${targetName}.${ns1}.${ns2}"`);
 
-        const { condition, run, playerInputSchema } = target[ns1][ns2] as Action<any>;
+        const action: Action<any> =
+            target.actions?.[key] || target.freeActions?.[key] || target.basicActions?.[key];
+        if (!action) throw new Error(`unknown action event key "${targetName}": "${key}"`);
 
-        if (playerInputSchema) {
+        if (action.playerInputSchema) {
             const result = await this.requestPlayerInput(event.type);
             try {
-                playerInputSchema.parse(result);
+                action.playerInputSchema.parse(result);
             } catch (e) {
                 throw new Error(`Event(${event.type}) player input validation failed: ${e}`);
             }
@@ -262,8 +261,8 @@ export default class Game {
         };
         actionContext.next = this.createNext(actionContext);
 
-        if (condition) {
-            const errors = condition
+        if (action.condition) {
+            const errors = action
                 // @ts-ignore
                 .condition(actionContext, event.data)
                 .filter((c: any) => !c[1])
@@ -273,7 +272,19 @@ export default class Game {
             }
         }
 
-        run(event.data);
+        try {
+            action.run.bind(target)(event.data);
+        } catch (e) {
+            console.error(`Event(${event.type}) action failed: ${e}`);
+            console.error(
+                this.state.actionQueue
+                    .slice()
+                    .reverse()
+                    .map(e => '  → ' + e.type)
+                    .join('\n'),
+            );
+            throw e;
+        }
 
         ++this.state.currentActionIndex;
     }
@@ -295,11 +306,6 @@ export default class Game {
 
     getCompanyDefinition(id: CompanyCard['id']): CompanyCard {
         return this.fullDecks.companies.seek(id);
-    }
-
-    getProsperity(role: RoleNameWorkingMiddleClass): number {
-        const r = this.state.roles[role];
-        return _.clamp(Math.ceil(_.size(r.state.workers) / 3), 3, 10);
     }
 
     getWorkerById(id: CompanyWorker['id']): {
@@ -403,7 +409,7 @@ export default class Game {
                 for (const deck of Object.values(this.state.board.decks)) {
                     deck.shuffle();
                 }
-                this.next('game.actions.roundStart');
+                this.next('game:roundStart');
             },
         }),
         roundStart: action({
@@ -424,7 +430,7 @@ export default class Game {
                     this.state.board.businessDealCards = [];
                 }
                 if (this.debug) console.log(chalk.green.bold('——— round:'), this.state.round);
-                this.next('game.actions.roleNext');
+                this.next('game:roleNext');
             },
         }),
         turnStart: action({
@@ -434,7 +440,7 @@ export default class Game {
                 for (const role of Object.values(this.state.roles)) {
                     role.state.usedActions = [];
                 }
-                this.next('game.actions.roleNext');
+                this.next('game:roleNext');
             },
         }),
         roleNext: action({
@@ -444,7 +450,7 @@ export default class Game {
                     this.state.currentRoleName ==
                     this.state.players[this.state.players.length - 1].role
                 ) {
-                    return this.next('game.actions.turnEnd');
+                    return this.next('game:turnEnd');
                 }
                 // start of a turn
                 if (this.state.currentRoleName == null) {
@@ -457,8 +463,12 @@ export default class Game {
                             ) + 1
                         ].role;
                 }
-
-                this.next('game.actions.roleTurn');
+                if (this.debug)
+                    console.log(
+                        chalk.cyan.bold('——— role:'),
+                        chalk.underline(this.state.currentRoleName),
+                    );
+                this.next('game:roleTurn');
             },
         }),
         roleTurn: action({
@@ -470,28 +480,28 @@ export default class Game {
                     this.state.roles[this.state.currentRoleName!].state.usedActions.push('basic');
                 }
                 this.next(type);
-                this.next('game.actions.roleCurrent');
+                this.next('game:roleCurrent');
             },
         }),
         roleCurrent: action({
             run: () => {
                 if (this.state.roles[this.state.currentRoleName!].state.usedActions.length >= 2)
-                    return this.next('game.actions.roleNext');
-                return this.next('game.actions.roleTurn');
+                    return this.next('game:roleNext');
+                return this.next('game:roleTurn');
             },
         }),
         turnEnd: action({
             run: () => {
-                if (this.state.turn >= 4) return this.next('game.actions.roundEnd');
+                if (this.state.turn >= 4) return this.next('game:roundEnd');
                 ++this.state.turn;
-                this.next('game.actions.turnStart');
+                this.next('game:turnStart');
             },
         }),
         roundEnd: action({
             run: () => {
-                if (this.state.round >= 4) return this.next('game.actions.end');
+                if (this.state.round >= 4) return this.next('game:end');
                 ++this.state.round;
-                this.next('game.actions.roundStart');
+                this.next('game:roundStart');
             },
         }),
         end: action({

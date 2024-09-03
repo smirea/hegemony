@@ -34,7 +34,7 @@ export default class Deck<Cards extends ReadonlyArray<{ id: string }>> {
     }
 
     draw(): Cards[number] {
-        if (!this.order.length) throw new Error('no more cards in deck');
+        if (!this.order.length) throw new Error(`Deck(${this.name}): no more cards`);
         const id = this.order.pop()!;
         const result = this.seek(id);
         delete this.map[id];

@@ -32,7 +32,7 @@ const todo = (
     .map(([ns1, ns2, target]) => {
         return Object.entries((target as any)[ns2]).map(([key, action]) => {
             const typeValue = target.constructor.name + `['${ns2}']['${key}']`;
-            const type = `${ns1}.${ns2}.${key}`;
+            const type = `${ns1}:${key}`;
             return { typeValue, ns1, ns2, type, action: action as any } satisfies {
                 type: string;
                 typeValue: string;
@@ -69,6 +69,11 @@ function init() {
         'export type ActionEventMap = {',
         ...createActionEventMap(),
         '};',
+        '',
+        '/** mostly used in testing */',
+        'export type PlayerInput = {',
+        ...createPlayerInputDataMap(),
+        '};',
     ];
 
     fs.writeFileSync(targetFile, content.join('\n'));
@@ -84,6 +89,15 @@ function createActionEventMap() {
         result.push(`${tab1}    '${type}',`);
         result.push(`${tab1}    ${typeValue}`);
         result.push(`${tab1}>;`);
+    }
+    return result;
+}
+
+function createPlayerInputDataMap() {
+    const result: string[] = [];
+    for (const { type, action, typeValue } of todo) {
+        if (!action.playerInputSchema) continue;
+        result.push(`${tab1}'${type}': z.infer<NonNullable<${typeValue}['playerInputSchema']>>;`);
     }
     return result;
 }

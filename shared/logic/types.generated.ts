@@ -15,261 +15,305 @@ export type AnyActionEvent = ActionEventMap[keyof ActionEventMap];
 export type ActionEventName = keyof ActionEventMap;
 
 export const actionEventNameSchema = z.enum([
-    'game.actions.start',
-    'game.actions.roundStart',
-    'game.actions.turnStart',
-    'game.actions.roleNext',
-    'game.actions.roleTurn',
-    'game.actions.roleCurrent',
-    'game.actions.turnEnd',
-    'game.actions.roundEnd',
-    'game.actions.end',
-    'workingClass.basicActions.proposeBill',
-    'workingClass.basicActions.applyPoliticalPressure',
-    'workingClass.basicActions.assignWorkers',
-    'workingClass.basicActions.buyGoodsAndServices',
-    'workingClass.basicActions.strike',
-    'workingClass.basicActions.demonstration',
-    'workingClass.freeActions.skip',
-    'workingClass.freeActions.payLoan',
-    'workingClass.freeActions.useHealthcare',
-    'workingClass.freeActions.useEducation',
-    'workingClass.freeActions.useLuxury',
-    'workingClass.freeActions.swapWorkers',
-    'workingClass.freeActions.receiveBenefits',
-    'middleClass.basicActions.proposeBill',
-    'middleClass.basicActions.applyPoliticalPressure',
-    'middleClass.basicActions.buildCompany',
-    'middleClass.basicActions.sellCompany',
-    'middleClass.basicActions.sellForeignMarketCard',
-    'middleClass.basicActions.extraShift',
-    'middleClass.freeActions.skip',
-    'middleClass.freeActions.payLoan',
-    'middleClass.freeActions.useHealthcare',
-    'middleClass.freeActions.useEducation',
-    'middleClass.freeActions.useLuxury',
-    'middleClass.freeActions.swapWorkers',
-    'middleClass.freeActions.receiveBenefits',
-    'capitalist.basicActions.proposeBill',
-    'capitalist.basicActions.buildCompany',
-    'capitalist.basicActions.sellCompany',
-    'capitalist.basicActions.sellForeignMarketCard',
-    'capitalist.basicActions.makeBusinessDeal',
-    'capitalist.basicActions.lobby',
-    'capitalist.freeActions.skip',
-    'capitalist.freeActions.payLoan',
-    'capitalist.freeActions.giveBonus',
-    'capitalist.freeActions.buyStorage',
-    'state.basicActions.proposeBill',
-    'state.basicActions.eventAction',
-    'state.basicActions.meetWithPartyMps',
-    'state.basicActions.extraTax',
-    'state.basicActions.campaign',
-    'state.freeActions.skip',
-    'state.freeActions.payLoan',
+    'game:start',
+    'game:roundStart',
+    'game:turnStart',
+    'game:roleNext',
+    'game:roleTurn',
+    'game:roleCurrent',
+    'game:turnEnd',
+    'game:roundEnd',
+    'game:end',
+    'workingClass:proposeBill',
+    'workingClass:applyPoliticalPressure',
+    'workingClass:assignWorkers',
+    'workingClass:buyGoodsAndServices',
+    'workingClass:strike',
+    'workingClass:demonstration',
+    'workingClass:skip',
+    'workingClass:payLoan',
+    'workingClass:useHealthcare',
+    'workingClass:useEducation',
+    'workingClass:useLuxury',
+    'workingClass:swapWorkers',
+    'workingClass:receiveBenefits',
+    'middleClass:proposeBill',
+    'middleClass:applyPoliticalPressure',
+    'middleClass:buildCompany',
+    'middleClass:sellCompany',
+    'middleClass:sellForeignMarketCard',
+    'middleClass:extraShift',
+    'middleClass:skip',
+    'middleClass:payLoan',
+    'middleClass:useHealthcare',
+    'middleClass:useEducation',
+    'middleClass:useLuxury',
+    'middleClass:swapWorkers',
+    'middleClass:receiveBenefits',
+    'capitalist:proposeBill',
+    'capitalist:buildCompany',
+    'capitalist:sellCompany',
+    'capitalist:sellForeignMarketCard',
+    'capitalist:makeBusinessDeal',
+    'capitalist:lobby',
+    'capitalist:skip',
+    'capitalist:payLoan',
+    'capitalist:giveBonus',
+    'capitalist:buyStorage',
+    'state:proposeBill',
+    'state:eventAction',
+    'state:meetWithPartyMps',
+    'state:extraTax',
+    'state:campaign',
+    'state:skip',
+    'state:payLoan',
 ] as const);
 
 export type ActionEventMap = {
-    'game.actions.start': ActionEventFromAction<'game.actions.start', Game['actions']['start']>;
-    'game.actions.roundStart': ActionEventFromAction<
-        'game.actions.roundStart',
-        Game['actions']['roundStart']
-    >;
-    'game.actions.turnStart': ActionEventFromAction<
-        'game.actions.turnStart',
-        Game['actions']['turnStart']
-    >;
-    'game.actions.roleNext': ActionEventFromAction<
-        'game.actions.roleNext',
-        Game['actions']['roleNext']
-    >;
-    'game.actions.roleTurn': ActionEventFromAction<
-        'game.actions.roleTurn',
-        Game['actions']['roleTurn']
-    >;
-    'game.actions.roleCurrent': ActionEventFromAction<
-        'game.actions.roleCurrent',
-        Game['actions']['roleCurrent']
-    >;
-    'game.actions.turnEnd': ActionEventFromAction<
-        'game.actions.turnEnd',
-        Game['actions']['turnEnd']
-    >;
-    'game.actions.roundEnd': ActionEventFromAction<
-        'game.actions.roundEnd',
-        Game['actions']['roundEnd']
-    >;
-    'game.actions.end': ActionEventFromAction<'game.actions.end', Game['actions']['end']>;
-    'workingClass.basicActions.proposeBill': ActionEventFromAction<
-        'workingClass.basicActions.proposeBill',
+    'game:start': ActionEventFromAction<'game:start', Game['actions']['start']>;
+    'game:roundStart': ActionEventFromAction<'game:roundStart', Game['actions']['roundStart']>;
+    'game:turnStart': ActionEventFromAction<'game:turnStart', Game['actions']['turnStart']>;
+    'game:roleNext': ActionEventFromAction<'game:roleNext', Game['actions']['roleNext']>;
+    'game:roleTurn': ActionEventFromAction<'game:roleTurn', Game['actions']['roleTurn']>;
+    'game:roleCurrent': ActionEventFromAction<'game:roleCurrent', Game['actions']['roleCurrent']>;
+    'game:turnEnd': ActionEventFromAction<'game:turnEnd', Game['actions']['turnEnd']>;
+    'game:roundEnd': ActionEventFromAction<'game:roundEnd', Game['actions']['roundEnd']>;
+    'game:end': ActionEventFromAction<'game:end', Game['actions']['end']>;
+    'workingClass:proposeBill': ActionEventFromAction<
+        'workingClass:proposeBill',
         WorkingClassRole['basicActions']['proposeBill']
     >;
-    'workingClass.basicActions.applyPoliticalPressure': ActionEventFromAction<
-        'workingClass.basicActions.applyPoliticalPressure',
+    'workingClass:applyPoliticalPressure': ActionEventFromAction<
+        'workingClass:applyPoliticalPressure',
         WorkingClassRole['basicActions']['applyPoliticalPressure']
     >;
-    'workingClass.basicActions.assignWorkers': ActionEventFromAction<
-        'workingClass.basicActions.assignWorkers',
+    'workingClass:assignWorkers': ActionEventFromAction<
+        'workingClass:assignWorkers',
         WorkingClassRole['basicActions']['assignWorkers']
     >;
-    'workingClass.basicActions.buyGoodsAndServices': ActionEventFromAction<
-        'workingClass.basicActions.buyGoodsAndServices',
+    'workingClass:buyGoodsAndServices': ActionEventFromAction<
+        'workingClass:buyGoodsAndServices',
         WorkingClassRole['basicActions']['buyGoodsAndServices']
     >;
-    'workingClass.basicActions.strike': ActionEventFromAction<
-        'workingClass.basicActions.strike',
+    'workingClass:strike': ActionEventFromAction<
+        'workingClass:strike',
         WorkingClassRole['basicActions']['strike']
     >;
-    'workingClass.basicActions.demonstration': ActionEventFromAction<
-        'workingClass.basicActions.demonstration',
+    'workingClass:demonstration': ActionEventFromAction<
+        'workingClass:demonstration',
         WorkingClassRole['basicActions']['demonstration']
     >;
-    'workingClass.freeActions.skip': ActionEventFromAction<
-        'workingClass.freeActions.skip',
+    'workingClass:skip': ActionEventFromAction<
+        'workingClass:skip',
         WorkingClassRole['freeActions']['skip']
     >;
-    'workingClass.freeActions.payLoan': ActionEventFromAction<
-        'workingClass.freeActions.payLoan',
+    'workingClass:payLoan': ActionEventFromAction<
+        'workingClass:payLoan',
         WorkingClassRole['freeActions']['payLoan']
     >;
-    'workingClass.freeActions.useHealthcare': ActionEventFromAction<
-        'workingClass.freeActions.useHealthcare',
+    'workingClass:useHealthcare': ActionEventFromAction<
+        'workingClass:useHealthcare',
         WorkingClassRole['freeActions']['useHealthcare']
     >;
-    'workingClass.freeActions.useEducation': ActionEventFromAction<
-        'workingClass.freeActions.useEducation',
+    'workingClass:useEducation': ActionEventFromAction<
+        'workingClass:useEducation',
         WorkingClassRole['freeActions']['useEducation']
     >;
-    'workingClass.freeActions.useLuxury': ActionEventFromAction<
-        'workingClass.freeActions.useLuxury',
+    'workingClass:useLuxury': ActionEventFromAction<
+        'workingClass:useLuxury',
         WorkingClassRole['freeActions']['useLuxury']
     >;
-    'workingClass.freeActions.swapWorkers': ActionEventFromAction<
-        'workingClass.freeActions.swapWorkers',
+    'workingClass:swapWorkers': ActionEventFromAction<
+        'workingClass:swapWorkers',
         WorkingClassRole['freeActions']['swapWorkers']
     >;
-    'workingClass.freeActions.receiveBenefits': ActionEventFromAction<
-        'workingClass.freeActions.receiveBenefits',
+    'workingClass:receiveBenefits': ActionEventFromAction<
+        'workingClass:receiveBenefits',
         WorkingClassRole['freeActions']['receiveBenefits']
     >;
-    'middleClass.basicActions.proposeBill': ActionEventFromAction<
-        'middleClass.basicActions.proposeBill',
+    'middleClass:proposeBill': ActionEventFromAction<
+        'middleClass:proposeBill',
         MiddleClassRole['basicActions']['proposeBill']
     >;
-    'middleClass.basicActions.applyPoliticalPressure': ActionEventFromAction<
-        'middleClass.basicActions.applyPoliticalPressure',
+    'middleClass:applyPoliticalPressure': ActionEventFromAction<
+        'middleClass:applyPoliticalPressure',
         MiddleClassRole['basicActions']['applyPoliticalPressure']
     >;
-    'middleClass.basicActions.buildCompany': ActionEventFromAction<
-        'middleClass.basicActions.buildCompany',
+    'middleClass:buildCompany': ActionEventFromAction<
+        'middleClass:buildCompany',
         MiddleClassRole['basicActions']['buildCompany']
     >;
-    'middleClass.basicActions.sellCompany': ActionEventFromAction<
-        'middleClass.basicActions.sellCompany',
+    'middleClass:sellCompany': ActionEventFromAction<
+        'middleClass:sellCompany',
         MiddleClassRole['basicActions']['sellCompany']
     >;
-    'middleClass.basicActions.sellForeignMarketCard': ActionEventFromAction<
-        'middleClass.basicActions.sellForeignMarketCard',
+    'middleClass:sellForeignMarketCard': ActionEventFromAction<
+        'middleClass:sellForeignMarketCard',
         MiddleClassRole['basicActions']['sellForeignMarketCard']
     >;
-    'middleClass.basicActions.extraShift': ActionEventFromAction<
-        'middleClass.basicActions.extraShift',
+    'middleClass:extraShift': ActionEventFromAction<
+        'middleClass:extraShift',
         MiddleClassRole['basicActions']['extraShift']
     >;
-    'middleClass.freeActions.skip': ActionEventFromAction<
-        'middleClass.freeActions.skip',
+    'middleClass:skip': ActionEventFromAction<
+        'middleClass:skip',
         MiddleClassRole['freeActions']['skip']
     >;
-    'middleClass.freeActions.payLoan': ActionEventFromAction<
-        'middleClass.freeActions.payLoan',
+    'middleClass:payLoan': ActionEventFromAction<
+        'middleClass:payLoan',
         MiddleClassRole['freeActions']['payLoan']
     >;
-    'middleClass.freeActions.useHealthcare': ActionEventFromAction<
-        'middleClass.freeActions.useHealthcare',
+    'middleClass:useHealthcare': ActionEventFromAction<
+        'middleClass:useHealthcare',
         MiddleClassRole['freeActions']['useHealthcare']
     >;
-    'middleClass.freeActions.useEducation': ActionEventFromAction<
-        'middleClass.freeActions.useEducation',
+    'middleClass:useEducation': ActionEventFromAction<
+        'middleClass:useEducation',
         MiddleClassRole['freeActions']['useEducation']
     >;
-    'middleClass.freeActions.useLuxury': ActionEventFromAction<
-        'middleClass.freeActions.useLuxury',
+    'middleClass:useLuxury': ActionEventFromAction<
+        'middleClass:useLuxury',
         MiddleClassRole['freeActions']['useLuxury']
     >;
-    'middleClass.freeActions.swapWorkers': ActionEventFromAction<
-        'middleClass.freeActions.swapWorkers',
+    'middleClass:swapWorkers': ActionEventFromAction<
+        'middleClass:swapWorkers',
         MiddleClassRole['freeActions']['swapWorkers']
     >;
-    'middleClass.freeActions.receiveBenefits': ActionEventFromAction<
-        'middleClass.freeActions.receiveBenefits',
+    'middleClass:receiveBenefits': ActionEventFromAction<
+        'middleClass:receiveBenefits',
         MiddleClassRole['freeActions']['receiveBenefits']
     >;
-    'capitalist.basicActions.proposeBill': ActionEventFromAction<
-        'capitalist.basicActions.proposeBill',
+    'capitalist:proposeBill': ActionEventFromAction<
+        'capitalist:proposeBill',
         CapitalistRole['basicActions']['proposeBill']
     >;
-    'capitalist.basicActions.buildCompany': ActionEventFromAction<
-        'capitalist.basicActions.buildCompany',
+    'capitalist:buildCompany': ActionEventFromAction<
+        'capitalist:buildCompany',
         CapitalistRole['basicActions']['buildCompany']
     >;
-    'capitalist.basicActions.sellCompany': ActionEventFromAction<
-        'capitalist.basicActions.sellCompany',
+    'capitalist:sellCompany': ActionEventFromAction<
+        'capitalist:sellCompany',
         CapitalistRole['basicActions']['sellCompany']
     >;
-    'capitalist.basicActions.sellForeignMarketCard': ActionEventFromAction<
-        'capitalist.basicActions.sellForeignMarketCard',
+    'capitalist:sellForeignMarketCard': ActionEventFromAction<
+        'capitalist:sellForeignMarketCard',
         CapitalistRole['basicActions']['sellForeignMarketCard']
     >;
-    'capitalist.basicActions.makeBusinessDeal': ActionEventFromAction<
-        'capitalist.basicActions.makeBusinessDeal',
+    'capitalist:makeBusinessDeal': ActionEventFromAction<
+        'capitalist:makeBusinessDeal',
         CapitalistRole['basicActions']['makeBusinessDeal']
     >;
-    'capitalist.basicActions.lobby': ActionEventFromAction<
-        'capitalist.basicActions.lobby',
+    'capitalist:lobby': ActionEventFromAction<
+        'capitalist:lobby',
         CapitalistRole['basicActions']['lobby']
     >;
-    'capitalist.freeActions.skip': ActionEventFromAction<
-        'capitalist.freeActions.skip',
+    'capitalist:skip': ActionEventFromAction<
+        'capitalist:skip',
         CapitalistRole['freeActions']['skip']
     >;
-    'capitalist.freeActions.payLoan': ActionEventFromAction<
-        'capitalist.freeActions.payLoan',
+    'capitalist:payLoan': ActionEventFromAction<
+        'capitalist:payLoan',
         CapitalistRole['freeActions']['payLoan']
     >;
-    'capitalist.freeActions.giveBonus': ActionEventFromAction<
-        'capitalist.freeActions.giveBonus',
+    'capitalist:giveBonus': ActionEventFromAction<
+        'capitalist:giveBonus',
         CapitalistRole['freeActions']['giveBonus']
     >;
-    'capitalist.freeActions.buyStorage': ActionEventFromAction<
-        'capitalist.freeActions.buyStorage',
+    'capitalist:buyStorage': ActionEventFromAction<
+        'capitalist:buyStorage',
         CapitalistRole['freeActions']['buyStorage']
     >;
-    'state.basicActions.proposeBill': ActionEventFromAction<
-        'state.basicActions.proposeBill',
+    'state:proposeBill': ActionEventFromAction<
+        'state:proposeBill',
         StateRole['basicActions']['proposeBill']
     >;
-    'state.basicActions.eventAction': ActionEventFromAction<
-        'state.basicActions.eventAction',
+    'state:eventAction': ActionEventFromAction<
+        'state:eventAction',
         StateRole['basicActions']['eventAction']
     >;
-    'state.basicActions.meetWithPartyMps': ActionEventFromAction<
-        'state.basicActions.meetWithPartyMps',
+    'state:meetWithPartyMps': ActionEventFromAction<
+        'state:meetWithPartyMps',
         StateRole['basicActions']['meetWithPartyMps']
     >;
-    'state.basicActions.extraTax': ActionEventFromAction<
-        'state.basicActions.extraTax',
+    'state:extraTax': ActionEventFromAction<
+        'state:extraTax',
         StateRole['basicActions']['extraTax']
     >;
-    'state.basicActions.campaign': ActionEventFromAction<
-        'state.basicActions.campaign',
+    'state:campaign': ActionEventFromAction<
+        'state:campaign',
         StateRole['basicActions']['campaign']
     >;
-    'state.freeActions.skip': ActionEventFromAction<
-        'state.freeActions.skip',
-        StateRole['freeActions']['skip']
+    'state:skip': ActionEventFromAction<'state:skip', StateRole['freeActions']['skip']>;
+    'state:payLoan': ActionEventFromAction<'state:payLoan', StateRole['freeActions']['payLoan']>;
+};
+
+/** mostly used in testing */
+export type PlayerInput = {
+    'game:roleTurn': z.infer<NonNullable<Game['actions']['roleTurn']['playerInputSchema']>>;
+    'workingClass:proposeBill': z.infer<
+        NonNullable<WorkingClassRole['basicActions']['proposeBill']['playerInputSchema']>
     >;
-    'state.freeActions.payLoan': ActionEventFromAction<
-        'state.freeActions.payLoan',
-        StateRole['freeActions']['payLoan']
+    'workingClass:assignWorkers': z.infer<
+        NonNullable<WorkingClassRole['basicActions']['assignWorkers']['playerInputSchema']>
+    >;
+    'workingClass:buyGoodsAndServices': z.infer<
+        NonNullable<WorkingClassRole['basicActions']['buyGoodsAndServices']['playerInputSchema']>
+    >;
+    'workingClass:strike': z.infer<
+        NonNullable<WorkingClassRole['basicActions']['strike']['playerInputSchema']>
+    >;
+    'workingClass:useEducation': z.infer<
+        NonNullable<WorkingClassRole['freeActions']['useEducation']['playerInputSchema']>
+    >;
+    'workingClass:swapWorkers': z.infer<
+        NonNullable<WorkingClassRole['freeActions']['swapWorkers']['playerInputSchema']>
+    >;
+    'middleClass:proposeBill': z.infer<
+        NonNullable<MiddleClassRole['basicActions']['proposeBill']['playerInputSchema']>
+    >;
+    'middleClass:buildCompany': z.infer<
+        NonNullable<MiddleClassRole['basicActions']['buildCompany']['playerInputSchema']>
+    >;
+    'middleClass:sellCompany': z.infer<
+        NonNullable<MiddleClassRole['basicActions']['sellCompany']['playerInputSchema']>
+    >;
+    'middleClass:sellForeignMarketCard': z.infer<
+        NonNullable<MiddleClassRole['basicActions']['sellForeignMarketCard']['playerInputSchema']>
+    >;
+    'middleClass:extraShift': z.infer<
+        NonNullable<MiddleClassRole['basicActions']['extraShift']['playerInputSchema']>
+    >;
+    'middleClass:useEducation': z.infer<
+        NonNullable<MiddleClassRole['freeActions']['useEducation']['playerInputSchema']>
+    >;
+    'middleClass:swapWorkers': z.infer<
+        NonNullable<MiddleClassRole['freeActions']['swapWorkers']['playerInputSchema']>
+    >;
+    'capitalist:proposeBill': z.infer<
+        NonNullable<CapitalistRole['basicActions']['proposeBill']['playerInputSchema']>
+    >;
+    'capitalist:buildCompany': z.infer<
+        NonNullable<CapitalistRole['basicActions']['buildCompany']['playerInputSchema']>
+    >;
+    'capitalist:sellCompany': z.infer<
+        NonNullable<CapitalistRole['basicActions']['sellCompany']['playerInputSchema']>
+    >;
+    'capitalist:sellForeignMarketCard': z.infer<
+        NonNullable<CapitalistRole['basicActions']['sellForeignMarketCard']['playerInputSchema']>
+    >;
+    'capitalist:makeBusinessDeal': z.infer<
+        NonNullable<CapitalistRole['basicActions']['makeBusinessDeal']['playerInputSchema']>
+    >;
+    'capitalist:giveBonus': z.infer<
+        NonNullable<CapitalistRole['freeActions']['giveBonus']['playerInputSchema']>
+    >;
+    'capitalist:buyStorage': z.infer<
+        NonNullable<CapitalistRole['freeActions']['buyStorage']['playerInputSchema']>
+    >;
+    'state:proposeBill': z.infer<
+        NonNullable<StateRole['basicActions']['proposeBill']['playerInputSchema']>
+    >;
+    'state:meetWithPartyMps': z.infer<
+        NonNullable<StateRole['basicActions']['meetWithPartyMps']['playerInputSchema']>
     >;
 };

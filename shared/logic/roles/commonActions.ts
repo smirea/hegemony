@@ -49,7 +49,7 @@ export function createProposeBill(
             ],
             run: ({ policy, value }) => {
                 role.game.state.board.policyProposals[policy] = {
-                    role: RoleEnum.workingClass,
+                    role: role.id,
                     value,
                 };
             },
@@ -89,15 +89,11 @@ export function createUseHealthcare(role: WorkingClassRole | MiddleClassRole) {
     return {
         useHealthcare: action({
             condition: () => [
-                [
-                    'hasHealthcare',
-                    role.state.resources.healthcare.value >= role.game.getProsperity(role.id),
-                ],
+                ['hasHealthcare', role.state.resources.healthcare.value >= role.getPopulation()],
             ],
             run: () => {
-                role.state.resources.healthcare.remove(role.game.getProsperity(role.id));
-                role.state.score += role.game.getProsperity(role.id);
-                role.state.score += 2;
+                role.state.resources.healthcare.remove(role.getPopulation());
+                role.increaseProsperity({ withHealthcare: true });
                 // todo: edge-case when there are no more unskilled workers
                 role.state.availableWorkers.unskilled -= 1;
                 const id = ++role.game.state.nextWorkerId;
@@ -121,14 +117,11 @@ export function createUseEducation(role: WorkingClassRole | MiddleClassRole) {
                 type: CompanyWorkerTypeSchema,
             }),
             condition: () => [
-                [
-                    'hasEducation',
-                    role.state.resources.education.value >= role.game.getProsperity(role.id),
-                ],
+                ['hasEducation', role.state.resources.education.value >= role.getPopulation()],
             ],
             run: ({ workerId, type }) => {
-                role.state.score += role.game.getProsperity(role.id);
-                role.state.resources.education.remove(role.game.getProsperity(role.id));
+                role.increaseProsperity();
+                role.state.resources.education.remove(role.getPopulation());
                 role.state.workers[workerId].type = type;
             },
         }),
@@ -140,14 +133,11 @@ export function createUseLuxury(role: WorkingClassRole | MiddleClassRole) {
     return {
         useLuxury: action({
             condition: () => [
-                [
-                    'hasLuxury',
-                    role.state.resources.luxury.value >= role.game.getProsperity(role.id),
-                ],
+                ['hasLuxury', role.state.resources.luxury.value >= role.getPopulation()],
             ],
             run: () => {
-                role.state.resources.luxury.remove(role.game.getProsperity(role.id));
-                role.state.score += role.game.getProsperity(role.id);
+                role.state.resources.luxury.remove(role.getPopulation());
+                role.increaseProsperity();
             },
         }),
     };

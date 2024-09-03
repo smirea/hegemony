@@ -23,10 +23,12 @@ import {
     createUseHealthcare,
     createUseLuxury,
 } from './commonActions';
+import { createGetPopulation, createIncreaseProsperity } from './commonMethods';
 
 import type Game from '../Game';
 
 interface MiddleClassState extends BaseState {
+    prosperity: number;
     availableVotingCubes: number;
     workers: Record<CompanyWorker['id'], CompanyWorker>;
     availableWorkers: Record<CompanyWorkerType, number>;
@@ -51,6 +53,7 @@ export default class MiddleClassRole extends AbstractRole<
         super(game);
         this.state = {
             ...this.createBaseState(),
+            prosperity: 0,
             companies: {},
             companyDeck: [],
             companyMarket: [],
@@ -80,6 +83,8 @@ export default class MiddleClassRole extends AbstractRole<
         };
     }
 
+    increaseProsperity = createIncreaseProsperity(this);
+    getPopulation = createGetPopulation(this);
     basicActions = {
         ...createProposeBill(this),
         ...createApplyPoliticalPressure(this),

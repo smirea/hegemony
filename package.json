@@ -9,6 +9,7 @@
 		"generate:shared-types": "ts-node -T -r tsconfig-paths/register ./scripts/generate-shared-types.ts",
 		"lint": "pnpm lint:report --fix",
 		"lint:report": "eslint --cache --cache-location node_modules/.cache/eslintcache",
+		"lint:types": "tsc --noEmit",
 		"server:dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules server/src/index.ts",
 		"test": "vitest",
 		"preinstall": "npx only-allow pnpm"

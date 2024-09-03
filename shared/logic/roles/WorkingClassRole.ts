@@ -17,10 +17,12 @@ import {
     createUseLuxury,
 } from './commonActions';
 import action from '../utils/action';
+import { createGetPopulation, createIncreaseProsperity } from './commonMethods';
 
 import type Game from '../Game';
 
 interface WorkingClassState extends BaseState {
+    prosperity: number;
     availableVotingCubes: number;
     workers: Record<CompanyWorker['id'], CompanyWorker>;
     availableWorkers: Record<CompanyWorkerType, number>;
@@ -40,6 +42,7 @@ export default class WorkingClassRole extends AbstractRole<
         super(game);
         this.state = {
             ...super.createBaseState(),
+            prosperity: 0,
             availableVotingCubes: 0,
             workers: {},
             availableWorkers: {
@@ -55,6 +58,9 @@ export default class WorkingClassRole extends AbstractRole<
             demonstration: false,
         };
     }
+
+    increaseProsperity = createIncreaseProsperity(this);
+    getPopulation = createGetPopulation(this);
 
     basicActions = {
         ...createProposeBill(this),
