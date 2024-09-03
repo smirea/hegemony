@@ -1,18 +1,18 @@
 import { beforeEach, expect, test, describe, vi } from 'vitest';
 
-import { type ActionName, type Player, PolicyEnum, RoleEnum } from './types';
-import { roleActionEvent } from './actions/utils';
+import { type Player, RoleEnum } from './types';
 import Game from './Game';
+import { type ActionEventName } from './types.generated';
 
 let game: Game = null as any;
 const noResponseSymbol = Symbol('nope');
 let playerInput: any = noResponseSymbol;
 const working: Player = { name: 'working', role: RoleEnum.workingClass };
-const middle: Player = { name: 'middle', role: RoleEnum.middleClass };
+// const middle: Player = { name: 'middle', role: RoleEnum.middleClass };
 const capitalist: Player = { name: 'capitalist', role: RoleEnum.capitalist };
-const state: Player = { name: 'state', role: RoleEnum.state };
+// const state: Player = { name: 'state', role: RoleEnum.state };
 
-const tick = async (n?: number | ActionName) => {
+const tick = async (n?: number | ActionEventName) => {
     n ??= 1;
     if (typeof n === 'number') for (let i = 0; i < n; ++i) await game.tick();
     else await game.flush({ after: n });
@@ -20,10 +20,15 @@ const tick = async (n?: number | ActionName) => {
 
 const requestPlayerInput = vi.fn<Game['requestPlayerInput']>();
 
+// const getCurrentAction = () => game.state.actionQueue[game.state.currentActionIndex];
+
+const findAction = (type: ActionEventName, n = 0) =>
+    game.state.actionQueue.filter(a => a.type === type).at(n)!;
+
 beforeEach(() => {
     game = new Game({
         players: [working, capitalist],
-        requestPlayerInput: requestPlayerInput as any,
+        requestPlayerInput,
     });
     requestPlayerInput.mockReset();
     requestPlayerInput.mockImplementation(async (...data: any) => {
@@ -36,36 +41,31 @@ beforeEach(() => {
     });
 });
 
-describe('game:start', () => {
+describe('game.actions.start', () => {
     test('sorts players by role', async () => {
-        game.next('game:start');
+        game.state.players = [capitalist, working];
+        game.next('game.actions.start');
         await tick();
-        expect(game.state.players).toEqual([working, middle, capitalist, state]);
-        expect(game.state.currentRoleName).toBe(0);
+        expect(game.state.players).toEqual([working, capitalist]);
+        expect(game.state.currentRoleName).toBe(RoleEnum.workingClass);
     });
 });
 
 describe('started game', () => {
     beforeEach(async () => {
-        playerInput = roleActionEvent('action:basic:propose-bill', {
-            policy: PolicyEnum.fiscalPolicy,
-            value: 1,
-        });
-        game.next('game:start');
+        game.next('game.actions.start');
         await tick();
     });
 
-    describe('workingClass:turn:start', () => {
+    describe('game.actions.roleTurn', () => {
         test.only('request input', async () => {
-            await tick('action:basic:propose-bill');
+            playerInput = 'workingClass.basicActions.proposeBill';
+            await tick('game.actions.roleTurn');
             expect(requestPlayerInput).toHaveBeenCalledOnce();
-            expect(requestPlayerInput).toHaveBeenCalledWith('pick-action', {
-                role: RoleEnum.workingClass,
-            });
-            expect(game.state.board.policyProposals.fiscalPolicy).toEqual({
-                role: RoleEnum.workingClass,
-                value: 1,
-            });
+            expect(requestPlayerInput).toHaveBeenCalledWith('game.actions.roleTurn');
+            expect(findAction('game.actions.roleTurn').data).toEqual(
+                'workingClass.basicActions.proposeBill',
+            );
         });
     });
 });

@@ -1,16 +1,15 @@
+import { z, type ZodNever, type ZodType } from 'zod';
+import { zodObjectEnum } from 'shared/utils/zod';
+
 import { type ForeignMarketCard } from './cards/foreignMarketCards';
-import {
-    type CapitalistMoneyResourceManager,
-    type MoneyResourceManager,
-} from './utils/ResourceManager';
+import { type AnyActionEvent } from './types.generated';
 
 import type Deck from './cards/Deck';
-import type ResourceManager from './utils/ResourceManager';
-import type { createActions } from './actions';
-import type { AnyObject } from 'shared/types';
 import type { BusinessDealCard } from './cards/businessDealCards';
-
-type ActionDefs = ReturnType<typeof createActions>;
+import type WorkingClassRole from './roles/WorkingClassRole';
+import type MiddleClassRole from './roles/MiddleClassRole';
+import type CapitalistRole from './roles/CapitalistRole';
+import type StateRole from './roles/StateRole';
 
 export const RoleEnum = {
     workingClass: 'workingClass',
@@ -18,8 +17,6 @@ export const RoleEnum = {
     capitalist: 'capitalist',
     state: 'state',
 } as const;
-
-export type RoleName = (typeof RoleEnum)[keyof typeof RoleEnum];
 
 export type PolicyString = `${1 | 2 | 3 | 4 | 5 | 6 | 7}${'A' | 'B' | 'C'}`;
 export type PolicyValue = 0 | 1 | 2;
@@ -68,75 +65,8 @@ export interface Player {
     name: string;
 }
 
-export interface BaseRole<MoneyManager extends MoneyResourceManager = MoneyResourceManager> {
-    id: RoleName;
-    score: number;
-    usedActions: Array<'basic' | 'free'>;
-    resources: {
-        money: MoneyManager;
-        influence: ResourceManager;
-        food: ResourceManager;
-        healthcare: ResourceManager;
-        education: ResourceManager;
-        luxury: ResourceManager;
-    };
-}
-
 export type Industry = 'food' | 'healthcare' | 'education' | 'luxury' | 'influence';
 export type CompanyWorkerType = keyof typeof WorkerTypeEnum;
-
-export interface WorkingClassRole extends BaseRole {
-    id: typeof RoleEnum.workingClass;
-    availableVotingCubes: number;
-    workers: Record<CompanyWorker['id'], CompanyWorker>;
-    availableWorkers: Record<CompanyWorkerType, number>;
-    strikeTokens: number;
-    unions: Partial<Record<Industry, boolean>>;
-    demonstration?: boolean;
-}
-export interface MiddleClassRole extends BaseRole {
-    id: typeof RoleEnum.middleClass;
-    availableVotingCubes: number;
-    workers: Record<CompanyWorker['id'], CompanyWorker>;
-    availableWorkers: Record<CompanyWorkerType, number>;
-    producedResources: Record<TradeableResource, number>;
-    prices: Record<TradeableResource, number>;
-    storage: Partial<Record<TradeableResource, boolean>>;
-    /** built companies */
-    companies: Record<Company['id'], Company>;
-    /** which companies are available to purchase */
-    companyMarket: string[];
-    companyDeck: string[];
-}
-export interface CapitalistRole extends BaseRole<CapitalistMoneyResourceManager> {
-    id: typeof RoleEnum.capitalist;
-    availableVotingCubes: number;
-    prices: Record<TradeableResource, number>;
-    storage: Partial<Record<TradeableResource, boolean>>;
-    /** built companies */
-    companies: Record<Company['id'], Company>;
-    /** which companies are available to purchase */
-    companyMarket: Array<Company['id']>;
-    companyDeck: Array<Company['id']>;
-    automationTokens: number;
-    freeTradeZoneResources: {
-        [ResourceEnum.food]: ResourceManager;
-        [ResourceEnum.luxury]: ResourceManager;
-    };
-}
-
-export interface StateRole extends BaseRole {
-    id: typeof RoleEnum.state;
-    legitimacy: Record<RoleNameNoState, number>;
-    legitimacyTokens: Record<RoleNameNoState, number>;
-    companies: Record<Company['id'], Company>;
-    companyDeck: string[];
-    benefits: Record<RoleNameNoState, Benefit[]>;
-}
-
-type Benefit =
-    | { type: 'resource'; resource: Resource; amount: number }
-    | { type: 'voting-cube'; amount: number };
 
 export type WageId = 'l1' | 'l2' | 'l3';
 
@@ -184,20 +114,16 @@ export interface GameState {
         };
     };
     roles: {
-        workingClass: WorkingClassRole;
-        middleClass: MiddleClassRole;
-        capitalist: CapitalistRole;
-        state: StateRole;
+        [RoleEnum.workingClass]: WorkingClassRole;
+        [RoleEnum.middleClass]: MiddleClassRole;
+        [RoleEnum.capitalist]: CapitalistRole;
+        [RoleEnum.state]: StateRole;
     };
     nextWorkerId: number;
     nextActionIndex: number;
     currentActionIndex: number;
-    actionQueue: ActionEventDefinition[];
+    actionQueue: AnyActionEvent[];
 }
-
-export type GameNext<T extends ActionName> = (
-    event: ActionEventMap[T] extends { data: infer D } ? { type: T; data: D } : T | { type: T },
-) => void;
 
 export type RoleMap = {
     workingClass: WorkingClassRole;
@@ -213,67 +139,29 @@ export interface RunContext<CurrenRole extends null | RoleName = null> {
     currentRole: CurrenRole extends RoleName ? RoleMap[CurrenRole] : null;
 }
 
-export interface Action<
-    Type extends string,
-    CurrenRole extends null | RoleName = null,
-    Data extends AnyObject | undefined = undefined,
-> {
-    readonly type: Type;
-    /** short description for quick overview. full details added in UI */
-    readonly info?: string;
-    readonly data?: Data;
-    readonly condition?: (
-        ctx: RunContext<CurrenRole>,
-        data: Data extends undefined ? never : Data,
-    ) => Array<[string, boolean]>;
-    readonly run: (
-        ctx: RunContext<CurrenRole>,
-        data: Data extends undefined ? never : Data,
-    ) => void | Promise<void>;
-}
-
-export type ActionEvent<T extends string, D = undefined> = D extends undefined
+export type ActionEvent<T extends string | number | symbol, D = undefined> = D extends undefined
     ? { type: T; data?: undefined | null }
     : { type: T; data: D };
 
-export type GetActionData<A extends Action<string, any>> =
-    A extends Action<string, infer D> ? D : never;
+type ValidationResult = [string, boolean];
 
-export type GetActionEventData<A extends ActionEvent<string, any>> =
-    A extends ActionEvent<string, infer D> ? D : never;
-
-type RoleActionMap = ActionDefs['roleActions'];
-export type RoleActionName = keyof RoleActionMap;
-export type RoleActionDefinition = RoleActionMap[RoleActionName];
-export type RoleActionEventMap = {
-    [K in keyof RoleActionMap]: ActionEventFromAction<RoleActionMap[K]>;
-};
-
-export type PlayerActionMap = ActionDefs['playerInputActions'];
-export type PlayerActionType = keyof PlayerActionMap;
-
-export type ActionEventFromAction<A> =
-    A extends Action<string, any, undefined>
-        ? ActionEvent<A['type']>
-        : A extends Action<string, any, infer D>
-          ? ActionEvent<A['type'], D>
-          : never;
-
-export type ActionMap = ActionDefs['actions'];
-export type ActionName = keyof ActionMap;
-export type ActionEventMap = {
-    [K in ActionName]: ActionEventFromAction<ActionMap[K]>;
-};
-export type ActionEventDefinition = ActionEventMap[ActionName];
-
-export interface RoleAction<
-    Type extends string,
-    Roles extends RoleName,
-    Data extends AnyObject | undefined = undefined,
-> extends Action<Type, Roles, Data> {
-    readonly isFreeAction?: boolean;
-    readonly roles: readonly Roles[];
+export interface Action<PlayerInput extends ZodType = ZodNever> {
+    /** needs to return true in order for the action to be valid in the first place */
+    condition?: () => ValidationResult[];
+    /** ensures the passed input actually makes sense */
+    validateInput?: (
+        input: PlayerInput extends ZodNever ? never : z.infer<PlayerInput>,
+    ) => ValidationResult[];
+    playerInputSchema?: PlayerInput;
+    run: (input: PlayerInput extends ZodNever ? never : z.infer<PlayerInput>) => void;
 }
+
+export type ActionEventFromAction<K extends string | number | symbol, A extends Action<any>> =
+    A extends Action<ZodNever>
+        ? ActionEvent<K>
+        : A extends Action<infer D>
+          ? ActionEvent<K, D>
+          : never;
 
 export type BuyGoodsAndServicesSources =
     | MiddleClassRole['id']
@@ -299,3 +187,52 @@ export interface CompanyCard {
         optional?: boolean;
     }>;
 }
+
+export type RoleName = (typeof RoleEnum)[keyof typeof RoleEnum];
+
+/** *** zod schemas *****/
+export const RoleNameSchema = zodObjectEnum(RoleEnum);
+export const RoleNameNoStateSchema = RoleNameSchema.exclude([RoleNameSchema.enum.state]);
+
+export const PolicyEnumSchema = zodObjectEnum(PolicyEnum);
+export const PolicyValueSchema = z.union([z.literal(0), z.literal(1), z.literal(2)]);
+export const PolicyStringSchema = z.string().regex(/^[1-7][A-C]$/);
+
+export const IndustrySchema = z.enum(['food', 'healthcare', 'education', 'luxury', 'influence']);
+
+export const CompanyWorkerTypeSchema = zodObjectEnum(WorkerTypeEnum);
+export const WageIdSchema = z.enum(['l1', 'l2', 'l3']);
+
+export const CompanyIdSchema = z.string();
+export const CompanyWorkerIdSchema = z.number();
+export const BusinessDealIdSchema = z.string();
+
+export const BuyGoodsAndServicesSourcesSchema = z.enum([
+    'foreign-market',
+    RoleNameSchema.enum.capitalist,
+    RoleNameSchema.enum.state,
+    RoleNameSchema.enum.middleClass,
+]);
+
+export const ResourceEnumSchema = zodObjectEnum(ResourceEnum);
+
+export const TradeableResourceSchema = ResourceEnumSchema.extract([
+    ResourceEnumSchema.enum.food,
+    ResourceEnumSchema.enum.healthcare,
+    ResourceEnumSchema.enum.education,
+    ResourceEnumSchema.enum.luxury,
+]);
+
+export const AssignWorkersSchema = z.array(
+    z.union([
+        z.object({
+            target: z.literal('union'),
+            workerId: CompanyWorkerIdSchema,
+        }),
+        z.object({
+            target: z.literal('company'),
+            workerId: CompanyWorkerIdSchema,
+            companyId: CompanyIdSchema,
+        }),
+    ]),
+);

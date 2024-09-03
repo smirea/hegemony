@@ -6,7 +6,7 @@
 		"client:build": "rsbuild build -c client/rsbuild.config.ts",
 		"client:dev": "rsbuild dev -c client/rsbuild.config.ts",
 		"client:preview": "rsbuild preview -c client/rsbuild.config.ts",
-		"generate:state-machine-types": "ts-node -T -r tsconfig-paths/register ./scripts/codemod-createMachine-types.ts",
+		"generate:shared-types": "ts-node -T -r tsconfig-paths/register ./scripts/generate-shared-types.ts",
 		"lint": "pnpm lint:report --fix",
 		"lint:report": "eslint --cache --cache-location node_modules/.cache/eslintcache",
 		"server:dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules server/src/index.ts",

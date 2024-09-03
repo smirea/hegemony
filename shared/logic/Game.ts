@@ -1,41 +1,38 @@
 import _ from 'lodash';
 import chalk from 'chalk';
+import { type z } from 'zod';
 
 import {
     PolicyEnum,
     type PolicyString,
-    type PolicyValue,
     ResourceEnum,
     RoleEnum,
-    type ActionEventDefinition,
-    type ActionName,
     type Company,
     type CompanyCard,
     type CompanyWorker,
-    type GameNext,
     type GameState,
     type Player,
-    type PlayerActionMap,
-    type PlayerActionType,
-    type PolicyName,
-    type RoleActionDefinition,
     type RoleName,
     type RoleNameNoWorkingClass,
     type RoleNameWorkingMiddleClass,
     type RunContext,
+    type Action,
+    type AssignWorkersSchema,
 } from './types';
-import { createActions } from './actions';
 import defaultForeignMarketCards from './cards/foreignMarketCards';
 import Deck from './cards/Deck';
 import { capitalistCompanies, middleClassCompanies, statecomapnies } from './cards/companyCards';
-import ResourceManager, {
-    CapitalistMoneyResourceManager,
-    MoneyResourceManager,
-} from './utils/ResourceManager';
 import businessDealCards from './cards/businessDealCards';
-
-const isRoleAction = (action: any): action is RoleActionDefinition =>
-    !!(action as RoleActionDefinition).roles;
+import WorkingClassRole from './roles/WorkingClassRole';
+import MiddleClassRole from './roles/MiddleClassRole';
+import CapitalistRole from './roles/CapitalistRole';
+import StateRole from './roles/StateRole';
+import {
+    type ActionEventName,
+    actionEventNameSchema,
+    type AnyActionEvent,
+} from './types.generated';
+import action from './utils/action';
 
 type RunContextNoRole = Omit<RunContext<RoleName>, 'currentRole'>;
 
@@ -48,8 +45,8 @@ const defaultDecks: GameState['board']['decks'] = {
 };
 
 interface GameConfig {
-    requestPlayerInput: Game['requestPlayerInput'];
     debug: boolean;
+    requestPlayerInput: Game['requestPlayerInput'];
     decks: GameState['board']['decks'];
     players: Player[];
 }
@@ -63,8 +60,6 @@ export default class Game {
     state: GameState;
     public readonly debug: boolean;
     protected config: GameConfig;
-    getAction: ReturnType<typeof createActions>['getAction'];
-    validateEvent: ReturnType<typeof createActions>['validateEvent'];
     /** stores all card definittions, used for lookup only */
     private readonly fullDecks: {
         businessDeal: GameState['board']['decks']['businessDealCards'];
@@ -85,9 +80,6 @@ export default class Game {
             },
         };
         this.debug = this.config.debug;
-        const { getAction, validateEvent } = createActions(this);
-        this.getAction = getAction;
-        this.validateEvent = validateEvent;
         this.state = this.createEmptyState();
         this.fullDecks = {
             businessDeal: this.state.board.decks.businessDealCards.clone(),
@@ -135,139 +127,24 @@ export default class Game {
                     [PolicyEnum.foreignTrade]: 1,
                     [PolicyEnum.immigration]: 1,
                 },
-                policyProposals: {} as Record<PolicyName, { role: RoleName; value: PolicyValue }>,
+                policyProposals: {},
                 decks: this.config.decks,
             },
             roles: {
-                [RoleEnum.workingClass]: {
-                    id: RoleEnum.workingClass,
-                    score: 0,
-                    usedActions: [],
-                    resources: {
-                        money: new MoneyResourceManager({ name: 'workingClass:money' }),
-                        influence: new ResourceManager({ name: 'workingClass:influence' }),
-                        food: new ResourceManager({ name: 'workingClass:food' }),
-                        healthcare: new ResourceManager({ name: 'workingClass:healthcare' }),
-                        education: new ResourceManager({ name: 'workingClass:education' }),
-                        luxury: new ResourceManager({ name: 'workingClass:luxury' }),
-                    },
-                    availableVotingCubes: 25,
-                    workers: [],
-                    strikeTokens: 5,
-                    availableWorkers: {
-                        influence: 0,
-                        food: 0,
-                        healthcare: 0,
-                        education: 0,
-                        luxury: 0,
-                        unskilled: 0,
-                    },
-                    unions: {},
-                },
-                [RoleEnum.middleClass]: {
-                    id: RoleEnum.middleClass,
-                    score: 0,
-                    usedActions: [],
-                    resources: {
-                        money: new MoneyResourceManager({ name: 'middleClass:money' }),
-                        influence: new ResourceManager({ name: 'middleClass:influence' }),
-                        food: new ResourceManager({ name: 'middleClass:food' }),
-                        healthcare: new ResourceManager({ name: 'middleClass:healthcare' }),
-                        education: new ResourceManager({ name: 'middleClass:education' }),
-                        luxury: new ResourceManager({ name: 'middleClass:luxury' }),
-                    },
-                    companies: {},
-                    companyDeck: [],
-                    companyMarket: [],
-                    producedResources: {
-                        food: 0,
-                        healthcare: 0,
-                        education: 0,
-                        luxury: 0,
-                    },
-                    availableVotingCubes: 25,
-                    workers: [],
-                    availableWorkers: {
-                        influence: 0,
-                        food: 0,
-                        healthcare: 0,
-                        education: 0,
-                        luxury: 0,
-                        unskilled: 0,
-                    },
-                    prices: {
-                        food: 0,
-                        healthcare: 0,
-                        education: 0,
-                        luxury: 0,
-                    },
-                    storage: {},
-                },
-                [RoleEnum.capitalist]: {
-                    id: RoleEnum.capitalist,
-                    score: 0,
-                    usedActions: [],
-                    resources: {
-                        money: new CapitalistMoneyResourceManager(),
-                        influence: new ResourceManager({ name: 'capitalist:influence' }),
-                        food: new ResourceManager({ name: 'capitalist:food' }),
-                        healthcare: new ResourceManager({ name: 'capitalist:healthcare' }),
-                        education: new ResourceManager({ name: 'capitalist:education' }),
-                        luxury: new ResourceManager({ name: 'capitalist:luxury' }),
-                    },
-                    companies: {},
-                    companyDeck: [],
-                    companyMarket: [],
-                    availableVotingCubes: 25,
-                    automationTokens: 4,
-                    prices: {
-                        food: 0,
-                        healthcare: 0,
-                        education: 0,
-                        luxury: 0,
-                    },
-                    storage: {},
-                    freeTradeZoneResources: {
-                        food: new ResourceManager({ name: 'freeTradeZone:food' }),
-                        luxury: new ResourceManager({ name: 'freeTradeZone:luxury' }),
-                    },
-                },
-                [RoleEnum.state]: {
-                    id: RoleEnum.state,
-                    score: 0,
-                    usedActions: [],
-                    resources: {
-                        money: new MoneyResourceManager({ name: 'workingClass:money' }),
-                        influence: new ResourceManager({ name: 'workingClass:influence' }),
-                        food: new ResourceManager({ name: 'workingClass:food' }),
-                        healthcare: new ResourceManager({ name: 'workingClass:healthcare' }),
-                        education: new ResourceManager({ name: 'workingClass:education' }),
-                        luxury: new ResourceManager({ name: 'workingClass:luxury' }),
-                    },
-                    legitimacy: {
-                        [RoleEnum.workingClass]: 2,
-                        [RoleEnum.middleClass]: 2,
-                        [RoleEnum.capitalist]: 2,
-                    },
-                    legitimacyTokens: {
-                        [RoleEnum.workingClass]: 0,
-                        [RoleEnum.middleClass]: 0,
-                        [RoleEnum.capitalist]: 0,
-                    },
-                    companies: {},
-                    companyDeck: [],
-                    benefits: {
-                        [RoleEnum.workingClass]: [],
-                        [RoleEnum.middleClass]: [],
-                        [RoleEnum.capitalist]: [],
-                    },
-                },
+                [RoleEnum.workingClass]: new WorkingClassRole(this),
+                [RoleEnum.middleClass]: new MiddleClassRole(this),
+                [RoleEnum.capitalist]: new CapitalistRole(this),
+                [RoleEnum.state]: new StateRole(this),
             },
             nextWorkerId: 0,
             currentActionIndex: 0,
             nextActionIndex: 0,
             actionQueue: [],
         } satisfies GameState;
+    }
+
+    getPolicy(name: (typeof PolicyEnum)[keyof typeof PolicyEnum]) {
+        return this.state.board.policies[name];
     }
 
     ifPolicy(name: PolicyString, op: '==' | '<=' | '>=' = '==') {
@@ -310,9 +187,16 @@ export default class Game {
         return this.fullDecks[type].seek(id) as any;
     }
 
-    createNext<T extends ActionName>(context: RunContextNoRole): GameNext<T> {
-        return ((event: any) => {
-            let formattedEvent: ActionEventDefinition = event;
+    get foreignMarketCard() {
+        return this.getCard('foreignMarket', this.state.board.foreignMarketCard);
+    }
+
+    createNext(context: RunContextNoRole) {
+        return <T extends ActionEventName>(
+            // event: ActionEventMap[T] extends { data: infer D } ? { type: T; data: D } : T | { type: T }
+            event: T,
+        ) => {
+            let formattedEvent: AnyActionEvent = event as any;
             if (typeof event === 'string') {
                 formattedEvent = { type: event } as any;
             }
@@ -322,19 +206,49 @@ export default class Game {
                 this.state.actionQueue.splice(context.queueIndex, 0, formattedEvent);
                 ++context.queueIndex;
             }
-        }) satisfies GameNext<T>;
+        };
+    }
+
+    async requestPlayerInput<T extends ActionEventName>(type: T): Promise<any> {
+        if (this.debug) console.log(chalk.blue('    user:'), chalk.red(type.padEnd(20)));
+        const result = await this.config.requestPlayerInput(type);
+        if (this.debug)
+            console.log(chalk.blue('    user:'), chalk.blue('result'.padEnd(20)), result);
+        return result;
     }
 
     async tick() {
         if (this.state.currentActionIndex >= this.state.actionQueue.length) return;
 
         const event = this.state.actionQueue[this.state.currentActionIndex];
-        const action = this.getAction(event.type);
+        const [targetName, ns1, ns2] = event.type.split('.');
+
+        if (!targetName || !ns1 || !ns2) {
+            throw new Error(`malformed action event name "${event.type}"`);
+        }
+
+        const target: any = targetName === 'game' ? this : this.state.roles[targetName as RoleName];
+        if (!target) throw new Error(`unknown action event target "${targetName}"`);
+        if (!target[ns1]) throw new Error(`unknown action event target "${targetName}.${ns1}"`);
+        if (!target[ns1][ns2])
+            throw new Error(`unknown action event target "${targetName}.${ns1}.${ns2}"`);
+
+        const { condition, run, playerInputSchema } = target[ns1][ns2] as Action<any>;
+
+        if (playerInputSchema) {
+            const result = await this.requestPlayerInput(event.type);
+            try {
+                playerInputSchema.parse(result);
+            } catch (e) {
+                throw new Error(`Event(${event.type}) player input validation failed: ${e}`);
+            }
+            event.data = result;
+        }
 
         if (this.config.debug) {
             console.log(
                 chalk.bold(`${String(this.state.currentActionIndex).padStart(3)} tick:`),
-                event.type.padEnd(35),
+                event.type.padEnd(40),
                 event.data,
             );
         }
@@ -348,33 +262,26 @@ export default class Game {
         };
         actionContext.next = this.createNext(actionContext);
 
-        if (
-            isRoleAction(action) &&
-            !(action.roles as any[]).includes(this.state.currentRoleName!)
-        ) {
-            throw new Error(
-                `Action(${action.type}) is not valid for: ${this.state.currentRoleName}`,
-            );
-        }
-
-        if (action.condition) {
-            const errors = action
+        if (condition) {
+            const errors = condition
                 // @ts-ignore
                 .condition(actionContext, event.data)
                 .filter((c: any) => !c[1])
                 .map((c: any) => c[0]);
             if (errors.length > 0) {
-                throw new Error(`Action(${action.type}) condition not met: ${errors.join(', ')}`);
+                throw new Error(`Event(${event.type}) condition not met: ${errors.join(', ')}`);
             }
         }
 
-        // @ts-ignore
-        await action.run(actionContext, event.data);
+        run(event.data);
 
         ++this.state.currentActionIndex;
     }
 
-    async flush({ to, after }: { to?: ActionName; after?: ActionName } = {}): Promise<void> {
+    async flush({
+        to,
+        after,
+    }: { to?: ActionEventName; after?: ActionEventName } = {}): Promise<void> {
         if (to && after) throw new Error('flush: to and after are mutually exclusive');
         let count = 0;
         while (this.state.actionQueue.length) {
@@ -390,22 +297,9 @@ export default class Game {
         return this.fullDecks.companies.seek(id);
     }
 
-    async requestPlayerInput<T extends PlayerActionType>(
-        type: T,
-        ...args: PlayerActionMap[T]['input'] extends undefined
-            ? []
-            : [NonNullable<PlayerActionMap[T]['input']>]
-    ): Promise<PlayerActionMap[T]['output']> {
-        if (this.debug) console.log(chalk.blue('    user:'), chalk.red(type.padEnd(20)), args[0]);
-        const result = await this.config.requestPlayerInput(type, ...args);
-        if (this.debug)
-            console.log(chalk.blue('    user:'), chalk.blue('result'.padEnd(20)), result);
-        return result;
-    }
-
     getProsperity(role: RoleNameWorkingMiddleClass): number {
         const r = this.state.roles[role];
-        return _.clamp(Math.ceil(_.size(r.workers) / 3), 3, 10);
+        return _.clamp(Math.ceil(_.size(r.state.workers) / 3), 3, 10);
     }
 
     getWorkerById(id: CompanyWorker['id']): {
@@ -413,22 +307,22 @@ export default class Game {
         roleName: RoleNameWorkingMiddleClass;
     } {
         const roleName =
-            id in this.state.roles.workingClass.workers
+            id in this.state.roles.workingClass.state.workers
                 ? RoleEnum.workingClass
                 : RoleEnum.middleClass;
 
-        return { roleName, worker: this.state.roles[roleName].workers[id] };
+        return { roleName, worker: this.state.roles[roleName].state.workers[id] };
     }
 
     getCompanyById(id: Company['id']): { company: Company; roleName: RoleNameNoWorkingClass } {
         const roleName =
-            id in this.state.roles.middleClass.companies
+            id in this.state.roles.middleClass.state.companies
                 ? RoleEnum.middleClass
-                : id in this.state.roles.capitalist.companies
+                : id in this.state.roles.capitalist.state.companies
                   ? RoleEnum.capitalist
                   : RoleEnum.state;
 
-        return { roleName, company: this.state.roles[roleName].companies[id] };
+        return { roleName, company: this.state.roles[roleName].state.companies[id] };
     }
 
     buyFromForeignMarket(
@@ -447,38 +341,165 @@ export default class Game {
         )[this.state.board.policies.foreignTrade][resource];
         const base = resource === ResourceEnum.food ? 10 : 6;
         const total = (base + tarriff) * count;
-        this.state.roles[roleName].resources[resource].add(count);
-        this.state.roles[roleName].resources.money.remove(total);
-        this.state.roles[RoleEnum.state].resources.money.add(tarriff * count);
+        this.state.roles[roleName].state.resources[resource].add(count);
+        this.state.roles[roleName].state.resources.money.remove(total);
+        this.state.roles[RoleEnum.state].state.resources.money.add(tarriff * count);
     }
 
-    workingClassCanDemonstrate() {
-        const unemployedWorkers = Object.values(this.state.roles.workingClass.workers).filter(
-            w => !w.company,
-        ).length;
-        if (unemployedWorkers < 2) return false;
-        const middleClassSlots = _.sum(
-            Object.values(this.state.roles.middleClass.companies).map(c => {
-                const d = this.getCompanyDefinition(c.id);
-                return d.workers.filter(w => w.optional).length;
-            }),
-        );
-        const capitalistSlots = _.sum(
-            Object.values(this.state.roles.capitalist.companies).map(c => {
-                if (c.workers.length) return 0;
-                const d = this.getCompanyDefinition(c.id);
-                if (d.fullyAutomated) return 0;
-                return d.workers.length;
-            }),
-        );
-        const stateSlots = _.sum(
-            Object.values(this.state.roles.state.companies).map(c => {
-                if (c.workers.length) return 0;
-                const d = this.getCompanyDefinition(c.id);
-                return d.workers.length;
-            }),
-        );
+    assignWorkers(toAssign: z.infer<typeof AssignWorkersSchema>) {
+        const companiesToEmpty = new Set<Company['id']>();
+        const handledWorkers = new Set<CompanyWorker['id']>();
 
-        return unemployedWorkers + 2 >= middleClassSlots + capitalistSlots + stateSlots;
+        for (const { workerId, ...payload } of toAssign) {
+            const { worker } = this.getWorkerById(workerId);
+            handledWorkers.add(workerId);
+
+            // moving unemployed workers is fine
+            // moving WC workers out of a MC company is also fine
+            // all other instances, we need to empty all other workers from a company
+            if (worker.company) {
+                const { company, roleName } = this.getCompanyById(worker.company);
+                if (roleName !== RoleEnum.middleClass || worker.role !== RoleEnum.workingClass) {
+                    companiesToEmpty.add(worker.company);
+                }
+                company.workers = company.workers.filter(w => w !== worker.id);
+                worker.company = null;
+            }
+
+            if (payload.target == 'union') {
+                worker.company = null;
+                worker.committed = false;
+                worker.union = true;
+            } else {
+                const { companyId } = payload;
+                const { company } = this.getCompanyById(companyId);
+                company.workers.push(workerId);
+            }
+        }
+
+        for (const companyId of companiesToEmpty) {
+            const { company } = this.getCompanyById(companyId);
+            for (const workerId of company.workers) {
+                if (handledWorkers.has(workerId)) continue;
+                const { worker } = this.getWorkerById(workerId);
+                worker.company = null;
+                worker.committed = false;
+            }
+        }
     }
+
+    readonly actions = {
+        start: action({
+            run: () => {
+                const order = [
+                    RoleEnum.workingClass,
+                    RoleEnum.middleClass,
+                    RoleEnum.capitalist,
+                    RoleEnum.state,
+                ];
+                this.state.players.sort((a, b) => order.indexOf(a.role) - order.indexOf(b.role));
+                this.state.round = 0;
+                this.state.round = 0;
+                for (const deck of Object.values(this.state.board.decks)) {
+                    deck.shuffle();
+                }
+                this.next('game.actions.roundStart');
+            },
+        }),
+        roundStart: action({
+            run: () => {
+                this.state.currentRoleName = null;
+                ++this.state.round;
+                this.state.turn = 0;
+                const { foreignMarketCards, businessDealCards } = this.state.board.decks;
+                this.state.board.foreignMarketCard = foreignMarketCards.draw().id;
+                if (this.ifPolicy('6A')) {
+                    this.state.board.businessDealCards = [
+                        businessDealCards.draw().id,
+                        businessDealCards.draw().id,
+                    ];
+                } else if (this.ifPolicy('6B')) {
+                    this.state.board.businessDealCards = [businessDealCards.draw().id];
+                } else {
+                    this.state.board.businessDealCards = [];
+                }
+                if (this.debug) console.log(chalk.green.bold('——— round:'), this.state.round);
+                this.next('game.actions.roleNext');
+            },
+        }),
+        turnStart: action({
+            run: () => {
+                ++this.state.turn;
+                if (this.debug) console.log(chalk.green.bold('——— turn:'), this.state.turn);
+                for (const role of Object.values(this.state.roles)) {
+                    role.state.usedActions = [];
+                }
+                this.next('game.actions.roleNext');
+            },
+        }),
+        roleNext: action({
+            run: () => {
+                // can't advance the role, turn is over
+                if (
+                    this.state.currentRoleName ==
+                    this.state.players[this.state.players.length - 1].role
+                ) {
+                    return this.next('game.actions.turnEnd');
+                }
+                // start of a turn
+                if (this.state.currentRoleName == null) {
+                    this.state.currentRoleName = this.state.players[0].role;
+                } else {
+                    this.state.currentRoleName =
+                        this.state.players[
+                            this.state.players.findIndex(
+                                p => p.role === this.state.currentRoleName,
+                            ) + 1
+                        ].role;
+                }
+
+                this.next('game.actions.roleTurn');
+            },
+        }),
+        roleTurn: action({
+            playerInputSchema: actionEventNameSchema,
+            run: type => {
+                if (isFreeAction(type)) {
+                    this.state.roles[this.state.currentRoleName!].state.usedActions.push('free');
+                } else {
+                    this.state.roles[this.state.currentRoleName!].state.usedActions.push('basic');
+                }
+                this.next(type);
+                this.next('game.actions.roleCurrent');
+            },
+        }),
+        roleCurrent: action({
+            run: () => {
+                if (this.state.roles[this.state.currentRoleName!].state.usedActions.length >= 2)
+                    return this.next('game.actions.roleNext');
+                return this.next('game.actions.roleTurn');
+            },
+        }),
+        turnEnd: action({
+            run: () => {
+                if (this.state.turn >= 4) return this.next('game.actions.roundEnd');
+                ++this.state.turn;
+                this.next('game.actions.turnStart');
+            },
+        }),
+        roundEnd: action({
+            run: () => {
+                if (this.state.round >= 4) return this.next('game.actions.end');
+                ++this.state.round;
+                this.next('game.actions.roundStart');
+            },
+        }),
+        end: action({
+            run: () => {
+                // todo
+            },
+        }),
+    } satisfies Record<string, Action<any>>;
 }
+
+const isFreeAction = (type: ActionEventName) => /\.freeAction\./.test(type);
