@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import {
     type Company,
+    type CompanyCard,
     type Resource,
     RoleEnum,
     type RoleNameNoState,
@@ -12,6 +13,8 @@ import action from '../utils/action';
 import AbstractRole, { type BaseState } from './AbstractRole';
 import { createPayLoan, createProposeBill, createSkip } from './commonActions';
 import { createCompany } from './commonMethods';
+import Deck from '../cards/Deck';
+import { stateCompanies } from '../cards/companyCards';
 
 import type Game from '../Game';
 
@@ -22,6 +25,7 @@ type Benefit =
 interface StateState extends BaseState {
     legitimacy: Record<RoleNameNoState, number>;
     legitimacyTokens: Record<RoleNameNoState, number>;
+    companyDeck: Deck<CompanyCard[]>;
     companies: Company[];
     benefits: Record<RoleNameNoState, Benefit[]>;
 }
@@ -45,6 +49,7 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
                 [RoleEnum.middleClass]: 0,
                 [RoleEnum.capitalist]: 0,
             },
+            companyDeck: new Deck('state companies', stateCompanies),
             companies: [],
             benefits: {
                 [RoleEnum.workingClass]: [],

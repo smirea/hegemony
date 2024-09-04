@@ -4,6 +4,7 @@ import _ from 'lodash';
 import {
     BusinessDealIdSchema,
     type Company,
+    type CompanyCard,
     CompanyIdSchema,
     type ResourceEnum,
     RoleEnum,
@@ -23,6 +24,8 @@ import {
     createSkip,
 } from './commonActions';
 import { createCompany } from './commonMethods';
+import Deck from '../cards/Deck';
+import { capitalistCompanies } from '../cards/companyCards';
 
 import type Game from '../Game';
 
@@ -30,6 +33,7 @@ interface CapitalistState extends BaseState<CapitalistMoneyResourceManager> {
     availableVotingCubes: number;
     prices: Record<TradeableResource, number>;
     storage: Partial<Record<TradeableResource, boolean>>;
+    companyDeck: Deck<CompanyCard[]>;
     /** built companies */
     companies: Company[];
     /** which companies are available to purchase */
@@ -57,6 +61,7 @@ export default class CapitalistRole extends AbstractRole<
                 ...base.resources,
                 money: new CapitalistMoneyResourceManager(),
             },
+            companyDeck: new Deck('capitalist companies', capitalistCompanies),
             companies: [],
             companyMarket: [],
             availableVotingCubes: 25,
@@ -110,12 +115,12 @@ export default class CapitalistRole extends AbstractRole<
                     this.game.state.board.businessDealCards.some(
                         id =>
                             this.state.resources.money.value >=
-                            this.game.getCard('businessDeal', id).cost,
+                            this.game.state.board.decks.businessDealCards.getOriginalCard(id).cost,
                     ),
                 ],
             ],
             run: ({ id, storage, freeTradeZone }) => {
-                const card = this.game.getCard('businessDeal', id);
+                const card = this.game.state.board.decks.businessDealCards.getOriginalCard(id);
                 this.state.resources.money.remove(card.cost);
 
                 if (storage.food) this.state.resources.food.add(storage.food);

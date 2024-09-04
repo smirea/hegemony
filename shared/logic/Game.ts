@@ -21,7 +21,6 @@ import {
 } from './types';
 import defaultForeignMarketCards from './cards/foreignMarketCards';
 import Deck from './cards/Deck';
-import { capitalistCompanies, middleClassCompanies, statecomapnies } from './cards/companyCards';
 import businessDealCards from './cards/businessDealCards';
 import WorkingClassRole from './roles/WorkingClassRole';
 import MiddleClassRole from './roles/MiddleClassRole';
@@ -37,9 +36,6 @@ import action from './utils/action';
 type RunContextNoRole = Omit<RunContext<RoleName>, 'currentRole'>;
 
 const getDefaultDecks = (): GameState['board']['decks'] => ({
-    capitalistCompanies: new Deck('capitalist companies', capitalistCompanies),
-    middleClassCompanies: new Deck('middle class companies', middleClassCompanies),
-    stateClassCompanies: new Deck('state class companies', statecomapnies),
     foreignMarketCards: new Deck('foreign market', defaultForeignMarketCards),
     businessDealCards: new Deck('business deal', businessDealCards),
 });
@@ -60,15 +56,6 @@ export default class Game {
     state: GameState;
     public readonly debug: boolean;
     protected config: GameConfig;
-    /** stores all card definittions, used for lookup only */
-    private readonly fullDecks: {
-        businessDeal: GameState['board']['decks']['businessDealCards'];
-        capitalistCompanies: GameState['board']['decks']['capitalistCompanies'];
-        middleClassCompanies: GameState['board']['decks']['middleClassCompanies'];
-        stateClassCompanies: GameState['board']['decks']['stateClassCompanies'];
-        foreignMarket: GameState['board']['decks']['foreignMarketCards'];
-        companies: Deck<CompanyCard[]>;
-    };
 
     constructor(config: GameConfigInput) {
         this.config = {
@@ -81,18 +68,6 @@ export default class Game {
         };
         this.debug = this.config.debug;
         this.state = this.createEmptyState();
-        this.fullDecks = {
-            businessDeal: this.state.board.decks.businessDealCards.clone(),
-            capitalistCompanies: this.state.board.decks.capitalistCompanies.clone(),
-            middleClassCompanies: this.state.board.decks.middleClassCompanies.clone(),
-            stateClassCompanies: this.state.board.decks.stateClassCompanies.clone(),
-            foreignMarket: this.state.board.decks.foreignMarketCards.clone(),
-            companies: new Deck('all companies', [
-                ...this.config.decks.capitalistCompanies.cards,
-                ...this.config.decks.middleClassCompanies.cards,
-                ...this.config.decks.stateClassCompanies.cards,
-            ]),
-        };
     }
 
     next = this.createNext({
@@ -180,15 +155,8 @@ export default class Game {
         }
     }
 
-    getCard<T extends keyof Game['fullDecks']>(
-        type: T,
-        id: string,
-    ): ReturnType<Game['fullDecks'][T]['seek']> {
-        return this.fullDecks[type].seek(id) as any;
-    }
-
     get foreignMarketCard() {
-        return this.getCard('foreignMarket', this.state.board.foreignMarketCard);
+        return this.state.board.decks.foreignMarketCards.seek(this.state.board.foreignMarketCard);
     }
 
     createNext(context: RunContextNoRole) {
@@ -316,7 +284,12 @@ export default class Game {
     }
 
     getCompanyDefinition(id: CompanyCard['id']): CompanyCard {
-        return this.fullDecks.companies.seek(id);
+        const result =
+            this.state.roles.capitalist.state.companyDeck.getOriginalCard(id, { safe: true }) ||
+            this.state.roles.middleClass.state.companyDeck.getOriginalCard(id, { safe: true }) ||
+            this.state.roles.state.state.companyDeck.getOriginalCard(id, { safe: true });
+        if (!result) throw new Error(`companyId="${id}" not found`);
+        return result;
     }
 
     getWorkerById(id: CompanyWorker['id']): {

@@ -125,6 +125,7 @@ export default class WorkingClassRole extends AbstractRole<
     countOpenWorkerSlots() {
         const middleClassSlots = _.sum(
             Object.values(this.game.state.roles.middleClass.state.companies).map(c => {
+                if (c.workers.length) return 0;
                 const d = this.game.getCompanyDefinition(c.id);
                 return d.workers.filter(w => w.roles.includes(RoleNameSchema.enum.workingClass))
                     .length;

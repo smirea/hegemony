@@ -369,10 +369,7 @@ export function createSellForeignMarketCard(role: MiddleClassRole | CapitalistRo
                 ['hasForeignMarketCard', role.game.state.board.foreignMarketCard != null],
             ],
             run(toSell) {
-                const card = role.game.getCard(
-                    'foreignMarket',
-                    role.game.state.board.foreignMarketCard,
-                );
+                const card = role.game.foreignMarketCard;
                 for (const [resource, [used1, used2]] of objectEntries(toSell)) {
                     if (used1) {
                         const { money, resources } = card[resource][0];

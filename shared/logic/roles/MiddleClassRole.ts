@@ -1,5 +1,6 @@
 import {
     type Company,
+    type CompanyCard,
     CompanyIdSchema,
     type CompanyWorker,
     type CompanyWorkerType,
@@ -24,6 +25,8 @@ import {
     createUseLuxury,
 } from './commonActions';
 import { createCompany, createGetPopulation, createIncreaseProsperity } from './commonMethods';
+import Deck from '../cards/Deck';
+import { middleClassCompanies } from '../cards/companyCards';
 
 import type Game from '../Game';
 
@@ -35,6 +38,7 @@ interface MiddleClassState extends BaseState {
     producedResources: Record<TradeableResource, number>;
     prices: Record<TradeableResource, number>;
     storage: Partial<Record<TradeableResource, boolean>>;
+    companyDeck: Deck<CompanyCard[]>;
     /** built companies */
     companies: Company[];
     /** which companies are available to purchase */
@@ -53,6 +57,7 @@ export default class MiddleClassRole extends AbstractRole<
         this.state = {
             ...this.createBaseState(),
             prosperity: 0,
+            companyDeck: new Deck('middleClass companies', middleClassCompanies),
             companies: [],
             companyMarket: [],
             producedResources: {

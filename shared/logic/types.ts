@@ -107,9 +107,6 @@ export interface GameState {
         foreignMarketCard: ForeignMarketCard['id'];
         businessDealCards: BusinessDealCard['id'][];
         decks: {
-            capitalistCompanies: Deck<CompanyCard[]>;
-            middleClassCompanies: Deck<CompanyCard[]>;
-            stateClassCompanies: Deck<CompanyCard[]>;
             foreignMarketCards: Deck<ForeignMarketCard[]>;
             businessDealCards: Deck<BusinessDealCard[]>;
         };

@@ -3,6 +3,8 @@ import _ from 'lodash';
 export default class Deck<Cards extends ReadonlyArray<{ id: string }>> {
     protected readonly map: Record<string, Cards>;
     protected order: Cards[number]['id'][] = [];
+    /** original deck that is unaffected by shuffling or sorting */
+    private readonly allCards: Map<Cards[number]['id'], Cards[number]>;
 
     constructor(
         protected readonly name: string,
@@ -16,6 +18,16 @@ export default class Deck<Cards extends ReadonlyArray<{ id: string }>> {
             this.map[card.id] = card as any;
         }
         this.order = Object.keys(this.map);
+        this.allCards = new Map(cards.map(c => [c.id, c]));
+    }
+
+    getOriginalCard<Safe extends boolean = false>(
+        id: Cards[number]['id'],
+        { safe }: { safe?: Safe } = {},
+    ): Safe extends true ? Cards[number] | undefined : Cards[number] {
+        const result = this.allCards.get(id)!;
+        if (!safe && !result) throw new Error(`Deck(${this.name}): card ${id} not found!`);
+        return result;
     }
 
     /** returns a card without taking it out of the deck */
@@ -24,7 +36,7 @@ export default class Deck<Cards extends ReadonlyArray<{ id: string }>> {
         { safe }: { safe?: boolean } = { safe: false },
     ): Cards[number] & { id: Id } {
         if (!safe && !this.map[id]) {
-            throw new Error(`card ${id} not found in ${this.name}`);
+            throw new Error(`Deck(${this.name}): card ${id} not found`);
         }
         return this.map[id] as any;
     }

@@ -33,7 +33,7 @@ export const capitalistCompanies: CompanyCard[] = [
     { ...tempCompany('capitalist', 'education'), fullyAutomated: true },
 ];
 
-export const statecomapnies: CompanyCard[] = [
+export const stateCompanies: CompanyCard[] = [
     tempCompany('state', 'healthcare'),
     tempCompany('state', 'education'),
     tempCompany('state', 'influence'),

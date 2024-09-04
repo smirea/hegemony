@@ -42,7 +42,11 @@ export function createGameUtils() {
 
     const initGame = async (
         roles: RoleName[] = ['workingClass', 'capitalist', 'middleClass', 'state'],
-        config: Partial<GameConfigInput> = {},
+        {
+            setup = true,
+            companyDecks = 'mock',
+            ...config
+        }: Partial<GameConfigInput> & { setup?: boolean; companyDecks?: 'mock' | 'empty' } = {},
     ) => {
         playerInputs = [];
         requestPlayerInput.mockReset();
@@ -62,75 +66,104 @@ export function createGameUtils() {
         game = new Game({
             players: [working, capitalist, middle, state].filter(p => roles.includes(p.role)),
             requestPlayerInput,
-            decks: {
-                ...createTestDecks(),
-                ...config.decks,
-            },
             ...config,
         });
 
-        const decks = game.state.board.decks;
-
-        if (game.state.roles.middleClass) {
-            game.state.roles.middleClass.setupBoard = () => {
-                const m1 = decks.middleClassCompanies.draw();
-                const m2 = decks.middleClassCompanies.draw();
-                game.state.roles.middleClass.state.companies = [
-                    {
-                        id: m1.id,
-                        workers: [],
-                        wages: 'l1',
-                    },
-                    {
-                        id: m2.id,
-                        workers: [],
-                        wages: 'l1',
-                    },
-                ];
-            };
+        if (companyDecks === 'empty') {
+            game.state.roles.middleClass.state.companyDeck = new Deck(
+                'test:middleClass companies',
+                [],
+            );
+            game.state.roles.middleClass.setupBoard = _.noop;
+            game.state.roles.capitalist.state.companyDeck = new Deck(
+                'test:capitalist companies',
+                [],
+            );
+            game.state.roles.capitalist.setupBoard = _.noop;
+            game.state.roles.state.state.companyDeck = new Deck('test:stateClass companies', []);
+            game.state.roles.state.setupBoard = _.noop;
         }
 
-        if (game.state.roles.capitalist) {
-            game.state.roles.capitalist.setupBoard = () => {
-                const c1 = decks.capitalistCompanies.draw();
-                const c2 = decks.capitalistCompanies.draw();
-                game.state.roles.capitalist.state.companies = [
-                    {
-                        id: c1.id,
-                        workers: [],
-                        wages: 'l1',
-                    },
-                    {
-                        id: c2.id,
-                        workers: [],
-                        wages: 'l1',
-                    },
-                ];
+        if (companyDecks === 'mock') {
+            const testDecks = createTestDecks();
+            const decks = {
+                get middleClassCompanies() {
+                    return game.state.roles.middleClass.state.companyDeck;
+                },
+                get capitalistCompanies() {
+                    return game.state.roles.capitalist.state.companyDeck;
+                },
+                get stateClassCompanies() {
+                    return game.state.roles.state.state.companyDeck;
+                },
             };
+
+            if (game.state.roles.middleClass) {
+                game.state.roles.middleClass.state.companyDeck = testDecks.middleClassCompanies;
+                game.state.roles.middleClass.setupBoard = () => {
+                    const m1 = decks.middleClassCompanies.draw();
+                    const m2 = decks.middleClassCompanies.draw();
+                    game.state.roles.middleClass.state.companies = [
+                        {
+                            id: m1.id,
+                            workers: [],
+                            wages: 'l1',
+                        },
+                        {
+                            id: m2.id,
+                            workers: [],
+                            wages: 'l1',
+                        },
+                    ];
+                };
+            }
+
+            if (game.state.roles.capitalist) {
+                game.state.roles.capitalist.state.companyDeck = testDecks.capitalistCompanies;
+                game.state.roles.capitalist.setupBoard = () => {
+                    const c1 = decks.capitalistCompanies.draw();
+                    const c2 = decks.capitalistCompanies.draw();
+                    game.state.roles.capitalist.state.companies = [
+                        {
+                            id: c1.id,
+                            workers: [],
+                            wages: 'l1',
+                        },
+                        {
+                            id: c2.id,
+                            workers: [],
+                            wages: 'l1',
+                        },
+                    ];
+                };
+            }
+
+            if (game.state.roles.state) {
+                game.state.roles.state.state.companyDeck = testDecks.stateClassCompanies;
+                game.state.roles.state.setupBoard = () => {
+                    const s1 = decks.stateClassCompanies.draw();
+                    const s2 = decks.stateClassCompanies.draw();
+                    game.state.roles.state.state.companies = [
+                        {
+                            id: s1.id,
+                            workers: [],
+                            wages: 'l1',
+                        },
+                        {
+                            id: s2.id,
+                            workers: [],
+                            wages: 'l1',
+                        },
+                    ];
+                };
+            }
         }
 
-        if (game.state.roles.state) {
-            game.state.roles.state.setupBoard = () => {
-                const s1 = decks.stateClassCompanies.draw();
-                const s2 = decks.stateClassCompanies.draw();
-                game.state.roles.state.state.companies = [
-                    {
-                        id: s1.id,
-                        workers: [],
-                        wages: 'l1',
-                    },
-                    {
-                        id: s2.id,
-                        workers: [],
-                        wages: 'l1',
-                    },
-                ];
-            };
+        if (setup) {
+            const setupFn = game.setupBoard.bind(game);
+            game.setupBoard = _.once(setupFn);
+            game.setupBoard();
         }
-
-        const setup = game.setupBoard.bind(game);
-        game.setupBoard = _.once(setup);
-        game.setupBoard();
 
         return game;
     };
@@ -149,61 +182,63 @@ export function createGameUtils() {
 }
 
 function createTestDecks() {
-    const decks = {
-        middleClassCompanies: new Deck(
-            'test:middleClass companies',
-            [
-                createTestCompanyCard({
-                    id: 'm1',
-                    workers: [
-                        { roles: ['middleClass'], type: 'unskilled' },
-                        { roles: ['middleClass'], type: 'unskilled' },
-                    ],
-                }),
-                createTestCompanyCard({
-                    id: 'm2',
-                    cost: 20,
-                    production: 5,
-                    extraProduction: 3,
-                    workers: [
-                        { roles: ['middleClass'], type: 'unskilled' },
-                        { roles: ['workingClass'], type: 'unskilled' },
-                    ],
-                }),
-                createTestCompanyCard(),
-            ].reverse(),
-        ),
-        capitalistCompanies: new Deck(
-            'test:capitalist companies',
-            [
-                createTestCompanyCard({ id: 'c1' }),
-                createTestCompanyCard({
-                    id: 'c2',
-                    cost: 20,
-                    production: 5,
-                    extraProduction: 0,
-                    fullyAutomated: true,
-                }),
-                createTestCompanyCard(),
-            ].reverse(),
-        ),
-        stateClassCompanies: new Deck(
-            'test:stateClass companies',
-            [
-                createTestCompanyCard({ id: 's1' }),
-                createTestCompanyCard({
-                    id: 's2',
-                    workers: [
-                        { roles: ['workingClass', 'middleClass'], type: 'unskilled' },
-                        { roles: ['workingClass', 'middleClass'], type: 'unskilled' },
-                    ],
-                }),
-                createTestCompanyCard(),
-            ].reverse(),
-        ),
-    } satisfies Partial<Game['state']['board']['decks']>;
+    const middleClassCompanies = new Deck(
+        'test:middleClass companies',
+        [
+            createTestCompanyCard({
+                id: 'm1',
+                workers: [
+                    { roles: ['middleClass'], type: 'unskilled' },
+                    { roles: ['middleClass'], type: 'unskilled' },
+                ],
+            }),
+            createTestCompanyCard({
+                id: 'm2',
+                cost: 20,
+                production: 5,
+                extraProduction: 3,
+                workers: [
+                    { roles: ['middleClass'], type: 'unskilled' },
+                    { roles: ['workingClass'], type: 'unskilled' },
+                ],
+            }),
+            createTestCompanyCard(),
+        ].reverse(),
+    );
+    const capitalistCompanies = new Deck(
+        'test:capitalist companies',
+        [
+            createTestCompanyCard({ id: 'c1' }),
+            createTestCompanyCard({
+                id: 'c2',
+                cost: 20,
+                production: 5,
+                extraProduction: 0,
+                fullyAutomated: true,
+            }),
+            createTestCompanyCard(),
+        ].reverse(),
+    );
+    const stateClassCompanies = new Deck(
+        'test:stateClass companies',
+        [
+            createTestCompanyCard({ id: 's1' }),
+            createTestCompanyCard({
+                id: 's2',
+                workers: [
+                    { roles: ['workingClass', 'middleClass'], type: 'unskilled' },
+                    { roles: ['workingClass', 'middleClass'], type: 'unskilled' },
+                ],
+            }),
+            createTestCompanyCard(),
+        ].reverse(),
+    );
 
-    return decks;
+    return {
+        middleClassCompanies,
+        capitalistCompanies,
+        stateClassCompanies,
+    };
 }
 
 let idCounter = 0;
