@@ -1,7 +1,14 @@
 import _ from 'lodash';
 import { z } from 'zod';
 
-import { type CompanyWorker, type Industry, type CompanyWorkerType, RoleEnum } from '../types';
+import {
+    type CompanyWorker,
+    type Industry,
+    type CompanyWorkerType,
+    RoleEnum,
+    CompanyIdSchema,
+    RoleNameSchema,
+} from '../types';
 import AbstractRole, { type BaseState } from './AbstractRole';
 import {
     createApplyPoliticalPressure,
@@ -24,7 +31,7 @@ import type Game from '../Game';
 interface WorkingClassState extends BaseState {
     prosperity: number;
     availableVotingCubes: number;
-    workers: Record<CompanyWorker['id'], CompanyWorker>;
+    workers: CompanyWorker[];
     availableWorkers: Record<CompanyWorkerType, number>;
     strikeTokens: number;
     unions: Partial<Record<Industry, boolean>>;
@@ -44,7 +51,7 @@ export default class WorkingClassRole extends AbstractRole<
             ...super.createBaseState(),
             prosperity: 0,
             availableVotingCubes: 0,
-            workers: {},
+            workers: [],
             availableWorkers: {
                 influence: 0,
                 food: 0,
@@ -59,6 +66,14 @@ export default class WorkingClassRole extends AbstractRole<
         };
     }
 
+    setupBoard() {
+        // todo
+    }
+
+    setupRound(): void {
+        // todo
+    }
+
     increaseProsperity = createIncreaseProsperity(this);
     getPopulation = createGetPopulation(this);
 
@@ -69,7 +84,8 @@ export default class WorkingClassRole extends AbstractRole<
         ...createBuyGoodsAndServices(this),
         /** 1-2 tokens → non-committed cos. (L1/L2 wages) → wages ⬆ or no production and +1 🟣 */
         strike: action({
-            playerInputSchema: z.array(z.string()), // todo Company['id'][]
+            playerInputSchema: z.array(CompanyIdSchema),
+            condition: () => [['hasStrikeTokens', this.state.strikeTokens > 0]],
             run: toStrike => {
                 for (const companyId of toStrike) {
                     const { company } = this.game.getCompanyById(companyId);
@@ -103,10 +119,15 @@ export default class WorkingClassRole extends AbstractRole<
     canDemonstrate() {
         const unemployedWorkers = Object.values(this.state.workers).filter(w => !w.company).length;
         if (unemployedWorkers < 2) return false;
+        return unemployedWorkers + 2 >= this.countOpenWorkerSlots();
+    }
+
+    countOpenWorkerSlots() {
         const middleClassSlots = _.sum(
             Object.values(this.game.state.roles.middleClass.state.companies).map(c => {
                 const d = this.game.getCompanyDefinition(c.id);
-                return d.workers.filter(w => w.optional).length;
+                return d.workers.filter(w => w.roles.includes(RoleNameSchema.enum.workingClass))
+                    .length;
             }),
         );
         const capitalistSlots = _.sum(
@@ -125,6 +146,6 @@ export default class WorkingClassRole extends AbstractRole<
             }),
         );
 
-        return unemployedWorkers + 2 >= middleClassSlots + capitalistSlots + stateSlots;
+        return middleClassSlots + capitalistSlots + stateSlots;
     }
 }

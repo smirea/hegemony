@@ -11,6 +11,7 @@ import {
 import action from '../utils/action';
 import AbstractRole, { type BaseState } from './AbstractRole';
 import { createPayLoan, createProposeBill, createSkip } from './commonActions';
+import { createCompany } from './commonMethods';
 
 import type Game from '../Game';
 
@@ -21,8 +22,7 @@ type Benefit =
 interface StateState extends BaseState {
     legitimacy: Record<RoleNameNoState, number>;
     legitimacyTokens: Record<RoleNameNoState, number>;
-    companies: Record<Company['id'], Company>;
-    companyDeck: string[];
+    companies: Company[];
     benefits: Record<RoleNameNoState, Benefit[]>;
 }
 
@@ -45,14 +45,23 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
                 [RoleEnum.middleClass]: 0,
                 [RoleEnum.capitalist]: 0,
             },
-            companies: {},
-            companyDeck: [],
+            companies: [],
             benefits: {
                 [RoleEnum.workingClass]: [],
                 [RoleEnum.middleClass]: [],
                 [RoleEnum.capitalist]: [],
             },
         };
+    }
+
+    company = createCompany(this);
+
+    setupBoard() {
+        // todo
+    }
+
+    setupRound(): void {
+        // todo
     }
 
     getBenefits(id: RoleNameNoState) {

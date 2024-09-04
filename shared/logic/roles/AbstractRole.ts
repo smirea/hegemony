@@ -37,6 +37,8 @@ export default abstract class AbstractRole<Id extends RoleName, State extends Ba
         };
     }
 
+    abstract setupBoard(): void;
+    abstract setupRound(): void;
     abstract basicActions: Record<string, Action<any>>;
     abstract freeActions: Record<string, Action<any>>;
 }

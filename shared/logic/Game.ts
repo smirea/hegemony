@@ -51,7 +51,7 @@ interface GameConfig {
     players: Player[];
 }
 
-interface GameConfigInput extends Omit<GameConfig, 'decks' | 'debug'> {
+export interface GameConfigInput extends Omit<GameConfig, 'decks' | 'debug'> {
     decks?: Partial<GameState['board']['decks']>;
     debug?: boolean;
 }
@@ -323,23 +323,26 @@ export default class Game {
         worker: CompanyWorker;
         roleName: RoleNameWorkingMiddleClass;
     } {
-        const roleName =
-            id in this.state.roles.workingClass.state.workers
-                ? RoleEnum.workingClass
-                : RoleEnum.middleClass;
+        const roleName = this.state.roles.workingClass.state.workers.find(w => w.id === id)
+            ? RoleEnum.workingClass
+            : this.state.roles.middleClass.state.workers.find(w => w.id === id)
+              ? RoleEnum.middleClass
+              : null;
+
+        if (!roleName) throw new Error(`workerId="${id}" not found`);
 
         return { roleName, worker: this.state.roles[roleName].state.workers[id] };
     }
 
     getCompanyById(id: Company['id']): { company: Company; roleName: RoleNameNoWorkingClass } {
-        const roleName =
-            id in this.state.roles.middleClass.state.companies
-                ? RoleEnum.middleClass
-                : id in this.state.roles.capitalist.state.companies
-                  ? RoleEnum.capitalist
-                  : RoleEnum.state;
+        const roleName = this.state.roles.middleClass.company(id, { safe: true })
+            ? RoleEnum.middleClass
+            : this.state.roles.capitalist.company(id, { safe: true })
+              ? RoleEnum.capitalist
+              : RoleEnum.state;
 
-        return { roleName, company: this.state.roles[roleName].state.companies[id] };
+        const company = this.state.roles[roleName].company(id);
+        return { roleName, company };
     }
 
     buyFromForeignMarket(
@@ -405,21 +408,28 @@ export default class Game {
         }
     }
 
+    setupBoard() {
+        const order = [
+            RoleEnum.workingClass,
+            RoleEnum.middleClass,
+            RoleEnum.capitalist,
+            RoleEnum.state,
+        ];
+        this.state.players.sort((a, b) => order.indexOf(a.role) - order.indexOf(b.role));
+        this.state.round = 0;
+        this.state.round = 0;
+        for (const deck of Object.values(this.state.board.decks)) {
+            deck.shuffle();
+        }
+        for (const role of Object.values(this.state.roles)) {
+            role.setupBoard();
+        }
+    }
+
     readonly actions = {
         start: action({
             run: () => {
-                const order = [
-                    RoleEnum.workingClass,
-                    RoleEnum.middleClass,
-                    RoleEnum.capitalist,
-                    RoleEnum.state,
-                ];
-                this.state.players.sort((a, b) => order.indexOf(a.role) - order.indexOf(b.role));
-                this.state.round = 0;
-                this.state.round = 0;
-                for (const deck of Object.values(this.state.board.decks)) {
-                    deck.shuffle();
-                }
+                this.setupBoard();
                 this.next('game:roundStart');
             },
         }),
@@ -439,6 +449,9 @@ export default class Game {
                     this.state.board.businessDealCards = [businessDealCards.draw().id];
                 } else {
                     this.state.board.businessDealCards = [];
+                }
+                for (const role of Object.values(this.state.roles)) {
+                    role.setupRound();
                 }
                 if (this.debug) console.log(chalk.green.bold('——— round:'), this.state.round);
                 this.next('game:roleNext');

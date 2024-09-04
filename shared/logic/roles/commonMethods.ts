@@ -1,7 +1,10 @@
 import _ from 'lodash';
 
-import type MiddleClassRole from './MiddleClassRole';
+import type { Company } from '../types';
 import type WorkingClassRole from './WorkingClassRole';
+import type MiddleClassRole from './MiddleClassRole';
+import type CapitalistRole from './CapitalistRole';
+import type StateRole from './StateRole';
 
 export function createIncreaseProsperity(role: WorkingClassRole | MiddleClassRole) {
     return ({ withHealthcare = false }: { withHealthcare?: boolean } = {}) => {
@@ -13,4 +16,15 @@ export function createIncreaseProsperity(role: WorkingClassRole | MiddleClassRol
 
 export function createGetPopulation(role: WorkingClassRole | MiddleClassRole) {
     return () => _.clamp(Math.ceil((_.size(role.state.workers) - 10) / 3), 3, 10);
+}
+
+export function createCompany(role: MiddleClassRole | CapitalistRole | StateRole) {
+    return <Safe extends boolean = false>(
+        companyId: Company['id'],
+        { safe }: { safe?: Safe } = {},
+    ): Safe extends true ? Company | undefined : Company => {
+        const company = role.state.companies.find(c => c.id === companyId);
+        if (!company && !safe) throw new Error(`${role.id}: companyId="${companyId}" not found`);
+        return company as any;
+    };
 }

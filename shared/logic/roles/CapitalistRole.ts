@@ -22,6 +22,7 @@ import {
     createSellForeignMarketCard,
     createSkip,
 } from './commonActions';
+import { createCompany } from './commonMethods';
 
 import type Game from '../Game';
 
@@ -30,10 +31,9 @@ interface CapitalistState extends BaseState<CapitalistMoneyResourceManager> {
     prices: Record<TradeableResource, number>;
     storage: Partial<Record<TradeableResource, boolean>>;
     /** built companies */
-    companies: Record<Company['id'], Company>;
+    companies: Company[];
     /** which companies are available to purchase */
-    companyMarket: Array<Company['id']>;
-    companyDeck: Array<Company['id']>;
+    companyMarket: Company['id'][];
     automationTokens: number;
     freeTradeZoneResources: {
         [ResourceEnum.food]: ResourceManager;
@@ -57,8 +57,7 @@ export default class CapitalistRole extends AbstractRole<
                 ...base.resources,
                 money: new CapitalistMoneyResourceManager(),
             },
-            companies: {},
-            companyDeck: [],
+            companies: [],
             companyMarket: [],
             availableVotingCubes: 25,
             automationTokens: 4,
@@ -74,6 +73,16 @@ export default class CapitalistRole extends AbstractRole<
                 luxury: new ResourceManager({ name: 'freeTradeZone:luxury' }),
             },
         };
+    }
+
+    company = createCompany(this);
+
+    setupBoard() {
+        // todo
+    }
+
+    setupRound(): void {
+        // todo
     }
 
     basicActions = {

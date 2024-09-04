@@ -1,6 +1,6 @@
 pre-commit:
     commands:
-        generate-machine-types:
+        generate-shared-types:
             glob: "shared/*.{ts}"
             run: pnpm run generate:shared-types
             stage_fixed: true
@@ -8,3 +8,7 @@ pre-commit:
             glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
             run: pnpm lint --no-error-on-unmatched-pattern --no-warn-ignored --no-color {staged_files}
             stage_fixed: true
+        typecheck:
+            glob: "*.{js,ts,jsx,tsx}"
+            run: pnpm lint:types
+

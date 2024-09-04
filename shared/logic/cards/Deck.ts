@@ -30,6 +30,7 @@ export default class Deck<Cards extends ReadonlyArray<{ id: string }>> {
     }
 
     shuffle() {
+        if (process.env.NODE_ENV === 'test') return; // disable shuffle in tests
         this.order = _.shuffle(this.order);
     }
 

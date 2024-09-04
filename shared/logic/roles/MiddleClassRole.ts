@@ -23,23 +23,22 @@ import {
     createUseHealthcare,
     createUseLuxury,
 } from './commonActions';
-import { createGetPopulation, createIncreaseProsperity } from './commonMethods';
+import { createCompany, createGetPopulation, createIncreaseProsperity } from './commonMethods';
 
 import type Game from '../Game';
 
 interface MiddleClassState extends BaseState {
     prosperity: number;
     availableVotingCubes: number;
-    workers: Record<CompanyWorker['id'], CompanyWorker>;
+    workers: CompanyWorker[];
     availableWorkers: Record<CompanyWorkerType, number>;
     producedResources: Record<TradeableResource, number>;
     prices: Record<TradeableResource, number>;
     storage: Partial<Record<TradeableResource, boolean>>;
     /** built companies */
-    companies: Record<Company['id'], Company>;
+    companies: Company[];
     /** which companies are available to purchase */
-    companyMarket: string[];
-    companyDeck: string[];
+    companyMarket: Company['id'][];
 }
 
 export default class MiddleClassRole extends AbstractRole<
@@ -54,8 +53,7 @@ export default class MiddleClassRole extends AbstractRole<
         this.state = {
             ...this.createBaseState(),
             prosperity: 0,
-            companies: {},
-            companyDeck: [],
+            companies: [],
             companyMarket: [],
             producedResources: {
                 food: 0,
@@ -81,6 +79,16 @@ export default class MiddleClassRole extends AbstractRole<
             },
             storage: {},
         };
+    }
+
+    company = createCompany(this);
+
+    setupBoard() {
+        // todo
+    }
+
+    setupRound(): void {
+        // todo
     }
 
     increaseProsperity = createIncreaseProsperity(this);
