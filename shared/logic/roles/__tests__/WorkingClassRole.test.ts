@@ -18,7 +18,7 @@ let game: Game;
 
 describe('countOpenWorkerSlots', () => {
     beforeEach(async () => {
-        game = await initGame(['workingClass', 'capitalist'], { companyDecks: 'empty' });
+        game = await initGame(undefined, { companyDecks: 'empty' });
         wc = game.state.roles.workingClass;
     });
 

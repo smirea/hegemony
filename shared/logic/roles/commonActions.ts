@@ -351,11 +351,11 @@ export function createSellCompany(role: MiddleClassRole | CapitalistRole) {
             condition: () => [['hasCompany', role.state.companies.length > 0]],
             run(companyId) {
                 const company = role.company(companyId);
-                company.workers = [];
                 for (const workerId of company.workers) {
                     const { worker } = role.game.getWorkerById(workerId);
                     worker.company = null;
                 }
+                company.workers = [];
                 role.state.resources.money.add(role.game.getCompanyDefinition(companyId).cost);
                 if (company.automationToken) {
                     ++(role as CapitalistRole).state.automationTokens;

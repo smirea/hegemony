@@ -55,6 +55,7 @@ export function createGameUtils() {
         for (let i = 0; i < count; ++i) {
             const worker = createTestWorker({ ...diff, role });
             game.state.roles[role].state.workers.push(worker);
+            result.push(worker.id);
         }
         return result;
     };
@@ -171,7 +172,7 @@ export function createGameUtils() {
                         cost: 20,
                         [ResourceEnumSchema.enum.food]: 3,
                         [ResourceEnumSchema.enum.luxury]: 4,
-                        tariffs: [5, 10],
+                        tariffs: [10, 5],
                     },
                 ] satisfies BusinessDealCard[]
             ).reverse(),

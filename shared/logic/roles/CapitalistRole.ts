@@ -161,13 +161,13 @@ export default class CapitalistRole extends AbstractRole<
         /** pay 30¥ → gain 3🟣 */
         lobby: action({
             condition: () => [
-                ['hasVotingCubes', this.state.availableVotingCubes > 0],
+                ['hasInfluence', this.game.state.board.availableInfluence > 0],
                 ['hasMoney', this.state.resources.money.value >= 30],
             ],
             run: () => {
                 const diff = Math.min(3, this.game.state.board.availableInfluence);
                 this.state.resources.money.remove(30);
-                this.state.availableVotingCubes += diff;
+                this.state.resources.influence.add(diff);
                 this.game.state.board.availableInfluence -= diff;
             },
         }),
@@ -181,6 +181,7 @@ export default class CapitalistRole extends AbstractRole<
         /** give 5¥ to a class → commit */
         giveBonus: action({
             playerInputSchema: CompanyIdSchema,
+            condition: () => [['hasMoney', this.state.resources.money.value >= 5]],
             run: companyId => {
                 const { company } = this.game.getCompanyById(companyId);
                 let targetRole: z.infer<typeof RoleNameSchema> | null = null;

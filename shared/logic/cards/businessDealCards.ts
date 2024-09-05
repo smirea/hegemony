@@ -5,7 +5,7 @@ export interface BusinessDealCard {
     cost: number;
     [ResourceEnum.food]?: number;
     [ResourceEnum.luxury]?: number;
-    tariffs: [number, number];
+    tariffs: [A: number, B: number];
 }
 
 const businessDealCards: BusinessDealCard[] = [
