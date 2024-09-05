@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import type { Company } from '../types';
+import type { Company, CompanyWorker } from '../types';
 import type WorkingClassRole from './WorkingClassRole';
 import type MiddleClassRole from './MiddleClassRole';
 import type CapitalistRole from './CapitalistRole';
@@ -26,5 +26,16 @@ export function createCompany(role: MiddleClassRole | CapitalistRole | StateRole
         const company = role.state.companies.find(c => c.id === companyId);
         if (!company && !safe) throw new Error(`${role.id}: companyId="${companyId}" not found`);
         return company as any;
+    };
+}
+
+export function createWorker(role: WorkingClassRole | MiddleClassRole) {
+    return <Safe extends boolean = false>(
+        workerId: CompanyWorker['id'],
+        { safe }: { safe?: Safe } = {},
+    ): Safe extends true ? CompanyWorker | undefined : CompanyWorker => {
+        const worker = role.state.workers.find(w => w.id === workerId);
+        if (!worker && !safe) throw new Error(`${role.id}: workerId="${workerId}" not found`);
+        return worker as any;
     };
 }

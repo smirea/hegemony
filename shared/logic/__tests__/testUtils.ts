@@ -2,9 +2,18 @@ import { vi } from 'vitest';
 import _ from 'lodash';
 
 import Game, { type GameConfigInput } from '../Game';
-import { type CompanyCard, type CompanyWorker, type Player, type RoleName } from '../types';
+import {
+    ResourceEnumSchema,
+    RoleNameSchema,
+    type CompanyCard,
+    type CompanyWorker,
+    type Player,
+    type RoleName,
+} from '../types';
 import { type ActionEventName, type PlayerInput } from '../types.generated';
 import Deck from '../cards/Deck';
+import { makeForeignMarketCard } from '../cards/foreignMarketCards';
+import { type BusinessDealCard } from '../cards/businessDealCards';
 
 type Input<T extends keyof PlayerInput> = { type: T; data: PlayerInput[T] };
 
@@ -40,6 +49,22 @@ export function createGameUtils() {
     const findAction = (type: ActionEventName, n = 0) =>
         game.state.actionQueue.filter(a => a.type === type).at(n)!;
 
+    const addWorkers = (count = 1, diff: Partial<CompanyWorker> = {}) => {
+        const result: CompanyWorker['id'][] = [];
+        const role = diff.role ?? RoleNameSchema.enum.workingClass;
+        for (let i = 0; i < count; ++i) {
+            const worker = createTestWorker({ ...diff, role });
+            game.state.roles[role].state.workers.push(worker);
+        }
+        return result;
+    };
+
+    const eachWorker = (ids: CompanyWorker['id'][], fn: (worker: CompanyWorker) => void) => {
+        for (const id of ids) {
+            fn(game.getWorkerById(id).worker);
+        }
+    };
+
     const initGame = async (
         roles: RoleName[] = ['workingClass', 'capitalist', 'middleClass', 'state'],
         {
@@ -69,19 +94,105 @@ export function createGameUtils() {
             ...config,
         });
 
+        for (const role of Object.values(game.state.roles)) {
+            role.state.resources.money.remove(role.state.resources.money.value);
+            role.state.resources.food.remove(role.state.resources.food.value);
+            role.state.resources.healthcare.remove(role.state.resources.healthcare.value);
+            role.state.resources.education.remove(role.state.resources.education.value);
+            role.state.resources.luxury.remove(role.state.resources.luxury.value);
+            role.state.resources.influence.remove(role.state.resources.influence.value);
+        }
+
+        game.state.board.policies = {
+            education: 0,
+            fiscalPolicy: 0,
+            foreignTrade: 0,
+            healthcare: 0,
+            laborMarket: 0,
+            taxation: 0,
+            immigration: 0,
+        };
+
+        game.state.roles.workingClass.state.availableWorkers = {
+            healthcare: 10,
+            education: 10,
+            influence: 10,
+            food: 10,
+            luxury: 10,
+            unskilled: 10,
+        };
+        game.state.roles.middleClass.state.availableWorkers = {
+            healthcare: 10,
+            education: 10,
+            influence: 10,
+            food: 10,
+            luxury: 10,
+            unskilled: 10,
+        };
+
+        game.state.roles.middleClass.state.priceLevels = {
+            education: 0,
+            healthcare: 0,
+            food: 0,
+            luxury: 0,
+        };
+        game.state.roles.capitalist.state.priceLevels = {
+            education: 0,
+            healthcare: 0,
+            food: 0,
+            luxury: 0,
+        };
+        game.state.board.decks.foreignMarketCards = new Deck(
+            'test:foreign-market',
+            [
+                makeForeignMarketCard(
+                    'f1',
+                    [1, 1, 5, 10],
+                    [1, 1, 5, 10],
+                    [1, 1, 5, 10],
+                    [1, 1, 5, 10],
+                ),
+                makeForeignMarketCard('f2', [1, 1, 2, 2], [1, 1, 2, 2], [1, 1, 2, 2], [1, 1, 2, 2]),
+            ].reverse(),
+        );
+        game.state.board.decks.businessDealCards = new Deck(
+            'test:business-deal',
+            (
+                [
+                    {
+                        id: 'test-1',
+                        cost: 10,
+                        [ResourceEnumSchema.enum.food]: 1,
+                        [ResourceEnumSchema.enum.luxury]: 2,
+                        tariffs: [2, 1],
+                    },
+                    {
+                        id: 'test-2',
+                        cost: 20,
+                        [ResourceEnumSchema.enum.food]: 3,
+                        [ResourceEnumSchema.enum.luxury]: 4,
+                        tariffs: [5, 10],
+                    },
+                ] satisfies BusinessDealCard[]
+            ).reverse(),
+        );
+
         if (companyDecks === 'empty') {
             game.state.roles.middleClass.state.companyDeck = new Deck(
                 'test:middleClass companies',
                 [],
             );
             game.state.roles.middleClass.setupBoard = _.noop;
+            game.state.roles.middleClass.setupRound = _.noop;
             game.state.roles.capitalist.state.companyDeck = new Deck(
                 'test:capitalist companies',
                 [],
             );
             game.state.roles.capitalist.setupBoard = _.noop;
+            game.state.roles.capitalist.setupRound = _.noop;
             game.state.roles.state.state.companyDeck = new Deck('test:stateClass companies', []);
             game.state.roles.state.setupBoard = _.noop;
+            game.state.roles.state.setupRound = _.noop;
         }
 
         if (companyDecks === 'mock') {
@@ -98,71 +209,68 @@ export function createGameUtils() {
                 },
             };
 
-            if (game.state.roles.middleClass) {
-                game.state.roles.middleClass.state.companyDeck = testDecks.middleClassCompanies;
-                game.state.roles.middleClass.setupBoard = () => {
-                    const m1 = decks.middleClassCompanies.draw();
-                    const m2 = decks.middleClassCompanies.draw();
-                    game.state.roles.middleClass.state.companies = [
-                        {
-                            id: m1.id,
-                            workers: [],
-                            wages: 'l1',
-                        },
-                        {
-                            id: m2.id,
-                            workers: [],
-                            wages: 'l1',
-                        },
-                    ];
-                };
-            }
+            game.state.roles.middleClass.state.companyDeck = testDecks.middleClassCompanies;
+            game.state.roles.middleClass.setupBoard = () => {
+                const m1 = decks.middleClassCompanies.draw();
+                const m2 = decks.middleClassCompanies.draw();
+                game.state.roles.middleClass.state.companies = [
+                    {
+                        id: m1.id,
+                        workers: [],
+                        wages: 'l1',
+                    },
+                    {
+                        id: m2.id,
+                        workers: [],
+                        wages: 'l1',
+                    },
+                ];
+            };
 
-            if (game.state.roles.capitalist) {
-                game.state.roles.capitalist.state.companyDeck = testDecks.capitalistCompanies;
-                game.state.roles.capitalist.setupBoard = () => {
-                    const c1 = decks.capitalistCompanies.draw();
-                    const c2 = decks.capitalistCompanies.draw();
-                    game.state.roles.capitalist.state.companies = [
-                        {
-                            id: c1.id,
-                            workers: [],
-                            wages: 'l1',
-                        },
-                        {
-                            id: c2.id,
-                            workers: [],
-                            wages: 'l1',
-                        },
-                    ];
-                };
-            }
+            game.state.roles.capitalist.state.companyDeck = testDecks.capitalistCompanies;
+            game.state.roles.capitalist.setupBoard = () => {
+                const c1 = decks.capitalistCompanies.draw();
+                const c2 = decks.capitalistCompanies.draw();
+                game.state.roles.capitalist.state.companies = [
+                    {
+                        id: c1.id,
+                        workers: [],
+                        wages: 'l1',
+                    },
+                    {
+                        id: c2.id,
+                        workers: [],
+                        wages: 'l1',
+                    },
+                ];
+            };
 
-            if (game.state.roles.state) {
-                game.state.roles.state.state.companyDeck = testDecks.stateClassCompanies;
-                game.state.roles.state.setupBoard = () => {
-                    const s1 = decks.stateClassCompanies.draw();
-                    const s2 = decks.stateClassCompanies.draw();
-                    game.state.roles.state.state.companies = [
-                        {
-                            id: s1.id,
-                            workers: [],
-                            wages: 'l1',
-                        },
-                        {
-                            id: s2.id,
-                            workers: [],
-                            wages: 'l1',
-                        },
-                    ];
-                };
-            }
+            game.state.roles.state.state.companyDeck = testDecks.stateClassCompanies;
+            game.state.roles.state.setupBoard = () => {
+                const s1 = decks.stateClassCompanies.draw();
+                const s2 = decks.stateClassCompanies.draw();
+                game.state.roles.state.state.companies = [
+                    {
+                        id: s1.id,
+                        workers: [],
+                        wages: 'l1',
+                    },
+                    {
+                        id: s2.id,
+                        workers: [],
+                        wages: 'l1',
+                    },
+                ];
+            };
         }
 
         if (setup) {
             const setupFn = game.setupBoard.bind(game);
             game.setupBoard = _.once(setupFn);
             game.setupBoard();
+            const roundStartFn = game.setupRound.bind(game);
+            game.setupRound = _.once(roundStartFn);
+            game.setupRound();
         }
 
         return game;
@@ -178,6 +286,8 @@ export function createGameUtils() {
         getCurrentAction,
         findAction,
         initGame,
+        addWorkers,
+        eachWorker,
     };
 }
 
@@ -202,7 +312,9 @@ function createTestDecks() {
                     { roles: ['workingClass'], type: 'unskilled' },
                 ],
             }),
-            createTestCompanyCard(),
+            createTestCompanyCard({ id: 'm-market-1' }),
+            createTestCompanyCard({ id: 'm-market-2' }),
+            createTestCompanyCard({ id: 'm-market-3' }),
         ].reverse(),
     );
     const capitalistCompanies = new Deck(
@@ -216,7 +328,10 @@ function createTestDecks() {
                 extraProduction: 0,
                 fullyAutomated: true,
             }),
-            createTestCompanyCard(),
+            createTestCompanyCard({ id: 'c-market-1' }),
+            createTestCompanyCard({ id: 'c-market-2' }),
+            createTestCompanyCard({ id: 'c-market-3' }),
+            createTestCompanyCard({ id: 'c-market-4' }),
         ].reverse(),
     );
     const stateClassCompanies = new Deck(

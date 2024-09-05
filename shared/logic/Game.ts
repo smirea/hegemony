@@ -83,7 +83,7 @@ export default class Game {
             settings: {},
             round: 0,
             turn: 0,
-            currentRoleName: RoleEnum.workingClass,
+            currentRoleName: null,
             board: {
                 foreignMarketCard: null as any,
                 businessDealCards: [],
@@ -156,7 +156,9 @@ export default class Game {
     }
 
     get foreignMarketCard() {
-        return this.state.board.decks.foreignMarketCards.seek(this.state.board.foreignMarketCard);
+        return this.state.board.decks.foreignMarketCards.getOriginalCard(
+            this.state.board.foreignMarketCard,
+        );
     }
 
     createNext(context: RunContextNoRole) {
@@ -202,12 +204,35 @@ export default class Game {
             target.actions?.[key] || target.freeActions?.[key] || target.basicActions?.[key];
         if (!action) throw new Error(`unknown action event key "${targetName}": "${key}"`);
 
+        const actionContext: RunContext<RoleName> = {
+            next: null as any, // added below
+            queueIndex: this.state.currentActionIndex + 1,
+            currentRole: this.state.currentRoleName
+                ? this.state.roles[this.state.currentRoleName]
+                : (null as any),
+        };
+        actionContext.next = this.createNext(actionContext);
+
+        if (action.condition) {
+            const errors = action
+                // @ts-ignore
+                .condition(actionContext, event.data)
+                .filter((c: any) => !c[1])
+                .map((c: any) => c[0]);
+            if (errors.length > 0) {
+                throw new Error(`Event(${event.type}) condition not met: ${errors.join(', ')}`);
+            }
+        }
+
         if (action.playerInputSchema) {
             const result = await this.requestPlayerInput(event.type);
             try {
                 action.playerInputSchema.parse(result);
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
             } catch (e) {
-                throw new Error(`Event(${event.type}) player input validation failed: ${e}`);
+                throw new Error(
+                    `Event(${event.type}) player input validation failed, does not match schema`,
+                );
             }
             if (action.validateInput) {
                 const errors = action
@@ -229,26 +254,6 @@ export default class Game {
                 event.type.padEnd(40),
                 event.data,
             );
-        }
-
-        const actionContext: RunContext<RoleName> = {
-            next: null as any, // added below
-            queueIndex: this.state.currentActionIndex + 1,
-            currentRole: this.state.currentRoleName
-                ? this.state.roles[this.state.currentRoleName]
-                : (null as any),
-        };
-        actionContext.next = this.createNext(actionContext);
-
-        if (action.condition) {
-            const errors = action
-                // @ts-ignore
-                .condition(actionContext, event.data)
-                .filter((c: any) => !c[1])
-                .map((c: any) => c[0]);
-            if (errors.length > 0) {
-                throw new Error(`Event(${event.type}) condition not met: ${errors.join(', ')}`);
-            }
         }
 
         try {
@@ -292,19 +297,20 @@ export default class Game {
         return result;
     }
 
+    /** @note prefer using WorkingClassRole.worker() or MiddleClassRole.worker() */
     getWorkerById(id: CompanyWorker['id']): {
         worker: CompanyWorker;
         roleName: RoleNameWorkingMiddleClass;
     } {
-        const roleName = this.state.roles.workingClass.state.workers.find(w => w.id === id)
+        const roleName = this.state.roles.workingClass.worker(id, { safe: true })
             ? RoleEnum.workingClass
-            : this.state.roles.middleClass.state.workers.find(w => w.id === id)
+            : this.state.roles.middleClass.worker(id, { safe: true })
               ? RoleEnum.middleClass
               : null;
 
         if (!roleName) throw new Error(`workerId="${id}" not found`);
 
-        return { roleName, worker: this.state.roles[roleName].state.workers[id] };
+        return { roleName, worker: this.state.roles[roleName].worker(id) };
     }
 
     getCompanyById(id: Company['id']): { company: Company; roleName: RoleNameNoWorkingClass } {
@@ -327,11 +333,11 @@ export default class Game {
         payTarriff ??= true;
         const tarriff = (
             [
-                { [ResourceEnum.food]: 10, [ResourceEnum.luxury]: 6 },
-                { [ResourceEnum.food]: 5, [ResourceEnum.luxury]: 3 },
                 { [ResourceEnum.food]: 0, [ResourceEnum.luxury]: 0 },
+                { [ResourceEnum.food]: 5, [ResourceEnum.luxury]: 3 },
+                { [ResourceEnum.food]: 10, [ResourceEnum.luxury]: 6 },
             ] as const
-        )[this.state.board.policies.foreignTrade][resource];
+        )[this.getPolicy('foreignTrade')][resource];
         const base = resource === ResourceEnum.food ? 10 : 6;
         const total = (base + tarriff) * count;
         this.state.roles[roleName].state.resources[resource].add(count);
@@ -367,6 +373,8 @@ export default class Game {
                 const { companyId } = payload;
                 const { company } = this.getCompanyById(companyId);
                 company.workers.push(workerId);
+                worker.company = companyId;
+                worker.committed = true;
             }
         }
 
@@ -395,7 +403,30 @@ export default class Game {
             deck.shuffle();
         }
         for (const role of Object.values(this.state.roles)) {
-            role.setupBoard();
+            role.active = !!this.state.players.find(p => p.role === role.id);
+            if (role.active) role.setupBoard();
+        }
+    }
+
+    setupRound() {
+        if (this.debug) console.log(chalk.green.bold('——— round:'), this.state.round);
+        this.state.currentRoleName = null;
+        ++this.state.round;
+        this.state.turn = 0;
+        const { foreignMarketCards, businessDealCards } = this.state.board.decks;
+        this.state.board.foreignMarketCard = foreignMarketCards.draw().id;
+        if (this.ifPolicy('6A')) {
+            this.state.board.businessDealCards = [
+                businessDealCards.draw().id,
+                businessDealCards.draw().id,
+            ];
+        } else if (this.ifPolicy('6B')) {
+            this.state.board.businessDealCards = [businessDealCards.draw().id];
+        } else {
+            this.state.board.businessDealCards = [];
+        }
+        for (const role of Object.values(this.state.roles)) {
+            if (role.active) role.setupRound();
         }
     }
 
@@ -408,25 +439,7 @@ export default class Game {
         }),
         roundStart: action({
             run: () => {
-                this.state.currentRoleName = null;
-                ++this.state.round;
-                this.state.turn = 0;
-                const { foreignMarketCards, businessDealCards } = this.state.board.decks;
-                this.state.board.foreignMarketCard = foreignMarketCards.draw().id;
-                if (this.ifPolicy('6A')) {
-                    this.state.board.businessDealCards = [
-                        businessDealCards.draw().id,
-                        businessDealCards.draw().id,
-                    ];
-                } else if (this.ifPolicy('6B')) {
-                    this.state.board.businessDealCards = [businessDealCards.draw().id];
-                } else {
-                    this.state.board.businessDealCards = [];
-                }
-                for (const role of Object.values(this.state.roles)) {
-                    role.setupRound();
-                }
-                if (this.debug) console.log(chalk.green.bold('——— round:'), this.state.round);
+                this.setupRound();
                 this.next('game:roleNext');
             },
         }),

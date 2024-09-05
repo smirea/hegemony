@@ -9,21 +9,21 @@ const { tick, nextAndTick, addInput, requestPlayerInput, findAction, initGame } 
 
 let game: Game;
 
-beforeEach(async () => {
-    game = await initGame(['capitalist', 'workingClass']);
-});
-
 describe('game:start', () => {
+    beforeEach(async () => {
+        game = await initGame(['capitalist', 'workingClass'], { setup: false });
+    });
     test('sorts players by role', async () => {
         await nextAndTick('game:start');
         expect(game.state.players[0].role).toBe(RoleEnum.workingClass);
         expect(game.state.players[1].role).toBe(RoleEnum.capitalist);
-        expect(game.state.currentRoleName).toBe(RoleEnum.workingClass);
+        expect(game.state.currentRoleName).toBe(null);
     });
 });
 
 describe('started game', () => {
     beforeEach(async () => {
+        game = await initGame(['capitalist', 'workingClass']);
         await nextAndTick('game:start');
     });
 

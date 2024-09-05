@@ -21,6 +21,10 @@ export default class Deck<Cards extends ReadonlyArray<{ id: string }>> {
         this.allCards = new Map(cards.map(c => [c.id, c]));
     }
 
+    get size() {
+        return this.order.length;
+    }
+
     getOriginalCard<Safe extends boolean = false>(
         id: Cards[number]['id'],
         { safe }: { safe?: Safe } = {},

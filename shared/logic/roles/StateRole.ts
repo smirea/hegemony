@@ -4,14 +4,16 @@ import {
     type Company,
     type CompanyCard,
     type Resource,
+    type ResourceEnum,
     RoleEnum,
     type RoleNameNoState,
     RoleNameNoStateSchema,
     RoleNameSchema,
+    type TradeableResource,
 } from '../types';
 import action from '../utils/action';
 import AbstractRole, { type BaseState } from './AbstractRole';
-import { createPayLoan, createProposeBill, createSkip } from './commonActions';
+import { createAdjustWages, createPayLoan, createProposeBill, createSkip } from './commonActions';
 import { createCompany } from './commonMethods';
 import Deck from '../cards/Deck';
 import { stateCompanies } from '../cards/companyCards';
@@ -69,6 +71,21 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
         // todo
     }
 
+    getPrice(resource: TradeableResource | typeof ResourceEnum.influence) {
+        switch (resource) {
+            case 'food':
+                return 12;
+            case 'healthcare':
+                return [0, 5, 10][this.game.getPolicy('healthcare')];
+            case 'education':
+                return [0, 5, 10][this.game.getPolicy('education')];
+            case 'luxury':
+                return 8;
+            case 'influence':
+                return 10;
+        }
+    }
+
     getBenefits(id: RoleNameNoState) {
         return this.state.benefits[id] || [];
     }
@@ -77,12 +94,12 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
         const role = this.game.state.roles[id];
         for (const benefit of this.getBenefits(id)) {
             if (benefit.type === 'resource') {
-                this.state.resources[benefit.resource].add(benefit.amount);
+                role.state.resources[benefit.resource].add(benefit.amount);
             } else if (benefit.type === 'voting-cube') {
-                role.state.availableVotingCubes -= benefit.amount;
                 this.game.state.board.votingCubeBag[id] += benefit.amount;
             }
         }
+        this.state.benefits[id] = [];
         this.state.score += 1;
     }
 
@@ -135,5 +152,6 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
     freeActions = {
         ...createSkip(this),
         ...createPayLoan(this),
+        ...createAdjustWages(this),
     };
 }

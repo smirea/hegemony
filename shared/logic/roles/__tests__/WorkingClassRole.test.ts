@@ -112,7 +112,7 @@ describe('countOpenWorkerSlots', () => {
 
 describe('basicActions', () => {
     beforeEach(async () => {
-        game = await initGame(['workingClass', 'capitalist']);
+        game = await initGame();
         wc = game.state.roles.workingClass;
     });
 

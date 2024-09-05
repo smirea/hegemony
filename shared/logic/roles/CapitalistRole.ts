@@ -16,11 +16,13 @@ import action from '../utils/action';
 import ResourceManager, { CapitalistMoneyResourceManager } from '../utils/ResourceManager';
 import AbstractRole, { type BaseState } from './AbstractRole';
 import {
+    createAdjustPrices,
+    createAdjustWages,
     createBuildCompany,
     createPayLoan,
     createProposeBill,
     createSellCompany,
-    createSellForeignMarketCard,
+    createSellToForeignMarket,
     createSkip,
 } from './commonActions';
 import { createCompany } from './commonMethods';
@@ -31,7 +33,7 @@ import type Game from '../Game';
 
 interface CapitalistState extends BaseState<CapitalistMoneyResourceManager> {
     availableVotingCubes: number;
-    prices: Record<TradeableResource, number>;
+    priceLevels: Record<TradeableResource, 0 | 1 | 2>;
     storage: Partial<Record<TradeableResource, boolean>>;
     companyDeck: Deck<CompanyCard[]>;
     /** built companies */
@@ -66,7 +68,7 @@ export default class CapitalistRole extends AbstractRole<
             companyMarket: [],
             availableVotingCubes: 25,
             automationTokens: 4,
-            prices: {
+            priceLevels: {
                 food: 0,
                 healthcare: 0,
                 education: 0,
@@ -87,14 +89,26 @@ export default class CapitalistRole extends AbstractRole<
     }
 
     setupRound(): void {
-        // todo
+        for (let i = this.state.companyMarket.length; i < 4; ++i) {
+            const card = this.state.companyDeck.draw();
+            this.state.companyMarket.push(card.id);
+        }
+    }
+
+    getPrice(resource: TradeableResource) {
+        return {
+            food: [9, 12, 15],
+            healthcare: [5, 8, 10],
+            education: [5, 8, 10],
+            luxury: [5, 8, 10],
+        }[resource][this.state.priceLevels[resource]];
     }
 
     basicActions = {
         ...createProposeBill(this),
         ...createBuildCompany(this),
         ...createSellCompany(this),
-        ...createSellForeignMarketCard(this),
+        ...createSellToForeignMarket(this),
         /** pay ¥, goods to storage (tariff ¥) and/or FTZ → discard */
         makeBusinessDeal: action({
             playerInputSchema: z.object({
@@ -160,6 +174,8 @@ export default class CapitalistRole extends AbstractRole<
     freeActions = {
         ...createSkip(this),
         ...createPayLoan(this),
+        ...createAdjustPrices(this),
+        ...createAdjustWages(this),
         /** give 5¥ to a class → commit */
         giveBonus: action({
             playerInputSchema: CompanyIdSchema,

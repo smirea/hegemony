@@ -19,6 +19,8 @@ export interface BaseState<MoneyManager extends MoneyResourceManager = MoneyReso
 export default abstract class AbstractRole<Id extends RoleName, State extends BaseState> {
     public abstract readonly id: Id;
     public abstract state: State;
+    /** whether this role is in the game (player or automata) */
+    public active = false;
 
     constructor(public readonly game: Game) {}
 

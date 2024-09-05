@@ -221,6 +221,14 @@ export const TradeableResourceSchema = ResourceEnumSchema.extract([
     ResourceEnumSchema.enum.luxury,
 ]);
 
+export const TradeableResourceAndInfluenceSchema = ResourceEnumSchema.extract([
+    ResourceEnumSchema.enum.food,
+    ResourceEnumSchema.enum.healthcare,
+    ResourceEnumSchema.enum.education,
+    ResourceEnumSchema.enum.luxury,
+    ResourceEnumSchema.enum.influence,
+]);
+
 export const AssignWorkersSchema = z.array(
     z.union([
         z.object({

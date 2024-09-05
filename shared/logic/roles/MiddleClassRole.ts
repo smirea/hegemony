@@ -11,20 +11,27 @@ import {
 import action from '../utils/action';
 import AbstractRole, { type BaseState } from './AbstractRole';
 import {
+    createAdjustPrices,
+    createAdjustWages,
     createApplyPoliticalPressure,
     createBuildCompany,
     createPayLoan,
     createProposeBill,
     createReceiveBenefits,
     createSellCompany,
-    createSellForeignMarketCard,
+    createSellToForeignMarket,
     createSkip,
     createSwapWorkers,
     createUseEducation,
     createUseHealthcare,
     createUseLuxury,
 } from './commonActions';
-import { createCompany, createGetPopulation, createIncreaseProsperity } from './commonMethods';
+import {
+    createCompany,
+    createGetPopulation,
+    createIncreaseProsperity,
+    createWorker,
+} from './commonMethods';
 import Deck from '../cards/Deck';
 import { middleClassCompanies } from '../cards/companyCards';
 
@@ -36,7 +43,7 @@ interface MiddleClassState extends BaseState {
     workers: CompanyWorker[];
     availableWorkers: Record<CompanyWorkerType, number>;
     producedResources: Record<TradeableResource, number>;
-    prices: Record<TradeableResource, number>;
+    priceLevels: Record<TradeableResource, 0 | 1 | 2>;
     storage: Partial<Record<TradeableResource, boolean>>;
     companyDeck: Deck<CompanyCard[]>;
     /** built companies */
@@ -76,7 +83,7 @@ export default class MiddleClassRole extends AbstractRole<
                 luxury: 0,
                 unskilled: 0,
             },
-            prices: {
+            priceLevels: {
                 food: 0,
                 healthcare: 0,
                 education: 0,
@@ -87,23 +94,36 @@ export default class MiddleClassRole extends AbstractRole<
     }
 
     company = createCompany(this);
+    worker = createWorker(this);
+    increaseProsperity = createIncreaseProsperity(this);
+    getPopulation = createGetPopulation(this);
 
     setupBoard() {
         // todo
     }
 
     setupRound(): void {
-        // todo
+        for (let i = this.state.companyMarket.length; i < 3; ++i) {
+            const card = this.state.companyDeck.draw();
+            this.state.companyMarket.push(card.id);
+        }
     }
 
-    increaseProsperity = createIncreaseProsperity(this);
-    getPopulation = createGetPopulation(this);
+    getPrice(resource: TradeableResource) {
+        return {
+            food: [9, 12, 15],
+            healthcare: [5, 8, 10],
+            education: [5, 8, 10],
+            luxury: [5, 8, 10],
+        }[resource][this.state.priceLevels[resource]];
+    }
+
     basicActions = {
         ...createProposeBill(this),
         ...createApplyPoliticalPressure(this),
         ...createBuildCompany(this),
         ...createSellCompany(this),
-        ...createSellForeignMarketCard(this),
+        ...createSellToForeignMarket(this),
         /** co with non-committed WC (+ non-committed WC) workers → commit + produce (+ pay WC) */
         extraShift: action({
             playerInputSchema: CompanyIdSchema,
@@ -143,5 +163,7 @@ export default class MiddleClassRole extends AbstractRole<
         ...createUseLuxury(this),
         ...createSwapWorkers(this),
         ...createReceiveBenefits(this),
+        ...createAdjustPrices(this),
+        ...createAdjustWages(this),
     };
 }

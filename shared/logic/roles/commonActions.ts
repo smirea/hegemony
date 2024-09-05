@@ -13,6 +13,7 @@ import {
     PolicyValueSchema,
     ResourceEnumSchema,
     RoleEnum,
+    TradeableResourceAndInfluenceSchema,
     TradeableResourceSchema,
     WageIdSchema,
     WorkerTypeEnum,
@@ -45,7 +46,6 @@ export function createProposeBill(
             validateInput: ({ policy, value }) => [
                 ['notProposed', !role.game.state.board.policyProposals[policy]],
                 ['isDifferent', role.game.state.board.policies[policy] !== value],
-                ['isValid', value === 0 || value === 1 || value === 2],
             ],
             run: ({ policy, value }) => {
                 role.game.state.board.policyProposals[policy] = {
@@ -97,12 +97,12 @@ export function createUseHealthcare(role: WorkingClassRole | MiddleClassRole) {
                 // todo: edge-case when there are no more unskilled workers
                 role.state.availableWorkers.unskilled -= 1;
                 const id = ++role.game.state.nextWorkerId;
-                role.state.workers[id] = {
+                role.state.workers.push({
                     id,
                     role: role.id,
                     type: WorkerTypeEnum.unskilled,
                     company: null,
-                };
+                });
             },
         }),
     };
@@ -113,16 +113,22 @@ export function createUseEducation(role: WorkingClassRole | MiddleClassRole) {
     return {
         useEducation: action({
             playerInputSchema: z.object({
-                workerId: z.number(), // todo CompanyWorker['id']
+                workerId: CompanyWorkerIdSchema,
                 type: CompanyWorkerTypeSchema,
             }),
             condition: () => [
                 ['hasEducation', role.state.resources.education.value >= role.getPopulation()],
             ],
+            validateInput: ({ type }) => [
+                ['hasAvailableWorkers', role.state.availableWorkers[type] > 0],
+            ],
             run: ({ workerId, type }) => {
                 role.increaseProsperity();
                 role.state.resources.education.remove(role.getPopulation());
-                role.state.workers[workerId].type = type;
+                role.worker(workerId).type = type;
+                // @todo: edge-case when there are no more skilled workers
+                --role.state.availableWorkers[type];
+                ++role.state.availableWorkers.unskilled;
             },
         }),
     };
@@ -149,7 +155,7 @@ export function createAdjustPrices(role: MiddleClassRole | CapitalistRole) {
         adjustPrices: action({
             playerInputSchema: z.record(IndustrySchema, PolicyValueSchema),
             run: prices => {
-                Object.assign(role.state.prices, prices);
+                Object.assign(role.state.priceLevels, prices);
             },
         }),
     };
@@ -165,6 +171,7 @@ export function createAdjustWages(role: MiddleClassRole | CapitalistRole | State
                     wages: WageIdSchema,
                 }),
             ),
+            condition: () => [['minWage', role.game.getPolicy('laborMarket') < 2]],
             run: toAdjust => {
                 for (const { companyId, wages } of toAdjust) {
                     const company = role.company(companyId);
@@ -195,11 +202,11 @@ export function createSwapWorkers(role: WorkingClassRole | MiddleClassRole) {
             ],
             run: tuples => {
                 for (const [id1, id2] of tuples) {
-                    const { company, committed } = role.state.workers[id1];
-                    role.state.workers[id1].company = role.state.workers[id2].company;
-                    role.state.workers[id1].committed = role.state.workers[id2].committed;
-                    role.state.workers[id2].company = company;
-                    role.state.workers[id2].committed = committed;
+                    const { company, committed } = role.worker(id1);
+                    role.worker(id1).company = role.worker(id2).company;
+                    role.worker(id1).committed = role.worker(id2).committed;
+                    role.worker(id2).company = company;
+                    role.worker(id2).committed = committed;
                 }
             },
         }),
@@ -228,7 +235,7 @@ export function createApplyPoliticalPressure(
         applyPoliticalPressure: action({
             condition: () => [['hasCubes', role.state.availableVotingCubes >= 1]],
             run: () => {
-                const toAdd = Math.min(3, role.game.state.board.votingCubeBag[role.id]);
+                const toAdd = Math.min(3, role.state.availableVotingCubes);
                 role.state.availableVotingCubes -= toAdd;
                 role.game.state.board.votingCubeBag[role.id] += toAdd;
             },
@@ -254,7 +261,7 @@ export function createBuyGoodsAndServices(role: WorkingClassRole | MiddleClassRo
         buyGoodsAndServices: action({
             playerInputSchema: z.array(
                 z.object({
-                    resource: TradeableResourceSchema,
+                    resource: TradeableResourceAndInfluenceSchema,
                     count: z.number(),
                     source: BuyGoodsAndServicesSourcesSchema,
                 }),
@@ -262,42 +269,39 @@ export function createBuyGoodsAndServices(role: WorkingClassRole | MiddleClassRo
             run(toBuy) {
                 for (const { resource, count, source } of toBuy) {
                     if (source === 'foreign-market') {
-                        role.game.buyFromForeignMarket(role.id, resource as any, count, {
+                        if (
+                            resource !== ResourceEnumSchema.enum.food &&
+                            resource !== ResourceEnumSchema.enum.luxury
+                        )
+                            throw new Error('only foreign market sells food and luxury');
+                        role.game.buyFromForeignMarket(role.id, resource, count, {
                             payTarriff: true,
                         });
                         continue;
                     }
+
                     const targetRole = role.game.state.roles[source];
                     let total = 0;
-                    if (targetRole.id === 'state') {
-                        const price = (
-                            {
-                                [ResourceEnumSchema.enum.food]: 12,
-                                [ResourceEnumSchema.enum.luxury]: 8,
-                                [ResourceEnumSchema.enum.influence]: 10,
-                                [ResourceEnumSchema.enum.healthcare]: [0, 5, 10][
-                                    role.game.getPolicy('healthcare')
-                                ],
-                                [ResourceEnumSchema.enum.education]: [0, 5, 10][
-                                    role.game.getPolicy('education')
-                                ],
-                            } as const
-                        )[resource];
-                        total = count * price;
+
+                    if (resource === ResourceEnumSchema.enum.influence) {
+                        if (targetRole.id !== RoleEnum.state) {
+                            throw new Error('only the state sells influence');
+                        }
+                        total = count * targetRole.getPrice(resource);
                     } else {
-                        total = count * targetRole.state.prices[resource];
+                        total = count * targetRole.getPrice(resource);
                     }
+
                     role.state.resources.money.remove(total);
+                    role.state.resources[resource].add(count);
                     targetRole.state.resources.money.add(total);
                     targetRole.state.resources[resource].remove(count);
-                    role.state.resources[resource].add(count);
                 }
             },
         }),
     };
 }
 
-/** */
 export function createBuildCompany(role: MiddleClassRole | CapitalistRole) {
     return {
         buildCompany: action({
@@ -310,6 +314,10 @@ export function createBuildCompany(role: MiddleClassRole | CapitalistRole) {
                     'hasSpace',
                     role.state.companies.length < (role.id === RoleEnum.capitalist ? 12 : 8),
                 ],
+                ['hasMarket', role.state.companyMarket.length > 0],
+            ],
+            validateInput: ({ companyId }) => [
+                ['inMarket', role.state.companyMarket.includes(companyId)],
             ],
             run: ({ companyId, workers }) => {
                 role.state.resources.money.remove(role.game.getCompanyDefinition(companyId).cost);
@@ -350,24 +358,22 @@ export function createSellCompany(role: MiddleClassRole | CapitalistRole) {
                 role.state.resources.money.add(role.game.getCompanyDefinition(companyId).cost);
                 if (company.automationToken) {
                     ++(role as CapitalistRole).state.automationTokens;
+                    company.automationToken = false;
                 }
-                role.state.companies.filter(c => c.id !== companyId);
+                role.state.companies = role.state.companies.filter(c => c.id !== companyId);
             },
         }),
     };
 }
 
 /** 1x per transaction (MC = 1x per transaction, State = only from supply) */
-export function createSellForeignMarketCard(role: MiddleClassRole | CapitalistRole | StateRole) {
+export function createSellToForeignMarket(role: MiddleClassRole | CapitalistRole | StateRole) {
     return {
-        sellForeignMarketCard: action({
+        sellToForeignMarket: action({
             playerInputSchema: z.record(
                 TradeableResourceSchema,
                 z.tuple([z.boolean(), z.boolean()]),
             ),
-            condition: () => [
-                ['hasForeignMarketCard', role.game.state.board.foreignMarketCard != null],
-            ],
             run(toSell) {
                 const card = role.game.foreignMarketCard;
                 for (const [resource, [used1, used2]] of objectEntries(toSell)) {
@@ -377,7 +383,7 @@ export function createSellForeignMarketCard(role: MiddleClassRole | CapitalistRo
                         role.state.resources.money.add(money);
                     }
                     if (used2) {
-                        const { money, resources } = card[resource][0];
+                        const { money, resources } = card[resource][1];
                         role.state.resources[resource].remove(resources);
                         role.state.resources.money.add(money);
                     }
