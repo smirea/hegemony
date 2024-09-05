@@ -87,10 +87,14 @@ const quote = (s: any) => `'${s}'`;
 function createActionEventMap() {
     const result: string[] = [];
     for (const { type, typeValue } of todo) {
-        result.push(`${tab1}'${type}': ActionEventFromAction<`);
-        result.push(`${tab1}    '${type}',`);
-        result.push(`${tab1}    ${typeValue}`);
-        result.push(`${tab1}>;`);
+        result.push(
+            splitIfNeeded([
+                `'${type}': ActionEventFromAction<`,
+                `'${type}',`,
+                ' ' + typeValue,
+                '>;',
+            ]),
+        );
     }
     return result;
 }
@@ -99,11 +103,25 @@ function createPlayerInputDataMap() {
     const result: string[] = [];
     for (const { type, action, typeValue } of todo) {
         if (!action.playerInputSchema) continue;
-        result.push(`${tab1}'${type}': z.infer<`);
-        result.push(`${tab2}NonNullable<${typeValue}['playerInputSchema']>`);
-        result.push(`${tab1}>;`);
+        result.push(
+            splitIfNeeded([
+                `'${type}': z.infer<`,
+                `NonNullable<${typeValue}['playerInputSchema']>`,
+                '>;',
+            ]),
+        );
     }
     return result;
 }
+
+const splitIfNeeded = (chunks: string[]) => {
+    const oneLine = chunks.join('');
+    if (oneLine.length <= 96) return tab1 + oneLine;
+    return [
+        tab1 + chunks[0],
+        ...chunks.slice(1, -1).map(c => tab2 + c.trim()),
+        tab1 + chunks[chunks.length - 1],
+    ].join('\n');
+};
 
 init();
