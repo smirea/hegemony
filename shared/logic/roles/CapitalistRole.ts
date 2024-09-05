@@ -18,9 +18,11 @@ import AbstractRole, { type BaseState } from './AbstractRole';
 import {
     createAdjustPrices,
     createAdjustWages,
+    createApplyPoliticalPressure,
     createBuildCompany,
     createPayLoan,
     createProposeBill,
+    createReceiveBenefits,
     createSellCompany,
     createSellToForeignMarket,
     createSkip,
@@ -169,11 +171,11 @@ export default class CapitalistRole extends AbstractRole<
                 this.game.state.board.availableInfluence -= diff;
             },
         }),
+        ...createApplyPoliticalPressure(this),
     };
 
     freeActions = {
         ...createSkip(this),
-        ...createPayLoan(this),
         ...createAdjustPrices(this),
         ...createAdjustWages(this),
         /** give 5¥ to a class → commit */
@@ -204,5 +206,7 @@ export default class CapitalistRole extends AbstractRole<
                 this.state.resources.money.remove(20);
             },
         }),
+        ...createReceiveBenefits(this),
+        ...createPayLoan(this),
     };
 }

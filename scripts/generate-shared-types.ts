@@ -74,12 +74,14 @@ function init() {
         'export type PlayerInput = {',
         ...createPlayerInputDataMap(),
         '};',
+        '',
     ];
 
     fs.writeFileSync(targetFile, content.join('\n'));
 }
 
 const tab1 = '    '.repeat(1);
+const tab2 = '    '.repeat(2);
 const quote = (s: any) => `'${s}'`;
 
 function createActionEventMap() {
@@ -97,7 +99,9 @@ function createPlayerInputDataMap() {
     const result: string[] = [];
     for (const { type, action, typeValue } of todo) {
         if (!action.playerInputSchema) continue;
-        result.push(`${tab1}'${type}': z.infer<NonNullable<${typeValue}['playerInputSchema']>>;`);
+        result.push(`${tab1}'${type}': z.infer<`);
+        result.push(`${tab2}NonNullable<${typeValue}['playerInputSchema']>`);
+        result.push(`${tab1}>;`);
     }
     return result;
 }

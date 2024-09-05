@@ -218,6 +218,7 @@ export function createReceiveBenefits(role: WorkingClassRole | MiddleClassRole |
     return {
         receiveBenefits: action({
             condition: () => [
+                ['only4Players', role.game.state.players.length === 4],
                 ['hasBenefits', role.game.state.roles.state.getBenefits(role.id).length > 0],
             ],
             run: () => {

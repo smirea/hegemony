@@ -13,7 +13,13 @@ import {
 } from '../types';
 import action from '../utils/action';
 import AbstractRole, { type BaseState } from './AbstractRole';
-import { createAdjustWages, createPayLoan, createProposeBill, createSkip } from './commonActions';
+import {
+    createAdjustWages,
+    createPayLoan,
+    createProposeBill,
+    createSellToForeignMarket,
+    createSkip,
+} from './commonActions';
 import { createCompany } from './commonMethods';
 import Deck from '../cards/Deck';
 import { stateCompanies } from '../cards/companyCards';
@@ -116,6 +122,7 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
                 throw new Error('todo');
             },
         }),
+        ...createSellToForeignMarket(this),
         /** 2x personal 🟣 to class → +1 that class's Legitimacy */
         meetWithPartyMps: action({
             playerInputSchema: RoleNameNoStateSchema,
@@ -151,7 +158,7 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
 
     freeActions = {
         ...createSkip(this),
-        ...createPayLoan(this),
         ...createAdjustWages(this),
+        ...createPayLoan(this),
     };
 }

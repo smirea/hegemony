@@ -80,7 +80,6 @@ export default class WorkingClassRole extends AbstractRole<
 
     basicActions = {
         ...createProposeBill(this),
-        ...createApplyPoliticalPressure(this),
         ...createAssignWorkers(this),
         ...createBuyGoodsAndServices(this),
         /** 1-2 tokens → non-committed cos. (L1/L2 wages) → wages ⬆ or no production and +1 🟣 */
@@ -105,16 +104,17 @@ export default class WorkingClassRole extends AbstractRole<
                 this.state.demonstration = true;
             },
         }),
+        ...createApplyPoliticalPressure(this),
     };
 
     freeActions = {
         ...createSkip(this),
-        ...createPayLoan(this),
         ...createUseHealthcare(this),
         ...createUseEducation(this),
         ...createUseLuxury(this),
         ...createSwapWorkers(this),
         ...createReceiveBenefits(this),
+        ...createPayLoan(this),
     };
 
     canDemonstrate() {

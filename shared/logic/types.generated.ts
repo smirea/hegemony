@@ -25,53 +25,58 @@ export const actionEventNameSchema = z.enum([
     'game:roundEnd',
     'game:end',
     'workingClass:proposeBill',
-    'workingClass:applyPoliticalPressure',
     'workingClass:assignWorkers',
     'workingClass:buyGoodsAndServices',
     'workingClass:strike',
     'workingClass:demonstration',
+    'workingClass:applyPoliticalPressure',
     'workingClass:skip',
-    'workingClass:payLoan',
     'workingClass:useHealthcare',
     'workingClass:useEducation',
     'workingClass:useLuxury',
     'workingClass:swapWorkers',
     'workingClass:receiveBenefits',
+    'workingClass:payLoan',
     'middleClass:proposeBill',
-    'middleClass:applyPoliticalPressure',
+    'middleClass:assignWorkers',
     'middleClass:buildCompany',
     'middleClass:sellCompany',
     'middleClass:sellToForeignMarket',
+    'middleClass:buyGoodsAndServices',
     'middleClass:extraShift',
+    'middleClass:applyPoliticalPressure',
     'middleClass:skip',
-    'middleClass:payLoan',
     'middleClass:useHealthcare',
     'middleClass:useEducation',
     'middleClass:useLuxury',
-    'middleClass:swapWorkers',
-    'middleClass:receiveBenefits',
     'middleClass:adjustPrices',
     'middleClass:adjustWages',
+    'middleClass:swapWorkers',
+    'middleClass:receiveBenefits',
+    'middleClass:payLoan',
     'capitalist:proposeBill',
     'capitalist:buildCompany',
     'capitalist:sellCompany',
     'capitalist:sellToForeignMarket',
     'capitalist:makeBusinessDeal',
     'capitalist:lobby',
+    'capitalist:applyPoliticalPressure',
     'capitalist:skip',
-    'capitalist:payLoan',
     'capitalist:adjustPrices',
     'capitalist:adjustWages',
     'capitalist:giveBonus',
     'capitalist:buyStorage',
+    'capitalist:receiveBenefits',
+    'capitalist:payLoan',
     'state:proposeBill',
     'state:eventAction',
+    'state:sellToForeignMarket',
     'state:meetWithPartyMps',
     'state:extraTax',
     'state:campaign',
     'state:skip',
-    'state:payLoan',
     'state:adjustWages',
+    'state:payLoan',
 ] as const);
 
 export type ActionEventMap = {
@@ -87,10 +92,6 @@ export type ActionEventMap = {
     'workingClass:proposeBill': ActionEventFromAction<
         'workingClass:proposeBill',
         WorkingClassRole['basicActions']['proposeBill']
-    >;
-    'workingClass:applyPoliticalPressure': ActionEventFromAction<
-        'workingClass:applyPoliticalPressure',
-        WorkingClassRole['basicActions']['applyPoliticalPressure']
     >;
     'workingClass:assignWorkers': ActionEventFromAction<
         'workingClass:assignWorkers',
@@ -108,13 +109,13 @@ export type ActionEventMap = {
         'workingClass:demonstration',
         WorkingClassRole['basicActions']['demonstration']
     >;
+    'workingClass:applyPoliticalPressure': ActionEventFromAction<
+        'workingClass:applyPoliticalPressure',
+        WorkingClassRole['basicActions']['applyPoliticalPressure']
+    >;
     'workingClass:skip': ActionEventFromAction<
         'workingClass:skip',
         WorkingClassRole['freeActions']['skip']
-    >;
-    'workingClass:payLoan': ActionEventFromAction<
-        'workingClass:payLoan',
-        WorkingClassRole['freeActions']['payLoan']
     >;
     'workingClass:useHealthcare': ActionEventFromAction<
         'workingClass:useHealthcare',
@@ -136,13 +137,17 @@ export type ActionEventMap = {
         'workingClass:receiveBenefits',
         WorkingClassRole['freeActions']['receiveBenefits']
     >;
+    'workingClass:payLoan': ActionEventFromAction<
+        'workingClass:payLoan',
+        WorkingClassRole['freeActions']['payLoan']
+    >;
     'middleClass:proposeBill': ActionEventFromAction<
         'middleClass:proposeBill',
         MiddleClassRole['basicActions']['proposeBill']
     >;
-    'middleClass:applyPoliticalPressure': ActionEventFromAction<
-        'middleClass:applyPoliticalPressure',
-        MiddleClassRole['basicActions']['applyPoliticalPressure']
+    'middleClass:assignWorkers': ActionEventFromAction<
+        'middleClass:assignWorkers',
+        MiddleClassRole['basicActions']['assignWorkers']
     >;
     'middleClass:buildCompany': ActionEventFromAction<
         'middleClass:buildCompany',
@@ -156,17 +161,21 @@ export type ActionEventMap = {
         'middleClass:sellToForeignMarket',
         MiddleClassRole['basicActions']['sellToForeignMarket']
     >;
+    'middleClass:buyGoodsAndServices': ActionEventFromAction<
+        'middleClass:buyGoodsAndServices',
+        MiddleClassRole['basicActions']['buyGoodsAndServices']
+    >;
     'middleClass:extraShift': ActionEventFromAction<
         'middleClass:extraShift',
         MiddleClassRole['basicActions']['extraShift']
     >;
+    'middleClass:applyPoliticalPressure': ActionEventFromAction<
+        'middleClass:applyPoliticalPressure',
+        MiddleClassRole['basicActions']['applyPoliticalPressure']
+    >;
     'middleClass:skip': ActionEventFromAction<
         'middleClass:skip',
         MiddleClassRole['freeActions']['skip']
-    >;
-    'middleClass:payLoan': ActionEventFromAction<
-        'middleClass:payLoan',
-        MiddleClassRole['freeActions']['payLoan']
     >;
     'middleClass:useHealthcare': ActionEventFromAction<
         'middleClass:useHealthcare',
@@ -180,6 +189,14 @@ export type ActionEventMap = {
         'middleClass:useLuxury',
         MiddleClassRole['freeActions']['useLuxury']
     >;
+    'middleClass:adjustPrices': ActionEventFromAction<
+        'middleClass:adjustPrices',
+        MiddleClassRole['freeActions']['adjustPrices']
+    >;
+    'middleClass:adjustWages': ActionEventFromAction<
+        'middleClass:adjustWages',
+        MiddleClassRole['freeActions']['adjustWages']
+    >;
     'middleClass:swapWorkers': ActionEventFromAction<
         'middleClass:swapWorkers',
         MiddleClassRole['freeActions']['swapWorkers']
@@ -188,13 +205,9 @@ export type ActionEventMap = {
         'middleClass:receiveBenefits',
         MiddleClassRole['freeActions']['receiveBenefits']
     >;
-    'middleClass:adjustPrices': ActionEventFromAction<
-        'middleClass:adjustPrices',
-        MiddleClassRole['freeActions']['adjustPrices']
-    >;
-    'middleClass:adjustWages': ActionEventFromAction<
-        'middleClass:adjustWages',
-        MiddleClassRole['freeActions']['adjustWages']
+    'middleClass:payLoan': ActionEventFromAction<
+        'middleClass:payLoan',
+        MiddleClassRole['freeActions']['payLoan']
     >;
     'capitalist:proposeBill': ActionEventFromAction<
         'capitalist:proposeBill',
@@ -220,13 +233,13 @@ export type ActionEventMap = {
         'capitalist:lobby',
         CapitalistRole['basicActions']['lobby']
     >;
+    'capitalist:applyPoliticalPressure': ActionEventFromAction<
+        'capitalist:applyPoliticalPressure',
+        CapitalistRole['basicActions']['applyPoliticalPressure']
+    >;
     'capitalist:skip': ActionEventFromAction<
         'capitalist:skip',
         CapitalistRole['freeActions']['skip']
-    >;
-    'capitalist:payLoan': ActionEventFromAction<
-        'capitalist:payLoan',
-        CapitalistRole['freeActions']['payLoan']
     >;
     'capitalist:adjustPrices': ActionEventFromAction<
         'capitalist:adjustPrices',
@@ -244,6 +257,14 @@ export type ActionEventMap = {
         'capitalist:buyStorage',
         CapitalistRole['freeActions']['buyStorage']
     >;
+    'capitalist:receiveBenefits': ActionEventFromAction<
+        'capitalist:receiveBenefits',
+        CapitalistRole['freeActions']['receiveBenefits']
+    >;
+    'capitalist:payLoan': ActionEventFromAction<
+        'capitalist:payLoan',
+        CapitalistRole['freeActions']['payLoan']
+    >;
     'state:proposeBill': ActionEventFromAction<
         'state:proposeBill',
         StateRole['basicActions']['proposeBill']
@@ -251,6 +272,10 @@ export type ActionEventMap = {
     'state:eventAction': ActionEventFromAction<
         'state:eventAction',
         StateRole['basicActions']['eventAction']
+    >;
+    'state:sellToForeignMarket': ActionEventFromAction<
+        'state:sellToForeignMarket',
+        StateRole['basicActions']['sellToForeignMarket']
     >;
     'state:meetWithPartyMps': ActionEventFromAction<
         'state:meetWithPartyMps',
@@ -265,11 +290,11 @@ export type ActionEventMap = {
         StateRole['basicActions']['campaign']
     >;
     'state:skip': ActionEventFromAction<'state:skip', StateRole['freeActions']['skip']>;
-    'state:payLoan': ActionEventFromAction<'state:payLoan', StateRole['freeActions']['payLoan']>;
     'state:adjustWages': ActionEventFromAction<
         'state:adjustWages',
         StateRole['freeActions']['adjustWages']
     >;
+    'state:payLoan': ActionEventFromAction<'state:payLoan', StateRole['freeActions']['payLoan']>;
 };
 
 /** mostly used in testing */
@@ -296,6 +321,9 @@ export type PlayerInput = {
     'middleClass:proposeBill': z.infer<
         NonNullable<MiddleClassRole['basicActions']['proposeBill']['playerInputSchema']>
     >;
+    'middleClass:assignWorkers': z.infer<
+        NonNullable<MiddleClassRole['basicActions']['assignWorkers']['playerInputSchema']>
+    >;
     'middleClass:buildCompany': z.infer<
         NonNullable<MiddleClassRole['basicActions']['buildCompany']['playerInputSchema']>
     >;
@@ -305,20 +333,23 @@ export type PlayerInput = {
     'middleClass:sellToForeignMarket': z.infer<
         NonNullable<MiddleClassRole['basicActions']['sellToForeignMarket']['playerInputSchema']>
     >;
+    'middleClass:buyGoodsAndServices': z.infer<
+        NonNullable<MiddleClassRole['basicActions']['buyGoodsAndServices']['playerInputSchema']>
+    >;
     'middleClass:extraShift': z.infer<
         NonNullable<MiddleClassRole['basicActions']['extraShift']['playerInputSchema']>
     >;
     'middleClass:useEducation': z.infer<
         NonNullable<MiddleClassRole['freeActions']['useEducation']['playerInputSchema']>
     >;
-    'middleClass:swapWorkers': z.infer<
-        NonNullable<MiddleClassRole['freeActions']['swapWorkers']['playerInputSchema']>
-    >;
     'middleClass:adjustPrices': z.infer<
         NonNullable<MiddleClassRole['freeActions']['adjustPrices']['playerInputSchema']>
     >;
     'middleClass:adjustWages': z.infer<
         NonNullable<MiddleClassRole['freeActions']['adjustWages']['playerInputSchema']>
+    >;
+    'middleClass:swapWorkers': z.infer<
+        NonNullable<MiddleClassRole['freeActions']['swapWorkers']['playerInputSchema']>
     >;
     'capitalist:proposeBill': z.infer<
         NonNullable<CapitalistRole['basicActions']['proposeBill']['playerInputSchema']>
@@ -349,6 +380,9 @@ export type PlayerInput = {
     >;
     'state:proposeBill': z.infer<
         NonNullable<StateRole['basicActions']['proposeBill']['playerInputSchema']>
+    >;
+    'state:sellToForeignMarket': z.infer<
+        NonNullable<StateRole['basicActions']['sellToForeignMarket']['playerInputSchema']>
     >;
     'state:meetWithPartyMps': z.infer<
         NonNullable<StateRole['basicActions']['meetWithPartyMps']['playerInputSchema']>

@@ -14,7 +14,9 @@ import {
     createAdjustPrices,
     createAdjustWages,
     createApplyPoliticalPressure,
+    createAssignWorkers,
     createBuildCompany,
+    createBuyGoodsAndServices,
     createPayLoan,
     createProposeBill,
     createReceiveBenefits,
@@ -120,10 +122,11 @@ export default class MiddleClassRole extends AbstractRole<
 
     basicActions = {
         ...createProposeBill(this),
-        ...createApplyPoliticalPressure(this),
+        ...createAssignWorkers(this),
         ...createBuildCompany(this),
         ...createSellCompany(this),
         ...createSellToForeignMarket(this),
+        ...createBuyGoodsAndServices(this),
         /** co with non-committed WC (+ non-committed WC) workers → commit + produce (+ pay WC) */
         extraShift: action({
             playerInputSchema: CompanyIdSchema,
@@ -153,17 +156,18 @@ export default class MiddleClassRole extends AbstractRole<
                 }
             },
         }),
+        ...createApplyPoliticalPressure(this),
     };
 
     freeActions = {
         ...createSkip(this),
-        ...createPayLoan(this),
         ...createUseHealthcare(this),
         ...createUseEducation(this),
         ...createUseLuxury(this),
-        ...createSwapWorkers(this),
-        ...createReceiveBenefits(this),
         ...createAdjustPrices(this),
         ...createAdjustWages(this),
+        ...createSwapWorkers(this),
+        ...createReceiveBenefits(this),
+        ...createPayLoan(this),
     };
 }

@@ -196,6 +196,10 @@ describe('createSwapWorkers', () => {
 });
 
 describe('createReceiveBenefits', () => {
+    test('condition:only4Players', async () => {
+        game.state.players.pop();
+        await expect(nextAndTick('workingClass:receiveBenefits')).rejects.toThrow(/only4Players/);
+    });
     test('condition:hasBenefits', async () => {
         await expect(nextAndTick('workingClass:receiveBenefits')).rejects.toThrow(/hasBenefits/);
     });
