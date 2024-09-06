@@ -4,12 +4,12 @@ import { z } from 'zod';
 import {
     type Company,
     type CompanyCard,
+    type CompanyTradeableResource,
     type Resource,
     ResourceEnumSchema,
     RoleEnum,
     type RoleNameNoState,
     RoleNameNoStateSchema,
-    type TradeableResourceAndInfluenceSchema,
 } from '../types';
 import action from '../utils/action';
 import AbstractRole, { type BaseState } from './AbstractRole';
@@ -87,7 +87,7 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
         // todo
     }
 
-    getPrice(resource: z.infer<typeof TradeableResourceAndInfluenceSchema>) {
+    getPrice(resource: CompanyTradeableResource) {
         switch (resource) {
             case 'food':
                 return 12;
@@ -102,11 +102,7 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
         }
     }
 
-    onBuyGoods(
-        roleName: RoleNameNoState,
-        resource: z.infer<typeof TradeableResourceAndInfluenceSchema>,
-        count: number,
-    ) {
+    onBuyGoods(roleName: RoleNameNoState, resource: CompanyTradeableResource, count: number) {
         if (
             resource !== ResourceEnumSchema.enum.education &&
             resource !== ResourceEnumSchema.enum.healthcare

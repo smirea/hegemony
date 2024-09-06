@@ -122,7 +122,7 @@ describe('basicActions', () => {
             addInput('workingClass:strike', ['c1']);
             await expect(nextAndTick('workingClass:strike')).rejects.toThrow(/hasStrikeTokens/);
         });
-        test('works', async () => {
+        test('run', async () => {
             const { company } = game.getCompanyById(
                 game.state.roles.capitalist.state.companies[0].id,
             );
@@ -161,7 +161,7 @@ describe('basicActions', () => {
                 /hasUnemployedWorkers/,
             );
         });
-        test('works', async () => {
+        test('run', async () => {
             game.state.roles.middleClass.state.companies = [];
             game.state.roles.capitalist.state.companies = [];
             game.state.roles.state.state.companies = [];

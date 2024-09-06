@@ -66,6 +66,15 @@ export function createGameUtils() {
         }
     };
 
+    const assignWorkers = (
+        ids: CompanyWorker['id'][],
+        companyId: CompanyCard['id'],
+        diff?: Partial<CompanyWorker>,
+    ) => {
+        game.assignWorkers(ids.map(id => ({ target: 'company', workerId: id, companyId })));
+        if (diff) eachWorker(ids, w => Object.assign(w, diff));
+    };
+
     const initGame = async (
         roles: RoleName[] = ['workingClass', 'capitalist', 'middleClass', 'state'],
         {
@@ -289,6 +298,7 @@ export function createGameUtils() {
         initGame,
         addWorkers,
         eachWorker,
+        assignWorkers,
     };
 }
 
@@ -297,17 +307,19 @@ function createTestDecks() {
         'test:middleClass companies',
         [
             createTestCompanyCard({
-                id: 'm1',
+                id: 'm-food',
+                industry: 'food',
                 workers: [
                     { roles: ['middleClass'], type: 'unskilled' },
                     { roles: ['middleClass'], type: 'unskilled' },
                 ],
             }),
             createTestCompanyCard({
-                id: 'm2',
+                id: 'm-influence',
                 cost: 20,
                 production: 5,
                 extraProduction: 3,
+                industry: 'influence',
                 workers: [
                     { roles: ['middleClass'], type: 'unskilled' },
                     { roles: ['workingClass'], type: 'unskilled' },
@@ -321,9 +333,10 @@ function createTestDecks() {
     const capitalistCompanies = new Deck(
         'test:capitalist companies',
         [
-            createTestCompanyCard({ id: 'c1' }),
+            createTestCompanyCard({ id: 'c-food', industry: 'food' }),
             createTestCompanyCard({
-                id: 'c2',
+                id: 'c-influence',
+                industry: 'influence',
                 cost: 20,
                 production: 5,
                 extraProduction: 0,
@@ -370,7 +383,7 @@ export const createTestCompanyCard = (diff: Partial<CompanyCard> = {}): CompanyC
         industry: 'food',
         production: 3,
         extraProduction: 2,
-        wages: { l1: 1, l2: 2, l3: 3 },
+        wages: { l1: 10, l2: 20, l3: 30 },
         workers: fullyAutomated
             ? []
             : [

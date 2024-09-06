@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, test } from 'vitest';
 import { CompanyWorkerTypeSchema, WorkerTypeEnum } from 'shared/logic/types';
 import _ from 'lodash';
 
+import type MiddleClassRole from '../MiddleClassRole';
 import type Game from 'shared/logic/Game';
 import type WorkingClassRole from '../WorkingClassRole';
 import type CapitalistRole from '../CapitalistRole';
@@ -13,11 +14,13 @@ const { initGame, addInput, nextAndTick, addWorkers, eachWorker } = createGameUt
 let game: Game;
 let wc: WorkingClassRole;
 let cap: CapitalistRole;
+let mc: MiddleClassRole;
 let st: StateRole;
 
 beforeEach(async () => {
     game = await initGame();
     wc = game.state.roles.workingClass;
+    mc = game.state.roles.middleClass;
     cap = game.state.roles.capitalist;
     st = game.state.roles.state;
 });
@@ -44,7 +47,7 @@ describe('createProposeBill', () => {
         addInput('workingClass:proposeBill', { policy: 'education', value: 0 });
         await expect(nextAndTick('workingClass:proposeBill')).rejects.toThrow(/isDifferent/);
     });
-    test('works', async () => {
+    test('run', async () => {
         addInput('workingClass:proposeBill', { policy: 'education', value: 1 });
         await nextAndTick('workingClass:proposeBill');
         expect(game.state.board.policyProposals.education).toEqual(wc1);
@@ -59,7 +62,7 @@ describe('createPayLoan', () => {
         wc.state.resources.money.addLoans(1);
         await expect(nextAndTick('workingClass:payLoan')).rejects.toThrow(/hasMoney/);
     });
-    test('works', async () => {
+    test('run', async () => {
         wc.state.resources.money.addLoans(1);
         wc.state.resources.money.add(55);
         await nextAndTick('workingClass:payLoan');
@@ -72,7 +75,7 @@ describe('createUseHealthcare', () => {
     test('condition:hasHealthcare', async () => {
         await expect(nextAndTick('workingClass:useHealthcare')).rejects.toThrow(/hasHealthcare/);
     });
-    test('works', async () => {
+    test('run', async () => {
         wc.state.resources.healthcare.add(5);
         await nextAndTick('workingClass:useHealthcare');
         expect(wc.state.resources.healthcare.value).toEqual(2);
@@ -102,7 +105,7 @@ describe('createUseEducation', () => {
             /hasAvailableWorkers/,
         );
     });
-    test('works', async () => {
+    test('run', async () => {
         wc.state.resources.education.add(5);
         wc.state.workers.push({
             id: 0,
@@ -129,7 +132,7 @@ describe('createUseLuxury', () => {
     test('condition:hasLuxury', async () => {
         await expect(nextAndTick('workingClass:useLuxury')).rejects.toThrow(/hasLuxury/);
     });
-    test('works', async () => {
+    test('run', async () => {
         wc.state.resources.luxury.add(5);
         await nextAndTick('workingClass:useLuxury');
         expect(wc.state.resources.luxury.value).toEqual(2);
@@ -138,7 +141,7 @@ describe('createUseLuxury', () => {
 });
 
 describe('createAdjustPrices', () => {
-    test('works', async () => {
+    test('run', async () => {
         game.state.board.policies.laborMarket = 1;
         addInput('capitalist:adjustPrices', { education: 2 });
         await nextAndTick('capitalist:adjustPrices');
@@ -149,14 +152,14 @@ describe('createAdjustPrices', () => {
 describe('createAdjustWages', () => {
     test('condition:minWage', async () => {
         game.state.board.policies.laborMarket = 2;
-        addInput('capitalist:adjustWages', [{ companyId: 'c1', wages: 'l2' }]);
+        addInput('capitalist:adjustWages', [{ companyId: 'c-food', wages: 'l2' }]);
         await expect(nextAndTick('capitalist:adjustWages')).rejects.toThrow(/minWage/);
     });
-    test('works', async () => {
-        cap.company('c1').wages = 'l1';
-        addInput('capitalist:adjustWages', [{ companyId: 'c1', wages: 'l2' }]);
+    test('run', async () => {
+        cap.company('c-food').wages = 'l1';
+        addInput('capitalist:adjustWages', [{ companyId: 'c-food', wages: 'l2' }]);
         await nextAndTick('capitalist:adjustWages');
-        expect(cap.company('c1').wages).toEqual('l2');
+        expect(cap.company('c-food').wages).toEqual('l2');
     });
 });
 
@@ -167,7 +170,7 @@ describe('createSwapWorkers', () => {
             /hasUnemployedWorkers/,
         );
     });
-    test('works', async () => {
+    test('run', async () => {
         wc.state.workers.push({
             id: 0,
             type: 'unskilled',
@@ -203,7 +206,7 @@ describe('createReceiveBenefits', () => {
     test('condition:hasBenefits', async () => {
         await expect(nextAndTick('workingClass:receiveBenefits')).rejects.toThrow(/hasBenefits/);
     });
-    test('works', async () => {
+    test('run', async () => {
         expect(st.state.benefits.workingClass).toEqual([]);
         expect(st.state.score).toEqual(0);
         st.state.benefits.workingClass = [{ type: 'resource', resource: 'money', amount: 5 }];
@@ -220,7 +223,7 @@ describe('createApplyPoliticalPressure', () => {
             /hasCubes/,
         );
     });
-    test('works', async () => {
+    test('run', async () => {
         wc.state.availableVotingCubes = 2;
         expect(game.state.board.votingCubeBag.workingClass).toEqual(0);
         await nextAndTick('workingClass:applyPoliticalPressure');
@@ -234,7 +237,7 @@ describe('createApplyPoliticalPressure', () => {
 });
 
 describe('createAssignWorkers', () => {
-    test('works', async () => {
+    test('run', async () => {
         wc.state.workers.push({
             id: 0,
             type: 'unskilled',
@@ -263,7 +266,7 @@ describe('createAssignWorkers', () => {
 });
 
 describe('createBuyGoodsAndServices', () => {
-    test('works', async () => {
+    test('run', async () => {
         wc.state.resources.money.add(100);
         cap.state.resources.luxury.add(10);
         st.state.resources.influence.add(10);
@@ -303,7 +306,7 @@ describe('createBuildCompany', () => {
         addInput('capitalist:buildCompany', { companyId: 'c-market-2', workers: [] });
         await expect(nextAndTick('capitalist:buildCompany')).rejects.toThrow(/inMarket/);
     });
-    test('works', async () => {
+    test('run', async () => {
         cap.state.resources.money.add(100);
         game.state.board.policies.laborMarket = 2;
         const workers = addWorkers(2, { committed: false, company: null });
@@ -326,7 +329,7 @@ describe('createSellCompany', () => {
         cap.state.companies = [];
         await expect(nextAndTick('capitalist:sellCompany')).rejects.toThrow(/hasCompany/);
     });
-    test('works', async () => {
+    test('run', async () => {
         const toSell = cap.state.companies[0];
         const workers = addWorkers(2, { company: toSell.id });
         toSell.workers = workers;
@@ -345,7 +348,7 @@ describe('createSellCompany', () => {
 });
 
 describe('createSellForeignMarketCard', () => {
-    test('works', async () => {
+    test('run', async () => {
         cap.state.resources.food.add(10);
         cap.state.resources.luxury.add(10);
         cap.state.resources.healthcare.add(10);
@@ -362,5 +365,23 @@ describe('createSellForeignMarketCard', () => {
         expect(cap.state.resources.healthcare.value).toEqual(10);
         expect(cap.state.resources.education.value).toEqual(5);
         expect(cap.state.resources.money.value).toEqual(1 + 11 + 0 + 10);
+    });
+    test('run - middleClass', async () => {
+        mc.state.producedResources.food.add(10);
+        mc.state.producedResources.luxury.add(10);
+        mc.state.producedResources.healthcare.add(10);
+        mc.state.producedResources.education.add(10);
+        addInput('middleClass:sellToForeignMarket', {
+            food: [true, false],
+            luxury: [true, true],
+            healthcare: [false, false],
+            education: [false, true],
+        });
+        await nextAndTick('middleClass:sellToForeignMarket');
+        expect(mc.state.producedResources.food.value).toEqual(9);
+        expect(mc.state.producedResources.luxury.value).toEqual(4);
+        expect(mc.state.producedResources.healthcare.value).toEqual(10);
+        expect(mc.state.producedResources.education.value).toEqual(5);
+        expect(mc.state.resources.money.value).toEqual(1 + 11 + 0 + 10);
     });
 });

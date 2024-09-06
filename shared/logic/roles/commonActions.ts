@@ -13,6 +13,7 @@ import {
     PolicyValueSchema,
     ResourceEnumSchema,
     RoleEnum,
+    type TradeableResource,
     TradeableResourceAndInfluenceSchema,
     TradeableResourceSchema,
     WageIdSchema,
@@ -362,15 +363,23 @@ export function createSellToForeignMarket(role: MiddleClassRole | CapitalistRole
             ),
             run(toSell) {
                 const card = role.game.foreignMarketCard;
+                const remove = (resource: TradeableResource, count: number) => {
+                    if (role.id === RoleEnum.middleClass) {
+                        role.state.producedResources[resource].remove(count);
+                        role.state.score += 1;
+                    } else {
+                        role.state.resources[resource].remove(count);
+                    }
+                };
                 for (const [resource, [used1, used2]] of objectEntries(toSell)) {
                     if (used1) {
                         const { money, resources } = card[resource][0];
-                        role.state.resources[resource].remove(resources);
+                        remove(resource, resources);
                         role.state.resources.money.add(money);
                     }
                     if (used2) {
                         const { money, resources } = card[resource][1];
-                        role.state.resources[resource].remove(resources);
+                        remove(resource, resources);
                         role.state.resources.money.add(money);
                     }
                 }

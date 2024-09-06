@@ -50,6 +50,8 @@ export type TradeableResource =
     | typeof ResourceEnum.education
     | typeof ResourceEnum.luxury;
 
+export type CompanyTradeableResource = TradeableResource | typeof ResourceEnum.influence;
+
 export const WorkerTypeEnum = {
     influence: ResourceEnum.influence,
     food: ResourceEnum.food,

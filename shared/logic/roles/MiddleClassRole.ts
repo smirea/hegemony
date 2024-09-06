@@ -2,6 +2,7 @@ import {
     type Company,
     type CompanyCard,
     CompanyIdSchema,
+    type CompanyTradeableResource,
     type CompanyWorker,
     type CompanyWorkerType,
     ResourceEnumSchema,
@@ -36,6 +37,7 @@ import {
 } from './commonMethods';
 import Deck from '../cards/Deck';
 import { middleClassCompanies } from '../cards/companyCards';
+import ResourceManager from '../utils/ResourceManager';
 
 import type Game from '../Game';
 
@@ -44,7 +46,7 @@ interface MiddleClassState extends BaseState {
     availableVotingCubes: number;
     workers: CompanyWorker[];
     availableWorkers: Record<CompanyWorkerType, number>;
-    producedResources: Record<TradeableResource, number>;
+    producedResources: Record<TradeableResource, ResourceManager>;
     priceLevels: Record<TradeableResource, 0 | 1 | 2>;
     storage: Partial<Record<TradeableResource, boolean>>;
     companyDeck: Deck<CompanyCard[]>;
@@ -70,10 +72,10 @@ export default class MiddleClassRole extends AbstractRole<
             companies: [],
             companyMarket: [],
             producedResources: {
-                food: 0,
-                healthcare: 0,
-                education: 0,
-                luxury: 0,
+                food: new ResourceManager({ name: 'middleClass:producedResources:food' }),
+                healthcare: new ResourceManager({ name: 'middleClass:producedResources:food' }),
+                education: new ResourceManager({ name: 'middleClass:producedResources:food' }),
+                luxury: new ResourceManager({ name: 'middleClass:producedResources:food' }),
             },
             availableVotingCubes: 25,
             workers: [],
@@ -120,6 +122,14 @@ export default class MiddleClassRole extends AbstractRole<
         }[resource][this.state.priceLevels[resource]];
     }
 
+    produce(resource: CompanyTradeableResource, count: number) {
+        if (resource === ResourceEnumSchema.enum.influence) {
+            this.state.resources[resource].add(count);
+        } else {
+            this.state.producedResources[resource].add(count);
+        }
+    }
+
     basicActions = {
         ...createProposeBill(this),
         ...createAssignWorkers(this),
@@ -142,17 +152,17 @@ export default class MiddleClassRole extends AbstractRole<
                     if (def.industry === ResourceEnumSchema.enum.influence) {
                         this.state.resources[def.industry].add(count);
                     } else {
-                        this.state.producedResources[def.industry] += count;
+                        this.state.producedResources[def.industry].add(count);
                     }
                 };
                 produce(def.production);
                 if (uncommittedWorkingClassWorker) {
                     this.state.resources.money.remove(wages);
                     this.game.state.roles[RoleEnum.workingClass].state.resources.money.add(wages);
-                    this.game.state.roles[RoleEnum.workingClass].state.workers[
-                        uncommittedWorkingClassWorker
-                    ].committed = true;
                     produce(def.extraProduction || 0);
+                }
+                for (const id of company.workers) {
+                    this.game.getWorkerById(id).worker.committed = true;
                 }
             },
         }),
