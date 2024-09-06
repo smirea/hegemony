@@ -33,18 +33,18 @@ describe('onBuyGoods', () => {
         test(resource, () => {
             game.state.board.policies[resource] = 2;
             st.onBuyGoods('workingClass', resource, 7);
-            expect(st.state.score).toBe(0);
-            expect(st.state.legitimacy.workingClass).toBe(2);
+            expect(st.data.score).toBe(0);
+            expect(st.data.legitimacy.workingClass).toBe(2);
 
             game.state.board.policies[resource] = 1;
             st.onBuyGoods('workingClass', resource, 7);
-            expect(st.state.score).toBe(1);
-            expect(st.state.legitimacy.workingClass).toBe(2);
+            expect(st.data.score).toBe(1);
+            expect(st.data.legitimacy.workingClass).toBe(2);
 
             game.state.board.policies[resource] = 0;
             st.onBuyGoods('workingClass', resource, 7);
-            expect(st.state.score).toBe(1);
-            expect(st.state.legitimacy.workingClass).toBe(4);
+            expect(st.data.score).toBe(1);
+            expect(st.data.legitimacy.workingClass).toBe(4);
         });
     }
 });
@@ -79,20 +79,20 @@ describe('getPrice', () => {
 
 describe('receiveBenefits', () => {
     test('resource', () => {
-        st.state.benefits.workingClass = [
+        st.data.benefits.workingClass = [
             { type: 'resource', resource: 'food', amount: 5 },
             { type: 'resource', resource: 'healthcare', amount: 3 },
         ];
         st.receiveBenefits('workingClass');
-        expect(game.state.roles.workingClass.state.resources.food.value).toBe(5);
-        expect(game.state.roles.workingClass.state.resources.healthcare.value).toBe(3);
-        expect(st.state.score).toBe(1);
+        expect(game.state.roles.workingClass.data.resources.food.value).toBe(5);
+        expect(game.state.roles.workingClass.data.resources.healthcare.value).toBe(3);
+        expect(st.data.score).toBe(1);
     });
     test('voting-cube', () => {
-        st.state.benefits.workingClass = [{ type: 'voting-cube', amount: 3 }];
+        st.data.benefits.workingClass = [{ type: 'voting-cube', amount: 3 }];
         st.receiveBenefits('workingClass');
         expect(game.state.board.votingCubeBag.workingClass).toBe(3);
-        expect(st.state.score).toBe(1);
+        expect(st.data.score).toBe(1);
     });
 });
 
@@ -102,20 +102,20 @@ describe('basicActions', () => {
             await expect(nextAndTick('state:meetWithPartyMps')).rejects.toThrow('hasVotingCubes');
         });
         test('run', async () => {
-            expect(st.state.legitimacy.workingClass).toBe(2);
-            st.state.resources.influence.add(5);
+            expect(st.data.legitimacy.workingClass).toBe(2);
+            st.data.resources.influence.add(5);
             addInput('state:meetWithPartyMps', RoleNameSchema.enum.workingClass);
             await nextAndTick('state:meetWithPartyMps');
-            expect(st.state.legitimacy.workingClass).toBe(3);
-            expect(st.state.resources.influence.value).toBe(3);
+            expect(st.data.legitimacy.workingClass).toBe(3);
+            expect(st.data.resources.influence.value).toBe(3);
         });
     });
     describe('extraTax', () => {
         test('run', async () => {
-            game.state.roles.workingClass.state.resources.money.add(20);
-            game.state.roles.middleClass.state.resources.money.add(5);
-            game.state.roles.capitalist.state.resources.money.add(0);
-            st.state.legitimacy = {
+            game.state.roles.workingClass.data.resources.money.add(20);
+            game.state.roles.middleClass.data.resources.money.add(5);
+            game.state.roles.capitalist.data.resources.money.add(0);
+            st.data.legitimacy = {
                 workingClass: 5,
                 middleClass: 4,
                 capitalist: 3,
@@ -125,19 +125,19 @@ describe('basicActions', () => {
                 RoleNameSchema.enum.capitalist,
             ]);
             await nextAndTick('state:extraTax');
-            expect(st.state.resources.money.value).toBe(30);
-            expect(st.state.legitimacy.workingClass).toBe(5);
-            expect(st.state.legitimacy.middleClass).toBe(3);
-            expect(st.state.legitimacy.capitalist).toBe(2);
+            expect(st.data.resources.money.value).toBe(30);
+            expect(st.data.legitimacy.workingClass).toBe(5);
+            expect(st.data.legitimacy.middleClass).toBe(3);
+            expect(st.data.legitimacy.capitalist).toBe(2);
 
-            expect(game.state.roles.workingClass.state.resources.money.value).toBe(10);
-            expect(game.state.roles.workingClass.state.resources.money.loans).toBe(0);
+            expect(game.state.roles.workingClass.data.resources.money.value).toBe(10);
+            expect(game.state.roles.workingClass.data.resources.money.loans).toBe(0);
 
-            expect(game.state.roles.middleClass.state.resources.money.value).toBe(45);
-            expect(game.state.roles.middleClass.state.resources.money.loans).toBe(1);
+            expect(game.state.roles.middleClass.data.resources.money.value).toBe(45);
+            expect(game.state.roles.middleClass.data.resources.money.loans).toBe(1);
 
-            expect(game.state.roles.capitalist.state.resources.money.value).toBe(40);
-            expect(game.state.roles.capitalist.state.resources.money.loans).toBe(1);
+            expect(game.state.roles.capitalist.data.resources.money.value).toBe(40);
+            expect(game.state.roles.capitalist.data.resources.money.loans).toBe(1);
         });
     });
     describe('campaign', () => {
@@ -146,15 +146,15 @@ describe('basicActions', () => {
             await expect(nextAndTick('state:campaign')).rejects.toThrow(/hasVotingCubes/);
         });
         test('run', async () => {
-            st.state.resources.influence.add(5);
+            st.data.resources.influence.add(5);
             addInput('state:campaign', 3);
             await nextAndTick('state:campaign');
-            expect(st.state.resources.influence.value).toBe(2);
-            expect(st.state.resources.personalInfluence.value).toBe(3);
+            expect(st.data.resources.influence.value).toBe(2);
+            expect(st.data.resources.personalInfluence.value).toBe(3);
             addInput('state:campaign', 3);
             await nextAndTick('state:campaign');
-            expect(st.state.resources.influence.value).toBe(0);
-            expect(st.state.resources.personalInfluence.value).toBe(5);
+            expect(st.data.resources.influence.value).toBe(0);
+            expect(st.data.resources.personalInfluence.value).toBe(5);
         });
     });
 });

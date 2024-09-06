@@ -290,9 +290,9 @@ export default class Game {
 
     getCompanyDefinition(id: CompanyCard['id']): CompanyCard {
         const result =
-            this.state.roles.capitalist.state.companyDeck.getOriginalCard(id, { safe: true }) ||
-            this.state.roles.middleClass.state.companyDeck.getOriginalCard(id, { safe: true }) ||
-            this.state.roles.state.state.companyDeck.getOriginalCard(id, { safe: true });
+            this.state.roles.capitalist.data.companyDeck.getOriginalCard(id, { safe: true }) ||
+            this.state.roles.middleClass.data.companyDeck.getOriginalCard(id, { safe: true }) ||
+            this.state.roles.state.data.companyDeck.getOriginalCard(id, { safe: true });
         if (!result) throw new Error(`companyId="${id}" not found`);
         return result;
     }
@@ -340,9 +340,9 @@ export default class Game {
         )[this.getPolicy('foreignTrade')][resource];
         const base = resource === ResourceEnum.food ? 10 : 6;
         const total = (base + tarriff) * count;
-        this.state.roles[roleName].state.resources[resource].add(count);
-        this.state.roles[roleName].state.resources.money.remove(total);
-        this.state.roles[RoleEnum.state].state.resources.money.add(tarriff * count);
+        this.state.roles[roleName].data.resources[resource].add(count);
+        this.state.roles[roleName].data.resources.money.remove(total);
+        this.state.roles[RoleEnum.state].data.resources.money.add(tarriff * count);
     }
 
     assignWorkers(toAssign: z.infer<typeof AssignWorkersSchema>) {
@@ -448,7 +448,7 @@ export default class Game {
                 ++this.state.turn;
                 if (this.debug) console.log(chalk.green.bold('——— turn:'), this.state.turn);
                 for (const role of Object.values(this.state.roles)) {
-                    role.state.usedActions = [];
+                    role.data.usedActions = [];
                 }
                 this.next('game:roleNext');
             },
@@ -487,9 +487,9 @@ export default class Game {
             validateInput: type => [['currentTurn', type.startsWith(this.state.currentRoleName!)]],
             run: type => {
                 if (isFreeAction(type)) {
-                    this.state.roles[this.state.currentRoleName!].state.usedActions.push('free');
+                    this.state.roles[this.state.currentRoleName!].data.usedActions.push('free');
                 } else {
-                    this.state.roles[this.state.currentRoleName!].state.usedActions.push('basic');
+                    this.state.roles[this.state.currentRoleName!].data.usedActions.push('basic');
                 }
                 this.next(type);
                 this.next('game:roleCurrent');
@@ -497,7 +497,7 @@ export default class Game {
         }),
         roleCurrent: action({
             run: () => {
-                if (this.state.roles[this.state.currentRoleName!].state.usedActions.length >= 2)
+                if (this.state.roles[this.state.currentRoleName!].data.usedActions.length >= 2)
                     return this.next('game:roleNext');
                 return this.next('game:roleTurn');
             },

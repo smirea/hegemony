@@ -58,9 +58,9 @@ describe('countOpenWorkerSlots', () => {
             wages: 'l1',
         };
 
-        game.state.roles[target].state.companies.push(company);
-        game.state.roles[target].state.companyDeck = new Deck('test:deck:' + target, [
-            ...game.state.roles[target].state.companyDeck.cards,
+        game.state.roles[target].data.companies.push(company);
+        game.state.roles[target].data.companyDeck = new Deck('test:deck:' + target, [
+            ...game.state.roles[target].data.companyDeck.cards,
             card,
         ]);
     };
@@ -118,16 +118,16 @@ describe('basicActions', () => {
 
     describe('workingClass:strike', async () => {
         test('conditions:hasStrikeTokens', async () => {
-            wc.state.strikeTokens = 0;
+            wc.data.strikeTokens = 0;
             addInput('workingClass:strike', ['c1']);
             await expect(nextAndTick('workingClass:strike')).rejects.toThrow(/hasStrikeTokens/);
         });
         test('run', async () => {
             const { company } = game.getCompanyById(
-                game.state.roles.capitalist.state.companies[0].id,
+                game.state.roles.capitalist.data.companies[0].id,
             );
             expect(company.strike).toBeFalsy();
-            wc.state.strikeTokens = 1;
+            wc.data.strikeTokens = 1;
             addInput('workingClass:strike', [company.id]);
             await nextAndTick('workingClass:strike');
             expect(company.strike).toBe(true);
@@ -135,20 +135,20 @@ describe('basicActions', () => {
     });
     describe('workingClass:demonstration', async () => {
         test('conditions:noDemonstration', async () => {
-            wc.state.demonstration = true;
+            wc.data.demonstration = true;
             await expect(nextAndTick('workingClass:demonstration')).rejects.toThrow(
                 /noDemonstration/,
             );
         });
         test('conditions:hasUnemployedWorkers', async () => {
-            wc.state.workers = [];
+            wc.data.workers = [];
             expect(wc.countOpenWorkerSlots()).toBe(9);
             await expect(nextAndTick('workingClass:demonstration')).rejects.toThrow(
                 /hasUnemployedWorkers/,
             );
         });
         test('conditions:hasUnemployedWorkers', async () => {
-            wc.state.workers = [
+            wc.data.workers = [
                 createTestWorker(),
                 createTestWorker(),
                 createTestWorker(),
@@ -162,13 +162,13 @@ describe('basicActions', () => {
             );
         });
         test('run', async () => {
-            game.state.roles.middleClass.state.companies = [];
-            game.state.roles.capitalist.state.companies = [];
-            game.state.roles.state.state.companies = [];
-            wc.state.workers = [createTestWorker(), createTestWorker()];
-            expect(wc.state.demonstration).toBe(false);
+            game.state.roles.middleClass.data.companies = [];
+            game.state.roles.capitalist.data.companies = [];
+            game.state.roles.state.data.companies = [];
+            wc.data.workers = [createTestWorker(), createTestWorker()];
+            expect(wc.data.demonstration).toBe(false);
             await nextAndTick('workingClass:demonstration');
-            expect(wc.state.demonstration).toBe(true);
+            expect(wc.data.demonstration).toBe(true);
         });
     });
 });

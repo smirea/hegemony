@@ -45,7 +45,7 @@ describe('started game', () => {
     test('turn:end', async () => {
         game.state.board.policies.fiscalPolicy = 1;
         game.state.board.policies.healthcare = 1;
-        game.state.roles.workingClass.state.resources.healthcare.add(10);
+        game.state.roles.workingClass.data.resources.healthcare.add(10);
         addInput('game:roleTurn', 'workingClass:proposeBill');
         addInput('workingClass:proposeBill', { value: 2, policy: 'fiscalPolicy' });
         addInput('game:roleTurn', 'workingClass:useHealthcare');
@@ -54,8 +54,8 @@ describe('started game', () => {
         addInput('game:roleTurn', 'capitalist:skip');
         await tick('game:turnEnd');
         expect(requestPlayerInput).toHaveBeenCalledTimes(6);
-        expect(game.state.roles.workingClass.state.resources.healthcare.value).toBe(7);
-        expect(game.state.roles.workingClass.state.score).toBe(3);
+        expect(game.state.roles.workingClass.data.resources.healthcare.value).toBe(7);
+        expect(game.state.roles.workingClass.data.score).toBe(3);
         expect(game.state.board.policyProposals.fiscalPolicy).toEqual({
             role: 'workingClass',
             value: 2,

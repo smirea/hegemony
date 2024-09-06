@@ -14,7 +14,7 @@ import {
 } from '../types';
 import action from '../utils/action';
 import ResourceManager, { CapitalistMoneyResourceManager } from '../utils/ResourceManager';
-import AbstractRole, { type BaseState } from './AbstractRole';
+import AbstractRole, { type BaseData } from './AbstractRole';
 import {
     createAdjustPrices,
     createAdjustWages,
@@ -33,7 +33,7 @@ import { capitalistCompanies } from '../cards/companyCards';
 
 import type Game from '../Game';
 
-interface CapitalistState extends BaseState<CapitalistMoneyResourceManager> {
+interface CapitalistData extends BaseData<CapitalistMoneyResourceManager> {
     availableVotingCubes: number;
     priceLevels: Record<TradeableResource, 0 | 1 | 2>;
     storage: Partial<Record<TradeableResource, boolean>>;
@@ -51,15 +51,15 @@ interface CapitalistState extends BaseState<CapitalistMoneyResourceManager> {
 
 export default class CapitalistRole extends AbstractRole<
     typeof RoleEnum.capitalist,
-    CapitalistState
+    CapitalistData
 > {
     readonly id = RoleEnum.capitalist;
-    state: CapitalistState;
+    data: CapitalistData;
 
     constructor(game: Game) {
         super(game);
         const base = this.createBaseState();
-        this.state = {
+        this.data = {
             ...base,
             resources: {
                 ...base.resources,
@@ -91,9 +91,9 @@ export default class CapitalistRole extends AbstractRole<
     }
 
     setupRound(): void {
-        for (let i = this.state.companyMarket.length; i < 4; ++i) {
-            const card = this.state.companyDeck.draw();
-            this.state.companyMarket.push(card.id);
+        for (let i = this.data.companyMarket.length; i < 4; ++i) {
+            const card = this.data.companyDeck.draw();
+            this.data.companyMarket.push(card.id);
         }
     }
 
@@ -103,7 +103,7 @@ export default class CapitalistRole extends AbstractRole<
             healthcare: [5, 8, 10],
             education: [5, 8, 10],
             luxury: [5, 8, 10],
-        }[resource][this.state.priceLevels[resource]];
+        }[resource][this.data.priceLevels[resource]];
     }
 
     basicActions = {
@@ -130,28 +130,28 @@ export default class CapitalistRole extends AbstractRole<
                     'hasMoney',
                     this.game.state.board.businessDealCards.some(
                         id =>
-                            this.state.resources.money.value >=
+                            this.data.resources.money.value >=
                             this.game.state.board.decks.businessDealCards.getOriginalCard(id).cost,
                     ),
                 ],
             ],
             run: ({ id, storage, freeTradeZone }) => {
                 const card = this.game.state.board.decks.businessDealCards.getOriginalCard(id);
-                this.state.resources.money.remove(card.cost);
+                this.data.resources.money.remove(card.cost);
 
-                if (storage.food) this.state.resources.food.add(storage.food);
-                if (storage.luxury) this.state.resources.luxury.add(storage.luxury);
+                if (storage.food) this.data.resources.food.add(storage.food);
+                if (storage.luxury) this.data.resources.luxury.add(storage.luxury);
 
                 if (freeTradeZone.food || freeTradeZone.luxury) {
                     const tariff =
                         card.tariffs[this.game.state.board.policies.foreignTrade as 0 | 1];
-                    this.state.resources.money.remove(tariff);
-                    this.game.state.roles.state.state.resources.money.add(tariff);
+                    this.data.resources.money.remove(tariff);
+                    this.game.state.roles.state.data.resources.money.add(tariff);
 
                     if (freeTradeZone.food)
-                        this.state.freeTradeZoneResources.food.add(freeTradeZone.food);
+                        this.data.freeTradeZoneResources.food.add(freeTradeZone.food);
                     if (freeTradeZone.luxury)
-                        this.state.freeTradeZoneResources.luxury.add(freeTradeZone.luxury);
+                        this.data.freeTradeZoneResources.luxury.add(freeTradeZone.luxury);
                 }
 
                 this.game.state.board.businessDealCards =
@@ -162,12 +162,12 @@ export default class CapitalistRole extends AbstractRole<
         lobby: action({
             condition: () => [
                 ['hasInfluence', this.game.state.board.availableInfluence > 0],
-                ['hasMoney', this.state.resources.money.value >= 30],
+                ['hasMoney', this.data.resources.money.value >= 30],
             ],
             run: () => {
                 const diff = Math.min(3, this.game.state.board.availableInfluence);
-                this.state.resources.money.remove(30);
-                this.state.resources.influence.add(diff);
+                this.data.resources.money.remove(30);
+                this.data.resources.influence.add(diff);
                 this.game.state.board.availableInfluence -= diff;
             },
         }),
@@ -181,7 +181,7 @@ export default class CapitalistRole extends AbstractRole<
         /** give 5¥ to a class → commit */
         giveBonus: action({
             playerInputSchema: CompanyIdSchema,
-            condition: () => [['hasMoney', this.state.resources.money.value >= 5]],
+            condition: () => [['hasMoney', this.data.resources.money.value >= 5]],
             run: companyId => {
                 const { company } = this.game.getCompanyById(companyId);
                 let targetRole: z.infer<typeof RoleNameSchema> | null = null;
@@ -191,20 +191,20 @@ export default class CapitalistRole extends AbstractRole<
                     targetRole = worker.role;
                 }
                 if (!targetRole) throw new Error('no target role');
-                this.state.resources.money.remove(5);
-                this.game.state.roles[targetRole].state.resources.money.add(5);
+                this.data.resources.money.remove(5);
+                this.game.state.roles[targetRole].data.resources.money.add(5);
             },
         }),
         /** buy storage for 20¥ per tile (max 1 storage tile per type for whole game) */
         buyStorage: action({
             playerInputSchema: TradeableResourceSchema,
             condition: () => [
-                ['hasMoney', this.state.resources.money.value >= 20],
-                ['hasStorage', _.filter(this.state.storage).length < 4],
+                ['hasMoney', this.data.resources.money.value >= 20],
+                ['hasStorage', _.filter(this.data.storage).length < 4],
             ],
             run: resource => {
-                this.state.storage[resource] = true;
-                this.state.resources.money.remove(20);
+                this.data.storage[resource] = true;
+                this.data.resources.money.remove(20);
             },
         }),
         ...createReceiveBenefits(this),

@@ -12,7 +12,7 @@ import {
     RoleNameNoStateSchema,
 } from '../types';
 import action from '../utils/action';
-import AbstractRole, { type BaseState } from './AbstractRole';
+import AbstractRole, { type BaseData } from './AbstractRole';
 import {
     createAdjustWages,
     createPayLoan,
@@ -31,23 +31,23 @@ type Benefit =
     | { type: 'resource'; resource: Resource; amount: number }
     | { type: 'voting-cube'; amount: number };
 
-interface StateState extends BaseState {
+interface StateData extends BaseData {
     legitimacy: Record<RoleNameNoState, number>;
     legitimacyTokens: Record<RoleNameNoState, number>;
     companyDeck: Deck<CompanyCard[]>;
     companies: Company[];
     benefits: Record<RoleNameNoState, Benefit[]>;
-    resources: BaseState['resources'] & { personalInfluence: ResourceManager };
+    resources: BaseData['resources'] & { personalInfluence: ResourceManager };
 }
 
-export default class StateRole extends AbstractRole<typeof RoleEnum.state, StateState> {
+export default class StateRole extends AbstractRole<typeof RoleEnum.state, StateData> {
     readonly id = RoleEnum.state;
-    state: StateState;
+    data: StateData;
 
     constructor(game: Game) {
         super(game);
         const base = this.createBaseState();
-        this.state = {
+        this.data = {
             ...base,
             resources: {
                 ...base.resources,
@@ -114,7 +114,7 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
                 this.updateLegitimacy(roleName, Math.floor(count / 3));
                 break;
             case 1:
-                this.state.score += 1;
+                this.data.score += 1;
                 break;
             case 2:
                 // noop
@@ -123,24 +123,24 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
     }
 
     getBenefits(id: RoleNameNoState) {
-        return this.state.benefits[id] || [];
+        return this.data.benefits[id] || [];
     }
 
     receiveBenefits(id: RoleNameNoState) {
         const role = this.game.state.roles[id];
         for (const benefit of this.getBenefits(id)) {
             if (benefit.type === 'resource') {
-                role.state.resources[benefit.resource].add(benefit.amount);
+                role.data.resources[benefit.resource].add(benefit.amount);
             } else if (benefit.type === 'voting-cube') {
                 this.game.state.board.votingCubeBag[id] += benefit.amount;
             }
         }
-        this.state.benefits[id] = [];
-        this.state.score += 1;
+        this.data.benefits[id] = [];
+        this.data.score += 1;
     }
 
     updateLegitimacy(id: RoleNameNoState, amount: number) {
-        this.state.legitimacy[id] = _.clamp(this.state.legitimacy[id] + amount, 1, 10);
+        this.data.legitimacy[id] = _.clamp(this.data.legitimacy[id] + amount, 1, 10);
     }
 
     basicActions = {
@@ -156,9 +156,9 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
         /** 2x personal 🟣 to class → +1 that class's Legitimacy */
         meetWithPartyMps: action({
             playerInputSchema: RoleNameNoStateSchema,
-            condition: () => [['hasVotingCubes', this.state.resources.influence.value >= 2]],
+            condition: () => [['hasVotingCubes', this.data.resources.influence.value >= 2]],
             run: target => {
-                this.state.resources.influence.remove(2);
+                this.data.resources.influence.remove(2);
                 this.updateLegitimacy(target, +1);
             },
         }),
@@ -172,27 +172,27 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
                 this.updateLegitimacy(roleA, -1);
                 this.updateLegitimacy(roleB, -1);
 
-                this.game.state.roles.workingClass.state.resources.money.remove(10, {
+                this.game.state.roles.workingClass.data.resources.money.remove(10, {
                     canTakeLoans: true,
                 });
-                this.game.state.roles.middleClass.state.resources.money.remove(10, {
+                this.game.state.roles.middleClass.data.resources.money.remove(10, {
                     canTakeLoans: true,
                 });
-                this.game.state.roles.capitalist.state.resources.money.remove(10, {
+                this.game.state.roles.capitalist.data.resources.money.remove(10, {
                     canTakeLoans: true,
                 });
 
-                this.state.resources.money.add(30);
+                this.data.resources.money.add(30);
             },
         }),
         /** up to 3x media → personal 🟣 */
         campaign: action({
-            condition: () => [['hasVotingCubes', this.state.resources.influence.value >= 1]],
+            condition: () => [['hasVotingCubes', this.data.resources.influence.value >= 1]],
             playerInputSchema: z.number().min(0).max(3),
             run: count => {
-                const toAdd = Math.min(3, count, this.state.resources.influence.value);
-                this.state.resources.influence.remove(toAdd);
-                this.state.resources.personalInfluence.add(toAdd);
+                const toAdd = Math.min(3, count, this.data.resources.influence.value);
+                this.data.resources.influence.remove(toAdd);
+                this.data.resources.personalInfluence.add(toAdd);
             },
         }),
     };

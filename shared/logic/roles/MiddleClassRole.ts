@@ -10,7 +10,7 @@ import {
     type TradeableResource,
 } from '../types';
 import action from '../utils/action';
-import AbstractRole, { type BaseState } from './AbstractRole';
+import AbstractRole, { type BaseData } from './AbstractRole';
 import {
     createAdjustPrices,
     createAdjustWages,
@@ -41,7 +41,7 @@ import ResourceManager from '../utils/ResourceManager';
 
 import type Game from '../Game';
 
-interface MiddleClassState extends BaseState {
+interface MiddleClassData extends BaseData {
     prosperity: number;
     availableVotingCubes: number;
     workers: CompanyWorker[];
@@ -58,14 +58,14 @@ interface MiddleClassState extends BaseState {
 
 export default class MiddleClassRole extends AbstractRole<
     typeof RoleEnum.middleClass,
-    MiddleClassState
+    MiddleClassData
 > {
     readonly id = RoleEnum.middleClass;
-    state: MiddleClassState;
+    data: MiddleClassData;
 
     constructor(game: Game) {
         super(game);
-        this.state = {
+        this.data = {
             ...this.createBaseState(),
             prosperity: 0,
             companyDeck: new Deck('middleClass companies', middleClassCompanies),
@@ -107,9 +107,9 @@ export default class MiddleClassRole extends AbstractRole<
     }
 
     setupRound(): void {
-        for (let i = this.state.companyMarket.length; i < 3; ++i) {
-            const card = this.state.companyDeck.draw();
-            this.state.companyMarket.push(card.id);
+        for (let i = this.data.companyMarket.length; i < 3; ++i) {
+            const card = this.data.companyDeck.draw();
+            this.data.companyMarket.push(card.id);
         }
     }
 
@@ -119,14 +119,14 @@ export default class MiddleClassRole extends AbstractRole<
             healthcare: [5, 8, 10],
             education: [5, 8, 10],
             luxury: [5, 8, 10],
-        }[resource][this.state.priceLevels[resource]];
+        }[resource][this.data.priceLevels[resource]];
     }
 
     produce(resource: CompanyTradeableResource, count: number) {
         if (resource === ResourceEnumSchema.enum.influence) {
-            this.state.resources[resource].add(count);
+            this.data.resources[resource].add(count);
         } else {
-            this.state.producedResources[resource].add(count);
+            this.data.producedResources[resource].add(count);
         }
     }
 
@@ -150,15 +150,15 @@ export default class MiddleClassRole extends AbstractRole<
                 const wages = def.wages[company.wages];
                 const produce = (count: number) => {
                     if (def.industry === ResourceEnumSchema.enum.influence) {
-                        this.state.resources[def.industry].add(count);
+                        this.data.resources[def.industry].add(count);
                     } else {
-                        this.state.producedResources[def.industry].add(count);
+                        this.data.producedResources[def.industry].add(count);
                     }
                 };
                 produce(def.production);
                 if (uncommittedWorkingClassWorker) {
-                    this.state.resources.money.remove(wages);
-                    this.game.state.roles[RoleEnum.workingClass].state.resources.money.add(wages);
+                    this.data.resources.money.remove(wages);
+                    this.game.state.roles[RoleEnum.workingClass].data.resources.money.add(wages);
                     produce(def.extraProduction || 0);
                 }
                 for (const id of company.workers) {

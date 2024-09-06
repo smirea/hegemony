@@ -9,7 +9,7 @@ import {
     CompanyIdSchema,
     RoleNameSchema,
 } from '../types';
-import AbstractRole, { type BaseState } from './AbstractRole';
+import AbstractRole, { type BaseData } from './AbstractRole';
 import {
     createApplyPoliticalPressure,
     createAssignWorkers,
@@ -28,7 +28,7 @@ import { createGetPopulation, createIncreaseProsperity, createWorker } from './c
 
 import type Game from '../Game';
 
-interface WorkingClassState extends BaseState {
+interface WorkingClassData extends BaseData {
     prosperity: number;
     availableVotingCubes: number;
     workers: CompanyWorker[];
@@ -40,14 +40,14 @@ interface WorkingClassState extends BaseState {
 
 export default class WorkingClassRole extends AbstractRole<
     typeof RoleEnum.workingClass,
-    WorkingClassState
+    WorkingClassData
 > {
     readonly id = RoleEnum.workingClass;
-    state: WorkingClassState;
+    data: WorkingClassData;
 
     constructor(game: Game) {
         super(game);
-        this.state = {
+        this.data = {
             ...super.createBaseState(),
             prosperity: 0,
             availableVotingCubes: 0,
@@ -85,23 +85,23 @@ export default class WorkingClassRole extends AbstractRole<
         /** 1-2 tokens → non-committed cos. (L1/L2 wages) → wages ⬆ or no production and +1 🟣 */
         strike: action({
             playerInputSchema: z.array(CompanyIdSchema),
-            condition: () => [['hasStrikeTokens', this.state.strikeTokens > 0]],
+            condition: () => [['hasStrikeTokens', this.data.strikeTokens > 0]],
             run: toStrike => {
                 for (const companyId of toStrike) {
                     const { company } = this.game.getCompanyById(companyId);
                     company.strike = true;
-                    --this.state.strikeTokens;
+                    --this.data.strikeTokens;
                 }
             },
         }),
         /** unemployed → open slots >= 2 → WC +1 🟣, others -★ (WC choice) */
         demonstration: action({
             condition: () => [
-                ['noDemonstration', !this.state.demonstration],
+                ['noDemonstration', !this.data.demonstration],
                 ['hasUnemployedWorkers', this.canDemonstrate()],
             ],
             run: () => {
-                this.state.demonstration = true;
+                this.data.demonstration = true;
             },
         }),
         ...createApplyPoliticalPressure(this),
@@ -118,14 +118,14 @@ export default class WorkingClassRole extends AbstractRole<
     };
 
     canDemonstrate() {
-        const unemployedWorkers = Object.values(this.state.workers).filter(w => !w.company).length;
+        const unemployedWorkers = Object.values(this.data.workers).filter(w => !w.company).length;
         if (unemployedWorkers < 2) return false;
         return unemployedWorkers + 2 >= this.countOpenWorkerSlots();
     }
 
     countOpenWorkerSlots() {
         const middleClassSlots = _.sum(
-            Object.values(this.game.state.roles.middleClass.state.companies).map(c => {
+            Object.values(this.game.state.roles.middleClass.data.companies).map(c => {
                 if (c.workers.length) return 0;
                 const d = this.game.getCompanyDefinition(c.id);
                 return d.workers.filter(w => w.roles.includes(RoleNameSchema.enum.workingClass))
@@ -133,7 +133,7 @@ export default class WorkingClassRole extends AbstractRole<
             }),
         );
         const capitalistSlots = _.sum(
-            Object.values(this.game.state.roles.capitalist.state.companies).map(c => {
+            Object.values(this.game.state.roles.capitalist.data.companies).map(c => {
                 if (c.workers.length) return 0;
                 const d = this.game.getCompanyDefinition(c.id);
                 if (d.fullyAutomated) return 0;
@@ -141,7 +141,7 @@ export default class WorkingClassRole extends AbstractRole<
             }),
         );
         const stateSlots = _.sum(
-            Object.values(this.game.state.roles.state.state.companies).map(c => {
+            Object.values(this.game.state.roles.state.data.companies).map(c => {
                 if (c.workers.length) return 0;
                 const d = this.game.getCompanyDefinition(c.id);
                 return d.workers.length;

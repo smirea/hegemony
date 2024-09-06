@@ -14,7 +14,7 @@ import type MiddleClassRole from './MiddleClassRole';
 import type StateRole from './StateRole';
 import type CapitalistRole from './CapitalistRole';
 
-export interface BaseState<MoneyManager extends MoneyResourceManager = MoneyResourceManager> {
+export interface BaseData<MoneyManager extends MoneyResourceManager = MoneyResourceManager> {
     score: number;
     usedActions: Array<'basic' | 'free'>;
     resources: {
@@ -27,15 +27,15 @@ export interface BaseState<MoneyManager extends MoneyResourceManager = MoneyReso
     };
 }
 
-export default abstract class AbstractRole<Id extends RoleName, State extends BaseState> {
+export default abstract class AbstractRole<Id extends RoleName, Data extends BaseData> {
     public abstract readonly id: Id;
-    public abstract state: State;
+    public abstract data: Data;
     /** whether this role is in the game (player or automata) */
     public active = false;
 
     constructor(public readonly game: Game) {}
 
-    protected createBaseState(): BaseState {
+    protected createBaseState(): BaseData {
         return {
             score: 0,
             usedActions: [],
@@ -70,11 +70,11 @@ export default abstract class AbstractRole<Id extends RoleName, State extends Ba
             total = count * source.getPrice(resource);
         }
 
-        this.state.resources.money.remove(total);
-        source.state.resources.money.add(total);
+        this.data.resources.money.remove(total);
+        source.data.resources.money.add(total);
 
-        this.state.resources[resource].add(count);
-        source.state.resources[resource].remove(count);
+        this.data.resources[resource].add(count);
+        source.data.resources[resource].remove(count);
 
         if (source.id === RoleEnum.state) source.onBuyGoods(this.id as any, resource, count);
     }

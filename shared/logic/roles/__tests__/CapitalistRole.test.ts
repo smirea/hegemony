@@ -25,12 +25,12 @@ describe('setupRound', () => {
         cap = game.state.roles.capitalist;
     });
     test('sets up market', () => {
-        expect(cap.state.companyMarket.length).toBe(0);
-        expect(cap.state.companyDeck.size).toBe(6);
+        expect(cap.data.companyMarket.length).toBe(0);
+        expect(cap.data.companyDeck.size).toBe(6);
         cap.setupRound();
-        expect(cap.state.companyDeck.size).toBe(2);
-        expect(cap.state.companyMarket.length).toBe(4);
-        expect(cap.state.companyMarket).toEqual([
+        expect(cap.data.companyDeck.size).toBe(2);
+        expect(cap.data.companyMarket.length).toBe(4);
+        expect(cap.data.companyMarket).toEqual([
             'c-food',
             'c-influence',
             'c-market-1',
@@ -39,11 +39,11 @@ describe('setupRound', () => {
     });
     test('only redraws empty slots', () => {
         cap.setupRound();
-        cap.state.companyMarket.shift();
+        cap.data.companyMarket.shift();
         cap.setupRound();
-        expect(cap.state.companyDeck.size).toBe(1);
-        expect(cap.state.companyMarket.length).toBe(4);
-        expect(cap.state.companyMarket).toEqual([
+        expect(cap.data.companyDeck.size).toBe(1);
+        expect(cap.data.companyMarket.length).toBe(4);
+        expect(cap.data.companyMarket).toEqual([
             'c-influence',
             'c-market-1',
             'c-market-2',
@@ -54,35 +54,35 @@ describe('setupRound', () => {
 
 describe('getPrice', () => {
     test('food', () => {
-        cap.state.priceLevels.food = 0;
+        cap.data.priceLevels.food = 0;
         expect(cap.getPrice('food')).toBe(9);
-        cap.state.priceLevels.food = 1;
+        cap.data.priceLevels.food = 1;
         expect(cap.getPrice('food')).toBe(12);
-        cap.state.priceLevels.food = 2;
+        cap.data.priceLevels.food = 2;
         expect(cap.getPrice('food')).toBe(15);
     });
     test('healthcare', () => {
-        cap.state.priceLevels.healthcare = 0;
+        cap.data.priceLevels.healthcare = 0;
         expect(cap.getPrice('healthcare')).toBe(5);
-        cap.state.priceLevels.healthcare = 1;
+        cap.data.priceLevels.healthcare = 1;
         expect(cap.getPrice('healthcare')).toBe(8);
-        cap.state.priceLevels.healthcare = 2;
+        cap.data.priceLevels.healthcare = 2;
         expect(cap.getPrice('healthcare')).toBe(10);
     });
     test('education', () => {
-        cap.state.priceLevels.education = 0;
+        cap.data.priceLevels.education = 0;
         expect(cap.getPrice('education')).toBe(5);
-        cap.state.priceLevels.education = 1;
+        cap.data.priceLevels.education = 1;
         expect(cap.getPrice('education')).toBe(8);
-        cap.state.priceLevels.education = 2;
+        cap.data.priceLevels.education = 2;
         expect(cap.getPrice('education')).toBe(10);
     });
     test('luxury', () => {
-        cap.state.priceLevels.luxury = 0;
+        cap.data.priceLevels.luxury = 0;
         expect(cap.getPrice('luxury')).toBe(5);
-        cap.state.priceLevels.luxury = 1;
+        cap.data.priceLevels.luxury = 1;
         expect(cap.getPrice('luxury')).toBe(8);
-        cap.state.priceLevels.luxury = 2;
+        cap.data.priceLevels.luxury = 2;
         expect(cap.getPrice('luxury')).toBe(10);
     });
 });
@@ -91,8 +91,8 @@ describe('basicActions', () => {
     describe('makeBusinessDeal', async () => {
         beforeEach(() => {
             expect(game.state.board.businessDealCards).toEqual(['test-1', 'test-2']);
-            cap.state.resources.money.add(100);
-            expect(cap.state.resources.money.value).toBe(100);
+            cap.data.resources.money.add(100);
+            expect(cap.data.resources.money.value).toBe(100);
         });
         test('condition:hasDeals', async () => {
             game.state.board.businessDealCards = [];
@@ -104,7 +104,7 @@ describe('basicActions', () => {
             await expect(nextAndTick('capitalist:makeBusinessDeal')).rejects.toThrow(/hasDeals/);
         });
         test('condition:hasMoney', async () => {
-            cap.state.resources.money.remove(100);
+            cap.data.resources.money.remove(100);
             addInput('capitalist:makeBusinessDeal', {
                 id: 'test-1',
                 storage: {},
@@ -119,11 +119,11 @@ describe('basicActions', () => {
                 freeTradeZone: {},
             });
             await nextAndTick('capitalist:makeBusinessDeal');
-            expect(cap.state.resources.money.value).toBe(90);
-            expect(cap.state.resources.food.value).toBe(1);
-            expect(cap.state.resources.luxury.value).toBe(2);
-            expect(cap.state.freeTradeZoneResources.food.value).toBe(0);
-            expect(cap.state.freeTradeZoneResources.luxury.value).toBe(0);
+            expect(cap.data.resources.money.value).toBe(90);
+            expect(cap.data.resources.food.value).toBe(1);
+            expect(cap.data.resources.luxury.value).toBe(2);
+            expect(cap.data.freeTradeZoneResources.food.value).toBe(0);
+            expect(cap.data.freeTradeZoneResources.luxury.value).toBe(0);
             expect(game.state.board.businessDealCards).toEqual(['test-2']);
         });
         test('some in trade zone', async () => {
@@ -133,11 +133,11 @@ describe('basicActions', () => {
                 freeTradeZone: { food: 1, luxury: 2 },
             });
             await nextAndTick('capitalist:makeBusinessDeal');
-            expect(cap.state.resources.money.value).toBe(70);
-            expect(cap.state.resources.food.value).toBe(2);
-            expect(cap.state.resources.luxury.value).toBe(2);
-            expect(cap.state.freeTradeZoneResources.food.value).toBe(1);
-            expect(cap.state.freeTradeZoneResources.luxury.value).toBe(2);
+            expect(cap.data.resources.money.value).toBe(70);
+            expect(cap.data.resources.food.value).toBe(2);
+            expect(cap.data.resources.luxury.value).toBe(2);
+            expect(cap.data.freeTradeZoneResources.food.value).toBe(1);
+            expect(cap.data.freeTradeZoneResources.luxury.value).toBe(2);
             expect(game.state.board.businessDealCards).toEqual(['test-1']);
         });
     });
@@ -151,15 +151,15 @@ describe('basicActions', () => {
             await expect(nextAndTick('capitalist:lobby')).rejects.toThrow(/hasMoney/);
         });
         test('run', async () => {
-            cap.state.resources.money.add(100);
+            cap.data.resources.money.add(100);
             game.state.board.availableInfluence = 2;
             await nextAndTick('capitalist:lobby');
             expect(game.state.board.availableInfluence).toBe(0);
-            expect(cap.state.resources.influence.value).toBe(2);
+            expect(cap.data.resources.influence.value).toBe(2);
             game.state.board.availableInfluence = 5;
             await nextAndTick('capitalist:lobby');
             expect(game.state.board.availableInfluence).toBe(2);
-            expect(cap.state.resources.influence.value).toBe(5);
+            expect(cap.data.resources.influence.value).toBe(5);
         });
     });
 });
@@ -167,21 +167,21 @@ describe('basicActions', () => {
 describe('freeAction', () => {
     describe('giveBonus', () => {
         test('condition:hasMoney', async () => {
-            cap.state.resources.money.add(4);
+            cap.data.resources.money.add(4);
             addInput('capitalist:giveBonus', 'middleClass');
             await expect(nextAndTick('capitalist:giveBonus')).rejects.toThrow(/hasMoney/);
         });
         test('run', async () => {
             const workers = addWorkers(3);
-            const company = cap.state.companies[0];
+            const company = cap.data.companies[0];
             assignWorkers(workers, company.id, { committed: false });
             expect(company.workers).toEqual(workers);
-            cap.state.resources.money.add(100);
+            cap.data.resources.money.add(100);
             addInput('capitalist:giveBonus', company.id);
-            expect(game.state.roles.workingClass.state.resources.money.value).toBe(0);
+            expect(game.state.roles.workingClass.data.resources.money.value).toBe(0);
             await nextAndTick('capitalist:giveBonus');
-            expect(cap.state.resources.money.value).toBe(95);
-            expect(game.state.roles.workingClass.state.resources.money.value).toBe(5);
+            expect(cap.data.resources.money.value).toBe(95);
+            expect(game.state.roles.workingClass.data.resources.money.value).toBe(5);
             eachWorker(workers, w => {
                 expect(w.committed).toBe(true);
             });
@@ -189,26 +189,26 @@ describe('freeAction', () => {
     });
     describe('buyStorage', () => {
         test('condition:hasMoney', async () => {
-            cap.state.resources.money.add(19);
+            cap.data.resources.money.add(19);
             addInput('capitalist:buyStorage', 'food');
             await expect(nextAndTick('capitalist:buyStorage')).rejects.toThrow(/hasMoney/);
         });
         test('condition:hasStorage', async () => {
-            cap.state.resources.money.add(20);
-            cap.state.storage.food = true;
-            cap.state.storage.healthcare = true;
-            cap.state.storage.education = true;
-            cap.state.storage.luxury = true;
+            cap.data.resources.money.add(20);
+            cap.data.storage.food = true;
+            cap.data.storage.healthcare = true;
+            cap.data.storage.education = true;
+            cap.data.storage.luxury = true;
             addInput('capitalist:buyStorage', 'food');
             await expect(nextAndTick('capitalist:buyStorage')).rejects.toThrow(/hasStorage/);
         });
         test('run', async () => {
-            cap.state.resources.money.add(100);
-            expect(cap.state.storage.food).toBeFalsy();
+            cap.data.resources.money.add(100);
+            expect(cap.data.storage.food).toBeFalsy();
             addInput('capitalist:buyStorage', 'food');
             await nextAndTick('capitalist:buyStorage');
-            expect(cap.state.resources.money.value).toBe(80);
-            expect(cap.state.storage.food).toBe(true);
+            expect(cap.data.resources.money.value).toBe(80);
+            expect(cap.data.storage.food).toBe(true);
         });
     });
 });
