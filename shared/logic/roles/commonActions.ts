@@ -281,22 +281,7 @@ export function createBuyGoodsAndServices(role: WorkingClassRole | MiddleClassRo
                         continue;
                     }
 
-                    const targetRole = role.game.state.roles[source];
-                    let total = 0;
-
-                    if (resource === ResourceEnumSchema.enum.influence) {
-                        if (targetRole.id !== RoleEnum.state) {
-                            throw new Error('only the state sells influence');
-                        }
-                        total = count * targetRole.getPrice(resource);
-                    } else {
-                        total = count * targetRole.getPrice(resource);
-                    }
-
-                    role.state.resources.money.remove(total);
-                    role.state.resources[resource].add(count);
-                    targetRole.state.resources.money.add(total);
-                    targetRole.state.resources[resource].remove(count);
+                    role.buyGoods(role.game.state.roles[source], resource, count);
                 }
             },
         }),

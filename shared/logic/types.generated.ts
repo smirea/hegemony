@@ -387,6 +387,12 @@ export type PlayerInput = {
     'state:meetWithPartyMps': z.infer<
         NonNullable<StateRole['basicActions']['meetWithPartyMps']['playerInputSchema']>
     >;
+    'state:extraTax': z.infer<
+        NonNullable<StateRole['basicActions']['extraTax']['playerInputSchema']>
+    >;
+    'state:campaign': z.infer<
+        NonNullable<StateRole['basicActions']['campaign']['playerInputSchema']>
+    >;
     'state:adjustWages': z.infer<
         NonNullable<StateRole['freeActions']['adjustWages']['playerInputSchema']>
     >;

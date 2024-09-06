@@ -190,7 +190,11 @@ export type RoleName = (typeof RoleEnum)[keyof typeof RoleEnum];
 
 /** *** zod schemas *****/
 export const RoleNameSchema = zodObjectEnum(RoleEnum);
-export const RoleNameNoStateSchema = RoleNameSchema.exclude([RoleNameSchema.enum.state]);
+export const RoleNameNoStateSchema = z.enum([
+    RoleEnum.workingClass,
+    RoleEnum.middleClass,
+    RoleEnum.capitalist,
+]);
 
 export const PolicyEnumSchema = zodObjectEnum(PolicyEnum);
 export const PolicyValueSchema = z.union([z.literal(0), z.literal(1), z.literal(2)]);

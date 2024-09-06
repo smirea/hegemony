@@ -1,7 +1,18 @@
-import { type Action, type RoleName } from '../types';
+import { type z } from 'zod';
+
+import {
+    ResourceEnumSchema,
+    RoleEnum,
+    type TradeableResourceAndInfluenceSchema,
+    type Action,
+    type RoleName,
+} from '../types';
 import ResourceManager, { MoneyResourceManager } from '../utils/ResourceManager';
 
 import type Game from '../Game';
+import type MiddleClassRole from './MiddleClassRole';
+import type StateRole from './StateRole';
+import type CapitalistRole from './CapitalistRole';
 
 export interface BaseState<MoneyManager extends MoneyResourceManager = MoneyResourceManager> {
     score: number;
@@ -43,4 +54,28 @@ export default abstract class AbstractRole<Id extends RoleName, State extends Ba
     abstract setupRound(): void;
     abstract basicActions: Record<string, Action<any>>;
     abstract freeActions: Record<string, Action<any>>;
+
+    public buyGoods(
+        source: MiddleClassRole | CapitalistRole | StateRole,
+        resource: z.infer<typeof TradeableResourceAndInfluenceSchema>,
+        count: number,
+    ) {
+        if (this.id === source.id) throw new Error(`${this.id}: cannot buy goods from yourself`);
+
+        let total;
+        if (resource === ResourceEnumSchema.enum.influence) {
+            if (source.id !== RoleEnum.state) throw new Error('only the state sells influence');
+            total = count * source.getPrice(resource);
+        } else {
+            total = count * source.getPrice(resource);
+        }
+
+        this.state.resources.money.remove(total);
+        source.state.resources.money.add(total);
+
+        this.state.resources[resource].add(count);
+        source.state.resources[resource].remove(count);
+
+        if (source.id === RoleEnum.state) source.onBuyGoods(this.id as any, resource, count);
+    }
 }

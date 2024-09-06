@@ -1,15 +1,15 @@
 import _ from 'lodash';
+import { z } from 'zod';
 
 import {
     type Company,
     type CompanyCard,
     type Resource,
-    type ResourceEnum,
+    ResourceEnumSchema,
     RoleEnum,
     type RoleNameNoState,
     RoleNameNoStateSchema,
-    RoleNameSchema,
-    type TradeableResource,
+    type TradeableResourceAndInfluenceSchema,
 } from '../types';
 import action from '../utils/action';
 import AbstractRole, { type BaseState } from './AbstractRole';
@@ -23,6 +23,7 @@ import {
 import { createCompany } from './commonMethods';
 import Deck from '../cards/Deck';
 import { stateCompanies } from '../cards/companyCards';
+import ResourceManager from '../utils/ResourceManager';
 
 import type Game from '../Game';
 
@@ -36,6 +37,7 @@ interface StateState extends BaseState {
     companyDeck: Deck<CompanyCard[]>;
     companies: Company[];
     benefits: Record<RoleNameNoState, Benefit[]>;
+    resources: BaseState['resources'] & { personalInfluence: ResourceManager };
 }
 
 export default class StateRole extends AbstractRole<typeof RoleEnum.state, StateState> {
@@ -44,8 +46,16 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
 
     constructor(game: Game) {
         super(game);
+        const base = this.createBaseState();
         this.state = {
-            ...this.createBaseState(),
+            ...base,
+            resources: {
+                ...base.resources,
+                personalInfluence: new ResourceManager({
+                    name: this.id + ':personalInfluence',
+                    value: 0,
+                }),
+            },
             usedActions: [],
             legitimacy: {
                 [RoleEnum.workingClass]: 2,
@@ -77,7 +87,7 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
         // todo
     }
 
-    getPrice(resource: TradeableResource | typeof ResourceEnum.influence) {
+    getPrice(resource: z.infer<typeof TradeableResourceAndInfluenceSchema>) {
         switch (resource) {
             case 'food':
                 return 12;
@@ -89,6 +99,30 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
                 return 8;
             case 'influence':
                 return 10;
+        }
+    }
+
+    onBuyGoods(
+        roleName: RoleNameNoState,
+        resource: z.infer<typeof TradeableResourceAndInfluenceSchema>,
+        count: number,
+    ) {
+        if (
+            resource !== ResourceEnumSchema.enum.education &&
+            resource !== ResourceEnumSchema.enum.healthcare
+        )
+            return;
+        const policy = this.game.state.board.policies[resource];
+        switch (policy) {
+            case 0:
+                this.updateLegitimacy(roleName, Math.floor(count / 3));
+                break;
+            case 1:
+                this.state.score += 1;
+                break;
+            case 2:
+                // noop
+                break;
         }
     }
 
@@ -128,19 +162,29 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
             playerInputSchema: RoleNameNoStateSchema,
             condition: () => [['hasVotingCubes', this.state.resources.influence.value >= 2]],
             run: target => {
+                this.state.resources.influence.remove(2);
                 this.updateLegitimacy(target, +1);
             },
         }),
         /** take 10¥ from each class → -1 Legitimacy from two lowest classes */
         extraTax: action({
-            run: () => {
-                this.updateLegitimacy(RoleNameSchema.enum.workingClass, -1);
-                this.updateLegitimacy(RoleNameSchema.enum.middleClass, -1);
-                this.updateLegitimacy(RoleNameSchema.enum.capitalist, -1);
+            // input is only needed in the case of a tie
+            // but since it's sometimes needed and sometimes not ...
+            // just have the UI always send it
+            playerInputSchema: z.tuple([RoleNameNoStateSchema, RoleNameNoStateSchema]),
+            run: ([roleA, roleB]) => {
+                this.updateLegitimacy(roleA, -1);
+                this.updateLegitimacy(roleB, -1);
 
-                this.game.state.roles.workingClass.state.resources.money.remove(10);
-                this.game.state.roles.middleClass.state.resources.money.remove(10);
-                this.game.state.roles.capitalist.state.resources.money.remove(10);
+                this.game.state.roles.workingClass.state.resources.money.remove(10, {
+                    canTakeLoans: true,
+                });
+                this.game.state.roles.middleClass.state.resources.money.remove(10, {
+                    canTakeLoans: true,
+                });
+                this.game.state.roles.capitalist.state.resources.money.remove(10, {
+                    canTakeLoans: true,
+                });
 
                 this.state.resources.money.add(30);
             },
@@ -148,10 +192,11 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
         /** up to 3x media → personal 🟣 */
         campaign: action({
             condition: () => [['hasVotingCubes', this.state.resources.influence.value >= 1]],
-            run: () => {
-                const toAdd = Math.min(3, this.game.state.board.availableInfluence);
-                this.state.resources.influence.add(toAdd);
-                this.game.state.board.availableInfluence -= toAdd;
+            playerInputSchema: z.number().min(0).max(3),
+            run: count => {
+                const toAdd = Math.min(3, count, this.state.resources.influence.value);
+                this.state.resources.influence.remove(toAdd);
+                this.state.resources.personalInfluence.add(toAdd);
             },
         }),
     };
