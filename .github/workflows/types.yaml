@@ -1,0 +1,21 @@
+name: Build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📥 Setup
+        uses: ./.github/actions/setup
+
+      - name: Typecheck all apps
+        run: pnpm lint:types

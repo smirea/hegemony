@@ -17,7 +17,7 @@
 	"dependencies": {
 		"@emotion/react": "^11.11.4",
 		"@emotion/styled": "^11.11.5",
-		"@smirea/node-utils": "github:smirea/smirea-node-utils",
+		"@smirea/node-utils": "github:smirea/node-utils",
 		"@tanstack/react-query": "^5.51.21",
 		"@types/lodash": "^4.17.7",
 		"chalk": "^4.1.2",

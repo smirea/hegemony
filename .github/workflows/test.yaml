@@ -1,0 +1,21 @@
+name: Test
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📥 Setup
+        uses: ./.github/actions/setup
+
+      - name: Test all apps
+        run: pnpm run test

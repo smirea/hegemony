@@ -1,0 +1,21 @@
+name: Lint
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📥 Setup
+        uses: ./.github/actions/setup
+
+      - name: Lint all apps
+        run: pnpm lint:report

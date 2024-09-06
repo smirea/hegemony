@@ -1,0 +1,51 @@
+# Reference:
+#   https://gist.github.com/belgattitude/0ecd26155b47e7be1be6163ecfbb0f0b
+
+name: 'setup'
+description: 'setup node, pnpm install, cache'
+
+runs:
+  using: 'composite'
+
+  steps:
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 9
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22.x'
+        cache: 'pnpm'
+
+    # - uses: nrwl/nx-set-shas@v3
+    #   with:
+    #     main-branch-name: master
+
+    # - name: Expose pnpm config(s) through "$GITHUB_OUTPUT"
+    #   id: pnpm-config
+    #   shell: bash
+    #   run: |
+    #     echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+    # - name: Cache rotation keys
+    #   id: cache-rotation
+    #   shell: bash
+    #   run: |
+    #     echo "YEAR_MONTH=$(/bin/date -u "+%Y%m")" >> $GITHUB_OUTPUT
+
+    # - uses: actions/cache@v4
+    #   name: Setup pnpm cache
+    #   with:
+    #     path: ${{ steps.pnpm-config.outputs.STORE_PATH }}
+    #     key: ${{ runner.os }}-pnpm-store-cache-${{ steps.cache-rotation.outputs.YEAR_MONTH }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-pnpm-store-cache-${{ steps.cache-rotation.outputs.YEAR_MONTH }}-
+
+    # - name: Install global dependencies
+    #   shell: bash
+    #   run: pnpm install --prefer-offline --global nx
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --prefer-offline

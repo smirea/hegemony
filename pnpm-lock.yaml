@@ -12,8 +12,8 @@ dependencies:
     specifier: ^11.11.5
     version: 11.11.5(@emotion/react@11.11.4)(@types/react@18.3.3)(react@18.3.1)
   '@smirea/node-utils':
-    specifier: github:smirea/smirea-node-utils
-    version: github.com/smirea/smirea-node-utils/5c1dd8f217b2b671bedb2c94b188d7b26f481487
+    specifier: github:smirea/node-utils
+    version: github.com/smirea/node-utils/5c1dd8f217b2b671bedb2c94b188d7b26f481487
   '@tanstack/react-query':
     specifier: ^5.51.21
     version: 5.51.21(react@18.3.1)
@@ -4332,8 +4332,8 @@ packages:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
     dev: false
 
-  github.com/smirea/smirea-node-utils/5c1dd8f217b2b671bedb2c94b188d7b26f481487:
-    resolution: {commit: 5c1dd8f217b2b671bedb2c94b188d7b26f481487, repo: git+ssh://git@github.com/smirea/smirea-node-utils.git, type: git}
+  github.com/smirea/node-utils/5c1dd8f217b2b671bedb2c94b188d7b26f481487:
+    resolution: {tarball: https://codeload.github.com/smirea/node-utils/tar.gz/5c1dd8f217b2b671bedb2c94b188d7b26f481487}
     name: '@smirea/node-utils'
     version: 1.3.0
     dependencies:
