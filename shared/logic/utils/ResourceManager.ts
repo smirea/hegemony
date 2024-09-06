@@ -48,9 +48,10 @@ export class MoneyResourceManager extends ResourceManager {
     remove(amount: number, { canTakeLoans = false }: { canTakeLoans?: boolean } = {}) {
         if (this._value >= amount) return super.remove(amount);
         if (!canTakeLoans) throw new Error('not enough money');
-        const numLoans = Math.ceil(((this._value - amount) * -1) / 50);
+        const numLoans = Math.ceil((amount - this._value) / 50);
         this.addLoans(numLoans);
-        this._value = numLoans * 50 - amount;
+        this._value += numLoans * 50;
+        this._value -= amount;
         return this.value;
     }
 }
@@ -95,23 +96,29 @@ export class CapitalistMoneyResourceManager extends MoneyResourceManager {
         const bucket = useCapital ? '_capital' : '_revenue';
         const otherBucket = useCapital ? '_revenue' : '_capital';
 
+        // no need to use both buckets
         if (value >= amount) {
             this[bucket] -= amount;
             return this.value;
         }
 
-        let remaining = amount - this[bucket];
-        this[bucket] = 0;
-        if (this[otherBucket] >= remaining) {
+        // no loans needed
+        if (this.value >= amount) {
+            const remaining = amount - this[bucket];
+            this[bucket] = 0;
             this[otherBucket] -= remaining;
-        } else {
-            if (!canTakeLoans) throw new Error('not enough money');
-            remaining -= this[otherBucket];
-            this[otherBucket] = 0;
-            const numLoans = Math.ceil(remaining / 50);
-            this._capital += numLoans * 50;
-            this.addLoans(numLoans);
+            return this.value;
         }
+
+        if (!canTakeLoans) throw new Error('not enough money');
+
+        const remaining = amount - this.value;
+        this._capital = 0;
+        this._revenue = 0;
+        const numLoans = Math.ceil(remaining / 50);
+        this.addLoans(numLoans);
+        this._capital += numLoans * 50;
+        this._capital -= remaining;
 
         return this.value;
     }
