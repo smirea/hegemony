@@ -1,11 +1,6 @@
 import { z, type ZodNever, type ZodType } from 'zod';
 import { zodObjectEnum } from 'shared/utils/zod';
 
-import { type ForeignMarketCard } from './cards/foreignMarketCards';
-import { type AnyActionEvent } from './types.generated';
-
-import type Deck from './cards/Deck';
-import type { BusinessDealCard } from './cards/businessDealCards';
 import type WorkingClassRole from './roles/WorkingClassRole';
 import type MiddleClassRole from './roles/MiddleClassRole';
 import type CapitalistRole from './roles/CapitalistRole';
@@ -94,37 +89,6 @@ export type RoleNameNoState = WorkingClassRole['id'] | MiddleClassRole['id'] | C
 export type RoleNameNoWorkingClass = StateRole['id'] | MiddleClassRole['id'] | CapitalistRole['id'];
 export type RoleNameWorkingMiddleClass = WorkingClassRole['id'] | MiddleClassRole['id'];
 export type RoleNameMiddleCapitalist = MiddleClassRole['id'] | CapitalistRole['id'];
-
-export interface GameState {
-    error?: any;
-    players: Player[];
-    settings: Record<string, never>;
-    round: number;
-    turn: number;
-    currentRoleName: null | RoleName;
-    board: {
-        votingCubeBag: Record<RoleNameNoState, number>;
-        policies: Record<PolicyName, PolicyValue>;
-        policyProposals: Partial<Record<PolicyName, { role: RoleName; value: PolicyValue }>>;
-        availableInfluence: number;
-        foreignMarketCard: ForeignMarketCard['id'];
-        businessDealCards: BusinessDealCard['id'][];
-        decks: {
-            foreignMarketCards: Deck<ForeignMarketCard[]>;
-            businessDealCards: Deck<BusinessDealCard[]>;
-        };
-    };
-    roles: {
-        [RoleEnum.workingClass]: WorkingClassRole;
-        [RoleEnum.middleClass]: MiddleClassRole;
-        [RoleEnum.capitalist]: CapitalistRole;
-        [RoleEnum.state]: StateRole;
-    };
-    nextWorkerId: number;
-    nextActionIndex: number;
-    currentActionIndex: number;
-    actionQueue: AnyActionEvent[];
-}
 
 export type RoleMap = {
     workingClass: WorkingClassRole;

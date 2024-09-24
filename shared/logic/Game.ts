@@ -11,7 +11,6 @@ import {
     type Company,
     type CompanyCard,
     type CompanyWorker,
-    type GameState,
     type Player,
     type RoleName,
     type RoleNameNoWorkingClass,
@@ -19,10 +18,13 @@ import {
     type RunContext,
     type Action,
     type AssignWorkersSchema,
+    type RoleNameNoState,
+    type PolicyName,
+    type PolicyValue,
 } from './types';
-import defaultForeignMarketCards from './cards/foreignMarketCards';
+import defaultForeignMarketCards, { type ForeignMarketCard } from './cards/foreignMarketCards';
 import Deck from './cards/Deck';
-import businessDealCards from './cards/businessDealCards';
+import businessDealCards, { type BusinessDealCard } from './cards/businessDealCards';
 import WorkingClassRole from './roles/WorkingClassRole';
 import MiddleClassRole from './roles/MiddleClassRole';
 import CapitalistRole from './roles/CapitalistRole';
@@ -52,6 +54,37 @@ interface GameConfig {
 export interface GameConfigInput extends Omit<GameConfig, 'decks' | 'debug'> {
     decks?: Partial<GameState['board']['decks']>;
     debug?: boolean;
+}
+
+export interface GameState {
+    error?: any;
+    players: Player[];
+    settings: Record<string, never>;
+    round: number;
+    turn: number;
+    currentRoleName: null | RoleName;
+    board: {
+        votingCubeBag: Record<RoleNameNoState, number>;
+        policies: Record<PolicyName, PolicyValue>;
+        policyProposals: Partial<Record<PolicyName, { role: RoleName; value: PolicyValue }>>;
+        availableInfluence: number;
+        foreignMarketCard: ForeignMarketCard['id'];
+        businessDealCards: BusinessDealCard['id'][];
+        decks: {
+            foreignMarketCards: Deck<ForeignMarketCard[]>;
+            businessDealCards: Deck<BusinessDealCard[]>;
+        };
+    };
+    roles: {
+        [RoleEnum.workingClass]: WorkingClassRole;
+        [RoleEnum.middleClass]: MiddleClassRole;
+        [RoleEnum.capitalist]: CapitalistRole;
+        [RoleEnum.state]: StateRole;
+    };
+    nextWorkerId: number;
+    nextActionIndex: number;
+    currentActionIndex: number;
+    actionQueue: AnyActionEvent[];
 }
 
 export default class Game {
