@@ -3,12 +3,13 @@ import _ from 'lodash';
 import useGame from 'client/utils/useGame';
 import { colors } from 'client/utils/constants';
 import { objectEntries } from 'shared/utils/ts';
+import { observer } from 'mobx-react';
 
 import RoleIcon from '../icons/RoleIcon';
 
 import type { PolicyName, PolicyValue } from 'shared/logic/types';
 
-const BoardPolicies: React.FC = () => {
+const BoardPolicies: React.FC = observer(() => {
     const game = useGame();
 
     const getProposal = (name: PolicyName, value: PolicyValue) => {
@@ -57,7 +58,7 @@ const BoardPolicies: React.FC = () => {
             ))}
         </Root>
     );
-};
+});
 
 export default BoardPolicies;
 

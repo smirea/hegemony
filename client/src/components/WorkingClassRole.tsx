@@ -2,21 +2,23 @@ import styled from '@emotion/styled';
 import React from 'react';
 import _ from 'lodash';
 import { objectEntries } from 'shared/utils/ts';
+import { observer } from 'mobx-react';
+import useGame from 'client/utils/useGame';
 
 import Value from './Value';
 import WorkingClassIcon from './icons/WorkingClassIcon';
 import WorkingClassWorkerIcon from './icons/WorkingCassWorkerIcon';
 
-const WorkingClassRole: React.FC = () => {
-    const workers = 21;
-    const population = 7;
-    const prosperity = 3;
+const WorkingClassRole: React.FC = observer(() => {
+    const game = useGame();
+
+    const workers = game.data.roles.workingClass.data.workers;
+    const population = game.data.roles.workingClass.getPopulation();
+    const prosperity = game.data.roles.workingClass.data.prosperity;
+    // const unions = game.data.roles.workingClass.data.unions;
     const unions = {
-        food: false,
         luxury: true,
-        healthcare: false,
-        education: true,
-        influence: false,
+        healthcare: true,
     };
     const unionCounts = {
         food: 0,
@@ -25,14 +27,7 @@ const WorkingClassRole: React.FC = () => {
         education: 6,
         influence: 1,
     };
-    const resources = {
-        money: 42,
-        food: 5,
-        luxury: 3,
-        healthcare: 2,
-        education: 0,
-        media: 3,
-    };
+    const resources = game.data.roles.workingClass.data.resources;
 
     return (
         <Root>
@@ -40,19 +35,19 @@ const WorkingClassRole: React.FC = () => {
                 <WorkingClassIcon size={4} color='white' />
                 <div className='column py05' data-spacing='.25'>
                     <div className='row' data-spacing='.25'>
-                        <Value icon='money' v={resources.money} />
-                        <Value icon='food' v={resources.food} />
-                        <Value icon='luxury' v={resources.luxury} />
-                        <Value icon='healthcare' v={resources.healthcare} />
-                        <Value icon='education' v={resources.education} />
-                        <Value icon='media' v={resources.media} />
+                        <Value icon='money' v={resources.money.value} />
+                        <Value icon='food' v={resources.food.value} />
+                        <Value icon='luxury' v={resources.luxury.value} />
+                        <Value icon='healthcare' v={resources.healthcare.value} />
+                        <Value icon='education' v={resources.education.value} />
+                        <Value icon='media' v={resources.influence.value} />
                         <div style={{ flex: '1 1 0' }} />
                         <Value icon='prosperity' v={prosperity} />
                     </div>
                     <div className='column'>
                         <div className='row' style={{ fontSize: '.75rem' }}>
                             {_.range(10, 31).map(i => (
-                                <TrackSquare key={i} data-highlighted={i === workers}>
+                                <TrackSquare key={i} data-highlighted={i === workers.length}>
                                     {i}
                                 </TrackSquare>
                             ))}
@@ -96,7 +91,7 @@ const WorkingClassRole: React.FC = () => {
                 >
                     <b style={{ textAlign: 'center' }}>{_.filter(unions).length} Unions</b>
                     <div className='row' data-spacing='.25' style={{ minWidth: '10rem' }}>
-                        {objectEntries(unions).map(([industry, active]) => (
+                        {objectEntries(unionCounts).map(([industry, count]) => (
                             <div
                                 key={industry}
                                 className='column'
@@ -107,10 +102,10 @@ const WorkingClassRole: React.FC = () => {
                                     <WorkingClassWorkerIcon
                                         height={2}
                                         type={industry}
-                                        color={active ? undefined : 'var(--board-color)'}
+                                        color={unions[industry] ? undefined : 'var(--board-color)'}
                                     />
                                 </UnionBox>
-                                <div style={{ fontSize: '.875rem' }}>{unionCounts[industry]}</div>
+                                <div style={{ fontSize: '.875rem' }}>{count}</div>
                             </div>
                         ))}
                     </div>
@@ -118,7 +113,7 @@ const WorkingClassRole: React.FC = () => {
             </div>
         </Root>
     );
-};
+});
 
 export default WorkingClassRole;
 

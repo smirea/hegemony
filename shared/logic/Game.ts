@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import chalk from 'chalk';
 import { type z } from 'zod';
+import { flow, observable, runInAction } from 'mobx';
 
 import {
     PolicyEnum,
@@ -35,7 +36,6 @@ import {
     type PlayerInput,
 } from './types.generated';
 import createAction from './utils/createAction';
-// import { createDraft, finishDraft, freeze, produceWithPatches } from 'immer';
 
 type RunContextNoRole = Omit<RunContext<RoleName>, 'currentRole'>;
 
@@ -88,7 +88,7 @@ export interface GameState {
 }
 
 export default class Game {
-    accessor data: GameState;
+    @observable accessor data: GameState;
     public readonly debug: boolean;
     protected readonly config: GameConfig;
 
@@ -232,12 +232,14 @@ export default class Game {
             await this.unsafeTick();
             return true;
         } catch (e) {
-            this.data.error = e;
+            runInAction(() => {
+                this.data.error = e;
+            });
             return false;
         }
     }
 
-    private async unsafeTick() {
+    private unsafeTick = flow(function* unsafeTick(this: Game) {
         if (this.data.currentActionIndex >= this.data.actionQueue.length) return;
 
         const event = this.data.actionQueue[this.data.currentActionIndex];
@@ -278,7 +280,7 @@ export default class Game {
             if ((event as any).debugPlayerInput) {
                 event.data = (event as any).debugPlayerInput;
             } else {
-                event.data = await this.requestPlayerInput(event.type);
+                event.data = yield this.requestPlayerInput(event.type);
             }
             try {
                 action.playerInputSchema.parse(event.data);
@@ -324,7 +326,7 @@ export default class Game {
         }
 
         ++this.data.currentActionIndex;
-    }
+    });
 
     /** primarily used in testing */
     async flush({
