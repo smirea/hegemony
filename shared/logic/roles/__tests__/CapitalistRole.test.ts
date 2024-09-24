@@ -12,7 +12,7 @@ let game: Game;
 
 beforeEach(async () => {
     game = await initGame();
-    cap = game.state.roles.capitalist;
+    cap = game.data.roles.capitalist;
 });
 
 describe.skip('setupBoard', () => {
@@ -22,7 +22,7 @@ describe.skip('setupBoard', () => {
 describe('setupRound', () => {
     beforeEach(async () => {
         game = await initGame(undefined, { setup: false });
-        cap = game.state.roles.capitalist;
+        cap = game.data.roles.capitalist;
     });
     test('sets up market', () => {
         expect(cap.data.companyMarket.length).toBe(0);
@@ -90,12 +90,12 @@ describe('getPrice', () => {
 describe('basicActions', () => {
     describe('makeBusinessDeal', async () => {
         beforeEach(() => {
-            expect(game.state.board.businessDealCards).toEqual(['test-1', 'test-2']);
+            expect(game.data.board.businessDealCards).toEqual(['test-1', 'test-2']);
             cap.data.resources.money.add(100);
             expect(cap.data.resources.money.value).toBe(100);
         });
         test('condition:hasDeals', async () => {
-            game.state.board.businessDealCards = [];
+            game.data.board.businessDealCards = [];
             addInput('capitalist:makeBusinessDeal', {
                 id: 'test-1',
                 storage: {},
@@ -124,7 +124,7 @@ describe('basicActions', () => {
             expect(cap.data.resources.luxury.value).toBe(2);
             expect(cap.data.freeTradeZoneResources.food.value).toBe(0);
             expect(cap.data.freeTradeZoneResources.luxury.value).toBe(0);
-            expect(game.state.board.businessDealCards).toEqual(['test-2']);
+            expect(game.data.board.businessDealCards).toEqual(['test-2']);
         });
         test('some in trade zone', async () => {
             addInput('capitalist:makeBusinessDeal', {
@@ -138,27 +138,27 @@ describe('basicActions', () => {
             expect(cap.data.resources.luxury.value).toBe(2);
             expect(cap.data.freeTradeZoneResources.food.value).toBe(1);
             expect(cap.data.freeTradeZoneResources.luxury.value).toBe(2);
-            expect(game.state.board.businessDealCards).toEqual(['test-1']);
+            expect(game.data.board.businessDealCards).toEqual(['test-1']);
         });
     });
     describe('lobby', () => {
         test('condition:hasInfluence', async () => {
-            game.state.board.availableInfluence = 0;
+            game.data.board.availableInfluence = 0;
             await expect(nextAndTick('capitalist:lobby')).rejects.toThrow(/hasInfluence/);
         });
         test('condition:hasMoney', async () => {
-            game.state.board.availableInfluence = 1;
+            game.data.board.availableInfluence = 1;
             await expect(nextAndTick('capitalist:lobby')).rejects.toThrow(/hasMoney/);
         });
         test('run', async () => {
             cap.data.resources.money.add(100);
-            game.state.board.availableInfluence = 2;
+            game.data.board.availableInfluence = 2;
             await nextAndTick('capitalist:lobby');
-            expect(game.state.board.availableInfluence).toBe(0);
+            expect(game.data.board.availableInfluence).toBe(0);
             expect(cap.data.resources.influence.value).toBe(2);
-            game.state.board.availableInfluence = 5;
+            game.data.board.availableInfluence = 5;
             await nextAndTick('capitalist:lobby');
-            expect(game.state.board.availableInfluence).toBe(2);
+            expect(game.data.board.availableInfluence).toBe(2);
             expect(cap.data.resources.influence.value).toBe(5);
         });
     });
@@ -178,10 +178,10 @@ describe('freeAction', () => {
             expect(company.workers).toEqual(workers);
             cap.data.resources.money.add(100);
             addInput('capitalist:giveBonus', company.id);
-            expect(game.state.roles.workingClass.data.resources.money.value).toBe(0);
+            expect(game.data.roles.workingClass.data.resources.money.value).toBe(0);
             await nextAndTick('capitalist:giveBonus');
             expect(cap.data.resources.money.value).toBe(95);
-            expect(game.state.roles.workingClass.data.resources.money.value).toBe(5);
+            expect(game.data.roles.workingClass.data.resources.money.value).toBe(5);
             eachWorker(workers, w => {
                 expect(w.committed).toBe(true);
             });

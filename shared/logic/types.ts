@@ -96,6 +96,7 @@ export type RoleNameWorkingMiddleClass = WorkingClassRole['id'] | MiddleClassRol
 export type RoleNameMiddleCapitalist = MiddleClassRole['id'] | CapitalistRole['id'];
 
 export interface GameState {
+    error?: any;
     players: Player[];
     settings: Record<string, never>;
     round: number;

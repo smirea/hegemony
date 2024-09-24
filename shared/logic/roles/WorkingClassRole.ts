@@ -23,7 +23,7 @@ import {
     createUseHealthcare,
     createUseLuxury,
 } from './commonActions';
-import action from '../utils/action';
+import createAction from '../utils/createAction';
 import { createGetPopulation, createIncreaseProsperity, createWorker } from './commonMethods';
 
 import type Game from '../Game';
@@ -83,7 +83,7 @@ export default class WorkingClassRole extends AbstractRole<
         ...createAssignWorkers(this),
         ...createBuyGoodsAndServices(this),
         /** 1-2 tokens → non-committed cos. (L1/L2 wages) → wages ⬆ or no production and +1 🟣 */
-        strike: action({
+        strike: createAction({
             playerInputSchema: z.array(CompanyIdSchema),
             condition: () => [['hasStrikeTokens', this.data.strikeTokens > 0]],
             run: toStrike => {
@@ -95,7 +95,7 @@ export default class WorkingClassRole extends AbstractRole<
             },
         }),
         /** unemployed → open slots >= 2 → WC +1 🟣, others -★ (WC choice) */
-        demonstration: action({
+        demonstration: createAction({
             condition: () => [
                 ['noDemonstration', !this.data.demonstration],
                 ['hasUnemployedWorkers', this.canDemonstrate()],
@@ -125,7 +125,7 @@ export default class WorkingClassRole extends AbstractRole<
 
     countOpenWorkerSlots() {
         const middleClassSlots = _.sum(
-            Object.values(this.game.state.roles.middleClass.data.companies).map(c => {
+            Object.values(this.game.data.roles.middleClass.data.companies).map(c => {
                 if (c.workers.length) return 0;
                 const d = this.game.getCompanyDefinition(c.id);
                 return d.workers.filter(w => w.roles.includes(RoleNameSchema.enum.workingClass))
@@ -133,7 +133,7 @@ export default class WorkingClassRole extends AbstractRole<
             }),
         );
         const capitalistSlots = _.sum(
-            Object.values(this.game.state.roles.capitalist.data.companies).map(c => {
+            Object.values(this.game.data.roles.capitalist.data.companies).map(c => {
                 if (c.workers.length) return 0;
                 const d = this.game.getCompanyDefinition(c.id);
                 if (d.fullyAutomated) return 0;
@@ -141,7 +141,7 @@ export default class WorkingClassRole extends AbstractRole<
             }),
         );
         const stateSlots = _.sum(
-            Object.values(this.game.state.roles.state.data.companies).map(c => {
+            Object.values(this.game.data.roles.state.data.companies).map(c => {
                 if (c.workers.length) return 0;
                 const d = this.game.getCompanyDefinition(c.id);
                 return d.workers.length;

@@ -14,8 +14,8 @@ let game: Game;
 
 beforeEach(async () => {
     game = await initGame();
-    mc = game.state.roles.middleClass;
-    wc = game.state.roles.workingClass;
+    mc = game.data.roles.middleClass;
+    wc = game.data.roles.workingClass;
 });
 
 describe.skip('setupBoard', () => {
@@ -25,7 +25,7 @@ describe.skip('setupBoard', () => {
 describe('setupRound', () => {
     beforeEach(async () => {
         game = await initGame(undefined, { setup: false });
-        mc = game.state.roles.middleClass;
+        mc = game.data.roles.middleClass;
     });
     test('sets up market', () => {
         expect(mc.data.companyMarket.length).toBe(0);

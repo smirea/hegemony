@@ -12,7 +12,7 @@ import {
     type TradeableResource,
     TradeableResourceSchema,
 } from '../types';
-import action from '../utils/action';
+import createAction from '../utils/createAction';
 import ResourceManager, { CapitalistMoneyResourceManager } from '../utils/ResourceManager';
 import AbstractRole, { type BaseData } from './AbstractRole';
 import {
@@ -112,7 +112,7 @@ export default class CapitalistRole extends AbstractRole<
         ...createSellCompany(this),
         ...createSellToForeignMarket(this),
         /** pay ¥, goods to storage (tariff ¥) and/or FTZ → discard */
-        makeBusinessDeal: action({
+        makeBusinessDeal: createAction({
             playerInputSchema: z.object({
                 id: BusinessDealIdSchema,
                 storage: z.object({
@@ -125,18 +125,18 @@ export default class CapitalistRole extends AbstractRole<
                 }),
             }),
             condition: () => [
-                ['hasDeals', this.game.state.board.businessDealCards.length > 0],
+                ['hasDeals', this.game.data.board.businessDealCards.length > 0],
                 [
                     'hasMoney',
-                    this.game.state.board.businessDealCards.some(
+                    this.game.data.board.businessDealCards.some(
                         id =>
                             this.data.resources.money.value >=
-                            this.game.state.board.decks.businessDealCards.getOriginalCard(id).cost,
+                            this.game.data.board.decks.businessDealCards.getOriginalCard(id).cost,
                     ),
                 ],
             ],
             run: ({ id, storage, freeTradeZone }) => {
-                const card = this.game.state.board.decks.businessDealCards.getOriginalCard(id);
+                const card = this.game.data.board.decks.businessDealCards.getOriginalCard(id);
                 this.data.resources.money.remove(card.cost);
 
                 if (storage.food) this.data.resources.food.add(storage.food);
@@ -144,9 +144,9 @@ export default class CapitalistRole extends AbstractRole<
 
                 if (freeTradeZone.food || freeTradeZone.luxury) {
                     const tariff =
-                        card.tariffs[this.game.state.board.policies.foreignTrade as 0 | 1];
+                        card.tariffs[this.game.data.board.policies.foreignTrade as 0 | 1];
                     this.data.resources.money.remove(tariff);
-                    this.game.state.roles.state.data.resources.money.add(tariff);
+                    this.game.data.roles.state.data.resources.money.add(tariff);
 
                     if (freeTradeZone.food)
                         this.data.freeTradeZoneResources.food.add(freeTradeZone.food);
@@ -154,21 +154,21 @@ export default class CapitalistRole extends AbstractRole<
                         this.data.freeTradeZoneResources.luxury.add(freeTradeZone.luxury);
                 }
 
-                this.game.state.board.businessDealCards =
-                    this.game.state.board.businessDealCards.filter(c => c !== id);
+                this.game.data.board.businessDealCards =
+                    this.game.data.board.businessDealCards.filter(c => c !== id);
             },
         }),
         /** pay 30¥ → gain 3🟣 */
-        lobby: action({
+        lobby: createAction({
             condition: () => [
-                ['hasInfluence', this.game.state.board.availableInfluence > 0],
+                ['hasInfluence', this.game.data.board.availableInfluence > 0],
                 ['hasMoney', this.data.resources.money.value >= 30],
             ],
             run: () => {
-                const diff = Math.min(3, this.game.state.board.availableInfluence);
+                const diff = Math.min(3, this.game.data.board.availableInfluence);
                 this.data.resources.money.remove(30);
                 this.data.resources.influence.add(diff);
-                this.game.state.board.availableInfluence -= diff;
+                this.game.data.board.availableInfluence -= diff;
             },
         }),
         ...createApplyPoliticalPressure(this),
@@ -179,7 +179,7 @@ export default class CapitalistRole extends AbstractRole<
         ...createAdjustPrices(this),
         ...createAdjustWages(this),
         /** give 5¥ to a class → commit */
-        giveBonus: action({
+        giveBonus: createAction({
             playerInputSchema: CompanyIdSchema,
             condition: () => [['hasMoney', this.data.resources.money.value >= 5]],
             run: companyId => {
@@ -192,11 +192,11 @@ export default class CapitalistRole extends AbstractRole<
                 }
                 if (!targetRole) throw new Error('no target role');
                 this.data.resources.money.remove(5);
-                this.game.state.roles[targetRole].data.resources.money.add(5);
+                this.game.data.roles[targetRole].data.resources.money.add(5);
             },
         }),
         /** buy storage for 20¥ per tile (max 1 storage tile per type for whole game) */
-        buyStorage: action({
+        buyStorage: createAction({
             playerInputSchema: TradeableResourceSchema,
             condition: () => [
                 ['hasMoney', this.data.resources.money.value >= 20],

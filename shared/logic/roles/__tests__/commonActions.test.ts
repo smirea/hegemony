@@ -19,10 +19,10 @@ let st: StateRole;
 
 beforeEach(async () => {
     game = await initGame();
-    wc = game.state.roles.workingClass;
-    mc = game.state.roles.middleClass;
-    cap = game.state.roles.capitalist;
-    st = game.state.roles.state;
+    wc = game.data.roles.workingClass;
+    mc = game.data.roles.middleClass;
+    cap = game.data.roles.capitalist;
+    st = game.data.roles.state;
 });
 
 describe('createProposeBill', () => {
@@ -31,26 +31,26 @@ describe('createProposeBill', () => {
         value: 1,
     } as const;
     test('condition:hasVotes', async () => {
-        game.state.board.policyProposals.education = wc1;
-        game.state.board.policyProposals.fiscalPolicy = wc1;
-        game.state.board.policyProposals.foreignTrade = wc1;
+        game.data.board.policyProposals.education = wc1;
+        game.data.board.policyProposals.fiscalPolicy = wc1;
+        game.data.board.policyProposals.foreignTrade = wc1;
         addInput('workingClass:proposeBill', { policy: 'healthcare', value: 1 });
         await expect(nextAndTick('workingClass:proposeBill')).rejects.toThrow(/hasVotes/);
     });
     test('validateInput:notProposed', async () => {
-        game.state.board.policyProposals.education = wc1;
+        game.data.board.policyProposals.education = wc1;
         addInput('workingClass:proposeBill', { policy: 'education', value: 1 });
         await expect(nextAndTick('workingClass:proposeBill')).rejects.toThrow(/notProposed/);
     });
     test('validateInput:isDifferent', async () => {
-        game.state.board.policyProposals.education = wc1;
+        game.data.board.policyProposals.education = wc1;
         addInput('workingClass:proposeBill', { policy: 'education', value: 0 });
         await expect(nextAndTick('workingClass:proposeBill')).rejects.toThrow(/isDifferent/);
     });
     test('run', async () => {
         addInput('workingClass:proposeBill', { policy: 'education', value: 1 });
         await nextAndTick('workingClass:proposeBill');
-        expect(game.state.board.policyProposals.education).toEqual(wc1);
+        expect(game.data.board.policyProposals.education).toEqual(wc1);
     });
 });
 
@@ -142,7 +142,7 @@ describe('createUseLuxury', () => {
 
 describe('createAdjustPrices', () => {
     test('run', async () => {
-        game.state.board.policies.laborMarket = 1;
+        game.data.board.policies.laborMarket = 1;
         addInput('capitalist:adjustPrices', { education: 2 });
         await nextAndTick('capitalist:adjustPrices');
         expect(cap.data.priceLevels.education).toEqual(2);
@@ -151,7 +151,7 @@ describe('createAdjustPrices', () => {
 
 describe('createAdjustWages', () => {
     test('condition:minWage', async () => {
-        game.state.board.policies.laborMarket = 2;
+        game.data.board.policies.laborMarket = 2;
         addInput('capitalist:adjustWages', [{ companyId: 'c-food', wages: 'l2' }]);
         await expect(nextAndTick('capitalist:adjustWages')).rejects.toThrow(/minWage/);
     });
@@ -200,7 +200,7 @@ describe('createSwapWorkers', () => {
 
 describe('createReceiveBenefits', () => {
     test('condition:only4Players', async () => {
-        game.state.players.pop();
+        game.data.players.pop();
         await expect(nextAndTick('workingClass:receiveBenefits')).rejects.toThrow(/only4Players/);
     });
     test('condition:hasBenefits', async () => {
@@ -225,14 +225,14 @@ describe('createApplyPoliticalPressure', () => {
     });
     test('run', async () => {
         wc.data.availableVotingCubes = 2;
-        expect(game.state.board.votingCubeBag.workingClass).toEqual(0);
+        expect(game.data.board.votingCubeBag.workingClass).toEqual(0);
         await nextAndTick('workingClass:applyPoliticalPressure');
         expect(wc.data.availableVotingCubes).toEqual(0);
-        expect(game.state.board.votingCubeBag.workingClass).toEqual(2);
+        expect(game.data.board.votingCubeBag.workingClass).toEqual(2);
         wc.data.availableVotingCubes = 10;
         await nextAndTick('workingClass:applyPoliticalPressure');
         expect(wc.data.availableVotingCubes).toEqual(7);
-        expect(game.state.board.votingCubeBag.workingClass).toEqual(5);
+        expect(game.data.board.votingCubeBag.workingClass).toEqual(5);
     });
 });
 
@@ -308,7 +308,7 @@ describe('createBuildCompany', () => {
     });
     test('run', async () => {
         cap.data.resources.money.add(100);
-        game.state.board.policies.laborMarket = 2;
+        game.data.board.policies.laborMarket = 2;
         const workers = addWorkers(2, { committed: false, company: null });
         addInput('capitalist:buildCompany', { companyId: 'c-market-1', workers });
         await nextAndTick('capitalist:buildCompany');

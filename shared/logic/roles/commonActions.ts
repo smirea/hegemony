@@ -19,7 +19,7 @@ import {
     WageIdSchema,
     WorkerTypeEnum,
 } from '../types';
-import action from '../utils/action';
+import createAction from '../utils/createAction';
 
 import type MiddleClassRole from './MiddleClassRole';
 import type WorkingClassRole from './WorkingClassRole';
@@ -31,7 +31,7 @@ export function createProposeBill(
     role: WorkingClassRole | MiddleClassRole | CapitalistRole | StateRole,
 ) {
     return {
-        proposeBill: action({
+        proposeBill: createAction({
             playerInputSchema: z.object({
                 policy: PolicyEnumSchema,
                 value: PolicyValueSchema,
@@ -39,17 +39,17 @@ export function createProposeBill(
             condition: () => [
                 [
                     'hasVotes',
-                    Object.values(role.game.state.board.policyProposals).filter(
+                    Object.values(role.game.data.board.policyProposals).filter(
                         p => p.role === RoleEnum.workingClass,
                     ).length < 3,
                 ],
             ],
             validateInput: ({ policy, value }) => [
-                ['notProposed', !role.game.state.board.policyProposals[policy]],
-                ['isDifferent', role.game.state.board.policies[policy] !== value],
+                ['notProposed', !role.game.data.board.policyProposals[policy]],
+                ['isDifferent', role.game.data.board.policies[policy] !== value],
             ],
             run: ({ policy, value }) => {
-                role.game.state.board.policyProposals[policy] = {
+                role.game.data.board.policyProposals[policy] = {
                     role: role.id,
                     value,
                 };
@@ -61,7 +61,7 @@ export function createProposeBill(
 /** hidden action to account for skipping the free action */
 export function createSkip(_role: WorkingClassRole | MiddleClassRole | CapitalistRole | StateRole) {
     return {
-        skip: action({
+        skip: createAction({
             run: () => void 0,
         }),
     };
@@ -72,7 +72,7 @@ export function createPayLoan(
     role: WorkingClassRole | MiddleClassRole | CapitalistRole | StateRole,
 ) {
     return {
-        payLoan: action({
+        payLoan: createAction({
             condition: () => [
                 ['hasLoans', role.data.resources.money.loans > 0],
                 ['hasMoney', role.data.resources.money.value >= 50],
@@ -88,7 +88,7 @@ export function createPayLoan(
 /** from G&S → 1x Pop. → 1 🔴 / 🟡 → + 2x + unskilled worker */
 export function createUseHealthcare(role: WorkingClassRole | MiddleClassRole) {
     return {
-        useHealthcare: action({
+        useHealthcare: createAction({
             condition: () => [
                 ['hasHealthcare', role.data.resources.healthcare.value >= role.getPopulation()],
             ],
@@ -97,7 +97,7 @@ export function createUseHealthcare(role: WorkingClassRole | MiddleClassRole) {
                 role.increaseProsperity({ withHealthcare: true });
                 // todo: edge-case when there are no more unskilled workers
                 role.data.availableWorkers.unskilled -= 1;
-                const id = ++role.game.state.nextWorkerId;
+                const id = ++role.game.data.nextWorkerId;
                 role.data.workers.push({
                     id,
                     role: role.id,
@@ -112,7 +112,7 @@ export function createUseHealthcare(role: WorkingClassRole | MiddleClassRole) {
 /** from G&S → 1x Pop. → 1 🔴 / 🟡 */
 export function createUseEducation(role: WorkingClassRole | MiddleClassRole) {
     return {
-        useEducation: action({
+        useEducation: createAction({
             playerInputSchema: z.object({
                 workerId: CompanyWorkerIdSchema,
                 type: CompanyWorkerTypeSchema,
@@ -138,7 +138,7 @@ export function createUseEducation(role: WorkingClassRole | MiddleClassRole) {
 /** from G&S 1x Population → 1 🔴 / 🟡 */
 export function createUseLuxury(role: WorkingClassRole | MiddleClassRole) {
     return {
-        useLuxury: action({
+        useLuxury: createAction({
             condition: () => [
                 ['hasLuxury', role.data.resources.luxury.value >= role.getPopulation()],
             ],
@@ -153,7 +153,7 @@ export function createUseLuxury(role: WorkingClassRole | MiddleClassRole) {
 /** any/all prices, any value */
 export function createAdjustPrices(role: MiddleClassRole | CapitalistRole) {
     return {
-        adjustPrices: action({
+        adjustPrices: createAction({
             playerInputSchema: z.record(IndustrySchema, PolicyValueSchema),
             run: prices => {
                 Object.assign(role.data.priceLevels, prices);
@@ -165,7 +165,7 @@ export function createAdjustPrices(role: MiddleClassRole | CapitalistRole) {
 /** raise = commit, committed = cannot lower (Labor Market) */
 export function createAdjustWages(role: MiddleClassRole | CapitalistRole | StateRole) {
     return {
-        adjustWages: action({
+        adjustWages: createAction({
             playerInputSchema: z.array(
                 z.object({
                     companyId: z.string(),
@@ -193,7 +193,7 @@ export function createAdjustWages(role: MiddleClassRole | CapitalistRole | State
 /** skilled worker(s) in unskilled slot ↔ unemployed unskilled (keep committed or non-committed) */
 export function createSwapWorkers(role: WorkingClassRole | MiddleClassRole) {
     return {
-        swapWorkers: action({
+        swapWorkers: createAction({
             playerInputSchema: z.array(z.tuple([CompanyWorkerIdSchema, CompanyWorkerIdSchema])),
             condition: () => [
                 [
@@ -217,13 +217,13 @@ export function createSwapWorkers(role: WorkingClassRole | MiddleClassRole) {
 /** take State Benefits → State gains 1★ */
 export function createReceiveBenefits(role: WorkingClassRole | MiddleClassRole | CapitalistRole) {
     return {
-        receiveBenefits: action({
+        receiveBenefits: createAction({
             condition: () => [
-                ['only4Players', role.game.state.players.length === 4],
-                ['hasBenefits', role.game.state.roles.state.getBenefits(role.id).length > 0],
+                ['only4Players', role.game.data.players.length === 4],
+                ['hasBenefits', role.game.data.roles.state.getBenefits(role.id).length > 0],
             ],
             run: () => {
-                role.game.state.roles.state.receiveBenefits(role.id);
+                role.game.data.roles.state.receiveBenefits(role.id);
             },
         }),
     };
@@ -234,12 +234,12 @@ export function createApplyPoliticalPressure(
     role: WorkingClassRole | MiddleClassRole | CapitalistRole,
 ) {
     return {
-        applyPoliticalPressure: action({
+        applyPoliticalPressure: createAction({
             condition: () => [['hasCubes', role.data.availableVotingCubes >= 1]],
             run: () => {
                 const toAdd = Math.min(3, role.data.availableVotingCubes);
                 role.data.availableVotingCubes -= toAdd;
-                role.game.state.board.votingCubeBag[role.id] += toAdd;
+                role.game.data.board.votingCubeBag[role.id] += toAdd;
             },
         }),
     };
@@ -248,7 +248,7 @@ export function createApplyPoliticalPressure(
 /** 1-3 un-employed or non-committed workers → commit (and/or Trade Union WC) */
 export function createAssignWorkers(role: WorkingClassRole | MiddleClassRole) {
     return {
-        assignWorkers: action({
+        assignWorkers: createAction({
             playerInputSchema: AssignWorkersSchema,
             run: toAssign => {
                 role.game.assignWorkers(toAssign);
@@ -260,7 +260,7 @@ export function createAssignWorkers(role: WorkingClassRole | MiddleClassRole) {
 /** up to 1 per Population × 2 sources (1 type) */
 export function createBuyGoodsAndServices(role: WorkingClassRole | MiddleClassRole) {
     return {
-        buyGoodsAndServices: action({
+        buyGoodsAndServices: createAction({
             playerInputSchema: z.array(
                 z.object({
                     resource: TradeableResourceAndInfluenceSchema,
@@ -282,7 +282,7 @@ export function createBuyGoodsAndServices(role: WorkingClassRole | MiddleClassRo
                         continue;
                     }
 
-                    role.buyGoods(role.game.state.roles[source], resource, count);
+                    role.buyGoods(role.game.data.roles[source], resource, count);
                 }
             },
         }),
@@ -291,7 +291,7 @@ export function createBuyGoodsAndServices(role: WorkingClassRole | MiddleClassRo
 
 export function createBuildCompany(role: MiddleClassRole | CapitalistRole) {
     return {
-        buildCompany: action({
+        buildCompany: createAction({
             playerInputSchema: z.object({
                 companyId: CompanyIdSchema,
                 workers: z.array(CompanyWorkerIdSchema),
@@ -332,7 +332,7 @@ export function createBuildCompany(role: MiddleClassRole | CapitalistRole) {
 /** company with non-committed workers → gain ¥ + workers to unemployed */
 export function createSellCompany(role: MiddleClassRole | CapitalistRole) {
     return {
-        sellCompany: action({
+        sellCompany: createAction({
             playerInputSchema: CompanyIdSchema,
             condition: () => [['hasCompany', role.data.companies.length > 0]],
             run(companyId) {
@@ -356,7 +356,7 @@ export function createSellCompany(role: MiddleClassRole | CapitalistRole) {
 /** 1x per transaction (MC = 1x per transaction, State = only from supply) */
 export function createSellToForeignMarket(role: MiddleClassRole | CapitalistRole | StateRole) {
     return {
-        sellToForeignMarket: action({
+        sellToForeignMarket: createAction({
             playerInputSchema: z.record(
                 TradeableResourceSchema,
                 z.tuple([z.boolean(), z.boolean()]),

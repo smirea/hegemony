@@ -19,7 +19,7 @@ let game: Game;
 describe('countOpenWorkerSlots', () => {
     beforeEach(async () => {
         game = await initGame(undefined, { companyDecks: 'empty' });
-        wc = game.state.roles.workingClass;
+        wc = game.data.roles.workingClass;
     });
 
     const create = (
@@ -58,9 +58,9 @@ describe('countOpenWorkerSlots', () => {
             wages: 'l1',
         };
 
-        game.state.roles[target].data.companies.push(company);
-        game.state.roles[target].data.companyDeck = new Deck('test:deck:' + target, [
-            ...game.state.roles[target].data.companyDeck.cards,
+        game.data.roles[target].data.companies.push(company);
+        game.data.roles[target].data.companyDeck = new Deck('test:deck:' + target, [
+            ...game.data.roles[target].data.companyDeck.cards,
             card,
         ]);
     };
@@ -113,7 +113,7 @@ describe('countOpenWorkerSlots', () => {
 describe('basicActions', () => {
     beforeEach(async () => {
         game = await initGame();
-        wc = game.state.roles.workingClass;
+        wc = game.data.roles.workingClass;
     });
 
     describe('workingClass:strike', async () => {
@@ -124,7 +124,7 @@ describe('basicActions', () => {
         });
         test('run', async () => {
             const { company } = game.getCompanyById(
-                game.state.roles.capitalist.data.companies[0].id,
+                game.data.roles.capitalist.data.companies[0].id,
             );
             expect(company.strike).toBeFalsy();
             wc.data.strikeTokens = 1;
@@ -162,9 +162,9 @@ describe('basicActions', () => {
             );
         });
         test('run', async () => {
-            game.state.roles.middleClass.data.companies = [];
-            game.state.roles.capitalist.data.companies = [];
-            game.state.roles.state.data.companies = [];
+            game.data.roles.middleClass.data.companies = [];
+            game.data.roles.capitalist.data.companies = [];
+            game.data.roles.state.data.companies = [];
             wc.data.workers = [createTestWorker(), createTestWorker()];
             expect(wc.data.demonstration).toBe(false);
             await nextAndTick('workingClass:demonstration');

@@ -12,7 +12,7 @@ let game: Game;
 
 beforeEach(async () => {
     game = await initGame();
-    st = game.state.roles.state;
+    st = game.data.roles.state;
 });
 
 describe.skip('setupBoard', () => {
@@ -22,7 +22,7 @@ describe.skip('setupBoard', () => {
 describe.skip('setupRound', () => {
     beforeEach(async () => {
         game = await initGame(undefined, { setup: false });
-        st = game.state.roles.state;
+        st = game.data.roles.state;
     });
 
     // todo
@@ -31,17 +31,17 @@ describe.skip('setupRound', () => {
 describe('onBuyGoods', () => {
     for (const resource of [ResourceEnum.healthcare, ResourceEnum.education] as const) {
         test(resource, () => {
-            game.state.board.policies[resource] = 2;
+            game.data.board.policies[resource] = 2;
             st.onBuyGoods('workingClass', resource, 7);
             expect(st.data.score).toBe(0);
             expect(st.data.legitimacy.workingClass).toBe(2);
 
-            game.state.board.policies[resource] = 1;
+            game.data.board.policies[resource] = 1;
             st.onBuyGoods('workingClass', resource, 7);
             expect(st.data.score).toBe(1);
             expect(st.data.legitimacy.workingClass).toBe(2);
 
-            game.state.board.policies[resource] = 0;
+            game.data.board.policies[resource] = 0;
             st.onBuyGoods('workingClass', resource, 7);
             expect(st.data.score).toBe(1);
             expect(st.data.legitimacy.workingClass).toBe(4);
@@ -54,19 +54,19 @@ describe('getPrice', () => {
         expect(st.getPrice('food')).toBe(12);
     });
     test('healthcare', () => {
-        game.state.board.policies.healthcare = 0;
+        game.data.board.policies.healthcare = 0;
         expect(st.getPrice('healthcare')).toBe(0);
-        game.state.board.policies.healthcare = 1;
+        game.data.board.policies.healthcare = 1;
         expect(st.getPrice('healthcare')).toBe(5);
-        game.state.board.policies.healthcare = 2;
+        game.data.board.policies.healthcare = 2;
         expect(st.getPrice('healthcare')).toBe(10);
     });
     test('education', () => {
-        game.state.board.policies.education = 0;
+        game.data.board.policies.education = 0;
         expect(st.getPrice('education')).toBe(0);
-        game.state.board.policies.education = 1;
+        game.data.board.policies.education = 1;
         expect(st.getPrice('education')).toBe(5);
-        game.state.board.policies.education = 2;
+        game.data.board.policies.education = 2;
         expect(st.getPrice('education')).toBe(10);
     });
     test('luxury', () => {
@@ -84,14 +84,14 @@ describe('receiveBenefits', () => {
             { type: 'resource', resource: 'healthcare', amount: 3 },
         ];
         st.receiveBenefits('workingClass');
-        expect(game.state.roles.workingClass.data.resources.food.value).toBe(5);
-        expect(game.state.roles.workingClass.data.resources.healthcare.value).toBe(3);
+        expect(game.data.roles.workingClass.data.resources.food.value).toBe(5);
+        expect(game.data.roles.workingClass.data.resources.healthcare.value).toBe(3);
         expect(st.data.score).toBe(1);
     });
     test('voting-cube', () => {
         st.data.benefits.workingClass = [{ type: 'voting-cube', amount: 3 }];
         st.receiveBenefits('workingClass');
-        expect(game.state.board.votingCubeBag.workingClass).toBe(3);
+        expect(game.data.board.votingCubeBag.workingClass).toBe(3);
         expect(st.data.score).toBe(1);
     });
 });
@@ -112,9 +112,9 @@ describe('basicActions', () => {
     });
     describe('extraTax', () => {
         test('run', async () => {
-            game.state.roles.workingClass.data.resources.money.add(20);
-            game.state.roles.middleClass.data.resources.money.add(5);
-            game.state.roles.capitalist.data.resources.money.add(0);
+            game.data.roles.workingClass.data.resources.money.add(20);
+            game.data.roles.middleClass.data.resources.money.add(5);
+            game.data.roles.capitalist.data.resources.money.add(0);
             st.data.legitimacy = {
                 workingClass: 5,
                 middleClass: 4,
@@ -130,14 +130,14 @@ describe('basicActions', () => {
             expect(st.data.legitimacy.middleClass).toBe(3);
             expect(st.data.legitimacy.capitalist).toBe(2);
 
-            expect(game.state.roles.workingClass.data.resources.money.value).toBe(10);
-            expect(game.state.roles.workingClass.data.resources.money.loans).toBe(0);
+            expect(game.data.roles.workingClass.data.resources.money.value).toBe(10);
+            expect(game.data.roles.workingClass.data.resources.money.loans).toBe(0);
 
-            expect(game.state.roles.middleClass.data.resources.money.value).toBe(45);
-            expect(game.state.roles.middleClass.data.resources.money.loans).toBe(1);
+            expect(game.data.roles.middleClass.data.resources.money.value).toBe(45);
+            expect(game.data.roles.middleClass.data.resources.money.loans).toBe(1);
 
-            expect(game.state.roles.capitalist.data.resources.money.value).toBe(40);
-            expect(game.state.roles.capitalist.data.resources.money.loans).toBe(1);
+            expect(game.data.roles.capitalist.data.resources.money.value).toBe(40);
+            expect(game.data.roles.capitalist.data.resources.money.loans).toBe(1);
         });
     });
     describe('campaign', () => {

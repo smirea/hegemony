@@ -9,7 +9,7 @@ import {
     RoleEnum,
     type TradeableResource,
 } from '../types';
-import action from '../utils/action';
+import createAction from '../utils/createAction';
 import AbstractRole, { type BaseData } from './AbstractRole';
 import {
     createAdjustPrices,
@@ -138,7 +138,7 @@ export default class MiddleClassRole extends AbstractRole<
         ...createSellToForeignMarket(this),
         ...createBuyGoodsAndServices(this),
         /** co with non-committed WC (+ non-committed WC) workers → commit + produce (+ pay WC) */
-        extraShift: action({
+        extraShift: createAction({
             playerInputSchema: CompanyIdSchema,
             run: companyId => {
                 const { company } = this.game.getCompanyById(companyId);
@@ -158,7 +158,7 @@ export default class MiddleClassRole extends AbstractRole<
                 produce(def.production);
                 if (uncommittedWorkingClassWorker) {
                     this.data.resources.money.remove(wages);
-                    this.game.state.roles[RoleEnum.workingClass].data.resources.money.add(wages);
+                    this.game.data.roles[RoleEnum.workingClass].data.resources.money.add(wages);
                     produce(def.extraProduction || 0);
                 }
                 for (const id of company.workers) {
