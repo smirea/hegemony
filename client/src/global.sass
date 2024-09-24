@@ -1,5 +1,45 @@
 :root
     --body-background: #fafafa
+    --text-color: #eee
+    --text-color-inverted: #23252A
+    --background-hover: rgba(210, 210, 210, 0.4)
+
+    --board-color: #23252A
+    --board-text: #eee
+
+    --working-class-color: #ED1C25
+    --middle-class-color: #FFC20D
+    --capitalist-color: #0389CF
+    --state-color: #939598
+
+    --wc-color: var(--working-class-color)
+    --mc-color: var(--middle-class-color)
+    --cc-color: var(--capitalist-color)
+    --sc-color: var(--state-color)
+
+    --policy-fiscalPolicy-color: #0285B7
+    --policy-laborMarket-color: #716C9F
+    --policy-taxation-color: #AA56A1
+    --policy-healthcare-color: #C4161B
+    --policy-education-color: #CC7B16
+    --policy-foreignTrade-color: #A3815B
+    --policy-immigration-color: #6E6D74
+
+    --industry-food-color: #63793E
+    --industry-luxury-color: #326EA9
+    --industry-healthcare-color: #EF1217
+    --industry-education-color: #C97A19
+    --industry-influence-color: #5C2B7D
+
+    --worker-unskilled-color: #babebc
+    --worker-food-color: #86BE3A
+    --worker-luxury-color: #01A7D9
+    --worker-healthcare-color: #fafafa
+    --worker-education-color: #EDA537
+    --worker-influence-color: #AB4388
+
+*
+    box-sizing: border-box
 
 html, body
     margin: 0
@@ -10,7 +50,74 @@ body
     min-height: 100vh
     min-width: 100vw
     background: var(--body-background)
+    line-height: 1rem
 
 body, input, button, textarea
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-    font-size: 1rem
+    font-family: Montserrat, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+
+.row
+    display: flex
+    flex-direction: row
+.column
+    display: flex
+    flex-direction: column
+.column, .row
+    &[data-align=center]
+        align-items: center
+    &[data-align=end]
+        align-items: flex-end
+    &[data-align=start]
+        align-items: flex-start
+    &[data-align=stretch]
+        align-items: stretch
+    &[data-spacing='1']
+        gap: 1rem
+    &[data-spacing='2']
+        gap: 2rem
+    &[data-spacing='.5']
+        gap: 0.5rem
+    &[data-spacing='.25']
+        gap: 0.25rem
+    &[data-spacing='.125']
+        gap: 0.125rem
+
+
+$spacings: (0.25, '025'), (0.5, '05'), (1, '1')
+
+@each $space in $spacings
+    $val: nth($space, 1)
+    $cn: nth($space, 2)
+
+    .m#{$cn}
+        margin: #{$val}rem
+    .mx#{$cn}
+        margin-left: #{$val}rem
+        margin-right: #{$val}rem
+    .my#{$cn}
+        margin-top: #{$val}rem
+        margin-bottom: #{$val}rem
+    .mr#{$cn}
+        margin-right: #{$val}rem
+    .ml#{$cn}
+        margin-left: #{$val}rem
+    .mt#{$cn}
+        margin-top: #{$val}rem
+    .mb#{$cn}
+        margin-bottom: #{$val}rem
+
+    .p#{$cn}
+        padding: #{$val}rem
+    .px#{$cn}
+        padding-right: #{$val}rem
+        padding-left: #{$val}rem
+    .py#{$cn}
+        padding-top: #{$val}rem
+        padding-bottom: #{$val}rem
+    .pr#{$cn}
+        padding-right: #{$val}rem
+    .pl#{$cn}
+        padding-left: #{$val}rem
+    .pt#{$cn}
+        padding-top: #{$val}rem
+    .pb#{$cn}
+        padding-bottom: #{$val}rem

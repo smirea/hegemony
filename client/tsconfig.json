@@ -7,7 +7,12 @@
         "module": "ESNext",
         "moduleResolution": "bundler",
         "resolveJsonModule": true,
-        "jsxImportSource": "react"
+        "jsxImportSource": "react",
+        "baseUrl": ".",
+        "paths": {
+            "client/*": ["./src/*"],
+            "shared/*": ["../shared/*"],
+        }
     },
     "include": ["./src"]
 }

@@ -40,7 +40,7 @@ export function createProposeBill(
                 [
                     'hasVotes',
                     Object.values(role.game.data.board.policyProposals).filter(
-                        p => p.role === RoleEnum.workingClass,
+                        p => p && p.role === RoleEnum.workingClass,
                     ).length < 3,
                 ],
             ],

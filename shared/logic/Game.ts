@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import chalk from 'chalk';
 import { type z } from 'zod';
-import { action, flow, flowResult, observable } from 'mobx';
 
 import {
     PolicyEnum,
@@ -36,6 +35,7 @@ import {
     type PlayerInput,
 } from './types.generated';
 import createAction from './utils/createAction';
+// import { createDraft, finishDraft, freeze, produceWithPatches } from 'immer';
 
 type RunContextNoRole = Omit<RunContext<RoleName>, 'currentRole'>;
 
@@ -88,7 +88,7 @@ export interface GameState {
 }
 
 export default class Game {
-    @observable accessor data: GameState;
+    accessor data: GameState;
     public readonly debug: boolean;
     protected readonly config: GameConfig;
 
@@ -227,10 +227,9 @@ export default class Game {
         return result;
     }
 
-    @action
     async tick() {
         try {
-            await flowResult(this.unsafeTick());
+            await this.unsafeTick();
             return true;
         } catch (e) {
             this.data.error = e;
@@ -238,8 +237,7 @@ export default class Game {
         }
     }
 
-    // the @flow decorator throws TS error
-    private unsafeTick = flow(function* unsafeTick(this: Game) {
+    private async unsafeTick() {
         if (this.data.currentActionIndex >= this.data.actionQueue.length) return;
 
         const event = this.data.actionQueue[this.data.currentActionIndex];
@@ -277,30 +275,29 @@ export default class Game {
         }
 
         if (action.playerInputSchema) {
-            if ((action as any).debugPlayerInput) {
-                event.data = (action as any).debugPlayerInput;
+            if ((event as any).debugPlayerInput) {
+                event.data = (event as any).debugPlayerInput;
             } else {
-                const result: any = yield this.requestPlayerInput(event.type);
-                try {
-                    action.playerInputSchema.parse(result);
-                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                } catch (e) {
+                event.data = await this.requestPlayerInput(event.type);
+            }
+            try {
+                action.playerInputSchema.parse(event.data);
+            } catch (e) {
+                console.log(e);
+                throw new Error(
+                    `Event(${event.type}) player input validation failed, does not match schema`,
+                );
+            }
+            if (action.validateInput) {
+                const errors = action
+                    .validateInput(event.data)
+                    .filter(x => !x[1])
+                    .map(x => x[0]);
+                if (errors.length > 0) {
                     throw new Error(
-                        `Event(${event.type}) player input validation failed, does not match schema`,
+                        `Event(${event.type}) player input validation failed: ${errors.join(', ')}`,
                     );
                 }
-                if (action.validateInput) {
-                    const errors = action
-                        .validateInput(result)
-                        .filter(x => !x[1])
-                        .map(x => x[0]);
-                    if (errors.length > 0) {
-                        throw new Error(
-                            `Event(${event.type}) player input validation failed: ${errors.join(', ')}`,
-                        );
-                    }
-                }
-                event.data = result;
             }
         }
 
@@ -327,10 +324,9 @@ export default class Game {
         }
 
         ++this.data.currentActionIndex;
-    });
+    }
 
     /** primarily used in testing */
-    @action
     async flush({
         to,
         after,
@@ -383,7 +379,6 @@ export default class Game {
         return { roleName, company };
     }
 
-    @action
     buyFromForeignMarket(
         roleName: RoleNameWorkingMiddleClass,
         resource: typeof ResourceEnum.food | typeof ResourceEnum.luxury,
@@ -405,7 +400,6 @@ export default class Game {
         this.data.roles[RoleEnum.state].data.resources.money.add(tarriff * count);
     }
 
-    @action
     assignWorkers(toAssign: z.infer<typeof AssignWorkersSchema>) {
         const companiesToEmpty = new Set<Company['id']>();
         const handledWorkers = new Set<CompanyWorker['id']>();
@@ -450,7 +444,6 @@ export default class Game {
         }
     }
 
-    @action
     setupBoard() {
         const order = [
             RoleEnum.workingClass,
@@ -470,7 +463,6 @@ export default class Game {
         }
     }
 
-    @action
     setupRound() {
         if (this.debug) console.log(chalk.green.bold('——— round:'), this.data.round);
         this.data.currentRoleName = null;

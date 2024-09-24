@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom/client';
 
 import App from './App';
 
+import './fonts.sass';
 import './global.sass';
 
 const rootEl = document.getElementById('root');

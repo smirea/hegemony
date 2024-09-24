@@ -1,6 +1,8 @@
 // Imported from https://github.com/sindresorhus/type-fest
 // since I could not manage to import the actual module (ts commonjs error)
 
+import { entries } from 'mobx';
+
 export type ObjectKeys<T extends object> = `${Exclude<keyof T, symbol>}`;
 
 export const objectKeys = Object.keys as <Type extends object>(
@@ -31,3 +33,5 @@ export function objectHasOwn<ObjectType, Key extends PropertyKey>(
 ): object is ObjectType & Record<Key, unknown> {
     return has.call(object, key);
 }
+
+export const mobxObjectEntries = entries as unknown as typeof objectEntries;
