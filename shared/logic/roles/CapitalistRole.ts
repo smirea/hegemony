@@ -87,7 +87,18 @@ export default class CapitalistRole extends AbstractRole<
     company = createCompany(this);
 
     setupBoard() {
-        // todo
+        const startingCompanies = [
+            this.data.companyDeck.drawById('start-food'),
+            this.data.companyDeck.drawById('start-luxury'),
+            this.data.companyDeck.drawById('start-healthcare'),
+            this.data.companyDeck.drawById('start-education'),
+        ];
+
+        this.data.companies = startingCompanies.map(c => ({
+            id: c.id,
+            workers: [],
+            wages: this.game.getWageId(),
+        }));
     }
 
     setupRound(): void {

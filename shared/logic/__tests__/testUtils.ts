@@ -321,7 +321,7 @@ function createTestDecks() {
                 id: 'm-influence',
                 cost: 20,
                 production: 5,
-                extraProduction: 3,
+                productionFromAutomation: 3,
                 industry: 'influence',
                 workers: [
                     { roles: ['middleClass'], type: 'unskilled' },
@@ -342,7 +342,7 @@ function createTestDecks() {
                 industry: 'influence',
                 cost: 20,
                 production: 5,
-                extraProduction: 0,
+                productionFromAutomation: 0,
                 fullyAutomated: true,
             }),
             createTestCompanyCard({ id: 'c-market-1' }),
@@ -385,7 +385,7 @@ export const createTestCompanyCard = (diff: Partial<CompanyCard> = {}): CompanyC
         cost: 10,
         industry: 'food',
         production: 3,
-        extraProduction: 2,
+        productionFromAutomation: 2,
         wages: { l1: 10, l2: 20, l3: 30 },
         workers: fullyAutomated
             ? []

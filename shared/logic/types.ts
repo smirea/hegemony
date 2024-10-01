@@ -140,8 +140,10 @@ export interface CompanyCard {
     cost: number;
     industry: Industry;
     production: number;
-    /** middle class (when WC worker) or capitalist (when automation token) */
-    extraProduction?: number;
+    /** capitalist only */
+    productionFromAutomation?: number;
+    /** middle class only */
+    productionFromOptionalWorkers?: number;
     /** capitalist only */
     fullyAutomated?: boolean;
     wages: Record<WageId, number>;

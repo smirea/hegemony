@@ -159,7 +159,7 @@ export default class MiddleClassRole extends AbstractRole<
                 if (uncommittedWorkingClassWorker) {
                     this.data.resources.money.remove(wages);
                     this.game.data.roles[RoleEnum.workingClass].data.resources.money.add(wages);
-                    produce(def.extraProduction || 0);
+                    produce(def.productionFromOptionalWorkers || 0);
                 }
                 for (const id of company.workers) {
                     this.game.getWorkerById(id).worker.committed = true;

@@ -21,6 +21,7 @@ import {
     type RoleNameNoState,
     type PolicyName,
     type PolicyValue,
+    type WageId,
 } from './types';
 import defaultForeignMarketCards, { type ForeignMarketCard } from './cards/foreignMarketCards';
 import Deck from './cards/Deck';
@@ -155,6 +156,10 @@ export default class Game {
 
     getPolicy(name: (typeof PolicyEnum)[keyof typeof PolicyEnum]) {
         return this.data.board.policies[name];
+    }
+
+    getWageId(): WageId {
+        return ('l' + (this.getPolicy('laborMarket') + 1)) as WageId;
     }
 
     ifPolicy(name: PolicyString, op: '==' | '<=' | '>=' = '==') {
@@ -463,6 +468,9 @@ export default class Game {
             role.active = !!this.data.players.find(p => p.role === role.id);
             if (role.active) role.setupBoard();
         }
+        for (const role of Object.values(this.data.roles)) {
+            if (role.active) role.setupBoard();
+        }
     }
 
     setupRound() {
@@ -483,7 +491,9 @@ export default class Game {
             this.data.board.businessDealCards = [];
         }
         for (const role of Object.values(this.data.roles)) {
-            if (role.active) role.setupRound();
+            // everyone except MC is always setup
+            if (role.id === RoleEnum.middleClass && !role.active) continue;
+            role.setupBoard();
         }
     }
 

@@ -311,9 +311,7 @@ export function createBuildCompany(role: MiddleClassRole | CapitalistRole) {
                 role.data.companies.push({
                     id: companyId,
                     workers: [],
-                    wages: ('l' + (role.game.getPolicy('laborMarket') + 1)) as z.infer<
-                        typeof WageIdSchema
-                    >,
+                    wages: role.game.getWageId(),
                 });
                 if (workers.length > 0) {
                     role.game.assignWorkers(

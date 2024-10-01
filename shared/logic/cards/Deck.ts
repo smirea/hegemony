@@ -58,6 +58,15 @@ export default class Deck<Cards extends ReadonlyArray<{ id: string }>> {
         return result;
     }
 
+    drawById<Id extends Cards[number]['id']>(id: Id): Cards[number] & { id: Id } {
+        const result = this.seek(id);
+        delete this.map[id];
+        const index = this.order.indexOf(id);
+        if (index === -1) throw new Error(`Deck(${this.name}): card ${id} not found in order`);
+        this.order.splice(index, 1);
+        return result;
+    }
+
     clone() {
         return new Deck(this.name, this.cards);
     }
