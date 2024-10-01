@@ -5,7 +5,7 @@ import WorkingClassIcon from './WorkingClassIcon';
 
 export interface RoleIconProps {
     role: RoleName;
-    size?: number;
+    height?: number;
     color?: string;
 }
 

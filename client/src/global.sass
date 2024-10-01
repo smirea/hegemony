@@ -4,6 +4,7 @@
     --text-color-inverted: #23252A
     --background-hover: rgba(210, 210, 210, 0.4)
 
+    --board-border-color: #aaa
     --board-color: #23252A
     --board-text: #eee
 
@@ -38,6 +39,12 @@
     --worker-education-color: #EDA537
     --worker-influence-color: #AB4388
 
+    --resource-food-color: #8FA955
+    --resource-luxury-color: #0389CF
+    --resource-healthcare-color: #ED1C25
+    --resource-education-color: #F7941F
+    --resource-influence-color: #92288F
+
 *
     box-sizing: border-box
 
@@ -50,7 +57,6 @@ body
     min-height: 100vh
     min-width: 100vw
     background: var(--body-background)
-    line-height: 1rem
 
 body, input, button, textarea
     font-family: Montserrat, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
@@ -70,17 +76,20 @@ body, input, button, textarea
         align-items: flex-start
     &[data-align=stretch]
         align-items: stretch
+    &[data-justify=center]
+        justify-content: center
+    &[data-justify=end]
+        justify-content: flex-end
     &[data-spacing='1']
         gap: 1rem
     &[data-spacing='2']
         gap: 2rem
-    &[data-spacing='.5']
+    &[data-spacing='.5'], &[data-spacing='05']
         gap: 0.5rem
-    &[data-spacing='.25']
+    &[data-spacing='.25'], &[data-spacing='025']
         gap: 0.25rem
     &[data-spacing='.125']
         gap: 0.125rem
-
 
 $spacings: (0.25, '025'), (0.5, '05'), (1, '1')
 

@@ -1,12 +1,9 @@
-export default function WorkingClassIcon({ size = 2, color = 'var(--wc-color)' } = {}) {
-    return (
-        <svg
-            width={size + 'rem'}
-            height={size + 'rem'}
-            xmlns='http://www.w3.org/2000/svg'
-            version='1.1'
-            viewBox='0.00 0.00 85.00 123.00'
-        >
+import createSVGIcon from './createSVGIcon';
+
+const WorkingClassIcon = createSVGIcon<object>(
+    { color: 'var(--wc-color)' },
+    ({ color, ...props }) => (
+        <svg {...props} viewBox='0.00 0.00 85.00 123.00'>
             <g fill={color}>
                 <path
                     d='
@@ -190,5 +187,7 @@ export default function WorkingClassIcon({ size = 2, color = 'var(--wc-color)' }
                 />
             </g>
         </svg>
-    );
-}
+    ),
+);
+
+export default WorkingClassIcon;

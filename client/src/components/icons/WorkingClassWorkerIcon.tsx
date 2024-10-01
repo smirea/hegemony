@@ -1,22 +1,14 @@
-import React from 'react';
 import { type CompanyWorkerType } from 'shared/logic/types';
 
-const WorkingClassWorkerIcon: React.FC<{
-    width?: number;
-    height?: number;
-    type?: CompanyWorkerType;
-    color?: string;
-}> = ({ width, height, type = 'unemployed', color } = {}) => (
-    <svg
-        width={width ? width + 'rem' : ''}
-        height={height ? height + 'rem' : ''}
-        xmlns='http://www.w3.org/2000/svg'
-        version='1.1'
-        viewBox='0.00 0.00 120.00 192.00'
-    >
-        <path
-            fill={color ?? `var(--worker-${type}-color)`}
-            d='
+import createSVGIcon from './createSVGIcon';
+
+const WorkingClassWorkerIcon = createSVGIcon<{ type?: CompanyWorkerType }>(
+    { type: 'unskilled' },
+    ({ color, type, ...props }) => (
+        <svg {...props} viewBox='25.00 15.00 90.00 155.00'>
+            <path
+                fill={color ?? `var(--worker-${type}-color)`}
+                d='
   M 80.48 64.19
   C 79.91 66.69 80.38 69.25 83.32 69.50
   Q 83.77 69.54 88.77 69.84
@@ -71,8 +63,9 @@ const WorkingClassWorkerIcon: React.FC<{
   Q 82.01 54.10 81.92 55.48
   Q 81.70 58.87 80.48 64.19
   Z'
-        />
-    </svg>
+            />
+        </svg>
+    ),
 );
 
 export default WorkingClassWorkerIcon;
