@@ -7,7 +7,7 @@ interface BaseProps extends ClassAndStyle {
     color?: string;
 }
 
-interface RenderProps {
+interface RenderProps extends ClassAndStyle {
     color?: string;
     width?: string;
     height?: string;

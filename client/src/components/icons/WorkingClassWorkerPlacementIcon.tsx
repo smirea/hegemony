@@ -7,7 +7,11 @@ const WorkingClassWorkerPlacementIcon = createSVGIcon<{
     type?: CompanyWorkerType;
 }>({ type: 'unskilled' }, ({ color, type, ...props }) => {
     return (
-        <svg {...props} viewBox='20.00 10.00 165.00 270.00'>
+        <svg
+            {...props}
+            viewBox='20.00 10.00 165.00 270.00'
+            style={{ ...props.style, opacity: 0.85 }}
+        >
             <path
                 fill={color ?? colors.worker[type!]}
                 d='

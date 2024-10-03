@@ -6,7 +6,11 @@ import createSVGIcon from './createSVGIcon';
 const AnyWorkerIcon = createSVGIcon<{ type?: CompanyWorkerType }>(
     { type: 'unskilled' },
     ({ color, type, ...props }) => (
-        <svg {...props} viewBox='10.00 10.00 300.00 435.00'>
+        <svg
+            {...props}
+            viewBox='10.00 10.00 300.00 435.00'
+            style={{ ...props.style, opacity: 0.85 }}
+        >
             <g fill={colors.worker[type!]}>
                 <path
                     d='

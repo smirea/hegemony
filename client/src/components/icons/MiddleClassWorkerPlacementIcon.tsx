@@ -8,7 +8,11 @@ const MiddleClassWorkerPlacementIcon = createSVGIcon<{
 }>({ type: 'unskilled' }, ({ color, type, ...props }) => {
     const clr = color ?? colors.worker[type!];
     return (
-        <svg {...props} viewBox='25.00 10.00 90.00 200.00'>
+        <svg
+            {...props}
+            viewBox='25.00 10.00 90.00 200.00'
+            style={{ ...props.style, opacity: 0.85 }}
+        >
             <g fill={clr}>
                 <path
                     d='

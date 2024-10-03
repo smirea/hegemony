@@ -29,6 +29,16 @@ export const GameContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
             role: 'workingClass',
             value: 2,
         };
+
+        game.data.roles.capitalist.data.companies[1].automationToken = true;
+
+        game.data.roles.capitalist.data.companies.push({
+            id: game.data.roles.capitalist.data.companyDeck.drawById('c-car-manufacturer-1').id,
+            workers: [],
+            wages: 'l2',
+            automationToken: false,
+        });
+
         return game;
     }, []);
 
