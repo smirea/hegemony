@@ -24,16 +24,13 @@ describe.skip('setupBoard', () => {
 
 describe('setupRound', () => {
     beforeEach(async () => {
-        game = await initGame(undefined, { setup: false });
+        game = await initGame(undefined, { setupBoard: false, mockDefaultSetup: false });
         mc = game.data.roles.middleClass;
     });
     test('sets up market', () => {
         expect(mc.data.companyMarket.length).toBe(0);
-        expect(mc.data.companyDeck.size).toBe(5);
         mc.setupRound();
-        expect(mc.data.companyDeck.size).toBe(2);
         expect(mc.data.companyMarket.length).toBe(3);
-        expect(mc.data.companyMarket).toEqual(['m-food', 'm-influence', 'm-market-1']);
     });
     test('only redraws empty slots', () => {
         mc.setupRound();

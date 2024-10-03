@@ -11,7 +11,7 @@ let game: Game;
 
 describe('game:start', () => {
     beforeEach(async () => {
-        game = await initGame(['capitalist', 'workingClass'], { setup: false });
+        game = await initGame(['capitalist', 'workingClass'], { setupBoard: false });
     });
     test('sorts players by role', async () => {
         await nextAndTick('game:start');
@@ -23,7 +23,7 @@ describe('game:start', () => {
 
 describe('started game', () => {
     beforeEach(async () => {
-        game = await initGame(['capitalist', 'workingClass']);
+        game = await initGame(['capitalist', 'workingClass'], { setupBoard: false });
         await nextAndTick('game:start');
     });
 

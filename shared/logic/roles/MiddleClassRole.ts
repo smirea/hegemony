@@ -7,6 +7,7 @@ import {
     type CompanyWorkerType,
     ResourceEnumSchema,
     RoleEnum,
+    type RoleNameNoWorkingClass,
     type TradeableResource,
 } from '../types';
 import createAction from '../utils/createAction';
@@ -105,19 +106,47 @@ export default class MiddleClassRole extends AbstractRole<
     newWorker = createNewWorker(this);
 
     setupBoard() {
+        this.data.resources.money.add(40);
+        this.data.resources.influence.add(1);
+        this.data.resources.food.add(1);
+        this.data.resources.healthcare.add(1);
+
+        const draw = (id: string) => {
+            this.data.companyDeck.drawById(id);
+            return id;
+        };
+
         this.data.companies = [
             {
-                id: this.data.companyDeck.drawById('middle-start-healthcare').id,
+                id: draw('m-convenience-store-1'),
                 workers: [this.newWorker('healthcare')],
                 wages: this.game.getWageId(),
             },
             {
-                id: this.data.companyDeck.drawById('middle-start-food').id,
+                id: draw('m-doctors-office-2'),
                 workers: [this.newWorker('food')],
                 wages: this.game.getWageId(),
             },
         ];
-        this.game.getWorkerById(this.data.companies[0].workers[0]).worker.committed = true;
+
+        this.data.companyMarket = [
+            this.data.companyDeck.draw().id,
+            this.data.companyDeck.draw().id,
+            this.data.companyDeck.draw().id,
+        ];
+
+        const fillCompany = (role: RoleNameNoWorkingClass, id: string) => {
+            const target = this.game.data.roles[role];
+            target.company(id).workers = target.data.companyDeck
+                .getOriginalCard(id)
+                .workers.map(w => this.newWorker(w.type));
+        };
+
+        fillCompany(RoleEnum.state, 's-technical-university-1');
+        fillCompany(RoleEnum.capitalist, 'c-shopping-mall-2');
+
+        // todo: pick skilled worker
+        // todo: immigration
     }
 
     setupRound(): void {

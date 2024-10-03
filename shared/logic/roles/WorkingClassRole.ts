@@ -8,6 +8,7 @@ import {
     RoleEnum,
     CompanyIdSchema,
     RoleNameSchema,
+    type RoleNameNoWorkingClass,
 } from '../types';
 import AbstractRole, { type BaseData } from './AbstractRole';
 import {
@@ -72,7 +73,23 @@ export default class WorkingClassRole extends AbstractRole<
     }
 
     setupBoard() {
-        // todo
+        this.data.resources.money.add(30);
+        this.data.resources.influence.add(1);
+
+        const fillCompany = (role: RoleNameNoWorkingClass, id: string) => {
+            const target = this.game.data.roles[role];
+            target.company(id).workers = target.data.companyDeck
+                .getOriginalCard(id)
+                .workers.map(w => this.newWorker(w.type));
+        };
+
+        fillCompany(RoleEnum.capitalist, 'c-supermarket-2');
+        fillCompany(RoleEnum.capitalist, 'c-college-2');
+        fillCompany(RoleEnum.state, 's-university-hospital-1');
+
+        this.newWorker('unskilled');
+
+        // todo: immigration
     }
 
     setupRound(): void {

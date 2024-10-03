@@ -464,13 +464,12 @@ export default class Game {
         for (const deck of Object.values(this.data.board.decks)) {
             deck.shuffle();
         }
-        for (const role of Object.values(this.data.roles)) {
-            role.active = !!this.data.players.find(p => p.role === role.id);
-            if (role.active) role.setupBoard();
-        }
-        for (const role of Object.values(this.data.roles)) {
-            if (role.active) role.setupBoard();
-        }
+
+        // order matters: companies need to be setup before workers come out
+        this.data.roles.state.setupBoard();
+        this.data.roles.capitalist.setupBoard();
+        this.data.roles.middleClass.setupBoard();
+        this.data.roles.workingClass.setupBoard();
     }
 
     setupRound() {
@@ -493,7 +492,7 @@ export default class Game {
         for (const role of Object.values(this.data.roles)) {
             // everyone except MC is always setup
             if (role.id === RoleEnum.middleClass && !role.active) continue;
-            role.setupBoard();
+            role.setupRound();
         }
     }
 

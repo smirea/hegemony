@@ -21,7 +21,7 @@ describe.skip('setupBoard', () => {
 
 describe.skip('setupRound', () => {
     beforeEach(async () => {
-        game = await initGame(undefined, { setup: false });
+        game = await initGame(undefined, { setupBoard: false });
         st = game.data.roles.state;
     });
 

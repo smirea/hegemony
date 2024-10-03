@@ -87,18 +87,46 @@ export default class CapitalistRole extends AbstractRole<
     company = createCompany(this);
 
     setupBoard() {
-        const startingCompanies = [
-            this.data.companyDeck.drawById('start-food'),
-            this.data.companyDeck.drawById('start-luxury'),
-            this.data.companyDeck.drawById('start-healthcare'),
-            this.data.companyDeck.drawById('start-education'),
+        this.data.resources.money.add(120);
+        this.data.resources.food.add(1);
+        this.data.resources.luxury.add(2);
+        this.data.resources.education.add(2);
+        this.data.resources.influence.add(1);
+
+        const draw = (id: string) => {
+            this.data.companyDeck.drawById(id);
+            return id;
+        };
+
+        this.data.companies = [
+            {
+                id: draw('c-clinic-2'),
+                workers: [],
+                wages: this.game.getWageId(),
+            },
+            {
+                id: draw('c-college-2'),
+                workers: [],
+                wages: this.game.getWageId(),
+            },
+            {
+                id: draw('c-shopping-mall-2'),
+                workers: [],
+                wages: this.game.getWageId(),
+            },
+            {
+                id: draw('c-supermarket-2'),
+                workers: [],
+                wages: this.game.getWageId(),
+            },
         ];
 
-        this.data.companies = startingCompanies.map(c => ({
-            id: c.id,
-            workers: [],
-            wages: this.game.getWageId(),
-        }));
+        this.data.companyMarket = [
+            this.data.companyDeck.draw().id,
+            this.data.companyDeck.draw().id,
+            this.data.companyDeck.draw().id,
+            this.data.companyDeck.draw().id,
+        ];
     }
 
     setupRound(): void {

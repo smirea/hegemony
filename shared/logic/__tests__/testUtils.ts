@@ -4,6 +4,7 @@ import _ from 'lodash';
 import Game, { type GameConfigInput } from '../Game';
 import {
     ResourceEnumSchema,
+    type RoleNameNoWorkingClass,
     RoleNameSchema,
     type CompanyCard,
     type CompanyWorker,
@@ -84,10 +85,15 @@ export function createGameUtils() {
     const initGame = async (
         roles: RoleName[] = ['workingClass', 'capitalist', 'middleClass', 'state'],
         {
-            setup = true,
+            setupBoard = true,
             companyDecks = 'mock',
+            mockDefaultSetup = true,
             ...config
-        }: Partial<GameConfigInput> & { setup?: boolean; companyDecks?: 'mock' | 'empty' } = {},
+        }: Partial<GameConfigInput> & {
+            setupBoard?: boolean;
+            mockDefaultSetup?: boolean;
+            companyDecks?: 'mock' | 'empty';
+        } = {},
     ) => {
         playerInputs = [];
         requestPlayerInput.mockReset();
@@ -117,6 +123,11 @@ export function createGameUtils() {
             role.data.resources.education.remove(role.data.resources.education.value);
             role.data.resources.luxury.remove(role.data.resources.luxury.value);
             role.data.resources.influence.remove(role.data.resources.influence.value);
+
+            if (mockDefaultSetup) {
+                role.setupBoard = _.noop;
+                role.setupRound = _.noop;
+            }
         }
 
         game.data.board.policies = {
@@ -198,78 +209,71 @@ export function createGameUtils() {
                 'test:middleClass companies',
                 [],
             );
-            game.data.roles.middleClass.setupBoard = _.noop;
-            game.data.roles.middleClass.setupRound = _.noop;
             game.data.roles.capitalist.data.companyDeck = new Deck('test:capitalist companies', []);
-            game.data.roles.capitalist.setupBoard = _.noop;
-            game.data.roles.capitalist.setupRound = _.noop;
             game.data.roles.state.data.companyDeck = new Deck('test:stateClass companies', []);
-            game.data.roles.state.setupBoard = _.noop;
-            game.data.roles.state.setupRound = _.noop;
         }
 
         if (companyDecks === 'mock') {
-            const testDecks = createTestDecks();
-            const decks = {
-                get middleClassCompanies() {
-                    return game.data.roles.middleClass.data.companyDeck;
-                },
-                get capitalistCompanies() {
-                    return game.data.roles.capitalist.data.companyDeck;
-                },
-                get stateClassCompanies() {
-                    return game.data.roles.state.data.companyDeck;
-                },
+            const draw = (role: RoleNameNoWorkingClass, id: string) => {
+                game.data.roles[role].data.companyDeck.drawById(id);
+                return id;
             };
 
+            const testDecks = createTestDecks();
             game.data.roles.middleClass.data.companyDeck = testDecks.middleClassCompanies;
+            game.data.roles.capitalist.data.companyDeck = testDecks.capitalistCompanies;
+            game.data.roles.state.data.companyDeck = testDecks.stateClassCompanies;
+
             game.data.roles.middleClass.setupBoard = () => {
-                const m1 = decks.middleClassCompanies.draw();
-                const m2 = decks.middleClassCompanies.draw();
                 game.data.roles.middleClass.data.companies = [
                     {
-                        id: m1.id,
+                        id: draw('middleClass', 'm-food'),
                         workers: [],
                         wages: 'l1',
                     },
                     {
-                        id: m2.id,
+                        id: draw('middleClass', 'm-influence'),
                         workers: [],
                         wages: 'l1',
                     },
                 ];
+                game.data.roles.middleClass.data.companyMarket = [
+                    draw('middleClass', 'm-market-1'),
+                    draw('middleClass', 'm-market-2'),
+                    draw('middleClass', 'm-market-3'),
+                ];
             };
 
-            game.data.roles.capitalist.data.companyDeck = testDecks.capitalistCompanies;
             game.data.roles.capitalist.setupBoard = () => {
-                const c1 = decks.capitalistCompanies.draw();
-                const c2 = decks.capitalistCompanies.draw();
                 game.data.roles.capitalist.data.companies = [
                     {
-                        id: c1.id,
+                        id: draw('capitalist', 'c-food'),
                         workers: [],
                         wages: 'l1',
                     },
                     {
-                        id: c2.id,
+                        id: draw('capitalist', 'c-influence'),
                         workers: [],
                         wages: 'l1',
                     },
                 ];
+                game.data.roles.capitalist.data.companyMarket = [
+                    draw('capitalist', 'c-market-1'),
+                    draw('capitalist', 'c-market-2'),
+                    draw('capitalist', 'c-market-3'),
+                    draw('capitalist', 'c-market-4'),
+                ];
             };
 
-            game.data.roles.state.data.companyDeck = testDecks.stateClassCompanies;
             game.data.roles.state.setupBoard = () => {
-                const s1 = decks.stateClassCompanies.draw();
-                const s2 = decks.stateClassCompanies.draw();
                 game.data.roles.state.data.companies = [
                     {
-                        id: s1.id,
+                        id: draw('state', 's1'),
                         workers: [],
                         wages: 'l1',
                     },
                     {
-                        id: s2.id,
+                        id: draw('state', 's2'),
                         workers: [],
                         wages: 'l1',
                     },
@@ -277,7 +281,7 @@ export function createGameUtils() {
             };
         }
 
-        if (setup) {
+        if (setupBoard) {
             const setupFn = game.setupBoard.bind(game);
             game.setupBoard = _.once(setupFn);
             game.setupBoard();
@@ -321,7 +325,7 @@ function createTestDecks() {
                 id: 'm-influence',
                 cost: 20,
                 production: 5,
-                productionFromAutomation: 3,
+                productionFromOptionalWorkers: 3,
                 industry: 'influence',
                 workers: [
                     { roles: ['middleClass'], type: 'unskilled' },
@@ -362,7 +366,6 @@ function createTestDecks() {
                     { roles: ['workingClass', 'middleClass'], type: 'unskilled' },
                 ],
             }),
-            createTestCompanyCard(),
         ].reverse(),
     );
 
@@ -386,6 +389,7 @@ export const createTestCompanyCard = (diff: Partial<CompanyCard> = {}): CompanyC
         industry: 'food',
         production: 3,
         productionFromAutomation: 2,
+        productionFromOptionalWorkers: 2,
         wages: { l1: 10, l2: 20, l3: 30 },
         workers: fullyAutomated
             ? []

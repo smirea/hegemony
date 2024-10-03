@@ -8,6 +8,7 @@ import {
     type Resource,
     ResourceEnumSchema,
     RoleEnum,
+    type RoleMap,
     type RoleNameNoState,
     RoleNameNoStateSchema,
 } from '../types';
@@ -80,7 +81,41 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
     company = createCompany(this);
 
     setupBoard() {
-        // todo
+        this.data.resources.money.add(120);
+        this.data.resources.influence.add(4);
+        this.data.resources.healthcare.add(6);
+        this.data.resources.education.add(6);
+
+        const draw = (id: string) => {
+            this.data.companyDeck.drawById(id);
+            return id;
+        };
+
+        const fillWorkers = (
+            role: RoleMap['workingClass']['id'] | RoleMap['middleClass']['id'],
+            id: string,
+        ) =>
+            this.data.companyDeck
+                .getOriginalCard(id)
+                .workers.map(w => this.game.data.roles[role].newWorker(w.type));
+
+        this.data.companies = [
+            {
+                id: draw('s-university-hospital-1'),
+                workers: fillWorkers('workingClass', 's-university-hospital-1'),
+                wages: this.game.getWageId(),
+            },
+            {
+                id: draw('s-technical-university-1'),
+                workers: fillWorkers('middleClass', 's-technical-university-1'),
+                wages: this.game.getWageId(),
+            },
+            {
+                id: draw('s-national-public-broadcasting-1'),
+                workers: [],
+                wages: this.game.getWageId(),
+            },
+        ];
     }
 
     setupRound(): void {

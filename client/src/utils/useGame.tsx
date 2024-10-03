@@ -20,7 +20,6 @@ export const GameContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         game.setupBoard();
         game.setupRound();
         game.data.currentRoleName = 'workingClass';
-        game.data.roles.middleClass.setupBoard();
 
         game.data.board.policyProposals.fiscalPolicy = {
             role: 'workingClass',
