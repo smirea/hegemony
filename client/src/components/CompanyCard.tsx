@@ -89,7 +89,7 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(({ company, ...rest }) 
                     <ExtraProduction
                         value={companyDef.productionFromAutomation}
                         industry={companyDef.industry}
-                        icon={<AutomationIcon height={1} />}
+                        icon={<AutomationIcon height={1} style={{ marginBottom: '.125rem' }} />}
                     />
                 )}
                 {companyDef.productionFromOptionalWorkers && (
@@ -132,11 +132,11 @@ const ExtraProduction: React.FC<{ value: number; industry: Industry; icon: React
     industry,
     icon,
 }) => (
-    <div className='row' data-spacing='.25' data-align='center' style={{ fontSize: '1rem' }}>
+    <div className='row' data-spacing='.25' data-align='end' style={{ fontSize: '1rem' }}>
         <div>(</div>
         {icon}
         <div>+{value}</div>
-        <ResourceIcon name={industry} color='white' height={0.875} />
+        <ResourceIcon name={industry} color='white' height={0.75} />
         <div>)</div>
     </div>
 );
