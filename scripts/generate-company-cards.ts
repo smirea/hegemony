@@ -83,7 +83,7 @@ function init() {
                 `        worker('m', '${industry}'),`,
                 '        ' +
                     (extra
-                        ? `worker('w', '${educated ? industry : 'unskilled'}')`
+                        ? `worker('w', '${educated ? industry : 'unskilled'}', true)`
                         : "worker('m', 'unskilled')"),
                 '    ],',
             ];

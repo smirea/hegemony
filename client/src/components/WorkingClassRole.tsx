@@ -9,7 +9,7 @@ import { colors } from 'client/utils/constants';
 
 import Value from './Value';
 import WorkingClassIcon from './icons/WorkingClassIcon';
-import WorkingClassWorkerIcon from './icons/WorkingClassWorkerIcon';
+import WorkingClassWorkerPlacementIcon from './icons/WorkingClassWorkerPlacementIcon';
 import ResourceIcon from './ResourceIcon';
 
 const WorkingClassRole: React.FC = observer(() => {
@@ -112,7 +112,7 @@ const WorkingClassRole: React.FC = observer(() => {
                                 data-spacing='.25'
                             >
                                 <UnionBox key={industry} type={industry}>
-                                    <WorkingClassWorkerIcon
+                                    <WorkingClassWorkerPlacementIcon
                                         height={2}
                                         type={industry}
                                         color={unions[industry] ? undefined : 'var(--board-color)'}

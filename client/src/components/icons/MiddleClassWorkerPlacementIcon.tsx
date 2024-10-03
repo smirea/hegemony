@@ -3,29 +3,13 @@ import { colors } from 'client/utils/constants';
 
 import createSVGIcon from './createSVGIcon';
 
-const MiddleClassWorkerIcon = createSVGIcon<{
+const MiddleClassWorkerPlacementIcon = createSVGIcon<{
     type?: CompanyWorkerType;
-    status?: 'empty' | 'committed' | 'uncommitted';
-}>({ type: 'unskilled', status: 'empty' }, ({ color, type, status, ...props }) => {
+}>({ type: 'unskilled' }, ({ color, type, ...props }) => {
     const clr = color ?? colors.worker[type!];
-    const gProps: Record<string, string> = {};
-    switch (status!) {
-        case 'empty':
-            gProps.stroke = clr;
-            gProps.strokeWidth = '10';
-            gProps.fill = 'transparent';
-            break;
-        case 'uncommitted':
-            gProps.fill = clr;
-            break;
-        case 'committed':
-            gProps.fill = clr;
-            (props as any).transform = 'rotate(180)';
-            break;
-    }
     return (
         <svg {...props} viewBox='25.00 10.00 90.00 200.00'>
-            <g {...gProps}>
+            <g fill={clr}>
                 <path
                     d='
       M 51.65 50.83
@@ -142,4 +126,4 @@ const MiddleClassWorkerIcon = createSVGIcon<{
     );
 });
 
-export default MiddleClassWorkerIcon;
+export default MiddleClassWorkerPlacementIcon;

@@ -6,11 +6,11 @@ import useGame from 'client/utils/useGame';
 import { type ClassAndStyle } from 'client/types';
 import { colors } from 'client/utils/constants';
 
-import MiddleClassWorkerIcon from './icons/MiddleClassWorkerIcon';
-import WorkingClassWorkerIcon from './icons/WorkingClassWorkerIcon';
 import ResourceIcon from './ResourceIcon';
 import AutomationIcon from './icons/AutomationIcon';
 import AnyWorkerIcon from './icons/AnyWorkerIcon';
+import WorkerIcon from './icons/WorkerIcon';
+import WorkingClassWorker3DIcon from './icons/WorkingClassWorker3DIcon';
 
 export interface CompanyCardProps extends ClassAndStyle {
     company: Company;
@@ -37,12 +37,13 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(({ company, ...rest }) 
                                     : 'uncommitted'
                                 : 'empty';
                             if (status === 'empty' && worker.roles.length > 1) {
-                                return <AnyWorkerIcon key={i} height={4} />;
+                                return <AnyWorkerIcon key={i} height={4} type={worker.type} />;
                             }
                             if (worker.roles[0] === RoleEnum.middleClass) {
                                 return (
-                                    <MiddleClassWorkerIcon
+                                    <WorkerIcon
                                         key={i}
+                                        role={RoleEnum.middleClass}
                                         type={worker.type}
                                         status={status}
                                         height={5}
@@ -58,8 +59,9 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(({ company, ...rest }) 
                                         style={{ fontSize: '2rem' }}
                                     >
                                         <div>(</div>
-                                        <WorkingClassWorkerIcon
+                                        <WorkerIcon
                                             key={i}
+                                            role={RoleEnum.workingClass}
                                             type={worker.type}
                                             status={status}
                                             height={4}
@@ -69,8 +71,9 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(({ company, ...rest }) 
                                 );
                             }
                             return (
-                                <WorkingClassWorkerIcon
+                                <WorkerIcon
                                     key={i}
+                                    role={RoleEnum.workingClass}
                                     type={worker.type}
                                     status={status}
                                     height={4}
@@ -93,7 +96,12 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(({ company, ...rest }) 
                     <ExtraProduction
                         value={companyDef.productionFromOptionalWorkers}
                         industry={companyDef.industry}
-                        icon={<WorkingClassWorkerIcon status='uncommitted' height={1.5} />}
+                        icon={
+                            <WorkingClassWorker3DIcon
+                                type={companyDef.workers[1].type}
+                                height={1.5}
+                            />
+                        }
                     />
                 )}
             </Output>
@@ -156,6 +164,7 @@ const Name = styled.div`
     background: rgba(0, 0, 0, 0.5);
     overflow: hidden;
     height: 2.5rem;
+    padding: 0 0.5rem;
 `;
 
 const Workers = styled.div`

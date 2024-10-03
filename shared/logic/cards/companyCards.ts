@@ -350,7 +350,7 @@ export const middleClassCompanies: CompanyCard[] = [
         production: 2,
         productionFromOptionalWorkers: 2,
         wages: { l1: 9, l2: 12, l3: 15 },
-        workers: [worker('m', 'influence'), worker('w', 'influence')],
+        workers: [worker('m', 'influence'), worker('w', 'influence', true)],
     },
     {
         id: 'm-doctors-office-1',
@@ -360,7 +360,7 @@ export const middleClassCompanies: CompanyCard[] = [
         production: 2,
         productionFromOptionalWorkers: 2,
         wages: { l1: 6, l2: 8, l3: 10 },
-        workers: [worker('m', 'healthcare'), worker('w', 'unskilled')],
+        workers: [worker('m', 'healthcare'), worker('w', 'unskilled', true)],
     },
     {
         id: 'm-pr-agency-1',
@@ -388,7 +388,7 @@ export const middleClassCompanies: CompanyCard[] = [
         production: 2,
         productionFromOptionalWorkers: 2,
         wages: { l1: 6, l2: 8, l3: 10 },
-        workers: [worker('m', 'education'), worker('w', 'unskilled')],
+        workers: [worker('m', 'education'), worker('w', 'unskilled', true)],
     },
     {
         id: 'm-private-school-1',
@@ -398,7 +398,7 @@ export const middleClassCompanies: CompanyCard[] = [
         production: 2,
         productionFromOptionalWorkers: 4,
         wages: { l1: 9, l2: 12, l3: 15 },
-        workers: [worker('m', 'education'), worker('w', 'education')],
+        workers: [worker('m', 'education'), worker('w', 'education', true)],
     },
     {
         id: 'm-training-center-1',
@@ -417,7 +417,7 @@ export const middleClassCompanies: CompanyCard[] = [
         production: 2,
         productionFromOptionalWorkers: 1,
         wages: { l1: 6, l2: 8, l3: 10 },
-        workers: [worker('m', 'food'), worker('w', 'unskilled')],
+        workers: [worker('m', 'food'), worker('w', 'unskilled', true)],
     },
     {
         id: 'm-medical-laboratory-1',
@@ -427,7 +427,7 @@ export const middleClassCompanies: CompanyCard[] = [
         production: 2,
         productionFromOptionalWorkers: 4,
         wages: { l1: 9, l2: 12, l3: 15 },
-        workers: [worker('m', 'healthcare'), worker('w', 'healthcare')],
+        workers: [worker('m', 'healthcare'), worker('w', 'healthcare', true)],
     },
     {
         id: 'm-electronics-store-1',
@@ -437,7 +437,7 @@ export const middleClassCompanies: CompanyCard[] = [
         production: 2,
         productionFromOptionalWorkers: 4,
         wages: { l1: 9, l2: 12, l3: 15 },
-        workers: [worker('m', 'luxury'), worker('w', 'luxury')],
+        workers: [worker('m', 'luxury'), worker('w', 'luxury', true)],
     },
     {
         id: 'm-local-newspaper-1',
@@ -447,7 +447,7 @@ export const middleClassCompanies: CompanyCard[] = [
         production: 2,
         productionFromOptionalWorkers: 1,
         wages: { l1: 6, l2: 8, l3: 10 },
-        workers: [worker('m', 'influence'), worker('w', 'unskilled')],
+        workers: [worker('m', 'influence'), worker('w', 'unskilled', true)],
     },
     {
         id: 'm-game-store-1',
@@ -457,7 +457,7 @@ export const middleClassCompanies: CompanyCard[] = [
         production: 2,
         productionFromOptionalWorkers: 2,
         wages: { l1: 6, l2: 8, l3: 10 },
-        workers: [worker('m', 'luxury'), worker('w', 'unskilled')],
+        workers: [worker('m', 'luxury'), worker('w', 'unskilled', true)],
     },
     {
         id: 'm-organic-farm-1',
@@ -467,7 +467,7 @@ export const middleClassCompanies: CompanyCard[] = [
         production: 2,
         productionFromOptionalWorkers: 2,
         wages: { l1: 9, l2: 12, l3: 15 },
-        workers: [worker('m', 'food'), worker('w', 'food')],
+        workers: [worker('m', 'food'), worker('w', 'food', true)],
     },
     {
         id: 'm-doctors-office-2',
@@ -477,7 +477,7 @@ export const middleClassCompanies: CompanyCard[] = [
         production: 2,
         productionFromOptionalWorkers: 2,
         wages: { l1: 6, l2: 8, l3: 10 },
-        workers: [worker('m', 'healthcare'), worker('w', 'unskilled')],
+        workers: [worker('m', 'healthcare'), worker('w', 'unskilled', true)],
     },
     {
         id: 'm-convenience-store-2',
@@ -487,7 +487,7 @@ export const middleClassCompanies: CompanyCard[] = [
         production: 2,
         productionFromOptionalWorkers: 1,
         wages: { l1: 6, l2: 8, l3: 10 },
-        workers: [worker('m', 'food'), worker('w', 'unskilled')],
+        workers: [worker('m', 'food'), worker('w', 'unskilled', true)],
     },
     {
         id: 'm-pharmacy-1',
