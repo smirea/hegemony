@@ -12,14 +12,15 @@ import InfluenceResourceIcon from './icons/InfluenceResourceIcon';
 export interface ResourceIconProps extends ClassAndStyle {
     name: Resource;
     height?: number;
+    color?: string;
 }
 
-const ResourceIcon: React.FC<ResourceIconProps> = ({ name, height = 1.5, ...rest }) => {
+const ResourceIcon: React.FC<ResourceIconProps> = ({ name, height = 1.5, color, ...rest }) => {
     const Icon = icons[name];
 
     return (
         <Root {...rest}>
-            <Icon height={height} />
+            <Icon height={height} color={color} />
         </Root>
     );
 };

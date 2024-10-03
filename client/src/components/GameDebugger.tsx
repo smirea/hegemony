@@ -4,6 +4,8 @@ import { observer, useLocalObservable } from 'mobx-react';
 import { PolicyEnum } from 'shared/logic/types';
 import _ from 'lodash';
 import { action } from 'mobx';
+import { type ActionEventName } from 'shared/logic/types.generated';
+import React from 'react';
 
 import ErrorBox from './ErrorBox';
 
@@ -11,7 +13,7 @@ const GameDebugger: React.FC = observer(() => {
     const game = useGame();
     const state = useLocalObservable(() => ({
         actions: {
-            proposeBill: {
+            'workingClass:proposeBill': {
                 policy: PolicyEnum.healthcare,
                 value: 2,
             },
@@ -30,6 +32,20 @@ const GameDebugger: React.FC = observer(() => {
             ))}
         </select>
     );
+    const renderAction = (name: ActionEventName, children: React.ReactNode[]) => (
+        <div className='row' data-spacing='1'>
+            <button
+                onClick={action(() => {
+                    game.next(name, { debugPlayerInput: state.actions[name] });
+                    void game.tick();
+                })}
+            >
+                next()
+            </button>
+            <b>{name}</b>
+            {children.map((c, i) => React.cloneElement(c as any, { key: i }))}
+        </div>
+    );
 
     return (
         <Root className='column' data-spacing='1'>
@@ -44,21 +60,10 @@ const GameDebugger: React.FC = observer(() => {
                 </div>
                 <div>role: {game.data.currentRoleName ?? 'n/a'}</div>
             </div>
-            <div className='row' data-spacing='1'>
-                <button
-                    onClick={action(() => {
-                        game.next('workingClass:proposeBill', {
-                            debugPlayerInput: state.actions.proposeBill,
-                        });
-                        void game.tick();
-                    })}
-                >
-                    next()
-                </button>
-                <b>proposeBill</b>
-                {selectInput('actions.proposeBill.policy', policies)}
-                {selectInput('actions.proposeBill.value', [0, 1, 2], Number)}
-            </div>
+            {renderAction('workingClass:proposeBill', [
+                selectInput('actions.workingClass:proposeBill.policy', policies),
+                selectInput('actions.workingClass:proposeBill.value', [0, 1, 2], Number),
+            ])}
         </Root>
     );
 });

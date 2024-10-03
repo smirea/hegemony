@@ -33,6 +33,7 @@ import {
     createCompany,
     createGetPopulation,
     createIncreaseProsperity,
+    createNewWorker,
     createWorker,
 } from './commonMethods';
 import Deck from '../cards/Deck';
@@ -101,9 +102,22 @@ export default class MiddleClassRole extends AbstractRole<
     worker = createWorker(this);
     increaseProsperity = createIncreaseProsperity(this);
     getPopulation = createGetPopulation(this);
+    newWorker = createNewWorker(this);
 
     setupBoard() {
-        // todo
+        this.data.companies = [
+            {
+                id: this.data.companyDeck.drawById('middle-start-healthcare').id,
+                workers: [this.newWorker('healthcare')],
+                wages: this.game.getWageId(),
+            },
+            {
+                id: this.data.companyDeck.drawById('middle-start-food').id,
+                workers: [this.newWorker('food')],
+                wages: this.game.getWageId(),
+            },
+        ];
+        this.game.getWorkerById(this.data.companies[0].workers[0]).worker.committed = true;
     }
 
     setupRound(): void {

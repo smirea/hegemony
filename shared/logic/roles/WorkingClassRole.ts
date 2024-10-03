@@ -24,7 +24,12 @@ import {
     createUseLuxury,
 } from './commonActions';
 import createAction from '../utils/createAction';
-import { createGetPopulation, createIncreaseProsperity, createWorker } from './commonMethods';
+import {
+    createGetPopulation,
+    createIncreaseProsperity,
+    createNewWorker,
+    createWorker,
+} from './commonMethods';
 
 import type Game from '../Game';
 
@@ -77,6 +82,7 @@ export default class WorkingClassRole extends AbstractRole<
     increaseProsperity = createIncreaseProsperity(this);
     getPopulation = createGetPopulation(this);
     worker = createWorker(this);
+    newWorker = createNewWorker(this);
 
     basicActions = {
         ...createProposeBill(this),

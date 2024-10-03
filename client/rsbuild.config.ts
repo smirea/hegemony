@@ -11,5 +11,22 @@ export default defineConfig({
             index: path.join(__dirname, 'src/index.tsx'),
         },
     },
-    plugins: [pluginReact(), pluginSass(), pluginSvgr()],
+    plugins: [
+        pluginReact({
+            swcReactOptions: {
+                importSource: '@emotion/react',
+            },
+        }),
+        pluginSass(),
+        pluginSvgr(),
+    ],
+    // tools: {
+    //     swc: {
+    //         jsc: {
+    //             experimental: {
+    //                 plugins: [['@swc/plugin-emotion', {}]],
+    //             },
+    //         },
+    //     },
+    // },
 });

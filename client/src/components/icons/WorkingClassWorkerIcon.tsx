@@ -1,13 +1,32 @@
 import { type CompanyWorkerType } from 'shared/logic/types';
+import { colors } from 'client/utils/constants';
 
 import createSVGIcon from './createSVGIcon';
 
-const WorkingClassWorkerIcon = createSVGIcon<{ type?: CompanyWorkerType }>(
-    { type: 'unskilled' },
-    ({ color, type, ...props }) => (
-        <svg {...props} viewBox='25.00 15.00 90.00 155.00'>
+const WorkingClassWorkerIcon = createSVGIcon<{
+    type?: CompanyWorkerType;
+    status?: 'empty' | 'committed' | 'uncommitted';
+}>({ type: 'unskilled', status: 'empty' }, ({ color, type, status, ...props }) => {
+    const clr = color ?? colors.worker[type!];
+    const gProps: Record<string, string> = {};
+    switch (status!) {
+        case 'empty':
+            gProps.stroke = clr;
+            gProps.strokeWidth = '8';
+            gProps.fill = 'transparent';
+            break;
+        case 'uncommitted':
+            gProps.fill = clr;
+            break;
+        case 'committed':
+            gProps.fill = clr;
+            (props as any).transform = 'rotate(180)';
+            break;
+    }
+    return (
+        <svg {...props} viewBox='20.00 15.00 95.00 155.00'>
             <path
-                fill={color ?? `var(--worker-${type}-color)`}
+                {...gProps}
                 d='
   M 80.48 64.19
   C 79.91 66.69 80.38 69.25 83.32 69.50
@@ -65,7 +84,7 @@ const WorkingClassWorkerIcon = createSVGIcon<{ type?: CompanyWorkerType }>(
   Z'
             />
         </svg>
-    ),
-);
+    );
+});
 
 export default WorkingClassWorkerIcon;

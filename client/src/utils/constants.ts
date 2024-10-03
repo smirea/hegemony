@@ -1,4 +1,9 @@
-import { type Industry, type Resource, type RoleName } from 'shared/logic/types';
+import {
+    type CompanyWorkerType,
+    type Industry,
+    type Resource,
+    type RoleName,
+} from 'shared/logic/types';
 
 export const remPx = 16;
 
@@ -24,4 +29,12 @@ export const colors = {
         influence: 'var(--resource-influence-color)',
         money: 'white',
     } satisfies Record<Resource, string>,
+    worker: {
+        unskilled: 'var(--worker-unskilled-color)',
+        food: 'var(--worker-food-color)',
+        luxury: 'var(--worker-luxury-color)',
+        healthcare: 'var(--worker-healthcare-color)',
+        education: 'var(--worker-education-color)',
+        influence: 'var(--worker-influence-color)',
+    } satisfies Record<CompanyWorkerType, string>,
 } as const;

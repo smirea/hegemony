@@ -1,4 +1,5 @@
 import { type ClassAndStyle } from 'client/types';
+import _ from 'lodash';
 
 interface BaseProps extends ClassAndStyle {
     width?: number;
@@ -17,7 +18,7 @@ export default function createSVGIcon<Extra = object>(
     render: (props: RenderProps & Extra) => React.ReactNode,
 ): React.FC<BaseProps & Extra> {
     return (inProps: BaseProps & Extra) => {
-        const props = { height: 2, ...defaultProps, ...inProps };
+        const props = { height: 2, ...defaultProps, ...(_.pickBy(inProps) as typeof inProps) };
         return render({
             viewBox: '0.00 0.00 100.00 100.00',
             ...props,

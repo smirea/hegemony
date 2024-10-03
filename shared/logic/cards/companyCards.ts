@@ -9,9 +9,9 @@ const tempCompany = (prefix: string, industry: Industry, id?: string): CompanyCa
         name: id,
         cost: 10,
         industry,
-        production: tempId % 5,
+        production: 1 + (tempId % 5),
         fullyAutomated: false,
-        wages: { l1: 1, l2: 2, l3: 3 },
+        wages: { l1: 5, l2: 10, l3: 15 },
         workers: [],
     };
 };
@@ -32,9 +32,20 @@ const worker = (
 });
 
 export const middleClassCompanies: CompanyCard[] = [
-    { ...tempCompany('middle', 'food', 'start-food'), workers: [worker('m', 'unskilled', true)] },
-    tempCompany('middle', 'luxury'),
-    tempCompany('middle', 'healthcare', 'start-healthcare'),
+    {
+        ...tempCompany('middle', 'food', 'middle-start-food'),
+        workers: [worker('m', 'food'), worker('w', 'unskilled', true)],
+        productionFromOptionalWorkers: 2,
+    },
+    {
+        ...tempCompany('middle', 'healthcare', 'middle-start-healthcare'),
+        workers: [worker('m', 'healthcare'), worker('m', 'unskilled')],
+    },
+    {
+        ...tempCompany('middle', 'luxury'),
+        workers: [worker('m', 'luxury'), worker('w', 'unskilled', true)],
+        productionFromOptionalWorkers: 3,
+    },
     tempCompany('middle', 'education'),
     tempCompany('middle', 'influence'),
 ];
@@ -43,9 +54,13 @@ export const capitalistCompanies: CompanyCard[] = [
     {
         ...tempCompany('capitalist', 'food', 'start-food'),
         productionFromAutomation: 2,
-        workers: [worker('m', 'food'), worker('m', 'unskilled'), worker('w', 'unskilled', true)],
+        workers: [worker('wm', 'food'), worker('wm', 'unskilled'), worker('wm', 'unskilled', true)],
     },
-    tempCompany('capitalist', 'luxury', 'start-luxury'),
+    {
+        ...tempCompany('capitalist', 'luxury', 'start-luxury'),
+        production: 10,
+        fullyAutomated: true,
+    },
     tempCompany('capitalist', 'healthcare', 'start-healthcare'),
     tempCompany('capitalist', 'education', 'start-education'),
     tempCompany('capitalist', 'influence'),

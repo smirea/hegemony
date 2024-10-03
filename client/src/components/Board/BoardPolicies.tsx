@@ -24,9 +24,12 @@ const BoardPolicies: React.FC = observer(() => {
                     width: '1.5rem',
                     height: '1.5rem',
                     marginLeft: '0.5rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                 }}
             >
-                <RoleIcon role={proposal.role} size={1.25} color='white' />
+                <RoleIcon role={proposal.role} height={1.25} color='white' />
             </div>
         );
     };
