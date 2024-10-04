@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { type Company, type CompanyCard, type Industry, RoleEnum } from 'shared/logic/types';
+import { type Company, type CompanyCard, type Industry } from 'shared/logic/types';
 import { observer } from 'mobx-react';
 import useGame from 'client/utils/useGame';
 import { type ClassAndStyle } from 'client/types';
@@ -11,6 +11,7 @@ import AutomationIcon from './icons/AutomationIcon';
 import AnyWorkerIcon from './icons/AnyWorkerIcon';
 import WorkerIcon from './icons/WorkerIcon';
 import WorkingClassWorker3DIcon from './icons/WorkingClassWorker3DIcon';
+import MoneyResourceIcon from './icons/MoneyResourceIcon';
 
 export interface CompanyCardProps extends ClassAndStyle {
     company: Company;
@@ -36,14 +37,16 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(({ company, minimal, ..
     if (minimal) {
         return (
             <Root {...rest} minimal background={colors.industry[companyDef.industry]}>
-                {/* <Name>{companyDef.cost}¥</Name> */}
                 <WorkersEl small companyDef={companyDef} company={company} />
                 <Output>
                     <Production value={totalProduction} small industry={companyDef.industry} />
                 </Output>
                 <Wages>
                     {!companyDef.fullyAutomated && (
-                        <div data-selected={true}>{companyDef.wages[company.wages]}¥</div>
+                        <div data-selected={true}>
+                            {companyDef.wages[company.wages]}
+                            <MoneyResourceIcon height={0.5} />
+                        </div>
                     )}
                 </Wages>
             </Root>
@@ -53,7 +56,10 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(({ company, minimal, ..
     return (
         <Root {...rest} background={colors.industry[companyDef.industry]}>
             <Name>
-                {companyDef.name} {companyDef.cost}¥
+                <div>{companyDef.name}</div>
+                <div className='row' data-align='center' data-spacing='.125'>
+                    {companyDef.cost} <MoneyResourceIcon height={0.5} />
+                </div>
             </Name>
             <WorkersEl companyDef={companyDef} company={company} />
             <Output>
@@ -128,87 +134,67 @@ const ExtraProduction: React.FC<{
 );
 
 const WorkersEl: React.FC<{ small?: boolean; companyDef: CompanyCard; company: Company }> =
-    observer(({ companyDef, company, small }) => {
+    observer(function WorkersEl({ companyDef, company, small }) {
         const game = useGame();
-
-        const heights: {
-            any: number;
-            middleClass: number;
-            workingClass: number;
-            automation: number;
-        } = small
-            ? {
-                  any: 2,
-                  middleClass: 2,
-                  workingClass: 2,
-                  automation: 2,
-              }
-            : {
-                  any: 3,
-                  middleClass: 3,
-                  workingClass: 3,
-                  automation: 3,
-              };
+        const iconHeight = small ? 2 : 3;
 
         if (companyDef.fullyAutomated) {
             return (
                 <Workers small={small}>
-                    <AutomationIcon height={heights.automation} />
+                    <AutomationIcon height={iconHeight} />
                 </Workers>
             );
         }
 
+        const optional = (key: number, content: React.ReactNode) => (
+            <div
+                key={key}
+                className='row'
+                data-align='center'
+                style={{ fontSize: small ? '1.5rem' : '2rem' }}
+            >
+                <div>(</div>
+                {content}
+                <div>)</div>
+            </div>
+        );
+
         return (
             <Workers small={small}>
-                {companyDef.workers.map((worker, i) => {
-                    const status = company.workers[i]
-                        ? game.getWorkerById(company.workers[i]).worker.committed
-                            ? 'committed'
-                            : 'uncommitted'
-                        : 'empty';
-                    if (status === 'empty' && worker.roles.length > 1) {
-                        return <AnyWorkerIcon key={i} height={heights.any} type={worker.type} />;
-                    }
-                    if (worker.roles[0] === RoleEnum.middleClass) {
-                        return (
+                {companyDef.workers.map((workerDef, i) => {
+                    if (!company.workers[i]) {
+                        if (workerDef.roles.length > 1) {
+                            return (
+                                <AnyWorkerIcon key={i} height={iconHeight} type={workerDef.type} />
+                            );
+                        }
+
+                        const content = (
                             <WorkerIcon
                                 key={i}
-                                role={RoleEnum.middleClass}
-                                type={worker.type}
-                                status={status}
-                                height={heights.middleClass}
+                                status='empty'
+                                role={workerDef.roles[0]}
+                                type={workerDef.type}
+                                height={iconHeight}
                             />
                         );
+
+                        return workerDef.optional ? optional(i, content) : content;
                     }
-                    if (worker.optional) {
-                        return (
-                            <div
-                                key={i}
-                                className='row'
-                                data-align='center'
-                                style={{ fontSize: small ? '1.5rem' : '2rem' }}
-                            >
-                                <div>(</div>
-                                <WorkerIcon
-                                    key={i}
-                                    role={RoleEnum.workingClass}
-                                    type={worker.type}
-                                    status={status}
-                                    height={heights.workingClass}
-                                />
-                                <div>)</div>
-                            </div>
-                        );
-                    }
-                    return (
+
+                    const { worker, roleName } = game.getWorkerById(company.workers[i]);
+
+                    const content = (
                         <WorkerIcon
                             key={i}
-                            role={RoleEnum.workingClass}
-                            type={worker.type}
-                            status={status}
-                            height={heights.workingClass}
+                            role={roleName}
+                            type={workerDef.type}
+                            status={worker.committed ? 'committed' : 'uncommitted'}
+                            height={iconHeight}
                         />
                     );
+
+                    return workerDef.optional ? optional(i, content) : content;
                 })}
             </Workers>
         );
@@ -233,6 +219,7 @@ const Name = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.25rem;
     font-weight: bold;
     font-size: 0.75rem;
     text-align: center;

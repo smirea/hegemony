@@ -8,6 +8,7 @@ import FoodResourceIcon from './icons/FoodResourceIcon';
 import HealthcareResourceIcon from './icons/HealthcareResourceIcon';
 import LuxuryResourceIcon from './icons/LuxuryResourceIcon';
 import InfluenceResourceIcon from './icons/InfluenceResourceIcon';
+import MoneyResourceIcon from './icons/MoneyResourceIcon';
 
 export interface ResourceIconProps extends ClassAndStyle {
     name: Resource;
@@ -33,7 +34,7 @@ const icons: Record<Resource, React.FC<{ height?: number; color?: string }>> = {
     healthcare: HealthcareResourceIcon,
     luxury: LuxuryResourceIcon,
     influence: InfluenceResourceIcon,
-    money: () => 'v',
+    money: MoneyResourceIcon,
 };
 
 const Root = styled.div``;

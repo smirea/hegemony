@@ -11,6 +11,7 @@ import Value from './Value';
 import WorkingClassIcon from './icons/WorkingClassIcon';
 import WorkingClassWorkerPlacementIcon from './icons/WorkingClassWorkerPlacementIcon';
 import ResourceIcon from './ResourceIcon';
+import ProsperityIcon from './icons/ProsperityIcon';
 
 const WorkingClassRole: React.FC = observer(() => {
     const game = useGame();
@@ -63,7 +64,10 @@ const WorkingClassRole: React.FC = observer(() => {
                             icon={<ResourceIcon name='influence' height={1} />}
                         />
                         <div style={{ flex: '1 1 0' }} />
-                        <Value icon='--prosperity--' v={prosperity} />
+                        <Value
+                            icon={<ProsperityIcon role='workingClass' height={1} />}
+                            v={prosperity}
+                        />
                     </div>
                     <div className='column'>
                         <div className='row' style={{ fontSize: '.75rem' }}>

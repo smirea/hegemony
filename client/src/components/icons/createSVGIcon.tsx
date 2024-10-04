@@ -18,7 +18,17 @@ export default function createSVGIcon<Extra = object>(
     render: (props: RenderProps & Extra) => React.ReactNode,
 ): React.FC<BaseProps & Extra> {
     return (inProps: BaseProps & Extra) => {
-        const props = { height: 2, ...defaultProps, ...(_.pickBy(inProps) as typeof inProps) };
+        const props = {
+            height: 2,
+            ...defaultProps,
+            ...(_.pickBy(inProps) as typeof inProps),
+            style: {
+                display: 'inline-block',
+                verticalAlign: 'middle',
+                flex: '0 0 auto',
+                ...inProps.style,
+            },
+        };
         return render({
             viewBox: '0.00 0.00 100.00 100.00',
             ...props,

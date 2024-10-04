@@ -7,7 +7,7 @@ const CompanyIcon = createSVGIcon<{ role: RoleNameNoWorkingClass }>(
     {},
     ({ color, role, ...props }) => (
         <svg {...props} viewBox='24.00 11.00 138.00 137.00'>
-            <g fill={color ?? colors.role[role]}>
+            <g fill={color ?? colors.role[role] ?? 'white'}>
                 <rect
                     x='-6.05'
                     y='-3.29'

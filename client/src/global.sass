@@ -68,7 +68,13 @@ body, input, button, textarea
 .column
     display: flex
     flex-direction: column
-.column, .row
+.inline-row
+    display: inline-flex
+    flex-direction: row
+.inline-column
+    display: inline-flex
+    flex-direction: column
+.column, .row, .inline-row, .inline-column
     &[data-align=center]
         align-items: center
     &[data-align=end]
