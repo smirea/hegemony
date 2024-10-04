@@ -8,6 +8,7 @@ import {
 export const remPx = 16;
 
 export const colors = {
+    boardColor: 'var(--board-color)',
     role: {
         workingClass: 'var(--working-class-color)',
         middleClass: 'var(--middle-class-color)',

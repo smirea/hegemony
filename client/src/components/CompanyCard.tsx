@@ -36,7 +36,7 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(({ company, minimal, ..
     if (minimal) {
         return (
             <Root {...rest} minimal background={colors.industry[companyDef.industry]}>
-                <Name>{companyDef.cost}¥</Name>
+                {/* <Name>{companyDef.cost}¥</Name> */}
                 <WorkersEl small companyDef={companyDef} company={company} />
                 <Output>
                     <Production value={totalProduction} small industry={companyDef.industry} />
@@ -61,7 +61,6 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(({ company, minimal, ..
                 {companyDef.productionFromAutomation && (
                     <ExtraProduction
                         value={companyDef.productionFromAutomation}
-                        industry={companyDef.industry}
                         icon={<AutomationIcon height={1} style={{ marginBottom: '.125rem' }} />}
                         active={!!company.automationToken}
                     />
@@ -69,7 +68,6 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(({ company, minimal, ..
                 {companyDef.productionFromOptionalWorkers && (
                     <ExtraProduction
                         value={companyDef.productionFromOptionalWorkers}
-                        industry={companyDef.industry}
                         icon={
                             <WorkingClassWorker3DIcon
                                 type={companyDef.workers[1].type}
@@ -104,10 +102,28 @@ const Production: React.FC<{ value: number; small?: boolean; industry: Industry 
         className='row'
         data-align='center'
         data-spacing='.25'
-        style={{ fontSize: small ? '1.25rem' : '2rem' }}
+        style={{ fontSize: small ? '1rem' : '1.5rem' }}
     >
         {value}
-        <ResourceIcon name={industry} color='white' height={small ? 0.875 : 1.5} />
+        <ResourceIcon name={industry} color='white' height={small ? 0.75 : 1} />
+    </div>
+);
+
+const ExtraProduction: React.FC<{
+    value: number;
+    icon: React.ReactNode;
+    active: boolean;
+}> = ({ value, icon, active }) => (
+    <div
+        className='row'
+        data-spacing='.125'
+        data-align='end'
+        style={{ fontSize: '1rem', opacity: active ? 1 : 0.5 }}
+    >
+        <div>(</div>
+        {icon}
+        <div>+{value}</div>
+        <div>)</div>
     </div>
 );
 
@@ -128,10 +144,10 @@ const WorkersEl: React.FC<{ small?: boolean; companyDef: CompanyCard; company: C
                   automation: 2,
               }
             : {
-                  any: 4,
-                  middleClass: 5,
-                  workingClass: 4,
-                  automation: 4,
+                  any: 3,
+                  middleClass: 3,
+                  workingClass: 3,
+                  automation: 3,
               };
 
         if (companyDef.fullyAutomated) {
@@ -198,34 +214,15 @@ const WorkersEl: React.FC<{ small?: boolean; companyDef: CompanyCard; company: C
         );
     });
 
-const ExtraProduction: React.FC<{
-    value: number;
-    industry: Industry;
-    icon: React.ReactNode;
-    active: boolean;
-}> = ({ value, industry, icon, active }) => (
-    <div
-        className='row'
-        data-spacing='.25'
-        data-align='end'
-        style={{ fontSize: '1rem', opacity: active ? 1 : 0.5 }}
-    >
-        <div>(</div>
-        {icon}
-        <div>+{value}</div>
-        <ResourceIcon name={industry} color='white' height={0.75} />
-        <div>)</div>
-    </div>
-);
-
-const Root = styled.div<{ background: string; minimal?: boolean }>`
+export const Root = styled.div<{ background: string; minimal?: boolean }>`
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     background: ${props => props.background};
-    min-width: ${props => (props.minimal ? '3rem' : '8rem')};
-    width: ${props => (props.minimal ? '3rem' : '10rem')};
-    height: 14rem;
+    /* min-width: ${props => (props.minimal ? '3rem' : '8rem')}; */
+    width: ${props => (props.minimal ? '3rem' : '8rem')};
+    height: 10rem;
     border-radius: 4px;
     overflow: hidden;
     color: var(--text-color);
@@ -237,6 +234,7 @@ const Name = styled.div`
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    font-size: 0.75rem;
     text-align: center;
     background: rgba(0, 0, 0, 0.5);
     overflow: hidden;
@@ -260,13 +258,14 @@ const Output = styled.div`
     justify-content: center;
     gap: 0.5rem;
     height: 2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 `;
 
 const Wages = styled.div`
     flex: 0 0 auto;
     display: flex;
-    height: 1.5rem;
+    height: 1.25rem;
+    font-size: 0.75rem;
     & > * {
         flex: 1 1 0;
         display: flex;
