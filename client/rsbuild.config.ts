@@ -21,6 +21,16 @@ export default defineConfig({
         pluginSvgr(),
     ],
     // tools: {
+    //     rspack: {
+    //         plugins: [TanStackRouterRspack({
+    //             quoteStyle: 'single',
+    //             semicolons: true,
+    //             routesDirectory: path.join(__dirname, 'src/routes'),
+    //             generatedRouteTree: path.join(__dirname, 'src/routeTree.gen.ts'),
+    //         })],
+    //     },
+    // },
+    // tools: {
     //     swc: {
     //         jsc: {
     //             experimental: {
