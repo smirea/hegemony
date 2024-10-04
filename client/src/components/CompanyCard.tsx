@@ -104,14 +104,9 @@ const Production: React.FC<{ value: number; small?: boolean; industry: Industry 
     small,
     industry,
 }) => (
-    <div
-        className='row'
-        data-align='center'
-        data-spacing='.25'
-        style={{ fontSize: small ? '1rem' : '1.5rem' }}
-    >
-        {value}
-        <ResourceIcon name={industry} color='white' height={small ? 0.75 : 1} />
+    <div className='row' data-align='center' data-spacing='.25'>
+        <div style={{ fontSize: small ? '1rem' : '1.5rem' }}>{value}</div>
+        <ResourceIcon name={industry} color='white' height={small ? 0.75 : 1.25} />
     </div>
 );
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import { type Resource } from 'shared/logic/types';
 import { type ClassAndStyle } from 'client/types';
 
@@ -19,11 +18,7 @@ export interface ResourceIconProps extends ClassAndStyle {
 const ResourceIcon: React.FC<ResourceIconProps> = ({ name, height = 1.5, color, ...rest }) => {
     const Icon = icons[name];
 
-    return (
-        <Root {...rest}>
-            <Icon height={height} color={color} />
-        </Root>
-    );
+    return <Icon {...rest} height={height} color={color} />;
 };
 
 export default ResourceIcon;
@@ -36,5 +31,3 @@ const icons: Record<Resource, React.FC<{ height?: number; color?: string }>> = {
     influence: InfluenceResourceIcon,
     money: MoneyResourceIcon,
 };
-
-const Root = styled.div``;

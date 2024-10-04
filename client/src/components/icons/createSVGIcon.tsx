@@ -29,6 +29,7 @@ export default function createSVGIcon<Extra = object>(
                 ...inProps.style,
             },
         };
+        // (props as any).lineHeight = props.height + 'rem';
         return render({
             viewBox: '0.00 0.00 100.00 100.00',
             ...props,
