@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
 import _ from 'lodash';
 import useGame from 'client/utils/useGame';
-import { colors } from 'client/utils/constants';
 import { objectEntries } from 'shared/utils/ts';
 import { observer } from 'mobx-react';
 
-import RoleIcon from '../icons/RoleIcon';
+import RoleIcon from '../RoleIcon';
 
 import type { PolicyName, PolicyValue } from 'shared/logic/types';
 
@@ -16,22 +15,7 @@ const BoardPolicies: React.FC = observer(() => {
         const proposal = game.data.board.policyProposals[name];
         if (!proposal) return null;
         if (proposal.value !== value) return null;
-        return (
-            <div
-                style={{
-                    borderRadius: '50%',
-                    background: colors.role[proposal.role],
-                    width: '1.5rem',
-                    height: '1.5rem',
-                    marginLeft: '0.5rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
-                <RoleIcon role={proposal.role} height={1.25} color='white' />
-            </div>
-        );
+        return <RoleIcon role={proposal.role} size={1.25} round className='ml05' />;
     };
 
     return (

@@ -1,7 +1,9 @@
+import { colors } from 'client/utils/constants';
+
 import createSVGIcon from './createSVGIcon';
 
 const WorkingClassIcon = createSVGIcon<object>(
-    { color: 'var(--wc-color)' },
+    { color: colors.role.workingClass },
     ({ color, ...props }) => (
         <svg {...props} viewBox='0.00 0.00 85.00 123.00'>
             <g fill={color}>

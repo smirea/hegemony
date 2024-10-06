@@ -17,10 +17,10 @@ export default function DebugIcons() {
         <Root>
             <h3>DebugIcons</h3>
             {Target && (
-                <Target
-                    height={20}
-                    style={{ border: '1px solid red', background: 'yellow', margin: '0 auto' }}
-                />
+                <div className='row' style={{ margin: '0 auto', gap: '5rem' }}>
+                    <Target height={20} style={{ border: '1px solid red' }} />
+                    <Target height={20} color='orange' style={{ border: '1px solid red' }} />
+                </div>
             )}
             <table>
                 <tbody>

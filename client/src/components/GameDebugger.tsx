@@ -79,5 +79,6 @@ const Root = styled.div`
     padding: 1rem;
     background-color: #eee;
     border: 1px solid #ccc;
+    color: #333;
     margin-top: 1rem;
 `;

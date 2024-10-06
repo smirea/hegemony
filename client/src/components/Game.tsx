@@ -9,9 +9,10 @@ const Game: React.FC = () => {
     return (
         <GameContextProvider>
             <Root>
+                <WorkingClassRole />
+                <br />
                 <Board />
                 <br />
-                <WorkingClassRole />
                 <GameDebugger />
             </Root>
         </GameContextProvider>
