@@ -146,7 +146,9 @@ export default class MiddleClassRole extends AbstractRole<
         fillCompany(RoleEnum.capitalist, 'c-shopping-mall-2');
 
         // todo: pick skilled worker
-        // todo: immigration
+
+        this.game.drawImmigrationCard(this.id);
+        this.game.drawImmigrationCard(this.id);
     }
 
     setupRound(): void {

@@ -24,11 +24,13 @@ const WorkerIcon: React.FC<{
     }
 
     if (role === RoleEnum.workingClass) {
-        if (status === 'empty') return <WorkingClassWorkerPlacementIcon {...props} />;
+        if (status === 'empty')
+            return <WorkingClassWorkerPlacementIcon {...props} style={{ opacity: 0.8 }} />;
         return <WorkingClassWorker3DIcon {...props} />;
     }
 
-    if (status === 'empty') return <MiddleClassWorkerPlacementIcon {...props} />;
+    if (status === 'empty')
+        return <MiddleClassWorkerPlacementIcon {...props} style={{ opacity: 0.8 }} />;
 
     return <MiddleClassWorker3DIcon {...props} />;
 };

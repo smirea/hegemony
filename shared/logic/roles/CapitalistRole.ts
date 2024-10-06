@@ -170,12 +170,12 @@ export default class CapitalistRole extends AbstractRole<
                     this.game.data.board.businessDealCards.some(
                         id =>
                             this.data.resources.money.value >=
-                            this.game.data.board.decks.businessDealCards.getOriginalCard(id).cost,
+                            this.game.data.board.decks.businessDealDeck.getOriginalCard(id).cost,
                     ),
                 ],
             ],
             run: ({ id, storage, freeTradeZone }) => {
-                const card = this.game.data.board.decks.businessDealCards.getOriginalCard(id);
+                const card = this.game.data.board.decks.businessDealDeck.getOriginalCard(id);
                 this.data.resources.money.remove(card.cost);
 
                 if (storage.food) this.data.resources.food.add(storage.food);

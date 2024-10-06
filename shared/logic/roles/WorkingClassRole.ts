@@ -88,8 +88,8 @@ export default class WorkingClassRole extends AbstractRole<
         fillCompany(RoleEnum.state, 's-university-hospital-1');
 
         this.newWorker('unskilled');
-
-        // todo: immigration
+        this.game.drawImmigrationCard(this.id);
+        this.game.drawImmigrationCard(this.id);
     }
 
     setupRound(): void {

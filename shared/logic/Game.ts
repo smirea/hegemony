@@ -22,6 +22,7 @@ import {
     type PolicyName,
     type PolicyValue,
     type WageId,
+    type RoleMap,
 } from './types';
 import defaultForeignMarketCards, { type ForeignMarketCard } from './cards/foreignMarketCards';
 import Deck from './cards/Deck';
@@ -37,12 +38,14 @@ import {
     type PlayerInput,
 } from './types.generated';
 import createAction from './utils/createAction';
+import immigrationCards, { type ImmigrationCard } from './cards/immigrationCards';
 
 type RunContextNoRole = Omit<RunContext<RoleName>, 'currentRole'>;
 
 const getDefaultDecks = (): GameState['board']['decks'] => ({
-    foreignMarketCards: new Deck('foreign market', defaultForeignMarketCards),
-    businessDealCards: new Deck('business deal', businessDealCards),
+    foreignMarketDeck: new Deck('foreign market', defaultForeignMarketCards),
+    businessDealDeck: new Deck('business deal', businessDealCards),
+    immigrationDeck: new Deck('immigration', immigrationCards),
 });
 
 interface GameConfig {
@@ -72,8 +75,9 @@ export interface GameState {
         foreignMarketCard: ForeignMarketCard['id'];
         businessDealCards: BusinessDealCard['id'][];
         decks: {
-            foreignMarketCards: Deck<ForeignMarketCard[]>;
-            businessDealCards: Deck<BusinessDealCard[]>;
+            foreignMarketDeck: Deck<ForeignMarketCard[]>;
+            businessDealDeck: Deck<BusinessDealCard[]>;
+            immigrationDeck: Deck<ImmigrationCard[]>;
         };
     };
     roles: {
@@ -196,7 +200,7 @@ export default class Game {
     }
 
     get foreignMarketCard() {
-        return this.data.board.decks.foreignMarketCards.getOriginalCard(
+        return this.data.board.decks.foreignMarketDeck.getOriginalCard(
             this.data.board.foreignMarketCard,
         );
     }
@@ -386,6 +390,11 @@ export default class Game {
         return { roleName, company };
     }
 
+    drawImmigrationCard(role: RoleMap['workingClass']['id'] | RoleMap['middleClass']['id']) {
+        const card = this.data.board.decks.immigrationDeck.draw();
+        this.data.roles[role].newWorker(card[role]);
+    }
+
     buyFromForeignMarket(
         roleName: RoleNameWorkingMiddleClass,
         resource: typeof ResourceEnum.food | typeof ResourceEnum.luxury,
@@ -477,7 +486,8 @@ export default class Game {
         this.data.currentRoleName = null;
         ++this.data.round;
         this.data.turn = 0;
-        const { foreignMarketCards, businessDealCards } = this.data.board.decks;
+        const { foreignMarketDeck: foreignMarketCards, businessDealDeck: businessDealCards } =
+            this.data.board.decks;
         this.data.board.foreignMarketCard = foreignMarketCards.draw().id;
         if (this.ifPolicy('6A')) {
             this.data.board.businessDealCards = [

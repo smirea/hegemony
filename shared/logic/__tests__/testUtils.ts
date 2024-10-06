@@ -169,7 +169,7 @@ export function createGameUtils() {
             food: 0,
             luxury: 0,
         };
-        game.data.board.decks.foreignMarketCards = new Deck(
+        game.data.board.decks.foreignMarketDeck = new Deck(
             'test:foreign-market',
             [
                 makeForeignMarketCard(
@@ -182,7 +182,7 @@ export function createGameUtils() {
                 makeForeignMarketCard('f2', [1, 1, 2, 2], [1, 1, 2, 2], [1, 1, 2, 2], [1, 1, 2, 2]),
             ].reverse(),
         );
-        game.data.board.decks.businessDealCards = new Deck(
+        game.data.board.decks.businessDealDeck = new Deck(
             'test:business-deal',
             (
                 [
