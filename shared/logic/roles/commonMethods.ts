@@ -8,8 +8,8 @@ import type StateRole from './StateRole';
 
 export function createIncreaseProsperity(role: WorkingClassRole | MiddleClassRole) {
     return ({ withHealthcare = false }: { withHealthcare?: boolean } = {}) => {
-        role.data.prosperity = Math.min(role.data.prosperity + 1, 10);
-        role.data.score += role.data.prosperity;
+        role.data.prosperityIndex.add(1);
+        role.data.score += role.getProsperityValue();
         if (withHealthcare) role.data.score += 2;
     };
 }

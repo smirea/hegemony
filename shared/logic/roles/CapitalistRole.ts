@@ -93,6 +93,8 @@ export default class CapitalistRole extends AbstractRole<
         this.data.resources.education.add(2);
         this.data.resources.influence.add(1);
 
+        this.data.companyDeck.shuffle();
+
         const draw = (id: string) => {
             this.data.companyDeck.drawById(id);
             return id;

@@ -340,7 +340,7 @@ export const middleClassCompanies: CompanyCard[] = [
         industry: 'luxury',
         production: 4,
         wages: { l1: 0, l2: 0, l3: 0 },
-        workers: [],
+        workers: [worker('m', 'luxury'), worker('m', 'unskilled')],
     },
     {
         id: 'm-regional-radio-station-1',

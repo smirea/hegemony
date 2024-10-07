@@ -1,26 +1,62 @@
 export default class ResourceManager {
     public readonly name: string;
     protected _value: number;
+    protected readonly min: number;
+    protected readonly max?: number;
+    protected readonly limitBehavior: 'throw' | 'clamp';
 
-    constructor({ name, value }: { name: string; value?: number }) {
+    constructor({
+        name,
+        value = 0,
+        min = 0,
+        max,
+        limitBehavior = 'throw',
+    }: {
+        name: string;
+        value?: number;
+        limitBehavior?: 'throw' | 'clamp';
+        min?: number;
+        max?: number;
+    }) {
         this.name = name;
-        this._value = value ?? 0;
+        this._value = value;
+        this.min = min;
+        this.max = max;
+        this.limitBehavior = limitBehavior;
     }
 
     get value() {
         return this._value;
     }
 
+    protected handleValue(v: number) {
+        if (typeof v !== 'number') throw new Error('invalid value');
+        if (this.min) {
+            if (v < this.min) {
+                if (this.limitBehavior === 'throw') {
+                    throw new Error(`not enough ${this.name} (${v} < ${this.min})`);
+                }
+                v = this.min;
+            }
+        }
+        if (this.max) {
+            if (v > this.max) {
+                if (this.limitBehavior === 'throw') {
+                    throw new Error(`too many ${this.name} (${v} > ${this.max})`);
+                }
+                v = this.max;
+            }
+        }
+        return v;
+    }
+
     add(amount: number) {
-        this._value += amount;
+        this._value = this.handleValue(this._value + amount);
         return this.value;
     }
 
     remove(amount: number) {
-        if (this._value < amount) {
-            throw new Error(`not enough ${this.name} (${this._value} < ${amount})`);
-        }
-        this._value -= amount;
+        this._value = this.handleValue(this._value - amount);
         return this.value;
     }
 }

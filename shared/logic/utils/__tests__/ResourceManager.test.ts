@@ -10,18 +10,88 @@ describe('ResourceManager', () => {
     beforeEach(() => {
         manager = new ResourceManager({ name: 'test', value: 0 });
     });
-    test('add', () => {
-        expect(manager.add(10)).toBe(10);
-        expect(manager.value).toBe(10);
-        expect(manager.add(10)).toBe(20);
-        expect(manager.value).toBe(20);
+    describe('default behavior', () => {
+        test('add', () => {
+            expect(manager.add(10)).toBe(10);
+            expect(manager.value).toBe(10);
+            expect(manager.add(10)).toBe(20);
+            expect(manager.value).toBe(20);
+        });
+        test('remove', () => {
+            manager.add(10);
+            expect(manager.remove(5)).toBe(5);
+            expect(manager.value).toBe(5);
+            expect(manager.remove(5)).toBe(0);
+            expect(manager.value).toBe(0);
+        });
     });
-    test('remove', () => {
-        manager.add(10);
-        expect(manager.remove(5)).toBe(5);
-        expect(manager.value).toBe(5);
-        expect(manager.remove(5)).toBe(0);
-        expect(manager.value).toBe(0);
+    describe('min', () => {
+        test('throw', () => {
+            manager = new ResourceManager({
+                name: 'test',
+                value: 0,
+                min: 10,
+                limitBehavior: 'throw',
+            });
+            expect(() => manager.add(5)).toThrow('not enough test (5 < 10)');
+        });
+        test('clamp', () => {
+            manager = new ResourceManager({
+                name: 'test',
+                value: 0,
+                min: 10,
+                limitBehavior: 'clamp',
+            });
+            expect(manager.add(5)).toBe(10);
+            expect(manager.value).toBe(10);
+        });
+    });
+    describe('max', () => {
+        test('throw', () => {
+            manager = new ResourceManager({
+                name: 'test',
+                value: 0,
+                max: 10,
+                limitBehavior: 'throw',
+            });
+            expect(() => manager.add(15)).toThrow('too many test (15 > 10)');
+        });
+        test('clamp', () => {
+            manager = new ResourceManager({
+                name: 'test',
+                value: 0,
+                max: 10,
+                limitBehavior: 'clamp',
+            });
+            expect(manager.add(15)).toBe(10);
+            expect(manager.value).toBe(10);
+        });
+    });
+    describe('min and max', () => {
+        test('throw', () => {
+            manager = new ResourceManager({
+                name: 'test',
+                value: 0,
+                min: 10,
+                max: 10,
+                limitBehavior: 'throw',
+            });
+            expect(() => manager.add(5)).toThrow('not enough test (5 < 10)');
+            expect(() => manager.add(15)).toThrow('too many test (15 > 10)');
+        });
+        test('clamp', () => {
+            manager = new ResourceManager({
+                name: 'test',
+                value: 0,
+                min: 10,
+                max: 10,
+                limitBehavior: 'clamp',
+            });
+            expect(manager.add(5)).toBe(10);
+            expect(manager.value).toBe(10);
+            expect(manager.add(15)).toBe(10);
+            expect(manager.value).toBe(10);
+        });
     });
 });
 

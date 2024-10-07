@@ -49,6 +49,7 @@ export function createProposeBill(
                 ['isDifferent', role.game.data.board.policies[policy] !== value],
             ],
             run: ({ policy, value }) => {
+                // todo: handle immediate vote
                 role.game.data.board.policyProposals[policy] = {
                     role: role.id,
                     value,

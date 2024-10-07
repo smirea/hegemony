@@ -90,14 +90,6 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
             return id;
         };
 
-        // const fillWorkers = (
-        //     role: RoleMap['workingClass']['id'] | RoleMap['middleClass']['id'],
-        //     id: string,
-        // ) =>
-        //     this.data.companyDeck
-        //         .getOriginalCard(id)
-        //         .workers.map(w => this.game.data.roles[role].newWorker(w.type));
-
         this.data.companies = [
             {
                 id: draw('s-university-hospital-1'),

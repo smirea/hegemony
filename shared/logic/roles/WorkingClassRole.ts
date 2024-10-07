@@ -31,11 +31,16 @@ import {
     createNewWorker,
     createWorker,
 } from './commonMethods';
+import ResourceManager from '../utils/ResourceManager';
 
 import type Game from '../Game';
 
 interface WorkingClassData extends BaseData {
-    prosperity: number;
+    /**
+     * multiple prosperity levels can have the same value, thus needing to store an index and a mapping
+     * use .getProsperityValue() to get the actual amount
+     */
+    prosperityIndex: ResourceManager;
     availableVotingCubes: number;
     workers: CompanyWorker[];
     availableWorkers: Record<CompanyWorkerType, number>;
@@ -51,11 +56,19 @@ export default class WorkingClassRole extends AbstractRole<
     readonly id = RoleEnum.workingClass;
     data: WorkingClassData;
 
+    public readonly prosperityValues: ReadonlyArray<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
     constructor(game: Game) {
         super(game);
         this.data = {
             ...super.createBaseState(),
-            prosperity: 0,
+            prosperityIndex: new ResourceManager({
+                name: 'workingClass:prosperityIndex',
+                value: 0,
+                min: 0,
+                max: this.prosperityValues.length - 1,
+                limitBehavior: 'clamp',
+            }),
             availableVotingCubes: 0,
             workers: [],
             availableWorkers: {
@@ -100,6 +113,10 @@ export default class WorkingClassRole extends AbstractRole<
     getPopulation = createGetPopulation(this);
     worker = createWorker(this);
     newWorker = createNewWorker(this);
+
+    getProsperityValue() {
+        return this.prosperityValues[this.data.prosperityIndex.value];
+    }
 
     basicActions = {
         ...createProposeBill(this),

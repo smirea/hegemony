@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import {
     type Company,
     type CompanyCard,
@@ -44,7 +46,11 @@ import ResourceManager from '../utils/ResourceManager';
 import type Game from '../Game';
 
 interface MiddleClassData extends BaseData {
-    prosperity: number;
+    /**
+     * multiple prosperity levels can have the same value, thus needing to store an index and a mapping
+     * use .getProsperityValue() to get the actual amount
+     */
+    prosperityIndex: ResourceManager;
     availableVotingCubes: number;
     workers: CompanyWorker[];
     availableWorkers: Record<CompanyWorkerType, number>;
@@ -65,11 +71,19 @@ export default class MiddleClassRole extends AbstractRole<
     readonly id = RoleEnum.middleClass;
     data: MiddleClassData;
 
+    public readonly prosperityValues: ReadonlyArray<number> = [0, 1, 2, 3, 4, 5, 5, 6, 6, 7, 7];
+
     constructor(game: Game) {
         super(game);
         this.data = {
             ...this.createBaseState(),
-            prosperity: 0,
+            prosperityIndex: new ResourceManager({
+                name: 'middleClass:prosperityIndex',
+                value: 0,
+                min: 0,
+                max: this.prosperityValues.length - 1,
+                limitBehavior: 'clamp',
+            }),
             companyDeck: new Deck('middleClass companies', middleClassCompanies),
             companies: [],
             companyMarket: [],
@@ -110,6 +124,8 @@ export default class MiddleClassRole extends AbstractRole<
         this.data.resources.influence.add(1);
         this.data.resources.food.add(1);
         this.data.resources.healthcare.add(1);
+
+        this.data.companyDeck.shuffle();
 
         const draw = (id: string) => {
             this.data.companyDeck.drawById(id);
@@ -173,6 +189,10 @@ export default class MiddleClassRole extends AbstractRole<
         } else {
             this.data.producedResources[resource].add(count);
         }
+    }
+
+    getProsperityValue() {
+        return this.prosperityValues[this.data.prosperityIndex.value];
     }
 
     basicActions = {
