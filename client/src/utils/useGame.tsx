@@ -17,6 +17,9 @@ export const GameContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
             requestPlayerInput: async () => {},
         });
 
+        game.data.roles.capitalist.data.companyDeck.shuffle = () => {};
+        game.data.roles.middleClass.data.companyDeck.shuffle = () => {};
+
         game.setupBoard();
         game.setupRound();
         game.data.currentRoleName = 'workingClass';
@@ -25,9 +28,17 @@ export const GameContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
             role: 'workingClass',
             value: 1,
         };
+        game.data.board.policyProposals.laborMarket = {
+            role: 'middleClass',
+            value: 0,
+        };
+        game.data.board.policyProposals.taxation = {
+            role: 'capitalist',
+            value: 1,
+        };
         game.data.board.policyProposals.education = {
-            role: 'workingClass',
-            value: 2,
+            role: 'state',
+            value: 1,
         };
 
         game.data.roles.capitalist.data.companies[1].automationToken = true;
@@ -38,6 +49,8 @@ export const GameContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
             wages: 'l2',
             automationToken: false,
         });
+
+        game.data.roles.middleClass.data.companyMarket.pop();
 
         return game;
     }, []);
