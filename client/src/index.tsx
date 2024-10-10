@@ -4,7 +4,7 @@ globalThis.EMOTION_RUNTIME_AUTO_LABEL = true;
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import './fonts.sass';
+import './fonts.css';
 import './global.sass';
 import App from './App';
 import defineColors from './utils/defineColors';
