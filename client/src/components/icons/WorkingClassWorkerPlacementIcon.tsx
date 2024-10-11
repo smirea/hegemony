@@ -13,7 +13,7 @@ const WorkingClassWorkerPlacementIcon = createSVGIcon<{
             style={{ ...props.style, opacity: 0.85 }}
         >
             <path
-                fill={color ?? colors.workerPlacement[type!]}
+                fill={color ?? colors.worker[type!]}
                 d='
                 M 103.34 11.32
                 C 105.56 11.32 107.49 12.76 108.30 14.53

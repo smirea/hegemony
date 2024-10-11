@@ -6,7 +6,7 @@ import createSVGIcon from './createSVGIcon';
 const MiddleClassWorkerPlacementIcon = createSVGIcon<{
     type?: CompanyWorkerType;
 }>({ type: 'unskilled' }, ({ color, type, ...props }) => {
-    const clr = color ?? colors.workerPlacement[type!];
+    const clr = color ?? colors.worker[type!];
     return (
         <svg
             {...props}

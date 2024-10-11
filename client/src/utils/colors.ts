@@ -56,14 +56,6 @@ const colorsDefinitions = {
     } satisfies Record<Industry, RGBA>,
     resource: resourceColors,
     worker: {
-        unskilled: hexToRGB('#babebc'),
-        food: resourceColors.food,
-        luxury: resourceColors.luxury,
-        healthcare: resourceColors.healthcare,
-        education: resourceColors.education,
-        influence: resourceColors.influence,
-    } satisfies Record<CompanyWorkerType, RGBA>,
-    workerPlacement: {
         unskilled: hexToRGB('#C7C7C5'),
         food: hexToRGB('#94C11C'),
         luxury: hexToRGB('#6CC6DF'),

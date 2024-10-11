@@ -8,8 +8,9 @@ const WorkingClassWorker3DIcon = createSVGIcon<{
 }>({ type: 'unskilled' }, ({ color, type, ...props }) => {
     const clr = color ?? colors.worker[type!];
     return (
-        <svg {...props} viewBox='3.00 6.00 160.00 252.00'>
-            <g fill={clr} style={{ filter: 'brightness(0.55)' }}>
+        <svg {...props} viewBox='32.00 28.00 130.00 230.00'>
+            {/* <svg {...props} viewBox='3.00 6.00 160.00 252.00'> */}
+            {/* <g fill={clr} style={{ filter: 'brightness(0.55)' }}>
                 <path
                     d='
                     M 119.29 39.71
@@ -137,7 +138,7 @@ const WorkingClassWorker3DIcon = createSVGIcon<{
                     Q 107.26 247.50 107.95 250.18
                     Z'
                 />
-            </g>
+            </g> */}
             <path
                 fill={clr}
                 d='

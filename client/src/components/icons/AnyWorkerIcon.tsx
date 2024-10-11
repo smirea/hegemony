@@ -11,7 +11,7 @@ const AnyWorkerIcon = createSVGIcon<{ type?: CompanyWorkerType }>(
             viewBox='10.00 10.00 300.00 435.00'
             style={{ ...props.style, opacity: 0.85 }}
         >
-            <g fill={colors.workerPlacement[type!]}>
+            <g fill={colors.worker[type!]}>
                 <path
                     d='
   M 78.84 122.40
