@@ -1,4 +1,5 @@
 import { type RoleMap } from 'shared/logic/types';
+import { colors } from 'client/utils/constants';
 
 import createSVGIcon from './createSVGIcon';
 
@@ -7,7 +8,7 @@ const ProsperityIcon = createSVGIcon<{
 }>({}, ({ role, ...props }) => (
     <svg {...props} viewBox='21.00 17.00 107.00 108.00'>
         <path
-            fill='#d02f26'
+            fill={colors.role[role]}
             d='
                 M 75.1499 124.2060
                 A 53.20 53.00 89.3 0 1 21.5040 71.6575

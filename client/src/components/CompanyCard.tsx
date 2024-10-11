@@ -34,6 +34,13 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(({ company, minimal, ..
         totalProduction += companyDef.productionFromOptionalWorkers;
     }
 
+    const ifWages = (content: React.ReactNode) =>
+        companyDef.wages.l1 || companyDef.wages.l2 || companyDef.wages.l3 ? (
+            <Wages>{content}</Wages>
+        ) : (
+            <Wages />
+        );
+
     if (minimal) {
         return (
             <Root {...rest} minimal background={colors.industry[companyDef.industry]}>
@@ -41,14 +48,16 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(({ company, minimal, ..
                 <Output>
                     <Production value={totalProduction} small industry={companyDef.industry} />
                 </Output>
-                <Wages>
-                    {!companyDef.fullyAutomated && (
-                        <div data-selected={true}>
-                            {companyDef.wages[company.wages]}
-                            <MoneyResourceIcon height={0.5} />
-                        </div>
-                    )}
-                </Wages>
+                {ifWages(
+                    <>
+                        {!companyDef.fullyAutomated && (
+                            <div data-selected={true}>
+                                {companyDef.wages[company.wages]}
+                                <MoneyResourceIcon height={0.5} />
+                            </div>
+                        )}
+                    </>,
+                )}
             </Root>
         );
     }
@@ -84,15 +93,17 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(({ company, minimal, ..
                     />
                 )}
             </Output>
-            <Wages>
-                {!companyDef.fullyAutomated && (
-                    <>
-                        <div data-selected={company.wages === 'l1'}>{companyDef.wages.l1}</div>
-                        <div data-selected={company.wages === 'l2'}>{companyDef.wages.l2}</div>
-                        <div data-selected={company.wages === 'l3'}>{companyDef.wages.l3}</div>
-                    </>
-                )}
-            </Wages>
+            {ifWages(
+                <>
+                    {!companyDef.fullyAutomated && (
+                        <>
+                            <div data-selected={company.wages === 'l1'}>{companyDef.wages.l1}</div>
+                            <div data-selected={company.wages === 'l2'}>{companyDef.wages.l2}</div>
+                            <div data-selected={company.wages === 'l3'}>{companyDef.wages.l3}</div>
+                        </>
+                    )}
+                </>,
+            )}
         </Root>
     );
 });

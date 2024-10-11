@@ -20,6 +20,11 @@ export default function DebugIcons() {
                 <div className='row' style={{ margin: '0 auto', gap: '5rem' }}>
                     <Target height={20} style={{ border: '1px solid red' }} />
                     <Target height={20} color='orange' style={{ border: '1px solid red' }} />
+                    <div className='column' data-spacing='1' data-align='center'>
+                        <Target height={5} color='orange' style={{ border: '1px solid red' }} />
+                        <Target height={2} color='orange' style={{ border: '1px solid red' }} />
+                        <Target height={1} color='orange' style={{ border: '1px solid red' }} />
+                    </div>
                 </div>
             )}
             <table>

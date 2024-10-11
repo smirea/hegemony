@@ -3,7 +3,7 @@ import { colors } from 'client/utils/constants';
 import createSVGIcon from './createSVGIcon';
 
 const StateIcon = createSVGIcon<object>({ color: colors.role.state }, ({ color, ...props }) => (
-    <svg {...props} viewBox='15.00 10.00 134.00 178.00'>
+    <svg {...props} viewBox='15.00 10.00 132.00 178.00'>
         <g fill={color}>
             <path
                 d='

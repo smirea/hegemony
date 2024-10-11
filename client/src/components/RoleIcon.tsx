@@ -30,22 +30,11 @@ const RoleIcon: React.FC<RoleIconProps> = ({ role, size, round, ...props }) => {
     size ||= 2;
     const iconSize = size * 1.01;
 
-    const customCSS = {
-        workingClass: {},
-        middleClass: {
-            transform: 'translateX(3px)',
-        },
-        capitalist: {},
-        state: {
-            transform: 'translateX(10px)',
-        },
-    }[role];
-
     const { style, className, ...restProps } = props;
 
     return (
         <Round background={color} size={size} style={{ ...style }} className={className}>
-            <Icon {...restProps} height={iconSize} color={colors.textColor} style={customCSS} />
+            <Icon {...restProps} height={iconSize} color={colors.textColor} />
         </Round>
     );
 };

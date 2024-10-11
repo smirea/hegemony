@@ -2,7 +2,7 @@ import { colors } from 'client/utils/constants';
 
 import createSVGIcon from './createSVGIcon';
 
-const MiddleClassPopulationIcon = createSVGIcon(
+const MiddleClassPopulationIcon = createSVGIcon<object>(
     { color: colors.role.middleClass },
     ({ color, ...props }) => (
         <svg {...props} viewBox='7.00 7.00 84.00 145.00'>

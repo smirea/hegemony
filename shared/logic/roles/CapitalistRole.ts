@@ -7,6 +7,7 @@ import {
     type CompanyCard,
     CompanyIdSchema,
     type ResourceEnum,
+    type ResourcePriceLevel,
     RoleEnum,
     type RoleNameSchema,
     type TradeableResource,
@@ -35,7 +36,7 @@ import type Game from '../Game';
 
 interface CapitalistData extends BaseData<CapitalistMoneyResourceManager> {
     availableVotingCubes: number;
-    priceLevels: Record<TradeableResource, 0 | 1 | 2>;
+    priceLevels: Record<TradeableResource, ResourcePriceLevel>;
     storage: Partial<Record<TradeableResource, boolean>>;
     companyDeck: Deck<CompanyCard[]>;
     /** built companies */

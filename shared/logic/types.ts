@@ -65,7 +65,7 @@ export interface Player {
 
 export type Industry = 'food' | 'healthcare' | 'education' | 'luxury' | 'influence';
 export type CompanyWorkerType = keyof typeof WorkerTypeEnum;
-
+export type ResourcePriceLevel = 0 | 1 | 2;
 export type WageId = 'l1' | 'l2' | 'l3';
 
 export interface Company {

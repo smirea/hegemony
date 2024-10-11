@@ -5,20 +5,19 @@ import { objectEntries } from 'shared/utils/ts';
 import { observer } from 'mobx-react';
 import useGame from 'client/utils/useGame';
 import { type Industry } from 'shared/logic/types';
-import { colors } from 'client/utils/constants';
 
 import Value from './Value';
 import WorkingClassIcon from './icons/WorkingClassIcon';
-import WorkingClassWorkerPlacementIcon from './icons/WorkingClassWorkerPlacementIcon';
 import ResourceIcon from './ResourceIcon';
 import ProsperityIcon from './icons/ProsperityIcon';
+import WorkerIcon from './icons/WorkerIcon';
 
 const WorkingClassRole: React.FC = observer(() => {
     const game = useGame();
 
     const workers = game.data.roles.workingClass.data.workers;
     const population = game.data.roles.workingClass.getPopulation();
-    const prosperity = game.data.roles.workingClass.data.prosperity;
+    const prosperity = game.data.roles.workingClass.data.prosperityIndex.value;
     // const unions = game.data.roles.workingClass.data.unions;
     const unions = {
         luxury: true,
@@ -41,31 +40,31 @@ const WorkingClassRole: React.FC = observer(() => {
                     <div className='row' data-spacing='.25'>
                         <Value
                             v={resources.money.value}
-                            icon={<ResourceIcon name='money' height={1} />}
+                            icon={p => <ResourceIcon {...p} name='money' />}
                         />
                         <Value
                             v={resources.food.value}
-                            icon={<ResourceIcon name='food' height={1} />}
+                            icon={p => <ResourceIcon {...p} name='food' />}
                         />
                         <Value
                             v={resources.luxury.value}
-                            icon={<ResourceIcon name='luxury' height={1} />}
+                            icon={p => <ResourceIcon {...p} name='luxury' />}
                         />
                         <Value
                             v={resources.healthcare.value}
-                            icon={<ResourceIcon name='healthcare' height={1} />}
+                            icon={p => <ResourceIcon {...p} name='healthcare' />}
                         />
                         <Value
                             v={resources.education.value}
-                            icon={<ResourceIcon name='education' height={1} />}
+                            icon={p => <ResourceIcon {...p} name='education' />}
                         />
                         <Value
                             v={resources.influence.value}
-                            icon={<ResourceIcon name='influence' height={1} />}
+                            icon={p => <ResourceIcon {...p} name='influence' />}
                         />
                         <div style={{ flex: '1 1 0' }} />
                         <Value
-                            icon={<ProsperityIcon role='workingClass' height={1} />}
+                            icon={p => <ProsperityIcon {...p} role='workingClass' />}
                             v={prosperity}
                         />
                     </div>
@@ -107,7 +106,7 @@ const WorkingClassRole: React.FC = observer(() => {
                 </div>
                 <div className='column p05' data-spacing='.5' data-align='stretch'>
                     <b style={{ textAlign: 'center' }}>{_.filter(unions).length} Unions</b>
-                    <div className='row' data-spacing='.25' style={{ minWidth: '10rem' }}>
+                    <div className='row' data-spacing='.25' style={{ minWidth: '6rem' }}>
                         {objectEntries(unionCounts).map(([industry, count]) => (
                             <div
                                 key={industry}
@@ -115,13 +114,12 @@ const WorkingClassRole: React.FC = observer(() => {
                                 style={{ flex: '1 1 0', alignItems: 'center' }}
                                 data-spacing='.25'
                             >
-                                <UnionBox key={industry} type={industry}>
-                                    <WorkingClassWorkerPlacementIcon
-                                        height={2}
-                                        type={industry}
-                                        color={unions[industry] ? undefined : 'var(--board-color)'}
-                                    />
-                                </UnionBox>
+                                <WorkerIcon
+                                    height={2}
+                                    role='workingClass'
+                                    type={industry}
+                                    status={unions[industry] ? 'uncommitted' : 'empty'}
+                                />
                                 <div style={{ fontSize: '.875rem' }}>{count}</div>
                             </div>
                         ))}
@@ -138,8 +136,10 @@ const Root = styled.div`
     display: inline-flex;
     overflow: hidden;
     border-radius: 8px;
-    background: var(--board-color);
+    box-shadow: 0 0 0 4px var(--working-class-color) inset;
+    background: rgba(var(--board-color-params), 0.75);
     color: var(--text-color);
+    padding: 1rem;
 `;
 
 const TrackSquare = styled.div`
@@ -162,20 +162,8 @@ const TrackSquare = styled.div`
     }
 
     &[data-highlighted='true'] {
-        background: var(--wc-color);
+        background: var(--working-class-color);
         color: var(--text-color);
         font-weight: bold;
     }
-`;
-
-const UnionBox = styled.div<{ type: Industry }>`
-    flex: 1 1 0;
-    align-self: stretch;
-    border-radius: 8px;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.125rem;
-    background: ${({ type }) => colors.industry[type]};
 `;

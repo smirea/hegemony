@@ -15,7 +15,7 @@ const BoardPolicies: React.FC = observer(() => {
         const proposal = game.data.board.policyProposals[name];
         if (!proposal) return null;
         if (proposal.value !== value) return null;
-        return <RoleIcon role={proposal.role} size={1.25} round className='ml05' />;
+        return <RoleIcon role={proposal.role} size={1.25} className='ml05' />;
     };
 
     return (

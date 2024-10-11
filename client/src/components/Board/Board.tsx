@@ -3,7 +3,6 @@ import { observer } from 'mobx-react';
 import useGame from 'client/utils/useGame';
 
 import BoardPolicies from './BoardPolicies';
-// import CompanyGrid from './CompanyGrid';
 import CompanyCard from '../CompanyCard';
 import CompanyCardPlacement from '../CompanyCardPlacement';
 
@@ -62,7 +61,4 @@ const Board: React.FC = observer(() => {
 
 export default Board;
 
-const Root = styled.div`
-    background: var(--board-color);
-    padding: 1rem;
-`;
+const Root = styled.div``;

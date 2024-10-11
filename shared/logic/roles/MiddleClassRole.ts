@@ -8,6 +8,7 @@ import {
     type CompanyWorker,
     type CompanyWorkerType,
     ResourceEnumSchema,
+    type ResourcePriceLevel,
     RoleEnum,
     type RoleNameNoWorkingClass,
     type TradeableResource,
@@ -55,7 +56,7 @@ interface MiddleClassData extends BaseData {
     workers: CompanyWorker[];
     availableWorkers: Record<CompanyWorkerType, number>;
     producedResources: Record<TradeableResource, ResourceManager>;
-    priceLevels: Record<TradeableResource, 0 | 1 | 2>;
+    priceLevels: Record<TradeableResource, ResourcePriceLevel>;
     storage: Partial<Record<TradeableResource, boolean>>;
     companyDeck: Deck<CompanyCard[]>;
     /** built companies */

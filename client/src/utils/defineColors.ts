@@ -55,8 +55,6 @@ const colors = {
     'resource-influence-color': hexToRGB('#92288F'),
 } satisfies Record<string, RGBA>;
 
-console.log(colors['working-class-color']);
-
 export default function defineColors() {
     document.getElementById('generated-colors')?.remove();
 

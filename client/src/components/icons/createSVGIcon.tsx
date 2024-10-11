@@ -33,7 +33,8 @@ export default function createSVGIcon<Extra = object>(
         return render({
             viewBox: '0.00 0.00 100.00 100.00',
             ...props,
-            height: props.height ? props.height + 'rem' : undefined,
+            /** for some reason, unbeknownst to humanity, the svg always adds 10% more height... */
+            height: props.height ? props.height * 0.9 + 'rem' : undefined,
             width: props.width ? props.width + 'rem' : undefined,
             xmlns: 'http://www.w3.org/2000/svg',
             version: '1.1',

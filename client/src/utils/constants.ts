@@ -10,6 +10,7 @@ export const remPx = 16;
 export const colors = {
     boardColor: 'var(--board-color)',
     textColor: 'var(--text-color)',
+    textColorMuted: 'rgba(var(--text-color-params), 0.5)',
     textColorInverted: 'var(--text-color-inverted)',
     role: {
         workingClass: 'var(--working-class-color)',
