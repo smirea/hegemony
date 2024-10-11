@@ -1,5 +1,5 @@
 import { type CompanyWorkerType } from 'shared/logic/types';
-import { colors } from 'client/utils/constants';
+import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
@@ -11,7 +11,7 @@ const AnyWorkerIcon = createSVGIcon<{ type?: CompanyWorkerType }>(
             viewBox='10.00 10.00 300.00 435.00'
             style={{ ...props.style, opacity: 0.85 }}
         >
-            <g fill={colors.worker[type!]}>
+            <g fill={colors.workerPlacement[type!]}>
                 <path
                     d='
   M 78.84 122.40

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import useGame from 'client/utils/useGame';
 import { observer } from 'mobx-react';
-import { colors } from 'client/utils/constants';
+import colors, { colorsRGBA } from 'client/utils/colors';
 import _ from 'lodash';
 import { type ResourcePriceLevel, type TradeableResource } from 'shared/logic/types';
 
@@ -124,10 +124,11 @@ const MiddleClassRole: React.FC = observer(() => {
                     market[i] ? (
                         <CompanyCard
                             key={i}
+                            format='tiny'
                             company={{ id: market[i], workers: [], wages: defaultWages }}
                         />
                     ) : (
-                        <CompanyCardPlacement key={i} role='middleClass' />
+                        <CompanyCardPlacement format='tiny' key={i} role='middleClass' />
                     ),
                 )}
             </div>
@@ -187,9 +188,7 @@ const ResourceProduction: React.FC<{
             </IconContainer>
             <div className='row' data-align='center' data-spacing='.25'>
                 <div>{value}</div>
-                <div style={{ color: colors.textColorMuted, fontSize: '.875rem' }}>
-                    / {maxStorage}
-                </div>
+                <div style={{ color: colors.textMuted, fontSize: '.875rem' }}>/ {maxStorage}</div>
             </div>
             <ResourcePrice color={color}>
                 <div>{prices[price]}</div>
@@ -201,9 +200,9 @@ const ResourceProduction: React.FC<{
 
 const Root = styled.div`
     border-radius: 8px;
-    box-shadow: 0 0 0 4px var(--middle-class-color) inset;
-    background: rgba(var(--board-color-params), 0.75);
-    color: var(--text-color);
+    box-shadow: 0 0 0 4px ${colors.role.middleClass} inset;
+    background: rgba(${colorsRGBA.board}, 0.75);
+    color: ${colors.text};
     padding: 1rem;
 `;
 

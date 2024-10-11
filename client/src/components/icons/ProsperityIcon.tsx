@@ -1,5 +1,5 @@
 import { type RoleMap } from 'shared/logic/types';
-import { colors } from 'client/utils/constants';
+import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 

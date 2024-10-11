@@ -1,5 +1,5 @@
 import { type CompanyWorkerType } from 'shared/logic/types';
-import { colors } from 'client/utils/constants';
+import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
@@ -13,7 +13,7 @@ const WorkingClassWorkerPlacementIcon = createSVGIcon<{
             style={{ ...props.style, opacity: 0.85 }}
         >
             <path
-                fill={color ?? colors.worker[type!]}
+                fill={color ?? colors.workerPlacement[type!]}
                 d='
                 M 103.34 11.32
                 C 105.56 11.32 107.49 12.76 108.30 14.53

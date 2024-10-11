@@ -1,9 +1,9 @@
-import { colors } from 'client/utils/constants';
+import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
 const MoneyResourceIcon = createSVGIcon<object>(
-    { height: 1, color: colors.textColor },
+    { height: 1, color: colors.text },
     ({ color, ...props }) => (
         <svg {...props} viewBox='5.00 8.00 95.00 86.00'>
             <g fill={color}>

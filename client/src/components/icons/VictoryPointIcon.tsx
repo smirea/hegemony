@@ -1,9 +1,9 @@
-import { colors } from 'client/utils/constants';
+import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
 const VictoryPointIcon = createSVGIcon<{ value?: number; textColor?: string }>(
-    { color: colors.textColor, textColor: colors.textColorInverted },
+    { color: colors.text, textColor: colors.textInverted },
     ({ color, textColor, value, ...props }) => (
         <svg {...props} viewBox='7.00 10.00 116.00 101.00'>
             <path

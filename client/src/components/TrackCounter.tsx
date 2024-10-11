@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import colors from 'client/utils/colors';
 import React from 'react';
 
 export interface TrackCounterProps {
@@ -70,7 +71,7 @@ const Tick = styled.div<{ color: string; size: number }>`
     }
 
     &[data-selected='false'] {
-        color: var(--text-color);
+        color: ${colors.text};
     }
 `;
 
@@ -78,7 +79,7 @@ const TrackSeparator = styled.div`
     position: absolute;
     left: -0.125rem;
     top: calc(50% - 0.125rem);
-    background: var(--text-color);
+    background: ${colors.text};
     border-radius: 50%;
     width: 0.25rem;
     height: 0.25rem;

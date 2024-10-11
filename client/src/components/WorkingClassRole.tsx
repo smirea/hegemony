@@ -5,6 +5,7 @@ import { objectEntries } from 'shared/utils/ts';
 import { observer } from 'mobx-react';
 import useGame from 'client/utils/useGame';
 import { type Industry } from 'shared/logic/types';
+import colors, { colorsRGBA } from 'client/utils/colors';
 
 import Value from './Value';
 import WorkingClassIcon from './icons/WorkingClassIcon';
@@ -136,9 +137,9 @@ const Root = styled.div`
     display: inline-flex;
     overflow: hidden;
     border-radius: 8px;
-    box-shadow: 0 0 0 4px var(--working-class-color) inset;
-    background: rgba(var(--board-color-params), 0.75);
-    color: var(--text-color);
+    box-shadow: 0 0 0 4px ${colors.role.workingClass} inset;
+    background: rgba(${colorsRGBA.board}, 0.75);
+    color: ${colors.text};
     padding: 1rem;
 `;
 
@@ -151,7 +152,7 @@ const TrackSquare = styled.div`
     padding: 0.125rem 0.25rem;
 
     & + & {
-        box-shadow: -1px 0 0 0 var(--text-color);
+        box-shadow: -1px 0 0 0 ${colors.text};
     }
 
     &[data-size='2'] {
@@ -162,8 +163,8 @@ const TrackSquare = styled.div`
     }
 
     &[data-highlighted='true'] {
-        background: var(--working-class-color);
-        color: var(--text-color);
+        background: ${colors.role.workingClass};
+        color: ${colors.text};
         font-weight: bold;
     }
 `;

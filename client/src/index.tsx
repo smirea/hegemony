@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom/client';
 import './fonts.css';
 import './global.sass';
 import App from './App';
-import defineColors from './utils/defineColors';
+import { defineColors } from './utils/colors';
 
 const rootEl = document.getElementById('root');
 if (rootEl) {

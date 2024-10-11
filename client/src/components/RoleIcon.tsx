@@ -2,7 +2,7 @@ import React from 'react';
 import { type RoleName } from 'shared/logic/types';
 import { type ClassAndStyle } from 'client/types';
 import styled from '@emotion/styled';
-import { colors } from 'client/utils/constants';
+import colors from 'client/utils/colors';
 
 import WorkingClassIcon from './icons/WorkingClassIcon';
 import MiddleClassIcon from './icons/MiddleClassIcon';
@@ -34,7 +34,7 @@ const RoleIcon: React.FC<RoleIconProps> = ({ role, size, round, ...props }) => {
 
     return (
         <Round background={color} size={size} style={{ ...style }} className={className}>
-            <Icon {...restProps} height={iconSize} color={colors.textColor} />
+            <Icon {...restProps} height={iconSize} color={colors.text} />
         </Round>
     );
 };

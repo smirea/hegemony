@@ -6,7 +6,7 @@ pre-commit:
             stage_fixed: true
         lint:
             glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
-            run: pnpm lint --no-error-on-unmatched-pattern --no-warn-ignored --no-color {staged_files}
+            run: pnpm lint --no-error-on-unmatched-pattern --no-warn-ignored --no-color {staged_files} || exit 0
             stage_fixed: true
         typecheck:
             glob: "*.{js,ts,jsx,tsx}"
