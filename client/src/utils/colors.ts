@@ -12,7 +12,7 @@ type RGBA = [number, number, number, number?];
 type HEX = `#${string}`;
 
 const hexToRGB = (hex: HEX): RGBA => {
-    let h = hex.replace(/^#/, '');
+    let h = hex.replace(/^#/, '').toLowerCase();
     if (h.length === 3) {
         h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
     }
@@ -24,23 +24,15 @@ const white: RGBA = [255, 255, 255, 1];
 
 const textColor = hexToRGB('#eeeeee');
 
-const resourceColors = {
-    food: hexToRGB('#80923E'),
-    luxury: hexToRGB('#008DC6'),
-    healthcare: hexToRGB('#C00C0D'),
-    education: hexToRGB('#EA8D00'),
-    influence: hexToRGB('#951A81'),
-    money: white,
-} satisfies Record<Resource, RGBA>;
-
 const colorsDefinitions = {
+    white: hexToRGB('#ffffff'),
     backgroundHover: [210, 210, 210, 0.4],
     board: hexToRGB('#23252A'),
     boardBorder: hexToRGB('#aaaaaa'),
     bodyBackground: hexToRGB('#23252A'),
     text: hexToRGB('#eeeeee'),
     textInverted: hexToRGB('#23252A'),
-    textMuted: alpha(textColor, 0.5),
+    textMuted: alpha(textColor, 0.65),
     role: {
         workingClass: hexToRGB('#ED1C25'),
         middleClass: hexToRGB('#FFC20D'),
@@ -54,12 +46,19 @@ const colorsDefinitions = {
         education: hexToRGB('#EA8D00'),
         influence: hexToRGB('#961A83'),
     } satisfies Record<Industry, RGBA>,
-    resource: resourceColors,
+    resource: {
+        food: hexToRGB('#80923E'),
+        luxury: hexToRGB('#008DC6'),
+        healthcare: hexToRGB('#EF1217'),
+        education: hexToRGB('#EA8D00'),
+        influence: hexToRGB('#951A81'),
+        money: white,
+    } satisfies Record<Resource, RGBA>,
     worker: {
-        unskilled: hexToRGB('#C7C7C5'),
+        unskilled: hexToRGB('#bbbbbb'),
         food: hexToRGB('#94C11C'),
         luxury: hexToRGB('#6CC6DF'),
-        healthcare: hexToRGB('#EAE6E6'),
+        healthcare: hexToRGB('#ffffff'),
         education: hexToRGB('#FFCF32'),
         influence: hexToRGB('#CD81B4'),
     } satisfies Record<CompanyWorkerType, RGBA>,

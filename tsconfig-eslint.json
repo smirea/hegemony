@@ -8,9 +8,10 @@
 		"client/**/*.ts",
 		"client/**/*.tsx",
 		"packages/**/*.ts",
+		"packages/**/*.tsx",
 		"scripts/**/*.ts",
 		"server/**/*.ts",
 		"shared/**/*.ts",
-		"shared/**/*.tsx"
+		"shared/**/*.tsx",
 	]
 }

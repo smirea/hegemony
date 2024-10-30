@@ -25,7 +25,9 @@ const Value: React.FC<ValueProps> = ({
     return (
         <Root {...rest} interactive={!!onClick} size={size} title={tooltip as any}>
             {icon?.({ height: size })}
-            {typeof v !== 'object' ? <span>{v}</span> : v}
+            <span className='inline-row' data-spacing='.25' data-align='center'>
+                {v}
+            </span>
             {rightIcon?.({ height: size })}
         </Root>
     );
@@ -36,7 +38,7 @@ export default Value;
 const Root = styled.div<{ interactive: boolean; size: number }>`
     display: inline-flex;
     align-items: center;
-    height: ${p => p.size + 0.5}rem;
+    min-height: ${p => p.size + 0.5}rem;
     font-size: ${p => p.size}rem;
     gap: 0.25rem;
     position: relative;

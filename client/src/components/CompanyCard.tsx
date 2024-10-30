@@ -13,6 +13,7 @@ import WorkerIcon from './icons/WorkerIcon';
 import WorkingClassWorker3DIcon from './icons/WorkingClassWorker3DIcon';
 import MoneyResourceIcon from './icons/MoneyResourceIcon';
 import Value from './Value';
+import CompanyWages from './CompanyWages';
 
 type Format = 'normal' | 'vertical' | 'tiny';
 
@@ -22,7 +23,7 @@ export interface CompanyCardProps extends ClassAndStyle {
 }
 
 const CompanyCard: React.FC<CompanyCardProps> = observer(
-    ({ company, format = 'normal', ...rest }) => {
+    ({ company, format = 'normal', ...rest }: CompanyCardProps) => {
         const game = useGame();
         const companyDef = game.getCompanyDefinition(company.id);
 
@@ -39,18 +40,14 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(
         }
 
         const ifWages = (content: React.ReactNode) =>
-            companyDef.wages.l1 || companyDef.wages.l2 || companyDef.wages.l3 ? (
-                <Wages>{content}</Wages>
-            ) : (
-                <Wages />
-            );
+            companyDef.wages.l1 || companyDef.wages.l2 || companyDef.wages.l3 ? content : null;
 
         const rootProps = {
             ...rest,
             background: colors.industry[companyDef.industry],
             'data-format': format,
             'data-company-id': companyDef.id,
-        } as const;
+        };
         const workersProps = {
             companyDef,
             company,
@@ -61,11 +58,42 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(
             return (
                 <Root {...rootProps}>
                     <Value
-                        v={companyDef.production}
+                        v={
+                            <>
+                                <div>{companyDef.production}</div>
+                                {!!companyDef.productionFromAutomation && (
+                                    <div style={{ fontSize: '.875rem', color: colors.textMuted }}>
+                                        + {companyDef.productionFromAutomation}
+                                    </div>
+                                )}
+                                {!!companyDef.productionFromOptionalWorkers && (
+                                    <div style={{ fontSize: '.875rem', color: colors.textMuted }}>
+                                        + {companyDef.productionFromOptionalWorkers}
+                                    </div>
+                                )}
+                            </>
+                        }
                         icon={p => <ResourceIcon {...p} name={companyDef.industry} color='white' />}
+                        style={{ background: rootProps.background }}
+                        className='px05 mr05'
                     />
-                    <Value v={companyDef.cost} icon={p => <ResourceIcon {...p} name='money' />} />
-                    <WorkersEl {...workersProps} />
+                    {/* <Value
+                        v={companyDef.cost}
+                        icon={p => <ResourceIcon {...p} name='money' />}
+                    /> */}
+                    <WorkersEl {...workersProps} className='pr05' />
+                    {!!companyDef.productionFromAutomation && (
+                        <AutomationIcon height={1} style={{ alignSelf: 'center' }} />
+                    )}
+                    {ifWages(
+                        <>
+                            <CompanyWages
+                                companyWages={companyDef.wages}
+                                value={company.wages}
+                                style={{ alignSelf: 'stretch' }}
+                            />
+                        </>,
+                    )}
                 </Root>
             );
         }
@@ -78,14 +106,14 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(
                         <Production value={totalProduction} small industry={companyDef.industry} />
                     </Output>
                     {ifWages(
-                        <>
+                        <Wages>
                             {!companyDef.fullyAutomated && (
                                 <div data-selected={true}>
                                     {companyDef.wages[company.wages]}
                                     <MoneyResourceIcon height={0.5} />
                                 </div>
                             )}
-                        </>,
+                        </Wages>,
                     )}
                 </Root>
             );
@@ -123,7 +151,7 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(
                     )}
                 </Output>
                 {ifWages(
-                    <>
+                    <Wages>
                         {!companyDef.fullyAutomated && (
                             <>
                                 <div data-selected={company.wages === 'l1'}>
@@ -137,7 +165,7 @@ const CompanyCard: React.FC<CompanyCardProps> = observer(
                                 </div>
                             </>
                         )}
-                    </>,
+                    </Wages>,
                 )}
             </Root>
         );
@@ -175,76 +203,75 @@ const ExtraProduction: React.FC<{
     </div>
 );
 
-const WorkersEl: React.FC<{ 'data-format': Format; companyDef: CompanyCard; company: Company }> =
-    observer(function WorkersEl({ companyDef, company, ...props }) {
-        const game = useGame();
-        const iconHeight = {
-            normal: 3,
-            vertical: 2,
-            tiny: 1.5,
-        }[props['data-format']];
-        const fontSize = {
-            normal: '2rem',
-            vertical: '1.5rem',
-            tiny: '1.25rem',
-        }[props['data-format']];
+const WorkersEl: React.FC<
+    { 'data-format': Format; companyDef: CompanyCard; company: Company } & ClassAndStyle
+> = observer(function WorkersEl({ companyDef, company, ...props }) {
+    const game = useGame();
+    const iconHeight = {
+        normal: 3,
+        vertical: 2,
+        tiny: 1.5,
+    }[props['data-format']];
+    const fontSize = {
+        normal: '2rem',
+        vertical: '1.5rem',
+        tiny: '1.25rem',
+    }[props['data-format']];
 
-        if (companyDef.fullyAutomated) {
-            return (
-                <Workers {...props}>
-                    <AutomationIcon height={iconHeight} />
-                </Workers>
-            );
-        }
-
-        const optional = (key: number, content: React.ReactNode) => (
-            <div key={key} className='row' data-align='center' style={{ fontSize }}>
-                <div>(</div>
-                {content}
-                <div>)</div>
-            </div>
-        );
-
+    if (companyDef.fullyAutomated) {
         return (
             <Workers {...props}>
-                {companyDef.workers.map((workerDef, i) => {
-                    if (!company.workers[i]) {
-                        if (workerDef.roles.length > 1) {
-                            return (
-                                <AnyWorkerIcon key={i} height={iconHeight} type={workerDef.type} />
-                            );
-                        }
+                <AutomationIcon height={iconHeight} />
+            </Workers>
+        );
+    }
 
-                        const content = (
-                            <WorkerIcon
-                                key={i}
-                                status='empty'
-                                role={workerDef.roles[0]}
-                                type={workerDef.type}
-                                height={iconHeight}
-                            />
-                        );
+    const optional = (key: number, content: React.ReactNode) => (
+        <div key={key} className='row' data-align='center' style={{ fontSize }}>
+            <div>(</div>
+            {content}
+            <div>)</div>
+        </div>
+    );
 
-                        return workerDef.optional ? optional(i, content) : content;
+    return (
+        <Workers {...props}>
+            {companyDef.workers.map((workerDef, i) => {
+                if (!company.workers[i]) {
+                    if (workerDef.roles.length > 1) {
+                        return <AnyWorkerIcon key={i} height={iconHeight} type={workerDef.type} />;
                     }
-
-                    const { worker, roleName } = game.getWorkerById(company.workers[i]);
 
                     const content = (
                         <WorkerIcon
                             key={i}
-                            role={roleName}
+                            status='empty'
+                            role={workerDef.roles[0]}
                             type={workerDef.type}
-                            status={worker.committed ? 'committed' : 'uncommitted'}
                             height={iconHeight}
                         />
                     );
 
                     return workerDef.optional ? optional(i, content) : content;
-                })}
-            </Workers>
-        );
-    });
+                }
+
+                const { worker, roleName } = game.getWorkerById(company.workers[i]);
+
+                const content = (
+                    <WorkerIcon
+                        key={i}
+                        role={roleName}
+                        type={workerDef.type}
+                        status={worker.committed ? 'committed' : 'uncommitted'}
+                        height={iconHeight}
+                    />
+                );
+
+                return workerDef.optional ? optional(i, content) : content;
+            })}
+        </Workers>
+    );
+});
 
 export const Root = styled.div<{ background: string; 'data-format': Format }>`
     flex: 0 0 auto;
@@ -252,21 +279,25 @@ export const Root = styled.div<{ background: string; 'data-format': Format }>`
     flex-direction: column;
     align-items: stretch;
     background: ${p => p.background};
-    width: 8rem;
-    height: 10rem;
     border-radius: 4px;
     overflow: hidden;
     color: ${colors.text};
 
+    &[data-format='normal'] {
+        width: 8rem;
+        height: 10rem;
+    }
+
     &[data-format='vertical'] {
         width: 3rem;
+        height: 10rem;
     }
 
     &[data-format='tiny'] {
+        box-shadow: 0 0 0 2px ${p => p.background} inset;
+        background: ${colors.board};
         flex-direction: row;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0 0.5rem;
+        gap: 0;
         height: 2rem;
         width: auto;
     }

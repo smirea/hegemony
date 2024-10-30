@@ -184,7 +184,7 @@ const ResourceProduction: React.FC<{
     return (
         <ResourceProductionRoot color={color}>
             <IconContainer color={color}>
-                <ResourceIcon name={resource} height={1} color='white' />
+                <ResourceIcon name={resource} height={1.125} color='white' />
             </IconContainer>
             <div className='row' data-align='center' data-spacing='.25'>
                 <div>{value}</div>
@@ -199,6 +199,7 @@ const ResourceProduction: React.FC<{
 };
 
 const Root = styled.div`
+    display: inline-block;
     border-radius: 8px;
     box-shadow: 0 0 0 4px ${colors.role.middleClass} inset;
     background: rgba(${colorsRGBA.board}, 0.75);

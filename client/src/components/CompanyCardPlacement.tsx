@@ -31,7 +31,11 @@ const CompanyCardPlacement: React.FC<CompanyCardPlacementProps> = ({
 export default CompanyCardPlacement;
 
 const Root = styled(CompanyCardRoot)`
-    box-shadow: 0 0 0 1px ${colors.boardBorder} inset;
+    box-shadow: 0 0 0 1px ${colors.boardBorder} inset !important;
     align-items: center;
     justify-content: center;
+
+    &[data-format='tiny'] {
+        min-width: 2rem;
+    }
 `;

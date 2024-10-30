@@ -5,6 +5,8 @@ import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginSass } from '@rsbuild/plugin-sass';
 import { pluginSvgr } from '@rsbuild/plugin-svgr';
 
+import { pluginSimpleStyled } from '../packages/simple-styled/src/rsbuild-plugin';
+
 export default defineConfig({
     source: {
         entry: {
@@ -19,6 +21,7 @@ export default defineConfig({
         }),
         pluginSass(),
         pluginSvgr(),
+        pluginSimpleStyled(),
     ],
     // tools: {
     //     rspack: {
