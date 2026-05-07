@@ -4,13 +4,13 @@ import colors from 'client/utils/colors';
 import createSVGIcon from './createSVGIcon';
 
 const MiddleClassWorker3DIcon = createSVGIcon<{
-    type?: CompanyWorkerType;
+	type?: CompanyWorkerType;
 }>({ type: 'unskilled' }, ({ color, type, ...props }) => {
-    const clr = color ?? colors.worker[type!];
-    return (
-        // <svg {...props} viewBox='3.00 3.00 145.00 300.00'>
-        <svg {...props} viewBox='33.00 25.00 113.00 277.00'>
-            {/* <g fill={clr} style={{ filter: 'brightness(0.55)' }}>
+	const clr = color ?? colors.worker[type!];
+	return (
+		// <svg {...props} viewBox='3.00 3.00 145.00 300.00'>
+		<svg {...props} viewBox='33.00 25.00 113.00 277.00'>
+			{/* <g fill={clr} style={{ filter: 'brightness(0.55)' }}>
                 <path
                     d='
                     M 66.01 4.64
@@ -76,9 +76,9 @@ const MiddleClassWorker3DIcon = createSVGIcon<{
                     Z'
                 />
             </g> */}
-            <g fill={clr}>
-                <path
-                    d='
+			<g fill={clr}>
+				<path
+					d='
                     M 121.10 47.59
                     L 124.36 49.26
                     A 0.49 0.49 0.0 0 1 124.50 50.03
@@ -131,11 +131,11 @@ const MiddleClassWorker3DIcon = createSVGIcon<{
                     Q 111.54 35.71 115.66 41.61
                     Q 117.97 44.93 121.10 47.59
                     Z'
-                />
-            </g>
-            <g fill={clr}>
-                <path
-                    d='
+				/>
+			</g>
+			<g fill={clr}>
+				<path
+					d='
                     M 105.25 28.25
                     Q 110.11 31.09 113.72 35.78
                     Q 117.90 41.22 121.10 47.59
@@ -153,9 +153,9 @@ const MiddleClassWorker3DIcon = createSVGIcon<{
                     C 78.72 33.63 84.24 29.62 90.36 27.58
                     Q 97.68 25.15 105.25 28.25
                     Z'
-                />
-                <path
-                    d='
+				/>
+				<path
+					d='
                     M 111.97 88.33
                     L 107.20 94.39
                     A 0.30 0.29 24.7 0 0 107.38 94.86
@@ -197,11 +197,11 @@ const MiddleClassWorker3DIcon = createSVGIcon<{
                     Q 116.06 69.39 115.00 77.22
                     Q 114.64 79.91 111.97 88.33
                     Z'
-                />
-            </g>
-            <g fill='black'>
-                <path
-                    d='
+				/>
+			</g>
+			<g fill='black'>
+				<path
+					d='
                     M 75.66 43.49
                     Q 78.87 39.85 80.26 38.54
                     Q 86.07 33.05 92.87 31.57
@@ -218,9 +218,9 @@ const MiddleClassWorker3DIcon = createSVGIcon<{
                     C 63.57 46.64 69.19 45.14 74.82 43.97
                     Q 75.32 43.87 75.66 43.49
                     Z'
-                />
-                <path
-                    d='
+				/>
+				<path
+					d='
                     M 92.39 114.45
                     L 98.53 121.85
                     Q 98.83 122.21 98.85 122.67
@@ -243,11 +243,11 @@ const MiddleClassWorker3DIcon = createSVGIcon<{
                     L 92.30 113.79
                     Q 92.14 114.15 92.39 114.45
                     Z'
-                />
-                <rect x='87.91' y='219.10' width='3.12' height='75.76' rx='0.54' />
-            </g>
-        </svg>
-    );
+				/>
+				<rect x='87.91' y='219.10' width='3.12' height='75.76' rx='0.54' />
+			</g>
+		</svg>
+	);
 });
 
 export default MiddleClassWorker3DIcon;

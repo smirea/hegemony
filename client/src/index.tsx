@@ -11,11 +11,11 @@ import { defineColors } from './utils/colors';
 
 const rootEl = document.getElementById('root');
 if (rootEl) {
-    const root = ReactDOM.createRoot(rootEl);
-    defineColors();
-    root.render(
-        <React.StrictMode>
-            <App />
-        </React.StrictMode>,
-    );
+	const root = ReactDOM.createRoot(rootEl);
+	defineColors();
+	root.render(
+		<React.StrictMode>
+			<App />
+		</React.StrictMode>,
+	);
 }

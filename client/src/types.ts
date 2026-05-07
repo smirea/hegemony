@@ -1,5 +1,5 @@
 export interface ClassAndStyle {
-    // keep things fancy
-    className?: string;
-    style?: React.CSSProperties;
+	// keep things fancy
+	className?: string;
+	style?: React.CSSProperties;
 }

@@ -4,18 +4,14 @@ import colors from 'client/utils/colors';
 import createSVGIcon from './createSVGIcon';
 
 const MiddleClassWorkerPlacementIcon = createSVGIcon<{
-    type?: CompanyWorkerType;
+	type?: CompanyWorkerType;
 }>({ type: 'unskilled' }, ({ color, type, ...props }) => {
-    const clr = color ?? colors.worker[type!];
-    return (
-        <svg
-            {...props}
-            viewBox='25.00 10.00 90.00 200.00'
-            style={{ ...props.style, opacity: 0.85 }}
-        >
-            <g fill={clr}>
-                <path
-                    d='
+	const clr = color ?? colors.worker[type!];
+	return (
+		<svg {...props} viewBox='25.00 10.00 90.00 200.00' style={{ ...props.style, opacity: 0.85 }}>
+			<g fill={clr}>
+				<path
+					d='
       M 51.65 50.83
       Q 51.92 49.76 51.54 48.65
       Q 51.50 48.51 51.41 48.00
@@ -124,10 +120,10 @@ const MiddleClassWorkerPlacementIcon = createSVGIcon<{
       Q 52.91 57.48 52.86 57.23
       Q 52.28 53.97 51.65 50.83
       Z'
-                />
-            </g>
-        </svg>
-    );
+				/>
+			</g>
+		</svg>
+	);
 });
 
 export default MiddleClassWorkerPlacementIcon;

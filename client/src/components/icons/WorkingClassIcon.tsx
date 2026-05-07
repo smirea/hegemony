@@ -2,13 +2,11 @@ import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
-const WorkingClassIcon = createSVGIcon<object>(
-    { color: colors.role.workingClass },
-    ({ color, ...props }) => (
-        <svg {...props} viewBox='0.00 0.00 85.00 123.00'>
-            <g fill={color}>
-                <path
-                    d='
+const WorkingClassIcon = createSVGIcon<object>({ color: colors.role.workingClass }, ({ color, ...props }) => (
+	<svg {...props} viewBox='0.00 0.00 85.00 123.00'>
+		<g fill={color}>
+			<path
+				d='
       M 41.78 0.40
       C 43.75 0.40 44.47 1.42 44.75 3.31
       Q 44.82 3.76 45.11 6.36
@@ -43,9 +41,9 @@ const WorkingClassIcon = createSVGIcon<object>(
       Q 38.74 3.76 38.81 3.31
       C 39.09 1.42 39.80 0.40 41.78 0.40
       Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
       M 34.52 58.50
       A 0.43 0.43 0.0 0 0 34.58 57.69
       Q 27.16 54.53 25.44 46.87
@@ -68,9 +66,9 @@ const WorkingClassIcon = createSVGIcon<object>(
       Q 26.40 60.60 27.38 60.35
       L 34.52 58.50
       Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
       M 57.74 77.06
       C 56.33 75.97 54.33 74.63 52.90 72.83
       Q 52.23 71.99 52.39 70.54
@@ -98,9 +96,9 @@ const WorkingClassIcon = createSVGIcon<object>(
       L 58.10 77.94
       Q 58.18 77.39 57.74 77.06
       Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
       M 24.43 87.75
       Q 24.51 88.46 25.22 88.46
       L 50.81 88.46
@@ -117,9 +115,9 @@ const WorkingClassIcon = createSVGIcon<object>(
       Q 21.61 63.44 21.71 64.31
       L 24.43 87.75
       Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
       M 12.67 114.69
       A 0.80 0.80 0.0 0 0 13.67 115.50
       Q 21.19 113.60 34.12 110.10
@@ -137,9 +135,9 @@ const WorkingClassIcon = createSVGIcon<object>(
       Q 14.66 63.94 14.57 66.19
       L 12.67 114.69
       Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
       M 72.88 109.16
       C 75.52 105.69 74.32 102.07 73.35 97.65
       Q 72.66 94.56 69.87 93.40
@@ -155,9 +153,9 @@ const WorkingClassIcon = createSVGIcon<object>(
       Q 71.23 114.13 71.53 112.06
       Q 71.72 110.69 72.88 109.16
       Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
       M 50.67 97.98
       C 51.96 100.95 52.85 102.85 56.16 101.69
       Q 63.36 99.15 67.23 97.97
@@ -172,9 +170,9 @@ const WorkingClassIcon = createSVGIcon<object>(
       Q 48.51 97.81 49.88 97.56
       Q 50.44 97.45 50.67 97.98
       Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
       M 51.82 118.18
       C 53.38 118.72 55.81 118.76 57.52 117.91
       Q 61.67 115.83 65.73 113.67
@@ -186,10 +184,9 @@ const WorkingClassIcon = createSVGIcon<object>(
       L 50.43 118.57
       Q 50.91 117.86 51.82 118.18
       Z'
-                />
-            </g>
-        </svg>
-    ),
-);
+			/>
+		</g>
+	</svg>
+));
 
 export default WorkingClassIcon;

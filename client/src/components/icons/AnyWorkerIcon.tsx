@@ -4,16 +4,12 @@ import colors from 'client/utils/colors';
 import createSVGIcon from './createSVGIcon';
 
 const AnyWorkerIcon = createSVGIcon<{ type?: CompanyWorkerType }>(
-    { type: 'unskilled' },
-    ({ color, type, ...props }) => (
-        <svg
-            {...props}
-            viewBox='10.00 10.00 300.00 435.00'
-            style={{ ...props.style, opacity: 0.85 }}
-        >
-            <g fill={colors.worker[type!]}>
-                <path
-                    d='
+	{ type: 'unskilled' },
+	({ color: _color, type, ...props }) => (
+		<svg {...props} viewBox='10.00 10.00 300.00 435.00' style={{ ...props.style, opacity: 0.85 }}>
+			<g fill={colors.worker[type!]}>
+				<path
+					d='
   M 78.84 122.40
   A 0.23 0.23 0.0 0 0 78.91 122.00
   C 71.10 116.46 66.66 108.76 64.44 99.33
@@ -71,9 +67,9 @@ const AnyWorkerIcon = createSVGIcon<{ type?: CompanyWorkerType }>(
   Q 42.57 133.81 46.37 132.61
   Q 62.63 127.47 78.84 122.40
   Z'
-                />
-                <path
-                    d='
+				/>
+				<path
+					d='
   M 210.35 115.23
   C 214.96 115.24 217.41 119.30 217.12 123.52
   Q 217.02 125.03 217.20 128.78
@@ -144,10 +140,10 @@ const AnyWorkerIcon = createSVGIcon<{ type?: CompanyWorkerType }>(
   Q 203.67 125.02 203.57 123.51
   C 203.29 119.29 205.75 115.23 210.35 115.23
   Z'
-                />
-            </g>
-        </svg>
-    ),
+				/>
+			</g>
+		</svg>
+	),
 );
 
 export default AnyWorkerIcon;

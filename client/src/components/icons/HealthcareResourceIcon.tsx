@@ -2,13 +2,11 @@ import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
-const HealthcareResourceIcon = createSVGIcon<object>(
-    { color: colors.resource.healthcare },
-    ({ color, ...props }) => (
-        <svg {...props} viewBox='15.00 10.00 245.00 225.00'>
-            <g fill={color}>
-                <path
-                    d='
+const HealthcareResourceIcon = createSVGIcon<object>({ color: colors.resource.healthcare }, ({ color, ...props }) => (
+	<svg {...props} viewBox='15.00 10.00 245.00 225.00'>
+		<g fill={color}>
+			<path
+				d='
   M 138.41 43.83
   Q 142.87 40.31 160.99 25.49
   Q 168.94 19.00 179.82 15.37
@@ -36,9 +34,9 @@ const HealthcareResourceIcon = createSVGIcon<object>(
   Q 133.33 40.44 137.72 43.84
   A 0.55 0.55 0.0 0 0 138.41 43.83
   Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
   M 174.05 112.83
   Q 179.97 123.90 181.77 127.21
   C 184.01 131.30 186.08 133.14 190.75 133.09
@@ -57,10 +55,9 @@ const HealthcareResourceIcon = createSVGIcon<object>(
   Q 153.79 163.90 173.58 112.86
   A 0.26 0.26 0.0 0 1 174.05 112.83
   Z'
-                />
-            </g>
-        </svg>
-    ),
-);
+			/>
+		</g>
+	</svg>
+));
 
 export default HealthcareResourceIcon;

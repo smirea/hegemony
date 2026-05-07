@@ -1,17 +1,24 @@
-import { observable, action } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 
 interface AppProviderState {
-    theme: 'dark' | 'light';
+	theme: 'dark' | 'light';
 }
 
 class AppProvider {
-    @observable accessor state: AppProviderState = {
-        theme: 'light',
-    };
+	state: AppProviderState = {
+		theme: 'light',
+	};
 
-    @action update(diff: Partial<AppProviderState>) {
-        Object.assign(this.state, diff);
-    }
+	constructor() {
+		makeObservable(this, {
+			state: observable,
+			update: action,
+		});
+	}
+
+	update(diff: Partial<AppProviderState>) {
+		Object.assign(this.state, diff);
+	}
 }
 
 const appProvider = new AppProvider();

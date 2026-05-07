@@ -3,12 +3,12 @@ import colors from 'client/utils/colors';
 import createSVGIcon from './createSVGIcon';
 
 const VictoryPointIcon = createSVGIcon<{ value?: number; textColor?: string }>(
-    { color: colors.text, textColor: colors.textInverted },
-    ({ color, textColor, value, ...props }) => (
-        <svg {...props} viewBox='7.00 10.00 116.00 101.00'>
-            <path
-                fill={color}
-                d='
+	{ color: colors.text, textColor: colors.textInverted },
+	({ color, textColor, value, ...props }) => (
+		<svg {...props} viewBox='7.00 10.00 116.00 101.00'>
+			<path
+				fill={color}
+				d='
                 M 64.98 10.21
                 Q 68.15 10.21 70.65 12.26
                 Q 72.21 13.53 74.05 16.91
@@ -45,20 +45,20 @@ const VictoryPointIcon = createSVGIcon<{ value?: number; textColor?: string }>(
                 Q 57.76 13.53 59.31 12.26
                 Q 61.82 10.21 64.98 10.21
                 Z'
-            />
-            <text
-                x='56%'
-                y='82%'
-                textAnchor='middle'
-                fill={textColor}
-                fontSize='300%'
-                fontWeight='bold'
-                fontFamily='Montserrat'
-            >
-                {value}
-            </text>
-        </svg>
-    ),
+			/>
+			<text
+				x='56%'
+				y='82%'
+				textAnchor='middle'
+				fill={textColor}
+				fontSize='300%'
+				fontWeight='bold'
+				fontFamily='Montserrat'
+			>
+				{value}
+			</text>
+		</svg>
+	),
 );
 
 export default VictoryPointIcon;

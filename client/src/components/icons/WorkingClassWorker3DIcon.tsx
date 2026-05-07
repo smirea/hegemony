@@ -4,13 +4,13 @@ import colors from 'client/utils/colors';
 import createSVGIcon from './createSVGIcon';
 
 const WorkingClassWorker3DIcon = createSVGIcon<{
-    type?: CompanyWorkerType;
+	type?: CompanyWorkerType;
 }>({ type: 'unskilled' }, ({ color, type, ...props }) => {
-    const clr = color ?? colors.worker[type!];
-    return (
-        <svg {...props} viewBox='32.00 28.00 130.00 230.00'>
-            {/* <svg {...props} viewBox='3.00 6.00 160.00 252.00'> */}
-            {/* <g fill={clr} style={{ filter: 'brightness(0.55)' }}>
+	const clr = color ?? colors.worker[type!];
+	return (
+		<svg {...props} viewBox='32.00 28.00 130.00 230.00'>
+			{/* <svg {...props} viewBox='3.00 6.00 160.00 252.00'> */}
+			{/* <g fill={clr} style={{ filter: 'brightness(0.55)' }}>
                 <path
                     d='
                     M 119.29 39.71
@@ -139,9 +139,9 @@ const WorkingClassWorker3DIcon = createSVGIcon<{
                     Z'
                 />
             </g> */}
-            <path
-                fill={clr}
-                d='
+			<path
+				fill={clr}
+				d='
                 M 119.29 39.71
                 Q 124.50 42.37 122.21 47.29
                 Q 122.00 47.74 122.27 48.16
@@ -235,10 +235,10 @@ const WorkingClassWorker3DIcon = createSVGIcon<{
                 Q 117.44 40.19 117.92 40.13
                 Q 118.70 40.04 119.29 39.71
                 Z'
-            />
-            <g fill='#000000'>
-                <path
-                    d='
+			/>
+			<g fill='#000000'>
+				<path
+					d='
                     M 120.26 70.59
                     Q 120.23 70.97 120.19 78.70
                     Q 120.16 84.33 119.67 86.78
@@ -295,9 +295,9 @@ const WorkingClassWorker3DIcon = createSVGIcon<{
                     L 120.74 69.95
                     Q 120.30 69.99 120.26 70.59
                     Z'
-                />
-                <path
-                    d='
+				/>
+				<path
+					d='
                     M 98.28 88.30
                     Q 99.35 87.40 100.78 87.59
                     Q 101.30 87.66 101.73 87.98
@@ -312,9 +312,9 @@ const WorkingClassWorker3DIcon = createSVGIcon<{
                     Q 94.65 87.27 97.39 88.44
                     Q 97.88 88.65 98.28 88.30
                     Z'
-                />
-                <path
-                    d='
+				/>
+				<path
+					d='
                     M 89.21 221.82
                     L 84.58 250.88
                     A 0.72 0.72 0.0 0 1 83.94 251.48
@@ -341,11 +341,11 @@ const WorkingClassWorker3DIcon = createSVGIcon<{
                     L 89.82 221.22
                     A 0.72 0.72 0.0 0 0 89.21 221.82
                     Z'
-                />
-            </g>
-            <path
-                fill={clr}
-                d='
+				/>
+			</g>
+			<path
+				fill={clr}
+				d='
                 M 101.88 144.44
                 Q 102.89 146.06 103.40 144.21
                 Q 103.90 142.34 105.63 141.14
@@ -364,9 +364,9 @@ const WorkingClassWorker3DIcon = createSVGIcon<{
                 Q 100.95 142.56 101.30 143.28
                 Q 101.75 144.23 101.88 144.44
                 Z'
-            />
-        </svg>
-    );
+			/>
+		</svg>
+	);
 });
 
 export default WorkingClassWorker3DIcon;

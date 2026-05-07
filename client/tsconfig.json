@@ -1,19 +1,19 @@
 {
-    "extends": "../tsconfig.json",
-    "compilerOptions": {
-        "composite": true,
-        "jsx": "react-jsx",
-        "lib": ["DOM", "ES2020"],
-        "useDefineForClassFields": true,
-        "module": "ESNext",
-        "moduleResolution": "bundler",
-        "resolveJsonModule": true,
-        "jsxImportSource": "react",
-        "baseUrl": ".",
-        "paths": {
-            "client/*": ["./src/*"],
-            "shared/*": ["../shared/*"],
-        }
-    },
-    "include": ["./src"]
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"composite": true,
+		"jsx": "react-jsx",
+		"lib": ["DOM", "ES2020"],
+		"useDefineForClassFields": true,
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"jsxImportSource": "react",
+		"baseUrl": ".",
+		"paths": {
+			"client/*": ["./src/*"],
+			"shared/*": ["../shared/*"]
+		}
+	},
+	"include": ["./src"]
 }

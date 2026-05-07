@@ -2,13 +2,11 @@ import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
-const EducationResourceIcon = createSVGIcon<object>(
-    { color: colors.resource.education },
-    ({ color, ...props }) => (
-        <svg {...props} viewBox='10.00 10.00 245.00 180.00'>
-            <g fill={color}>
-                <path
-                    d='
+const EducationResourceIcon = createSVGIcon<object>({ color: colors.resource.education }, ({ color, ...props }) => (
+	<svg {...props} viewBox='10.00 10.00 245.00 180.00'>
+		<g fill={color}>
+			<path
+				d='
   M 18.43 54.64
   L 130.15 15.07
   A 6.91 6.91 0.0 0 1 134.77 15.07
@@ -19,9 +17,9 @@ const EducationResourceIcon = createSVGIcon<object>(
   L 18.43 67.66
   A 6.91 6.91 0.0 0 1 18.43 54.64
   Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
   M 234.71 143.88
   A 0.74 0.73 -17.2 0 0 234.38 144.49
   Q 234.34 159.74 234.39 175.08
@@ -42,9 +40,9 @@ const EducationResourceIcon = createSVGIcon<object>(
   Q 234.37 119.82 234.82 120.14
   C 243.48 126.11 243.62 138.05 234.71 143.88
   Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
   M 132.44 127.14
   Q 135.86 127.14 137.75 126.48
   Q 163.14 117.59 201.75 103.80
@@ -63,10 +61,9 @@ const EducationResourceIcon = createSVGIcon<object>(
   Q 101.75 117.58 127.14 126.48
   Q 129.03 127.14 132.44 127.14
   Z'
-                />
-            </g>
-        </svg>
-    ),
-);
+			/>
+		</g>
+	</svg>
+));
 
 export default EducationResourceIcon;

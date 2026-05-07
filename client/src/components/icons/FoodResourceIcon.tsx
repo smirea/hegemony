@@ -2,13 +2,11 @@ import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
-const FoodResourceIcon = createSVGIcon<object>(
-    { color: colors.resource.food },
-    ({ color, ...props }) => (
-        <svg {...props} viewBox='22.00 27.00 120.00 190.00'>
-            <g fill={color}>
-                <path
-                    d='
+const FoodResourceIcon = createSVGIcon<object>({ color: colors.resource.food }, ({ color, ...props }) => (
+	<svg {...props} viewBox='22.00 27.00 120.00 190.00'>
+		<g fill={color}>
+			<path
+				d='
                     M 121.48 28.52
                     Q 123.81 29.52 124.15 31.60
                     Q 125.67 41.01 126.91 50.51
@@ -23,9 +21,9 @@ const FoodResourceIcon = createSVGIcon<object>(
                     Q 109.57 34.14 117.42 28.73
                     Q 119.16 27.53 121.48 28.52
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 82.31 120.45
                     Q 82.18 120.39 82.15 120.31
                     Q 79.94 114.19 75.88 109.25
@@ -54,9 +52,9 @@ const FoodResourceIcon = createSVGIcon<object>(
                     Q 88.51 117.85 82.56 120.49
                     Q 82.48 120.52 82.31 120.45
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 72.80 142.69
                     Q 72.85 142.72 72.91 142.72
                     Q 73.02 142.72 73.11 142.61
@@ -85,9 +83,9 @@ const FoodResourceIcon = createSVGIcon<object>(
                     Q 72.69 142.58 72.76 142.66
                     Q 72.81 142.70 72.80 142.69
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 56.25 181.54
                     Q 56.42 181.61 56.57 181.42
                     Q 57.79 179.87 60.92 176.05
@@ -114,10 +112,9 @@ const FoodResourceIcon = createSVGIcon<object>(
                     Q 56.39 179.27 56.11 181.23
                     Q 56.08 181.46 56.25 181.54
                     Z'
-                />
-            </g>
-        </svg>
-    ),
-);
+			/>
+		</g>
+	</svg>
+));
 
 export default FoodResourceIcon;

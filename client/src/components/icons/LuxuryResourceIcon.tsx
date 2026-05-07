@@ -2,13 +2,11 @@ import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
-const LuxuryResourceIcon = createSVGIcon<object>(
-    { color: colors.resource.luxury },
-    ({ color, ...props }) => (
-        <svg {...props} viewBox='25.00 15.00 135.00 225.00'>
-            <g fill={color}>
-                <path
-                    d='
+const LuxuryResourceIcon = createSVGIcon<object>({ color: colors.resource.luxury }, ({ color, ...props }) => (
+	<svg {...props} viewBox='25.00 15.00 135.00 225.00'>
+		<g fill={color}>
+			<path
+				d='
   M 158.63 227.34
   A 12.04 12.04 0.0 0 1 146.59 239.38
   L 36.57 239.38
@@ -35,10 +33,9 @@ const LuxuryResourceIcon = createSVGIcon<object>(
   A 9.63 9.63 0.0 0 0 91.58 232.03
   A 9.63 9.63 0.0 0 0 101.21 222.40
   Z'
-                />
-            </g>
-        </svg>
-    ),
-);
+			/>
+		</g>
+	</svg>
+));
 
 export default LuxuryResourceIcon;

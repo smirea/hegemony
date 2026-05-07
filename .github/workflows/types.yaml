@@ -18,4 +18,4 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Typecheck all apps
-        run: pnpm lint:types
+        run: bun run lint:types

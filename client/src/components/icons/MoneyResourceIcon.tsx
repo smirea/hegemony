@@ -2,13 +2,11 @@ import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
-const MoneyResourceIcon = createSVGIcon<object>(
-    { height: 1, color: colors.text },
-    ({ color, ...props }) => (
-        <svg {...props} viewBox='5.00 8.00 95.00 86.00'>
-            <g fill={color}>
-                <path
-                    d='
+const MoneyResourceIcon = createSVGIcon<object>({ height: 1, color: colors.text }, ({ color, ...props }) => (
+	<svg {...props} viewBox='5.00 8.00 95.00 86.00'>
+		<g fill={color}>
+			<path
+				d='
                     M 92.28 46.32
                     L 90.41 51.91
                     A 0.33 0.33 0.0 0 1 90.09 52.13
@@ -77,10 +75,9 @@ const MoneyResourceIcon = createSVGIcon<object>(
                     A 0.31 0.31 0.0 0 0 53.36 86.38
                     L 64.79 52.45
                     Z'
-                />
-            </g>
-        </svg>
-    ),
-);
+			/>
+		</g>
+	</svg>
+));
 
 export default MoneyResourceIcon;

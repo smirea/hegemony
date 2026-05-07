@@ -5,6 +5,10 @@ tmp*.ts
 *.local
 *.log*
 
+# Caches
+.cache
+*.tsbuildinfo
+
 # Dist
 node_modules
 dist/

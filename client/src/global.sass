@@ -1,3 +1,5 @@
+@use 'sass:list'
+
 *
     box-sizing: border-box
 
@@ -57,8 +59,8 @@ body, input, button, textarea
 $spacings: (0.25, '025'), (0.5, '05'), (1, '1')
 
 @each $space in $spacings
-    $val: nth($space, 1)
-    $cn: nth($space, 2)
+    $val: list.nth($space, 1)
+    $cn: list.nth($space, 2)
 
     .m#{$cn}
         margin: #{$val}rem

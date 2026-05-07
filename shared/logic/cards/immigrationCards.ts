@@ -1,9 +1,9 @@
 import { type CompanyWorkerType, type Industry } from '../types';
 
 export interface ImmigrationCard {
-    id: string;
-    workingClass: CompanyWorkerType;
-    middleClass: CompanyWorkerType;
+	id: string;
+	workingClass: CompanyWorkerType;
+	middleClass: CompanyWorkerType;
 }
 
 const wcSpecialized = 2;
@@ -23,22 +23,20 @@ let idCounter = 0;
  *  - 3 specialized / industry for MC
  */
 const immigrationCards: ImmigrationCard[] = [
-    ...new Array(wcSpecialized)
-        .fill(industries)
-        .flat()
-        .map((industry: Industry) => ({
-            id: 'i-' + ++idCounter,
-            workingClass: industry,
-            middleClass: 'unskilled' as const,
-        })),
-    ...new Array(mcSpecialized)
-        .fill(industries)
-        .flat()
-        .map((industry: Industry) => ({
-            id: 'i-' + ++idCounter,
-            workingClass: 'unskilled' as const,
-            middleClass: industry,
-        })),
+	...Array.from({ length: wcSpecialized })
+		.flatMap(() => industries)
+		.map((industry: Industry) => ({
+			id: 'i-' + ++idCounter,
+			workingClass: industry,
+			middleClass: 'unskilled' as const,
+		})),
+	...Array.from({ length: mcSpecialized })
+		.flatMap(() => industries)
+		.map((industry: Industry) => ({
+			id: 'i-' + ++idCounter,
+			workingClass: 'unskilled' as const,
+			middleClass: industry,
+		})),
 ];
 
 export default immigrationCards;

@@ -3,22 +3,13 @@ import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
-const CompanyIcon = createSVGIcon<{ role: RoleNameNoWorkingClass }>(
-    {},
-    ({ color, role, ...props }) => (
-        <svg {...props} viewBox='24.00 11.00 138.00 137.00'>
-            <g fill={color ?? colors.role[role] ?? 'white'}>
-                <rect
-                    x='-6.05'
-                    y='-3.29'
-                    transform='translate(93.07,15.87) rotate(-0.1)'
-                    width='12.10'
-                    height='6.58'
-                    rx='1.03'
-                />
-                <rect x='72.50' y='25.70' width='41.40' height='6.68' rx='1.10' />
-                <path
-                    d='
+const CompanyIcon = createSVGIcon<{ role: RoleNameNoWorkingClass }>({}, ({ color, role, ...props }) => (
+	<svg {...props} viewBox='24.00 11.00 138.00 137.00'>
+		<g fill={color ?? colors.role[role] ?? 'white'}>
+			<rect x='-6.05' y='-3.29' transform='translate(93.07,15.87) rotate(-0.1)' width='12.10' height='6.58' rx='1.03' />
+			<rect x='72.50' y='25.70' width='41.40' height='6.68' rx='1.10' />
+			<path
+				d='
                     M 93.08 38.95
                     Q 116.81 38.96 124.80 38.98
                     Q 126.05 38.98 126.05 40.23
@@ -127,25 +118,11 @@ const CompanyIcon = createSVGIcon<{ role: RoleNameNoWorkingClass }>(
                     A 1.03 1.03 0.0 0 0 113.8945 99.3471
                     L 113.8855 94.2071
                     Z'
-                />
-                <rect
-                    x='-6.05'
-                    y='-3.29'
-                    transform='translate(45.79,44.93) rotate(-0.2)'
-                    width='12.10'
-                    height='6.58'
-                    rx='0.97'
-                />
-                <rect
-                    x='-4.19'
-                    y='-3.60'
-                    transform='translate(138.19,51.86) rotate(0.2)'
-                    width='8.38'
-                    height='7.20'
-                    rx='1.06'
-                />
-                <path
-                    d='
+			/>
+			<rect x='-6.05' y='-3.29' transform='translate(45.79,44.93) rotate(-0.2)' width='12.10' height='6.58' rx='0.97' />
+			<rect x='-4.19' y='-3.60' transform='translate(138.19,51.86) rotate(0.2)' width='8.38' height='7.20' rx='1.06' />
+			<path
+				d='
                     M 51.87 146.20
                     A 1.21 1.21 0.0 0 1 50.66 147.41
                     L 26.20 147.41
@@ -196,10 +173,10 @@ const CompanyIcon = createSVGIcon<{ role: RoleNameNoWorkingClass }>(
                     A 1.03 1.03 0.0 0 0 44.3664 121.3503
                     L 44.3736 117.1904
                     Z'
-                />
-                <rect x='134.01' y='63.24' width='18.54' height='7.20' rx='0.98' />
-                <path
-                    d='
+			/>
+			<rect x='134.01' y='63.24' width='18.54' height='7.20' rx='0.98' />
+			<path
+				d='
                     M 160.90 146.39
                     A 1.03 1.03 0.0 0 1 159.87 147.42
                     L 135.05 147.42
@@ -240,11 +217,10 @@ const CompanyIcon = createSVGIcon<{ role: RoleNameNoWorkingClass }>(
                     A 1.00 1.00 0.0 0 0 151.3550 133.1132
                     L 151.3450 127.3532
                     Z'
-                />
-                <rect x='86.33' y='134.13' width='13.82' height='13.30' rx='0.26' />
-            </g>
-        </svg>
-    ),
-);
+			/>
+			<rect x='86.33' y='134.13' width='13.82' height='13.30' rx='0.26' />
+		</g>
+	</svg>
+));
 
 export default CompanyIcon;

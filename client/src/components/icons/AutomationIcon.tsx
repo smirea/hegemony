@@ -1,15 +1,15 @@
 import createSVGIcon from './createSVGIcon';
 
 const AutomationIcon = createSVGIcon<object>(
-    {
-        height: 1,
-        color: 'white',
-    },
-    ({ color, ...props }) => (
-        <svg {...props} viewBox='40.00 20.00 130.00 125.00'>
-            <path
-                fill={color}
-                d='
+	{
+		height: 1,
+		color: 'white',
+	},
+	({ color, ...props }) => (
+		<svg {...props} viewBox='40.00 20.00 130.00 125.00'>
+			<path
+				fill={color}
+				d='
                 M 104.49 19.93
                 Q 108.03 19.93 109.06 20.18
                 Q 110.55 20.55 111.32 22.38
@@ -108,9 +108,9 @@ const AutomationIcon = createSVGIcon<object>(
                 A 19.87 19.87 0.0 0 0 104.50 104.50
                 A 19.87 19.87 0.0 0 0 124.37 84.63
                 Z'
-            />
-        </svg>
-    ),
+			/>
+		</svg>
+	),
 );
 
 export default AutomationIcon;

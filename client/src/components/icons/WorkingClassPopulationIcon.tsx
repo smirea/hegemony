@@ -2,13 +2,11 @@ import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
-const WorkingClassPopulationIcon = createSVGIcon(
-    { color: colors.role.workingClass },
-    ({ color, ...props }) => (
-        <svg {...props} viewBox='32.00 18.00 90.00 143.00'>
-            <g fill={color}>
-                <path
-                    d='
+const WorkingClassPopulationIcon = createSVGIcon({ color: colors.role.workingClass }, ({ color, ...props }) => (
+	<svg {...props} viewBox='32.00 18.00 90.00 143.00'>
+		<g fill={color}>
+			<path
+				d='
                     M 66.85 35.80
                     Q 65.44 35.95 63.92 35.48
                     Q 63.42 35.32 63.21 34.84
@@ -68,9 +66,9 @@ const WorkingClassPopulationIcon = createSVGIcon(
                     Q 67.66 40.83 67.45 36.31
                     Q 67.42 35.74 66.85 35.80
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 48.80 72.42
                     A 0.32 0.31 -23.0 0 0 48.99 71.96
                     Q 46.62 68.02 47.03 63.95
@@ -126,9 +124,9 @@ const WorkingClassPopulationIcon = createSVGIcon(
                     Q 43.23 73.80 44.52 73.50
                     Q 47.22 72.89 48.80 72.42
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 87.84 71.13
                     Q 86.26 68.30 86.02 63.49
                     Q 85.99 62.94 85.46 62.93
@@ -184,9 +182,9 @@ const WorkingClassPopulationIcon = createSVGIcon(
                     Q 84.15 73.08 86.88 72.90
                     Q 88.77 72.78 87.84 71.13
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 76.91 72.62
                     Q 78.92 72.62 78.98 75.51
                     Q 78.99 76.02 79.44 76.24
@@ -243,10 +241,9 @@ const WorkingClassPopulationIcon = createSVGIcon(
                     Q 74.82 76.02 74.83 75.51
                     Q 74.90 72.62 76.91 72.62
                     Z'
-                />
-            </g>
-        </svg>
-    ),
-);
+			/>
+		</g>
+	</svg>
+));
 
 export default WorkingClassPopulationIcon;

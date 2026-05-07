@@ -2,13 +2,11 @@ import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
-const InfluenceResourceIcon = createSVGIcon<object>(
-    { color: colors.resource.influence },
-    ({ color, ...props }) => (
-        <svg {...props} viewBox='10.00 10.00 230.00 185.00'>
-            <g fill={color}>
-                <path
-                    d='
+const InfluenceResourceIcon = createSVGIcon<object>({ color: colors.resource.influence }, ({ color, ...props }) => (
+	<svg {...props} viewBox='10.00 10.00 230.00 185.00'>
+		<g fill={color}>
+			<path
+				d='
   M 54.85 156.01
   A 0.63 0.62 -63.9 0 0 54.59 155.24
   Q 37.77 145.56 26.36 130.68
@@ -29,10 +27,9 @@ const InfluenceResourceIcon = createSVGIcon<object>(
   Q 32.19 186.54 35.14 183.38
   C 44.60 173.26 50.57 166.65 54.85 156.01
   Z'
-                />
-            </g>
-        </svg>
-    ),
-);
+			/>
+		</g>
+	</svg>
+));
 
 export default InfluenceResourceIcon;

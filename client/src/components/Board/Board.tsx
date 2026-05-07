@@ -8,134 +8,92 @@ import CompanyCard from '../CompanyCard';
 import CompanyCardPlacement from '../CompanyCardPlacement';
 
 const Board: React.FC = observer(() => {
-    const game = useGame();
+	const game = useGame();
 
-    const format = 'normal';
+	const format = 'normal';
 
-    return (
-        <Root>
-            <div
-                className='row'
-                data-spacing='.5'
-                style={{
-                    flexWrap: 'wrap',
-                    border: '2px solid var(--roleCapitalistColor)',
-                    padding: '.5rem',
-                    borderRadius: '8px',
-                }}
-            >
-                <CompanyCard
-                    format={format}
-                    company={game.data.roles.capitalist.data.companies[0]}
-                />
-                <CompanyCard
-                    format={format}
-                    company={game.data.roles.capitalist.data.companies[0]}
-                />
-                <CompanyCard
-                    format={format}
-                    company={game.data.roles.capitalist.data.companies[0]}
-                />
-                <CompanyCard
-                    format={format}
-                    company={game.data.roles.capitalist.data.companies[1]}
-                />
-                <CompanyCard
-                    format={format}
-                    company={game.data.roles.capitalist.data.companies[1]}
-                />
-                <CompanyCard
-                    format={format}
-                    company={game.data.roles.capitalist.data.companies[1]}
-                />
-                <CompanyCard
-                    format={format}
-                    company={game.data.roles.capitalist.data.companies[2]}
-                />
-                <CompanyCard
-                    format={format}
-                    company={game.data.roles.capitalist.data.companies[2]}
-                />
-                <CompanyCard
-                    format={format}
-                    company={game.data.roles.capitalist.data.companies[3]}
-                />
-                <CompanyCard
-                    format={format}
-                    company={game.data.roles.capitalist.data.companies[3]}
-                />
-                <CompanyCard
-                    format={format}
-                    company={game.data.roles.capitalist.data.companies[4]}
-                />
-                <CompanyCard
-                    format={format}
-                    company={game.data.roles.capitalist.data.companies[4]}
-                />
-                {/* <CompanyCardPlacement format={format} role='capitalist' />
+	return (
+		<Root>
+			<div
+				className='row'
+				data-spacing='.5'
+				style={{
+					flexWrap: 'wrap',
+					border: '2px solid var(--roleCapitalistColor)',
+					padding: '.5rem',
+					borderRadius: '8px',
+				}}
+			>
+				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[0]} />
+				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[0]} />
+				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[0]} />
+				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[1]} />
+				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[1]} />
+				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[1]} />
+				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[2]} />
+				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[2]} />
+				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[3]} />
+				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[3]} />
+				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[4]} />
+				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[4]} />
+				{/* <CompanyCardPlacement format={format} role='capitalist' />
                 <CompanyCardPlacement format={format} role='capitalist' />
                 <CompanyCardPlacement format={format} role='capitalist' />
                 <CompanyCardPlacement format={format} role='capitalist' />
                 <CompanyCardPlacement format={format} role='capitalist' />
                 <CompanyCardPlacement format={format} role='capitalist' />
                 <CompanyCardPlacement format={format} role='capitalist' /> */}
-            </div>
-            <div
-                className='row mt1'
-                data-spacing='.5'
-                style={{
-                    flexWrap: 'wrap',
-                    border: '2px solid ' + colors.role.middleClass,
-                    padding: '.5rem',
-                    borderRadius: '8px',
-                }}
-            >
-                <CompanyCard
-                    format={format}
-                    company={game.data.roles.middleClass.data.companies[0]}
-                />
-                <CompanyCard
-                    format={format}
-                    company={game.data.roles.middleClass.data.companies[1]}
-                />
-                <CompanyCardPlacement format={format} role='middleClass' />
-                <CompanyCardPlacement format={format} role='middleClass' />
-                <CompanyCardPlacement format={format} role='middleClass' />
-                <CompanyCardPlacement format={format} role='middleClass' />
-                <CompanyCardPlacement format={format} role='middleClass' />
-                <CompanyCardPlacement format={format} role='middleClass' />
-                <CompanyCardPlacement format={format} role='middleClass' />
-                <CompanyCardPlacement format={format} role='middleClass' />
-            </div>
-            <div
-                className='row mt1'
-                data-spacing='.5'
-                style={{
-                    flexWrap: 'wrap',
-                    border: '2px solid ' + colors.role.state,
-                    padding: '.5rem',
-                    borderRadius: '8px',
-                }}
-            >
-                <CompanyCard format={format} company={game.data.roles.state.data.companies[0]} />
-                <CompanyCard format={format} company={game.data.roles.state.data.companies[1]} />
-                <CompanyCard format={format} company={game.data.roles.state.data.companies[2]} />
-                <CompanyCardPlacement format={format} role='state' />
-                <CompanyCardPlacement format={format} role='state' />
-                <CompanyCardPlacement format={format} role='state' />
-                <CompanyCardPlacement format={format} role='state' />
-                <CompanyCardPlacement format={format} role='state' />
-                <CompanyCardPlacement format={format} role='state' />
-            </div>
-            <br />
-            <BoardPolicies />
-            {/* <CompanyGrid
+			</div>
+			<div
+				className='row mt1'
+				data-spacing='.5'
+				style={{
+					flexWrap: 'wrap',
+					border: '2px solid ' + colors.role.middleClass,
+					padding: '.5rem',
+					borderRadius: '8px',
+				}}
+			>
+				<CompanyCard format={format} company={game.data.roles.middleClass.data.companies[0]} />
+				<CompanyCard format={format} company={game.data.roles.middleClass.data.companies[1]} />
+				<CompanyCardPlacement format={format} role='middleClass' />
+				<CompanyCardPlacement format={format} role='middleClass' />
+				<CompanyCardPlacement format={format} role='middleClass' />
+				<CompanyCardPlacement format={format} role='middleClass' />
+				<CompanyCardPlacement format={format} role='middleClass' />
+				<CompanyCardPlacement format={format} role='middleClass' />
+				<CompanyCardPlacement format={format} role='middleClass' />
+				<CompanyCardPlacement format={format} role='middleClass' />
+			</div>
+			<div
+				className='row mt1'
+				data-spacing='.5'
+				style={{
+					flexWrap: 'wrap',
+					border: '2px solid ' + colors.role.state,
+					padding: '.5rem',
+					borderRadius: '8px',
+				}}
+			>
+				<CompanyCard format={format} company={game.data.roles.state.data.companies[0]} />
+				<CompanyCard format={format} company={game.data.roles.state.data.companies[1]} />
+				<CompanyCard format={format} company={game.data.roles.state.data.companies[2]} />
+				<CompanyCardPlacement format={format} role='state' />
+				<CompanyCardPlacement format={format} role='state' />
+				<CompanyCardPlacement format={format} role='state' />
+				<CompanyCardPlacement format={format} role='state' />
+				<CompanyCardPlacement format={format} role='state' />
+				<CompanyCardPlacement format={format} role='state' />
+			</div>
+			<br />
+			<BoardPolicies />
+			{/* <CompanyGrid
                 companies={game.data.roles.capitalist.data.companies}
                 width={12}
                 height={1}
             /> */}
-        </Root>
-    );
+		</Root>
+	);
 });
 
 export default Board;

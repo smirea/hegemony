@@ -7,24 +7,24 @@ import GameDebugger from './GameDebugger';
 import MiddleClassRole from './MiddleClassRole';
 
 const Game: React.FC = () => {
-    return (
-        <GameContextProvider>
-            <Root>
-                <MiddleClassRole />
-                <br />
-                <WorkingClassRole />
-                <br />
-                <br />
-                <Board />
-                <br />
-                <GameDebugger />
-            </Root>
-        </GameContextProvider>
-    );
+	return (
+		<GameContextProvider>
+			<Root>
+				<MiddleClassRole />
+				<br />
+				<WorkingClassRole />
+				<br />
+				<br />
+				<Board />
+				<br />
+				<GameDebugger />
+			</Root>
+		</GameContextProvider>
+	);
 };
 
 export default Game;
 
 const Root = styled.div`
-    padding: 1rem;
+	padding: 1rem;
 `;

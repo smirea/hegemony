@@ -2,13 +2,11 @@ import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
-const CapitalistIcon = createSVGIcon<object>(
-    { color: colors.role.capitalist },
-    ({ color, ...props }) => (
-        <svg {...props} viewBox='8.00 7.00 146.00 160.00'>
-            <g fill={color}>
-                <path
-                    d='
+const CapitalistIcon = createSVGIcon<object>({ color: colors.role.capitalist }, ({ color, ...props }) => (
+	<svg {...props} viewBox='8.00 7.00 146.00 160.00'>
+		<g fill={color}>
+			<path
+				d='
                     M 54.88 32.84
                     Q 54.45 34.16 54.41 32.77
                     Q 54.10 21.94 61.00 15.14
@@ -23,9 +21,9 @@ const CapitalistIcon = createSVGIcon<object>(
                     Q 74.98 21.01 70.02 21.35
                     Q 58.38 22.13 54.88 32.84
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 87.02 68.74
                     L 103.93 70.88
                     Q 104.47 70.95 104.61 71.47
@@ -91,9 +89,9 @@ const CapitalistIcon = createSVGIcon<object>(
                     Q 65.16 72.20 65.00 73.98
                     Q 64.91 74.98 64.91 81.49
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 132.35 83.19
                     Q 145.38 91.28 150.66 106.34
                     Q 152.04 110.28 152.35 115.33
@@ -165,9 +163,9 @@ const CapitalistIcon = createSVGIcon<object>(
                     Q 119.81 132.93 120.35 132.98
                     Q 121.19 133.05 122.87 133.04
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 43.71 107.64
                     Q 43.71 106.74 43.23 107.50
                     L 32.11 125.22
@@ -196,9 +194,9 @@ const CapitalistIcon = createSVGIcon<object>(
                     A 0.90 0.90 0.0 0 1 44.04 159.00
                     L 43.71 107.64
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 126.54 109.64
                     A 0.27 0.27 0.0 0 1 126.81 109.91
                     L 126.81 110.14
@@ -209,9 +207,9 @@ const CapitalistIcon = createSVGIcon<object>(
                     A 0.27 0.27 0.0 0 1 119.00 109.62
                     L 126.54 109.64
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 122.84 117.81
                     Q 123.70 117.80 124.30 117.82
                     Q 124.78 117.84 124.66 118.31
@@ -220,10 +218,9 @@ const CapitalistIcon = createSVGIcon<object>(
                     Q 120.90 117.85 121.38 117.83
                     Q 121.98 117.81 122.84 117.81
                     Z'
-                />
-            </g>
-        </svg>
-    ),
-);
+			/>
+		</g>
+	</svg>
+));
 
 export default CapitalistIcon;

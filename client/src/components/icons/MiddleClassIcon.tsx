@@ -2,13 +2,11 @@ import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
-const MiddleClassIcon = createSVGIcon<object>(
-    { color: colors.role.middleClass },
-    ({ color, ...props }) => (
-        <svg {...props} viewBox='10.00 10.00 323.00 409.00'>
-            <g fill={color}>
-                <path
-                    d='
+const MiddleClassIcon = createSVGIcon<object>({ color: colors.role.middleClass }, ({ color, ...props }) => (
+	<svg {...props} viewBox='10.00 10.00 323.00 409.00'>
+		<g fill={color}>
+			<path
+				d='
                     M 191.13 158.49
                     L 211.19 160.54
                     Q 211.80 160.60 212.04 161.16
@@ -85,9 +83,9 @@ const MiddleClassIcon = createSVGIcon<object>(
                     Q 164.81 391.14 164.89 391.17
                     Q 164.98 391.19 165.11 391.19
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 262.72 50.18
                     C 264.16 50.43 266.24 51.05 267.72 51.82
                     Q 269.63 52.83 278.31 57.64
@@ -112,10 +110,9 @@ const MiddleClassIcon = createSVGIcon<object>(
                     Q 263.44 44.83 262.25 49.46
                     Q 262.09 50.07 262.72 50.18
                     Z'
-                />
-            </g>
-        </svg>
-    ),
-);
+			/>
+		</g>
+	</svg>
+));
 
 export default MiddleClassIcon;

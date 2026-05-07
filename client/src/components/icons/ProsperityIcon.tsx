@@ -4,12 +4,12 @@ import colors from 'client/utils/colors';
 import createSVGIcon from './createSVGIcon';
 
 const ProsperityIcon = createSVGIcon<{
-    role: RoleMap['workingClass']['id'] | RoleMap['middleClass']['id'];
+	role: RoleMap['workingClass']['id'] | RoleMap['middleClass']['id'];
 }>({}, ({ role, ...props }) => (
-    <svg {...props} viewBox='21.00 17.00 107.00 108.00'>
-        <path
-            fill={colors.role[role]}
-            d='
+	<svg {...props} viewBox='21.00 17.00 107.00 108.00'>
+		<path
+			fill={colors.role[role]}
+			d='
                 M 75.1499 124.2060
                 A 53.20 53.00 89.3 0 1 21.5040 71.6575
                 A 53.20 53.00 89.3 0 1 73.8501 17.8140
@@ -40,8 +40,8 @@ const ProsperityIcon = createSVGIcon<{
                 C 101.93 71.66 100.94 74.54 99.86 78.25
                 C 96.57 89.58 86.52 97.61 74.59 97.65
                 Z'
-        />
-    </svg>
+		/>
+	</svg>
 ));
 
 export default ProsperityIcon;

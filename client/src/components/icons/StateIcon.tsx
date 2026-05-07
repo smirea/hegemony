@@ -3,10 +3,10 @@ import colors from 'client/utils/colors';
 import createSVGIcon from './createSVGIcon';
 
 const StateIcon = createSVGIcon<object>({ color: colors.role.state }, ({ color, ...props }) => (
-    <svg {...props} viewBox='15.00 10.00 132.00 178.00'>
-        <g fill={color}>
-            <path
-                d='
+	<svg {...props} viewBox='15.00 10.00 132.00 178.00'>
+		<g fill={color}>
+			<path
+				d='
                     M 69.14 45.59
                     Q 57.76 45.58 46.05 44.01
                     A 0.54 0.54 0.0 0 1 45.59 43.47
@@ -41,9 +41,9 @@ const StateIcon = createSVGIcon<object>({ color: colors.role.state }, ({ color, 
                     A 0.54 0.54 0.0 0 1 92.22 44.04
                     Q 80.52 45.60 69.14 45.59
                     Z'
-            />
-            <path
-                d='
+			/>
+			<path
+				d='
                     M 69.26 52.44
                     Q 84.12 52.44 96.27 50.44
                     Q 98.19 50.13 99.15 50.71
@@ -54,9 +54,9 @@ const StateIcon = createSVGIcon<object>({ color: colors.role.state }, ({ color, 
                     Q 40.33 50.13 42.25 50.44
                     Q 54.40 52.44 69.26 52.44
                     Z'
-            />
-            <path
-                d='
+			/>
+			<path
+				d='
                     M 69.48 67.17
                     Q 77.50 67.16 85.51 66.30
                     Q 91.94 65.61 92.60 65.55
@@ -93,9 +93,9 @@ const StateIcon = createSVGIcon<object>({ color: colors.role.state }, ({ color, 
                     Q 64.12 83.80 68.37 84.55
                     Q 68.60 84.59 69.45 84.60
                     Z'
-            />
-            <path
-                d='
+			/>
+			<path
+				d='
                     M 103.33 121.37
                     A 0.41 0.41 0.0 0 0 102.88 121.73
                     L 100.66 140.95
@@ -140,9 +140,9 @@ const StateIcon = createSVGIcon<object>({ color: colors.role.state }, ({ color, 
                     Q 120.25 109.89 120.76 109.91
                     Q 122.17 109.98 123.01 110.07
                     Z'
-            />
-            <path
-                d='
+			/>
+			<path
+				d='
                     M 61.55 100.94
                     Q 69.93 102.26 77.22 100.95
                     A 0.27 0.27 0.0 0 1 77.53 101.27
@@ -151,9 +151,9 @@ const StateIcon = createSVGIcon<object>({ color: colors.role.state }, ({ color, 
                     L 61.16 101.36
                     A 0.35 0.34 -2.7 0 1 61.55 100.94
                     Z'
-            />
-            <path
-                d='
+			/>
+			<path
+				d='
                     M 37.08 170.51
                     Q 45.36 168.41 66.23 162.95
                     Q 70.22 161.91 74.28 162.21
@@ -189,9 +189,9 @@ const StateIcon = createSVGIcon<object>({ color: colors.role.state }, ({ color, 
                     L 36.51 170.04
                     Q 36.48 170.66 37.08 170.51
                     Z'
-            />
-            <path
-                d='
+			/>
+			<path
+				d='
                     M 116.88 141.59
                     Q 113.98 138.90 109.26 139.69
                     Q 108.62 139.80 108.62 139.15
@@ -209,9 +209,9 @@ const StateIcon = createSVGIcon<object>({ color: colors.role.state }, ({ color, 
                     Q 120.76 152.86 119.63 147.88
                     Q 118.56 143.15 116.88 141.59
                     Z'
-            />
-            <path
-                d='
+			/>
+			<path
+				d='
                     M 91.70 151.68
                     Q 93.02 152.43 94.46 151.95
                     Q 102.48 149.26 111.05 146.37
@@ -228,9 +228,9 @@ const StateIcon = createSVGIcon<object>({ color: colors.role.state }, ({ color, 
                     L 90.26 150.19
                     Q 90.76 151.14 91.70 151.68
                     Z'
-            />
-            <path
-                d='
+			/>
+			<path
+				d='
                     M 88.87 173.48
                     Q 93.22 175.45 97.49 173.75
                     Q 99.86 172.80 102.19 171.27
@@ -243,9 +243,9 @@ const StateIcon = createSVGIcon<object>({ color: colors.role.state }, ({ color, 
                     C 79.26 183.87 85.88 180.24 88.40 173.67
                     A 0.35 0.35 0.0 0 1 88.87 173.48
                     Z'
-            />
-        </g>
-    </svg>
+			/>
+		</g>
+	</svg>
 ));
 
 export default StateIcon;

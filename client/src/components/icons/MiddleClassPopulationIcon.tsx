@@ -2,13 +2,11 @@ import colors from 'client/utils/colors';
 
 import createSVGIcon from './createSVGIcon';
 
-const MiddleClassPopulationIcon = createSVGIcon<object>(
-    { color: colors.role.middleClass },
-    ({ color, ...props }) => (
-        <svg {...props} viewBox='7.00 7.00 84.00 145.00'>
-            <g fill={color}>
-                <path
-                    d='
+const MiddleClassPopulationIcon = createSVGIcon<object>({ color: colors.role.middleClass }, ({ color, ...props }) => (
+	<svg {...props} viewBox='7.00 7.00 84.00 145.00'>
+		<g fill={color}>
+			<path
+				d='
                     M 43.16 29.14
                     Q 43.01 28.84 42.70 28.51
                     C 41.26 26.99 40.66 24.27 40.52 21.99
@@ -38,9 +36,9 @@ const MiddleClassPopulationIcon = createSVGIcon<object>(
                     Q 37.61 31.14 42.91 29.71
                     Q 43.38 29.58 43.16 29.14
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 21.00 57.37
                     Q 20.77 56.96 20.31 56.50
                     C 17.59 53.79 18.17 49.04 17.95 45.54
@@ -78,9 +76,9 @@ const MiddleClassPopulationIcon = createSVGIcon<object>(
                     L 20.86 57.73
                     Q 21.16 57.64 21.00 57.37
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 77.49 57.90
                     Q 80.19 58.49 83.12 59.45
                     Q 85.05 60.07 85.44 61.73
@@ -116,9 +114,9 @@ const MiddleClassPopulationIcon = createSVGIcon<object>(
                     C 79.62 54.01 78.81 55.48 77.30 57.35
                     A 0.34 0.34 0.0 0 0 77.49 57.90
                     Z'
-                />
-                <path
-                    d='
+			/>
+			<path
+				d='
                     M 41.80 74.11
                     Q 40.31 72.02 39.67 70.78
                     C 38.56 68.59 39.32 65.21 37.74 63.08
@@ -154,10 +152,9 @@ const MiddleClassPopulationIcon = createSVGIcon<object>(
                     L 41.65 74.57
                     A 0.30 0.30 0.0 0 0 41.80 74.11
                     Z'
-                />
-            </g>
-        </svg>
-    ),
-);
+			/>
+		</g>
+	</svg>
+));
 
 export default MiddleClassPopulationIcon;

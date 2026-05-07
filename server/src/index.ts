@@ -1,15 +1,14 @@
-async function init() {
-    console.log('Server is running...');
-}
+const apiPort = Number(Bun.env.API_PORT ?? 3000);
+if (Number.isNaN(apiPort)) throw new Error('API_PORT must be a valid number');
 
-process.on('unhandledRejection', err => {
-    console.error(err);
-    process.exit(1);
+const server = Bun.serve({
+	development: true,
+	idleTimeout: 120,
+	port: apiPort,
+	routes: {
+		'/status': Response.json({ ok: true }),
+		'/*': Response.json({ ok: false, error: 'Not found' }, { status: 404 }),
+	},
 });
 
-void init()
-    .catch(err => {
-        console.error(err);
-        process.exit(1);
-    })
-    .then(() => process.exit(0));
+console.log('Server running at:', server.url);

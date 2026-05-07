@@ -18,4 +18,4 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Lint all apps
-        run: pnpm lint:report
+        run: bun run lint:report
