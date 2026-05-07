@@ -221,12 +221,13 @@ export default class Game {
 	validatePlayers() {
 		const roles = this.activeRoleNames;
 		const expectedByCount: Record<number, RoleName[]> = {
+			1: roles,
 			2: [RoleEnum.workingClass, RoleEnum.capitalist],
 			3: [RoleEnum.workingClass, RoleEnum.middleClass, RoleEnum.capitalist],
 			4: [RoleEnum.workingClass, RoleEnum.middleClass, RoleEnum.capitalist, RoleEnum.state],
 		};
 		const expected = expectedByCount[roles.length];
-		if (!expected) throw new Error('Hegemony requires 2-4 players');
+		if (!expected) throw new Error('Hegemony requires 1-4 players');
 		if (new Set(roles).size !== roles.length) throw new Error('Each role can only be controlled by one player');
 		if (roles.join(',') !== expected.join(',')) {
 			throw new Error(`${roles.length}-player games must use roles: ${expected.join(', ')}`);
