@@ -80,6 +80,7 @@ describe('getPrice', () => {
 describe('basicActions', () => {
 	describe('makeBusinessDeal', async () => {
 		beforeEach(() => {
+			game.data.board.businessDealCards = ['test-1', 'test-2'];
 			expect(game.data.board.businessDealCards).toEqual(['test-1', 'test-2']);
 			cap.data.resources.money.add(100);
 			expect(cap.data.resources.money.value).toBe(100);
@@ -109,7 +110,7 @@ describe('basicActions', () => {
 				freeTradeZone: {},
 			});
 			await nextAndTick('capitalist:makeBusinessDeal');
-			expect(cap.data.resources.money.value).toBe(90);
+			expect(cap.data.resources.money.value).toBe(88);
 			expect(cap.data.resources.food.value).toBe(1);
 			expect(cap.data.resources.luxury.value).toBe(2);
 			expect(cap.data.freeTradeZoneResources.food.value).toBe(0);

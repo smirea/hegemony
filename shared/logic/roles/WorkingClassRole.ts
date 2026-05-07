@@ -15,6 +15,7 @@ import {
 	createApplyPoliticalPressure,
 	createAssignWorkers,
 	createBuyGoodsAndServices,
+	createPass,
 	createPayLoan,
 	createProposeBill,
 	createReceiveBenefits,
@@ -80,23 +81,47 @@ export default class WorkingClassRole extends AbstractRole<typeof RoleEnum.worki
 	setupBoard() {
 		this.data.resources.money.add(30);
 		this.data.resources.influence.add(1);
+		this.data.availableWorkers = {
+			influence: 10,
+			food: 10,
+			healthcare: 10,
+			education: 10,
+			luxury: 10,
+			unskilled: 40,
+		};
 
 		const fillCompany = (role: RoleNameNoWorkingClass, id: string) => {
 			const target = this.game.data.roles[role];
-			target.company(id).workers = target.data.companyDeck.getOriginalCard(id).workers.map(w => this.newWorker(w.type));
+			target.company(id).workers = target.data.companyDeck.getOriginalCard(id).workers.map(w => {
+				const workerId = this.newWorker(w.type);
+				this.worker(workerId).company = id;
+				return workerId;
+			});
 		};
 
 		fillCompany(RoleEnum.capitalist, 'c-supermarket-2');
-		fillCompany(RoleEnum.capitalist, 'c-college-2');
-		fillCompany(RoleEnum.state, 's-university-hospital-1');
+		if (this.game.data.players.length === 2) {
+			fillCompany(RoleEnum.capitalist, 'c-shopping-mall-2');
+			fillCompany(RoleEnum.state, 's-public-hospital-1');
+			fillCompany(RoleEnum.state, 's-public-university-1');
+		} else {
+			fillCompany(RoleEnum.capitalist, 'c-college-2');
+			fillCompany(RoleEnum.state, 's-university-hospital-1');
+		}
 
 		this.newWorker('unskilled');
 		this.game.drawImmigrationCard(this.id);
-		this.game.drawImmigrationCard(this.id);
+		if (this.game.data.players.length > 2) this.game.drawImmigrationCard(this.id);
 	}
 
 	setupRound(): void {
-		// todo
+		this.data.resources.money.remove(this.data.resources.money.loans * 5, { canTakeLoans: true });
+		this.data.prosperityIndex.remove(1);
+		this.newWorker('unskilled');
+		this.newWorker('unskilled');
+		for (let i = 0; i < this.game.getPolicy('immigration'); ++i) {
+			this.game.drawImmigrationCard(this.id);
+		}
 	}
 
 	increaseProsperity = createIncreaseProsperity(this);
@@ -109,6 +134,7 @@ export default class WorkingClassRole extends AbstractRole<typeof RoleEnum.worki
 	}
 
 	basicActions = {
+		...createPass(this),
 		...createProposeBill(this),
 		...createAssignWorkers(this),
 		...createBuyGoodsAndServices(this),

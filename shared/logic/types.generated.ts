@@ -22,8 +22,18 @@ export const actionEventNameSchema = z.enum([
     'game:roleTurn',
     'game:roleCurrent',
     'game:turnEnd',
+    'game:productionStart',
+    'game:productionProduceGoods',
+    'game:productionCoverNeeds',
+    'game:productionCheckImf',
+    'game:productionPayTaxes',
+    'game:electionsStart',
+    'game:electionsRefillBag',
+    'game:electionsCarryOut',
+    'game:scoringStart',
     'game:roundEnd',
     'game:end',
+    'workingClass:pass',
     'workingClass:proposeBill',
     'workingClass:assignWorkers',
     'workingClass:buyGoodsAndServices',
@@ -37,6 +47,7 @@ export const actionEventNameSchema = z.enum([
     'workingClass:swapWorkers',
     'workingClass:receiveBenefits',
     'workingClass:payLoan',
+    'middleClass:pass',
     'middleClass:proposeBill',
     'middleClass:assignWorkers',
     'middleClass:buildCompany',
@@ -54,6 +65,7 @@ export const actionEventNameSchema = z.enum([
     'middleClass:swapWorkers',
     'middleClass:receiveBenefits',
     'middleClass:payLoan',
+    'capitalist:pass',
     'capitalist:proposeBill',
     'capitalist:buildCompany',
     'capitalist:sellCompany',
@@ -68,6 +80,7 @@ export const actionEventNameSchema = z.enum([
     'capitalist:buyStorage',
     'capitalist:receiveBenefits',
     'capitalist:payLoan',
+    'state:pass',
     'state:proposeBill',
     'state:eventAction',
     'state:sellToForeignMarket',
@@ -87,8 +100,48 @@ export type ActionEventMap = {
     'game:roleTurn': ActionEventFromAction<'game:roleTurn', Game['actions']['roleTurn']>;
     'game:roleCurrent': ActionEventFromAction<'game:roleCurrent', Game['actions']['roleCurrent']>;
     'game:turnEnd': ActionEventFromAction<'game:turnEnd', Game['actions']['turnEnd']>;
+    'game:productionStart': ActionEventFromAction<
+        'game:productionStart',
+        Game['actions']['productionStart']
+    >;
+    'game:productionProduceGoods': ActionEventFromAction<
+        'game:productionProduceGoods',
+        Game['actions']['productionProduceGoods']
+    >;
+    'game:productionCoverNeeds': ActionEventFromAction<
+        'game:productionCoverNeeds',
+        Game['actions']['productionCoverNeeds']
+    >;
+    'game:productionCheckImf': ActionEventFromAction<
+        'game:productionCheckImf',
+        Game['actions']['productionCheckImf']
+    >;
+    'game:productionPayTaxes': ActionEventFromAction<
+        'game:productionPayTaxes',
+        Game['actions']['productionPayTaxes']
+    >;
+    'game:electionsStart': ActionEventFromAction<
+        'game:electionsStart',
+        Game['actions']['electionsStart']
+    >;
+    'game:electionsRefillBag': ActionEventFromAction<
+        'game:electionsRefillBag',
+        Game['actions']['electionsRefillBag']
+    >;
+    'game:electionsCarryOut': ActionEventFromAction<
+        'game:electionsCarryOut',
+        Game['actions']['electionsCarryOut']
+    >;
+    'game:scoringStart': ActionEventFromAction<
+        'game:scoringStart',
+        Game['actions']['scoringStart']
+    >;
     'game:roundEnd': ActionEventFromAction<'game:roundEnd', Game['actions']['roundEnd']>;
     'game:end': ActionEventFromAction<'game:end', Game['actions']['end']>;
+    'workingClass:pass': ActionEventFromAction<
+        'workingClass:pass',
+        WorkingClassRole['basicActions']['pass']
+    >;
     'workingClass:proposeBill': ActionEventFromAction<
         'workingClass:proposeBill',
         WorkingClassRole['basicActions']['proposeBill']
@@ -140,6 +193,10 @@ export type ActionEventMap = {
     'workingClass:payLoan': ActionEventFromAction<
         'workingClass:payLoan',
         WorkingClassRole['freeActions']['payLoan']
+    >;
+    'middleClass:pass': ActionEventFromAction<
+        'middleClass:pass',
+        MiddleClassRole['basicActions']['pass']
     >;
     'middleClass:proposeBill': ActionEventFromAction<
         'middleClass:proposeBill',
@@ -209,6 +266,10 @@ export type ActionEventMap = {
         'middleClass:payLoan',
         MiddleClassRole['freeActions']['payLoan']
     >;
+    'capitalist:pass': ActionEventFromAction<
+        'capitalist:pass',
+        CapitalistRole['basicActions']['pass']
+    >;
     'capitalist:proposeBill': ActionEventFromAction<
         'capitalist:proposeBill',
         CapitalistRole['basicActions']['proposeBill']
@@ -265,6 +326,7 @@ export type ActionEventMap = {
         'capitalist:payLoan',
         CapitalistRole['freeActions']['payLoan']
     >;
+    'state:pass': ActionEventFromAction<'state:pass', StateRole['basicActions']['pass']>;
     'state:proposeBill': ActionEventFromAction<
         'state:proposeBill',
         StateRole['basicActions']['proposeBill']
@@ -300,6 +362,9 @@ export type ActionEventMap = {
 /** mostly used in testing */
 export type PlayerInput = {
     'game:roleTurn': z.infer<NonNullable<Game['actions']['roleTurn']['playerInputSchema']>>;
+    'game:electionsCarryOut': z.infer<
+        NonNullable<Game['actions']['electionsCarryOut']['playerInputSchema']>
+    >;
     'workingClass:proposeBill': z.infer<
         NonNullable<WorkingClassRole['basicActions']['proposeBill']['playerInputSchema']>
     >;

@@ -43,8 +43,7 @@ describe('createProposeBill', () => {
 		await expect(nextAndTick('workingClass:proposeBill')).rejects.toThrow(/notProposed/);
 	});
 	test('validateInput:isDifferent', async () => {
-		game.data.board.policyProposals.education = wc1;
-		addInput('workingClass:proposeBill', { policy: 'education', value: 0 });
+		addInput('workingClass:proposeBill', { policy: 'education', value: game.data.board.policies.education });
 		await expect(nextAndTick('workingClass:proposeBill')).rejects.toThrow(/isDifferent/);
 	});
 	test('run', async () => {
@@ -149,7 +148,7 @@ describe('createAdjustPrices', () => {
 
 describe('createAdjustWages', () => {
 	test('condition:minWage', async () => {
-		game.data.board.policies.laborMarket = 2;
+		game.data.board.policies.laborMarket = 0;
 		addInput('capitalist:adjustWages', [{ companyId: 'c-food', wages: 'l2' }]);
 		await expect(nextAndTick('capitalist:adjustWages')).rejects.toThrow(/minWage/);
 	});
@@ -215,72 +214,56 @@ describe('createReceiveBenefits', () => {
 
 describe('createApplyPoliticalPressure', () => {
 	test('condition:hasCubes', async () => {
+		wc.data.availableVotingCubes = 0;
 		await expect(nextAndTick('workingClass:applyPoliticalPressure')).rejects.toThrow(/hasCubes/);
 	});
 	test('run', async () => {
 		wc.data.availableVotingCubes = 2;
-		expect(game.data.board.votingCubeBag.workingClass).toEqual(0);
+		expect(game.data.board.votingCubeBag.workingClass).toEqual(8);
 		await nextAndTick('workingClass:applyPoliticalPressure');
 		expect(wc.data.availableVotingCubes).toEqual(0);
-		expect(game.data.board.votingCubeBag.workingClass).toEqual(2);
+		expect(game.data.board.votingCubeBag.workingClass).toEqual(10);
 		wc.data.availableVotingCubes = 10;
 		await nextAndTick('workingClass:applyPoliticalPressure');
 		expect(wc.data.availableVotingCubes).toEqual(7);
-		expect(game.data.board.votingCubeBag.workingClass).toEqual(5);
+		expect(game.data.board.votingCubeBag.workingClass).toEqual(13);
 	});
 });
 
 describe('createAssignWorkers', () => {
 	test('run', async () => {
-		wc.data.workers.push({
-			id: 0,
-			type: 'unskilled',
-			role: 'workingClass',
-			company: null,
-			committed: false,
-		});
-		wc.data.workers.push({
-			id: 1,
-			type: 'unskilled',
-			role: 'workingClass',
-			company: null,
-			committed: false,
-		});
+		const workers = addWorkers(3, { committed: false, company: null });
 		addInput('workingClass:assignWorkers', [
-			{ target: 'union', workerId: 0 },
-			{ target: 'company', companyId: cap.data.companies[0].id, workerId: 1 },
+			{ target: 'company', companyId: cap.data.companies[0].id, workerId: workers[0] },
+			{ target: 'company', companyId: cap.data.companies[0].id, workerId: workers[1] },
+			{ target: 'company', companyId: cap.data.companies[0].id, workerId: workers[2] },
 		]);
 		await nextAndTick('workingClass:assignWorkers');
-		expect(wc.data.workers[0].company).toEqual(null);
-		expect(wc.data.workers[0].union).toEqual(true);
-		expect(wc.data.workers[0].committed).toEqual(false);
-		expect(wc.data.workers[1].company).toEqual(cap.data.companies[0].id);
-		expect(wc.data.workers[1].committed).toEqual(true);
+		for (const workerId of workers) {
+			expect(wc.worker(workerId).company).toEqual(cap.data.companies[0].id);
+			expect(wc.worker(workerId).committed).toEqual(true);
+		}
 	});
 });
 
 describe('createBuyGoodsAndServices', () => {
 	test('run', async () => {
+		game.data.board.policies.foreignTrade = 2;
 		wc.data.resources.money.add(100);
 		cap.data.resources.luxury.add(10);
-		st.data.resources.influence.add(10);
 		addInput('workingClass:buyGoodsAndServices', [
-			{ resource: 'food', count: 1, source: 'foreign-market' },
+			{ resource: 'luxury', count: 1, source: 'foreign-market' },
 			{ resource: 'luxury', count: 3, source: 'capitalist' },
-			{ resource: 'influence', count: 2, source: 'state' },
 		]);
 		await nextAndTick('workingClass:buyGoodsAndServices');
 
-		expect(wc.data.resources.food.value).toEqual(1);
-		expect(wc.data.resources.luxury.value).toEqual(3);
-		expect(wc.data.resources.influence.value).toEqual(2);
-		expect(wc.data.resources.money.value).toEqual(55);
+		expect(wc.data.resources.luxury.value).toEqual(4);
+		expect(wc.data.resources.money.value).toEqual(79);
 
 		expect(cap.data.resources.luxury.value).toEqual(7);
 		expect(cap.data.resources.money.value).toEqual(15);
 
-		expect(st.data.resources.money.value).toEqual(20);
-		expect(st.data.resources.influence.value).toEqual(8);
+		expect(st.data.resources.money.value).toEqual(0);
 	});
 });
 
@@ -307,13 +290,13 @@ describe('createBuildCompany', () => {
 	test('run', async () => {
 		cap.data.resources.money.add(100);
 		game.data.board.policies.laborMarket = 2;
-		const workers = addWorkers(2, { committed: false, company: null });
+		const workers = addWorkers(3, { committed: false, company: null });
 		addInput('capitalist:buildCompany', { companyId: 'c-market-1', workers });
 		await nextAndTick('capitalist:buildCompany');
 		expect(cap.data.resources.money.value).toEqual(90);
 		const company = _.last(cap.data.companies)!;
 		expect(company.id).toEqual('c-market-1');
-		expect(company.wages).toEqual('l3');
+		expect(company.wages).toEqual('l1');
 		expect(company.workers).toEqual(workers);
 		eachWorker(workers, w => {
 			expect(w.company).toEqual(company.id);

@@ -21,6 +21,7 @@ import {
 	createAdjustWages,
 	createApplyPoliticalPressure,
 	createBuildCompany,
+	createPass,
 	createPayLoan,
 	createProposeBill,
 	createReceiveBenefits,
@@ -69,10 +70,10 @@ export default class CapitalistRole extends AbstractRole<typeof RoleEnum.capital
 			availableVotingCubes: 25,
 			automationTokens: 4,
 			priceLevels: {
-				food: 0,
-				healthcare: 0,
-				education: 0,
-				luxury: 0,
+				food: 1,
+				healthcare: 1,
+				education: 1,
+				luxury: 1,
 			},
 			storage: {},
 			freeTradeZoneResources: {
@@ -130,7 +131,12 @@ export default class CapitalistRole extends AbstractRole<typeof RoleEnum.capital
 	}
 
 	setupRound(): void {
+		this.data.resources.money.remove(this.data.resources.money.loans * 5, { canTakeLoans: true, useCapital: true });
 		for (let i = this.data.companyMarket.length; i < 4; ++i) {
+			if (!this.data.companyDeck.size) {
+				this.data.companyDeck = this.data.companyDeck.clone();
+				this.data.companyDeck.shuffle();
+			}
 			const card = this.data.companyDeck.draw();
 			this.data.companyMarket.push(card.id);
 		}
@@ -146,6 +152,7 @@ export default class CapitalistRole extends AbstractRole<typeof RoleEnum.capital
 	}
 
 	basicActions = {
+		...createPass(this),
 		...createProposeBill(this),
 		...createBuildCompany(this),
 		...createSellCompany(this),
@@ -180,11 +187,18 @@ export default class CapitalistRole extends AbstractRole<typeof RoleEnum.capital
 				if (storage.food) this.data.resources.food.add(storage.food);
 				if (storage.luxury) this.data.resources.luxury.add(storage.luxury);
 
-				if (freeTradeZone.food || freeTradeZone.luxury) {
-					const tariff = card.tariffs[this.game.data.board.policies.foreignTrade as 0 | 1];
+				if (storage.food || storage.luxury) {
+					const tariff =
+						this.game.data.board.policies.foreignTrade === 0
+							? card.tariffs[0]
+							: this.game.data.board.policies.foreignTrade === 1
+								? card.tariffs[1]
+								: 0;
 					this.data.resources.money.remove(tariff);
 					this.game.data.roles.state.data.resources.money.add(tariff);
+				}
 
+				if (freeTradeZone.food || freeTradeZone.luxury) {
 					if (freeTradeZone.food) this.data.freeTradeZoneResources.food.add(freeTradeZone.food);
 					if (freeTradeZone.luxury) this.data.freeTradeZoneResources.luxury.add(freeTradeZone.luxury);
 				}
@@ -200,7 +214,7 @@ export default class CapitalistRole extends AbstractRole<typeof RoleEnum.capital
 			],
 			run: () => {
 				const diff = Math.min(3, this.game.data.board.availableInfluence);
-				this.data.resources.money.remove(30);
+				this.data.resources.money.remove(30, { useCapital: true });
 				this.data.resources.influence.add(diff);
 				this.game.data.board.availableInfluence -= diff;
 			},

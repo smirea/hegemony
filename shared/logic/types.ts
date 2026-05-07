@@ -90,6 +90,18 @@ export type RoleNameNoWorkingClass = StateRole['id'] | MiddleClassRole['id'] | C
 export type RoleNameWorkingMiddleClass = WorkingClassRole['id'] | MiddleClassRole['id'];
 export type RoleNameMiddleCapitalist = MiddleClassRole['id'] | CapitalistRole['id'];
 
+export const GamePhaseEnum = {
+	setup: 'setup',
+	preparation: 'preparation',
+	action: 'action',
+	production: 'production',
+	elections: 'elections',
+	scoring: 'scoring',
+	finished: 'finished',
+} as const;
+
+export type GamePhase = (typeof GamePhaseEnum)[keyof typeof GamePhaseEnum];
+
 export type RoleMap = {
 	workingClass: WorkingClassRole;
 	middleClass: MiddleClassRole;
@@ -205,3 +217,10 @@ export const AssignWorkersSchema = z.array(
 		}),
 	]),
 );
+
+const ElectionChoiceSchema = z.object({
+	preferences: z.record(RoleNameSchema, z.boolean()).default({}),
+	influence: z.record(RoleNameSchema, z.number().int().min(0)).default({}),
+});
+
+export const ElectionsInputSchema = z.record(PolicyEnumSchema, ElectionChoiceSchema);
