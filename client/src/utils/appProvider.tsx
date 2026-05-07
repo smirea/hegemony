@@ -1,20 +1,13 @@
-import { action, makeObservable, observable } from 'mobx';
+import { proxy } from 'valtio/vanilla';
 
 interface AppProviderState {
 	theme: 'dark' | 'light';
 }
 
 class AppProvider {
-	state: AppProviderState = {
+	state = proxy<AppProviderState>({
 		theme: 'light',
-	};
-
-	constructor() {
-		makeObservable(this, {
-			state: observable,
-			update: action,
-		});
-	}
+	});
 
 	update(diff: Partial<AppProviderState>) {
 		Object.assign(this.state, diff);

@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import React from 'react';
 import _ from 'lodash';
 import { objectEntries } from 'shared/utils/ts';
-import { observer } from 'mobx-react';
 import useGame from 'client/utils/useGame';
 import { type Industry } from 'shared/logic/types';
 import colors, { colorsRGBA } from 'client/utils/colors';
@@ -13,7 +12,7 @@ import ResourceIcon from './ResourceIcon';
 import ProsperityIcon from './icons/ProsperityIcon';
 import WorkerIcon from './icons/WorkerIcon';
 
-const WorkingClassRole: React.FC = observer(() => {
+const WorkingClassRole: React.FC = () => {
 	const game = useGame();
 
 	const workers = game.data.roles.workingClass.data.workers;
@@ -103,7 +102,7 @@ const WorkingClassRole: React.FC = observer(() => {
 			</div>
 		</Root>
 	);
-});
+};
 
 export default WorkingClassRole;
 

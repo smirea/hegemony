@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { type Company, type CompanyCard, type Industry } from 'shared/logic/types';
-import { observer } from 'mobx-react';
 import useGame from 'client/utils/useGame';
 import { type ClassAndStyle } from 'client/types';
 import colors from 'client/utils/colors';
@@ -22,135 +21,133 @@ export interface CompanyCardProps extends ClassAndStyle {
 	format?: Format;
 }
 
-const CompanyCard: React.FC<CompanyCardProps> = observer(
-	({ company, format = 'normal', ...rest }: CompanyCardProps) => {
-		const game = useGame();
-		const companyDef = game.getCompanyDefinition(company.id);
+const CompanyCard: React.FC<CompanyCardProps> = ({ company, format = 'normal', ...rest }: CompanyCardProps) => {
+	const game = useGame();
+	const companyDef = game.getCompanyDefinition(company.id);
 
-		let totalProduction = companyDef.production;
+	let totalProduction = companyDef.production;
 
-		if (companyDef.productionFromAutomation && company.automationToken) {
-			totalProduction += companyDef.productionFromAutomation;
-		}
-		if (companyDef.productionFromOptionalWorkers && company.workers.length === companyDef.workers.length) {
-			totalProduction += companyDef.productionFromOptionalWorkers;
-		}
+	if (companyDef.productionFromAutomation && company.automationToken) {
+		totalProduction += companyDef.productionFromAutomation;
+	}
+	if (companyDef.productionFromOptionalWorkers && company.workers.length === companyDef.workers.length) {
+		totalProduction += companyDef.productionFromOptionalWorkers;
+	}
 
-		const ifWages = (content: React.ReactNode) =>
-			companyDef.wages.l1 || companyDef.wages.l2 || companyDef.wages.l3 ? content : null;
+	const ifWages = (content: React.ReactNode) =>
+		companyDef.wages.l1 || companyDef.wages.l2 || companyDef.wages.l3 ? content : null;
 
-		const rootProps = {
-			...rest,
-			background: colors.industry[companyDef.industry],
-			'data-format': format,
-			'data-company-id': companyDef.id,
-		};
-		const workersProps = {
-			companyDef,
-			company,
-			'data-format': format,
-		};
+	const rootProps = {
+		...rest,
+		background: colors.industry[companyDef.industry],
+		'data-format': format,
+		'data-company-id': companyDef.id,
+	};
+	const workersProps = {
+		companyDef,
+		company,
+		'data-format': format,
+	};
 
-		if (format === 'tiny') {
-			return (
-				<Root {...rootProps}>
-					<Value
-						v={
-							<>
-								<div>{companyDef.production}</div>
-								{!!companyDef.productionFromAutomation && (
-									<div style={{ fontSize: '.875rem', color: colors.textMuted }}>
-										+ {companyDef.productionFromAutomation}
-									</div>
-								)}
-								{!!companyDef.productionFromOptionalWorkers && (
-									<div style={{ fontSize: '.875rem', color: colors.textMuted }}>
-										+ {companyDef.productionFromOptionalWorkers}
-									</div>
-								)}
-							</>
-						}
-						icon={p => <ResourceIcon {...p} name={companyDef.industry} color='white' />}
-						style={{ background: rootProps.background }}
-						className='px05 mr05'
-					/>
-					{/* <Value
+	if (format === 'tiny') {
+		return (
+			<Root {...rootProps}>
+				<Value
+					v={
+						<>
+							<div>{companyDef.production}</div>
+							{!!companyDef.productionFromAutomation && (
+								<div style={{ fontSize: '.875rem', color: colors.textMuted }}>
+									+ {companyDef.productionFromAutomation}
+								</div>
+							)}
+							{!!companyDef.productionFromOptionalWorkers && (
+								<div style={{ fontSize: '.875rem', color: colors.textMuted }}>
+									+ {companyDef.productionFromOptionalWorkers}
+								</div>
+							)}
+						</>
+					}
+					icon={p => <ResourceIcon {...p} name={companyDef.industry} color='white' />}
+					style={{ background: rootProps.background }}
+					className='px05 mr05'
+				/>
+				{/* <Value
                         v={companyDef.cost}
                         icon={p => <ResourceIcon {...p} name='money' />}
                     /> */}
-					<WorkersEl {...workersProps} className='pr05' />
-					{!!companyDef.productionFromAutomation && <AutomationIcon height={1} style={{ alignSelf: 'center' }} />}
-					{ifWages(
-						<>
-							<CompanyWages companyWages={companyDef.wages} value={company.wages} style={{ alignSelf: 'stretch' }} />
-						</>,
-					)}
-				</Root>
-			);
-		}
+				<WorkersEl {...workersProps} className='pr05' />
+				{!!companyDef.productionFromAutomation && <AutomationIcon height={1} style={{ alignSelf: 'center' }} />}
+				{ifWages(
+					<>
+						<CompanyWages companyWages={companyDef.wages} value={company.wages} style={{ alignSelf: 'stretch' }} />
+					</>,
+				)}
+			</Root>
+		);
+	}
 
-		if (format === 'vertical') {
-			return (
-				<Root {...rootProps}>
-					<WorkersEl {...workersProps} />
-					<Output>
-						<Production value={totalProduction} small industry={companyDef.industry} />
-					</Output>
-					{ifWages(
-						<Wages>
-							{!companyDef.fullyAutomated && (
-								<div data-selected={true}>
-									{companyDef.wages[company.wages]}
-									<MoneyResourceIcon height={0.5} />
-								</div>
-							)}
-						</Wages>,
-					)}
-				</Root>
-			);
-		}
-
+	if (format === 'vertical') {
 		return (
 			<Root {...rootProps}>
-				<Name>
-					<div>{companyDef.name}</div>
-					<div className='row' data-align='center' data-spacing='.125'>
-						{companyDef.cost} <MoneyResourceIcon height={0.5} />
-					</div>
-				</Name>
 				<WorkersEl {...workersProps} />
 				<Output>
-					<Production value={totalProduction} industry={companyDef.industry} />
-					{companyDef.productionFromAutomation && (
-						<ExtraProduction
-							value={companyDef.productionFromAutomation}
-							icon={<AutomationIcon height={1} style={{ marginBottom: '.125rem' }} />}
-							active={!!company.automationToken}
-						/>
-					)}
-					{companyDef.productionFromOptionalWorkers && (
-						<ExtraProduction
-							value={companyDef.productionFromOptionalWorkers}
-							icon={<WorkingClassWorker3DIcon type={companyDef.workers[1].type} height={1.5} />}
-							active={company.workers.length === companyDef.workers.length}
-						/>
-					)}
+					<Production value={totalProduction} small industry={companyDef.industry} />
 				</Output>
 				{ifWages(
 					<Wages>
 						{!companyDef.fullyAutomated && (
-							<>
-								<div data-selected={company.wages === 'l1'}>{companyDef.wages.l1}</div>
-								<div data-selected={company.wages === 'l2'}>{companyDef.wages.l2}</div>
-								<div data-selected={company.wages === 'l3'}>{companyDef.wages.l3}</div>
-							</>
+							<div data-selected={true}>
+								{companyDef.wages[company.wages]}
+								<MoneyResourceIcon height={0.5} />
+							</div>
 						)}
 					</Wages>,
 				)}
 			</Root>
 		);
-	},
-);
+	}
+
+	return (
+		<Root {...rootProps}>
+			<Name>
+				<div>{companyDef.name}</div>
+				<div className='row' data-align='center' data-spacing='.125'>
+					{companyDef.cost} <MoneyResourceIcon height={0.5} />
+				</div>
+			</Name>
+			<WorkersEl {...workersProps} />
+			<Output>
+				<Production value={totalProduction} industry={companyDef.industry} />
+				{companyDef.productionFromAutomation && (
+					<ExtraProduction
+						value={companyDef.productionFromAutomation}
+						icon={<AutomationIcon height={1} style={{ marginBottom: '.125rem' }} />}
+						active={!!company.automationToken}
+					/>
+				)}
+				{companyDef.productionFromOptionalWorkers && (
+					<ExtraProduction
+						value={companyDef.productionFromOptionalWorkers}
+						icon={<WorkingClassWorker3DIcon type={companyDef.workers[1].type} height={1.5} />}
+						active={company.workers.length === companyDef.workers.length}
+					/>
+				)}
+			</Output>
+			{ifWages(
+				<Wages>
+					{!companyDef.fullyAutomated && (
+						<>
+							<div data-selected={company.wages === 'l1'}>{companyDef.wages.l1}</div>
+							<div data-selected={company.wages === 'l2'}>{companyDef.wages.l2}</div>
+							<div data-selected={company.wages === 'l3'}>{companyDef.wages.l3}</div>
+						</>
+					)}
+				</Wages>,
+			)}
+		</Root>
+	);
+};
 
 export default CompanyCard;
 
@@ -175,7 +172,7 @@ const ExtraProduction: React.FC<{
 );
 
 const WorkersEl: React.FC<{ 'data-format': Format; companyDef: CompanyCard; company: Company } & ClassAndStyle> =
-	observer(function WorkersEl({ companyDef, company, ...props }) {
+	function WorkersEl({ companyDef, company, ...props }) {
 		const game = useGame();
 		const iconHeight = {
 			normal: 3,
@@ -235,7 +232,7 @@ const WorkersEl: React.FC<{ 'data-format': Format; companyDef: CompanyCard; comp
 				})}
 			</Workers>
 		);
-	});
+	};
 
 export const Root = styled.div<{ background: string; 'data-format': Format }>`
 	flex: 0 0 auto;

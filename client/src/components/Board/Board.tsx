@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { observer } from 'mobx-react';
 import useGame from 'client/utils/useGame';
 import colors from 'client/utils/colors';
 
@@ -7,7 +6,7 @@ import BoardPolicies from './BoardPolicies';
 import CompanyCard from '../CompanyCard';
 import CompanyCardPlacement from '../CompanyCardPlacement';
 
-const Board: React.FC = observer(() => {
+const Board: React.FC = () => {
 	const game = useGame();
 
 	const format = 'normal';
@@ -94,7 +93,7 @@ const Board: React.FC = observer(() => {
             /> */}
 		</Root>
 	);
-});
+};
 
 export default Board;
 

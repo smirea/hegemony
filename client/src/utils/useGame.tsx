@@ -1,8 +1,16 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import Game from 'shared/logic/Game';
+import { subscribe } from 'valtio/vanilla';
 
 const GameContext = React.createContext<Game>(null as any);
-const useGame = () => useContext(GameContext);
+const useGame = () => {
+	const game = useContext(GameContext);
+	const [, setVersion] = useState(0);
+
+	useEffect(() => subscribe(game.data, () => setVersion(version => version + 1)), [game]);
+
+	return game;
+};
 
 export const GameContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	const game = useMemo(() => {

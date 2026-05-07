@@ -1,5 +1,5 @@
 import { type z } from 'zod';
-import { flow, makeObservable, observable, runInAction } from 'mobx';
+import { proxy } from 'valtio/vanilla';
 
 import {
 	PolicyEnum,
@@ -100,10 +100,7 @@ export default class Game {
 			},
 		};
 		this.debug = this.config.debug;
-		this.data = this.createEmptyState();
-		makeObservable(this, {
-			data: observable,
-		});
+		this.data = proxy(this.createEmptyState());
 	}
 
 	next = this.createNext({
@@ -232,14 +229,12 @@ export default class Game {
 			await this.unsafeTick();
 			return true;
 		} catch (e) {
-			runInAction(() => {
-				this.data.error = e;
-			});
+			this.data.error = e;
 			return false;
 		}
 	}
 
-	private unsafeTick = flow(function* unsafeTick(this: Game) {
+	private async unsafeTick() {
 		if (this.data.currentActionIndex >= this.data.actionQueue.length) return;
 
 		const event = this.data.actionQueue[this.data.currentActionIndex];
@@ -277,7 +272,7 @@ export default class Game {
 			if ((event as any).debugPlayerInput) {
 				event.data = (event as any).debugPlayerInput;
 			} else {
-				event.data = yield this.requestPlayerInput(event.type);
+				event.data = await this.requestPlayerInput(event.type);
 			}
 			try {
 				action.playerInputSchema.parse(event.data);
@@ -315,7 +310,7 @@ export default class Game {
 		}
 
 		++this.data.currentActionIndex;
-	});
+	}
 
 	/** primarily used in testing */
 	async flush({ to, after }: { to?: ActionEventName; after?: ActionEventName } = {}): Promise<void> {

@@ -1,30 +1,34 @@
 import styled from '@emotion/styled';
 import useGame from 'client/utils/useGame';
-import { observer, useLocalObservable } from 'mobx-react';
 import { PolicyEnum } from 'shared/logic/types';
 import _ from 'lodash';
-import { action } from 'mobx';
 import { type ActionEventName } from 'shared/logic/types.generated';
 import React from 'react';
+import { proxy, useSnapshot } from 'valtio';
 
 import ErrorBox from './ErrorBox';
 
-const GameDebugger: React.FC = observer(() => {
+const GameDebugger: React.FC = () => {
 	const game = useGame();
-	const state = useLocalObservable(() => ({
-		actions: {
-			'workingClass:proposeBill': {
-				policy: PolicyEnum.healthcare,
-				value: 2,
-			},
-		} as Record<string, any>,
-	}));
-	const input = (path: string) => ({
-		value: _.get(state, path),
-		onChange: action((v: any) => _.set(state, path, v?.target?.value ?? v)),
+	const state = React.useMemo(
+		() =>
+			proxy({
+				actions: {
+					'workingClass:proposeBill': {
+						policy: PolicyEnum.healthcare,
+						value: 2,
+					},
+				} as Record<string, any>,
+			}),
+		[],
+	);
+	const stateSnapshot = useSnapshot(state);
+	const input = (path: string, parse: (v: any) => any = v => v) => ({
+		value: _.get(stateSnapshot, path),
+		onChange: (v: any) => _.set(state, path, parse(v?.target?.value ?? v)),
 	});
 	const selectInput = (path: string, options: any[], parse: (v: any) => any = v => v) => (
-		<select {...input(path)}>
+		<select {...input(path, parse)}>
 			{options.map(option => (
 				<option value={parse(option)} key={option}>
 					{option}
@@ -35,10 +39,10 @@ const GameDebugger: React.FC = observer(() => {
 	const renderAction = (name: ActionEventName, children: React.ReactNode[]) => (
 		<div className='row' data-spacing='1'>
 			<button
-				onClick={action(() => {
+				onClick={() => {
 					game.next(name, { debugPlayerInput: state.actions[name] });
 					void game.tick();
-				})}
+				}}
 			>
 				next()
 			</button>
@@ -64,7 +68,7 @@ const GameDebugger: React.FC = observer(() => {
 			])}
 		</Root>
 	);
-});
+};
 
 export default GameDebugger;
 

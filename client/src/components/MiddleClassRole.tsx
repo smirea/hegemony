@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import useGame from 'client/utils/useGame';
-import { observer } from 'mobx-react';
 import colors, { colorsRGBA } from 'client/utils/colors';
 import _ from 'lodash';
 import { type ResourcePriceLevel, type TradeableResource } from 'shared/logic/types';
@@ -17,7 +16,7 @@ import ResourceIcon from './ResourceIcon';
 
 // import ProsperityIcon from './icons/ProsperityIcon';
 
-const MiddleClassRole: React.FC = observer(() => {
+const MiddleClassRole: React.FC = () => {
 	const game = useGame();
 
 	const role = game.data.roles.middleClass;
@@ -117,7 +116,7 @@ const MiddleClassRole: React.FC = observer(() => {
 			</div>
 		</Root>
 	);
-});
+};
 
 export default MiddleClassRole;
 
