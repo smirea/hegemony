@@ -87,7 +87,7 @@ export function createGameUtils() {
 		}: Partial<GameConfigInput> & {
 			setupBoard?: boolean;
 			mockDefaultSetup?: boolean;
-			companyDecks?: 'mock' | 'empty';
+			companyDecks?: 'mock' | 'empty' | 'real';
 		} = {},
 	) => {
 		playerInputs = [];

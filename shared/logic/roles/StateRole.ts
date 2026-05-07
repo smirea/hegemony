@@ -15,6 +15,7 @@ import createAction from '../utils/createAction';
 import AbstractRole, { type BaseData } from './AbstractRole';
 import {
 	createAdjustWages,
+	createPass,
 	createPayLoan,
 	createProposeBill,
 	createSellToForeignMarket,
@@ -79,36 +80,36 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
 
 	setupBoard() {
 		this.data.resources.money.add(120);
-		this.data.resources.influence.add(4);
-		this.data.resources.healthcare.add(6);
-		this.data.resources.education.add(6);
+		this.data.resources.influence.add(this.game.data.players.length === 2 ? 3 : 4);
+		this.data.resources.healthcare.add(this.game.data.players.length === 2 ? 5 : 6);
+		this.data.resources.education.add(this.game.data.players.length === 2 ? 5 : 6);
+		if (this.active) this.data.resources.personalInfluence.add(1);
 
 		const draw = (id: string) => {
 			this.data.companyDeck.drawById(id);
 			return id;
 		};
 
-		this.data.companies = [
-			{
-				id: draw('s-university-hospital-1'),
-				workers: [],
-				wages: this.game.getWageId(),
-			},
-			{
-				id: draw('s-technical-university-1'),
-				workers: [],
-				wages: this.game.getWageId(),
-			},
-			{
-				id: draw('s-national-public-broadcasting-1'),
-				workers: [],
-				wages: this.game.getWageId(),
-			},
-		];
+		const startingCompanies =
+			this.game.data.players.length === 2
+				? ['s-public-hospital-1', 's-public-university-1', 's-regional-tv-station-1']
+				: ['s-university-hospital-1', 's-technical-university-1', 's-national-public-broadcasting-1'];
+
+		this.data.companies = startingCompanies.map(id => ({
+			id: draw(id),
+			workers: [],
+			wages: this.game.getWageId(),
+		}));
 	}
 
 	setupRound(): void {
-		// todo
+		this.data.resources.money.remove(this.data.resources.money.loans * 5, { canTakeLoans: true });
+		if (!this.active) {
+			while (this.data.resources.money.loans > 0 && this.data.resources.money.value > 50) {
+				this.data.resources.money.remove(50);
+				this.data.resources.money.removeLoans(1);
+			}
+		}
 	}
 
 	getPrice(resource: CompanyTradeableResource) {
@@ -164,21 +165,22 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
 	}
 
 	basicActions = {
+		...createPass(this),
 		...createProposeBill(this),
 		/** execute + gain rewards → discard Event Card */
 		eventAction: createAction({
+			condition: () => [['hasEvents', false]],
 			run: () => {
-				// todo
-				throw new Error('todo');
+				return;
 			},
 		}),
 		...createSellToForeignMarket(this),
 		/** 2x personal 🟣 to class → +1 that class's Legitimacy */
 		meetWithPartyMps: createAction({
 			playerInputSchema: RoleNameNoStateSchema,
-			condition: () => [['hasVotingCubes', this.data.resources.influence.value >= 2]],
+			condition: () => [['hasVotingCubes', this.data.resources.personalInfluence.value >= 2]],
 			run: target => {
-				this.data.resources.influence.remove(2);
+				this.data.resources.personalInfluence.remove(2);
 				this.updateLegitimacy(target, +1);
 			},
 		}),

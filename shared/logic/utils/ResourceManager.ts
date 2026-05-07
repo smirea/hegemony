@@ -31,7 +31,7 @@ export default class ResourceManager {
 
 	protected handleValue(v: number) {
 		if (typeof v !== 'number') throw new Error('invalid value');
-		if (this.min) {
+		if (this.min != null) {
 			if (v < this.min) {
 				if (this.limitBehavior === 'throw') {
 					throw new Error(`not enough ${this.name} (${v} < ${this.min})`);
@@ -39,7 +39,7 @@ export default class ResourceManager {
 				v = this.min;
 			}
 		}
-		if (this.max) {
+		if (this.max != null) {
 			if (v > this.max) {
 				if (this.limitBehavior === 'throw') {
 					throw new Error(`too many ${this.name} (${v} > ${this.max})`);
@@ -110,6 +110,12 @@ export class CapitalistMoneyResourceManager extends MoneyResourceManager {
 	}
 	get value() {
 		return this._revenue + this._capital;
+	}
+
+	transferRevenueToCapital() {
+		this._capital += this._revenue;
+		this._revenue = 0;
+		return this.value;
 	}
 
 	add(amount: number, { useCapital }: { useCapital?: boolean } = {}) {

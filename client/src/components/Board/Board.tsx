@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import useGame from 'client/utils/useGame';
 import colors from 'client/utils/colors';
+import { RoleEnum, type RoleNameNoWorkingClass } from 'shared/logic/types';
 
 import BoardPolicies from './BoardPolicies';
 import CompanyCard from '../CompanyCard';
@@ -10,6 +11,21 @@ const Board: React.FC = () => {
 	const game = useGame();
 
 	const format = 'normal';
+	const renderCompanies = (role: RoleNameNoWorkingClass) => {
+		const companies = game.data.roles[role].data.companies;
+		const capacity = role === RoleEnum.capitalist ? 12 : 8;
+
+		return (
+			<>
+				{companies.map((company, i) => (
+					<CompanyCard key={`${company.id}:${i}`} format={format} company={company} />
+				))}
+				{Array.from({ length: Math.max(0, capacity - companies.length) }, (_, i) => (
+					<CompanyCardPlacement key={`placeholder:${i}`} format={format} role={role} />
+				))}
+			</>
+		);
+	};
 
 	return (
 		<Root>
@@ -23,25 +39,7 @@ const Board: React.FC = () => {
 					borderRadius: '8px',
 				}}
 			>
-				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[0]} />
-				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[0]} />
-				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[0]} />
-				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[1]} />
-				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[1]} />
-				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[1]} />
-				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[2]} />
-				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[2]} />
-				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[3]} />
-				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[3]} />
-				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[4]} />
-				<CompanyCard format={format} company={game.data.roles.capitalist.data.companies[4]} />
-				{/* <CompanyCardPlacement format={format} role='capitalist' />
-                <CompanyCardPlacement format={format} role='capitalist' />
-                <CompanyCardPlacement format={format} role='capitalist' />
-                <CompanyCardPlacement format={format} role='capitalist' />
-                <CompanyCardPlacement format={format} role='capitalist' />
-                <CompanyCardPlacement format={format} role='capitalist' />
-                <CompanyCardPlacement format={format} role='capitalist' /> */}
+				{renderCompanies(RoleEnum.capitalist)}
 			</div>
 			<div
 				className='row mt1'
@@ -53,16 +51,7 @@ const Board: React.FC = () => {
 					borderRadius: '8px',
 				}}
 			>
-				<CompanyCard format={format} company={game.data.roles.middleClass.data.companies[0]} />
-				<CompanyCard format={format} company={game.data.roles.middleClass.data.companies[1]} />
-				<CompanyCardPlacement format={format} role='middleClass' />
-				<CompanyCardPlacement format={format} role='middleClass' />
-				<CompanyCardPlacement format={format} role='middleClass' />
-				<CompanyCardPlacement format={format} role='middleClass' />
-				<CompanyCardPlacement format={format} role='middleClass' />
-				<CompanyCardPlacement format={format} role='middleClass' />
-				<CompanyCardPlacement format={format} role='middleClass' />
-				<CompanyCardPlacement format={format} role='middleClass' />
+				{renderCompanies(RoleEnum.middleClass)}
 			</div>
 			<div
 				className='row mt1'
@@ -74,15 +63,7 @@ const Board: React.FC = () => {
 					borderRadius: '8px',
 				}}
 			>
-				<CompanyCard format={format} company={game.data.roles.state.data.companies[0]} />
-				<CompanyCard format={format} company={game.data.roles.state.data.companies[1]} />
-				<CompanyCard format={format} company={game.data.roles.state.data.companies[2]} />
-				<CompanyCardPlacement format={format} role='state' />
-				<CompanyCardPlacement format={format} role='state' />
-				<CompanyCardPlacement format={format} role='state' />
-				<CompanyCardPlacement format={format} role='state' />
-				<CompanyCardPlacement format={format} role='state' />
-				<CompanyCardPlacement format={format} role='state' />
+				{renderCompanies(RoleEnum.state)}
 			</div>
 			<br />
 			<BoardPolicies />

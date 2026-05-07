@@ -91,7 +91,7 @@ describe('receiveBenefits', () => {
 	test('voting-cube', () => {
 		st.data.benefits.workingClass = [{ type: 'voting-cube', amount: 3 }];
 		st.receiveBenefits('workingClass');
-		expect(game.data.board.votingCubeBag.workingClass).toBe(3);
+		expect(game.data.board.votingCubeBag.workingClass).toBe(11);
 		expect(st.data.score).toBe(1);
 	});
 });
@@ -103,11 +103,11 @@ describe('basicActions', () => {
 		});
 		test('run', async () => {
 			expect(st.data.legitimacy.workingClass).toBe(2);
-			st.data.resources.influence.add(5);
+			st.data.resources.personalInfluence.add(5);
 			addInput('state:meetWithPartyMps', RoleNameSchema.enum.workingClass);
 			await nextAndTick('state:meetWithPartyMps');
 			expect(st.data.legitimacy.workingClass).toBe(3);
-			expect(st.data.resources.influence.value).toBe(3);
+			expect(st.data.resources.personalInfluence.value).toBe(3);
 		});
 	});
 	describe('extraTax', () => {

@@ -106,7 +106,7 @@ describe('basicActions', () => {
 		});
 		test('run - one working class worker', async () => {
 			mc.data.resources.money.add(100);
-			const company = mc.data.companies.find(c => c.id === 'm-food')!;
+			const company = mc.data.companies.find(c => c.id === 'm-influence')!;
 			const mcw = addWorkers(1, { role: 'middleClass' });
 			const wcw = addWorkers(1, { role: 'workingClass' });
 			const workers = [...mcw, ...wcw];
@@ -118,12 +118,12 @@ describe('basicActions', () => {
 				expect(w.committed).toBe(true);
 			});
 			expect(mc.data.resources.money.value).toBe(90);
-			expect(mc.data.producedResources.food.value).toBe(5);
+			expect(mc.data.resources.influence.value).toBe(8);
 			expect(wc.data.resources.money.value).toBe(10);
 		});
 		test('run - one working class worker, but committed', async () => {
 			mc.data.resources.money.add(100);
-			const company = mc.data.companies.find(c => c.id === 'm-food')!;
+			const company = mc.data.companies.find(c => c.id === 'm-influence')!;
 			const mcw = addWorkers(1, { role: 'middleClass' });
 			const wcw = addWorkers(1, { role: 'workingClass' });
 			const workers = [...mcw, ...wcw];
@@ -132,7 +132,7 @@ describe('basicActions', () => {
 			addInput('middleClass:extraShift', company.id);
 			await nextAndTick('middleClass:extraShift');
 			expect(mc.data.resources.money.value).toBe(100);
-			expect(mc.data.producedResources.food.value).toBe(3);
+			expect(mc.data.resources.influence.value).toBe(5);
 			expect(wc.data.resources.money.value).toBe(0);
 		});
 		test('run - influence', async () => {

@@ -37,13 +37,13 @@ export function createProposeBill(role: WorkingClassRole | MiddleClassRole | Cap
 			condition: () => [
 				[
 					'hasVotes',
-					Object.values(role.game.data.board.policyProposals).filter(p => p && p.role === RoleEnum.workingClass)
-						.length < 3,
+					Object.values(role.game.data.board.policyProposals).filter(p => p && p.role === role.id).length < 3,
 				],
 			],
 			validateInput: ({ policy, value }) => [
 				['notProposed', !role.game.data.board.policyProposals[policy]],
 				['isDifferent', role.game.data.board.policies[policy] !== value],
+				['isAdjacent', Math.abs(role.game.data.board.policies[policy] - value) === 1],
 			],
 			run: ({ policy, value }) => {
 				// todo: handle immediate vote
@@ -65,6 +65,14 @@ export function createSkip(_role: WorkingClassRole | MiddleClassRole | Capitalis
 	};
 }
 
+export function createPass(_role: WorkingClassRole | MiddleClassRole | CapitalistRole | StateRole) {
+	return {
+		pass: createAction({
+			run: () => void 0,
+		}),
+	};
+}
+
 /** 50¥ (CC: from Capital) → discard loan (max 1 loan payoff/action) */
 export function createPayLoan(role: WorkingClassRole | MiddleClassRole | CapitalistRole | StateRole) {
 	return {
@@ -75,7 +83,7 @@ export function createPayLoan(role: WorkingClassRole | MiddleClassRole | Capital
 			],
 			run: () => {
 				role.data.resources.money.removeLoans(1);
-				role.data.resources.money.remove(50);
+				role.data.resources.money.remove(50, { useCapital: role.id === RoleEnum.capitalist } as any);
 			},
 		}),
 	};
@@ -160,11 +168,11 @@ export function createAdjustWages(role: MiddleClassRole | CapitalistRole | State
 					wages: WageIdSchema,
 				}),
 			),
-			condition: () => [['minWage', role.game.getPolicy('laborMarket') < 2]],
+			validateInput: toAdjust => toAdjust.map(({ wages }) => ['minWage', role.game.isWageAllowed(wages)]),
 			run: toAdjust => {
 				for (const { companyId, wages } of toAdjust) {
 					const company = role.company(companyId);
-					const isHigher = company.wages > wages;
+					const isHigher = Number(wages.slice(1)) > Number(company.wages.slice(1));
 					company.wages = wages;
 					if (isHigher) {
 						for (const workerId of company.workers) {
@@ -231,6 +239,7 @@ export function createAssignWorkers(role: WorkingClassRole | MiddleClassRole) {
 	return {
 		assignWorkers: createAction({
 			playerInputSchema: AssignWorkersSchema,
+			validateInput: toAssign => role.game.validateAssignWorkers(toAssign, role.id),
 			run: toAssign => {
 				role.game.assignWorkers(toAssign);
 			},
@@ -245,10 +254,15 @@ export function createBuyGoodsAndServices(role: WorkingClassRole | MiddleClassRo
 			playerInputSchema: z.array(
 				z.object({
 					resource: TradeableResourceAndInfluenceSchema,
-					count: z.number(),
+					count: z.number().int().positive(),
 					source: BuyGoodsAndServicesSourcesSchema,
 				}),
 			),
+			validateInput: toBuy => [
+				['oneResource', new Set(toBuy.map(item => item.resource)).size <= 1],
+				['maxTwoSources', new Set(toBuy.map(item => item.source)).size <= 2],
+				['sourceLimit', toBuy.every(item => item.count <= role.getPopulation())],
+			],
 			run(toBuy) {
 				for (const { resource, count, source } of toBuy) {
 					if (source === 'foreign-market') {
@@ -278,9 +292,13 @@ export function createBuildCompany(role: MiddleClassRole | CapitalistRole) {
 				['hasSpace', role.data.companies.length < (role.id === RoleEnum.capitalist ? 12 : 8)],
 				['hasMarket', role.data.companyMarket.length > 0],
 			],
-			validateInput: ({ companyId }) => [['inMarket', role.data.companyMarket.includes(companyId)]],
+			validateInput: ({ companyId, workers }) => [
+				['inMarket', role.data.companyMarket.includes(companyId)],
+				['workersFit', workers.length === 0 || role.game.canWorkersFillCompany(workers, companyId)],
+			],
 			run: ({ companyId, workers }) => {
 				role.data.resources.money.remove(role.game.getCompanyDefinition(companyId).cost);
+				role.data.companyMarket = role.data.companyMarket.filter(id => id !== companyId);
 				role.data.companies.push({
 					id: companyId,
 					workers: [],
@@ -306,6 +324,12 @@ export function createSellCompany(role: MiddleClassRole | CapitalistRole) {
 		sellCompany: createAction({
 			playerInputSchema: CompanyIdSchema,
 			condition: () => [['hasCompany', role.data.companies.length > 0]],
+			validateInput: companyId => [
+				[
+					'noCommittedWorkers',
+					role.company(companyId).workers.every(workerId => !role.game.getWorkerById(workerId).worker.committed),
+				],
+			],
 			run(companyId) {
 				const company = role.company(companyId);
 				for (const workerId of company.workers) {

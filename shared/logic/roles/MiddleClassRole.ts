@@ -22,6 +22,7 @@ import {
 	createAssignWorkers,
 	createBuildCompany,
 	createBuyGoodsAndServices,
+	createPass,
 	createPayLoan,
 	createProposeBill,
 	createReceiveBenefits,
@@ -122,6 +123,20 @@ export default class MiddleClassRole extends AbstractRole<typeof RoleEnum.middle
 		this.data.resources.influence.add(1);
 		this.data.resources.food.add(1);
 		this.data.resources.healthcare.add(1);
+		this.data.availableWorkers = {
+			influence: 10,
+			food: 10,
+			healthcare: 10,
+			education: 10,
+			luxury: 10,
+			unskilled: 40,
+		};
+		this.data.priceLevels = {
+			food: 1,
+			healthcare: 1,
+			education: 1,
+			luxury: 1,
+		};
 
 		this.data.companyDeck.shuffle();
 
@@ -133,15 +148,18 @@ export default class MiddleClassRole extends AbstractRole<typeof RoleEnum.middle
 		this.data.companies = [
 			{
 				id: draw('m-convenience-store-1'),
-				workers: [this.newWorker('healthcare')],
+				workers: [this.newWorker('food')],
 				wages: this.game.getWageId(),
 			},
 			{
 				id: draw('m-doctors-office-2'),
-				workers: [this.newWorker('food')],
+				workers: [this.newWorker('healthcare')],
 				wages: this.game.getWageId(),
 			},
 		];
+		for (const company of this.data.companies) {
+			for (const workerId of company.workers) this.worker(workerId).company = company.id;
+		}
 
 		this.data.companyMarket = [
 			this.data.companyDeck.draw().id,
@@ -151,22 +169,33 @@ export default class MiddleClassRole extends AbstractRole<typeof RoleEnum.middle
 
 		const fillCompany = (role: RoleNameNoWorkingClass, id: string) => {
 			const target = this.game.data.roles[role];
-			target.company(id).workers = target.data.companyDeck.getOriginalCard(id).workers.map(w => this.newWorker(w.type));
+			target.company(id).workers = target.data.companyDeck.getOriginalCard(id).workers.map(w => {
+				const workerId = this.newWorker(w.type);
+				this.worker(workerId).company = id;
+				return workerId;
+			});
 		};
 
 		fillCompany(RoleEnum.state, 's-technical-university-1');
 		fillCompany(RoleEnum.capitalist, 'c-shopping-mall-2');
 
-		// todo: pick skilled worker
+		this.newWorker('food');
 
 		this.game.drawImmigrationCard(this.id);
 		this.game.drawImmigrationCard(this.id);
 	}
 
 	setupRound(): void {
+		this.data.resources.money.remove(this.data.resources.money.loans * 5, { canTakeLoans: true });
+		this.data.prosperityIndex.remove(2);
 		for (let i = this.data.companyMarket.length; i < 3; ++i) {
 			const card = this.data.companyDeck.draw();
 			this.data.companyMarket.push(card.id);
+		}
+		this.newWorker('unskilled');
+		this.newWorker('food');
+		for (let i = 0; i < this.game.getPolicy('immigration'); ++i) {
+			this.game.drawImmigrationCard(this.id);
 		}
 	}
 
@@ -192,6 +221,7 @@ export default class MiddleClassRole extends AbstractRole<typeof RoleEnum.middle
 	}
 
 	basicActions = {
+		...createPass(this),
 		...createProposeBill(this),
 		...createAssignWorkers(this),
 		...createBuildCompany(this),
