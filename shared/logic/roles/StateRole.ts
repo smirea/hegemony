@@ -25,6 +25,8 @@ import { createCompany } from './commonMethods';
 import Deck from '../cards/Deck';
 import { stateCompanies } from '../cards/companyCards';
 import ResourceManager from '../utils/ResourceManager';
+import { createEventDeck, type EventCard } from '../cards/eventCards';
+import { createPoliticalAgendaDeck, type PoliticalAgendaCard } from '../cards/politicalAgendaCards';
 
 import type Game from '../Game';
 
@@ -37,6 +39,12 @@ interface StateData extends BaseData {
 	companies: Company[];
 	benefits: Record<RoleNameNoState, Benefit[]>;
 	resources: BaseData['resources'] & { personalInfluence: ResourceManager };
+	eventDeck: Deck<EventCard[]>;
+	eventCards: EventCard['id'][];
+	eventDiscard: EventCard['id'][];
+	politicalAgendaDeck: Deck<PoliticalAgendaCard[]>;
+	politicalAgendaCard: PoliticalAgendaCard['id'] | null;
+	politicalAgendaDiscard: PoliticalAgendaCard['id'][];
 }
 
 export default class StateRole extends AbstractRole<typeof RoleEnum.state, StateData> {
@@ -68,6 +76,12 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
 			},
 			companyDeck: new Deck('state companies', stateCompanies),
 			companies: [],
+			eventDeck: createEventDeck(),
+			eventCards: [],
+			eventDiscard: [],
+			politicalAgendaDeck: createPoliticalAgendaDeck(),
+			politicalAgendaCard: null,
+			politicalAgendaDiscard: [],
 			benefits: {
 				[RoleEnum.workingClass]: [],
 				[RoleEnum.middleClass]: [],
@@ -84,6 +98,14 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
 		this.data.resources.healthcare.add(this.game.data.players.length === 2 ? 5 : 6);
 		this.data.resources.education.add(this.game.data.players.length === 2 ? 5 : 6);
 		if (this.active) this.data.resources.personalInfluence.add(1);
+		if (this.active) {
+			this.data.actionDeck.shuffle();
+			this.refillActionHand();
+			this.data.eventDeck.shuffle();
+			this.revealEvents();
+			this.data.politicalAgendaDeck.shuffle();
+			this.revealPoliticalAgenda();
+		}
 
 		const draw = (id: string) => {
 			this.data.companyDeck.drawById(id);
@@ -111,12 +133,44 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
 
 	setupRound(): void {
 		this.data.resources.money.remove(this.data.resources.money.loans * 5, { canTakeLoans: true });
+		if (this.active) {
+			this.refillActionHand();
+			this.revealEvents();
+			this.revealPoliticalAgenda();
+		}
 		if (!this.active) {
 			while (this.data.resources.money.loans > 0 && this.data.resources.money.value > 50) {
 				this.data.resources.money.remove(50);
 				this.data.resources.money.removeLoans(1);
 			}
 		}
+	}
+
+	revealEvents(count = 2) {
+		if (this.data.eventCards.length) this.discardEvents();
+		for (let i = 0; i < count && this.data.eventDeck.size > 0; ++i) {
+			this.data.eventCards.push(this.data.eventDeck.draw().id);
+		}
+	}
+
+	revealPoliticalAgenda() {
+		if (this.data.politicalAgendaCard) this.data.politicalAgendaDiscard.push(this.data.politicalAgendaCard);
+		if (!this.data.politicalAgendaDeck.size) {
+			this.data.politicalAgendaCard = null;
+			return;
+		}
+		this.data.politicalAgendaCard = this.data.politicalAgendaDeck.draw().id;
+	}
+
+	discardEvents() {
+		this.data.eventDiscard.push(...this.data.eventCards);
+		this.data.eventCards = [];
+	}
+
+	discardPoliticalAgenda() {
+		if (!this.data.politicalAgendaCard) return;
+		this.data.politicalAgendaDiscard.push(this.data.politicalAgendaCard);
+		this.data.politicalAgendaCard = null;
 	}
 
 	getPrice(resource: CompanyTradeableResource) {

@@ -103,6 +103,14 @@ describe('basicActions', () => {
 			});
 			await expect(nextAndTick('capitalist:makeBusinessDeal')).rejects.toThrow(/hasMoney/);
 		});
+		test('validateInput:availableGoods', async () => {
+			addInput('capitalist:makeBusinessDeal', {
+				id: 'test-1',
+				storage: { food: 2 },
+				freeTradeZone: {},
+			});
+			await expect(nextAndTick('capitalist:makeBusinessDeal')).rejects.toThrow(/availableGoods/);
+		});
 		test('all in storage', async () => {
 			addInput('capitalist:makeBusinessDeal', {
 				id: 'test-1',

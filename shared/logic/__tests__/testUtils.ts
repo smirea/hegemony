@@ -175,14 +175,18 @@ export function createGameUtils() {
 				[
 					{
 						id: 'test-1',
+						name: 'Test 1',
 						cost: 10,
+						goods: { [ResourceEnumSchema.enum.food]: 1, [ResourceEnumSchema.enum.luxury]: 2 },
 						[ResourceEnumSchema.enum.food]: 1,
 						[ResourceEnumSchema.enum.luxury]: 2,
 						tariffs: [2, 1],
 					},
 					{
 						id: 'test-2',
+						name: 'Test 2',
 						cost: 20,
+						goods: { [ResourceEnumSchema.enum.food]: 3, [ResourceEnumSchema.enum.luxury]: 4 },
 						[ResourceEnumSchema.enum.food]: 3,
 						[ResourceEnumSchema.enum.luxury]: 4,
 						tariffs: [10, 5],

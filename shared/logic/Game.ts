@@ -38,6 +38,7 @@ import StateRole from './roles/StateRole';
 import { type ActionEventName, actionEventNameSchema, type AnyActionEvent, type PlayerInput } from './types.generated';
 import createAction from './utils/createAction';
 import immigrationCards, { type ImmigrationCard } from './cards/immigrationCards';
+import loanCards, { type LoanCard } from './cards/loanCards';
 
 type RunContextNoRole = Omit<RunContext<RoleName>, 'currentRole'>;
 
@@ -45,6 +46,7 @@ const getDefaultDecks = (): GameState['board']['decks'] => ({
 	foreignMarketDeck: new Deck('foreign market', defaultForeignMarketCards),
 	businessDealDeck: new Deck('business deal', businessDealCards),
 	immigrationDeck: new Deck('immigration', immigrationCards),
+	loanDeck: new Deck('loans', loanCards),
 });
 
 interface GameConfig {
@@ -54,9 +56,10 @@ interface GameConfig {
 	players: Player[];
 }
 
-export interface GameConfigInput extends Omit<GameConfig, 'decks' | 'debug'> {
+export interface GameConfigInput extends Omit<GameConfig, 'decks' | 'debug' | 'requestPlayerInput'> {
 	decks?: Partial<GameState['board']['decks']>;
 	debug?: boolean;
+	requestPlayerInput?: Game['requestPlayerInput'];
 }
 
 export interface GameState {
@@ -82,6 +85,7 @@ export interface GameState {
 			foreignMarketDeck: Deck<ForeignMarketCard[]>;
 			businessDealDeck: Deck<BusinessDealCard[]>;
 			immigrationDeck: Deck<ImmigrationCard[]>;
+			loanDeck: Deck<LoanCard[]>;
 		};
 	};
 	roles: {
@@ -768,6 +772,7 @@ export default class Game {
 		this.data.roles.capitalist.data.score += wealthLevel;
 
 		if (this.data.roles.state.active) {
+			this.data.roles.state.discardEvents();
 			const legitimacy = Object.values(this.data.roles.state.data.legitimacy).sort((a, b) => a - b);
 			this.data.roles.state.data.score += legitimacy[0] + legitimacy[1];
 			for (const roleName of Object.keys(this.data.roles.state.data.legitimacy) as RoleNameNoState[]) {
@@ -776,7 +781,16 @@ export default class Game {
 				);
 				this.data.roles.state.data.legitimacy[roleName] += this.data.roles.state.data.legitimacyTokens[roleName];
 			}
+			this.scorePoliticalAgenda();
 		}
+	}
+
+	private scorePoliticalAgenda() {
+		const state = this.data.roles.state;
+		if (!state.data.politicalAgendaCard) return;
+		const card = state.data.politicalAgendaDeck.getOriginalCard(state.data.politicalAgendaCard);
+		state.data.score += card.policies.filter(policy => this.ifPolicy(policy)).length;
+		state.discardPoliticalAgenda();
 	}
 
 	cleanupRound() {

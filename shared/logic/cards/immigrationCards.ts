@@ -1,42 +1,51 @@
-import { type CompanyWorkerType, type Industry } from '../types';
+import immigrationFixtureCards from '../../../fixtures/assets/decks-sorted/immigration-cards/deck';
+
+import { type CompanyWorkerType } from '../types';
+
+import type { ParsedImmigrationCard } from '../../../fixtures/assets/decks-sorted/types';
+
+interface ImmigrationWorkerConfig {
+	type: ParsedImmigrationCard['workers']['workingClass']['type'];
+	worker: CompanyWorkerType;
+	distributionCount: number;
+}
 
 export interface ImmigrationCard {
 	id: string;
+	name: string;
+	frontImage?: ParsedImmigrationCard['frontImage'];
+	backImage?: ParsedImmigrationCard['backImage'];
 	workingClass: CompanyWorkerType;
 	middleClass: CompanyWorkerType;
+	workers: {
+		workingClass: ImmigrationWorkerConfig;
+		middleClass: ImmigrationWorkerConfig;
+	};
 }
 
-const wcSpecialized = 2;
-const mcSpecialized = 3;
-
-const industries: Industry[] = ['food', 'healthcare', 'education', 'luxury', 'influence'];
-
-let idCounter = 0;
-
-/**
- * Default immigration cards always follow the same pattern:
- *  - 1 specialized for one class
- *  - 1 unskilled for the other
- *
- * The default ratio is
- *  - 2 specialized / industry for WC
- *  - 3 specialized / industry for MC
- */
-const immigrationCards: ImmigrationCard[] = [
-	...Array.from({ length: wcSpecialized })
-		.flatMap(() => industries)
-		.map((industry: Industry) => ({
-			id: 'i-' + ++idCounter,
-			workingClass: industry,
-			middleClass: 'unskilled' as const,
-		})),
-	...Array.from({ length: mcSpecialized })
-		.flatMap(() => industries)
-		.map((industry: Industry) => ({
-			id: 'i-' + ++idCounter,
-			workingClass: 'unskilled' as const,
-			middleClass: industry,
-		})),
-];
+const immigrationCards: ImmigrationCard[] = immigrationFixtureCards.map(card => {
+	const workingClass = workerConfig(card.workers.workingClass);
+	const middleClass = workerConfig(card.workers.middleClass);
+	return {
+		id: card.id,
+		name: card.name,
+		frontImage: card.frontImage,
+		backImage: card.backImage,
+		workingClass: workingClass.worker,
+		middleClass: middleClass.worker,
+		workers: {
+			workingClass,
+			middleClass,
+		},
+	};
+});
 
 export default immigrationCards;
+
+function workerConfig(worker: ParsedImmigrationCard['workers']['workingClass']): ImmigrationWorkerConfig {
+	return {
+		type: worker.type,
+		worker: worker.type === 'specialized' ? worker.industry! : 'unskilled',
+		distributionCount: worker.quantity,
+	};
+}

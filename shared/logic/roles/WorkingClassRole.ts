@@ -81,6 +81,8 @@ export default class WorkingClassRole extends AbstractRole<typeof RoleEnum.worki
 	setupBoard() {
 		this.data.resources.money.add(30);
 		this.data.resources.influence.add(1);
+		this.data.actionDeck.shuffle();
+		this.refillActionHand();
 		this.data.availableWorkers = {
 			influence: 10,
 			food: 10,
@@ -117,6 +119,7 @@ export default class WorkingClassRole extends AbstractRole<typeof RoleEnum.worki
 	setupRound(): void {
 		this.data.resources.money.remove(this.data.resources.money.loans * 5, { canTakeLoans: true });
 		this.data.prosperityIndex.remove(1);
+		this.refillActionHand();
 		this.newWorker('unskilled');
 		this.newWorker('unskilled');
 		for (let i = 0; i < this.game.getPolicy('immigration'); ++i) {

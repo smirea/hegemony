@@ -123,6 +123,8 @@ export default class MiddleClassRole extends AbstractRole<typeof RoleEnum.middle
 		this.data.resources.influence.add(1);
 		this.data.resources.food.add(1);
 		this.data.resources.healthcare.add(1);
+		this.data.actionDeck.shuffle();
+		this.refillActionHand();
 		this.data.availableWorkers = {
 			influence: 10,
 			food: 10,
@@ -188,6 +190,7 @@ export default class MiddleClassRole extends AbstractRole<typeof RoleEnum.middle
 	setupRound(): void {
 		this.data.resources.money.remove(this.data.resources.money.loans * 5, { canTakeLoans: true });
 		this.data.prosperityIndex.remove(2);
+		this.refillActionHand();
 		for (let i = this.data.companyMarket.length; i < 3; ++i) {
 			const card = this.data.companyDeck.draw();
 			this.data.companyMarket.push(card.id);

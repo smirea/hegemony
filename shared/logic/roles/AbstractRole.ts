@@ -8,11 +8,13 @@ import {
 	type RoleName,
 } from '../types';
 import ResourceManager, { MoneyResourceManager } from '../utils/ResourceManager';
+import { createActionDeck, type ActionCard } from '../cards/actionCards';
 
 import type Game from '../Game';
 import type MiddleClassRole from './MiddleClassRole';
 import type StateRole from './StateRole';
 import type CapitalistRole from './CapitalistRole';
+import type Deck from '../cards/Deck';
 
 export interface BaseData<MoneyManager extends MoneyResourceManager = MoneyResourceManager> {
 	score: number;
@@ -25,6 +27,9 @@ export interface BaseData<MoneyManager extends MoneyResourceManager = MoneyResou
 		education: ResourceManager;
 		luxury: ResourceManager;
 	};
+	actionDeck: Deck<ActionCard[]>;
+	actionHand: ActionCard['id'][];
+	actionDiscard: ActionCard['id'][];
 }
 
 export default abstract class AbstractRole<Id extends RoleName, Data extends BaseData> {
@@ -47,6 +52,9 @@ export default abstract class AbstractRole<Id extends RoleName, Data extends Bas
 				education: new ResourceManager({ name: this.id + ':education' }),
 				luxury: new ResourceManager({ name: this.id + ':luxury' }),
 			},
+			actionDeck: createActionDeck(this.id),
+			actionHand: [],
+			actionDiscard: [],
 		};
 	}
 
@@ -54,6 +62,16 @@ export default abstract class AbstractRole<Id extends RoleName, Data extends Bas
 	abstract setupRound(): void;
 	abstract basicActions: Record<string, Action<any>>;
 	abstract freeActions: Record<string, Action<any>>;
+
+	public drawActionCards(count: number) {
+		for (let i = 0; i < count && this.data.actionDeck.size > 0; ++i) {
+			this.data.actionHand.push(this.data.actionDeck.draw().id);
+		}
+	}
+
+	public refillActionHand(target = 7) {
+		this.drawActionCards(Math.max(0, target - this.data.actionHand.length));
+	}
 
 	public buyGoods(
 		source: MiddleClassRole | CapitalistRole | StateRole,

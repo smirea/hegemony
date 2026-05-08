@@ -92,6 +92,8 @@ export default class CapitalistRole extends AbstractRole<typeof RoleEnum.capital
 		this.data.resources.education.add(2);
 		this.data.resources.influence.add(1);
 
+		this.data.actionDeck.shuffle();
+		this.refillActionHand();
 		this.data.companyDeck.shuffle();
 
 		const draw = (id: string) => {
@@ -132,6 +134,7 @@ export default class CapitalistRole extends AbstractRole<typeof RoleEnum.capital
 
 	setupRound(): void {
 		this.data.resources.money.remove(this.data.resources.money.loans * 5, { canTakeLoans: true, useCapital: true });
+		this.refillActionHand();
 		for (let i = this.data.companyMarket.length; i < 4; ++i) {
 			if (!this.data.companyDeck.size) {
 				this.data.companyDeck = this.data.companyDeck.clone();
@@ -162,12 +165,12 @@ export default class CapitalistRole extends AbstractRole<typeof RoleEnum.capital
 			playerInputSchema: z.object({
 				id: BusinessDealIdSchema,
 				storage: z.object({
-					food: z.number().optional(),
-					luxury: z.number().optional(),
+					food: z.number().int().min(0).optional(),
+					luxury: z.number().int().min(0).optional(),
 				}),
 				freeTradeZone: z.object({
-					food: z.number().optional(),
-					luxury: z.number().optional(),
+					food: z.number().int().min(0).optional(),
+					luxury: z.number().int().min(0).optional(),
 				}),
 			}),
 			condition: () => [
@@ -180,6 +183,19 @@ export default class CapitalistRole extends AbstractRole<typeof RoleEnum.capital
 					),
 				],
 			],
+			validateInput: ({ id, storage, freeTradeZone }) => {
+				const card = this.game.data.board.decks.businessDealDeck.getOriginalCard(id, { safe: true });
+				if (!card) return [['knownDeal', false]];
+				const requested = (resource: 'food' | 'luxury') => (storage[resource] ?? 0) + (freeTradeZone[resource] ?? 0);
+				return [
+					['inMarket', this.game.data.board.businessDealCards.includes(id)],
+					[
+						'availableGoods',
+						(['food', 'luxury'] as const).every(resource => requested(resource) <= (card.goods[resource] ?? 0)),
+					],
+					['takesGoods', requested('food') + requested('luxury') > 0],
+				];
+			},
 			run: ({ id, storage, freeTradeZone }) => {
 				const card = this.game.data.board.decks.businessDealDeck.getOriginalCard(id);
 				this.data.resources.money.remove(card.cost);
