@@ -12,9 +12,13 @@ Run `scripts/split-deck-grids.ts` to crop every grid image into individual files
 
 Each deck folder has a `deck.ts` fixture file. The `rawText` field is OCR-derived unless the card is icon-only; company, business deal, immigration, and loan cards also include structured values from the rules/source data or visible card values. Action, event, and Automa cards use `stateEffects` for declarative game-state operations only. OCR/source text stays in `rawText` and `content`; it should not be encoded as a raw state effect.
 
+Some physical decks contain repeated copies of the same visible card face. In those cases `deck.ts` has one entry per physical card, while repeated entries share the same `frontImage` and use `source.copyIndex`/`source.physicalIndex` for provenance.
+
 Notes:
 
 - `middle-class-company-cards/grid_17-items_6-3__...` and `capitalist-class-company-cards/grid_28-items_6-5__...` use the visible/rules component counts; the generated source README understated those counts.
+- `business-deal-cards` has 20 physical cards but only 10 unique faces; each face appears twice, matching the Tabletop Simulator `cardIds`.
+- `loan-cards` has 10 physical base-game Loan 50 cards sharing one visible face. `loan-expansion-cards` keeps the separate 3-card 30/40 front and 50/70 back loan deck from the extracted expansion assets.
 - `export-cards/deck.ts` includes the visible icon transactions as `{ resource, amount, money }` rows; the OCR text is still preserved because the source cards are mostly icon-only.
 - `historical-event-expansion-cards` and the four `*-action-expansion-cards` folders were split out from base decks because they came from additional 5-card or historical event sheets, not the base component counts in `fixtures/rules/components.md`.
 - Duplicate source sheets were collapsed to one canonical copy: historical events keep deck 190, Automa events keep deck 212, Automa agenda keeps deck 209, Automa Capitalist action priority keeps deck 233, Automa spending influence keeps deck 243, and Working Class action expansion keeps deck 202.

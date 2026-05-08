@@ -21,6 +21,9 @@ export interface DeckCardImage {
 	source: {
 		deck: string;
 		file: string;
+		cardId?: number;
+		copyIndex?: number;
+		physicalIndex?: number;
 		position?: {
 			x: number;
 			y: number;
@@ -285,6 +288,12 @@ export interface ParsedLoanCard extends DeckCardImage {
 	value: number;
 	repayment?: number;
 	range?: [number, number];
+	sides?: Array<{
+		label: 'front' | 'back';
+		image: DeckImagePath;
+		value: number;
+		repayment?: number;
+	}>;
 }
 
 export interface ParsedCompanyDeckCard extends DeckCardImage, CompanyCard {
