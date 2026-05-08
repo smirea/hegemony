@@ -59,12 +59,7 @@ const automaDesiredPoliciesCard = [
 				'lie',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'DESIRED POLICIES\nThe Desired Policies for each other\nplayer are assumed by the Automa\nto be the following:\nry\nti\nbia [2a [3a] 4a [5a | 6c | 78 |\na\nl2c [sc J 4c | 5c [6a] 7c |\nfie [2B | 3B | 48 [5B | 6B | 74)\nlie [2c [3a | 48 [5B] 6B} 7c]\nLe La',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies AutomaDesiredPoliciesCardCard[];
 

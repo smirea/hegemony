@@ -29,12 +29,7 @@ const automaWorkingClassPolicyPriorityCards = [
 		values: {
 			numbers: [7],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'u7\nOn\n[= @)\nQe\n<r',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-policy-priority-cards-grid-7-items-4-2-automa-working-class-policy-priority-deck-247-pos-2-1',
@@ -64,12 +59,7 @@ const automaWorkingClassPolicyPriorityCards = [
 			numbers: [5],
 			keywords: ['gorse', 'ome', 'eur', 'ase'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'ome\nm> >\neur\nmo 5\nase\npe)\nm',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-policy-priority-cards-grid-7-items-4-2-automa-working-class-policy-priority-deck-247-pos-3-1',
@@ -92,12 +82,7 @@ const automaWorkingClassPolicyPriorityCards = [
 		name: 'Automa Working Class Policy Priority',
 		content: '<F\n>\nzo\na',
 		values: {},
-		effects: [
-			{
-				type: 'raw',
-				text: '<F\n>\nzo\na',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-policy-priority-cards-grid-7-items-4-2-automa-working-class-policy-priority-deck-247-pos-4-1',
@@ -120,12 +105,7 @@ const automaWorkingClassPolicyPriorityCards = [
 		name: 'Automa Working Class Policy Priority',
 		content: '=\n=\nQ\nD\n=\nfe)\nZz',
 		values: {},
-		effects: [
-			{
-				type: 'raw',
-				text: '=\n=\nQ\nD\n=\nfe)\nZz',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-policy-priority-cards-grid-7-items-4-2-automa-working-class-policy-priority-deck-247-pos-1-2',
@@ -148,12 +128,7 @@ const automaWorkingClassPolicyPriorityCards = [
 		name: 'Automa Working Class Policy Priority',
 		content: 'Ni',
 		values: {},
-		effects: [
-			{
-				type: 'raw',
-				text: 'Ni',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-policy-priority-cards-grid-7-items-4-2-automa-working-class-policy-priority-deck-247-pos-2-2',
@@ -176,12 +151,7 @@ const automaWorkingClassPolicyPriorityCards = [
 		name: 'Automa Working Class Policy Priority',
 		content: 'BO\n>\nOm\nmo\nz',
 		values: {},
-		effects: [
-			{
-				type: 'raw',
-				text: 'BO\n>\nOm\nmo\nz',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-policy-priority-cards-grid-7-items-4-2-automa-working-class-policy-priority-deck-247-pos-3-2',
@@ -204,12 +174,7 @@ const automaWorkingClassPolicyPriorityCards = [
 		name: 'Automa Working Class Policy Priority',
 		content: '@ =)\nmé=\nOF\nre]\nOn\nZz\n‘e, wi',
 		values: {},
-		effects: [
-			{
-				type: 'raw',
-				text: '@ =)\nmé=\nOF\nre]\nOn\nZz\n‘e, wi',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies AutomaWorkingClassPolicyPriorityCardsCard[];
 

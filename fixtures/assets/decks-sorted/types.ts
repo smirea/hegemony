@@ -39,67 +39,125 @@ export interface DeckCardImage {
 
 export type PlayerClass = Exclude<RoleName, 'state'>;
 export type TargetRole = RoleName | 'self' | 'any' | 'all' | 'other' | 'active-player';
+export type ComparisonOperator = '==' | '!=' | '<' | '<=' | '>' | '>=';
+export type RequirementMode = 'all' | 'any';
 
-export interface PolicyRequirement {
-	policy: PolicyName;
-	value: PolicyValue | PolicyString;
-	operator?: '==' | '<=' | '>=';
-}
+export type CardRequirement =
+	| {
+			type: 'policy';
+			mode: RequirementMode;
+			policies: PolicyString[];
+	  }
+	| {
+			type: 'policy-section-count';
+			section: PolicyValue;
+			count: number;
+			operator: ComparisonOperator;
+			policies?: PolicyName[];
+	  }
+	| {
+			type: 'proposed-bills';
+			count: number;
+			operator: ComparisonOperator;
+	  }
+	| {
+			type: 'loans';
+			owner: TargetRole | 'all-players';
+			count: number;
+			operator: ComparisonOperator;
+	  }
+	| {
+			type: 'companies';
+			owner?: TargetRole;
+			industry?: Industry | 'agriculture-or-luxury';
+			operational?: boolean;
+			count: number;
+			operator: ComparisonOperator;
+	  }
+	| {
+			type: 'round';
+			round: number;
+			operator: ComparisonOperator;
+	  };
 
 export interface LegitimacyChange {
 	className: PlayerClass;
 	value: number;
 }
 
-export type ParsedEffect =
+export type StateEffectAmount =
+	| number
+	| 'all'
+	| 'any'
+	| {
+			type: 'up-to';
+			amount: number | 'population' | 'available';
+	  }
+	| {
+			type: 'per';
+			amount: number;
+			per:
+				| 'population'
+				| 'employed-worker'
+				| 'unemployed-worker'
+				| 'company'
+				| 'operational-company'
+				| 'trade-union'
+				| 'matching-policy'
+				| 'loan';
+			target?: TargetRole;
+	  };
+
+export type StateEffect =
 	| {
 			type: 'resource';
 			action: 'gain' | 'spend' | 'pay' | 'provide' | 'receive' | 'buy' | 'sell' | 'discard' | 'store';
 			resource: Resource | CompanyTradeableResource;
-			amount: number | 'up-to' | 'any' | 'all';
-			target?: TargetRole;
+			amount: StateEffectAmount;
+			target?: TargetRole | 'foreign-market' | 'market';
 			source?: TargetRole | 'foreign-market' | 'bank' | 'supply';
-			condition?: string;
+			condition?: CardRequirement;
 	  }
 	| {
 			type: 'money';
 			action: 'gain' | 'spend' | 'pay' | 'provide' | 'receive' | 'take-loan' | 'repay-loan' | 'tax';
-			amount: number | 'up-to' | 'any' | 'all';
+			amount: StateEffectAmount;
 			target?: TargetRole;
 			source?: TargetRole | 'bank' | 'supply';
-			condition?: string;
+			condition?: CardRequirement;
 	  }
 	| {
 			type: 'victory-points';
 			action: 'gain' | 'lose';
-			amount: number | 'variable';
+			amount: StateEffectAmount;
 			target?: TargetRole;
-			condition?: string;
+			condition?: CardRequirement;
 	  }
 	| {
 			type: 'policy';
-			action: 'change' | 'propose' | 'score' | 'require';
+			action: 'change' | 'propose' | 'score';
 			policy?: PolicyName;
 			value?: PolicyValue | PolicyString;
-			condition?: string;
+			condition?: CardRequirement;
 	  }
 	| {
 			type: 'state:legitimacy-increment';
 			className: PlayerClass;
-			value: number;
+			value: StateEffectAmount;
 	  }
 	| {
 			type: 'state:legitimacy-decrement';
 			className: PlayerClass;
-			value: number;
+			value: StateEffectAmount;
 	  }
 	| {
 			type: 'worker';
 			action: 'add' | 'remove' | 'upgrade' | 'assign' | 'commit' | 'uncommit' | 'swap';
 			workerType?: CompanyWorkerType | 'any';
 			target?: TargetRole | 'unemployed-workers' | 'trade-union' | 'company';
-			amount?: number | 'any' | 'all';
-			condition?: string;
+			source?: TargetRole | 'supply' | 'unemployed-workers' | 'company';
+			amount?: StateEffectAmount;
+			condition?: CardRequirement;
 	  }
 	| {
 			type: 'company';
@@ -116,39 +174,35 @@ export type ParsedEffect =
 				| 'strike';
 			industry?: Industry | 'any';
 			target?: TargetRole | 'company' | 'market';
-			amount?: number | 'any' | 'all';
-			condition?: string;
+			amount?: StateEffectAmount;
+			condition?: CardRequirement;
 	  }
 	| {
 			type: 'card';
 			action: 'draw' | 'discard' | 'reveal' | 'search' | 'shuffle' | 'play' | 'remove-from-game';
 			deck?: string;
-			amount?: number | 'any' | 'all';
+			amount?: StateEffectAmount;
 			target?: TargetRole;
-			condition?: string;
+			condition?: CardRequirement;
 	  }
 	| {
 			type: 'vote';
 			action: 'add-cubes' | 'remove-cubes' | 'spend-influence' | 'immediate-vote' | 'change-result';
 			target?: TargetRole | 'bag';
-			amount?: number | 'any' | 'all';
-			condition?: string;
+			amount?: StateEffectAmount;
+			condition?: CardRequirement;
 	  }
 	| {
 			type: 'automa';
 			action: string;
 			target?: TargetRole | 'automa';
 			value?: string | number;
-			condition?: string;
+			condition?: CardRequirement;
 	  }
 	| {
 			type: 'choice';
 			options: string[];
-			effects?: ParsedEffect[];
-	  }
-	| {
-			type: 'raw';
-			text: string;
+			stateEffects?: StateEffect[];
 	  };
 
 export interface ParsedActionCard extends DeckCardImage {
@@ -157,8 +211,8 @@ export interface ParsedActionCard extends DeckCardImage {
 	category?: 'base' | 'expansion';
 	name: string;
 	content: string;
-	requirements?: PolicyRequirement[];
-	effects: ParsedEffect[];
+	requirements?: CardRequirement[];
+	stateEffects: StateEffect[];
 	legitimacy?: LegitimacyChange[];
 }
 
@@ -171,13 +225,14 @@ export interface ParsedEventCard extends DeckCardImage {
 		label: string;
 		reward?: string;
 		penalty?: string;
-		effects?: ParsedEffect[];
+		stateEffects?: StateEffect[];
 	}>;
 	noAction?: {
 		text: string;
-		effects?: ParsedEffect[];
+		stateEffects?: StateEffect[];
 	};
-	effects: ParsedEffect[];
+	requirements?: CardRequirement[];
+	stateEffects: StateEffect[];
 }
 
 export interface ParsedPoliticalAgendaCard extends DeckCardImage {
@@ -185,7 +240,7 @@ export interface ParsedPoliticalAgendaCard extends DeckCardImage {
 	name: string;
 	policies: PolicyString[];
 	scoring: string;
-	effects?: ParsedEffect[];
+	stateEffects?: StateEffect[];
 }
 
 export interface ParsedImmigrationCard extends DeckCardImage {
@@ -253,7 +308,8 @@ export interface ParsedAutomaCard extends DeckCardImage {
 	name?: string;
 	content: string;
 	values?: Record<string, string | number | boolean | string[] | number[]>;
-	effects: ParsedEffect[];
+	requirements?: CardRequirement[];
+	stateEffects: StateEffect[];
 }
 
 export type ParsedDeckCard =

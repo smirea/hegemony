@@ -29,12 +29,7 @@ const automaCapitalistActionPriorityCards = [
 		values: {
 			numbers: [2],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '=\n(e)\now\n2 @s\n<\nJ',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-action-priority-cards-grid-6-items-3-2-automa-capitalist-action-priority-deck-233-pos-2-1',
@@ -62,12 +57,7 @@ const automaCapitalistActionPriorityCards = [
 		values: {
 			keywords: ['automa', 'capitalist', 'action', 'priority'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'Automa Capitalist Action Priority',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-action-priority-cards-grid-6-items-3-2-automa-capitalist-action-priority-deck-233-pos-3-1',
@@ -95,12 +85,7 @@ const automaCapitalistActionPriorityCards = [
 		values: {
 			numbers: [2, 7],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '2\ng\n= 7\n’',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-action-priority-cards-grid-6-items-3-2-automa-capitalist-action-priority-deck-233-pos-1-2',
@@ -130,12 +115,7 @@ const automaCapitalistActionPriorityCards = [
 			numbers: [10, 9],
 			keywords: ['oom'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '10.9]\noom\nA\nS =a\na. -[\n>\nPe,\n=',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-action-priority-cards-grid-6-items-3-2-automa-capitalist-action-priority-deck-233-pos-2-2',
@@ -163,12 +143,7 @@ const automaCapitalistActionPriorityCards = [
 		values: {
 			numbers: [2, 9, 3],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: "%\nn\nm\n2\n> Mu.\n9 '\n: a\n>\nS\n(3)",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-action-priority-cards-grid-6-items-3-2-automa-capitalist-action-priority-deck-233-pos-3-2',
@@ -191,12 +166,7 @@ const automaCapitalistActionPriorityCards = [
 		name: 'Automa Capitalist Action Priority',
 		content: 'ee\nn\nU\nm\nQ\nGo\n° <=\n(@)\n=\nrd',
 		values: {},
-		effects: [
-			{
-				type: 'raw',
-				text: 'ee\nn\nU\nm\nQ\nGo\n° <=\n(@)\n=\nrd',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies AutomaCapitalistActionPriorityCardsCard[];
 

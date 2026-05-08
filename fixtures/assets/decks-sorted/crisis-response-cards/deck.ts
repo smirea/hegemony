@@ -47,12 +47,7 @@ const crisisResponseCards = [
 		name: 'WASHINGTON CONSENSUS',
 		content:
 			'DISCARD PROPOSED BILLS\nAll\nCHANGE POLICIES\n‘Te (2c) (3) 4c (Se) (6c) 78\nADDITIONAL EFFECTS\n&: Get ©) equal to half your Popula-\ntion (rounded up). Add 2 Voting\ncubes to the bag per Trade Union.\nRemove 2 unemployed Workers.\nDB: Get 2 ©). Add 2 Voting cubes to\nthe bag for each Public and Capitalist\nClass Company where your Workers\nare employed. Remove 2 unemployed\nWorkers.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State gets é $ .',
-		effects: [
-			{
-				type: 'raw',
-				text: 'DISCARD PROPOSED BILLS\nAll\nCHANGE POLICIES\n‘Te (2c) (3) 4c (Se) (6c) 78\nADDITIONAL EFFECTS\n&: Get ©) equal to half your Popula-\ntion (rounded up). Add 2 Voting\ncubes to the bag per Trade Union.\nRemove 2 unemployed Workers.\nDB: Get 2 ©). Add 2 Voting cubes to\nthe bag for each Public and Capitalist\nClass Company where your Workers\nare employed. Remove 2 unemployed\nWorkers.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State gets é $ .',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'crisis-response-cards-grid-10-items-5-2-crisis-response-deck-211-pos-2-1',
@@ -99,12 +94,7 @@ const crisisResponseCards = [
 		name: 'FAILED IMF NEGOTIATIONS',
 		content:
 			'DISCARD PROPOSED BILLS\nOnly in Policies Band.\nCHANGE POLICIES\n(2c) 78\nADDITIONAL EFFECTS\nEach class pays 10¥ to the State.\nRepeat this as many times\nas needed for the State\nto be able to pay off its Loans.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State gets @ to each class for\nevery 10¥ it got from that class.',
-		effects: [
-			{
-				type: 'raw',
-				text: 'DISCARD PROPOSED BILLS\nOnly in Policies Band.\nCHANGE POLICIES\n(2c) 78\nADDITIONAL EFFECTS\nEach class pays 10¥ to the State.\nRepeat this as many times\nas needed for the State\nto be able to pay off its Loans.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State gets @ to each class for\nevery 10¥ it got from that class.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'crisis-response-cards-grid-10-items-5-2-crisis-response-deck-211-pos-3-1',
@@ -150,12 +140,7 @@ const crisisResponseCards = [
 		name: 'MODERATE IMF INTERVENTION',
 		content:
 			'DISCARD PROPOSED BILLS\nAll\nCHANGE POLICIES\n=\n{ic} (26) (38) 46 (5B) (Fe\nADDITIONAL EFFECTS\nPolicy 6 is locked until the\nCheck IMF step next round.\n& : Remove 2 unemployed\nWorkers.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State gets @ to each class.',
-		effects: [
-			{
-				type: 'raw',
-				text: 'DISCARD PROPOSED BILLS\nAll\nCHANGE POLICIES\n=\n{ic} (26) (38) 46 (5B) (Fe\nADDITIONAL EFFECTS\nPolicy 6 is locked until the\nCheck IMF step next round.\n& : Remove 2 unemployed\nWorkers.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State gets @ to each class.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'crisis-response-cards-grid-10-items-5-2-crisis-response-deck-211-pos-4-1',
@@ -201,12 +186,7 @@ const crisisResponseCards = [
 		name: 'JAPANESE MODEL',
 		content:
 			'All\nCHANGE POLICIES\n‘1c (2B) (38) 4B (5B) (6c) |74)\nADDITIONAL EFFECTS\nThe State gets 40¥.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State gets @ to each class.',
-		effects: [
-			{
-				type: 'raw',
-				text: 'All\nCHANGE POLICIES\n‘1c (2B) (38) 4B (5B) (6c) |74)\nADDITIONAL EFFECTS\nThe State gets 40¥.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State gets @ to each class.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'crisis-response-cards-grid-10-items-5-2-crisis-response-deck-211-pos-5-1',
@@ -252,12 +232,7 @@ const crisisResponseCards = [
 		name: 'BASIC IMF INTERVENTION',
 		content:
 			'DISCARD PROPOSED BILLS\nAll\nCHANGE POLICIES\n(ig) ize 5A) 46 (5G) (6B!\nADDITIONAL EFFECTS\nPolicies 1 and 3 are locked\nuntil the Check IMF step\nnext round.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State reduces Legitimacy to\nhalf for each class (rounded up).',
-		effects: [
-			{
-				type: 'raw',
-				text: 'DISCARD PROPOSED BILLS\nAll\nCHANGE POLICIES\n(ig) ize 5A) 46 (5G) (6B!\nADDITIONAL EFFECTS\nPolicies 1 and 3 are locked\nuntil the Check IMF step\nnext round.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State reduces Legitimacy to\nhalf for each class (rounded up).',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'crisis-response-cards-grid-10-items-5-2-crisis-response-deck-211-pos-1-2',
@@ -304,10 +279,13 @@ const crisisResponseCards = [
 		name: 'US STIMULUS PACKAGE',
 		content:
 			'DISCARD PROPOSED BILLS\nAll\nCHANGE POLICIES\n(Te) (2) (58) 4c (5G) (6B) (78\nADDITIONAL EFFECTS\nThe State gets 60€.\ni Get 10¥ and2 (if able)\nfrom the State.\n6: Get 15¥ from the State.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State reduces Legitimacy\nto half for the Working Class and\nthe Middle Class (rounded up).',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'DISCARD PROPOSED BILLS\nAll\nCHANGE POLICIES\n(Te) (2) (58) 4c (5G) (6B) (78\nADDITIONAL EFFECTS\nThe State gets 60€.\ni Get 10¥ and2 (if able)\nfrom the State.\n6: Get 15¥ from the State.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State reduces Legitimacy\nto half for the Working Class and\nthe Middle Class (rounded up).',
+				type: 'money',
+				action: 'gain',
+				amount: 15,
+				source: 'state',
+				target: 'self',
 			},
 		],
 	},
@@ -355,12 +333,7 @@ const crisisResponseCards = [
 		name: 'IMF INTERVENTION',
 		content:
 			'WITH RESISTANCE\nDISCARD PROPOSED BILLS\nAll except Policies 4 and [5].\nCHANGE POLICIES\n(1g) 2¢ 3B (6B) 7A\nJe) ze 3B (eB)\nADDITIONAL EFFECTS\nPolicy 1 is locked until the\nCheck IMF step next round.\n&: Place 3 Strike tokens.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State gets @ to each class.',
-		effects: [
-			{
-				type: 'raw',
-				text: 'WITH RESISTANCE\nDISCARD PROPOSED BILLS\nAll except Policies 4 and [5].\nCHANGE POLICIES\n(1g) 2¢ 3B (6B) 7A\nJe) ze 3B (eB)\nADDITIONAL EFFECTS\nPolicy 1 is locked until the\nCheck IMF step next round.\n&: Place 3 Strike tokens.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State gets @ to each class.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'crisis-response-cards-grid-10-items-5-2-crisis-response-deck-211-pos-3-2',
@@ -406,12 +379,7 @@ const crisisResponseCards = [
 		name: 'NEW GOVERNMENT BOND',
 		content:
 			"PROGRAM\nIf this is the 5th Round, draw a new\nCrisis Response card.\nDISCARD CHANGE\nPROPOSED BILLS POLICIES\nNone None\nADDITIONAL EFFECTS\nEach class, in reverse player order,\nmay pay 30¥/ 50¥ to the State.\n+ If the amount gathered is not\nenough to pay off the State's Loans,\nreturn that money and draw a new\nCrisis Response card.\n+ If it is, the State pays off its Loans.\nNothing further happens in this step\nbut it must pay back 40¥/ 70¥ to\neach class it got money from by the\nend of the Action Phase next round.\nPAY OFF LOANS\nLEGITIMACY LOST\nNone",
-		effects: [
-			{
-				type: 'raw',
-				text: "PROGRAM\nIf this is the 5th Round, draw a new\nCrisis Response card.\nDISCARD CHANGE\nPROPOSED BILLS POLICIES\nNone None\nADDITIONAL EFFECTS\nEach class, in reverse player order,\nmay pay 30¥/ 50¥ to the State.\n+ If the amount gathered is not\nenough to pay off the State's Loans,\nreturn that money and draw a new\nCrisis Response card.\n+ If it is, the State pays off its Loans.\nNothing further happens in this step\nbut it must pay back 40¥/ 70¥ to\neach class it got money from by the\nend of the Action Phase next round.\nPAY OFF LOANS\nLEGITIMACY LOST\nNone",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'crisis-response-cards-grid-10-items-5-2-crisis-response-deck-211-pos-4-2',
@@ -457,12 +425,7 @@ const crisisResponseCards = [
 		name: 'EU AUSTERITY MEASURES',
 		content:
 			'DISCARD PROPOSED BILLS\nAll\nCHANGE POLICIES\nADDITIONAL EFFECTS\n& & B: Pay 10¥ to the State.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State reduces Legitimacy\nto half for each class (rounded up).',
-		effects: [
-			{
-				type: 'raw',
-				text: 'DISCARD PROPOSED BILLS\nAll\nCHANGE POLICIES\nADDITIONAL EFFECTS\n& & B: Pay 10¥ to the State.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State reduces Legitimacy\nto half for each class (rounded up).',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'crisis-response-cards-grid-10-items-5-2-crisis-response-deck-211-pos-5-2',
@@ -509,12 +472,7 @@ const crisisResponseCards = [
 		name: 'FAILED IMF INTERVENTION',
 		content:
 			'FAILED IMF INTERVENTION:\nREVOLUTION\n" If there are less than 2 Trade Unions,\ndraw a new Crisis Response card.\nDISCARD PROPOSED BILLS\nAll\nCHANGE POLICIES\n‘TA [2¢) (3A) 4a (BA) (6A) 7A\nADDITIONAL EFFECTS\nThe State does not pay for new Public\nCompanies this round.\n& : Pay 10¥ to the State.\n«©: Pay 35¥ to the State. Get 1 @ for\nevery 2 of your Companies.\nths: Pay 20% to the State. Get 1 © for\nevery 2 of your Companies.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State gets 6 é.',
-		effects: [
-			{
-				type: 'raw',
-				text: 'FAILED IMF INTERVENTION:\nREVOLUTION\n" If there are less than 2 Trade Unions,\ndraw a new Crisis Response card.\nDISCARD PROPOSED BILLS\nAll\nCHANGE POLICIES\n‘TA [2¢) (3A) 4a (BA) (6A) 7A\nADDITIONAL EFFECTS\nThe State does not pay for new Public\nCompanies this round.\n& : Pay 10¥ to the State.\n«©: Pay 35¥ to the State. Get 1 @ for\nevery 2 of your Companies.\nths: Pay 20% to the State. Get 1 © for\nevery 2 of your Companies.\nPAY OFF LOANS\nLEGITIMACY LOST\nThe State gets 6 é.',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies CrisisResponseCardsCard[];
 

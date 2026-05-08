@@ -48,12 +48,7 @@ const capitalistClassActionExpansionCards = [
 		name: 'ie le Ny',
 		content:
 			'. ,\npoe = 5 eg rete\nRe ns pyc\n= 3 = a SS.\na a ==, = ee\n2 =a 1 2 ~~ a. ~\nJ —_ .\n¢ PROTECT THE STATUS QUO °-\nChoose a Policy. For the rest\nof this round, no Bills may be\nproposed for that Policy. (Place\none of your Bill markers in its\ncurrent section as a reminder.)\nThen, get 1®.\nak a',
-		effects: [
-			{
-				type: 'raw',
-				text: '. ,\npoe = 5 eg rete\nRe ns pyc\n= 3 = a SS.\na a ==, = ee\n2 =a 1 2 ~~ a. ~\nJ —_ .\n¢ PROTECT THE STATUS QUO °-\nChoose a Policy. For the rest\nof this round, no Bills may be\nproposed for that Policy. (Place\none of your Bill markers in its\ncurrent section as a reminder.)\nThen, get 1®.\nak a',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-expansion-cards-grid-5-items-5-2-capitalist-class-action-expansion-deck-205-pos-2-1',
@@ -101,10 +96,13 @@ const capitalistClassActionExpansionCards = [
 		name: 'A ae eo',
 		content:
 			'eh es = =\nf 4 |\nJi BD 2\nf 5 7 a fiay SL eee r\n: . a ea =\na 4, Ns NOT j=. =\nPU. ae oe\n" COVID-19 VACCINE -\nR&D FUNDING\nGet 15¥ from the State\nfor each operational Healthcare\nCompany you own.\nLP er',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'eh es = =\nf 4 |\nJi BD 2\nf 5 7 a fiay SL eee r\n: . a ea =\na 4, Ns NOT j=. =\nPU. ae oe\n" COVID-19 VACCINE -\nR&D FUNDING\nGet 15¥ from the State\nfor each operational Healthcare\nCompany you own.\nLP er',
+				type: 'money',
+				action: 'gain',
+				amount: 15,
+				source: 'state',
+				target: 'self',
 			},
 		],
 	},
@@ -153,12 +151,7 @@ const capitalistClassActionExpansionCards = [
 		name: 't fe',
 		content:
 			'ie,\nT ——e\n=e =a a\n- CHANGE OF "\nGOVERNMENT AGENDA\nIf there are 3 or less\nproposed Bills, discard a Bill\nproposed by another player.\nThen, you may both Propose\nanother Bill, with you going first.\nWe iy',
-		effects: [
-			{
-				type: 'raw',
-				text: 'ie,\nT ——e\n=e =a a\n- CHANGE OF "\nGOVERNMENT AGENDA\nIf there are 3 or less\nproposed Bills, discard a Bill\nproposed by another player.\nThen, you may both Propose\nanother Bill, with you going first.\nWe iy',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-expansion-cards-grid-5-items-5-2-capitalist-class-action-expansion-deck-205-pos-4-1',
@@ -206,10 +199,14 @@ const capitalistClassActionExpansionCards = [
 		name: 'OB 0',
 		content:
 			'—— = OB 0\nee vp fa gay\n. — ¥ hy =X i\nz-\\\n¢ MOMENTUM FOR CHANGE °\nGet 1® for each Bill marker\nof yours on the Politics Table.\nThen, Propose a Bill.\nYou may not call for an\nImmediate Vote on this Bill.\nSL <a',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '—— = OB 0\nee vp fa gay\n. — ¥ hy =X i\nz-\\\n¢ MOMENTUM FOR CHANGE °\nGet 1® for each Bill marker\nof yours on the Politics Table.\nThen, Propose a Bill.\nYou may not call for an\nImmediate Vote on this Bill.\nSL <a',
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -238,12 +235,7 @@ const capitalistClassActionExpansionCards = [
 		category: 'expansion',
 		name: 'REVEAL POLITICAL SCANDAL',
 		content: '° REVEAL POLITICAL SCANDAL\nTake 2 @ from another player.\na1 aa',
-		effects: [
-			{
-				type: 'raw',
-				text: '° REVEAL POLITICAL SCANDAL\nTake 2 @ from another player.\na1 aa',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies CapitalistClassActionExpansionCardsCard[];
 

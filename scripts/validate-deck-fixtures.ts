@@ -53,6 +53,11 @@ for (const folder of folders) {
 			errors.push(`${folder.name}: back image missing on disk: ${card.backImage}`);
 		}
 		if (!card.rawText.trim()) errors.push(`${folder.name}: ${card.id} has empty rawText`);
+		if ('effects' in card) errors.push(`${folder.name}: ${card.id} uses effects instead of stateEffects`);
+		const parsedCard = card as DeckCardImage & { kind?: string; stateEffects?: unknown };
+		if (['action', 'automa', 'crisis-response', 'event', 'historical-event'].includes(parsedCard.kind ?? '')) {
+			if (!Array.isArray(parsedCard.stateEffects)) errors.push(`${folder.name}: ${card.id} is missing stateEffects`);
+		}
 	}
 }
 

@@ -47,12 +47,7 @@ const stateActionExpansionCards = [
 		name: 'State Action Expansion',
 		content:
 			'(= ‘N\nY ; L==]5 oo\n: et ‘\nwt 9°. 3 =a\na\na (am (od eS aa\na! = A\nPROTECT THE STATUS QUO\nChoose a Policy. For the rest\nof this round, no Bills may be\nproposed for that Policy. (Place\none of your Bill markers in its\ncurrent section as a reminder.)\nThen, get 1®.\n‘ee aa',
-		effects: [
-			{
-				type: 'raw',
-				text: '(= ‘N\nY ; L==]5 oo\n: et ‘\nwt 9°. 3 =a\na\na (am (od eS aa\na! = A\nPROTECT THE STATUS QUO\nChoose a Policy. For the rest\nof this round, no Bills may be\nproposed for that Policy. (Place\none of your Bill markers in its\ncurrent section as a reminder.)\nThen, get 1®.\n‘ee aa',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-expansion-cards-grid-5-items-5-2-state-action-expansion-deck-204-pos-2-1',
@@ -98,12 +93,7 @@ const stateActionExpansionCards = [
 		name: 'State Action Expansion',
 		content:
 			'< fe\ny~ Bu We\nLa * A\nCHANGE OF\nGOVERNMENT AGENDA\nIf there are 3 or less\nproposed Bills, discard a Bill\nproposed by another player.\nThen, you may both Propose\nanother Bill, with you going first.\nShe <4',
-		effects: [
-			{
-				type: 'raw',
-				text: '< fe\ny~ Bu We\nLa * A\nCHANGE OF\nGOVERNMENT AGENDA\nIf there are 3 or less\nproposed Bills, discard a Bill\nproposed by another player.\nThen, you may both Propose\nanother Bill, with you going first.\nShe <4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-expansion-cards-grid-5-items-5-2-state-action-expansion-deck-204-pos-3-1',
@@ -129,12 +119,7 @@ const stateActionExpansionCards = [
 		category: 'expansion',
 		name: 'cam w',
 		content: '| = cam w\nREVEAL POLITICAL SCANDAL\nTake 2 @® from another player.\nYk aa',
-		effects: [
-			{
-				type: 'raw',
-				text: '| = cam w\nREVEAL POLITICAL SCANDAL\nTake 2 @® from another player.\nYk aa',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-expansion-cards-grid-5-items-5-2-state-action-expansion-deck-204-pos-4-1',
@@ -181,10 +166,14 @@ const stateActionExpansionCards = [
 		name: 'ae Y ni —a',
 		content:
 			'= ae Y ni —a\n= = — : ‘ i \\ ead\n«=\nMOMENTUM FOR CHANGE\nGet 1® for each Bill marker\nof yours on the Politics Table.\nThen, Propose a Bill.\nYou may not call for an\nImmediate Vote on this Bill.\nVil aa',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '= ae Y ni —a\n= = — : ‘ i \\ ead\n«=\nMOMENTUM FOR CHANGE\nGet 1® for each Bill marker\nof yours on the Politics Table.\nThen, Propose a Bill.\nYou may not call for an\nImmediate Vote on this Bill.\nVil aa',
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -234,12 +223,7 @@ const stateActionExpansionCards = [
 		name: 'State Action Expansion',
 		content:
 			'- re\n{ i ——+—\na mia \\ |\ni |\n) a\ney 5 e ee a. | = lh\nOe f aa e | S&S\nCOVID-19 VACCINATION\nPROGRAM\nBuy @& from the Foreign Market\nfor 5¥ each, up to your current capacity.\nThen Provide @ to a class, equal to its\nPopulation. For every 3% you provide,\nget @ to that class.\n-\no 6\nthe a',
-		effects: [
-			{
-				type: 'raw',
-				text: '- re\n{ i ——+—\na mia \\ |\ni |\n) a\ney 5 e ee a. | = lh\nOe f aa e | S&S\nCOVID-19 VACCINATION\nPROGRAM\nBuy @& from the Foreign Market\nfor 5¥ each, up to your current capacity.\nThen Provide @ to a class, equal to its\nPopulation. For every 3% you provide,\nget @ to that class.\n-\no 6\nthe a',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies StateActionExpansionCardsCard[];
 

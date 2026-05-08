@@ -10,7 +10,7 @@ Filename prefixes:
 
 Run `scripts/split-deck-grids.ts` to crop every grid image into individual files next to its source sheet. Each folder should have at most one source `grid_...` image; extra sheets should be a separately named `*-expansion-cards` folder.
 
-Each deck folder has a `deck.ts` fixture file. The `rawText` field is OCR-derived unless the card is icon-only; company, business deal, immigration, and loan cards also include structured values from the rules/source data or visible card values. Action, event, and Automa effects keep a `raw` effect entry for the OCR text so later rule implementation can refine them without losing the source parse.
+Each deck folder has a `deck.ts` fixture file. The `rawText` field is OCR-derived unless the card is icon-only; company, business deal, immigration, and loan cards also include structured values from the rules/source data or visible card values. Action, event, and Automa cards use `stateEffects` for declarative game-state operations only. OCR/source text stays in `rawText` and `content`; it should not be encoded as a raw state effect.
 
 Notes:
 

@@ -49,12 +49,7 @@ const middleClassActionExpansionCards = [
 		name: 'i e',
 		content:
 			"sf Si $\n' ry 4 .\na . a\n«——\nCHANGE OF\nGOVERNMENT AGENDA\nIf there are 3 or less\nproposed Bills, discard a Bill\nproposed by another player.\nThen, you may both Propose\nanother Bill, with you going first.\nBT a",
-		effects: [
-			{
-				type: 'raw',
-				text: "sf Si $\n' ry 4 .\na . a\n«——\nCHANGE OF\nGOVERNMENT AGENDA\nIf there are 3 or less\nproposed Bills, discard a Bill\nproposed by another player.\nThen, you may both Propose\nanother Bill, with you going first.\nBT a",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'middle-class-action-expansion-cards-grid-5-items-5-2-middle-class-action-expansion-deck-203-pos-2-1',
@@ -101,12 +96,7 @@ const middleClassActionExpansionCards = [
 		name: 'om 32',
 		content:
 			'(= = »\nom 32\n- 0 - A444 }\nEe ie\n~< — a ea a a\n‘s. 0 5 ab Or et\nPROTECT THE STATUS QUO\nChoose a Policy. For the rest\nof this round, no Bills may be\nproposed for that Policy. (Place\none of your Bill markers in its\ncurrent section as a reminder.)\nThen, get 1®.\nhe a',
-		effects: [
-			{
-				type: 'raw',
-				text: '(= = »\nom 32\n- 0 - A444 }\nEe ie\n~< — a ea a a\n‘s. 0 5 ab Or et\nPROTECT THE STATUS QUO\nChoose a Policy. For the rest\nof this round, no Bills may be\nproposed for that Policy. (Place\none of your Bill markers in its\ncurrent section as a reminder.)\nThen, get 1®.\nhe a',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'middle-class-action-expansion-cards-grid-5-items-5-2-middle-class-action-expansion-deck-203-pos-3-1',
@@ -154,10 +144,14 @@ const middleClassActionExpansionCards = [
 		name: 'MOMENTUM FOR CHANGE',
 		content:
 			'= \\\nMOMENTUM FOR CHANGE\nGet 1® for each Bill marker\nof yours on the Politics Table.\nThen, Propose a Bill.\nYou may not call for an\nImmediate Vote on this Bill.\nWe <a',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '= \\\nMOMENTUM FOR CHANGE\nGet 1® for each Bill marker\nof yours on the Politics Table.\nThen, Propose a Bill.\nYou may not call for an\nImmediate Vote on this Bill.\nWe <a',
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -208,10 +202,13 @@ const middleClassActionExpansionCards = [
 		name: 'SS =. x 7',
 		content:
 			'SS =. x 7 |\nim \\ ) =\n= a) —s |\n" COVID-19 .\nSTIMULUS PACKAGE\nGet 2¥ from the State for each\nemployed Worker you have in Public\nand Capitalist Class Companies and\n4¥ for each Company you own.\n4 5%\nis Se',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'SS =. x 7 |\nim \\ ) =\n= a) —s |\n" COVID-19 .\nSTIMULUS PACKAGE\nGet 2¥ from the State for each\nemployed Worker you have in Public\nand Capitalist Class Companies and\n4¥ for each Company you own.\n4 5%\nis Se',
+				type: 'money',
+				action: 'gain',
+				amount: 2,
+				source: 'state',
+				target: 'self',
 			},
 		],
 	},
@@ -240,12 +237,7 @@ const middleClassActionExpansionCards = [
 		category: 'expansion',
 		name: 'bee See go',
 		content: '— 4, ila\nWh_cay\nREVEAL POLITICAL SCANDAL\nTake 2 @ from another player.\nhe Cu',
-		effects: [
-			{
-				type: 'raw',
-				text: '— 4, ila\nWh_cay\nREVEAL POLITICAL SCANDAL\nTake 2 @ from another player.\nhe Cu',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies MiddleClassActionExpansionCardsCard[];
 

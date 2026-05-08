@@ -40,10 +40,12 @@ const eventCards = [
 		name: 'RESMING POLITICAL SCANDAL',
 		content:
 			'4 . >»\nRESMING POLITICAL SCANDAL\ngy\n\\ SPEND 25¥% AND PROVIDE UP TO\n/ 3 MEDIA @® TO THE CLASSES\nIVE f IN ANY COMBINATION.\n1 @ ea,\n6 |.e%.|%. | &\n, 4',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '4 . >»\nRESMING POLITICAL SCANDAL\ngy\n\\ SPEND 25¥% AND PROVIDE UP TO\n/ 3 MEDIA @® TO THE CLASSES\nIVE f IN ANY COMBINATION.\n1 @ ea,\n6 |.e%.|%. | &\n, 4',
+				type: 'money',
+				action: 'spend',
+				amount: 25,
+				target: 'self',
 			},
 		],
 	},
@@ -68,12 +70,7 @@ const eventCards = [
 		kind: 'event',
 		name: 'y» 7, SPEND UP TO 6',
 		content: ', — >\n4\ny» 7, SPEND UP TO 6 @&\nLIVE f\nBS w\nK y',
-		effects: [
-			{
-				type: 'raw',
-				text: ', — >\n4\ny» 7, SPEND UP TO 6 @&\nLIVE f\nBS w\nK y',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-3-1',
@@ -110,12 +107,7 @@ const eventCards = [
 		name: 'di a BUY SS FROM THE OTHER PLAYERS',
 		content:
 			'di a BUY SS FROM THE OTHER PLAYERS,\ny y IN ANY COMBINATION, UP TO\nVE f THE NUMBER OF PUBLIC COMPANIES.\n; seh\nsea, +1 oe\nBa\nS 4',
-		effects: [
-			{
-				type: 'raw',
-				text: 'di a BUY SS FROM THE OTHER PLAYERS,\ny y IN ANY COMBINATION, UP TO\nVE f THE NUMBER OF PUBLIC COMPANIES.\n; seh\nsea, +1 oe\nBa\nS 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-4-1',
@@ -140,12 +132,7 @@ const eventCards = [
 		name: 'Base Events',
 		content:
 			'le >\nBANC | STRIKE AT THE PORT\ng\ny Y, PROVIDE 2 MEDIA @\nTO A CLASS.\nLIVE f\ns a\nW253 Xs\n99 +1)\n\\K y',
-		effects: [
-			{
-				type: 'raw',
-				text: 'le >\nBANC | STRIKE AT THE PORT\ng\ny Y, PROVIDE 2 MEDIA @\nTO A CLASS.\nLIVE f\ns a\nW253 Xs\n99 +1)\n\\K y',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-5-1',
@@ -183,12 +170,7 @@ const eventCards = [
 		name: 'a -',
 		content:
 			'a - »\nay LOW EDUCATION INDEX\ny _\n% y PROVIDE wi TOA CLASS,\nEQUAL TO HALF ITS POPULATION\nive f (ROUNDED UP).\na +1 +1\n\\ 4',
-		effects: [
-			{
-				type: 'raw',
-				text: 'a - »\nay LOW EDUCATION INDEX\ny _\n% y PROVIDE wi TOA CLASS,\nEQUAL TO HALF ITS POPULATION\nive f (ROUNDED UP).\na +1 +1\n\\ 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-1-2',
@@ -213,12 +195,7 @@ const eventCards = [
 		name: 'Base Events',
 		content:
 			'fo >\nR NEED FOR SUSTAINABILITY\nINITIATIVE\nwa\n¥ j CHOOSE 2 CLASSES.\nPROVIDE 25% TO EACH OF THEM.\n-1 oo | -\nyy »\nJy',
-		effects: [
-			{
-				type: 'raw',
-				text: 'fo >\nR NEED FOR SUSTAINABILITY\nINITIATIVE\nwa\n¥ j CHOOSE 2 CLASSES.\nPROVIDE 25% TO EACH OF THEM.\n-1 oo | -\nyy »\nJy',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-2-2',
@@ -242,12 +219,7 @@ const eventCards = [
 		kind: 'event',
 		name: 'BAKING f FEAR OF DEFLATION',
 		content: '4 - 4\nBAKING f FEAR OF DEFLATION\n+4\n4 y SPEND 15% 30¥ OR 45%\nBS b 2 4\na »',
-		effects: [
-			{
-				type: 'raw',
-				text: '4 - 4\nBAKING f FEAR OF DEFLATION\n+4\n4 y SPEND 15% 30¥ OR 45%\nBS b 2 4\na »',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-3-2',
@@ -284,12 +256,7 @@ const eventCards = [
 		name: 'Base Events',
 		content:
 			'4 = a\nREARING DECLINING BIRTH RATE\nma en\n\\ PROVIDE & TO A CLASS,\né EQUAL TO HALF ITS POPULATION\nive f (ROUNDED UP).\n1 | +1\nwy 4',
-		effects: [
-			{
-				type: 'raw',
-				text: '4 = a\nREARING DECLINING BIRTH RATE\nma en\n\\ PROVIDE & TO A CLASS,\né EQUAL TO HALF ITS POPULATION\nive f (ROUNDED UP).\n1 | +1\nwy 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-4-2',
@@ -314,12 +281,7 @@ const eventCards = [
 		name: 'PEAKING NEED FOR STIMULUS PACKAGE',
 		content:
 			'< >\nPEAKING NEED FOR STIMULUS PACKAGE\ng\n\\3 j CHOOSE ONE:\nPROVIDE 10*% OR 15*¥ TO EACH CLASS.\na| WW ae\n1@ a H @ 1\n. 4',
-		effects: [
-			{
-				type: 'raw',
-				text: '< >\nPEAKING NEED FOR STIMULUS PACKAGE\ng\n\\3 j CHOOSE ONE:\nPROVIDE 10*% OR 15*¥ TO EACH CLASS.\na| WW ae\n1@ a H @ 1\n. 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-5-2',
@@ -362,12 +324,7 @@ const eventCards = [
 		name: 'Base Events',
 		content:
 			'& : NY\ni: DEMAND FOR\nTHIRTEEN MONTH PAY\n& a PROVIDE 5¥ TO A CLASS\ny “ FOR EACH OF ITS WORKERS\nive EMPLOYED IN THE PUBLIC SECTOR.\n-\nite\n+1] +1\n-1\n@ 4',
-		effects: [
-			{
-				type: 'raw',
-				text: '& : NY\ni: DEMAND FOR\nTHIRTEEN MONTH PAY\n& a PROVIDE 5¥ TO A CLASS\ny “ FOR EACH OF ITS WORKERS\nive EMPLOYED IN THE PUBLIC SECTOR.\n-\nite\n+1] +1\n-1\n@ 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-1-3',
@@ -408,12 +365,7 @@ const eventCards = [
 		name: 'fa oy',
 		content:
 			'REA COMPANIES DEMAND |\nBETTER INTERNET\na PROVIDE [] TO ACLASS,\n"Re EQUAL TO HALF THE NUMBER\nOF ITS OPERATIONAL COMPANIES\nIVE f (ROUNDED UP).\n& sea |\nsea, +1 41\nDa\n0 0 |\nLo y',
-		effects: [
-			{
-				type: 'raw',
-				text: 'REA COMPANIES DEMAND |\nBETTER INTERNET\na PROVIDE [] TO ACLASS,\n"Re EQUAL TO HALF THE NUMBER\nOF ITS OPERATIONAL COMPANIES\nIVE f (ROUNDED UP).\n& sea |\nsea, +1 41\nDa\n0 0 |\nLo y',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-2-3',
@@ -450,12 +402,7 @@ const eventCards = [
 		name: 'Base Events',
 		content:
 			'4 . y\nay. DROUGHT 1\ni\n| PROVIDE ¢ TO ACLASS, ,\nyy EQUAL TO HALF ITS POPULATION\n| OR HALF ITS OPERATIONAL |\nBD iive { COMPANIES (ROUNDED-UP). ff\n, Re rs |\n| sed it. |\noo| G\nhe J',
-		effects: [
-			{
-				type: 'raw',
-				text: '4 . y\nay. DROUGHT 1\ni\n| PROVIDE ¢ TO ACLASS, ,\nyy EQUAL TO HALF ITS POPULATION\n| OR HALF ITS OPERATIONAL |\nBD iive { COMPANIES (ROUNDED-UP). ff\n, Re rs |\n| sed it. |\noo| G\nhe J',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-3-3',
@@ -493,12 +440,7 @@ const eventCards = [
 		name: 'PEAKING LOCAL INDUSTRIES IN TURMOIL',
 		content:
 			'4 >\nPEAKING LOCAL INDUSTRIES IN TURMOIL\n”\n\\ PROVIDE 5% TO A CLASS\ny FOR EACH OPERATIONAL\nLive COMPANY IT OWNS.\n; BA\nsea @ S 2\n97\na 4',
-		effects: [
-			{
-				type: 'raw',
-				text: '4 >\nPEAKING LOCAL INDUSTRIES IN TURMOIL\n”\n\\ PROVIDE 5% TO A CLASS\ny FOR EACH OPERATIONAL\nLive COMPANY IT OWNS.\n; BA\nsea @ S 2\n97\na 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-4-3',
@@ -541,12 +483,7 @@ const eventCards = [
 		name: 'Base Events',
 		content:
 			'fe >\nPANG TECHNOLOGICAL ILLITERACY\nig PROVIDE [] AND i TO A CLASS,\n‘ IN ANY COMBINATION, EQUAL (IN TOTAL)\ny F, TO HALF ITS POPULATION\nOR HALF ITS OPERATIONAL COMPANIES\nLIVE f (ROUNDED UP, MIN 1 OF EACH).\n: seedy\n@| © a\n9 @\na 4',
-		effects: [
-			{
-				type: 'raw',
-				text: 'fe >\nPANG TECHNOLOGICAL ILLITERACY\nig PROVIDE [] AND i TO A CLASS,\n‘ IN ANY COMBINATION, EQUAL (IN TOTAL)\ny F, TO HALF ITS POPULATION\nOR HALF ITS OPERATIONAL COMPANIES\nLIVE f (ROUNDED UP, MIN 1 OF EACH).\n: seedy\n@| © a\n9 @\na 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-5-3',
@@ -589,12 +526,7 @@ const eventCards = [
 		name: 'DEMAND FOR HIGHER',
 		content:
 			'& >»\n. DEMAND FOR HIGHER\nWELFARE STANDARDS\nae PROVIDE & AND & TO ACLASS,\n» 7, IN ANY COMBINATION, EQUAL\n(IN TOTAL) TO HALF ITS POPULATION\nLIVE f (ROUNDED, MIN 1 OF EACH).\n1 +1 +1\na y',
-		effects: [
-			{
-				type: 'raw',
-				text: '& >»\n. DEMAND FOR HIGHER\nWELFARE STANDARDS\nae PROVIDE & AND & TO ACLASS,\n» 7, IN ANY COMBINATION, EQUAL\n(IN TOTAL) TO HALF ITS POPULATION\nLIVE f (ROUNDED, MIN 1 OF EACH).\n1 +1 +1\na y',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-1-4',
@@ -618,12 +550,7 @@ const eventCards = [
 		kind: 'event',
 		name: 'Base Events',
 		content: 'fe »\nBAKING DEVELOPING COUNTRIES IN NEED\n4\n¥ 7, SPEND UP TO 6 &.\n%.\nBs tw\n\\ yD',
-		effects: [
-			{
-				type: 'raw',
-				text: 'fe »\nBAKING DEVELOPING COUNTRIES IN NEED\n4\n¥ 7, SPEND UP TO 6 &.\n%.\nBs tw\n\\ yD',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-2-4',
@@ -666,12 +593,7 @@ const eventCards = [
 		name: 'ay. INFANT INDUSTRY REQUIRES HELP',
 		content:
 			'4 >\nay. INFANT INDUSTRY REQUIRES HELP\n4 5 PAY THE COST AND BUILD\ny / A COMPANY COSTING 15¥%\n‘ve OR MORE FOR ANOTHER CLASS.\nsca Bt\no: +1)\n. 4',
-		effects: [
-			{
-				type: 'raw',
-				text: '4 >\nay. INFANT INDUSTRY REQUIRES HELP\n4 5 PAY THE COST AND BUILD\ny / A COMPANY COSTING 15¥%\n‘ve OR MORE FOR ANOTHER CLASS.\nsca Bt\no: +1)\n. 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-3-4',
@@ -712,12 +634,7 @@ const eventCards = [
 		name: 'Base Events',
 		content:
 			'a »\naR OUTDATED PUBLIC SECTOR\nINFRASTRUCTURE\n& 5 BUY FROM THE OTHER PLAYERS,\n\\] / IN ANY COMBINATION, UP TO\nuve f THE NUMBER OF PUBLIC COMPANIES.\n3 seh\nsed, | 41\na:\n0 a\n\\ 4',
-		effects: [
-			{
-				type: 'raw',
-				text: 'a »\naR OUTDATED PUBLIC SECTOR\nINFRASTRUCTURE\n& 5 BUY FROM THE OTHER PLAYERS,\n\\] / IN ANY COMBINATION, UP TO\nuve f THE NUMBER OF PUBLIC COMPANIES.\n3 seh\nsed, | 41\na:\n0 a\n\\ 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-4-4',
@@ -756,12 +673,7 @@ const eventCards = [
 		name: 'a PROVIDE ¢ AND & TO ACLASS',
 		content:
 			'4 >\na PROVIDE ¢ AND & TO ACLASS,\n7 , IN ANY COMBINATION, EQUAL\n(IN TOTAL) TO HALF ITS POPULATION\nLIVE f (ROUNDED UP, MIN 1 OF EACH).\n+1 +1\n1 @\n. 4',
-		effects: [
-			{
-				type: 'raw',
-				text: '4 >\na PROVIDE ¢ AND & TO ACLASS,\n7 , IN ANY COMBINATION, EQUAL\n(IN TOTAL) TO HALF ITS POPULATION\nLIVE f (ROUNDED UP, MIN 1 OF EACH).\n+1 +1\n1 @\n. 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-5-4',
@@ -786,12 +698,7 @@ const eventCards = [
 		name: 'ny DEMAND FOR PENSION REFORM',
 		content:
 			'4 >\nny DEMAND FOR PENSION REFORM\na\n\\ PROVIDE ¥ TO A CLASS\n; EQUAL TO 5 TIMES\n‘ve f ITS POPULATION.\nb 2 4 a\n| = | +1)\n, 7 7 d',
-		effects: [
-			{
-				type: 'raw',
-				text: '4 >\nny DEMAND FOR PENSION REFORM\na\n\\ PROVIDE ¥ TO A CLASS\n; EQUAL TO 5 TIMES\n‘ve f ITS POPULATION.\nb 2 4 a\n| = | +1)\n, 7 7 d',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-1-5',
@@ -817,10 +724,12 @@ const eventCards = [
 		name: 'Base Events',
 		content:
 			'C »\n« a SPEND 30¥ AND PROVIDE\nd 4 VOTING CUBES TO THE CLASSES\nive IN ANY COMBINATION.\n&\nry sea,\n&| © | ©\nD @\na _d',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'C »\n« a SPEND 30¥ AND PROVIDE\nd 4 VOTING CUBES TO THE CLASSES\nive IN ANY COMBINATION.\n&\nry sea,\n&| © | ©\nD @\na _d',
+				type: 'money',
+				action: 'spend',
+				amount: 30,
+				target: 'self',
 			},
 		],
 	},
@@ -845,10 +754,10 @@ const eventCards = [
 		kind: 'event',
 		name: 'Base Events',
 		content: "f >\naay CIVIL UNREST\nyg\n¥ j PROPOSE A BILL\nOF ANOTHER PLAYER'S CHOICE.\nsea sea,\n2 @ #2 a2\na Ad",
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "f >\naay CIVIL UNREST\nyg\n¥ j PROPOSE A BILL\nOF ANOTHER PLAYER'S CHOICE.\nsea sea,\n2 @ #2 a2\na Ad",
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -887,12 +796,7 @@ const eventCards = [
 		name: 'Base Events',
 		content:
 			'a >\nBEAMING f UNFAIR REPRESENTATION\n4 5 PROVIDE 1 PERSONAL @®\nae) AND 2 VOTING CUBES\nrIVE f TO A CLASS.\na | .\n7 3 sea\na 4',
-		effects: [
-			{
-				type: 'raw',
-				text: 'a >\nBEAMING f UNFAIR REPRESENTATION\n4 5 PROVIDE 1 PERSONAL @®\nae) AND 2 VOTING CUBES\nrIVE f TO A CLASS.\na | .\n7 3 sea\na 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-4-5',
@@ -933,12 +837,7 @@ const eventCards = [
 		name: 'EE, LOW UNIVERSITY RATINGS',
 		content:
 			'4 \\\nEE, LOW UNIVERSITY RATINGS\n& 5 BUY | FROM THE OTHER PLAYERS,\ny 7 IN ANY COMBINATION, UP TO\ngy THE NUMBER OF PUBLIC COMPANIES.\n2 sed\nseh +1 41\nO.\nY y',
-		effects: [
-			{
-				type: 'raw',
-				text: '4 \\\nEE, LOW UNIVERSITY RATINGS\n& 5 BUY | FROM THE OTHER PLAYERS,\ny 7 IN ANY COMBINATION, UP TO\ngy THE NUMBER OF PUBLIC COMPANIES.\n2 sed\nseh +1 41\nO.\nY y',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'event-cards-grid-25-items-5-5-base-events-deck-163-pos-5-5',
@@ -981,12 +880,7 @@ const eventCards = [
 		name: 'BERING GLOBAL SUPPLY CHAIN CRISIS',
 		content:
 			'4 - >\nBERING GLOBAL SUPPLY CHAIN CRISIS\na PROVIDE ¢ AND [] TOA CLASS,\n% , IN ANY COMBINATION, EQUAL\n(IN TOTAL) TO HALF ITS POPULATION\nLIVE f (ROUNDED UP, MIN. 1 OF EACH).\nES wr\n-1\na A',
-		effects: [
-			{
-				type: 'raw',
-				text: '4 - >\nBERING GLOBAL SUPPLY CHAIN CRISIS\na PROVIDE ¢ AND [] TOA CLASS,\n% , IN ANY COMBINATION, EQUAL\n(IN TOTAL) TO HALF ITS POPULATION\nLIVE f (ROUNDED UP, MIN. 1 OF EACH).\nES wr\n-1\na A',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies EventCardsCard[];
 

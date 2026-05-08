@@ -44,10 +44,25 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			'f }\nPi 24\nr\nSPECIALIZATION\nPlace a skilled Worker of your\nchoice from the Supply in\nthe Unemployed Workers area.\nThen, assign up to 3 Workers.\n7B /7C\n] 4',
-		effects: [
+		requirements: [{ type: 'policy', mode: 'any', policies: ['7B', '7C'] }],
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'f }\nPi 24\nr\nSPECIALIZATION\nPlace a skilled Worker of your\nchoice from the Supply in\nthe Unemployed Workers area.\nThen, assign up to 3 Workers.\n7B /7C\n] 4',
+				type: 'worker',
+				action: 'assign',
+				amount: {
+					type: 'up-to',
+					amount: 3,
+				},
+				workerType: 'any',
+				target: 'company',
+			},
+			{
+				type: 'worker',
+				action: 'add',
+				amount: 1,
+				workerType: 'any',
+				source: 'supply',
+				target: 'unemployed-workers',
 			},
 		],
 	},
@@ -92,10 +107,25 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			'f }\nPi 24\nr\nSPECIALIZATION\nPlace a skilled Worker of your\nchoice from the Supply in\nthe Unemployed Workers area.\nThen, assign up to 3 Workers.\n7B /7C\n] 4',
-		effects: [
+		requirements: [{ type: 'policy', mode: 'any', policies: ['7B', '7C'] }],
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'f }\nPi 24\nr\nSPECIALIZATION\nPlace a skilled Worker of your\nchoice from the Supply in\nthe Unemployed Workers area.\nThen, assign up to 3 Workers.\n7B /7C\n] 4',
+				type: 'worker',
+				action: 'assign',
+				amount: {
+					type: 'up-to',
+					amount: 3,
+				},
+				workerType: 'any',
+				target: 'company',
+			},
+			{
+				type: 'worker',
+				action: 'add',
+				amount: 1,
+				workerType: 'any',
+				source: 'supply',
+				target: 'unemployed-workers',
 			},
 		],
 	},
@@ -124,12 +154,7 @@ const workingClassActionCards = [
 		category: 'base',
 		name: 'g REAKE GS',
 		content: '; g REAKE GS\n: a: "%\nz 2\nHIGHLIGHT SOCIAL ISSUES\nBuy 3 @ from the State for 15 ¥.\n4',
-		effects: [
-			{
-				type: 'raw',
-				text: '; g REAKE GS\n: a: "%\nz 2\nHIGHLIGHT SOCIAL ISSUES\nBuy 3 @ from the State for 15 ¥.\n4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-4-1',
@@ -175,12 +200,7 @@ const workingClassActionCards = [
 		name: 'lll s—‘(i‘é ee',
 		content:
 			'——— lll s—‘(i‘é ee\nOPES ~S Exe ta\n~ id ine yy) 35\ne eee ~\nCOOPERATIVE FARM\nIf you have at least\n3 Unemployed Workers,\nbuild a Cooperative Farm\n(place it next to your board) and\nassign 3 of those Workers there.\n7 sy',
-		effects: [
-			{
-				type: 'raw',
-				text: '——— lll s—‘(i‘é ee\nOPES ~S Exe ta\n~ id ine yy) 35\ne eee ~\nCOOPERATIVE FARM\nIf you have at least\n3 Unemployed Workers,\nbuild a Cooperative Farm\n(place it next to your board) and\nassign 3 of those Workers there.\n7 sy',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-5-1',
@@ -226,12 +246,7 @@ const workingClassActionCards = [
 		name: 'lll s—‘(i‘é ee',
 		content:
 			'——— lll s—‘(i‘é ee\nOPES ~S Exe ta\n~ id ine yy) 35\ne eee ~\nCOOPERATIVE FARM\nIf you have at least\n3 Unemployed Workers,\nbuild a Cooperative Farm\n(place it next to your board) and\nassign 3 of those Workers there.\n7 sy',
-		effects: [
-			{
-				type: 'raw',
-				text: '——— lll s—‘(i‘é ee\nOPES ~S Exe ta\n~ id ine yy) 35\ne eee ~\nCOOPERATIVE FARM\nIf you have at least\n3 Unemployed Workers,\nbuild a Cooperative Farm\n(place it next to your board) and\nassign 3 of those Workers there.\n7 sy',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-6-1',
@@ -274,12 +289,7 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			'A\nie te\n5 N .\n> “bY\nHEALTHCARE BENEFITS\nBuy @ from the State,\nup to your Population, paying\nhalf the cost (rounded up).\na\nREQUIREMENT silly,\n9d',
-		effects: [
-			{
-				type: 'raw',
-				text: 'A\nie te\n5 N .\n> “bY\nHEALTHCARE BENEFITS\nBuy @ from the State,\nup to your Population, paying\nhalf the cost (rounded up).\na\nREQUIREMENT silly,\n9d',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-7-1',
@@ -322,12 +332,7 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			'A\nie te\n5 N .\n> “bY\nHEALTHCARE BENEFITS\nBuy @ from the State,\nup to your Population, paying\nhalf the cost (rounded up).\na\nREQUIREMENT silly,\n9d',
-		effects: [
-			{
-				type: 'raw',
-				text: 'A\nie te\n5 N .\n> “bY\nHEALTHCARE BENEFITS\nBuy @ from the State,\nup to your Population, paying\nhalf the cost (rounded up).\na\nREQUIREMENT silly,\n9d',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-8-1',
@@ -368,10 +373,10 @@ const workingClassActionCards = [
 		name: 'A YY ae',
 		content:
 			'_ A YY ae /\nHEALTHCARE MOVEMENT\nPropose a Bill for\nWelfare State - Healthcare.\nAdd 2 Voting cubes to the bag.\n7',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '_ A YY ae /\nHEALTHCARE MOVEMENT\nPropose a Bill for\nWelfare State - Healthcare.\nAdd 2 Voting cubes to the bag.\n7',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -398,12 +403,7 @@ const workingClassActionCards = [
 		category: 'base',
 		name: 'ein 2',
 		content: '1 ein 2\n1 a © ie\n? A wy t\n| - iy\nol sad Re\nj A\nNEED FOR CHANGE\nPropose 2 Bills.',
-		effects: [
-			{
-				type: 'raw',
-				text: '1 ein 2\n1 a © ie\n? A wy t\n| - iy\nol sad Re\nj A\nNEED FOR CHANGE\nPropose 2 Bills.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-2-2',
@@ -428,12 +428,7 @@ const workingClassActionCards = [
 		category: 'base',
 		name: 'ein 2',
 		content: '1 ein 2\n1 a © ie\n? A wy t\n| - iy\nol sad Re\nj A\nNEED FOR CHANGE\nPropose 2 Bills.',
-		effects: [
-			{
-				type: 'raw',
-				text: '1 ein 2\n1 a © ie\n? A wy t\n| - iy\nol sad Re\nj A\nNEED FOR CHANGE\nPropose 2 Bills.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-3-2',
@@ -458,12 +453,7 @@ const workingClassActionCards = [
 		category: 'base',
 		name: 'ein es',
 		content: '1 ein es\n1 a © ie\n? A wy t\n| - Wy\nol sad Re\nj A\nNEED FOR CHANGE\nPropose 2 Bills.',
-		effects: [
-			{
-				type: 'raw',
-				text: '1 ein es\n1 a © ie\n? A wy t\n| - Wy\nol sad Re\nj A\nNEED FOR CHANGE\nPropose 2 Bills.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-4-2',
@@ -510,12 +500,8 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			'\'’ -\n= T,\nThe « art F Vi "\nant Se ee |\nLABOR MARKET\nDEREGULATION\nAssign any number of unemployed\nWorkers. If Ea is in effect,\nyou may also reassign any number\nof Workers already assigned\nto other Companies.\n2B/2c\n—',
-		effects: [
-			{
-				type: 'raw',
-				text: '\'’ -\n= T,\nThe « art F Vi "\nant Se ee |\nLABOR MARKET\nDEREGULATION\nAssign any number of unemployed\nWorkers. If Ea is in effect,\nyou may also reassign any number\nof Workers already assigned\nto other Companies.\n2B/2c\n—',
-			},
-		],
+		requirements: [{ type: 'policy', mode: 'any', policies: ['2B', '2C'] }],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-5-2',
@@ -562,12 +548,8 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			'\'’ -\n= T,\nThe « art F Vi "\nant Se ee |\nLABOR MARKET\nDEREGULATION\nAssign any number of unemployed\nWorkers. If Ea is in effect,\nyou may also reassign any number\nof Workers already assigned\nto other Companies.\n2B/2c\n—',
-		effects: [
-			{
-				type: 'raw',
-				text: '\'’ -\n= T,\nThe « art F Vi "\nant Se ee |\nLABOR MARKET\nDEREGULATION\nAssign any number of unemployed\nWorkers. If Ea is in effect,\nyou may also reassign any number\nof Workers already assigned\nto other Companies.\n2B/2c\n—',
-			},
-		],
+		requirements: [{ type: 'policy', mode: 'any', policies: ['2B', '2C'] }],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-6-2',
@@ -615,10 +597,13 @@ const workingClassActionCards = [
 		name: 'eeeC7O7"E',
 		content:
 			'— —eeeC7O7"E\n= = iS i\ni tie 1 eT oT\na te y er\nyj ae ¥\n==. ~\nre Passports\nSS & wu | -\nMIGRATION\nIf you have at least 4 Unemployed\nWorkers, remove up to 2 of them.\nGet 5¥ for each Unskilled worker\nand 10¥ for each Skilled Worker\nremoved this way.\ni',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '— —eeeC7O7"E\n= = iS i\ni tie 1 eT oT\na te y er\nyj ae ¥\n==. ~\nre Passports\nSS & wu | -\nMIGRATION\nIf you have at least 4 Unemployed\nWorkers, remove up to 2 of them.\nGet 5¥ for each Unskilled worker\nand 10¥ for each Skilled Worker\nremoved this way.\ni',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},
@@ -668,10 +653,13 @@ const workingClassActionCards = [
 		name: 'eeeC7O7"E',
 		content:
 			'— —eeeC7O7"E\n= = iS i\ni tie 1 eT oT\na te y er\nyj ae ¥\n==. ~\nre Passports\nSS & wu | -\nMIGRATION\nIf you have at least 4 Unemployed\nWorkers, remove up to 2 of them.\nGet 5¥ for each Unskilled worker\nand 10¥ for each Skilled Worker\nremoved this way.\ni',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '— —eeeC7O7"E\n= = iS i\ni tie 1 eT oT\na te y er\nyj ae ¥\n==. ~\nre Passports\nSS & wu | -\nMIGRATION\nIf you have at least 4 Unemployed\nWorkers, remove up to 2 of them.\nGet 5¥ for each Unskilled worker\nand 10¥ for each Skilled Worker\nremoved this way.\ni',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},
@@ -717,10 +705,10 @@ const workingClassActionCards = [
 		name: 'Ss te',
 		content:
 			'’ Ss te ”\nae -— t\nEAD ahh! | GS |p Re\n(Lill ¢ > WORKERS + aw\n~~ Yd r- >\na P =\n‘ig ‘/*\nWORKERS MOVEMENT\nPropose a Bill for Labor Market.\nAdd 2 Voting cubes to the bag',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '’ Ss te ”\nae -— t\nEAD ahh! | GS |p Re\n(Lill ¢ > WORKERS + aw\n~~ Yd r- >\na P =\n‘ig ‘/*\nWORKERS MOVEMENT\nPropose a Bill for Labor Market.\nAdd 2 Voting cubes to the bag',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -769,10 +757,13 @@ const workingClassActionCards = [
 		name: 'i 4',
 		content:
 			'~ i 4\nrm\nWORKPLACE ACCIDENT\nChoose an industry. Get 8¥ from\nanother player for each of their\nCompanies of that industry\nin which you have Workers.\nSO 7 7 7 4',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '~ i 4\nrm\nWORKPLACE ACCIDENT\nChoose an industry. Get 8¥ from\nanother player for each of their\nCompanies of that industry\nin which you have Workers.\nSO 7 7 7 4',
+				type: 'money',
+				action: 'gain',
+				amount: 8,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},
@@ -819,12 +810,7 @@ const workingClassActionCards = [
 		name: 'Fal > Pe',
 		content:
 			'( 3 Fal > Pe\n%\noo y\nWo 5\nn a] < ;\naud : # bse ie\nJ\nPROLETARIANS\nOF THE WORLD, UNITE!\nAdd Voting cubes to the bag\nequal to your Population.\nSea eae',
-		effects: [
-			{
-				type: 'raw',
-				text: '( 3 Fal > Pe\n%\noo y\nWo 5\nn a] < ;\naud : # bse ie\nJ\nPROLETARIANS\nOF THE WORLD, UNITE!\nAdd Voting cubes to the bag\nequal to your Population.\nSea eae',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-3-3',
@@ -869,12 +855,7 @@ const workingClassActionCards = [
 		name: 'Fal > Pe',
 		content:
 			'( 3 Fal > Pe\n%\noo y\nWo 5\nn a] < ;\naud : # bse ie\nJ\nPROLETARIANS\nOF THE WORLD, UNITE!\nAdd Voting cubes to the bag\nequal to your Population.\nSea eae',
-		effects: [
-			{
-				type: 'raw',
-				text: '( 3 Fal > Pe\n%\noo y\nWo 5\nn a] < ;\naud : # bse ie\nJ\nPROLETARIANS\nOF THE WORLD, UNITE!\nAdd Voting cubes to the bag\nequal to your Population.\nSea eae',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-4-3',
@@ -920,12 +901,7 @@ const workingClassActionCards = [
 		name: 'bo Je',
 		content:
 			'-_\n=\n> +, bo Je .\nz =\n‘4\nBOOST DOMESTIC TOURISM\nBuy 0 from another player, up to\nyour Population, paying half the\ncost (rounded up). The other half\nis paid by the State.\na',
-		effects: [
-			{
-				type: 'raw',
-				text: '-_\n=\n> +, bo Je .\nz =\n‘4\nBOOST DOMESTIC TOURISM\nBuy 0 from another player, up to\nyour Population, paying half the\ncost (rounded up). The other half\nis paid by the State.\na',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-5-3',
@@ -971,12 +947,7 @@ const workingClassActionCards = [
 		name: 'bo Je',
 		content:
 			'-_\n=\n> +, bo Je .\nz =\n‘4\nBOOST DOMESTIC TOURISM\nBuy 0 from another player, up to\nyour Population, paying half the\ncost (rounded up). The other half\nis paid by the State.',
-		effects: [
-			{
-				type: 'raw',
-				text: '-_\n=\n> +, bo Je .\nz =\n‘4\nBOOST DOMESTIC TOURISM\nBuy 0 from another player, up to\nyour Population, paying half the\ncost (rounded up). The other half\nis paid by the State.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-6-3',
@@ -1023,10 +994,14 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			'a :\n:\n: . , |\nPUBLIC OPINION POLLING\nPropose a Bill and reveal 5 Voting\ncubes from the bag. You may\nthen call for an Immediate Vote\nwithout spending @. If you do,\nuse those 5 cubes instead of\ndrawing new ones. If not. return\nthem to the bag.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'a :\n:\n: . , |\nPUBLIC OPINION POLLING\nPropose a Bill and reveal 5 Voting\ncubes from the bag. You may\nthen call for an Immediate Vote\nwithout spending @. If you do,\nuse those 5 cubes instead of\ndrawing new ones. If not. return\nthem to the bag.',
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -1073,10 +1048,10 @@ const workingClassActionCards = [
 		name: 'Li sb',
 		content:
 			'Li sb ||\nCp faa\na pees = Pp +e\nae le q |\nPid. i!\nSTUDENT MOVEMENT\nPropose a Bill for\nWelfare State - Education.\nAdd 2 Voting cubes to the bag.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'Li sb ||\nCp faa\na pees = Pp +e\nae le q |\nPid. i!\nSTUDENT MOVEMENT\nPropose a Bill for\nWelfare State - Education.\nAdd 2 Voting cubes to the bag.',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -1127,10 +1102,14 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			'4 - ;\nty\nSa\n«4\n3\n2 = i\na Eee\nSUPPLEMENTAL INCOME\nPROGRAM\nGet 1¥ from the State for each\nof your employed Workers. You\nmay then buy Goods & Services.\n2B /2Cc nog\nne',
-		effects: [
+		requirements: [{ type: 'policy', mode: 'any', policies: ['2B'] }],
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '4 - ;\nty\nSa\n«4\n3\n2 = i\na Eee\nSUPPLEMENTAL INCOME\nPROGRAM\nGet 1¥ from the State for each\nof your employed Workers. You\nmay then buy Goods & Services.\n2B /2Cc nog\nne',
+				type: 'money',
+				action: 'gain',
+				amount: 1,
+				source: 'state',
+				target: 'self',
 			},
 		],
 	},
@@ -1181,10 +1160,14 @@ const workingClassActionCards = [
 		name: 'q ho',
 		content:
 			'q ho ;\nty\nSa\n«4\n3\n2 = i\na Eee\nSUPPLEMENTAL INCOME\nPROGRAM\nGet 1¥ from the State for each\nof your employed Workers. You\nmay then buy Goods & Services.\n2B /2Cc nog\nee',
-		effects: [
+		requirements: [{ type: 'policy', mode: 'any', policies: ['2B'] }],
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'q ho ;\nty\nSa\n«4\n3\n2 = i\na Eee\nSUPPLEMENTAL INCOME\nPROGRAM\nGet 1¥ from the State for each\nof your employed Workers. You\nmay then buy Goods & Services.\n2B /2Cc nog\nee',
+				type: 'money',
+				action: 'gain',
+				amount: 1,
+				source: 'state',
+				target: 'self',
 			},
 		],
 	},
@@ -1232,12 +1215,7 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			"‘ |\n=\n. |\n“ =\n>\nj\n—\nEXTRA SHIFT\nChoose a Public Company. The State\npays the workers' wages and\nperforms a Production. You may\nthen Buy Goods or Services from the\nState of the type produced by that\nCompany, up to your Population.\nnc (",
-		effects: [
-			{
-				type: 'raw',
-				text: "‘ |\n=\n. |\n“ =\n>\nj\n—\nEXTRA SHIFT\nChoose a Public Company. The State\npays the workers' wages and\nperforms a Production. You may\nthen Buy Goods or Services from the\nState of the type produced by that\nCompany, up to your Population.\nnc (",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-3-4',
@@ -1283,12 +1261,7 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			"‘ |\n=\n. |\n“ =\n>\nj\n—\nEXTRA SHIFT\nChoose a Public Company. The State\npays the workers' wages and\nperforms a Production. You may\nthen Buy Goods or Services from the\nState of the type produced by that\nCompany, up to your Population.\nnc (",
-		effects: [
-			{
-				type: 'raw',
-				text: "‘ |\n=\n. |\n“ =\n>\nj\n—\nEXTRA SHIFT\nChoose a Public Company. The State\npays the workers' wages and\nperforms a Production. You may\nthen Buy Goods or Services from the\nState of the type produced by that\nCompany, up to your Population.\nnc (",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-4-4',
@@ -1317,12 +1290,7 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			'. 4\nF “\ni %\n*. ny \\\n: _ ) oa .\nAFFORDABLE HOUSING\nGive 20¥ to the Capitalist.\nGet 5.\nGive 10¥ to the Middle-Class.\nGet 3.\n- OS a”',
-		effects: [
-			{
-				type: 'raw',
-				text: '. 4\nF “\ni %\n*. ny \\\n: _ ) oa .\nAFFORDABLE HOUSING\nGive 20¥ to the Capitalist.\nGet 5.\nGive 10¥ to the Middle-Class.\nGet 3.\n- OS a”',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-5-4',
@@ -1348,10 +1316,10 @@ const workingClassActionCards = [
 		category: 'base',
 		name: 'eet, ae',
 		content: 'é\nIMMIGRATION REFORM\nPropose a Bill for Immigration.\nAdd 2 Voting cubes to the bag.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'é\nIMMIGRATION REFORM\nPropose a Bill for Immigration.\nAdd 2 Voting cubes to the bag.',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -1400,10 +1368,23 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			"“ME =\n‘\nwren\n| SIGNING BONUS\nAssign up to 4 unemployed\nWorkers. For each Worker assigned\nto a Company this way, get 4¥\nfrom that Company's owner.\nng",
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "“ME =\n‘\nwren\n| SIGNING BONUS\nAssign up to 4 unemployed\nWorkers. For each Worker assigned\nto a Company this way, get 4¥\nfrom that Company's owner.\nng",
+				type: 'money',
+				action: 'gain',
+				amount: 4,
+				source: 'supply',
+				target: 'self',
+			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: {
+					type: 'up-to',
+					amount: 4,
+				},
+				workerType: 'any',
+				target: 'company',
 			},
 		],
 	},
@@ -1452,10 +1433,23 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			"“ME =\n‘\nwren\n| SIGNING BONUS\nAssign up to 4 unemployed\nWorkers. For each Worker assigned\nto a Company this way, get 4¥\nfrom that Company's owner.\nng",
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "“ME =\n‘\nwren\n| SIGNING BONUS\nAssign up to 4 unemployed\nWorkers. For each Worker assigned\nto a Company this way, get 4¥\nfrom that Company's owner.\nng",
+				type: 'money',
+				action: 'gain',
+				amount: 4,
+				source: 'supply',
+				target: 'self',
+			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: {
+					type: 'up-to',
+					amount: 4,
+				},
+				workerType: 'any',
+				target: 'company',
 			},
 		],
 	},
@@ -1500,10 +1494,12 @@ const workingClassActionCards = [
 		name: 'x ee eA',
 		content:
 			'- x ee eA\n5. Sh aes\n“ = at\n| 7 . 7\n\\ !\n»,\nGENERAL STRIKE\nPerform a Strike. You may\nplace an additional Strike token\nfor each Trade Union you have.\n2B/2C\nng',
-		effects: [
+		requirements: [{ type: 'policy', mode: 'any', policies: ['2B', '2C'] }],
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '- x ee eA\n5. Sh aes\n“ = at\n| 7 . 7\n\\ !\n»,\nGENERAL STRIKE\nPerform a Strike. You may\nplace an additional Strike token\nfor each Trade Union you have.\n2B/2C\nng',
+				type: 'company',
+				action: 'strike',
+				target: 'company',
 			},
 		],
 	},
@@ -1550,12 +1546,7 @@ const workingClassActionCards = [
 		name: 'Ps Ten',
 		content:
 			'| Ps Ten\nZ a ae “d =\nSF, O SFENS SS ~\nry’ >. ae\nffl om ~ —ae a\nFAKE NEWS\nDraw 6 Voting cubes from\nthe bag. Remove up to 4 of them\nand return the rest to the bag.\nSc',
-		effects: [
-			{
-				type: 'raw',
-				text: '| Ps Ten\nZ a ae “d =\nSF, O SFENS SS ~\nry’ >. ae\nffl om ~ —ae a\nFAKE NEWS\nDraw 6 Voting cubes from\nthe bag. Remove up to 4 of them\nand return the rest to the bag.\nSc',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-2-5',
@@ -1598,10 +1589,12 @@ const workingClassActionCards = [
 		name: 'RoW aN',
 		content:
 			'. “ RoW aN\n~\n- ~ Si wr\ni ->\n, é ” o- a =\ni, 4 —_\n. \\ !\n| »,\nGENERAL STRIKE\nPerform a Strike. You may\nplace an additional Strike token\nfor each Trade Union you have.\n2B/2C',
-		effects: [
+		requirements: [{ type: 'policy', mode: 'any', policies: ['2B', '2C'] }],
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '. “ RoW aN\n~\n- ~ Si wr\ni ->\n, é ” o- a =\ni, 4 —_\n. \\ !\n| »,\nGENERAL STRIKE\nPerform a Strike. You may\nplace an additional Strike token\nfor each Trade Union you have.\n2B/2C',
+				type: 'company',
+				action: 'strike',
+				target: 'company',
 			},
 		],
 	},
@@ -1642,12 +1635,7 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			'A\nat\n~ m : wn\n; aS) .\n@ ™ A\n’ ¥\n\\\n| a \\\nSTATE SCHOLARSHIP\nBuy from the State,\nup to your Population, paying\nhalf the cost (rounded up).',
-		effects: [
-			{
-				type: 'raw',
-				text: 'A\nat\n~ m : wn\n; aS) .\n@ ™ A\n’ ¥\n\\\n| a \\\nSTATE SCHOLARSHIP\nBuy from the State,\nup to your Population, paying\nhalf the cost (rounded up).',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-4-5',
@@ -1686,12 +1674,7 @@ const workingClassActionCards = [
 		name: 'Working Class Actions',
 		content:
 			'A\nat\n~ m : wn\n; aS) .\n@ ™ A\n’ ¥\n\\\n| a \\\nSTATE SCHOLARSHIP\nBuy from the State,\nup to your Population, paying\nhalf the cost (rounded up).',
-		effects: [
-			{
-				type: 'raw',
-				text: 'A\nat\n~ m : wn\n; aS) .\n@ ™ A\n’ ¥\n\\\n| a \\\nSTATE SCHOLARSHIP\nBuy from the State,\nup to your Population, paying\nhalf the cost (rounded up).',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-5-5',
@@ -1739,10 +1722,14 @@ const workingClassActionCards = [
 		name: 'Pike = MR | j',
 		content:
 			"a ' 4 y ss q E .\npe ?. ¥\nhid “4 * ,\nim oe is\n. A ~\nys ; AZ’\n. ~~!\n. ye a ' Ne —\nRADICAL REFORMS\nPropose a Bill. You may place\nyour marker on any section (even\nif it's not next to the current one).\nYou may not call for an\nImmediate Vote on this Bill.\nSee",
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "a ' 4 y ss q E .\npe ?. ¥\nhid “4 * ,\nim oe is\n. A ~\nys ; AZ’\n. ~~!\n. ye a ' Ne —\nRADICAL REFORMS\nPropose a Bill. You may place\nyour marker on any section (even\nif it's not next to the current one).\nYou may not call for an\nImmediate Vote on this Bill.\nSee",
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -1792,10 +1779,13 @@ const workingClassActionCards = [
 		name: 'et J cy] ”',
 		content:
 			'et J cy] ” ?\nA\n) ’ \\ We |\n11) Pom\n- oa ca \\\nUNEMPLOYMENT BENEFITS\nGet 5¥ from the State for each\nof your unemployed Workers.\nYou may then Buy Goods\n& Services from the State\nsh',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'et J cy] ” ?\nA\n) ’ \\ We |\n11) Pom\n- oa ca \\\nUNEMPLOYMENT BENEFITS\nGet 5¥ from the State for each\nof your unemployed Workers.\nYou may then Buy Goods\n& Services from the State\nsh',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'state',
+				target: 'self',
 			},
 		],
 	},
@@ -1845,10 +1835,13 @@ const workingClassActionCards = [
 		name: 'et J cy] ”',
 		content:
 			'et J cy] ” ?\nA\n) ’ \\ We |\n11) Pom\n- oa ca \\\nUNEMPLOYMENT BENEFITS\nGet 5¥ from the State for each\nof your unemployed Workers.\nYou may then Buy Goods\n& Services from the State\nsh',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'et J cy] ” ?\nA\n) ’ \\ We |\n11) Pom\n- oa ca \\\nUNEMPLOYMENT BENEFITS\nGet 5¥ from the State for each\nof your unemployed Workers.\nYou may then Buy Goods\n& Services from the State\nsh',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'state',
+				target: 'self',
 			},
 		],
 	},
@@ -1897,12 +1890,7 @@ const workingClassActionCards = [
 		name: 'ae’ ee',
 		content:
 			'\\ Cee‘ a\n—\n| lab\niy! Pat kop / Fr\nate J < { “Tk\n<= =\nINTEREST GROUPS\nReveal Voting cubes from the bag\nuntil you reveal 3 opponents’\ncubes. Replace them with your\nVoting cubes and return all\nrevealed cubes to the bag.',
-		effects: [
-			{
-				type: 'raw',
-				text: '\\ Cee‘ a\n—\n| lab\niy! Pat kop / Fr\nate J < { “Tk\n<= =\nINTEREST GROUPS\nReveal Voting cubes from the bag\nuntil you reveal 3 opponents’\ncubes. Replace them with your\nVoting cubes and return all\nrevealed cubes to the bag.',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies WorkingClassActionCardsCard[];
 

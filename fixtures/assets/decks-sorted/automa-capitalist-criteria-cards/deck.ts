@@ -75,12 +75,7 @@ const automaCapitalistCriteriaCards = [
 				'workers',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'CHECK COMPANIES\noS 0\nFor each Company in the Market that\nyou can afford to Build, check the\nfollowing:\n+ If it’s automated or if there +1\nare unemployed Workers /2 PROD.\navailable that could fill all poarneic\nits slots:\n+ If it also produces a resource +1\nyou are currently not able\nto produce:\nThen, check the following:\n- If there is a Demonstration +3\ntaking place:\n+ If the previous questions\ncaused the priority card to | LSA} #1\nmove 1 step or less:\nFor each non-operational Company\nyou own, check the following:\n+ If you sell it, you will get at +1\nleast 20¥: Nor\na a',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-criteria-cards-grid-11-items-6-2-automa-capitalist-criteria-deck-239-pos-2-1',
@@ -152,12 +147,7 @@ const automaCapitalistCriteriaCards = [
 				'for',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'SELL COMPANY\nCRITERIA\nae a\nWhen Selling a Company, choose using\nthe following criteria:\n+ Highest Cost\n+ If operational with Working Class\nworkers, requirements for a Trade\nUnion would be met.\n+ Fewest matching unemployed\nWorkers available\n+ At random\nNOTE: Never sell an operational Company.\n‘a 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-criteria-cards-grid-11-items-6-2-automa-capitalist-criteria-deck-239-pos-3-1',
@@ -231,12 +221,7 @@ const automaCapitalistCriteriaCards = [
 				'aside',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'CHECK POLICIES\nOO\nThe Desired Policies for the Capitalist\nClass are the following:\nbic }2c } 3c } 4c | 5c | 6a [7c |\nFor each of the 2 Policies listed, if the\nPolicy priority card is not set aside and\nyou have at least one available Bill mar-\nker, check where the Policy marker is:\n+ If the current Policy is = +1\ndirectly next to your Desired\nPolicy:\n+ If the current Policy is 2 42\nspaces away from your\nDesired Policy:\n+ If the Policy is Taxation: | (5) +1\nThen, move the Policy’s priority card\nthe same number of steps.\n+ Ifyou are unable to Propose +1\na Bill for either Policy: | a3\n_ A',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-criteria-cards-grid-11-items-6-2-automa-capitalist-criteria-deck-239-pos-4-1',
@@ -302,10 +287,20 @@ const automaCapitalistCriteriaCards = [
 				'otherwise',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'ie\nCHECK FOREIGN MARKET\nae\nCheck the current Export card to see\nif you can Sell to the Foreign Market:\n+ If you can make at least +1\n2 transactions: | Sos\n+ Otherwise: | [sa | +1\ne 4',
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -377,12 +372,7 @@ const automaCapitalistCriteriaCards = [
 				'the',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: "ie\nACTION CRITERIA\noS\nL Propose Bill\n4 Simple Mode: You must have\na Bill marker available, and\nthere must be at least one\nPolicy listed on the Al card\nthat does not match your\nDesired Policy.\nAdvanced Mode: You must\nhave a Bill marker available,\nand at least one Policy\n@ priority card in a priority row.\nSp Lobby\nSimple Mode: The @® you\nhave is less than the @ of all\nthe other .\n@ players.\nSpecial Action\ny Simple Mode: The first\n=x) condition listed on the Al\ncard's Bonus is met.\n-_ ae",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-criteria-cards-grid-11-items-6-2-automa-capitalist-criteria-deck-239-pos-6-1',
@@ -454,12 +444,7 @@ const automaCapitalistCriteriaCards = [
 				'based',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '3\nASSIGN WORKERS\nCRITERIA\n[NE a i A SY\nSome effects allow you to Assign\nWorkers to your non-operational\nCompanies. In those cases, choose\nwhere they will be assigned based\non the following criteria:\n+ You do not have any other operational\nCompanies in that industry\n+ Does not cause the requirements\nfor a Trade Union to be met\n+ Media\n+ Healthcare / Education (whichever\ncorresponding Public Service is not\nbeing produced, whichever is more\nexpensive, or at random between\nthe two)\n+ Agricultural\n+ Luxury\n+ At random\n‘a a',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-criteria-cards-grid-11-items-6-2-automa-capitalist-criteria-deck-239-pos-1-2',
@@ -531,12 +516,7 @@ const automaCapitalistCriteriaCards = [
 				'that',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: "‘a SS\nRESPONSE TO STRIKE\nos\nFor each Company with a Strike token,\ncheck the following:\n+ If the Company has ped Draw 2\nor is the only operational\nCompany you have of that\nindustry:\n+ Otherwise: | Draw 1\nIf any of the cards drawn show the\n@ symbol, increase the Company's\nWages to L3. At the beginning of the\nfollowing round, Adjust Wages again for\nall of your Companies to the minimum\nallowable Wage.\n_ a",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-criteria-cards-grid-11-items-6-2-automa-capitalist-criteria-deck-239-pos-2-2',
@@ -608,10 +588,11 @@ const automaCapitalistCriteriaCards = [
 				'workers',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "(a ey\nBUILDING COMPANY CRITERIA\na ee\nTo choose which Company to build, use\nthe following criteria to narrow down a\nset of options until only 1 remains:\n+ Unemployed Workers available to\nmake it operational\n+ Automated\n- Industry with the fewest operational\nCompanies\n+ Doesn't fulfill requirements for a Trade\nUnion\n+ Agricultural, Luxury, Media\n+ Healthcare / Education (whichever\ncorresponding Public Service is not\nbeing produced, whichever is more\nexpensive, or at random between\nthe two)\n+ Highest production\n+ At random\nNOTE: Never Build a Company that won't\nbecome operational if there's already a non-\noperational Company of that Industry.\nNOTE: When Workers from both classes are\navailable, assign Middle Class Workers, unless\nthere's a Demonstration in which case assign\nWorking Class Workers.\n‘a a",
+				type: 'company',
+				action: 'build',
+				target: 'self',
 			},
 		],
 	},
@@ -683,12 +664,7 @@ const automaCapitalistCriteriaCards = [
 				'agricultural',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'a *\nPLACE MACHINERY\nCRITERIA\nOrr pe oe oe ap\nTo choose which of your Companies to\nplace & on, use the following criteria:\n+ None of your other Companies in that\nindustry have a % token\n+ Agricultural\n+ Luxury\n+ Healthcare / Education\n(whichever corresponding\nPublic Service is not being produced,\nwhichever is more expensive, or at\nrandom between the two)\n+ Highest Production\n+ At random\n- as',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-criteria-cards-grid-11-items-6-2-automa-capitalist-criteria-deck-239-pos-4-2',
@@ -758,10 +734,25 @@ const automaCapitalistCriteriaCards = [
 				'board',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'is\nACTION CRITERIA\noS\n<3. Build Company\nFA There must be at least one\nJz = :] Company in the Market that\nyou can afford to build and\nat least one empty space on\nthe board.\nSimple Mode: There must\nalso be unemployed\nWorkers available to make it\noperational, or it must be an\nautomated Company. If you\ncan’t Build a Company and\nyou have at least one non-\noperational Company that\nyou can sell for 20€ or more,\nperform Sell Company.\nSell to the Foreign Market\nYou must be able to perform\nat least 2 transactions on the\ncurrent Export card.\ncs 4°',
+				type: 'company',
+				action: 'build',
+				target: 'self',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -835,12 +826,7 @@ const automaCapitalistCriteriaCards = [
 				'get',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: "CHECK INFLUENCE\n(eee eee ee Se\nIf there is at least 1 proposed Bill,\ncheck the following:\n+ Count all @® the other players\ncurrently have.\n+ Add all @ the other players would\nget by the Carry Out Elections step,\nassuming the board state remains\nas it is.\n+ If that number is higher +X\nthan the amount of @ ee\nyou currently have plus the | biFrereNce\n@ you will produce in the\nupcoming Production Phase,\nassuming the board state\nremains as it is:\n+ Otherwise (or if there are | By +1\nno proposed Bills):\nNOTE: When counting potential @, include\nproduction from operational Companies,\nTrade Union bonuses, and the State's\nPersonal @ gained due to Legitimacy.\n_ ar",
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies AutomaCapitalistCriteriaCardsCard[];
 

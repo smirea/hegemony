@@ -29,12 +29,7 @@ const automaAgendaCards = [
 			numbers: [10, 4],
 			keywords: ['leviathan', 'perform', 'the', 'task', 'least', 'events', 'anytime'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '“\nLEVIATHAN\nPerform the task of at least\n10 Events.\nQo x\nAnytime\n4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-2-1',
@@ -98,12 +93,7 @@ const automaAgendaCards = [
 				'end',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '“7\nEXPERT BUDGETER\nFinish the game without\ntaking a Loan.\nIf you ever take a Loan,\ndiscard this Agenda.\nGame End\na',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-3-1',
@@ -167,12 +157,7 @@ const automaAgendaCards = [
 				'ail',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '“a\nACCORDING TO PLAN\na\nsas _.\na\nat] 4+\nHave at least 4 Policies\nmatch your current Political\nAgenda card.\no -#£\nScoring Phase\nail',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-4-1',
@@ -206,12 +191,7 @@ const automaAgendaCards = [
 			resources: ['money'],
 			keywords: ['strong', 'welfare', 'state', 'have', 'least', 'and', 'policies', 'section', 'anytime'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'a,\nSTRONG WELFARE STATE\n150+ [ Q\nHave at least 150¥ and have\nPolicies 4 and 5 in section A.\n@ wh\nAnytime\n”',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-5-1',
@@ -269,12 +249,7 @@ const automaAgendaCards = [
 				'ail',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '“a\nSTATE-LED ECONOMY\nLele\nOPERATIONAL\nHave Policy 1 in section A\nand have at least 6 operational\nPublic Companies.\no -#£\nAnytime\nail',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-1-2',
@@ -304,12 +279,7 @@ const automaAgendaCards = [
 			numbers: [4, 0, 8],
 			keywords: ['entrepreneur', 'have', 'least', 'and', 'your', 'storages', 'anytime', 'oil'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '>\nENTREPRENEUR\n4\n-0? f\n8+ 8+ 8+ 8+\nHave at least 8 ¢, 8],\n8%, and 8 Si\nin your Storages.\noO x\nAnytime\noil',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-2-2',
@@ -367,12 +337,7 @@ const automaAgendaCards = [
 				'before',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '“-\nSUCCESSFUL STARTUP\n@ iii\n3 ce\nOPERATIONAL\nHave at least 5 fully\noperational Companies\nby the end of the 3rd round.\no -#\nAnytime\n(before the\n4th round)\nwa',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-3-2',
@@ -434,12 +399,7 @@ const automaAgendaCards = [
 				'sil',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '>\nGROWING MIDDLE CLASS\nia ata\n8 5+\nHave 8 fully operational\nCompanies and have Workers\nin at least 5 Public and/or\nCapitalist Class Companies.\n@ wh\nAnytime\nsil',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-4-2',
@@ -467,12 +427,7 @@ const automaAgendaCards = [
 			numbers: [1, -5],
 			keywords: ['golden', 'compromise', 'have', 'policies', 'section', 'anytime'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'a.\nGOLDEN COMPROMISE\ni EE al\nHave Policies 1-5\nin section B.\noO x\nAnytime\ner',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-5-2',
@@ -498,12 +453,7 @@ const automaAgendaCards = [
 		values: {
 			keywords: ['work', 'thrive', 'workers', 'have', 'unemployed', 'game', 'end'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '-\nWE WORK, WE THRIVE\nA\nWORKERS,\nHave no unemployed\nWorkers.\noO -£\nGame End\n=',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-1-3',
@@ -531,12 +481,7 @@ const automaAgendaCards = [
 			numbers: [6],
 			keywords: ['rally', 'the', 'masses', 'have', 'least', 'anytime'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'i.\nRALLY THE MASSES\nHave at least 6@®.\nQo wx\nAnytime\nii',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-2-3',
@@ -564,12 +509,7 @@ const automaAgendaCards = [
 			numbers: [4],
 			keywords: ['workers', 'unite', 'have', 'least', 'trade', 'unions', 'anytime'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 've\nWORKERS, UNITE!\n* ae\nHave at least\n4 Trade Unions.\nQ wv\nAnytime\na',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-3-3',
@@ -629,12 +569,7 @@ const automaAgendaCards = [
 				'iil',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '>\nWORKING CLASS PUSH\n: 2\n1\nPass 3 Bills you have\nproposed during the same\nElections Phase.\n@ wt\nElections\nPhase\niil',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-4-3',
@@ -662,12 +597,7 @@ const automaAgendaCards = [
 			numbers: [7],
 			keywords: ['small', 'labor', 'force', 'have', 'population', 'less', 'game', 'end'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'a.\nSMALL LABOR FORCE\nig : Up to Z\nHave a Population\nof 7 or less.\nQo -£\nGame End\naa',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-5-3',
@@ -727,12 +657,7 @@ const automaAgendaCards = [
 				'ail',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '“a\nTHE SURPLUS VALUE\nIS OURS!\nBAB : 240+\nGet at least 240¥\nin Wages in a single\nProduction Phase.\nOo x\nProduction\nPhase\nail',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-1-4',
@@ -762,12 +687,7 @@ const automaAgendaCards = [
 			numbers: [12, 11],
 			keywords: ['corporate', 'empire', 'operational', 'have', 'companies', 'least', 'them', 'must', 'anytime', 'ail'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '>\nCORPORATE EMPIRE\nEE\n12\n11+ OPERATIONAL\nHave 12 Companies.\nAt least 11 of them\nmust be operational.\nAnytime\nail',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-2-4',
@@ -823,12 +743,7 @@ const automaAgendaCards = [
 				'round',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '“7\nTOWARD A NEOLIBERAL\nSTATE\n- Eq =\nok\nHave at least 3\nNeoliberal Policies\n(Policies 1 - 5 in section C).\no xg\nAnytime\n(after the\nIst round)\n-',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-3-4',
@@ -888,10 +803,20 @@ const automaAgendaCards = [
 				'phase',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '“s\nEXPORT TYCOON\nett : 240+\nGet at least 240¥ in\na single Sell to the Foreign\nMarket Action.\nQ wv\nAction Phase\n”',
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -955,12 +880,7 @@ const automaAgendaCards = [
 				'aid',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '“y\nDIVERSIFIED PORTFOLIO\n‘ives?\niffia Oa Gita la Gia\n2+ 2+ at: 2+ 2%\nHave at least 2 Companies\nfrom each industry.\nQO #\nGame End\naid',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-agenda-cards-grid-20-items-5-4-automa-agendas-deck-209-pos-5-4',
@@ -992,12 +912,7 @@ const automaAgendaCards = [
 			resources: ['money'],
 			keywords: ['venture', 'capitalist', 'capital', 'have', 'least', 'your', 'game', 'end'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '“"\nVENTURE CAPITALIST\nCAPITAL\nHave at least 320¥\nin your Capital.\nQ\nGame End\n”',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies AutomaAgendaCardsCard[];
 

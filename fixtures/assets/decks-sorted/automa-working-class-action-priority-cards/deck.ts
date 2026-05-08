@@ -31,12 +31,7 @@ const automaWorkingClassActionPriorityCards = [
 			numbers: [0],
 			keywords: ['ann'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'A:\nBa ie\n<0 oa\nnO “LS\nmo\nann',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-action-priority-cards-grid-6-items-3-2-automa-working-class-action-priority-deck-234-pos-2-1',
@@ -64,12 +59,7 @@ const automaWorkingClassActionPriorityCards = [
 		values: {
 			numbers: [9, 3],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '\\w)\nm\nK< |\n9 |\npo}\ni\nfe}\n< 3)',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-action-priority-cards-grid-6-items-3-2-automa-working-class-action-priority-deck-234-pos-3-1',
@@ -97,12 +87,7 @@ const automaWorkingClassActionPriorityCards = [
 		values: {
 			numbers: [4],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'i\n- =_\n4\ng\n| gi',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-action-priority-cards-grid-6-items-3-2-automa-working-class-action-priority-deck-234-pos-1-2',
@@ -132,12 +117,7 @@ const automaWorkingClassActionPriorityCards = [
 			numbers: [5, 7],
 			keywords: ['oon'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'a »\nif\n(@)\nS a=,\n< oon\n5 gl\n5 xz!\nAz\n5\n7) lB\nXE a',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-action-priority-cards-grid-6-items-3-2-automa-working-class-action-priority-deck-234-pos-2-2',
@@ -165,12 +145,7 @@ const automaWorkingClassActionPriorityCards = [
 		values: {
 			numbers: [7],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'MY\ng\n= 7',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-action-priority-cards-grid-6-items-3-2-automa-working-class-action-priority-deck-234-pos-3-2',
@@ -198,12 +173,7 @@ const automaWorkingClassActionPriorityCards = [
 		values: {
 			keywords: ['automa', 'working', 'class', 'action', 'priority'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'Automa Working Class Action Priority',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies AutomaWorkingClassActionPriorityCardsCard[];
 

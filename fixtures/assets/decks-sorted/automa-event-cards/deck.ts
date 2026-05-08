@@ -73,10 +73,12 @@ const automaEventCards = [
 				'working',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '>\n2EAKING LOW GLOBAL INNOVATION\nNEWS INDEX RANKING\nSPEND 48). FOR EACH &i YOU\nARE UNABLE TO SPEND, SPEND 8¥\nVE INSTEAD. THEN CHOOSE A CLASS.\nNO ACTION WORKING CAPITALIST\nCLASS CLASS\n, fe , pa\n1 o sme sh,\nsideline eh GET 1 AND 1[]. :\nSS',
+				type: 'money',
+				action: 'spend',
+				amount: 8,
+				target: 'self',
 			},
 		],
 	},
@@ -148,12 +150,7 @@ const automaEventCards = [
 				'each',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'a >\nBREAKING DEMAND FOR\nNEWS BETTER PUBLIC EDUCATION\na Cf\n\\0 j CHOOSE A CLASS WITH AN\nOPERATIONAL EDUCATION COMPANY.\nLIVE\nNO ACTION MIDDLE CAPITALIST\nCLASS CLASS\n) s )} s\n: ei e 6\n_ PHASE : EACH. IF YOU DO, THE STATE GETS ‘1°. :',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-3-1',
@@ -223,10 +220,12 @@ const automaEventCards = [
 				'get',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '-AKING DEMAND FOR SUBSIDIES\nNEWS BY DAIRY FARMERS\nSPEND 30¥\nTHEN, CHOOSE A CLASS.\nIVE\nNO ACTION WORKING CAPITALIST\nCLASS CLASS\na mS -\n1 S 2 8\nPHASE ; GET 10%\n. y',
+				type: 'money',
+				action: 'spend',
+				amount: 30,
+				target: 'self',
 			},
 		],
 	},
@@ -300,12 +299,7 @@ const automaEventCards = [
 				'tothe',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'a “\nBREAKING DEMAND FOR\n_ NEWS ADMINISTRATIVE UPGRADE\na\nty i CHOOSE A CLASS WITH AN\nOPERATIONAL LUXURY COMPANY.\nLIVE\nNO ACTION MIDDLE CAPITALIST\nCLASS CLASS\n» » ~Y\n"PRODUCTION | SELLUPT02[]TOTHE STATEFOR10¥\ns PHASE : EACH. IF YOU DO, THE STATE GETS *1°. .',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-5-1',
@@ -371,12 +365,7 @@ const automaEventCards = [
 				'cet',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'ge ”\n-AKING\nNEWS HIGH ILLITERACY RATE\nSPEND 48) OR 30¥%\nTHEN, CHOOSE A CLASS.\nIVE\nNO ACTION WORKING MIDDLE\nCLASS CLASS\n- ae )\n5 ss ez es\nee\nPHASE ; CET 2S.\n4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-1-2',
@@ -448,12 +437,7 @@ const automaEventCards = [
 				'tst',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'i >\n-EAKING\nNEWS LOW VACCINATION RATES\nSPEND 4% OR 30¥%\nTHEN, CHOOSE A CLASS.\nIVE\nNO ACTION WORKING MIDDLE\nCLASS CLASS\n- =\n) 1]\n5 a 2 a\nFE EES TNT CEE SEES TST\nPHASE | GET 2 &.\nSo »',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-2-2',
@@ -523,12 +507,7 @@ const automaEventCards = [
 				'then',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: "i >\nEAKING\nEAKING POLITICAL PRESSURE\nSPEND 1@ (EITHER MEDIA\nOR PERSONAL) FOR EACH POLICY\nTHAT DOESN'T MATCH YOUR\nCURRENT POLITICAL AGENDA.\nLIVE THEN, CHOOSE A CLASS.\nNO ACTION WORKING CAPITALIST\nCLASS CLASS\na a a\na & 2 8\n- PHASE : ADD 2 VOTING CUBES TO THE BAG. ”",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-3-2',
@@ -600,12 +579,7 @@ const automaEventCards = [
 				'two',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: "e ”\nEAKING\nNEWS DEMAND FOR ENERGY SUBSIDY\nSPEND 1 MEDIA@.\nTHEN, CHOOSE A CLASS.\nIVE\nNO ACTION | WORKING MIDDLE CAPITALIST\nCLASS CLASS CLASS\na= mn\nANY TWO\nPRODUCTION :\n' PHASE ; THE STATE PAYS YOU 10¥. 7",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-4-2',
@@ -673,12 +647,7 @@ const automaEventCards = [
 				'phase',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'EAKING\nNEWS SMEAR CAMPAIGN\nSPEND 1 PERSONAL @® AND 15%\nTHEN, CHOOSE A CLASS.\nIVE\nNO ACTION | WORKING MIDDLE CAPITALIST\nQ CLASS CLASS CLASS\nity a = > i\na] Xi Bs se\nwm | @ | @ | @\nELECTIONS :\nPHASE ; CET! ®.\n‘eo i',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-5-2',
@@ -746,12 +715,7 @@ const automaEventCards = [
 				'before',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '§ 7\nEAKING DEMAND FOR\nNEWS ECONOMIC STIMULUS\nSPEND 30%\nTHEN, CHOOSE A CLASS.\nIVE\nNO ACTION MIDDLE CAPITALIST\nCLASS CLASS\n) S )\noi ks BA\nog 2 E\na PHASE 3 OF YOUR COMPANIES BEFORE IT PRODUCES',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-1-3',
@@ -821,12 +785,7 @@ const automaEventCards = [
 				'elections',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'a >\n-AKING\nNEWS PUBLIC PRESSURE\nCHOOSE A CLASS.\nIVE\nNO ACTION WORKING CAPITALIST\nCLASS CLASS\n- mS ~ as\n1 o ite, sh,\n: DISCARD THIS CARD BEFORE VOTING FOR\nELECTIONS : a BILL. THE STATE SUPPORTS THAT BILL,\n“ PHASE : SPENDING AS MUCH AS IT CAN, UP TO 2 2,',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-2-3',
@@ -898,12 +857,7 @@ const automaEventCards = [
 				'phase',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'a >\nEAKING\nSUN HURRICANE\nBUY UPTOS5 ¢&.\nTHEN, CHOOSE A CLASS.\nIVE\nNO ACTION WORKING MIDDLE\nCLASS CLASS\na\nA : BS 3\nPRODUCTION : IN THE COVER NEEDS STEP, THE STATE\n. PHASE : GIVES YOU 1¥. IF UNABLE, IT LOSES °1). >',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-3-3',
@@ -971,12 +925,7 @@ const automaEventCards = [
 				'middle',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '“ .\n-AKING\nNEWS RISING TRAFFIC ACCIDENTS\nSPEND EITHER 2% AND 2 &\nOR 3 OF ONE AND 17 OF THE OTHER.\nTHEN, CHOOSE A CLASS.\nLIVE\nNO ACTION WORKING MIDDLE\nCLASS CLASS\n,\n)\nty\nSemen eae GET 19 AND 12). ;\neS',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-4-3',
@@ -1046,12 +995,7 @@ const automaEventCards = [
 				'during',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'EAKING\n~ NEWS TAX RETURNS\nCHOOSE A CLASS.\nIVE\nNO ACTION | WORKING MIDDLE CAPITALIST\nCLASS CLASS CLASS\ncm ~\nANY TWO\nPRODUCTION :\n. PHASE | PAY 10 LESS DURING THE PAY TAXES STEP. 7',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-5-3',
@@ -1119,12 +1063,7 @@ const automaEventCards = [
 				'any',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '< i.\nEAKING\nNEWS FEAR OF RECESSION\nSPEND 1 PERSONAL ® AND 15%\nTHEN, CHOOSE A CLASS.\nLIVE\nNO ACTION | WORKING MIDDLE CAPITALIST\nme CLASS CLASS CLASS\nie sed +.\n1 sok\n+2) .\nANY TWO\nPRODUCTION :\nPHASE: CET! =.\nXe 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-1-4',
@@ -1192,12 +1131,7 @@ const automaEventCards = [
 				'two',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'gr\nEAKING\nNEWS STUDENT PROTEST\nSPEND 1 PERSONAL ® AND 2%.\nTHEN, CHOOSE A CLASS.\nIVE\nNO ACTION | WORKING MIDDLE CAPITALIST\nCLASS CLASS CLASS\nle, see\n965| » é 8\nANY TWO\nPREPARATION :\nPHASE | CET 2S.\nse vy',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-2-4',
@@ -1269,12 +1203,7 @@ const automaEventCards = [
 				'tothe',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'ts >\nBREAKING\nNEWS RISING FLU INFECTIONS\né y CHOOSE A CLASS WITH\n\\ y AN OPERATIONAL HEALTHCARE\n: COMPANY.\nLIVE\nNO ACTION MIDDLE CAPITALIST\nCLASS CLASS\n) rl ) ry\n& © 5 a\n“PRODUCTION ; SELLUP TO 2 @ TOTHE STATEFOR10¥\ni PHASE : EACH. IF YOU DO, THE STATE GETS °1. "',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-3-4',
@@ -1344,12 +1273,7 @@ const automaEventCards = [
 				'for',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'i "\nEAKING\n“NEWS LOW POLITICAL ENGAGEMENT\nCHOOSE A CLASS WITH AT LEAST 1\nBILL MARKER STILL AVAILABLE. SPEND\n1@ (EITHER MEDIA OR PERSONAL) FOR\nIVE EACH AVAILABLE BILL MARKER IT HAS.\nNO ACTION WORKING CAPITALIST\nCLASS CLASS\n2 @ ~~\n\' PHASE : ADD 2 VOTING CUBES TO THE BAG. :',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-4-4',
@@ -1421,10 +1345,12 @@ const automaEventCards = [
 				'phase',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '“ ‘,\nREAKING DEMAND FOR\nNEWS DIGITAL TRANSFORMATION\nSPEND 30¥\nTHEN, CHOOSE A CLASS WITH\nVE AN OPERATIONAL LUXURY COMPANY.\nNO ACTION MIDDLE CAPITALIST\nCLASS CLASS\n) S }) S\nZ a A &\nc PHASE : OF EACH OF YOUR LUXURY COMPANIES BY 1. 2',
+				type: 'money',
+				action: 'spend',
+				amount: 30,
+				target: 'self',
 			},
 		],
 	},
@@ -1494,10 +1420,19 @@ const automaEventCards = [
 				'get',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '- >\nIEAKING\nFAKING RISING ECONOMIC INEQUALITY\nSPEND 30¥\nTHEN, CHOOSE A CLASS.\nLIVE\nNO ACTION WORKING MIDDLE\nCLASS CLASS\n> cam\n"\nim 2 3\nPHASE i GET 10¥%\n= 4',
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'spend',
+				amount: 30,
+				target: 'self',
 			},
 		],
 	},
@@ -1569,12 +1504,7 @@ const automaEventCards = [
 				'any',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'a >\n-EAKING\nNEWS HEALTHCARE SCANDAL\nSPEND 1 PERSONAL @® AND 2%\nTHEN, CHOOSE A CLASS.\nIVE\nNO ACTION | WORKING MIDDLE CAPITALIST\nCLASS CLASS CLASS\na we\nsity, seh &\nv- 3 2]\nANY TWO\nPREPARATION :\nPHASE | GET 2 &.\noa ”',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-2-5',
@@ -1644,12 +1574,7 @@ const automaEventCards = [
 				'getting',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: "- .\nEAKING PUBLIC SECTOR UNION\nNEWS NEGOTIATIONS\nCHOOSE A CLASS WITH WORKERS\nIN A PUBLIC COMPANY.\nIVE\nNO ACTION WORKING MIDDLE\nCLASS CLASS\na\nim\n99 .\nvpamieriey | WHEN GETTING WAGES, THE STATE PAYS YOU\npoet Nee : 5'¥ MORE FOR EACH PUBLIC COMPANY WITH\n. ; YOUR WORKERS. THEN, IT GETS ‘itv. -",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-3-5',
@@ -1721,12 +1646,7 @@ const automaEventCards = [
 				'and',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'ga a.\nEAKING\nNEWS DEMAND FOR STARTUP SUPPORT\nCHOOSE A CLASS.\nLIVE\nNO ACTION MIDDLE CAPITALIST\nCLASS CLASS\n» & Nb s\n- PHASE ; STATE PAYS 10¥ OF ITS COST AND GETS ‘ly. 55',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-4-5',
@@ -1796,12 +1716,7 @@ const automaEventCards = [
 				'voting',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: "os >\nEAKING\n“NEWS GERRYMANDERING\nSPEND 2 PERSONAL @®.\nTHEN, CHOOSE A CLASS.\nIVE\nNO ACTION | WORKING MIDDLE CAPITALIST\na. CLASS CLASS CLASS\nhe se re a\nse, Jed )\n660, | A | &\nwm | @ | @| @\nELECTIONS :\n' PHASE | ADD 2 VOTING CUBES TO THE BAG.",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-event-cards-grid-25-items-5-5-automa-events-deck-212-pos-5-5',
@@ -1871,12 +1786,7 @@ const automaEventCards = [
 				'you',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '“a ”\nREAKING DEMAND FOR STATE\nNEWS INTERVENTION\nSPEND 20%\nTHEN, CHOOSE A CLASS.\nLIVE\nNO ACTION WORKING CLASS | CAPITALIST CLASS\nx\ngid, ay\n00 | * ;\neS CHOOSE A PRIVATE COMPANY YOU EITHER.\n: OWN OR HAVE WORKERS IN. FOR THIS\nPRODUCTION : BHASE ONLY, INCREASE OR LOWER ITS\nPHASE : WAGE LEVEL BY 1, IGNORING THE LABOR\n. : MARKET POLICY. ,',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies AutomaEventCardsCard[];
 

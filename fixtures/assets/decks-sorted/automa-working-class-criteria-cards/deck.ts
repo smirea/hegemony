@@ -71,12 +71,7 @@ const automaWorkingClassCriteriaCards = [
 				'least',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'CHECK WORKERS\noS\nSwap any skilled Workers in unskilled\nslots with unskilled unemployed\nWorkers if possible.\nThen, check the following:\n+ If there is a way to Assign +1\nWorkers so that at least\n2 unemployed Workers | POO\nbecome employed:\n+ If there is a way to Assign 42\nWorkers that will form one\n. / UNION\nor more Trade Unions:\n+ If the previous questions did By 41\nnot cause the priority card\nto move:\n+ If there are more [DEM E>¢\nunemployed Workers than 2\navailable Worker slots DIFFERENCE\n(regardless of skill):\na a',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-criteria-cards-grid-10-items-5-2-automa-working-class-criteria-deck-240-pos-2-1',
@@ -148,12 +143,7 @@ const automaWorkingClassCriteriaCards = [
 				'options',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'SKILLED WORKER\nCRITERIA\nOS 0\nTo choose which skilled Worker to add\nfrom the Supply, use the following criteria:\n+ If assigned, could form a Trade Union\nIf multiple options:\n- Fewest available slots in Companies\n- At random\n+ If assigned, would make you meet the\nrequirements for a Trade Union\n+ Most available slots in Companies\n+ Most available slots in unbuilt\nCompanies in players’ Markets\n+ Healthcare / Education (whichever\ncorresponding Public Service is not\nbeing produced, whichever is more\nexpensive, or at random between\nthe two)\n+ Agricultural, Media, Luxury\nNOTE: If the skilled Worker indicated here\nis already in the Unemployed Workers\narea, exclude it from the options, unless an\nadditional Worker of that type would be\nrequired to form a Trade Union.\n- Se',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-criteria-cards-grid-10-items-5-2-automa-working-class-criteria-deck-240-pos-3-1',
@@ -225,12 +215,7 @@ const automaWorkingClassCriteriaCards = [
 				'and',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '( >\nCHECK POLICIES\noS\nThe Desired Policies for the Working\nClass are the following:\n11 [2a [3A] 44] 5a [6c] 78 |\nFor each of the 2 Policies listed, if the\nPolicy priority card is not set aside and\nyou have at least one available Bill mar-\nker, check where the Policy marker is:\n+ If the current Policy is +1\ndirectly next to your Desired\nPolicy:\n+ If the current Policy is 2 a2\nspaces away from your\nDesired Policy:\n+ If the Policy is Labor Market: | +1\nThen, move the Policy’s priority card\nthe same number of steps.\n+ If you are unable to Propose #1\na Bill for either Policy: | LSA\nol a',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-criteria-cards-grid-10-items-5-2-automa-working-class-criteria-deck-240-pos-4-1',
@@ -302,10 +287,11 @@ const automaWorkingClassCriteriaCards = [
 				'which',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'CHECK STRIKE\nGO\n- If Labor Market Policy +1\nis in section B and you 7/3 COMPANIES\nhave at least 2 Trade\nUnions:\n+ If Labor Market Policy +1\nis in section C: 2. COMPANIES\nLABOR\n|\nNOTE: Count only the Companies in which\nthe Wage given is the minimum allowable\nWage set by the current Labor Market Policy\nand at which you could perform a Strike.\nvl “oi',
+				type: 'company',
+				action: 'strike',
+				target: 'company',
 			},
 		],
 	},
@@ -381,12 +367,7 @@ const automaWorkingClassCriteriaCards = [
 				'the',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'ACTION CRITERIA\nae\nPropose Bill\nSimple Mode: You must have\na Bill marker available, and\nthere must be at least one\nPolicy listed on the Al card\nthat does not match your\nDesired Policy.\nAdvanced Mode: You must\nhave a Bill marker available\nand at least one Policy priority\ncard in a priority row.\nRey Strike\nx One of the following\n¥ conditions must apply:\n+ Labor Market is in 2C\n+ Labor Market is in 2B and\nthere are at least 2 Trade\nUnions\nThere must also be at least 2\nCompanies eligible for Strike,\nexcluding Public Companies\nthat offer their services for free.\n‘a a',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-criteria-cards-grid-10-items-5-2-automa-working-class-criteria-deck-240-pos-1-2',
@@ -460,12 +441,7 @@ const automaWorkingClassCriteriaCards = [
 				'population',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '‘a\nCHECK GOODS & SERVICES\noS 10\nCheck if the 3 resources that increase\nyour Prosperity (Health, Education,\nand Luxury) are available in a quantity\nequal to your Population (even if\nbought from 2 sources) and if you\ncan afford to buy them.\n+ Ifyou are unable to buy any | 1 SA Ea]\nof the 3 resources:\nOtherwise, for each eligible\nresource check the following:\n+ Ifyou can you get it for free: | FTES) +3\n+ If it will cost you 6¥ per item | ETS) +2\nor less (but not free):\n+ If it will cost you more than | [BGS Fa]\n6¥ per item:\nSs a',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-criteria-cards-grid-10-items-5-2-automa-working-class-criteria-deck-240-pos-2-2',
@@ -537,12 +513,7 @@ const automaWorkingClassCriteriaCards = [
 				'excluding',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'STRIKE TOKEN PLACEMENT\nCRITERIA\nee ee\nPlace Strike tokens, up to the number of\nTrade Unions plus 2, on Companies that\nare eligible for them, excluding Public\nCompanies that offer their services for\nfree. If there are many options on where\nto place the Strike tokens, use the\nfollowing criteria to narrow them down:\n+ Companies with &\n+ Companies that are the only\noperational ones of their industry\n(for their owner)\n+ Biggest difference in Wages between\nlevels\n+ Media, Healthcare, Educational,\nLuxury, Agricultural\n+ Biggest production\n+ At random\n‘a a',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-criteria-cards-grid-10-items-5-2-automa-working-class-criteria-deck-240-pos-3-2',
@@ -612,12 +583,7 @@ const automaWorkingClassCriteriaCards = [
 				'options',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'BUY GOODS & SERVICES\nCRITERIA\noe ee ere ees eee meer eee |\nTo choose which goods and services to\nbuy, and from which source when there\nare multiple options, use the following\ncriteria to narrow down those options\nuntil only 1 remains:\n+ Free\n+ If you have 3 or more unemployed\nunskilled Workers: Si\n+ Cheapest (including combinations\nfrom 2 sources). Exclude @ if it will\nlead to Population increase and other\noptions are available.\n23.0\n+ Public Services\n+ Foreign Market\n+ Capitalist Class\n+ Middle Class\n7 ”',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-criteria-cards-grid-10-items-5-2-automa-working-class-criteria-deck-240-pos-4-2',
@@ -689,12 +655,7 @@ const automaWorkingClassCriteriaCards = [
 				'not',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'ACTION CRITERIA\nOO\n«gy. Assign Workers\n= You must be able to Assign\n3 | at least 2 unemployed\nWorkers to one or more\nCompanies or 1 Worker\nto a Trade Union.\nSimple Mode: If not and\nthere are more unemployed\nWorkers than the number\nof available slots by at least\n2, perform Demonstration\ninstead.\nSee Buy Goods & Services\n\\vs / You must be able to buy at\n® least one of the 3 resources\n(Health, Education, Luxury) in\na quantity that will allow you\nto increase your Prosperity.\nes a',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-criteria-cards-grid-10-items-5-2-automa-working-class-criteria-deck-240-pos-5-2',
@@ -766,12 +727,7 @@ const automaWorkingClassCriteriaCards = [
 				'down',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'ASSIGN WORKERS\nCRITERIA\nEe ree ree ere Bee ee ree, |\nTo choose where to assign Workers\nwhen there are multiple options, use\nthe following criteria to narrow down\na set of options until only 1 remains:\n+ Forming a Trade Union\n+ Most unemployed Workers assigned\n+ Fulfillment of requirements for Trade\nUnion\n+ Highest Wages\n+ Public Company\n+ Capitalist Company\n+ Healthcare / Education Company\n(whichever corresponding Public\nService is not being produced,\nwhichever is cheaper, or at random\nbetween the two)\n+ Agricultural, Media, Luxury\n+ At random\n‘a ail',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies AutomaWorkingClassCriteriaCardsCard[];
 

@@ -76,10 +76,23 @@ const automaWorkingClassAiCards = [
 				'that',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "— Lee NS\nfio se\n. e e ——=\n(2B/2c : You may Assign up to\n4 unemployed Workers this turn.\nGet 4¥ for each Worker assigned\nto a Company this way from\nthat Company's owner.\nQn 0\nSPECIAL ACTION\nReveal Voting cubes from the\nbag until you reveal 3 cubes of\nother classes. Replace them with\nWorking Class cubes and return all\n@ revealed cubes to the bag. 1",
+				type: 'money',
+				action: 'gain',
+				amount: 4,
+				source: 'supply',
+				target: 'self',
+			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: {
+					type: 'up-to',
+					amount: 4,
+				},
+				workerType: 'any',
+				target: 'company',
 			},
 		],
 	},
@@ -152,10 +165,14 @@ const automaWorkingClassAiCards = [
 				'current',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'Se ifs WS\n=a . e e\nIf you Propose a Bill this turn,\nplace your marker on your Desired\nPolicy, even if it’s not next to the\ncurrent section. You may only\ncall for an Immediate Vote if you\nplaced your marker next to the\ncurrent section. |\nOe\nSPECIAL ACTION\nAdd Voting cubes to the bag\nequal to your Population.\n@B@ 11',
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -230,10 +247,13 @@ const automaWorkingClassAiCards = [
 				'special',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '‘ ie Aq\nOsi\nscan\n(2B72e) : if you Buy\nGoods & Services this turn,\nthe State gives you 1¥ for each\nof your employed Workers first.\nOQ 0\nSPECIAL ACTION\nGet 15¥ from the player\nin whose Companies you have\nthe most Workers.\nr 13',
+				type: 'money',
+				action: 'gain',
+				amount: 15,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},
@@ -308,10 +328,10 @@ const automaWorkingClassAiCards = [
 				'state',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '5 Ns £ ¢ BB =\n% \\Ss/ BAA\n== e e .\n‘omen\nIf you Propose a Bill this turn,\nadd 2 Voting cubes to the bag first.\nSPECIAL ACTION\nBuy 3 © from the State for 5¥\neach. For each ©» you are unable\nto buy, add 2 Voting cubes\nto the bag instead.\n* a',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -388,12 +408,7 @@ const automaWorkingClassAiCards = [
 				'class',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '= q \\S\n== ps Fee ~ ¥\nOsi\nIf you Assign Workers this turn,\nyou may Assign\n(2B) : any number of\nunemployed Workers.\n(2) : any number of Workers.\n° aa -O\nSPECIAL ACTION\nIf able, give 20¥ to the Capitalist\nClass and get fy.\ntd 19',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-ai-cards-grid-30-items-10-3-automa-working-class-ai-deck-237-pos-6-1',
@@ -464,12 +479,7 @@ const automaWorkingClassAiCards = [
 				'you',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '4 = \\q\nVs Fla &\nis sold by the State\nat half price this turn\n(rounded up).\nle: - — - -e}\nSPECIAL ACTION\nReveal Voting cubes from the\nbag until you reveal 3 cubes of\nother classes. Replace them with\nWorking Class cubes and return\nall revealed cubes to the bag.\nS&S q 21',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-ai-cards-grid-30-items-10-3-automa-working-class-ai-deck-237-pos-7-1',
@@ -540,12 +550,7 @@ const automaWorkingClassAiCards = [
 				'action',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'Seg = 3.\nwes EZ AR\nPs/ A OAR\n(AT IB’ : Half of the cost of | |\n(rounded down) bought from\nother players this turn\nis paid by the State.\nSPECIAL ACTION\nAdd Voting cubes to the bag\nequal to your Population.\n28',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-ai-cards-grid-30-items-10-3-automa-working-class-ai-deck-237-pos-8-1',
@@ -618,10 +623,21 @@ const automaWorkingClassAiCards = [
 				'workers',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '— . e e\nIf you Propose a Bill this turn,\ncall for an Immediate Vote\nwithout spending “>.\nre)\nSPECIAL ACTION\nIf you have at least 4 unemployed\nWorkers, remove 2 of them\n(unskilled if able, otherwise\nat random) and get 10¥.\nBQ 17',
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -696,10 +712,17 @@ const automaWorkingClassAiCards = [
 				'companies',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '= fe apa\ni \\Ss7 BAR\n— e e .\nIf you Propose a Bill this turn,\nPropose 2 Bills instead if able.\nA SPECIAL ACTION\nGet 15¥ from the player\nin whose Companies you have\nthe most Workers.\n24',
+				type: 'money',
+				action: 'gain',
+				amount: 15,
+				source: 'supply',
+				target: 'self',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -772,10 +795,16 @@ const automaWorkingClassAiCards = [
 				'owner',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "Aa We?\n. — e e\n: You may Assign up to\n4 unemployed Workers this turn.\nGet 4*¥ for each Worker assigned\nto a Company this way from that\nCompany's owner.\n: SPECIAL ACTION\nDraw 6 voting cubes from the bag.\nReturn the Working Class cubes\nto the bag and remove all the rest.\n26",
+				type: 'worker',
+				action: 'assign',
+				amount: {
+					type: 'up-to',
+					amount: 4,
+				},
+				workerType: 'any',
+				target: 'company',
 			},
 		],
 	},
@@ -850,12 +879,7 @@ const automaWorkingClassAiCards = [
 				'bag',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'Aa Sev\n. SS e e\nIf you Assign Workers this turn,\nyou may Assign\n(2B) : any number of\nunemployed Workers.\n(2) : any number of Workers.\nSPECIAL ACTION\nDraw 6 Voting cubes from the bag.\nAll Working Class cubes drawn are\nreturned to the bag. Remove all\nother drawn cubes.\n8',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-ai-cards-grid-30-items-10-3-automa-working-class-ai-deck-237-pos-2-2',
@@ -928,10 +952,14 @@ const automaWorkingClassAiCards = [
 				'the',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '= fe apg:\n& \\vsi7 lar\n——a e e .\nIf you Propose a Bill this turn,\ncall for an Immediate Vote\nwithout spending ©.\nOQ 0\nSPECIAL ACTION\nIf able, give 20¥ to the Capitalist\nClass and get fy.\n6',
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -1006,10 +1034,17 @@ const automaWorkingClassAiCards = [
 				'whose',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '== . e @\nIf you Propose a Bill this turn,\nadd 2 Voting cubes\nto the bag first.\nQ- a 0\nSPECIAL ACTION\nGet 15¥ from the player\nin whose Companies you have\nthe most Workers.\n@ 5',
+				type: 'money',
+				action: 'gain',
+				amount: 15,
+				source: 'supply',
+				target: 'self',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -1080,12 +1115,7 @@ const automaWorkingClassAiCards = [
 				'population',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '¢ D> ip.\ne e ——= .\nGi is sold by the State\nat half price this turn\n(rounded up).\nQe 0\nSPECIAL ACTION\nAdd Voting cubes to the bag\nequal to your Population.\n4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-ai-cards-grid-30-items-10-3-automa-working-class-ai-deck-237-pos-5-2',
@@ -1158,12 +1188,7 @@ const automaWorkingClassAiCards = [
 				'first',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '0 bos \\S\nShi xf\nOsi\nIf you Buy Goods & Services\nthis turn, a Public Education\nCompany with your Workers\ndoes a Production first.\noS\nSPECIAL ACTION\nBuy 3 © from the State for 5¥\neach. For each ©) you are unable\nto buy, add 2 Voting cubes\nto the bag instead.\n@ r 9',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-ai-cards-grid-30-items-10-3-automa-working-class-ai-deck-237-pos-6-2',
@@ -1234,10 +1259,10 @@ const automaWorkingClassAiCards = [
 				'get',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '5 iA: See\nEZ if vs\n—=—a . e e\nIf you Propose a Bill this turn,\nPropose 2 Bills instead if able.\nOQ 0\nSPECIAL ACTION\nIf able, give 20¥ to the Capitalist\nClass and get fy.\nEo) 29',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -1312,10 +1337,21 @@ const automaWorkingClassAiCards = [
 				'may',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '—=s e e .\nIf you Propose a Bill this turn,\nplace your marker on your Desired\nPolicy, even if it’s not next to\nthe current one. You may only\ncall for an Immediate Vote if you\nplaced your marker next to the\ns current section. a\nSPECIAL ACTION\nGet 15¥ from the player\nin whose Companies you have\nthe most Workers.\n18',
+				type: 'money',
+				action: 'gain',
+				amount: 15,
+				source: 'supply',
+				target: 'self',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -1388,12 +1424,7 @@ const automaWorkingClassAiCards = [
 				'classes',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '1\nSi is sold by the State\nat half-price this turn\n(rounded up).\noO - - =e)\nSPECIAL ACTION\nReveal Voting cubes from the\nbag until you reveal 3 cubes of\nother classes. Replace them with\nWorking Class cubes and return all\nrevealed cubes to the bag.\n@ 27',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-ai-cards-grid-30-items-10-3-automa-working-class-ai-deck-237-pos-9-2',
@@ -1466,12 +1497,7 @@ const automaWorkingClassAiCards = [
 				'action',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '‘ = ‘\nSee ae: DP\nlos Ha &\nSey Ee\n1A/1B° : Half of the cost of 0\n(rounded down) bought from\nother players this turn\nis paid by the State.\noO - ze}\nSPECIAL ACTION\nDraw 6 Voting cubes from the bag.\nAll Working Class cubes drawn\nare returned to the bag. Remove\nall other drawn cubes.\n@ iS',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-ai-cards-grid-30-items-10-3-automa-working-class-ai-deck-237-pos-10-2',
@@ -1544,12 +1570,7 @@ const automaWorkingClassAiCards = [
 				'cubes',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'iH: mB - see ¥\na & Vs\n7B/7C : \\f you Assign Workers\nthis turn, get a skilled Worker\nfrom the Supply first.\n5 SPECIAL ACTION\nAdd Voting cubes to the bag\nequal to your Population.\n20',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-ai-cards-grid-30-items-10-3-automa-working-class-ai-deck-237-pos-1-3',
@@ -1622,12 +1643,7 @@ const automaWorkingClassAiCards = [
 				'state',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'ra ce We?\n. == e e\nIf you Assign Workers this turn,\nBuild a Cooperative Farm first and\nAssign the Workers there if able.\no_o\nSPECIAL ACTION\nBuy 3 © from the State for 5¥\neach. For each © you are unable\nto buy, add 2 Voting cubes\nto the bag instead.\n* 2',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-ai-cards-grid-30-items-10-3-automa-working-class-ai-deck-237-pos-2-3',
@@ -1700,12 +1716,7 @@ const automaWorkingClassAiCards = [
 				'action',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'a \\S =\nFee 2 1--—3\nee ES i\ne e === ns\nIf you Buy Goods & Services\nthis turn, a Public Healthcare\nCompany with your Workers\ndoes a Production first.\noS —_—__—_—_—_——o\nSPECIAL ACTION\nBuy 3 © from the State for 5¥\neach. For each © you are unable\nto buy, add 2 Voting cubes\nto the bag instead.\n* :',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-ai-cards-grid-30-items-10-3-automa-working-class-ai-deck-237-pos-3-3',
@@ -1774,12 +1785,7 @@ const automaWorkingClassAiCards = [
 				'give',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '= fe 5 Ne £ i\nFra Ws?\n. or e e\nsna\nIf you Assign Workers this turn,\nBuild a Cooperative Farm first and\nAssign the Workers there if able.\nQn ee 0\nSPECIAL ACTION\nIf able, give 20% to the Capitalist\nClass and get vy.\n14',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-ai-cards-grid-30-items-10-3-automa-working-class-ai-deck-237-pos-4-3',
@@ -1852,12 +1858,7 @@ const automaWorkingClassAiCards = [
 				'cubes',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '== el Seg LS ¥\nsi\n{7B/7C) : \\f you Assign Workers\nthis turn, get a skilled Worker\nfrom the Supply first.\nOQ oe 0\nSPECIAL ACTION\nReveal Voting cubes from the\nbag until you reveal 3 cubes of\nother classes. Replace them with\nWorking Class cubes and return all\nrevealed cubes to the bag.\nBS 7',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-ai-cards-grid-30-items-10-3-automa-working-class-ai-deck-237-pos-5-3',
@@ -1932,12 +1933,7 @@ const automaWorkingClassAiCards = [
 				'workers',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '2 = \\S\nVs Hla &\n4A /4B : You may only Buy from\nPublic Services this turn. If you do,\nthe State gives you 5¥ for each\nof your unemployed Workers first.\nSPECIAL ACTION\nDraw 6 Voting cubes from the bag.\nAll Working Class cubes drawn are\nreturned to the bag. Remove all\nother drawn cubes.\n@ &',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-working-class-ai-cards-grid-30-items-10-3-automa-working-class-ai-deck-237-pos-6-3',
@@ -2012,10 +2008,13 @@ const automaWorkingClassAiCards = [
 				'unemployed',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '“ ice NN\nFe ae: BD\nVs Hla &\n4A /4B : You may only Buy from\nPublic Services this turn. If you do,\nthe State gives you 5¥ for each of\nyour unemployed Workers first.\n5 SPECIAL ACTION\nIf you have at least 4 unemployed\nWorkers, remove 2 of them\n(unskilled if able, otherwise\nat random) and get 10¥.\n@ 25',
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},
@@ -2090,10 +2089,10 @@ const automaWorkingClassAiCards = [
 				'for',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '= + Fa- See\n== . e e\nIf you Propose a Bill this turn,\nadd 2 Voting cubes to the bag first.\nSPECIAL ACTION\nBuy 3 © from the State for 5¥\neach. For each © you are unable\nto buy, add 2 Voting cubes\nto the bag instead.\n® * 23',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -2168,10 +2167,17 @@ const automaWorkingClassAiCards = [
 				'workers',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '5 Ns £ ¢, ses =\n—— e e 2\nIf you Propose a Bill this turn,\nadd 2 Voting cubes to the bag first.\nQe 0\nSPECIAL ACTION\nIf you have at least 4 unemployed\nWorkers, remove 2 of them\n(unskilled if able, otherwise\nat random) and get 10¥.\n12',
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -2246,10 +2252,13 @@ const automaWorkingClassAiCards = [
 				'them',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'a \\S =\nFee 2 12: hp\nwe AA\nis sold by the State\nat half price this turn\n(rounded up).\nOQ 0\nSPECIAL ACTION\nIf you have at least 4 unemployed\nWorkers, remove 2 of them\n(unskilled if able, otherwise\nat random) and get 10¥.\n10',
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},
@@ -2324,10 +2333,13 @@ const automaWorkingClassAiCards = [
 				'action',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'a \\S =\nFee 2 1=:\nre EA\n(2B7/72e) : if you Buy\nGoods & Services this turn,\nthe State gives you 1¥ for each\nof your employed Workers first.\n; SPECIAL ACTION\nIf you have at least 4 unemployed\nWorkers, remove 2 of them\n(unskilled if able, otherwise\nat random) and get 10¥.\n22',
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},

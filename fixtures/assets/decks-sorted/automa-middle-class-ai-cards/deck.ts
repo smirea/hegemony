@@ -68,10 +68,10 @@ const automaMiddleClassAiCards = [
 				'shift',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'Df mB:\nQS)\nSS Se) Hi\nIf you Propose a Bill this turn,\nadd 2 Voting cubes to the bag first.\noO\nSPECIAL ACTION\nPerform an Extra Shift.\n@ 27',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -144,12 +144,7 @@ const automaMiddleClassAiCards = [
 				'from',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'SE ott ‘\nvoy, EA 3 fa\n= Ef\n(ee) tii i\nGis sold by the State\nat half price this turn\n(rounded up).\nOO\nSPECIAL ACTION\nReveal Voting cubes from the bag\nuntil you reveal 3 cubes of other\nclasses. Replace them with Middle\nClass cubes and return all revealed\ncubes to the bag.\nZs',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-ai-cards-grid-30-items-10-3-automa-middle-class-ai-deck-238-pos-3-1',
@@ -210,12 +205,7 @@ const automaMiddleClassAiCards = [
 				'shift',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'te wm. =O ~—»\nOs/ As Om GG\nes) fla ES\nis sold by the State\nat half price this turn\n(rounded up).\nQn 0\nSPECIAL ACTION\nPerform an Extra Shift.\n@ 1',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-ai-cards-grid-30-items-10-3-automa-middle-class-ai-deck-238-pos-4-1',
@@ -286,12 +276,7 @@ const automaMiddleClassAiCards = [
 				'action',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'CA ES DD\nWer As\noo 20, ———\nIf you Buy Goods & Services\nthis turn, a Public Education\nCompany with your Workers\ndoes a Production first.\nSPECIAL ACTION\nSell up to 6 to the State\nfor 10% each.\n$26\n4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-ai-cards-grid-30-items-10-3-automa-middle-class-ai-deck-238-pos-5-1',
@@ -362,12 +347,7 @@ const automaMiddleClassAiCards = [
 				'does',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'See — —\nwe Ry . of =\n7\nwet Fea Efi ams\nOR et\nIf you Buy Goods & Services\nthis turn, a Public Healthcare\nCompany with your Workers\ndoes a Production first.\nSPECIAL ACTION\nSellupto6 tothe State\nfor 10*¥ each.\n30\nS 5',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-ai-cards-grid-30-items-10-3-automa-middle-class-ai-deck-238-pos-6-1',
@@ -438,12 +418,7 @@ const automaMiddleClassAiCards = [
 				'special',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '$ \\S = =e\nih if\nVs\nWe & Aa ET\nIf you Buy Goods & Services\nthis turn, buy the resource from\nevery available source (including\nyourself), up to your Population\nfrom each.\n‘ SPECIAL ACTION\nIf able, pay 6% per Population\nto gain 1 Prosperity.\n8',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-ai-cards-grid-30-items-10-3-automa-middle-class-ai-deck-238-pos-7-1',
@@ -516,12 +491,7 @@ const automaMiddleClassAiCards = [
 				'special',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '= = a \\S\nTen i, See eZ\nOsi\nElla cfs s/o\n7B/7C . If you Assign Workers\nthis turn, get a skilled Worker\nfrom the Supply first.\nQn 0\nSPECIAL ACTION\nAdd Voting cubes to the bag equal\nto 2 plus the number of Public\nand Capitalist Class Companies in\nwhich your Workers are employed.\n& 19',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-ai-cards-grid-30-items-10-3-automa-middle-class-ai-deck-238-pos-8-1',
@@ -592,12 +562,7 @@ const automaMiddleClassAiCards = [
 				'action',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'Vs\ni Se\nIf you Build a non-Media Company\nthis turn, pay 4*¥ less. Then, get\na Storage for the resource\nproduced by that Company.\n° =<)\nSPECIAL ACTION\nSell up to 6 Bj to the State\nfor 10% each.\n26\nDS 15',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-ai-cards-grid-30-items-10-3-automa-middle-class-ai-deck-238-pos-9-1',
@@ -670,12 +635,7 @@ const automaMiddleClassAiCards = [
 				'capitalist',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'oT ees\nVs\nos) FH\n(2817/26) - if you Buy\nGoods & Services this turn,\nthe State first gives you 2¥ for\neach of your employed Workers in\nPublic or Capitalist Class Companies.\nSPECIAL ACTION\nAdd Voting cubes to the bag equal\nto 2 plus the number of Public\nand Capitalist Class Companies in\nwhich your Workers are employed.\n®@ 9',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-ai-cards-grid-30-items-10-3-automa-middle-class-ai-deck-238-pos-10-1',
@@ -748,12 +708,7 @@ const automaMiddleClassAiCards = [
 				'special',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'é Sy cS \\S\n2 if fi &\nVs\nWey ala ia\n(GAVEB) - if you Buy\nGoods & Services this turn,\ndo not pay tariffs for & or| |\nfrom the Foreign Market.\nQa\nSPECIAL ACTION\nBuy 3 ©» from the State for 5¥\neach. For each ©) you are unable\nto buy, add 2 Voting cubes\nto the bag instead.\n6 ‘',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-ai-cards-grid-30-items-10-3-automa-middle-class-ai-deck-238-pos-1-2',
@@ -828,10 +783,20 @@ const automaMiddleClassAiCards = [
 				'from',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'Vs\n1A/1B : If you Sell\nto the Foreign Market,\nthe State gives you 5¥ for\neach transaction you perform.\nSPECIAL ACTION\nDraw 6 Voting cubes from the bag.\nAll Middle Class cubes drawn are\nreturned to the bag. Remove all\nother drawn cubes.\n@ 23',
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -906,10 +871,21 @@ const automaMiddleClassAiCards = [
 				'action',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'afi 187 EA\nIf you Propose a Bill this turn,\ncall for an Immediate Vote\nwithout spending ©.\nOs ot pet ois a ie Oo Fie\nSPECIAL ACTION\nGet 5¥ from the State for each\nof your Companies with a Working\nClass Worker in it. Then, perform\nan Extra Shift in one of those\nCompanies if able.\n6 24',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -984,10 +960,13 @@ const automaMiddleClassAiCards = [
 				'and',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '(®) Lee = ef\n\\gsy EA\nil e e\nIf you have at least 4 | Aja\nunemployed Workers: (UNEMPL.\nOo\nSPECIAL ACTION\nIf you have at least 4 unemployed\nWorkers, remove 2 of them\n(unskilled if able, otherwise\nat random) and get 10¥.\n30',
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},
@@ -1062,10 +1041,11 @@ const automaMiddleClassAiCards = [
 				'ate',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '==B re ca:\nome, 1S) Hf\nFA Wey |\n7B /7C : \\f you Build\na Company this turn,\nuse a skilled Middle Class\nWorker of your choice\nfrom the Supply.\nate aiaeRinan TABOR Tae ERT NRE SECA CO\nSPECIAL ACTION\nSellupto6 tothe State\nfor 10*¥ each.\ne3\n14',
+				type: 'company',
+				action: 'build',
+				target: 'self',
 			},
 		],
 	},
@@ -1138,10 +1118,11 @@ const automaMiddleClassAiCards = [
 				'action',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '— — See\n| a SY,\nOsi\nffi fla 92 mt\nfed EE De ERS ee\n(TAV1B : if you Build\na Company this turn,\nthe State pays its cost.\nSPECIAL ACTION\nDraw 6 Voting cubes from the bag.\nAll Middle Class cubes drawn are\nreturned to the bag. Remove all\nother drawn cubes.\n@ 13',
+				type: 'company',
+				action: 'build',
+				target: 'self',
 			},
 		],
 	},
@@ -1214,10 +1195,10 @@ const automaMiddleClassAiCards = [
 				'public',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '2 Bowe\n~~\n& Fa SE\nIf you Propose a Bill this turn,\nadd 2 Voting cubes to the bag first.\nSPECIAL ACTION\nAdd Voting cubes to the bag equal\nto 2 plus the number of Public\nand Capitalist Class Companies in\nwhich your Workers are employed.\n@ 25',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -1292,10 +1273,37 @@ const automaMiddleClassAiCards = [
 				'unemployed',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'See — —\nwe ay, | =\n7\ncams, 1S) Al Ofte\nIf you Sell to the Foreign Market,\nget an additional 5¥ for each\ntransaction you perform.\n° SPECIAL ACTION ‘\nAssign up to 3 unemployed\nWorking Class Workers to your\nCompanies. Get 5¥ from the State\nfor each Worker assigned this way.\né 20',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: {
+					type: 'up-to',
+					amount: 3,
+				},
+				workerType: 'any',
+				target: 'company',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -1368,12 +1376,7 @@ const automaMiddleClassAiCards = [
 				'each',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '1\nPe vid SB AH\nIf you Buy Goods & Services\nthis turn, buy the resource from\nevery available source (including\nyourself), up to your Population\nfrom each.\nOp SS Ee\nSPECIAL ACTION\nDraw 6 Voting cubes from the bag.\nAll Middle Class cubes drawn are\nreturned to the bag. Remove all\nother drawn cubes.\n@ 3',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-ai-cards-grid-30-items-10-3-automa-middle-class-ai-deck-238-pos-9-2',
@@ -1448,10 +1451,13 @@ const automaMiddleClassAiCards = [
 				'your',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '= $ = \\S\nVs\n{7B 7 ; \\f you Assign Workers\nthis turn, get a skilled Worker\nfrom the Supply first.\nOe Se SS a eS SS\nSPECIAL ACTION\nGet 5¥ from the State for each\nof your Companies with a Working\nClass Worker in it. Then, perform\nan Extra Shift in one of those\nCompanies if able.\n@ 6 17',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'state',
+				target: 'self',
 			},
 		],
 	},
@@ -1528,10 +1534,28 @@ const automaMiddleClassAiCards = [
 				'class',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'Osi\n‘TA/1B : If you Build\na Company this turn,\nthe State pays its cost.\ne; O\nSPECIAL ACTION\nAssign up to 3 unemployed\nWorking Class Workers to your\nCompanies. Get 5¥ from the State\nfor each Worker assigned this way.\n6 10',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: {
+					type: 'up-to',
+					amount: 3,
+				},
+				workerType: 'any',
+				target: 'company',
+			},
+			{
+				type: 'company',
+				action: 'build',
+				target: 'self',
 			},
 		],
 	},
@@ -1604,10 +1628,13 @@ const automaMiddleClassAiCards = [
 				'get',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '(®) af\nfee LS 126\ni e e ==\nIf you have at least 4 | Ana\nunemployed Workers: Aa\nee)\nSPECIAL ACTION\nIf you have at least 4 unemployed\nWorkers, remove 2 of them\n(unskilled if able, otherwise\nat random) and get 10¥.\n28',
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},
@@ -1680,10 +1707,20 @@ const automaMiddleClassAiCards = [
 				'action',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '= ne fee art =\naoa\noat) vera SY Pi\nIf you Sell to the Foreign Market,\nget an additional 5*¥ for each\ntransaction you perform.\n5 SPECIAL ACTION\nReveal Voting cubes from the bag\nuntil you reveal 3 cubes of other\nclasses. Replace them with Middle\nClass cubes and return all revealed\ncubes to the bag.\n22',
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -1758,12 +1795,7 @@ const automaMiddleClassAiCards = [
 				'for',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'WE\nElla (2s? Ale\nOO\nIf you Assign Workers this turn,\nyou may Assign\n(2B): any number\nof unemployed Workers.\nge : any number of Workers.\nSPECIAL ACTION\nBuy 3 © from the State for 5%\neach. For each © you are unable\nto buy, add 2 Voting cubes\nto the bag instead.\na 16',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-ai-cards-grid-30-items-10-3-automa-middle-class-ai-deck-238-pos-4-3',
@@ -1832,10 +1864,13 @@ const automaMiddleClassAiCards = [
 				'get',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '(® oe LS\nIf you have at least 4 | je\nunemployed Workers: LNs\no- OQ.\nSPECIAL ACTION\nIf you have at least 4 unemployed\nWorkers, remove 2 of them\n(unskilled if able, otherwise\nat random) and get 10¥.\nBS 29',
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},
@@ -1910,12 +1945,7 @@ const automaMiddleClassAiCards = [
 				'per',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: "= = :\nop ==p Fee eta\nVs\nElla cta '2s7\nSS\nIf you Assign Workers this turn,\nyou may Assign\n(2B) . any number\nof unemployed Workers.\nej : any number of Workers.\noO 0\nSPECIAL ACTION\nIf able, pay 6% per Population\nto gain 1 Prosperity.\n18",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-ai-cards-grid-30-items-10-3-automa-middle-class-ai-deck-238-pos-6-3',
@@ -1988,12 +2018,7 @@ const automaMiddleClassAiCards = [
 				'produced',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '—_— és \\S\na Wet ome\nVs\nkas SE |\nIf you Build a non-Media Company\nthis turn, pay 4¥ less. Then, get\na Storage for the resource\nproduced by that Company.\n0\nSPECIAL ACTION\nPerform an Extra Shift.\neS 1',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-ai-cards-grid-30-items-10-3-automa-middle-class-ai-deck-238-pos-7-3',
@@ -2064,10 +2089,20 @@ const automaMiddleClassAiCards = [
 				'shift',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'is) Fy\nos, SY cia\n1A/1B : If you Sell\nto the Foreign Market,\nthe State gives you 5¥ for\neach transaction you perform.\nQa 0\nSPECIAL ACTION\nPerform an Extra Shift.\neS 21',
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -2142,10 +2177,11 @@ const automaMiddleClassAiCards = [
 				'action',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '1\naaa (2) Wh\n"7B 7) : \\f you Build\na Company this turn,\nuse a skilled Middle Class\nWorker of your choice\nfrom the Supply.\noO O.\nSPECIAL ACTION\nReveal Voting cubes from the bag\nuntil you reveal 3 cubes of other\nclasses. Replace them with Middle\nClass cubes and return all revealed\ncubes to the bag. e',
+				type: 'company',
+				action: 'build',
+				target: 'self',
 			},
 		],
 	},
@@ -2220,10 +2256,31 @@ const automaMiddleClassAiCards = [
 				'class',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'eS 3 ¢ A: ar:\nSB le) ihe HA\nSe) a EA\nIf you Propose a Bill this turn,\ncall for an Immediate Vote\nwithout spending ©).\nDa\nSPECIAL ACTION\nAssign up to 3 unemployed\nWorking Class Workers to your\nCompanies. Get 5¥ from the State\nfor each Worker assigned this way.\né 26',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: {
+					type: 'up-to',
+					amount: 3,
+				},
+				workerType: 'any',
+				target: 'company',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -2298,10 +2355,13 @@ const automaMiddleClassAiCards = [
 				'your',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'See — =—\n= 8 . oy =\nOsi\nTye come Fa Ot\noO 0\n: Ifyou Buy\nGoods & Services this turn,\nthe State first gives you 2¥ for\neach of your employed Workers in\nPublic or Capitalist Class Companies.\nOSs Se\nSPECIAL ACTION\nGet 5¥ from the State for each\nof your Companies with a Working\nClass Worker in it. Then, perform\nan Extra Shift in one of those\nCompanies if able.\n2 6 7',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'state',
+				target: 'self',
 			},
 		],
 	},

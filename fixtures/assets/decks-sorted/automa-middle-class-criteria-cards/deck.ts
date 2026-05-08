@@ -73,12 +73,7 @@ const automaMiddleClassCriteriaCards = [
 				'assigned',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: "ASSIGN WORKING CLASS\nWORKERS CRITERIA\nSome effects allow you to Assign\nWorking Class Workers to your\nCompanies. In those cases, choose\nwhere they will be assigned based on\nthe following criteria:\n+ Current production of the Company's\nresource is less than its storage limit\n+ You do not have any other Companies\nin that industry\n+ Does not cause the requirements for\na Trade Union to be met\n+ Agricultural\n+ Healthcare / Education (whichever\ncorresponding Public Service is not\nbeing produced, whichever is more\nexpensive, or at random between\nthe two)\n+ Luxury\n+ Media\n+ At random\n“a “il",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-criteria-cards-grid-13-items-7-2-automa-middle-class-criteria-deck-241-pos-2-1',
@@ -152,12 +147,7 @@ const automaMiddleClassCriteriaCards = [
 				'population',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'CHECK GOODS & SERVICES\nCheck if the 3 resources that increase\nyour Prosperity (Health, Education,\nand Luxury) are available in a quantity\nequal to your Population (even if\nbought from 2 sources) and if you\ncan afford to buy them.\n+ If you are unable to buy any | SA Es]\nof the 3 resources:\nOtherwise, for each eligible\nresource check the following:\n+ Ifyou can you get it for free: | +3\n+ If it will cost you 6¥ per item 42\nor less (but not free):\n+ If it will cost you more than | [BGS 5]\n6¥ per item:\nNOTE: Remember that goods and services\nyou have produced yourself can be bought for\nfree, but you still count as 1 of the 2 sources. o\n-',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-criteria-cards-grid-13-items-7-2-automa-middle-class-criteria-deck-241-pos-3-1',
@@ -229,10 +219,11 @@ const automaMiddleClassCriteriaCards = [
 				'until',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '(a a)\nBUILDING COMPANY CRITERIA\n° oO\nTo choose which Company to build\nwhen there are multiple options, use\nthe following criteria to narrow down\na set of options until only 1 remains:\n+» Unemployed Working Class Worker\navailable to fill its slot\n+ Requires Middle Class Workers only\n+ Industry with the fewest operational\nCompanies\n+ Healthcare / Education (whichever\ncorresponding Public Service is not\nbeing produced, whichever is more\nexpensive, or at random between\nthe two)\n+ Agricultural, Luxury, Media\n+ Highest production\n+ At random\nOTE: Never Build a Company if you already\nhave 2 Companies of the same industry.\na a',
+				type: 'company',
+				action: 'build',
+				target: 'self',
 			},
 		],
 	},
@@ -304,12 +295,7 @@ const automaMiddleClassCriteriaCards = [
 				'least',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'CHECK COMPANIES\nC O\nFor each Company in the Market that\nyou can afford to Build and have the\nrequired Worker(s) for, check the\nfollowing: +1\n+ If at least 2 Production /2 PROD.\nPhases remain: See rus\n+ If it also has a Working Class +2\nWorker slot and there is\nat least one unemployed |\nWorker who could fill it:\n+ If it produces a resource you | +2\nare currently not able to\nproduce:\nThen, check the following:\n- If your Prosperity is equal to +2\nor higher than the number\nof your fully operational\nCompanies:\n+ If the previous questions SAEs)\ncaused the priority card to\nmove 1 step or less:\n“a -',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-criteria-cards-grid-13-items-7-2-automa-middle-class-criteria-deck-241-pos-5-1',
@@ -381,12 +367,7 @@ const automaMiddleClassCriteriaCards = [
 				'following',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: "SKILLED WORKER CRITERIA\nTo choose which skilled Worker to add\nfrom the Supply, exclude the types of\nWorkers already in the Unemployed\nWorkers area and use the following\ncriteria to narrow down your options\nuntil only 1 remains:\n+ Needed by Companies in your Market.\nExclude industries of which you have\nalready built 2 or more Companies.\nIf multiple options:\n- Needed by Companies for which\nthere are enough other Workers to\nbuild/make them fully operational\n- Needed by Companies of an industry\nof which you don’t have any\n- Agricultural, Education, Healthcare,\nLuxury, Media\n+ Needed by non-operational Capitalist\nClass and Public Companies\n+ Needed by Companies in the Capitalist\nClass's Market\n+ At random\na a",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-criteria-cards-grid-13-items-7-2-automa-middle-class-criteria-deck-241-pos-6-1',
@@ -456,12 +437,7 @@ const automaMiddleClassCriteriaCards = [
 				'free',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'BUY GOODS & SERVICES\nCRITERIA\ni Al Ne ae\nTo choose which goods and services to\nbuy, and from which source when there\nare multiple options, use the following\ncriteria:\n+ Free\n+ If you have 3 or more unemployed\nunskilled Workers: Si\n+ Cheapest (including combinations\nfrom 2 sources). Exclude @ if it will\nlead to Population increase and other\noptions are available.\nS90\n+ Public Services\n+ Foreign Market\n+ Capitalist Class\na al',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-criteria-cards-grid-13-items-7-2-automa-middle-class-criteria-deck-241-pos-7-1',
@@ -533,12 +509,7 @@ const automaMiddleClassCriteriaCards = [
 				'that',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '(a yy\nACTION CRITERIA\nSO\nSee Buy Goods & Services\n\\vs / You must be able to buy at\n@ least one of the 3 resources\n(Health, Education, Luxury) in\na quantity that will allow you\nto increase your Prosperity.\n= Build Company\n= There must be at least one\nJz Hy | Company in the Market that\nyou can afford to build, have\nthe required Worker(s) for,\nand there is at least one\nempty space on the board.\nSF Y= Assign Workers\n| You must be able to Assign\nat least 2 unemployed\nWorkers to a Company.\na 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-criteria-cards-grid-13-items-7-2-automa-middle-class-criteria-deck-241-pos-1-2',
@@ -610,12 +581,7 @@ const automaMiddleClassCriteriaCards = [
 				'down',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '& a\nASSIGN MIDDLE CLASS\nWORKERS CRITERIA\n5 a a ;,\nTo choose where to assign your Workers\nwhen there are multiple options, use the\nfollowing criteria to narrow down a set\nof options until only 1 remains:\n+ Most unemployed Workers assigned\n+ Highest Wages\n+ Public Company\n+ Capitalist Company\n+ Healthcare / Education Company\n(whichever corresponding Public\nService is not being produced,\nwhichever is cheaper, or at random\nbetween the two)\n+ Agricultural\n+ Media\n+ Luxury\n+ At random\nay',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-criteria-cards-grid-13-items-7-2-automa-middle-class-criteria-deck-241-pos-2-2',
@@ -685,10 +651,20 @@ const automaMiddleClassCriteriaCards = [
 				'the',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'ACTION CRITERIA\n—— ih\nPropose Bill\n5 Simple Mode: You must have\na Bill marker available, and\nthere must be at least one\nPolicy listed on the Al card\nthat does not match your\nDesired Policy.\nAdvanced Mode: You must\nhave a Bill marker available,\nand at least one Policy\npriority card in a priority row.\nSell to the Foreign Market\nYou must be able to perform\nat least 2 transactions on the\ncurrent Export card.\n(®) Special Action\nSimple Mode: The first\ncondition listed on the Al\n“=i card’s Bonus is met.\n“al ae',
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -760,12 +736,7 @@ const automaMiddleClassCriteriaCards = [
 				'least',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'pe *\nCHECK WORKERS\n+ Swap any skilled Workers in unskilled\nslots with unskilled unemployed\nWorkers if possible.\nThen, check the following:\n+ If there is a way to Assign +1\nWorkers so that at least WORKER\n2 unemployed Workers\nbecome employed:\n+ Otherwise: | | SA | +1\na ”',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-criteria-cards-grid-13-items-7-2-automa-middle-class-criteria-deck-241-pos-4-2',
@@ -837,12 +808,7 @@ const automaMiddleClassCriteriaCards = [
 				'set',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'EXTRA SHIFT CRITERIA\n° O\nTo choose which Company performs\nan Extra Shift when there are multiple\noptions, use the following criteria to\nnarrow down a set of options until only\n1 remains, excluding Media Companies:\n+ Space is available in your Storages to\nstore what will be produced\n+ Has 2 Middle Class Workers\n+ Has a non-committed Working Class\nWorker\n+ Agricultural\n+ Healthcare / Education (whichever\ncorresponding Public Service is not\nbeing produced, whichever is more\nexpensive, or at random between\nthe two)\n+ Luxury\nok a',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-criteria-cards-grid-13-items-7-2-automa-middle-class-criteria-deck-241-pos-5-2',
@@ -916,10 +882,20 @@ const automaMiddleClassCriteriaCards = [
 				'less',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'CHECK FOREIGN MARKET\nO_o\nCheck the current Export card to see\nif you can Sell to the Foreign Market:\n+ If you can make at least +1\n2 transactions: | iS ae\n+ Ifyou also have 15¥ or less: | EV) 41\n+ Otherwise: |Bgu\n_ a',
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -995,12 +971,7 @@ const automaMiddleClassCriteriaCards = [
 				'and',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'CHECK POLICIES\n$$ ——o\nThe Desired Policies for the Middle\n‘Class are the following:\n118 [28 ] 3B | 48 | 5B | 6B [7A |\nFor each of the 2 Policies listed, if the\nPolicy priority card is not set aside and\nyou have at least one available Bill mar-\nker, check where the Policy marker is:\n+ If the current Policy is +1\ndirectly next to your Desired\nPolicy:\n+ If the current Policy is 2 42\nspaces away from your\nDesired Policy:\nThen, move the Policy’s priority card\nthe same number of steps.\n+ Ifyou are unable to Propose | Gyn\na Bill for either Policy:\n‘a A',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies AutomaMiddleClassCriteriaCardsCard[];
 

@@ -29,12 +29,7 @@ const automaMiddleClassActionPriorityCards = [
 		values: {
 			keywords: ['pas'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'a >»\nbh\nwn\n(@)\nz =.\nee |\n> fx!\nPas\nPe\nam |\ni J',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-action-priority-cards-grid-6-items-3-2-automa-middle-class-action-priority-deck-235-pos-2-1',
@@ -62,12 +57,7 @@ const automaMiddleClassActionPriorityCards = [
 		values: {
 			numbers: [3],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'w\n=\n(e) |] p\n= om"\n3\n<',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-action-priority-cards-grid-6-items-3-2-automa-middle-class-action-priority-deck-235-pos-3-1',
@@ -95,12 +85,7 @@ const automaMiddleClassActionPriorityCards = [
 		values: {
 			numbers: [2],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'i\n= =_\n2\n=\n| a',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-action-priority-cards-grid-6-items-3-2-automa-middle-class-action-priority-deck-235-pos-1-2',
@@ -128,12 +113,7 @@ const automaMiddleClassActionPriorityCards = [
 		values: {
 			keywords: ['ago'],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'ae\nm~<e\nago\naa',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-action-priority-cards-grid-6-items-3-2-automa-middle-class-action-priority-deck-235-pos-2-2',
@@ -161,12 +141,7 @@ const automaMiddleClassActionPriorityCards = [
 		values: {
 			numbers: [7],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'g\n= 7',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-middle-class-action-priority-cards-grid-6-items-3-2-automa-middle-class-action-priority-deck-235-pos-3-2',
@@ -189,12 +164,7 @@ const automaMiddleClassActionPriorityCards = [
 		name: 'Automa Middle Class Action Priority',
 		content: 'i\na A" Hl',
 		values: {},
-		effects: [
-			{
-				type: 'raw',
-				text: 'i\na A" Hl',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies AutomaMiddleClassActionPriorityCardsCard[];
 

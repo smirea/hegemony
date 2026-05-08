@@ -74,12 +74,7 @@ const automaCapitalistAiCards = [
 				'action',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: "j FA f=\n| ety an =\nIf you have any Companies | (SA) +1\nthat could get a %: 14a\nIf there are also 2 or (SA) +1\nmore Production Phases ie PROD:\nremaining: REMAINING\nQn 0\nSPECIAL ACTION\nIf it's not the final round,\npay 20¥ to geta x.\nIf able, pay 25% more and\nget an additional %.\n@ 3",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-ai-cards-grid-30-items-10-3-automa-capitalist-ai-deck-236-pos-2-1',
@@ -154,10 +149,25 @@ const automaCapitalistAiCards = [
 				'unemployed',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'an = 2\nIf you Build a Company this turn,\nBuild 2 Companies instead if able.\nThen, add 2 new Companies\nto the Market.\nOQ a 0\nSPECIAL ACTION\n4A/4B : Assign unemployed\nWorkers to one of your non-\noperational Companies. Get 5¥\nfrom the State for each Worker\nassigned this way.\na 26',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: 'any',
+				workerType: 'any',
+				target: 'company',
+			},
+			{
+				type: 'company',
+				action: 'build',
+				target: 'self',
 			},
 		],
 	},
@@ -234,10 +244,18 @@ const automaCapitalistAiCards = [
 				'get',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'vA = 2\nIf you Build a Company this turn,\nBuild 2 Companies instead if able.\nThen, add 2 new Companies\nto the Market.\nCe eee meas\nSPECIAL ACTION\n‘TA/1B : Get 5¥ from the State\nfor each Company you own.\n(3 SEB\na. @/3 iis',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'company',
+				action: 'build',
+				target: 'self',
 			},
 		],
 	},
@@ -312,10 +330,20 @@ const automaCapitalistAiCards = [
 				'able',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '“na ee\nom\nIf you Sell to the Foreign Market,\nsell up to 4 © for 15¥ each first.\n(Counts as an additional\ntransaction.)\nQn = 0\nSPECIAL ACTION\nAdd 3 Voting cubes to the bag.\nIf able, pay 15% and add\n3 additional Voting cubes\nto the bag.\n@ 15',
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -390,12 +418,7 @@ const automaCapitalistAiCards = [
 				'state',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'erh = *2\n(WAT TB : if you Build a Luxury\nor Agricultural Company this turn,\nhalf its cost (rounded down)\nis paid by the State.\nee)\nSPECIAL ACTION\nPay 50¥ from your Capital\nto the State to gain Yz.\ngS 7',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-ai-cards-grid-30-items-10-3-automa-capitalist-ai-deck-236-pos-6-1',
@@ -468,10 +491,20 @@ const automaCapitalistAiCards = [
 				'able',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'a ee\nIf you Sell to the Foreign Market,\nsell up to 6| | for 10¥ each first.\n(Counts as an additional\ntransaction.)\n: SPECIAL ACTION 1\nAdd 3 Voting cubes to the bag.\nIf able, pay 15% and add\n3 additional Voting cubes\nto the bag.\n@ 21',
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -546,12 +579,7 @@ const automaCapitalistAiCards = [
 				'capital',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '(®) S ao\ni cH\ni\nIf you have at least 150¥ | SAja\nin Revenue: Logs,\nIf Taxation is also | (SA +2\nin BAYSB) : re\nSala\niF BB)\nSPECIAL ACTION\nIf you have at least 150%\nin Revenue, move half of your\nRevenue (rounded down)\nto your Capital.\n®@ 23',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-ai-cards-grid-30-items-10-3-automa-capitalist-ai-deck-236-pos-8-1',
@@ -622,12 +650,7 @@ const automaCapitalistAiCards = [
 				'non-automated',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'an = 2\nIf you sell one of your\nCompanies without %& this turn,\nget twice its cost.\nre)\nSPECIAL ACTION\nChoose one of your non-automated\nCompanies. Pay the Workers’ Wages\nand perform a Production.\n2',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-ai-cards-grid-30-items-10-3-automa-capitalist-ai-deck-236-pos-9-1',
@@ -698,10 +721,21 @@ const automaCapitalistAiCards = [
 				'deal',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'Sh tii Pa\nIf you Propose a Bill this turn,\ncall for an Immediate Vote\nwithout spending ©.\nQa 0\nSPECIAL ACTION\nMake a Business Deal.\n24',
+				type: 'card',
+				action: 'play',
+				deck: 'business-deal',
+				amount: 1,
+				target: 'self',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -776,10 +810,20 @@ const automaCapitalistAiCards = [
 				'public',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "& i; o8\noti S&S fii Pa\nIf you Sell to the Foreign Market,\nsell up to 4 © for 15¥ each first.\n(Counts as an additional\ntransaction.)\nae a eee\nSPECIAL ACTION\n(2872) - if an operational Public\nCompany has the exact same\nWorkers as a non-operational\nCompany of yours requires, Assign its\nWorkers to your Company. Then set\nyour Company's Wages to 5. 19",
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -852,10 +896,10 @@ const automaCapitalistAiCards = [
 				'bag',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '2 = a@\noes li 2\nIf you Propose a Bill this turn,\npay 25%, if able,\nto Propose 2 Bills instead.\no- - a —O\nSPECIAL ACTION\nReveal Voting cubes from the\nbag until you reveal 3 cubes of\nother classes. Replace them with\nCapitalist Class cubes and return\nall revealed cubes to the bag. 18',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -932,10 +976,27 @@ const automaCapitalistAiCards = [
 				'state',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'ois a iil "2\nIf you Sell to the Foreign Market,\nsell up to 6 | | for 10¥ each first.\n(Counts as an additional\ntransaction.)\nQa 0\nSPECIAL ACTION\nTA/1B : Get 5¥ from the State\nfor each Company you own.\n/3 SEB\n@/3 fia re',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -1006,10 +1067,21 @@ const automaCapitalistAiCards = [
 				'ily',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'If you Propose a Bill this turn,\ncall for an Immediate Vote\nwithout spending >.\nQa 0\nSPECIAL ACTION\nMake a Business Deal.\neS ily',
+				type: 'card',
+				action: 'play',
+				deck: 'business-deal',
+				amount: 1,
+				target: 'self',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -1084,10 +1156,11 @@ const automaCapitalistAiCards = [
 				'capitalist',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'vera = *\nIf you Build a Company this turn,\npay 10¥ less.\nlo: -O\nSPECIAL ACTION\nDraw 6 Voting cubes from the bag.\nAll Capitalist Class cubes drawn\nare returned to the bag.\nRemove all other drawn cubes.\n@ 13',
+				type: 'company',
+				action: 'build',
+				target: 'self',
 			},
 		],
 	},
@@ -1158,12 +1231,7 @@ const automaCapitalistAiCards = [
 				'capital',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '(®) Ss =\n=\nsvete\nIf you have at least 150% | Aja\nin Revenue: Woe.\nIf Taxation is also | (SA) +2\nin BAY3B) : re\nSA}+1\niF BB)\nne)\nSPECIAL ACTION\nIf you have at least 150%\nin Revenue, move half of your\nRevenue (rounded down)\nto your Capital.\n28',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-ai-cards-grid-30-items-10-3-automa-capitalist-ai-deck-236-pos-6-2',
@@ -1232,12 +1300,7 @@ const automaCapitalistAiCards = [
 				'get',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'FA f=\nS ri og aes\nIfyou have atleast 3||: | (BA +1\n/3{]\nIf you also have no ™®: | Saja\nSe aS Se\nSPECIAL ACTION\nSell up to 6| | to the State\nfor 10¥ each. Then, get 1%.\n@/3(]\nEo) 25',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-ai-cards-grid-30-items-10-3-automa-capitalist-ai-deck-236-pos-7-2',
@@ -1310,12 +1373,7 @@ const automaCapitalistAiCards = [
 				'state',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: 'vePAd = 2\nIf you sell one of your\nCompanies without %& this turn,\nget twice its cost.\nQ- a 0\nSPECIAL ACTION\nSellupto9 to the State\nfor 10¥ each.\n3°\n@ 19',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-ai-cards-grid-30-items-10-3-automa-capitalist-ai-deck-236-pos-8-2',
@@ -1386,10 +1444,10 @@ const automaCapitalistAiCards = [
 				'the',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 're | cy\nIf you Propose a Bill this turn,\npay 25%, if able,\nto Propose 2 Bills instead.\nQe 0\nSPECIAL ACTION\nChoose one of your non-automated\nCompanies. Pay the Workers’\nWages, and perform a Production.\noe 11',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -1464,10 +1522,14 @@ const automaCapitalistAiCards = [
 				'may',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '@ =. ee\niHit\nS&S i a Se\nIf you Propose a Bill this turn,\nplace your marker on your\nDesired Policy, even if it’s not next\nto the current section. You may\nonly call for an Immediate Vote\nif you placed your marker next\nto the current section.\nQ-- -0\nSPECIAL ACTION\nSellupto9 to the State\nfor 10¥ each.\n2°\n& 29',
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -1542,12 +1604,7 @@ const automaCapitalistAiCards = [
 				'action',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '()) ae\nW i ZS\nan\n—_\nIf you have any Companies | GAe\nthat could get a X: ii\nIf there are also 2 or Ala\nmore Production Phases iE eo\nremaining: REMAINING\nOQ 0\nSPECIAL ACTION\nIf it’s not the final round,\npay 20¥ to get a %.\nIf able, pay 25% more\nand get an additional &.\n14',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-ai-cards-grid-30-items-10-3-automa-capitalist-ai-deck-236-pos-1-3',
@@ -1620,10 +1677,20 @@ const automaCapitalistAiCards = [
 				'public',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "a EE @\neit, Fly ©\nIf you Sell to the Foreign Market,\nget an additional 5¥ for each\ntransaction you perform.\n(QR a re pes Se ag\nSPECIAL ACTION\n(2B7/2€) - if an operational Public\nCompany has the exact same.\nWorkers as a non-operational\nCompany of yours requires, Assign its\nWorkers to your Company. Then set\nyour Company's Wages to 3. 22",
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -1698,10 +1765,10 @@ const automaCapitalistAiCards = [
 				'each',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'as att Pa\nIf you Propose a Bill this turn,\nadd 2 Voting cubes to the bag first.\nQn 5 0\nSPECIAL ACTION\nSell up to 9 Bj to the State\nfor 10¥ each.\ne3e\n30',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -1774,10 +1841,27 @@ const automaCapitalistAiCards = [
 				'from',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'oa & Hii Pa\n(EBVEE) : If you Sell\nto the Foreign Market,\nfirst make a Business Deal\nif able.\no—— a 0\nSPECIAL ACTION\nReveal Voting cubes from the\nbag until you reveal 3 cubes of\nother classes. Replace them with\nCapitalist Class cubes and return\nall revealed cubes to the bag. 4',
+				type: 'card',
+				action: 'play',
+				deck: 'business-deal',
+				amount: 1,
+				target: 'self',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -1850,10 +1934,34 @@ const automaCapitalistAiCards = [
 				'non',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'oT <\nan = 2\n(‘6B/6C : If you Sell\nto the Foreign Market,\nfirst make a Business Deal\nif able.\nSPECIAL ACTION\n4A/4B : Assign unemployed\nWorkers to one of your non-\noperational Companies. Get 5%\nfrom the State for each Worker\nassigned this way.\nDB @ 9',
+				type: 'worker',
+				action: 'assign',
+				amount: 'any',
+				workerType: 'any',
+				target: 'company',
+			},
+			{
+				type: 'card',
+				action: 'play',
+				deck: 'business-deal',
+				amount: 1,
+				target: 'self',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -1928,12 +2036,7 @@ const automaCapitalistAiCards = [
 				'the',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '(@®) oot\nLZ ah Fi\npe vera\n=\n™bvenion\n(GAWIGB) : If you have any | SAN+1\nAgricultural Companies: | 7)\n(6A) - If you have any PAe\nLuxury Companies: 78a\nSPECIAL ACTION\n(6A/6B : Add 2 Voting cubes to\nthe bag for each Company you own\nin the Agricultural industry. If [Al is\nin effect, also count the Companies\nin the Luxury industry. 12',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-ai-cards-grid-30-items-10-3-automa-capitalist-ai-deck-236-pos-6-3',
@@ -2006,12 +2109,7 @@ const automaCapitalistAiCards = [
 				'special',
 			],
 		},
-		effects: [
-			{
-				type: 'raw',
-				text: '(WAV TB) : if you Build a Luxury\nor Agricultural Company this turn,\nhalf its cost (rounded down)\nis paid by the State.\nOsa a ee\nSPECIAL ACTION\nSell up to 9 Bj to the State\nfor 10¥ each.\na3\n20',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'automa-capitalist-ai-cards-grid-30-items-10-3-automa-capitalist-ai-deck-236-pos-7-3',
@@ -2086,10 +2184,17 @@ const automaCapitalistAiCards = [
 				'matching',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'ER ze eo:\nan = ae\nIf you Build a Company this turn,\npay 10¥ less.\n8\nSPECIAL ACTION\n{7B 7G) : Choose one of your\nnon-operational Companies. Spend\n10¥ and Assign matching Workers\nfrom the Supply to that Company.\n8',
+				type: 'money',
+				action: 'spend',
+				amount: 10,
+				target: 'self',
+			},
+			{
+				type: 'company',
+				action: 'build',
+				target: 'self',
 			},
 		],
 	},
@@ -2166,10 +2271,26 @@ const automaCapitalistAiCards = [
 				'companies',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'an = ee\nIf you Sell to the Foreign Market,\nget an additional 5¥ for each\ntransaction you perform.\nle; ==.\nJ SPECIAL ACTION\n{7B /7E) : Choose one of your\nnon-operational Companies.\nSpend 10¥ and Assign matching\nWorkers from the Supply\n@ to that Company. 2)',
+				type: 'money',
+				action: 'spend',
+				amount: 10,
+				target: 'self',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -2242,10 +2363,21 @@ const automaCapitalistAiCards = [
 				'section',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'Leh fh 0%\n— Hii @a\nIf you Propose a Bill this turn, place\nyour marker on your Desired Policy,\neven if it’s not next to the current\nsection. You may only call for an\nImmediate Vote if you placed your\nmarker next to the current section.\nOR 0\nSPECIAL ACTION\nMake a Business Deal.\n6',
+				type: 'card',
+				action: 'play',
+				deck: 'business-deal',
+				amount: 1,
+				target: 'self',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -2318,10 +2450,10 @@ const automaCapitalistAiCards = [
 				'class',
 			],
 		},
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'If you Propose a Bill this turn,\nadd 2 Voting cubes to the bag first.\nOm a 0\nSPECIAL ACTION\nDraw 6 Voting cubes from the bag.\nAll Capitalist Class cubes drawn\nare returned to the bag.\nRemove all other drawn cubes.\ntd 5',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},

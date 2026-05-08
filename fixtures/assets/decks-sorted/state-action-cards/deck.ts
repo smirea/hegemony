@@ -29,10 +29,20 @@ const stateActionCards = [
 		category: 'base',
 		name: 'Vou',
 		content: '“a / ,\n¢ )\n- aa\nEMPLOYMENT SUPPORT\nSCHEME\nGive 15¥ to the Working Class\nand the Middle Class.\nSg',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '“a / ,\n¢ )\n- aa\nEMPLOYMENT SUPPORT\nSCHEME\nGive 15¥ to the Working Class\nand the Middle Class.\nSg',
+				type: 'money',
+				action: 'provide',
+				amount: 15,
+				source: 'state',
+				target: 'workingClass',
+			},
+			{
+				type: 'money',
+				action: 'provide',
+				amount: 15,
+				source: 'state',
+				target: 'middleClass',
 			},
 		],
 	},
@@ -80,10 +90,20 @@ const stateActionCards = [
 		name: 'e b Ss ~ 4',
 		content:
 			'?\ne b Ss ~ 4\n\\ ie eae f\n(1 ae\n"Fe i ‘a si\nSHIFT FOCUS\nLook at the top 2 cards of the\nEvent deck. You may then discard\none of the current Events without\nany penalty and replace it with\none of the top 2 cards. Then,\nperform an Event Action.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '?\ne b Ss ~ 4\n\\ ie eae f\n(1 ae\n"Fe i ‘a si\nSHIFT FOCUS\nLook at the top 2 cards of the\nEvent deck. You may then discard\none of the current Events without\nany penalty and replace it with\none of the top 2 cards. Then,\nperform an Event Action.',
+				type: 'card',
+				action: 'reveal',
+				deck: 'event',
+				amount: 2,
+				target: 'self',
+			},
+			{
+				type: 'card',
+				action: 'discard',
+				deck: 'event',
+				amount: 1,
+				target: 'self',
 			},
 		],
 	},
@@ -132,10 +152,16 @@ const stateActionCards = [
 		name: 'y wha 4',
 		content:
 			'i ‘a ! J\n= PRESS” / A h\now\nDENIAL OF FREE SPEECH\nGet up to 2 Media @®.\nThen, choose 2 other players.\nEach of them gives you 1@ and\nyou get -1) to their class.\né',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'i ‘a ! J\n= PRESS” / A h\now\nDENIAL OF FREE SPEECH\nGet up to 2 Media @®.\nThen, choose 2 other players.\nEach of them gives you 1@ and\nyou get -1) to their class.\né',
+				type: 'resource',
+				action: 'gain',
+				resource: 'influence',
+				amount: {
+					type: 'up-to',
+					amount: 2,
+				},
+				target: 'self',
 			},
 		],
 	},
@@ -177,12 +203,7 @@ const stateActionCards = [
 		name: 't : be',
 		content:
 			'Ee to. oe\n4 a\n, —_ ,\nf . uw\nSTEP FOR REPRESENTATION\nProvide 1 Personal @® and 2\nVoting cubes to a class. Get @ to\nthat class.\n45a\nO18',
-		effects: [
-			{
-				type: 'raw',
-				text: 'Ee to. oe\n4 a\n, —_ ,\nf . uw\nSTEP FOR REPRESENTATION\nProvide 1 Personal @® and 2\nVoting cubes to a class. Get @ to\nthat class.\n45a\nO18',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-5-1',
@@ -230,12 +251,8 @@ const stateActionCards = [
 		name: 'ee ae',
 		content:
 			'= ee ae\nSSL eZ 5a SSS aS Ler esate\n= a oF Se ie\nbd rrr ———————\nr Te. . :\niy ’ ib Cee: | | b}\n“eed j a. A } yh 7\n—\nIMMEDIATE RESPONSE\nChoose an Event and perform\nits Action twice (decisions made\nwhen performing the Action can\nbe different the second time).',
-		effects: [
-			{
-				type: 'raw',
-				text: '= ee ae\nSSL eZ 5a SSS aS Ler esate\n= a oF Se ie\nbd rrr ———————\nr Te. . :\niy ’ ib Cee: | | b}\n“eed j a. A } yh 7\n—\nIMMEDIATE RESPONSE\nChoose an Event and perform\nits Action twice (decisions made\nwhen performing the Action can\nbe different the second time).',
-			},
-		],
+		requirements: [{ type: 'policy', mode: 'any', policies: ['5A'] }],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-6-1',
@@ -264,12 +281,7 @@ const stateActionCards = [
 		name: 'State Actions',
 		content:
 			'i ,\n, 7 ) ’\nGEOPOLITICAL SUPPORT\nGet money based on the current\nForeign Trade Policy:\nV.1s¥\n3:):30¥\n:45¥7',
-		effects: [
-			{
-				type: 'raw',
-				text: 'i ,\n, 7 ) ’\nGEOPOLITICAL SUPPORT\nGet money based on the current\nForeign Trade Policy:\nV.1s¥\n3:):30¥\n:45¥7',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-7-1',
@@ -296,10 +308,20 @@ const stateActionCards = [
 		name: 'j > & \\ \\ ‘',
 		content:
 			', ) j > & \\ \\ ‘ —\nt 1 . | oe\n- > ay \\ fl \\\nwiv §\nFOREIGN STUDENTS\nSell up to 8 to the Foreign\nMarket at the current local price.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: ', ) j > & \\ \\ ‘ —\nt 1 . | oe\n- > ay \\ fl \\\nwiv §\nFOREIGN STUDENTS\nSell up to 8 to the Foreign\nMarket at the current local price.',
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -340,12 +362,7 @@ const stateActionCards = [
 		name: 'f eT Re',
 		content:
 			'f eT Re <=\n<a . &. wer ge\nCe — Ze ae\nHEALTHCARE PROGRAM\nProvide to a class,\nequal to its Population.\nGeta @) for that class.\na',
-		effects: [
-			{
-				type: 'raw',
-				text: 'f eT Re <=\n<a . &. wer ge\nCe — Ze ae\nHEALTHCARE PROGRAM\nProvide to a class,\nequal to its Population.\nGeta @) for that class.\na',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-1-2',
@@ -372,10 +389,20 @@ const stateActionCards = [
 		name: 'f 4',
 		content:
 			'— \\ f 4\nt | a\n‘AN i Zz\nod :\n+ j\nMEDICAL TOURISM\nSell up to 8 to the Foreign\nMarket at the current local price.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '— \\ f 4\nt | a\n‘AN i Zz\nod :\n+ j\nMEDICAL TOURISM\nSell up to 8 to the Foreign\nMarket at the current local price.',
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -419,10 +446,13 @@ const stateActionCards = [
 		name: 'coe a',
 		content:
 			"coe a |\n' : >\nne ’ ; é 4 i ~\n4 mee -* wil '’ : '\nUNEMPLOYMENT INITIATIVE\nPROGRAM\nAssign unemployed Workers\nto one of your non-operational\nCompanies.\nREQUIREMENT",
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "coe a |\n' : >\nne ’ ; é 4 i ~\n4 mee -* wil '’ : '\nUNEMPLOYMENT INITIATIVE\nPROGRAM\nAssign unemployed Workers\nto one of your non-operational\nCompanies.\nREQUIREMENT",
+				type: 'worker',
+				action: 'assign',
+				amount: 'any',
+				workerType: 'any',
+				target: 'company',
 			},
 		],
 	},
@@ -468,12 +498,7 @@ const stateActionCards = [
 		name: 'ip “oo',
 		content:
 			'€ ip “oo\n‘ a\nA MATTER OF HIGH PRIORITY\nLook at the top 2 Event cards and,\nif able, place one on the board.\nThen, perform an Event Action.',
-		effects: [
-			{
-				type: 'raw',
-				text: '€ ip “oo\n‘ a\nA MATTER OF HIGH PRIORITY\nLook at the top 2 Event cards and,\nif able, place one on the board.\nThen, perform an Event Action.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-4-2',
@@ -519,12 +544,7 @@ const stateActionCards = [
 		name: "a Z ' oo",
 		content:
 			")\na Z ' oo\n‘ x d\n“ Y 4\na + ——-\nEMERGENCY STATE\nIf there are at least 3 Policies\nwith proposed Bills, choose\na Policy without a proposed Bill\nand move its marker\nto an adjacent section.\nbg",
-		effects: [
-			{
-				type: 'raw',
-				text: ")\na Z ' oo\n‘ x d\n“ Y 4\na + ——-\nEMERGENCY STATE\nIf there are at least 3 Policies\nwith proposed Bills, choose\na Policy without a proposed Bill\nand move its marker\nto an adjacent section.\nbg",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-5-2',
@@ -553,10 +573,13 @@ const stateActionCards = [
 		name: 'State Actions',
 		content:
 			"eS\nN ——y . Sp ve!\n7 | i\noi m De\n' i\\\n———————————\nFOREIGN INVESTMENT\nPROGRAM\nSpend 2 Personal @ to get 40¥V.",
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "eS\nN ——y . Sp ve!\n7 | i\noi m De\n' i\\\n———————————\nFOREIGN INVESTMENT\nPROGRAM\nSpend 2 Personal @ to get 40¥V.",
+				type: 'money',
+				action: 'gain',
+				amount: 40,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},
@@ -598,12 +621,7 @@ const stateActionCards = [
 		name: 'ee "eS',
 		content:
 			'» Van > et\n| ; | | .\nLITERACY PROGRAM\nProvide to a class,\nequal to its Population.\nGeta 9) for that class.\nREQUIREMENT /',
-		effects: [
-			{
-				type: 'raw',
-				text: '» Van > et\n| ; | | .\nLITERACY PROGRAM\nProvide to a class,\nequal to its Population.\nGeta 9) for that class.\nREQUIREMENT /',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-7-2',
@@ -643,12 +661,7 @@ const stateActionCards = [
 		name: 'State Actions',
 		content:
 			'% = i\nwer i aoe ©\nFa “yt ia |\n(2% A\nGROWTH IN TOURISM\nThe State, the Middle Class and\nthe Capitalist Class get 15 each.',
-		effects: [
-			{
-				type: 'raw',
-				text: '% = i\nwer i aoe ©\nFa “yt ia |\n(2% A\nGROWTH IN TOURISM\nThe State, the Middle Class and\nthe Capitalist Class get 15 each.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-8-2',
@@ -694,12 +707,8 @@ const stateActionCards = [
 		name: 'Lo =,',
 		content:
 			'Lo =, ;\ntrys\n~-\nd ;\naS\nSUPPLEMENTAL INCOME\nPROGRAM\nProvide 1¥ to a class for each\nof its employed Workers.\nFor every 10¥ you provide,\nget +1) to that class.\n2B/2C / / io',
-		effects: [
-			{
-				type: 'raw',
-				text: 'Lo =, ;\ntrys\n~-\nd ;\naS\nSUPPLEMENTAL INCOME\nPROGRAM\nProvide 1¥ to a class for each\nof its employed Workers.\nFor every 10¥ you provide,\nget +1) to that class.\n2B/2C / / io',
-			},
-		],
+		requirements: [{ type: 'policy', mode: 'any', policies: ['2B', '2C'] }],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-1-3',
@@ -728,12 +737,7 @@ const stateActionCards = [
 		name: 'State Actions',
 		content:
 			'IS\n| gy\nWl\nM\\\\ y .\n’ y\n4\nALLOWANCES AND SUBSIDIES\nProvide 20¥ to a class.\nGeta @) for that class.',
-		effects: [
-			{
-				type: 'raw',
-				text: 'IS\n| gy\nWl\nM\\\\ y .\n’ y\n4\nALLOWANCES AND SUBSIDIES\nProvide 20¥ to a class.\nGeta @) for that class.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-2-3',
@@ -772,12 +776,7 @@ const stateActionCards = [
 		category: 'base',
 		name: 'State Actions',
 		content: 'J\n"J a.\nAGENDA-SETTING\nGet 1 Personal @ for each Policy\nthat matches your current\nPolitical Agenda.',
-		effects: [
-			{
-				type: 'raw',
-				text: 'J\n"J a.\nAGENDA-SETTING\nGet 1 Personal @ for each Policy\nthat matches your current\nPolitical Agenda.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-3-3',
@@ -821,10 +820,14 @@ const stateActionCards = [
 		name: 'Ath Th 66 G6 kaka BUC',
 		content:
 			'~S 4 F\n— ;\nPRESSING MATTERS\nPropose a Bill.\nYou may call for an Immediate\nVote without spending @\nSg',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '~S 4 F\n— ;\nPRESSING MATTERS\nPropose a Bill.\nYou may call for an Immediate\nVote without spending @\nSg',
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -872,10 +875,14 @@ const stateActionCards = [
 		name: 'mi ae _ SS .-',
 		content:
 			"|. mi ae _ SS .-\nA oe t : ,\n> —e :\n. @ . WF .\nRADICAL REFORMS\nPropose a Bill. You may place\nyour marker on any section (even\nif it's not next to the current one).\nYou may not call for an\nImmediate Vote on this Bill.",
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "|. mi ae _ SS .-\nA oe t : ,\n> —e :\n. @ . WF .\nRADICAL REFORMS\nPropose a Bill. You may place\nyour marker on any section (even\nif it's not next to the current one).\nYou may not call for an\nImmediate Vote on this Bill.",
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -920,12 +927,7 @@ const stateActionCards = [
 		name: 'he am 5',
 		content:
 			"o =| j te i a fl\n7 >| 9 i f\nDo eo\n2 7 | |\n= t, ae\nPUBLIC SECTOR OVERTIME\nChoose one of your Companies.\nPay the Workers' Wages\nand perform a Production.",
-		effects: [
-			{
-				type: 'raw',
-				text: "o =| j te i a fl\n7 >| 9 i f\nDo eo\n2 7 | |\n= t, ae\nPUBLIC SECTOR OVERTIME\nChoose one of your Companies.\nPay the Workers' Wages\nand perform a Production.",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-6-3',
@@ -951,12 +953,7 @@ const stateActionCards = [
 		category: 'base',
 		name: 'State Actions',
 		content: 'gy\nie\nCONSTRUCTION BOOM\nThe State, the Working Class and\nthe Capitalist Class get 15‘¥ each.\né',
-		effects: [
-			{
-				type: 'raw',
-				text: 'gy\nie\nCONSTRUCTION BOOM\nThe State, the Working Class and\nthe Capitalist Class get 15‘¥ each.\né',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-7-3',
@@ -998,12 +995,7 @@ const stateActionCards = [
 		name: 'Ca lie j',
 		content:
 			'% Ca lie j\nz = re\nBUSINESS GRANTS\nProvide 5¥ to the Capitalist Class\nfor each of its Companies.\nO sii\nS',
-		effects: [
-			{
-				type: 'raw',
-				text: '% Ca lie j\nz = re\nBUSINESS GRANTS\nProvide 5¥ to the Capitalist Class\nfor each of its Companies.\nO sii\nS',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-8-3',
@@ -1030,12 +1022,7 @@ const stateActionCards = [
 		category: 'base',
 		name: 'State Actions',
 		content: 'a\nHIGHER VAT\nEach player pays 15¥ to the State.\nThen, get 1) to 2 classes.\n6',
-		effects: [
-			{
-				type: 'raw',
-				text: 'a\nHIGHER VAT\nEach player pays 15¥ to the State.\nThen, get 1) to 2 classes.\n6',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-1-4',
@@ -1083,12 +1070,8 @@ const stateActionCards = [
 		name: 'Mr Fx lag N',
 		content:
 			"ait..e es:\nBae ied 2s Oe\nod, : BY ge ame {; 4,\nme a ad\na {\n,\nNATIONALIZATION\nRemove a non-operational Public\nCompany and replace it with a non-\noperational Capitalist Class Company\nof your choice without & (move it to\nthe Public Sector). You may then Assign\nWorkers to it. If is in effect, pay the\nCompany's cost to the Capitalist Class.\n1A/1B",
-		effects: [
-			{
-				type: 'raw',
-				text: "ait..e es:\nBae ied 2s Oe\nod, : BY ge ame {; 4,\nme a ad\na {\n,\nNATIONALIZATION\nRemove a non-operational Public\nCompany and replace it with a non-\noperational Capitalist Class Company\nof your choice without & (move it to\nthe Public Sector). You may then Assign\nWorkers to it. If is in effect, pay the\nCompany's cost to the Capitalist Class.\n1A/1B",
-			},
-		],
+		requirements: [{ type: 'policy', mode: 'any', policies: ['1A', '1B'] }],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-2-4',
@@ -1117,10 +1100,20 @@ const stateActionCards = [
 		name: 'e: ee',
 		content:
 			'= , e: ee\nar *\n“~ ie i\nA mia\n= ‘ "ae |\n< S i :\na_i -* ; y ~~ i\na a Sa a oa\nie ee,\nQUANTITATIVE EASING\nGet 25¥.\nIf you have a Loan,\nget 35¥ instead.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '= , e: ee\nar *\n“~ ie i\nA mia\n= ‘ "ae |\n< S i :\na_i -* ; y ~~ i\na a Sa a oa\nie ee,\nQUANTITATIVE EASING\nGet 25¥.\nIf you have a Loan,\nget 35¥ instead.',
+				type: 'money',
+				action: 'gain',
+				amount: 25,
+				source: 'supply',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 35,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},
@@ -1169,12 +1162,7 @@ const stateActionCards = [
 		name: 'State Actions',
 		content:
 			'4 A\nWin to : - VEE\nv Que perry\na P j «\nra We Aa ta tc We\n> If . Iaif/e Fis Fl\nPRIVATIZATION\nSell one of your operational\nCompanies to the Capitalist\nClass for its cost (move it\nto the Private Sector).\n6\ni',
-		effects: [
-			{
-				type: 'raw',
-				text: '4 A\nWin to : - VEE\nv Que perry\na P j «\nra We Aa ta tc We\n> If . Iaif/e Fis Fl\nPRIVATIZATION\nSell one of your operational\nCompanies to the Capitalist\nClass for its cost (move it\nto the Private Sector).\n6\ni',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-4-4',
@@ -1217,10 +1205,13 @@ const stateActionCards = [
 		name: 'aD f',
 		content:
 			'-\naD f\nFOREIGN FINANCIAL\nASSISTANCE\nGet 10¥ for each Policy\nthat matches your current\nPolitical Agenda.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '-\naD f\nFOREIGN FINANCIAL\nASSISTANCE\nGet 10¥ for each Policy\nthat matches your current\nPolitical Agenda.',
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},
@@ -1268,12 +1259,7 @@ const stateActionCards = [
 		name: 'a oF SE ie',
 		content:
 			'= a oF SE ie\nby rrr ——————\nr Te. . :\niy ’ ib Cee: | | b}\n“eed j a. A } yh ¥\n—\nIMMEDIATE RESPONSE\nChoose an Event and perform\nits Action twice (decisions made\nwhen performing the Action can\nbe different the second time).',
-		effects: [
-			{
-				type: 'raw',
-				text: '= a oF SE ie\nby rrr ——————\nr Te. . :\niy ’ ib Cee: | | b}\n“eed j a. A } yh ¥\n—\nIMMEDIATE RESPONSE\nChoose an Event and perform\nits Action twice (decisions made\nwhen performing the Action can\nbe different the second time).',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-6-4',
@@ -1314,12 +1300,7 @@ const stateActionCards = [
 		name: 'State Actions',
 		content:
 			'ad\n. ™ > : -\n- 4 tas i\nSTEP FOR REPRESENTATION\nProvide 1 Personal @® and 2\nVoting cubes to a class. Get @ to\nthat class.\n45a\nO18',
-		effects: [
-			{
-				type: 'raw',
-				text: 'ad\n. ™ > : -\n- 4 tas i\nSTEP FOR REPRESENTATION\nProvide 1 Personal @® and 2\nVoting cubes to a class. Get @ to\nthat class.\n45a\nO18',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-7-4',
@@ -1363,12 +1344,7 @@ const stateActionCards = [
 		name: 'j te i Hi',
 		content:
 			"-\n7 = | j te i Hi\nXd age 8\na =a - |\n= t, ee\nPUBLIC SECTOR OVERTIME\nChoose one of your Companies.\nPay the Workers' Wages\nand perform a Production.",
-		effects: [
-			{
-				type: 'raw',
-				text: "-\n7 = | j te i Hi\nXd age 8\na =a - |\n= t, ee\nPUBLIC SECTOR OVERTIME\nChoose one of your Companies.\nPay the Workers' Wages\nand perform a Production.",
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-8-4',
@@ -1395,10 +1371,13 @@ const stateActionCards = [
 		category: 'base',
 		name: 'State Actions',
 		content: ": oS —\noi m De\n' i\\\n———————————\nFOREIGN INVESTMENT\nPROGRAM\nSpend 2 Personal @ to get 40¥V.",
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: ": oS —\noi m De\n' i\\\n———————————\nFOREIGN INVESTMENT\nPROGRAM\nSpend 2 Personal @ to get 40¥V.",
+				type: 'money',
+				action: 'gain',
+				amount: 40,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},
@@ -1427,12 +1406,7 @@ const stateActionCards = [
 		category: 'base',
 		name: 'State Actions',
 		content: 'a.\nBins \\ Ny\net\nHIGHER VAT\nEach player pays 15¥ to the State.\nThen, get 1) to 2 classes.\n6',
-		effects: [
-			{
-				type: 'raw',
-				text: 'a.\nBins \\ Ny\net\nHIGHER VAT\nEach player pays 15¥ to the State.\nThen, get 1) to 2 classes.\n6',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-2-5',
@@ -1478,10 +1452,20 @@ const stateActionCards = [
 		name: 'a i',
 		content:
 			"+ ?\nes 1 b nd ™ k\na % Gi a om ' > ; ‘ :\n\\ ee ;\n: Same! ° -)\n: .. : ’\na “7\nSHIFT FOCUS\nLook at the top 2 cards of the\nEvent deck. You may then discard\none of the current Events without\nany penalty and replace it with\none of the top 2 cards. Then,\nperform an Event Action.",
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "+ ?\nes 1 b nd ™ k\na % Gi a om ' > ; ‘ :\n\\ ee ;\n: Same! ° -)\n: .. : ’\na “7\nSHIFT FOCUS\nLook at the top 2 cards of the\nEvent deck. You may then discard\none of the current Events without\nany penalty and replace it with\none of the top 2 cards. Then,\nperform an Event Action.",
+				type: 'card',
+				action: 'reveal',
+				deck: 'event',
+				amount: 2,
+				target: 'self',
+			},
+			{
+				type: 'card',
+				action: 'discard',
+				deck: 'event',
+				amount: 1,
+				target: 'self',
 			},
 		],
 	},
@@ -1525,12 +1509,7 @@ const stateActionCards = [
 		name: 'State Actions',
 		content:
 			'- <>\n“4 a.\nSS; 2 W.\nal , <—\npat = ——\nAGENDA-SETTING\nGet 1 Personal @ for each Policy\nthat matches your current\nPolitical Agenda.',
-		effects: [
-			{
-				type: 'raw',
-				text: '- <>\n“4 a.\nSS; 2 W.\nal , <—\npat = ——\nAGENDA-SETTING\nGet 1 Personal @ for each Policy\nthat matches your current\nPolitical Agenda.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-4-5',
@@ -1575,12 +1554,7 @@ const stateActionCards = [
 		name: 'ya gar a',
 		content:
 			'‘ ya gar a\nA MATTER OF HIGH PRIORITY\nLook at the top 2 Event cards and,\nif able, place one on the board.\nThen, perform an Event Action.',
-		effects: [
-			{
-				type: 'raw',
-				text: '‘ ya gar a\nA MATTER OF HIGH PRIORITY\nLook at the top 2 Event cards and,\nif able, place one on the board.\nThen, perform an Event Action.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-5-5',
@@ -1609,12 +1583,7 @@ const stateActionCards = [
 		name: 'State Actions',
 		content:
 			'| IS\n| <i\nRY)\nA\\\\ \\ y .\nTDL\nALLOWANCES AND SUBSIDIES\nProvide 20¥ to a class.\nGeta @) for that class.',
-		effects: [
-			{
-				type: 'raw',
-				text: '| IS\n| <i\nRY)\nA\\\\ \\ y .\nTDL\nALLOWANCES AND SUBSIDIES\nProvide 20¥ to a class.\nGeta @) for that class.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'state-action-cards-grid-40-items-8-5-state-actions-deck-171-pos-6-5',
@@ -1657,10 +1626,13 @@ const stateActionCards = [
 		name: 'aD f',
 		content:
 			'-\naD f\nFOREIGN FINANCIAL\nASSISTANCE\nGet 10¥ for each Policy\nthat matches your current\nPolitical Agenda.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '-\naD f\nFOREIGN FINANCIAL\nASSISTANCE\nGet 10¥ for each Policy\nthat matches your current\nPolitical Agenda.',
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
 			},
 		],
 	},
@@ -1704,10 +1676,14 @@ const stateActionCards = [
 		name: 'fe m',
 		content:
 			'; a\n0 ‘ > om\n~S f F\n—* 4 ;\nPRESSING MATTERS\nPropose a Bill.\nYou may call for an Immediate\nVote without spending @\nSee',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '; a\n0 ‘ > om\n~S f F\n—* 4 ;\nPRESSING MATTERS\nPropose a Bill.\nYou may call for an Immediate\nVote without spending @\nSee',
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -1738,12 +1714,7 @@ const stateActionCards = [
 		name: 'State Actions',
 		content:
 			'ON\ni ,\nGEOPOLITICAL SUPPORT\nGet money based on the current\nForeign Trade Policy:\n:15¥\n|: 30¥\n:45¥7',
-		effects: [
-			{
-				type: 'raw',
-				text: 'ON\ni ,\nGEOPOLITICAL SUPPORT\nGet money based on the current\nForeign Trade Policy:\n:15¥\n|: 30¥\n:45¥7',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies StateActionCardsCard[];
 

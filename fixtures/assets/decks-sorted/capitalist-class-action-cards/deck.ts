@@ -28,12 +28,8 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'Orr Fb 1',
 		content: '« ~\n= Orr Fb 1\nHEALTH CRISIS\nSell up to 9\nto the State for 10% each.\n4a\nOv',
-		effects: [
-			{
-				type: 'raw',
-				text: '« ~\n= Orr Fb 1\nHEALTH CRISIS\nSell up to 9\nto the State for 10% each.\n4a\nOv',
-			},
-		],
+		requirements: [{ type: 'policy', mode: 'any', policies: ['4A'] }],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-2-1',
@@ -62,12 +58,7 @@ const capitalistClassActionCards = [
 		name: 'S|. ee r',
 		content:
 			'\\ ia o\n< L -\n“~ g aa\nik. * IL}\nHIGHER EDUCATION PROGRAM\nSell up to 9\nto the State for 10¥ each.\nZz\n/3',
-		effects: [
-			{
-				type: 'raw',
-				text: '\\ ia o\n< L -\n“~ g aa\nik. * IL}\nHIGHER EDUCATION PROGRAM\nSell up to 9\nto the State for 10¥ each.\nZz\n/3',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-3-1',
@@ -94,12 +85,7 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'Capitalist Class Actions',
 		content: '® ‘s\n‘ i] rhs: / 4\ni .\n. ;\nPUSH POLITICAL AGENDA\nPay 25¥ to Propose 2 Bills.',
-		effects: [
-			{
-				type: 'raw',
-				text: '® ‘s\n‘ i] rhs: / 4\ni .\n. ;\nPUSH POLITICAL AGENDA\nPay 25¥ to Propose 2 Bills.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-4-1',
@@ -148,10 +134,13 @@ const capitalistClassActionCards = [
 		name: 'or a nt ie ae',
 		content:
 			", or a nt ie ae\noa xs O) ‘\nve s '\nL oy a f ; \\ \\\n| Ur Niet\n.A 1) Sl ws\nJ, : ; \\\nFOREIGN RECRUITMENT\nChoose one of your\nnon-operational Companies.\nSpend 10¥ and assign matching\nWorkers from the Supply\nto that Company.\n7B /7C\n. 4",
-		effects: [
+		requirements: [{ type: 'policy', mode: 'any', policies: ['7B', '7C'] }],
+		stateEffects: [
 			{
-				type: 'raw',
-				text: ", or a nt ie ae\noa xs O) ‘\nve s '\nL oy a f ; \\ \\\n| Ur Niet\n.A 1) Sl ws\nJ, : ; \\\nFOREIGN RECRUITMENT\nChoose one of your\nnon-operational Companies.\nSpend 10¥ and assign matching\nWorkers from the Supply\nto that Company.\n7B /7C\n. 4",
+				type: 'money',
+				action: 'spend',
+				amount: 10,
+				target: 'self',
 			},
 		],
 	},
@@ -201,12 +190,8 @@ const capitalistClassActionCards = [
 		name: 'me. y',
 		content:
 			'i | a Fae . ly\nCOMPETITIVE WAGES\nSet the Wages in one of your\nCompanies to L3. Then, choose\nan operational Company of the same\nindustry in the Public Sector with\nthe same number of Workers. Assign\nthose Workers to your Company.\n2B/2C',
-		effects: [
-			{
-				type: 'raw',
-				text: 'i | a Fae . ly\nCOMPETITIVE WAGES\nSet the Wages in one of your\nCompanies to L3. Then, choose\nan operational Company of the same\nindustry in the Public Sector with\nthe same number of Workers. Assign\nthose Workers to your Company.\n2B/2C',
-			},
-		],
+		requirements: [{ type: 'policy', mode: 'any', policies: ['2B', '2C'] }],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-6-1',
@@ -235,10 +220,20 @@ const capitalistClassActionCards = [
 		name: 'a - re',
 		content:
 			']\na - re\n| ea |\nmms”\nGLOBAL BRANDING\nSell to the Foreign Market.\nYou may also Sell up to 6[)\nfor 10¥ each.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: ']\na - re\n| ea |\nmms”\nGLOBAL BRANDING\nSell to the Foreign Market.\nYou may also Sell up to 6[)\nfor 10¥ each.',
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -287,12 +282,7 @@ const capitalistClassActionCards = [
 		name: 'Capitalist Class Actions',
 		content:
 			'‘. | }\n| ui\n> § »\nqj e\nvis Ee i i F\nINTEREST GROUPS\nReveal Voting cubes from the bag\nuntil you reveal 3 opponents’\ncubes. Replace them with your\nVoting cubes and return all\nrevealed cubes to the bag.\n4',
-		effects: [
-			{
-				type: 'raw',
-				text: '‘. | }\n| ui\n> § »\nqj e\nvis Ee i i F\nINTEREST GROUPS\nReveal Voting cubes from the bag\nuntil you reveal 3 opponents’\ncubes. Replace them with your\nVoting cubes and return all\nrevealed cubes to the bag.\n4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-8-1',
@@ -319,12 +309,7 @@ const capitalistClassActionCards = [
 		name: 'Capitalist Class Actions',
 		content:
 			'SS\n; ¢ Sars 2\n— _ _— “= ~—\nOFFSHORE COMPANIES\nMove half of your Revenue\nto your Capital (rounded down).',
-		effects: [
-			{
-				type: 'raw',
-				text: 'SS\n; ¢ Sars 2\n— _ _— “= ~—\nOFFSHORE COMPANIES\nMove half of your Revenue\nto your Capital (rounded down).',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-1-2',
@@ -370,10 +355,20 @@ const capitalistClassActionCards = [
 		name: 'i ll',
 		content:
 			'Anna’\nae\n| aaa r\n7 Nae ‘ ’ 2 —*\n- - a‘ a\nFOREIGN MARKET INSIGHT\nReveal the next 2 Export cards.\nYou may choose one to replace\nthe current Export card.\nDiscard the other cards.\nYou may then Sell\nto the Foreign Market.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'Anna’\nae\n| aaa r\n7 Nae ‘ ’ 2 —*\n- - a‘ a\nFOREIGN MARKET INSIGHT\nReveal the next 2 Export cards.\nYou may choose one to replace\nthe current Export card.\nDiscard the other cards.\nYou may then Sell\nto the Foreign Market.',
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -423,10 +418,20 @@ const capitalistClassActionCards = [
 		name: 'wey',
 		content:
 			'4 ‘\nee ‘ f\n/ > i =\nUNEMPLOYMENT INITIATIVE\nPROGRAM\nAssign unemployed Workers\nto one of your non-operational\nCompanies. Get 5¥ from the State\nfor each Worker assigned this way.\n,',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '4 ‘\nee ‘ f\n/ > i =\nUNEMPLOYMENT INITIATIVE\nPROGRAM\nAssign unemployed Workers\nto one of your non-operational\nCompanies. Get 5¥ from the State\nfor each Worker assigned this way.\n,',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: 'any',
+				workerType: 'any',
+				target: 'company',
 			},
 		],
 	},
@@ -467,10 +472,27 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'a 7 : ) vy',
 		content: 'FOREIGN PARTNER\nMake a Business Deal.\nYou may then Sell & and/or\n[] to the Foreign Market.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'FOREIGN PARTNER\nMake a Business Deal.\nYou may then Sell & and/or\n[] to the Foreign Market.',
+				type: 'card',
+				action: 'play',
+				deck: 'business-deal',
+				amount: 1,
+				target: 'self',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -499,12 +521,7 @@ const capitalistClassActionCards = [
 		name: 'we a AN',
 		content:
 			'\\\nwe a AN\nBUSINESS EXPANSION\nBuild 2 Companies.\nAdd an equal number of new\nCompanies to the Market.\n= 4',
-		effects: [
-			{
-				type: 'raw',
-				text: '\\\nwe a AN\nBUSINESS EXPANSION\nBuild 2 Companies.\nAdd an equal number of new\nCompanies to the Market.\n= 4',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-5-2',
@@ -548,10 +565,11 @@ const capitalistClassActionCards = [
 		name: 'lk ls',
 		content:
 			'@ lk ls\n’ ‘J -\n\\ ~) ay\nSa “a\nINVESTMENT OPPORTUNITIES\nBuild a Company paying 10¥ less.\nOR\nSearch the Company deck\nfor a Company of your choice\nand build it paying 10¥ more.\nBe (',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '@ lk ls\n’ ‘J -\n\\ ~) ay\nSa “a\nINVESTMENT OPPORTUNITIES\nBuild a Company paying 10¥ less.\nOR\nSearch the Company deck\nfor a Company of your choice\nand build it paying 10¥ more.\nBe (',
+				type: 'company',
+				action: 'build',
+				target: 'self',
 			},
 		],
 	},
@@ -596,12 +614,7 @@ const capitalistClassActionCards = [
 		name: 'a) b> fz ¥2',
 		content:
 			'a) b> fz ¥2 é\n. : hy mt P y RuEY\net a 4 5\nas SS ; ee Ey Me Ne\nFAKE NEWS\nDraw 6 Voting cubes from\nthe bag. Remove up to 4 of them\nand return the rest to the bag.\n=',
-		effects: [
-			{
-				type: 'raw',
-				text: 'a) b> fz ¥2 é\n. : hy mt P y RuEY\net a 4 5\nas SS ; ee Ey Me Ne\nFAKE NEWS\nDraw 6 Voting cubes from\nthe bag. Remove up to 4 of them\nand return the rest to the bag.\n=',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-7-2',
@@ -644,10 +657,20 @@ const capitalistClassActionCards = [
 		name: 'Capitalist Class Actions',
 		content:
 			", =\n) PS\n- ff i 4. ,\n) 1 \\o% in :\n¥, Pan * 44 i\n— J\nGLOBAL FOOD CRISIS\nSell to the Foreign Market.\nYou may also Sell up to 4 ¢\n| for 15¥ each.\n' ;",
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: ", =\n) PS\n- ff i 4. ,\n) 1 \\o% in :\n¥, Pan * 44 i\n— J\nGLOBAL FOOD CRISIS\nSell to the Foreign Market.\nYou may also Sell up to 4 ¢\n| for 15¥ each.\n' ;",
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -693,12 +716,7 @@ const capitalistClassActionCards = [
 		name: 'a 78 X',
 		content:
 			'het . 2 . eB\nINDUSTRIALIZATION\nBuild a Luxury or Agricultural\nCompany paying half its cost.\nThe other half is paid by the State.\nsea\na]',
-		effects: [
-			{
-				type: 'raw',
-				text: 'het . 2 . eB\nINDUSTRIALIZATION\nBuild a Luxury or Agricultural\nCompany paying half its cost.\nThe other half is paid by the State.\nsea\na]',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-1-3',
@@ -727,12 +745,7 @@ const capitalistClassActionCards = [
 		name: 'Capitalist Class Actions',
 		content:
 			'I\n.\nec 4\n4 - Le |\nBID RIGGING\nSell up to 6 [)\nto the State for 10¥ each.\nThen, get 1 @\n4x\nOO\nBS',
-		effects: [
-			{
-				type: 'raw',
-				text: 'I\n.\nec 4\n4 - Le |\nBID RIGGING\nSell up to 6 [)\nto the State for 10¥ each.\nThen, get 1 @\n4x\nOO\nBS',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-2-3',
@@ -759,12 +772,7 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'Capitalist Class Actions',
 		content: '- —— = ——\nat\nBUY PRIVATE ISLAND\nPay 50¥ from your Capital\nto the State.\nGain 7.',
-		effects: [
-			{
-				type: 'raw',
-				text: '- —— = ——\nat\nBUY PRIVATE ISLAND\nPay 50¥ from your Capital\nto the State.\nGain 7.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-3-3',
@@ -790,12 +798,7 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'EXIT STRATEGY',
 		content: '=\nEXIT STRATEGY\nSell one of your Companies\nwithout 2 for twice its cost.\nSD a',
-		effects: [
-			{
-				type: 'raw',
-				text: '=\nEXIT STRATEGY\nSell one of your Companies\nwithout 2 for twice its cost.\nSD a',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-4-3',
@@ -838,10 +841,13 @@ const capitalistClassActionCards = [
 		name: 'a 7',
 		content:
 			'’ a 7\n> ‘ ;\n\\ : ~,\nBUSINESS GRANTS\nGet 5¥ from the State\nfor each Company you own.\nREQUIREMENT ‘ ai.\nSith',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '’ a 7\n> ‘ ;\n\\ : ~,\nBUSINESS GRANTS\nGet 5¥ from the State\nfor each Company you own.\nREQUIREMENT ‘ ai.\nSith',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'state',
+				target: 'self',
 			},
 		],
 	},
@@ -884,10 +890,10 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'y - CL . 7',
 		content: 'TAP INTO NEW MARKETS\nPropose a Bill for Foreign Trade.\nAdd 2 Voting cubes to the bag.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'TAP INTO NEW MARKETS\nPropose a Bill for Foreign Trade.\nAdd 2 Voting cubes to the bag.',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -936,10 +942,14 @@ const capitalistClassActionCards = [
 		name: 'ee Ms ay',
 		content:
 			"Te! eemee |\n2 aS eee oe\nan t . &\n» ——\n>2 » yt Pa . Ne >\nRADICAL REFORMS\nPropose a Bill. You may place\nyour marker on any section (even\nif it's not next to the current one).\nYou may not call for an\nImmediate Vote on this Bill.",
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "Te! eemee |\n2 aS eee oe\nan t . &\n» ——\n>2 » yt Pa . Ne >\nRADICAL REFORMS\nPropose a Bill. You may place\nyour marker on any section (even\nif it's not next to the current one).\nYou may not call for an\nImmediate Vote on this Bill.",
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -985,12 +995,7 @@ const capitalistClassActionCards = [
 		name: 'Capitalist Class Actions',
 		content:
 			'Nt\naL ih *\n& AEN HR) my i 3 We. £\nS* ap 3s | a\n=] z\nSe "l\nEXTRA SHIFT\nChoose one of your\nnon-automated Companies.\nPay the workers’ wages\nand perform a Production.',
-		effects: [
-			{
-				type: 'raw',
-				text: 'Nt\naL ih *\n& AEN HR) my i 3 We. £\nS* ap 3s | a\n=] z\nSe "l\nEXTRA SHIFT\nChoose one of your\nnon-automated Companies.\nPay the workers’ wages\nand perform a Production.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-8-3',
@@ -1033,10 +1038,10 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'a e 7',
 		content: 'TED\nmec Xone\n,\nTAXED ENOUGH ALREADY!\nPropose a Bill for Taxation.\nAdd 2 Voting cubes to the bag.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'TED\nmec Xone\n,\nTAXED ENOUGH ALREADY!\nPropose a Bill for Taxation.\nAdd 2 Voting cubes to the bag.',
+				type: 'policy',
+				action: 'propose',
 			},
 		],
 	},
@@ -1081,10 +1086,12 @@ const capitalistClassActionCards = [
 		name: 'Raye',
 		content:
 			"— . Raye\nthe u 04 oe” r\n= , “a ‘ =\n‘ . TIM 0 4 sie ad\n'!> ae Ss Ww. ?-2°e A\n~ \\\n> aN\nENDORSE\nPOLITICAL CAMPAIGN\nSpend 15¥ and add\n6 Voting cubes to the bag.",
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: "— . Raye\nthe u 04 oe” r\n= , “a ‘ =\n‘ . TIM 0 4 sie ad\n'!> ae Ss Ww. ?-2°e A\n~ \\\n> aN\nENDORSE\nPOLITICAL CAMPAIGN\nSpend 15¥ and add\n6 Voting cubes to the bag.",
+				type: 'money',
+				action: 'spend',
+				amount: 15,
+				target: 'self',
 			},
 		],
 	},
@@ -1113,12 +1120,7 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'Capitalist Class Actions',
 		content: 'i ~~\n} oe\nTECHNOLOGICAL PROGRESS\nPay 20¥ to get a &&\nOR\nPay 45¥ to get 2 &&',
-		effects: [
-			{
-				type: 'raw',
-				text: 'i ~~\n} oe\nTECHNOLOGICAL PROGRESS\nPay 20¥ to get a &&\nOR\nPay 45¥ to get 2 &&',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-3-4',
@@ -1165,12 +1167,7 @@ const capitalistClassActionCards = [
 		name: 'Z . : o> | 1',
 		content:
 			'. = \\, Z . : o> | 1%\ne ; Q , . .\n{ a\n== Fai\n| oY\n. . =|\nTRADE PROTECTIONISM\nLOBBY\nAdd 2 Voting cubes to the bag\nfor each Company you own in the\nAgricultural industry. If isin\neffect, also count the Companies\nin the Luxury industry.',
-		effects: [
-			{
-				type: 'raw',
-				text: '. = \\, Z . : o> | 1%\ne ; Q , . .\n{ a\n== Fai\n| oY\n. . =|\nTRADE PROTECTIONISM\nLOBBY\nAdd 2 Voting cubes to the bag\nfor each Company you own in the\nAgricultural industry. If isin\neffect, also count the Companies\nin the Luxury industry.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-4-4',
@@ -1217,10 +1214,14 @@ const capitalistClassActionCards = [
 		name: 'eae',
 		content:
 			'3 eae }\n>\ny i ——t m\nPUBLIC OPINION POLLING\nPropose a Bill and reveal 5 Voting\ncubes from the bag. You may\nthen call for an Immediate Vote\nwithout spending @.\nIf you do, use those 5 cubes\ninstead of drawing new ones.\nIf not, return them to the bag.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '3 eae }\n>\ny i ——t m\nPUBLIC OPINION POLLING\nPropose a Bill and reveal 5 Voting\ncubes from the bag. You may\nthen call for an Immediate Vote\nwithout spending @.\nIf you do, use those 5 cubes\ninstead of drawing new ones.\nIf not, return them to the bag.',
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'vote',
+				action: 'immediate-vote',
 			},
 		],
 	},
@@ -1270,12 +1271,8 @@ const capitalistClassActionCards = [
 		name: 'me. y',
 		content:
 			'=\nme. y\ni | a Fae . ly\nCOMPETITIVE WAGES\nSet the Wages in one of your\nCompanies to L3. Then, choose\nan operational Company of the same\nindustry in the Public Sector with\nthe same number of Workers. Assign\nthose Workers to your Company.\n2B/2C',
-		effects: [
-			{
-				type: 'raw',
-				text: '=\nme. y\ni | a Fae . ly\nCOMPETITIVE WAGES\nSet the Wages in one of your\nCompanies to L3. Then, choose\nan operational Company of the same\nindustry in the Public Sector with\nthe same number of Workers. Assign\nthose Workers to your Company.\n2B/2C',
-			},
-		],
+		requirements: [{ type: 'policy', mode: 'any', policies: ['2B', '2C'] }],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-6-4',
@@ -1301,12 +1298,7 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'EXIT STRATEGY',
 		content: '=\nEXIT STRATEGY\nSell one of your Companies\nwithout 2 for twice its cost.\nSg',
-		effects: [
-			{
-				type: 'raw',
-				text: '=\nEXIT STRATEGY\nSell one of your Companies\nwithout 2 for twice its cost.\nSg',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-7-4',
@@ -1333,12 +1325,7 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'Capitalist Class Actions',
 		content: 'i ~~\n} oe\nTECHNOLOGICAL PROGRESS\nPay 20¥ to get a &&\nOR\nPay 45¥ to get 2 &&',
-		effects: [
-			{
-				type: 'raw',
-				text: 'i ~~\n} oe\nTECHNOLOGICAL PROGRESS\nPay 20¥ to get a &&\nOR\nPay 45¥ to get 2 &&',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-8-4',
@@ -1365,12 +1352,7 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'i “ay',
 		content: '} Me\nTECHNOLOGICAL PROGRESS\nPay 20¥ to get a &&\nOR\nPay 45¥ to get 2 &&',
-		effects: [
-			{
-				type: 'raw',
-				text: '} Me\nTECHNOLOGICAL PROGRESS\nPay 20¥ to get a &&\nOR\nPay 45¥ to get 2 &&',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-1-5',
@@ -1419,10 +1401,13 @@ const capitalistClassActionCards = [
 		name: 'Capitalist Class Actions',
 		content:
 			'a\nJ oa = -) ‘\ni s \'\nweg a f \\ is\n=" 7 - )) =~\n.A 1) Se ws\nJ, : ; \\\nFOREIGN RECRUITMENT\nChoose one of your\nnon-operational Companies.\nSpend 10¥ and assign matching\nWorkers from the Supply\nto that Company.\n7B /7C\nig',
-		effects: [
+		requirements: [{ type: 'policy', mode: 'any', policies: ['7B', '7C'] }],
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'a\nJ oa = -) ‘\ni s \'\nweg a f \\ is\n=" 7 - )) =~\n.A 1) Se ws\nJ, : ; \\\nFOREIGN RECRUITMENT\nChoose one of your\nnon-operational Companies.\nSpend 10¥ and assign matching\nWorkers from the Supply\nto that Company.\n7B /7C\nig',
+				type: 'money',
+				action: 'spend',
+				amount: 10,
+				target: 'self',
 			},
 		],
 	},
@@ -1464,10 +1449,27 @@ const capitalistClassActionCards = [
 		name: 'Capitalist Class Actions',
 		content:
 			'it\nes 7 : ) yA\nFOREIGN PARTNER\nMake a Business Deal.\nYou may then Sell & and/or\n[] to the Foreign Market.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: 'it\nes 7 : ) yA\nFOREIGN PARTNER\nMake a Business Deal.\nYou may then Sell & and/or\n[] to the Foreign Market.',
+				type: 'card',
+				action: 'play',
+				deck: 'business-deal',
+				amount: 1,
+				target: 'self',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -1496,12 +1498,7 @@ const capitalistClassActionCards = [
 		name: 'vy a ne',
 		content:
 			'— vy a ne\n5 7\ntS\nBUSINESS EXPANSION\nBuild 2 Companies.\nAdd an equal number of new\nCompanies to the Market.\nng',
-		effects: [
-			{
-				type: 'raw',
-				text: '— vy a ne\n5 7\ntS\nBUSINESS EXPANSION\nBuild 2 Companies.\nAdd an equal number of new\nCompanies to the Market.\nng',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-4-5',
@@ -1546,12 +1543,7 @@ const capitalistClassActionCards = [
 		name: 'Jes 4h) My (NE ) a P',
 		content:
 			'© Jes 4h) My (NE ) a P\no* ap 3s | a\na a\nmay. ts La "ly\nEXTRA SHIFT\nChoose one of your\nnon-automated Companies.\nPay the workers’ wages\nand perform a Production.',
-		effects: [
-			{
-				type: 'raw',
-				text: '© Jes 4h) My (NE ) a P\no* ap 3s | a\na a\nmay. ts La "ly\nEXTRA SHIFT\nChoose one of your\nnon-automated Companies.\nPay the workers’ wages\nand perform a Production.',
-			},
-		],
+		stateEffects: [],
 	},
 	{
 		id: 'capitalist-class-action-cards-grid-40-items-8-5-capitalist-class-actions-deck-176-pos-5-5',
@@ -1597,10 +1589,20 @@ const capitalistClassActionCards = [
 		name: 'Capitalist Class Actions',
 		content:
 			'. »\n8 | oe!\n| aaa r\n"ll —~\n- - a +\n— NG\nTa LS\nFOREIGN MARKET INSIGHT\nReveal the next 2 Export cards.\nYou may choose one to replace\nthe current Export card.\nDiscard the other cards.\nYou may then Sell\nto the Foreign Market.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '. »\n8 | oe!\n| aaa r\n"ll —~\n- - a +\n— NG\nTa LS\nFOREIGN MARKET INSIGHT\nReveal the next 2 Export cards.\nYou may choose one to replace\nthe current Export card.\nDiscard the other cards.\nYou may then Sell\nto the Foreign Market.',
+				type: 'resource',
+				action: 'sell',
+				resource: 'food',
+				amount: 'any',
+				target: 'foreign-market',
+			},
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: 'any',
+				target: 'foreign-market',
 			},
 		],
 	},
@@ -1646,10 +1648,11 @@ const capitalistClassActionCards = [
 		name: 'lk lk',
 		content:
 			'@ lk lk\n’ ‘J -\n\\ ~) ay\n~ a AM\nINVESTMENT OPPORTUNITIES\nBuild a Company paying 10¥ less.\nOR\nSearch the Company deck\nfor a Company of your choice\nand build it paying 10¥ more.\nSn',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '@ lk lk\n’ ‘J -\n\\ ~) ay\n~ a AM\nINVESTMENT OPPORTUNITIES\nBuild a Company paying 10¥ less.\nOR\nSearch the Company deck\nfor a Company of your choice\nand build it paying 10¥ more.\nSn',
+				type: 'company',
+				action: 'build',
+				target: 'self',
 			},
 		],
 	},
@@ -1699,10 +1702,20 @@ const capitalistClassActionCards = [
 		name: 'e ag v -',
 		content:
 			'5 .\n= ‘\n: e ag v -\ny\n\\ f 7 a\nUNEMPLOYMENT INITIATIVE\nPROGRAM\nAssign unemployed Workers\nto one of your non-operational\nCompanies. Get 5¥ from the State\nfor each Worker assigned this way.',
-		effects: [
+		stateEffects: [
 			{
-				type: 'raw',
-				text: '5 .\n= ‘\n: e ag v -\ny\n\\ f 7 a\nUNEMPLOYMENT INITIATIVE\nPROGRAM\nAssign unemployed Workers\nto one of your non-operational\nCompanies. Get 5¥ from the State\nfor each Worker assigned this way.',
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: 'any',
+				workerType: 'any',
+				target: 'company',
 			},
 		],
 	},
@@ -1729,12 +1742,7 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'Capitalist Class Actions',
 		content: 'SS\n; ¢ Sars 2\nae «= ~—\nOFFSHORE COMPANIES\nMove half of your Revenue\nto your Capital (rounded down).',
-		effects: [
-			{
-				type: 'raw',
-				text: 'SS\n; ¢ Sars 2\nae «= ~—\nOFFSHORE COMPANIES\nMove half of your Revenue\nto your Capital (rounded down).',
-			},
-		],
+		stateEffects: [],
 	},
 ] satisfies CapitalistClassActionCardsCard[];
 
