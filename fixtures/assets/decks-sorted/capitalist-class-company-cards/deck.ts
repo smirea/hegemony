@@ -9,7 +9,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'College: education company, cost 16, production 6, wages l1 10, l2 20, l3 30. Workers: education workingClass/middleClass; unskilled workingClass/middleClass.',
+			'College: education company, cost 16, production 6, production from automation 2, wages level1 10, level2 20, level3 30. Workers: education workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-1-1.png',
@@ -19,7 +19,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [16, 6, 1, 10, 2, 20, 3, 30],
+			numbers: [16, 6, 2, 10, 20, 30, 2],
+			money: [16, 10, 20, 30],
 			resources: ['education', 'money'],
 			keywords: [
 				'college',
@@ -29,17 +30,19 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-1',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-college-1',
 		name: 'College',
-		industry: 'education',
 		cost: 16,
+		industry: 'education',
 		production: 6,
 		wages: {
 			l1: 10,
@@ -49,15 +52,16 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'education',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 2,
 	},
 	{
 		frontImage:
@@ -65,7 +69,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Vegetable Farm: food company, cost 15, production 5, wages l1 20, l2 25, l3 30. Workers: unskilled workingClass/middleClass; unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Vegetable Farm: food company, cost 15, production 5, wages level1 20, level2 25, level3 30. Workers: unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-2-1.png',
@@ -75,7 +79,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [15, 5, 1, 20, 2, 25, 3, 30],
+			numbers: [15, 5, 20, 25, 30, 3],
+			money: [15, 20, 25, 30],
 			resources: ['food', 'money'],
 			keywords: [
 				'vegetable',
@@ -92,11 +97,12 @@ const capitalistClassCompanyCards = [
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-2',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-vegetable-farm-1',
 		name: 'Vegetable Farm',
-		industry: 'food',
 		cost: 15,
+		industry: 'food',
 		production: 5,
 		wages: {
 			l1: 20,
@@ -106,18 +112,18 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
 	},
@@ -127,7 +133,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Radio Station: influence company, cost 8, production 2, wages l1 10, l2 15, l3 20. Workers: unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Radio Station: influence company, cost 8, production 2, wages level1 10, level2 15, level3 20. Workers: unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-3-1.png',
@@ -137,7 +143,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [8, 2, 1, 10, 15, 3, 20],
+			numbers: [8, 2, 10, 15, 20, 2],
+			money: [8, 10, 15, 20],
 			resources: ['influence', 'money'],
 			keywords: [
 				'radio',
@@ -154,11 +161,12 @@ const capitalistClassCompanyCards = [
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-3',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-radio-station-1',
 		name: 'Radio Station',
-		industry: 'influence',
 		cost: 8,
+		industry: 'influence',
 		production: 2,
 		wages: {
 			l1: 10,
@@ -168,13 +176,13 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
 	},
@@ -184,7 +192,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Hotel: luxury company, cost 15, production 7, wages l1 20, l2 25, l3 30. Workers: unskilled workingClass/middleClass; unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Hotel: luxury company, cost 15, production 7, production from automation 9, wages level1 20, level2 25, level3 30. Workers: unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-4-1.png',
@@ -194,7 +202,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [15, 7, 1, 20, 2, 25, 3, 30],
+			numbers: [15, 7, 9, 20, 25, 30, 3],
+			money: [15, 20, 25, 30],
 			resources: ['luxury', 'money'],
 			keywords: [
 				'hotel',
@@ -207,14 +216,16 @@ const capitalistClassCompanyCards = [
 				'unskilled',
 				'workingclass',
 				'middleclass',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-4',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-hotel-1',
 		name: 'Hotel',
-		industry: 'luxury',
 		cost: 15,
+		industry: 'luxury',
 		production: 7,
 		wages: {
 			l1: 20,
@@ -224,20 +235,21 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 9,
 	},
 	{
 		frontImage:
@@ -245,7 +257,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'TV Station: influence company, cost 24, production 4, wages l1 20, l2 30, l3 40. Workers: unskilled workingClass/middleClass; unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+			'TV Station: influence company, cost 24, production 4, wages level1 20, level2 30, level3 40. Workers: unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-5-1.png',
@@ -255,9 +267,11 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [24, 4, 1, 20, 2, 30, 3, 40],
+			numbers: [24, 4, 20, 30, 40, 3],
+			money: [24, 20, 30, 40],
 			resources: ['influence', 'money'],
 			keywords: [
+				'tv',
 				'station',
 				'influence',
 				'company',
@@ -271,11 +285,12 @@ const capitalistClassCompanyCards = [
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-5',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-tv-station-1',
 		name: 'TV Station',
-		industry: 'influence',
 		cost: 24,
+		industry: 'influence',
 		production: 4,
 		wages: {
 			l1: 20,
@@ -285,18 +300,18 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
 	},
@@ -306,7 +321,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Academy: education company, cost 20, production 7, wages l1 10, l2 20, l3 30. Workers: education workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Academy: education company, cost 20, production 7, wages level1 10, level2 20, level3 30. Workers: education workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-6-1.png',
@@ -316,7 +331,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [20, 7, 1, 10, 2, 3, 30],
+			numbers: [20, 7, 10, 20, 30, 2],
+			money: [20, 10, 20, 30],
 			resources: ['education', 'money'],
 			keywords: [
 				'academy',
@@ -326,17 +342,18 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-6',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-academy-1',
 		name: 'Academy',
-		industry: 'education',
 		cost: 20,
+		industry: 'education',
 		production: 7,
 		wages: {
 			l1: 10,
@@ -346,13 +363,13 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'education',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
 	},
@@ -361,7 +378,8 @@ const capitalistClassCompanyCards = [
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/grid_28-items_6-5__capitalist-class-companies-deck-159__pos-1-2.png',
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
-		rawText: 'Car Manufacturer: luxury company, cost 45, production 5, wages l1 0, l2 0, l3 0. Workers: .',
+		rawText:
+			'Car Manufacturer: luxury company, cost 45, production 5, fully automated, wages level1 0, level2 0, level3 0. Workers: none.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-1-2.png',
@@ -371,16 +389,29 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [45, 5, 1, 0, 2, 3],
+			numbers: [45, 5, 0, 0, 0, 0],
+			money: [45],
 			resources: ['luxury', 'money'],
-			keywords: ['car', 'manufacturer', 'luxury', 'company', 'cost', 'production', 'wages', 'workers'],
+			keywords: [
+				'car',
+				'manufacturer',
+				'luxury',
+				'company',
+				'cost',
+				'production',
+				'wages',
+				'workers',
+				'fully',
+				'automated',
+			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-7',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-car-manufacturer-1',
 		name: 'Car Manufacturer',
-		industry: 'luxury',
 		cost: 45,
+		industry: 'luxury',
 		production: 5,
 		wages: {
 			l1: 0,
@@ -388,6 +419,7 @@ const capitalistClassCompanyCards = [
 			l3: 0,
 		},
 		workers: [],
+		fullyAutomated: true,
 	},
 	{
 		frontImage:
@@ -395,7 +427,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'University: education company, cost 24, production 9, wages l1 20, l2 30, l3 40. Workers: unskilled workingClass/middleClass; unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+			'University: education company, cost 24, production 9, production from automation 2, wages level1 20, level2 30, level3 40. Workers: unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-2-2.png',
@@ -405,7 +437,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [24, 9, 1, 20, 2, 30, 3, 40],
+			numbers: [24, 9, 2, 20, 30, 40, 3],
+			money: [24, 20, 30, 40],
 			resources: ['education', 'money'],
 			keywords: [
 				'university',
@@ -418,14 +451,16 @@ const capitalistClassCompanyCards = [
 				'unskilled',
 				'workingclass',
 				'middleclass',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-8',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-university-1',
 		name: 'University',
-		industry: 'education',
 		cost: 24,
+		industry: 'education',
 		production: 9,
 		wages: {
 			l1: 20,
@@ -435,20 +470,21 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 2,
 	},
 	{
 		frontImage:
@@ -456,7 +492,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Fast Food Chain: food company, cost 8, production 3, wages l1 10, l2 15, l3 20. Workers: food workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Fast Food Chain: food company, cost 8, production 3, wages level1 10, level2 15, level3 20. Workers: food workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-3-2.png',
@@ -466,7 +502,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [8, 3, 1, 10, 2, 15, 20],
+			numbers: [8, 3, 10, 15, 20, 2],
+			money: [8, 10, 15, 20],
 			resources: ['food', 'money'],
 			keywords: [
 				'fast',
@@ -477,17 +514,18 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-9',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-fast-food-chain-1',
 		name: 'Fast Food Chain',
-		industry: 'food',
 		cost: 8,
+		industry: 'food',
 		production: 3,
 		wages: {
 			l1: 10,
@@ -497,13 +535,13 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'food',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
 	},
@@ -512,7 +550,8 @@ const capitalistClassCompanyCards = [
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/grid_28-items_6-5__capitalist-class-companies-deck-159__pos-4-2.png',
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
-		rawText: 'Electronics Manufacturer: luxury company, cost 25, production 3, wages l1 0, l2 0, l3 0. Workers: .',
+		rawText:
+			'Electronics Manufacturer: luxury company, cost 25, production 3, fully automated, wages level1 0, level2 0, level3 0. Workers: none.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-4-2.png',
@@ -522,16 +561,29 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [25, 3, 1, 0, 2],
+			numbers: [25, 3, 0, 0, 0, 0],
+			money: [25],
 			resources: ['luxury', 'money'],
-			keywords: ['electronics', 'manufacturer', 'luxury', 'company', 'cost', 'production', 'wages', 'workers'],
+			keywords: [
+				'electronics',
+				'manufacturer',
+				'luxury',
+				'company',
+				'cost',
+				'production',
+				'wages',
+				'workers',
+				'fully',
+				'automated',
+			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-10',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-electronics-manufacturer-1',
 		name: 'Electronics Manufacturer',
-		industry: 'luxury',
 		cost: 25,
+		industry: 'luxury',
 		production: 3,
 		wages: {
 			l1: 0,
@@ -539,6 +591,7 @@ const capitalistClassCompanyCards = [
 			l3: 0,
 		},
 		workers: [],
+		fullyAutomated: true,
 	},
 	{
 		frontImage:
@@ -546,7 +599,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Fish Farm: food company, cost 20, production 6, wages l1 25, l2 30, l3 35. Workers: unskilled workingClass/middleClass; unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Fish Farm: food company, cost 20, production 6, production from automation 1, wages level1 25, level2 30, level3 35. Workers: unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-5-2.png',
@@ -556,7 +609,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [20, 6, 1, 25, 2, 30, 3, 35],
+			numbers: [20, 6, 1, 25, 30, 35, 3],
+			money: [20, 25, 30, 35],
 			resources: ['food', 'money'],
 			keywords: [
 				'fish',
@@ -570,14 +624,16 @@ const capitalistClassCompanyCards = [
 				'unskilled',
 				'workingclass',
 				'middleclass',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-11',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-fish-farm-1',
 		name: 'Fish Farm',
-		industry: 'food',
 		cost: 20,
+		industry: 'food',
 		production: 6,
 		wages: {
 			l1: 25,
@@ -587,20 +643,21 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 1,
 	},
 	{
 		frontImage:
@@ -608,7 +665,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Publishing House: influence company, cost 12, production 3, wages l1 20, l2 25, l3 30. Workers: influence workingClass/middleClass; unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Publishing House: influence company, cost 12, production 3, wages level1 20, level2 25, level3 30. Workers: influence workingClass/middleClass optional false; unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-6-2.png',
@@ -618,7 +675,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [12, 3, 1, 20, 2, 25, 30],
+			numbers: [12, 3, 20, 25, 30, 3],
+			money: [12, 20, 25, 30],
 			resources: ['influence', 'money'],
 			keywords: [
 				'publishing',
@@ -629,17 +687,18 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-12',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-publishing-house-1',
 		name: 'Publishing House',
-		industry: 'influence',
 		cost: 12,
+		industry: 'influence',
 		production: 3,
 		wages: {
 			l1: 20,
@@ -649,18 +708,18 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'influence',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
 	},
@@ -670,7 +729,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Clinic: healthcare company, cost 16, production 6, wages l1 10, l2 20, l3 30. Workers: unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Clinic: healthcare company, cost 16, production 6, production from automation 2, wages level1 10, level2 20, level3 30. Workers: unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-1-3.png',
@@ -680,7 +739,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [16, 6, 1, 10, 2, 20, 3, 30],
+			numbers: [16, 6, 2, 10, 20, 30, 2],
+			money: [16, 10, 20, 30],
 			resources: ['healthcare', 'money'],
 			keywords: [
 				'clinic',
@@ -693,14 +753,16 @@ const capitalistClassCompanyCards = [
 				'unskilled',
 				'workingclass',
 				'middleclass',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-13',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-clinic-1',
 		name: 'Clinic',
-		industry: 'healthcare',
 		cost: 16,
+		industry: 'healthcare',
 		production: 6,
 		wages: {
 			l1: 10,
@@ -710,15 +772,16 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 2,
 	},
 	{
 		frontImage:
@@ -726,7 +789,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Stadium: luxury company, cost 20, production 8, wages l1 25, l2 30, l3 35. Workers: luxury workingClass/middleClass; unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Stadium: luxury company, cost 20, production 8, production from automation 3, wages level1 25, level2 30, level3 35. Workers: luxury workingClass/middleClass optional false; unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-2-3.png',
@@ -736,7 +799,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [20, 8, 1, 25, 2, 30, 3, 35],
+			numbers: [20, 8, 3, 25, 30, 35, 3],
+			money: [20, 25, 30, 35],
 			resources: ['luxury', 'money'],
 			keywords: [
 				'stadium',
@@ -746,17 +810,19 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-14',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-stadium-1',
 		name: 'Stadium',
-		industry: 'luxury',
 		cost: 20,
+		industry: 'luxury',
 		production: 8,
 		wages: {
 			l1: 25,
@@ -766,20 +832,21 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'luxury',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 3,
 	},
 	{
 		frontImage:
@@ -787,7 +854,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Hospital: healthcare company, cost 20, production 7, wages l1 10, l2 20, l3 30. Workers: healthcare workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Hospital: healthcare company, cost 20, production 7, wages level1 10, level2 20, level3 30. Workers: healthcare workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-3-3.png',
@@ -797,7 +864,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [20, 7, 1, 10, 2, 3, 30],
+			numbers: [20, 7, 10, 20, 30, 2],
+			money: [20, 10, 20, 30],
 			resources: ['healthcare', 'money'],
 			keywords: [
 				'hospital',
@@ -807,17 +875,18 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-15',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-hospital-1',
 		name: 'Hospital',
-		industry: 'healthcare',
 		cost: 20,
+		industry: 'healthcare',
 		production: 7,
 		wages: {
 			l1: 10,
@@ -827,13 +896,13 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'healthcare',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
 	},
@@ -843,7 +912,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Medical Village: healthcare company, cost 24, production 9, wages l1 20, l2 30, l3 40. Workers: healthcare workingClass/middleClass; unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Medical Village: healthcare company, cost 24, production 9, production from automation 2, wages level1 20, level2 30, level3 40. Workers: healthcare workingClass/middleClass optional false; unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-4-3.png',
@@ -853,7 +922,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [24, 9, 1, 20, 2, 30, 3, 40],
+			numbers: [24, 9, 2, 20, 30, 40, 3],
+			money: [24, 20, 30, 40],
 			resources: ['healthcare', 'money'],
 			keywords: [
 				'medical',
@@ -864,17 +934,19 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-16',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-medical-village-1',
 		name: 'Medical Village',
-		industry: 'healthcare',
 		cost: 24,
+		industry: 'healthcare',
 		production: 9,
 		wages: {
 			l1: 20,
@@ -884,20 +956,21 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'healthcare',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 2,
 	},
 	{
 		frontImage:
@@ -905,7 +978,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Supermarket: food company, cost 16, production 4, wages l1 15, l2 20, l3 25. Workers: food workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Supermarket: food company, cost 16, production 4, production from automation 1, wages level1 15, level2 20, level3 25. Workers: food workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-5-3.png',
@@ -915,7 +988,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [16, 4, 1, 15, 2, 20, 3, 25],
+			numbers: [16, 4, 1, 15, 20, 25, 2],
+			money: [16, 15, 20, 25],
 			resources: ['food', 'money'],
 			keywords: [
 				'supermarket',
@@ -925,17 +999,19 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-17',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-supermarket-1',
 		name: 'Supermarket',
-		industry: 'food',
 		cost: 16,
+		industry: 'food',
 		production: 4,
 		wages: {
 			l1: 15,
@@ -945,15 +1021,16 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'food',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 1,
 	},
 	{
 		frontImage:
@@ -961,7 +1038,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Shopping Mall: luxury company, cost 16, production 6, wages l1 15, l2 20, l3 25. Workers: luxury workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Shopping Mall: luxury company, cost 16, production 6, production from automation 2, wages level1 15, level2 20, level3 25. Workers: luxury workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-6-3.png',
@@ -971,7 +1048,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [16, 6, 1, 15, 2, 20, 3, 25],
+			numbers: [16, 6, 2, 15, 20, 25, 2],
+			money: [16, 15, 20, 25],
 			resources: ['luxury', 'money'],
 			keywords: [
 				'shopping',
@@ -982,17 +1060,19 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-18',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-shopping-mall-1',
 		name: 'Shopping Mall',
-		industry: 'luxury',
 		cost: 16,
+		industry: 'luxury',
 		production: 6,
 		wages: {
 			l1: 15,
@@ -1002,15 +1082,16 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'luxury',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 2,
 	},
 	{
 		frontImage:
@@ -1018,7 +1099,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Lobbying Firm: influence company, cost 16, production 3, wages l1 10, l2 20, l3 30. Workers: influence workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Lobbying Firm: influence company, cost 16, production 3, wages level1 10, level2 20, level3 30. Workers: influence workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-1-4.png',
@@ -1028,7 +1109,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [16, 3, 1, 10, 2, 20, 30],
+			numbers: [16, 3, 10, 20, 30, 2],
+			money: [16, 10, 20, 30],
 			resources: ['influence', 'money'],
 			keywords: [
 				'lobbying',
@@ -1039,17 +1121,18 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-19',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-lobbying-firm-1',
 		name: 'Lobbying Firm',
-		industry: 'influence',
 		cost: 16,
+		industry: 'influence',
 		production: 3,
 		wages: {
 			l1: 10,
@@ -1059,13 +1142,13 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'influence',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
 	},
@@ -1075,7 +1158,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Institute of Technology: education company, cost 20, production 8, wages l1 20, l2 30, l3 40. Workers: education workingClass/middleClass; unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Institute of Technology: education company, cost 20, production 8, production from automation 3, wages level1 20, level2 30, level3 40. Workers: education workingClass/middleClass optional false; unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-2-4.png',
@@ -1085,10 +1168,12 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [20, 8, 1, 2, 30, 3, 40],
+			numbers: [20, 8, 3, 20, 30, 40, 3],
+			money: [20, 20, 30, 40],
 			resources: ['education', 'money'],
 			keywords: [
 				'institute',
+				'of',
 				'technology',
 				'education',
 				'company',
@@ -1096,17 +1181,19 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-20',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-institute-of-technology-1',
 		name: 'Institute of Technology',
-		industry: 'education',
 		cost: 20,
+		industry: 'education',
 		production: 8,
 		wages: {
 			l1: 20,
@@ -1116,27 +1203,29 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'education',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 3,
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/grid_28-items_6-5__capitalist-class-companies-deck-159__pos-3-4.png',
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
-		rawText: 'Automated Grain Farm: food company, cost 25, production 2, wages l1 0, l2 0, l3 0. Workers: .',
+		rawText:
+			'Automated Grain Farm: food company, cost 25, production 2, fully automated, wages level1 0, level2 0, level3 0. Workers: none.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-3-4.png',
@@ -1146,16 +1235,18 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [25, 2, 1, 0, 3],
+			numbers: [25, 2, 0, 0, 0, 0],
+			money: [25],
 			resources: ['food', 'money'],
-			keywords: ['automated', 'grain', 'farm', 'food', 'company', 'cost', 'production', 'wages', 'workers'],
+			keywords: ['automated', 'grain', 'farm', 'food', 'company', 'cost', 'production', 'wages', 'workers', 'fully'],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-21',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-automated-grain-farm-1',
 		name: 'Automated Grain Farm',
-		industry: 'food',
 		cost: 25,
+		industry: 'food',
 		production: 2,
 		wages: {
 			l1: 0,
@@ -1163,6 +1254,7 @@ const capitalistClassCompanyCards = [
 			l3: 0,
 		},
 		workers: [],
+		fullyAutomated: true,
 	},
 	{
 		frontImage:
@@ -1170,7 +1262,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Fashion Company: luxury company, cost 8, production 4, wages l1 10, l2 15, l3 20. Workers: unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Fashion Company: luxury company, cost 8, production 4, production from automation 2, wages level1 10, level2 15, level3 20. Workers: unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-4-4.png',
@@ -1180,7 +1272,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [8, 4, 1, 10, 2, 15, 3, 20],
+			numbers: [8, 4, 2, 10, 15, 20, 2],
+			money: [8, 10, 15, 20],
 			resources: ['luxury', 'money'],
 			keywords: [
 				'fashion',
@@ -1193,14 +1286,16 @@ const capitalistClassCompanyCards = [
 				'unskilled',
 				'workingclass',
 				'middleclass',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-22',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-fashion-company-1',
 		name: 'Fashion Company',
-		industry: 'luxury',
 		cost: 8,
+		industry: 'luxury',
 		production: 4,
 		wages: {
 			l1: 10,
@@ -1210,22 +1305,24 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 2,
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/grid_28-items_6-5__capitalist-class-companies-deck-159__pos-5-4.png',
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
-		rawText: 'Automated Dairy Farm: food company, cost 45, production 3, wages l1 0, l2 0, l3 0. Workers: .',
+		rawText:
+			'Automated Dairy Farm: food company, cost 45, production 3, fully automated, wages level1 0, level2 0, level3 0. Workers: none.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-5-4.png',
@@ -1235,16 +1332,18 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [45, 3, 1, 0, 2],
+			numbers: [45, 3, 0, 0, 0, 0],
+			money: [45],
 			resources: ['food', 'money'],
-			keywords: ['automated', 'dairy', 'farm', 'food', 'company', 'cost', 'production', 'wages', 'workers'],
+			keywords: ['automated', 'dairy', 'farm', 'food', 'company', 'cost', 'production', 'wages', 'workers', 'fully'],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-23',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-automated-dairy-farm-1',
 		name: 'Automated Dairy Farm',
-		industry: 'food',
 		cost: 45,
+		industry: 'food',
 		production: 3,
 		wages: {
 			l1: 0,
@@ -1252,6 +1351,7 @@ const capitalistClassCompanyCards = [
 			l3: 0,
 		},
 		workers: [],
+		fullyAutomated: true,
 	},
 	{
 		frontImage:
@@ -1259,7 +1359,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Pharmaceutical Company: healthcare company, cost 20, production 8, wages l1 20, l2 30, l3 40. Workers: healthcare workingClass/middleClass; unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Pharmaceutical Company: healthcare company, cost 20, production 8, production from automation 3, wages level1 20, level2 30, level3 40. Workers: healthcare workingClass/middleClass optional false; unskilled workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-6-4.png',
@@ -1269,7 +1369,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [20, 8, 1, 2, 30, 3, 40],
+			numbers: [20, 8, 3, 20, 30, 40, 3],
+			money: [20, 20, 30, 40],
 			resources: ['healthcare', 'money'],
 			keywords: [
 				'pharmaceutical',
@@ -1279,17 +1380,19 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-24',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-pharmaceutical-company-1',
 		name: 'Pharmaceutical Company',
-		industry: 'healthcare',
 		cost: 20,
+		industry: 'healthcare',
 		production: 8,
 		wages: {
 			l1: 20,
@@ -1299,20 +1402,21 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'healthcare',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 3,
 	},
 	{
 		frontImage:
@@ -1320,7 +1424,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Clinic: healthcare company, cost 16, production 6, wages l1 10, l2 20, l3 30. Workers: healthcare workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Clinic: healthcare company, cost 16, production 6, production from automation 2, wages level1 10, level2 20, level3 30. Workers: healthcare workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-1-5.png',
@@ -1330,7 +1434,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [16, 6, 1, 10, 2, 20, 3, 30],
+			numbers: [16, 6, 2, 10, 20, 30, 2],
+			money: [16, 10, 20, 30],
 			resources: ['healthcare', 'money'],
 			keywords: [
 				'clinic',
@@ -1340,17 +1445,19 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-25',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-clinic-2',
 		name: 'Clinic',
-		industry: 'healthcare',
 		cost: 16,
+		industry: 'healthcare',
 		production: 6,
 		wages: {
 			l1: 10,
@@ -1360,15 +1467,16 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'healthcare',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 2,
 	},
 	{
 		frontImage:
@@ -1376,7 +1484,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'College: education company, cost 16, production 6, wages l1 10, l2 20, l3 30. Workers: education workingClass/middleClass; unskilled workingClass/middleClass.',
+			'College: education company, cost 16, production 6, production from automation 2, wages level1 10, level2 20, level3 30. Workers: education workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-2-5.png',
@@ -1386,7 +1494,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [16, 6, 1, 10, 2, 20, 3, 30],
+			numbers: [16, 6, 2, 10, 20, 30, 2],
+			money: [16, 10, 20, 30],
 			resources: ['education', 'money'],
 			keywords: [
 				'college',
@@ -1396,17 +1505,19 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-26',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-college-2',
 		name: 'College',
-		industry: 'education',
 		cost: 16,
+		industry: 'education',
 		production: 6,
 		wages: {
 			l1: 10,
@@ -1416,15 +1527,16 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'education',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 2,
 	},
 	{
 		frontImage:
@@ -1432,7 +1544,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Shopping Mall: luxury company, cost 16, production 6, wages l1 15, l2 20, l3 25. Workers: luxury workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Shopping Mall: luxury company, cost 16, production 6, production from automation 2, wages level1 15, level2 20, level3 25. Workers: luxury workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-3-5.png',
@@ -1442,7 +1554,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [16, 6, 1, 15, 2, 20, 3, 25],
+			numbers: [16, 6, 2, 15, 20, 25, 2],
+			money: [16, 15, 20, 25],
 			resources: ['luxury', 'money'],
 			keywords: [
 				'shopping',
@@ -1453,17 +1566,19 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-27',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-shopping-mall-2',
 		name: 'Shopping Mall',
-		industry: 'luxury',
 		cost: 16,
+		industry: 'luxury',
 		production: 6,
 		wages: {
 			l1: 15,
@@ -1473,15 +1588,16 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'luxury',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 2,
 	},
 	{
 		frontImage:
@@ -1489,7 +1605,7 @@ const capitalistClassCompanyCards = [
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-company-cards/back__capitalist-class-companies-deck-159.png',
 		rawText:
-			'Supermarket: food company, cost 16, production 4, wages l1 15, l2 20, l3 25. Workers: food workingClass/middleClass; unskilled workingClass/middleClass.',
+			'Supermarket: food company, cost 16, production 4, production from automation 1, wages level1 15, level2 20, level3 25. Workers: food workingClass/middleClass optional false; unskilled workingClass/middleClass optional false.',
 		source: {
 			deck: 'capitalist-class-company-cards',
 			file: 'grid_28-items_6-5__capitalist-class-companies-deck-159__pos-4-5.png',
@@ -1499,7 +1615,8 @@ const capitalistClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [16, 4, 1, 15, 2, 20, 3, 25],
+			numbers: [16, 4, 1, 15, 20, 25, 2],
+			money: [16, 15, 20, 25],
 			resources: ['food', 'money'],
 			keywords: [
 				'supermarket',
@@ -1509,17 +1626,19 @@ const capitalistClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
+				'unskilled',
 				'workingclass',
 				'middleclass',
-				'unskilled',
+				'automation',
 			],
 		},
 		kind: 'company',
-		id: 'capitalist-class-company-cards-28',
 		owner: 'capitalist',
+		sourceType: 'base',
+		id: 'c-supermarket-2',
 		name: 'Supermarket',
-		industry: 'food',
 		cost: 16,
+		industry: 'food',
 		production: 4,
 		wages: {
 			l1: 15,
@@ -1529,15 +1648,16 @@ const capitalistClassCompanyCards = [
 		workers: [
 			{
 				type: 'food',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['workingClass', 'middleClass'],
+				optional: false,
 			},
 		],
+		productionFromAutomation: 1,
 	},
 ] satisfies CapitalistClassCompanyCardsCard[];
 

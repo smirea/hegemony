@@ -90,10 +90,17 @@ export default class StateRole extends AbstractRole<typeof RoleEnum.state, State
 			return id;
 		};
 
+		const twoPlayerPublicCompanies = ['s-public-hospital-1', 's-public-university-1', 's-regional-tv-station-1'];
+		const threeOrFourPlayerPublicCompanies = [
+			's-university-hospital-1',
+			's-technical-university-1',
+			's-national-public-broadcasting-1',
+		];
 		const startingCompanies =
-			this.game.data.players.length === 2
-				? ['s-public-hospital-1', 's-public-university-1', 's-regional-tv-station-1']
-				: ['s-university-hospital-1', 's-technical-university-1', 's-national-public-broadcasting-1'];
+			this.game.data.players.length === 2 ? twoPlayerPublicCompanies : threeOrFourPlayerPublicCompanies;
+		const unusedPublicCompanies =
+			this.game.data.players.length === 2 ? threeOrFourPlayerPublicCompanies : twoPlayerPublicCompanies;
+		unusedPublicCompanies.forEach(draw);
 
 		this.data.companies = startingCompanies.map(id => ({
 			id: draw(id),

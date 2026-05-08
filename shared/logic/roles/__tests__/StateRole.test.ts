@@ -1,6 +1,6 @@
 import { createGameUtils } from 'shared/logic/__tests__/testUtils';
 import { beforeEach, describe, expect, test } from 'vitest';
-import { ResourceEnum, RoleNameSchema } from 'shared/logic/types';
+import { ResourceEnum, RoleEnum, RoleNameSchema } from 'shared/logic/types';
 
 import type Game from 'shared/logic/Game';
 import type StateRole from '../StateRole';
@@ -15,8 +15,44 @@ beforeEach(async () => {
 	st = game.data.roles.state;
 });
 
-describe.skip('setupBoard', () => {
-	// todo
+describe('setupBoard', () => {
+	test('uses the 2-player public company variants', async () => {
+		game = await initGame([RoleEnum.workingClass, RoleEnum.capitalist], {
+			setupBoard: false,
+			mockDefaultSetup: false,
+			companyDecks: 'real',
+		});
+		st = game.data.roles.state;
+
+		st.setupBoard();
+
+		expect(st.data.companies.map(company => company.id)).toEqual([
+			's-public-hospital-1',
+			's-public-university-1',
+			's-regional-tv-station-1',
+		]);
+		expect(st.data.companyDeck.seek('s-university-hospital-1', { safe: true })).toBeUndefined();
+		expect(st.data.companyDeck.seek('s-public-hospital-2', { safe: true })?.id).toBe('s-public-hospital-2');
+	});
+
+	test('uses the 3/4-player public company variants', async () => {
+		game = await initGame([RoleEnum.workingClass, RoleEnum.middleClass, RoleEnum.capitalist, RoleEnum.state], {
+			setupBoard: false,
+			mockDefaultSetup: false,
+			companyDecks: 'real',
+		});
+		st = game.data.roles.state;
+
+		st.setupBoard();
+
+		expect(st.data.companies.map(company => company.id)).toEqual([
+			's-university-hospital-1',
+			's-technical-university-1',
+			's-national-public-broadcasting-1',
+		]);
+		expect(st.data.companyDeck.seek('s-public-hospital-1', { safe: true })).toBeUndefined();
+		expect(st.data.companyDeck.seek('s-public-hospital-2', { safe: true })?.id).toBe('s-public-hospital-2');
+	});
 });
 
 describe.skip('setupRound', () => {

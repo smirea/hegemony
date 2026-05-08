@@ -166,10 +166,13 @@ const companies = {
 		['National Public Broadcasting', 'influence', 4, 0, 35, 30, 25, 3, true, 30],
 		['Public Hospital', 'healthcare', 4, 0, 25, 20, 15, 2, true, 20],
 		['Public University', 'education', 4, 0, 25, 20, 15, 2, true, 20],
-		['Regional TV Station', 'influence', 4, 0, 25, 20, 15, 2, true, 20],
+		['Regional TV Station', 'influence', 3, 0, 25, 20, 15, 2, true, 20],
 		['Public Hospital', 'healthcare', 4, 0, 25, 20, 15, 2, true, 20],
 		['Public University', 'education', 4, 0, 25, 20, 15, 2, true, 20],
-		['Regional TV Station', 'influence', 4, 0, 25, 20, 15, 2, true, 20],
+		['Regional TV Station', 'influence', 3, 0, 25, 20, 15, 2, true, 20],
+		['Public Hospital', 'healthcare', 4, 0, 25, 20, 15, 2, true, 20],
+		['Public University', 'education', 4, 0, 25, 20, 15, 2, true, 20],
+		['Regional TV Station', 'influence', 3, 0, 25, 20, 15, 2, true, 20],
 	],
 } as const;
 

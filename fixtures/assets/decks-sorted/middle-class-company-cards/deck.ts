@@ -7,8 +7,7 @@ const middleClassCompanyCards = [
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-1-1.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
-		rawText:
-			'Jewelry Store: luxury company, cost 16, production 4, wages l1 0, l2 0, l3 0. Workers: luxury middleClass; unskilled middleClass.',
+		rawText: 'Jewelry Store: luxury company, cost 16, production 4, wages level1 0, level2 0, level3 0. Workers: none.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-1-1.png',
@@ -18,52 +17,32 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [16, 4, 1, 0, 2, 3],
+			numbers: [16, 4, 0, 0, 0, 0],
+			money: [16],
 			resources: ['luxury', 'money'],
-			keywords: [
-				'jewelry',
-				'store',
-				'luxury',
-				'company',
-				'cost',
-				'production',
-				'wages',
-				'workers',
-				'middleclass',
-				'unskilled',
-			],
+			keywords: ['jewelry', 'store', 'luxury', 'company', 'cost', 'production', 'wages', 'workers'],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-1',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-jewelry-store-1',
 		name: 'Jewelry Store',
-		industry: 'luxury',
 		cost: 16,
+		industry: 'luxury',
 		production: 4,
 		wages: {
 			l1: 0,
 			l2: 0,
 			l3: 0,
 		},
-		workers: [
-			{
-				type: 'luxury',
-				optional: false,
-				roles: ['middleClass'],
-			},
-			{
-				type: 'unskilled',
-				optional: false,
-				roles: ['middleClass'],
-			},
-		],
+		workers: [],
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-2-1.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			'Regional Radio Station: influence company, cost 20, production 2, wages l1 9, l2 12, l3 15. Workers: influence middleClass; influence workingClass.',
+			'Regional Radio Station: influence company, cost 20, production 2, production from optional workers 2, wages level1 9, level2 12, level3 15. Workers: influence middleClass optional false; influence workingClass optional true.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-2-1.png',
@@ -73,7 +52,8 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [20, 2, 1, 9, 12, 3, 15],
+			numbers: [20, 2, 2, 9, 12, 15, 2],
+			money: [20, 9, 12, 15],
 			resources: ['influence', 'money'],
 			keywords: [
 				'regional',
@@ -87,14 +67,16 @@ const middleClassCompanyCards = [
 				'workers',
 				'middleclass',
 				'workingclass',
+				'optional',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-2',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-regional-radio-station-1',
 		name: 'Regional Radio Station',
-		industry: 'influence',
 		cost: 20,
+		industry: 'influence',
 		production: 2,
 		wages: {
 			l1: 9,
@@ -104,22 +86,23 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'influence',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'influence',
-				optional: true,
 				roles: ['workingClass'],
+				optional: true,
 			},
 		],
+		productionFromOptionalWorkers: 2,
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-3-1.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			"Doctor's Office: healthcare company, cost 12, production 2, wages l1 6, l2 8, l3 10. Workers: healthcare middleClass; unskilled workingClass.",
+			"Doctor's Office: healthcare company, cost 12, production 2, production from optional workers 2, wages level1 6, level2 8, level3 10. Workers: healthcare middleClass optional false; unskilled workingClass optional true.",
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-3-1.png',
@@ -129,10 +112,12 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [12, 2, 1, 6, 8, 3, 10],
+			numbers: [12, 2, 2, 6, 8, 10, 2],
+			money: [12, 6, 8, 10],
 			resources: ['healthcare', 'money'],
 			keywords: [
 				'doctor',
+				's',
 				'office',
 				'healthcare',
 				'company',
@@ -140,17 +125,19 @@ const middleClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
-				'middleclass',
 				'unskilled',
+				'middleclass',
 				'workingclass',
+				'optional',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-3',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-doctors-office-1',
 		name: "Doctor's Office",
-		industry: 'healthcare',
 		cost: 12,
+		industry: 'healthcare',
 		production: 2,
 		wages: {
 			l1: 6,
@@ -160,22 +147,23 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'healthcare',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: true,
 				roles: ['workingClass'],
+				optional: true,
 			},
 		],
+		productionFromOptionalWorkers: 2,
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-4-1.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			'PR Agency: influence company, cost 20, production 3, wages l1 0, l2 0, l3 0. Workers: influence middleClass; unskilled middleClass.',
+			'PR Agency: influence company, cost 20, production 3, wages level1 0, level2 0, level3 0. Workers: influence middleClass optional false; unskilled middleClass optional false.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-4-1.png',
@@ -185,9 +173,11 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [20, 3, 1, 0, 2],
+			numbers: [20, 3, 0, 0, 0, 2],
+			money: [20],
 			resources: ['influence', 'money'],
 			keywords: [
+				'pr',
 				'agency',
 				'influence',
 				'company',
@@ -195,16 +185,17 @@ const middleClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
-				'middleclass',
 				'unskilled',
+				'middleclass',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-4',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-pr-agency-1',
 		name: 'PR Agency',
-		industry: 'influence',
 		cost: 20,
+		industry: 'influence',
 		production: 3,
 		wages: {
 			l1: 0,
@@ -214,13 +205,13 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'influence',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 		],
 	},
@@ -229,7 +220,7 @@ const middleClassCompanyCards = [
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-5-1.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			'Fast Food Restaurant: food company, cost 20, production 3, wages l1 0, l2 0, l3 0. Workers: food middleClass; unskilled middleClass.',
+			'Fast Food Restaurant: food company, cost 20, production 3, wages level1 0, level2 0, level3 0. Workers: food middleClass optional false; unskilled middleClass optional false.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-5-1.png',
@@ -239,7 +230,8 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [20, 3, 1, 0, 2],
+			numbers: [20, 3, 0, 0, 0, 2],
+			money: [20],
 			resources: ['food', 'money'],
 			keywords: [
 				'fast',
@@ -250,16 +242,17 @@ const middleClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
-				'middleclass',
 				'unskilled',
+				'middleclass',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-5',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-fast-food-restaurant-1',
 		name: 'Fast Food Restaurant',
-		industry: 'food',
 		cost: 20,
+		industry: 'food',
 		production: 3,
 		wages: {
 			l1: 0,
@@ -269,13 +262,13 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'food',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 		],
 	},
@@ -284,7 +277,7 @@ const middleClassCompanyCards = [
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-6-1.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			'Tutoring Company: education company, cost 12, production 2, wages l1 6, l2 8, l3 10. Workers: education middleClass; unskilled workingClass.',
+			'Tutoring Company: education company, cost 12, production 2, production from optional workers 2, wages level1 6, level2 8, level3 10. Workers: education middleClass optional false; unskilled workingClass optional true.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-6-1.png',
@@ -294,7 +287,8 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [12, 2, 1, 6, 8, 3, 10],
+			numbers: [12, 2, 2, 6, 8, 10, 2],
+			money: [12, 6, 8, 10],
 			resources: ['education', 'money'],
 			keywords: [
 				'tutoring',
@@ -304,17 +298,19 @@ const middleClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
-				'middleclass',
 				'unskilled',
+				'middleclass',
 				'workingclass',
+				'optional',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-6',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-tutoring-company-1',
 		name: 'Tutoring Company',
-		industry: 'education',
 		cost: 12,
+		industry: 'education',
 		production: 2,
 		wages: {
 			l1: 6,
@@ -324,22 +320,23 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'education',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: true,
 				roles: ['workingClass'],
+				optional: true,
 			},
 		],
+		productionFromOptionalWorkers: 2,
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-1-2.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			'Private School: education company, cost 20, production 2, wages l1 9, l2 12, l3 15. Workers: education middleClass; education workingClass.',
+			'Private School: education company, cost 20, production 2, production from optional workers 4, wages level1 9, level2 12, level3 15. Workers: education middleClass optional false; education workingClass optional true.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-1-2.png',
@@ -349,7 +346,8 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [20, 2, 1, 9, 12, 3, 15],
+			numbers: [20, 2, 4, 9, 12, 15, 2],
+			money: [20, 9, 12, 15],
 			resources: ['education', 'money'],
 			keywords: [
 				'private',
@@ -362,14 +360,16 @@ const middleClassCompanyCards = [
 				'workers',
 				'middleclass',
 				'workingclass',
+				'optional',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-7',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-private-school-1',
 		name: 'Private School',
-		industry: 'education',
 		cost: 20,
+		industry: 'education',
 		production: 2,
 		wages: {
 			l1: 9,
@@ -379,22 +379,23 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'education',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'education',
-				optional: true,
 				roles: ['workingClass'],
+				optional: true,
 			},
 		],
+		productionFromOptionalWorkers: 4,
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-2-2.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			'Training Center: education company, cost 16, production 4, wages l1 0, l2 0, l3 0. Workers: education middleClass; unskilled middleClass.',
+			'Training Center: education company, cost 16, production 4, wages level1 0, level2 0, level3 0. Workers: education middleClass optional false; unskilled middleClass optional false.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-2-2.png',
@@ -404,7 +405,8 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [16, 4, 1, 0, 2, 3],
+			numbers: [16, 4, 0, 0, 0, 2],
+			money: [16],
 			resources: ['education', 'money'],
 			keywords: [
 				'training',
@@ -415,16 +417,17 @@ const middleClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
-				'middleclass',
 				'unskilled',
+				'middleclass',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-8',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-training-center-1',
 		name: 'Training Center',
-		industry: 'education',
 		cost: 16,
+		industry: 'education',
 		production: 4,
 		wages: {
 			l1: 0,
@@ -434,13 +437,13 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'education',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 		],
 	},
@@ -449,7 +452,7 @@ const middleClassCompanyCards = [
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-3-2.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			'Convenience Store: food company, cost 14, production 2, wages l1 6, l2 8, l3 10. Workers: food middleClass; unskilled workingClass.',
+			'Convenience Store: food company, cost 14, production 2, production from optional workers 1, wages level1 6, level2 8, level3 10. Workers: food middleClass optional false; unskilled workingClass optional true.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-3-2.png',
@@ -459,7 +462,8 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [14, 2, 1, 6, 8, 3, 10],
+			numbers: [14, 2, 1, 6, 8, 10, 2],
+			money: [14, 6, 8, 10],
 			resources: ['food', 'money'],
 			keywords: [
 				'convenience',
@@ -470,17 +474,19 @@ const middleClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
-				'middleclass',
 				'unskilled',
+				'middleclass',
 				'workingclass',
+				'optional',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-9',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-convenience-store-1',
 		name: 'Convenience Store',
-		industry: 'food',
 		cost: 14,
+		industry: 'food',
 		production: 2,
 		wages: {
 			l1: 6,
@@ -490,22 +496,23 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'food',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: true,
 				roles: ['workingClass'],
+				optional: true,
 			},
 		],
+		productionFromOptionalWorkers: 1,
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-4-2.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			'Medical Laboratory: healthcare company, cost 20, production 2, wages l1 9, l2 12, l3 15. Workers: healthcare middleClass; healthcare workingClass.',
+			'Medical Laboratory: healthcare company, cost 20, production 2, production from optional workers 4, wages level1 9, level2 12, level3 15. Workers: healthcare middleClass optional false; healthcare workingClass optional true.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-4-2.png',
@@ -515,7 +522,8 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [20, 2, 1, 9, 12, 3, 15],
+			numbers: [20, 2, 4, 9, 12, 15, 2],
+			money: [20, 9, 12, 15],
 			resources: ['healthcare', 'money'],
 			keywords: [
 				'medical',
@@ -528,14 +536,16 @@ const middleClassCompanyCards = [
 				'workers',
 				'middleclass',
 				'workingclass',
+				'optional',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-10',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-medical-laboratory-1',
 		name: 'Medical Laboratory',
-		industry: 'healthcare',
 		cost: 20,
+		industry: 'healthcare',
 		production: 2,
 		wages: {
 			l1: 9,
@@ -545,22 +555,23 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'healthcare',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'healthcare',
-				optional: true,
 				roles: ['workingClass'],
+				optional: true,
 			},
 		],
+		productionFromOptionalWorkers: 4,
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-5-2.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			'Electronics Store: luxury company, cost 20, production 2, wages l1 9, l2 12, l3 15. Workers: luxury middleClass; luxury workingClass.',
+			'Electronics Store: luxury company, cost 20, production 2, production from optional workers 4, wages level1 9, level2 12, level3 15. Workers: luxury middleClass optional false; luxury workingClass optional true.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-5-2.png',
@@ -570,7 +581,8 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [20, 2, 1, 9, 12, 3, 15],
+			numbers: [20, 2, 4, 9, 12, 15, 2],
+			money: [20, 9, 12, 15],
 			resources: ['luxury', 'money'],
 			keywords: [
 				'electronics',
@@ -583,14 +595,16 @@ const middleClassCompanyCards = [
 				'workers',
 				'middleclass',
 				'workingclass',
+				'optional',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-11',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-electronics-store-1',
 		name: 'Electronics Store',
-		industry: 'luxury',
 		cost: 20,
+		industry: 'luxury',
 		production: 2,
 		wages: {
 			l1: 9,
@@ -600,22 +614,23 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'luxury',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'luxury',
-				optional: true,
 				roles: ['workingClass'],
+				optional: true,
 			},
 		],
+		productionFromOptionalWorkers: 4,
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-6-2.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			'Local Newspaper: influence company, cost 14, production 2, wages l1 6, l2 8, l3 10. Workers: influence middleClass; unskilled workingClass.',
+			'Local Newspaper: influence company, cost 14, production 2, production from optional workers 1, wages level1 6, level2 8, level3 10. Workers: influence middleClass optional false; unskilled workingClass optional true.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-6-2.png',
@@ -625,7 +640,8 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [14, 2, 1, 6, 8, 3, 10],
+			numbers: [14, 2, 1, 6, 8, 10, 2],
+			money: [14, 6, 8, 10],
 			resources: ['influence', 'money'],
 			keywords: [
 				'local',
@@ -636,17 +652,19 @@ const middleClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
-				'middleclass',
 				'unskilled',
+				'middleclass',
 				'workingclass',
+				'optional',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-12',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-local-newspaper-1',
 		name: 'Local Newspaper',
-		industry: 'influence',
 		cost: 14,
+		industry: 'influence',
 		production: 2,
 		wages: {
 			l1: 6,
@@ -656,22 +674,23 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'influence',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: true,
 				roles: ['workingClass'],
+				optional: true,
 			},
 		],
+		productionFromOptionalWorkers: 1,
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-1-3.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			'Game Store: luxury company, cost 12, production 2, wages l1 6, l2 8, l3 10. Workers: luxury middleClass; unskilled workingClass.',
+			'Game Store: luxury company, cost 12, production 2, production from optional workers 2, wages level1 6, level2 8, level3 10. Workers: luxury middleClass optional false; unskilled workingClass optional true.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-1-3.png',
@@ -681,7 +700,8 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [12, 2, 1, 6, 8, 3, 10],
+			numbers: [12, 2, 2, 6, 8, 10, 2],
+			money: [12, 6, 8, 10],
 			resources: ['luxury', 'money'],
 			keywords: [
 				'game',
@@ -692,17 +712,19 @@ const middleClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
-				'middleclass',
 				'unskilled',
+				'middleclass',
 				'workingclass',
+				'optional',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-13',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-game-store-1',
 		name: 'Game Store',
-		industry: 'luxury',
 		cost: 12,
+		industry: 'luxury',
 		production: 2,
 		wages: {
 			l1: 6,
@@ -712,22 +734,23 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'luxury',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: true,
 				roles: ['workingClass'],
+				optional: true,
 			},
 		],
+		productionFromOptionalWorkers: 2,
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-2-3.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			'Organic Farm: food company, cost 20, production 2, wages l1 9, l2 12, l3 15. Workers: food middleClass; food workingClass.',
+			'Organic Farm: food company, cost 20, production 2, production from optional workers 2, wages level1 9, level2 12, level3 15. Workers: food middleClass optional false; food workingClass optional true.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-2-3.png',
@@ -737,7 +760,8 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [20, 2, 1, 9, 12, 3, 15],
+			numbers: [20, 2, 2, 9, 12, 15, 2],
+			money: [20, 9, 12, 15],
 			resources: ['food', 'money'],
 			keywords: [
 				'organic',
@@ -750,14 +774,16 @@ const middleClassCompanyCards = [
 				'workers',
 				'middleclass',
 				'workingclass',
+				'optional',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-14',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-organic-farm-1',
 		name: 'Organic Farm',
-		industry: 'food',
 		cost: 20,
+		industry: 'food',
 		production: 2,
 		wages: {
 			l1: 9,
@@ -767,22 +793,23 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'food',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'food',
-				optional: true,
 				roles: ['workingClass'],
+				optional: true,
 			},
 		],
+		productionFromOptionalWorkers: 2,
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-3-3.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			"Doctor's Office: healthcare company, cost 12, production 2, wages l1 6, l2 8, l3 10. Workers: healthcare middleClass; unskilled workingClass.",
+			"Doctor's Office: healthcare company, cost 12, production 2, production from optional workers 2, wages level1 6, level2 8, level3 10. Workers: healthcare middleClass optional false; unskilled workingClass optional true.",
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-3-3.png',
@@ -792,10 +819,12 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [12, 2, 1, 6, 8, 3, 10],
+			numbers: [12, 2, 2, 6, 8, 10, 2],
+			money: [12, 6, 8, 10],
 			resources: ['healthcare', 'money'],
 			keywords: [
 				'doctor',
+				's',
 				'office',
 				'healthcare',
 				'company',
@@ -803,17 +832,19 @@ const middleClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
-				'middleclass',
 				'unskilled',
+				'middleclass',
 				'workingclass',
+				'optional',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-15',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-doctors-office-2',
 		name: "Doctor's Office",
-		industry: 'healthcare',
 		cost: 12,
+		industry: 'healthcare',
 		production: 2,
 		wages: {
 			l1: 6,
@@ -823,22 +854,23 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'healthcare',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: true,
 				roles: ['workingClass'],
+				optional: true,
 			},
 		],
+		productionFromOptionalWorkers: 2,
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-4-3.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			'Convenience Store: food company, cost 14, production 2, wages l1 6, l2 8, l3 10. Workers: food middleClass; unskilled workingClass.',
+			'Convenience Store: food company, cost 14, production 2, production from optional workers 1, wages level1 6, level2 8, level3 10. Workers: food middleClass optional false; unskilled workingClass optional true.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-4-3.png',
@@ -848,7 +880,8 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [14, 2, 1, 6, 8, 3, 10],
+			numbers: [14, 2, 1, 6, 8, 10, 2],
+			money: [14, 6, 8, 10],
 			resources: ['food', 'money'],
 			keywords: [
 				'convenience',
@@ -859,17 +892,19 @@ const middleClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
-				'middleclass',
 				'unskilled',
+				'middleclass',
 				'workingclass',
+				'optional',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-16',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-convenience-store-2',
 		name: 'Convenience Store',
-		industry: 'food',
 		cost: 14,
+		industry: 'food',
 		production: 2,
 		wages: {
 			l1: 6,
@@ -879,22 +914,23 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'food',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: true,
 				roles: ['workingClass'],
+				optional: true,
 			},
 		],
+		productionFromOptionalWorkers: 1,
 	},
 	{
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-company-cards/grid_17-items_6-3__middle-class-companies-deck-153__pos-5-3.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-company-cards/back__middle-class-companies-deck-153.jpg',
 		rawText:
-			'Pharmacy: healthcare company, cost 16, production 4, wages l1 0, l2 0, l3 0. Workers: healthcare middleClass; unskilled middleClass.',
+			'Pharmacy: healthcare company, cost 16, production 4, wages level1 0, level2 0, level3 0. Workers: healthcare middleClass optional false; unskilled middleClass optional false.',
 		source: {
 			deck: 'middle-class-company-cards',
 			file: 'grid_17-items_6-3__middle-class-companies-deck-153__pos-5-3.png',
@@ -904,7 +940,8 @@ const middleClassCompanyCards = [
 			},
 		},
 		parsed: {
-			numbers: [16, 4, 1, 0, 2, 3],
+			numbers: [16, 4, 0, 0, 0, 2],
+			money: [16],
 			resources: ['healthcare', 'money'],
 			keywords: [
 				'pharmacy',
@@ -914,16 +951,17 @@ const middleClassCompanyCards = [
 				'production',
 				'wages',
 				'workers',
-				'middleclass',
 				'unskilled',
+				'middleclass',
 			],
 		},
 		kind: 'company',
-		id: 'middle-class-company-cards-17',
 		owner: 'middleClass',
+		sourceType: 'base',
+		id: 'm-pharmacy-1',
 		name: 'Pharmacy',
-		industry: 'healthcare',
 		cost: 16,
+		industry: 'healthcare',
 		production: 4,
 		wages: {
 			l1: 0,
@@ -933,13 +971,13 @@ const middleClassCompanyCards = [
 		workers: [
 			{
 				type: 'healthcare',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 			{
 				type: 'unskilled',
-				optional: false,
 				roles: ['middleClass'],
+				optional: false,
 			},
 		],
 	},
