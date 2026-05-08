@@ -6,7 +6,7 @@ import path from 'node:path';
 
 import { capitalistCompanies, middleClassCompanies, stateCompanies } from '../shared/logic/cards/companyCards';
 
-import type { DeckCardImage, ParsedCompanyDeckCard } from '../fixtures/assets/decks-sorted/types';
+import type { DeckCardImage, ParsedActionCard, ParsedCompanyDeckCard } from '../fixtures/assets/decks-sorted/types';
 import type { CompanyCard } from '../shared/logic/types';
 
 const root = path.resolve('fixtures/assets/decks-sorted');
@@ -32,6 +32,29 @@ const sourceCompanyDecks: Record<string, CompanyCard[]> = {
 	'middle-class-company-cards': middleClassCompanies,
 	'public-company-cards': stateCompanies,
 };
+const actionDecks: Record<
+	string,
+	{ role: ParsedActionCard['role']; category: NonNullable<ParsedActionCard['category']> }
+> = {
+	'capitalist-class-action-cards': { role: 'capitalist', category: 'base' },
+	'capitalist-class-action-expansion-cards': { role: 'capitalist', category: 'expansion' },
+	'middle-class-action-cards': { role: 'middleClass', category: 'base' },
+	'middle-class-action-expansion-cards': { role: 'middleClass', category: 'expansion' },
+	'state-action-cards': { role: 'state', category: 'base' },
+	'state-action-expansion-cards': { role: 'state', category: 'expansion' },
+	'working-class-action-cards': { role: 'workingClass', category: 'base' },
+	'working-class-action-expansion-cards': { role: 'workingClass', category: 'expansion' },
+};
+const genericActionNames = new Set([
+	'Capitalist Class Actions',
+	'Capitalist Class Action Expansion',
+	'Middle Class Actions',
+	'Middle Class Action Expansion',
+	'State Actions',
+	'State Action Expansion',
+	'Working Class Actions',
+	'Working Class Action Expansion',
+]);
 const companyFields = [
 	'id',
 	'name',
@@ -118,6 +141,8 @@ for (const folder of folders) {
 
 	const sourceCompanyDeck = sourceCompanyDecks[folder.name];
 	if (sourceCompanyDeck) validateCompanyDeck(folder.name, deck as ParsedCompanyDeckCard[], sourceCompanyDeck);
+	const actionDeck = actionDecks[folder.name];
+	if (actionDeck) validateActionDeck(folder.name, deck as ParsedActionCard[], actionDeck);
 	if (folder.name === 'cooperative-farm-cards') validateCooperativeFarmDeck(deck as ParsedCompanyDeckCard[]);
 }
 
@@ -198,6 +223,61 @@ function validateCooperativeFarmDeck(deck: ParsedCompanyDeckCard[]) {
 	}
 }
 
+function validateActionDeck(
+	folderName: string,
+	deck: ParsedActionCard[],
+	expected: { role: ParsedActionCard['role']; category: NonNullable<ParsedActionCard['category']> },
+) {
+	for (const card of deck) {
+		if (card.kind !== 'action') errors.push(`${folderName}: ${card.id} is not an action card`);
+		if (card.role !== expected.role) errors.push(`${folderName}: ${card.id} has role ${card.role}`);
+		if (card.category !== expected.category) errors.push(`${folderName}: ${card.id} has category ${card.category}`);
+		if (genericActionNames.has(card.name)) errors.push(`${folderName}: ${card.id} still has generic action name`);
+		if (!/^[A-Z0-9][A-Z0-9 &'’.,:!?/()-]+$/.test(card.name)) {
+			errors.push(`${folderName}: ${card.id} has suspicious action name ${JSON.stringify(card.name)}`);
+		}
+		if (!card.content.startsWith(card.name)) {
+			errors.push(`${folderName}: ${card.id} content does not start with its normalized name`);
+		}
+		if (!['complete', 'partial', 'unparsed'].includes(card.stateEffectsCoverage)) {
+			errors.push(`${folderName}: ${card.id} has invalid stateEffectsCoverage ${card.stateEffectsCoverage}`);
+		}
+		if (card.stateEffectsCoverage === 'unparsed' && card.stateEffects.length) {
+			errors.push(`${folderName}: ${card.id} has effects but is marked unparsed`);
+		}
+		if (card.stateEffectsCoverage !== 'unparsed' && !card.stateEffects.length) {
+			errors.push(`${folderName}: ${card.id} has parsed coverage but no stateEffects`);
+		}
+		if (/may not call for an\s+Immediate Vote/i.test(card.content)) {
+			const hasImmediateVote = card.stateEffects.some(
+				effect => effect.type === 'vote' && effect.action === 'immediate-vote',
+			);
+			const blocksImmediateVote = card.stateEffects.some(
+				effect => effect.type === 'policy' && effect.action === 'propose' && effect.immediateVoteAllowed === false,
+			);
+			if (hasImmediateVote) errors.push(`${folderName}: ${card.id} incorrectly adds an immediate-vote effect`);
+			if (!blocksImmediateVote) errors.push(`${folderName}: ${card.id} does not encode immediateVoteAllowed: false`);
+		}
+		if (!Number.isInteger(card.source.physicalIndex)) {
+			errors.push(`${folderName}: ${card.id} is missing source.physicalIndex`);
+		}
+		if (!Number.isInteger(card.source.copyIndex)) {
+			errors.push(`${folderName}: ${card.id} is missing source.copyIndex`);
+		}
+	}
+
+	for (const [name, cards] of groupBy(deck, card => card.name)) {
+		const copyIndexes = cards.map(card => card.source.copyIndex);
+		if (new Set(copyIndexes).size !== cards.length) {
+			errors.push(`${folderName}: action name ${name} has duplicate source.copyIndex values`);
+		}
+		for (const card of cards) {
+			const expectedId = `${actionIdPrefix(expected.role)}-action-${expected.category === 'expansion' ? 'expansion-' : ''}${slug(card.name)}-${card.source.copyIndex}`;
+			if (card.id !== expectedId) errors.push(`${folderName}: expected ${expectedId}, got ${card.id}`);
+		}
+	}
+}
+
 function getCompanyField(card: CompanyCard, field: (typeof companyFields)[number]) {
 	if (field === 'workers') {
 		return card.workers.map(worker => ({
@@ -207,4 +287,25 @@ function getCompanyField(card: CompanyCard, field: (typeof companyFields)[number
 		}));
 	}
 	return card[field];
+}
+
+function actionIdPrefix(role: ParsedActionCard['role']) {
+	switch (role) {
+		case 'capitalist':
+			return 'capitalist-class';
+		case 'middleClass':
+			return 'middle-class';
+		case 'workingClass':
+			return 'working-class';
+		case 'state':
+			return 'state';
+	}
+}
+
+function slug(value: string) {
+	return value
+		.toLowerCase()
+		.replace(/&/g, 'and')
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-|-$/g, '');
 }

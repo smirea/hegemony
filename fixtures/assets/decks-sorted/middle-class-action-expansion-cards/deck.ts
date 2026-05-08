@@ -4,13 +4,25 @@ interface MiddleClassActionExpansionCardsCard extends ParsedActionCard {}
 
 const middleClassActionExpansionCards = [
 	{
-		id: 'middle-class-action-expansion-cards-grid-5-items-5-2-middle-class-action-expansion-deck-203-pos-1-1',
+		id: 'middle-class-action-expansion-change-of-government-agenda-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-expansion-cards/grid_5-items_5-2__middle-class-action-expansion-deck-203__pos-1-1.jpg',
 		backImage:
 			'fixtures/assets/decks-sorted/middle-class-action-expansion-cards/back__middle-class-action-expansion-deck-203.jpg',
 		rawText:
-			"i e\nsf Si $\n' ry 4 .\na . a\n«——\nCHANGE OF\nGOVERNMENT AGENDA\nIf there are 3 or less\nproposed Bills, discard a Bill\nproposed by another player.\nThen, you may both Propose\nanother Bill, with you going first.\nBT a",
+			'i e\n' +
+			'sf Si $\n' +
+			"' ry 4 .\n" +
+			'a . a\n' +
+			'«——\n' +
+			'CHANGE OF\n' +
+			'GOVERNMENT AGENDA\n' +
+			'If there are 3 or less\n' +
+			'proposed Bills, discard a Bill\n' +
+			'proposed by another player.\n' +
+			'Then, you may both Propose\n' +
+			'another Bill, with you going first.\n' +
+			'BT a',
 		source: {
 			deck: 'middle-class-action-expansion-cards',
 			file: 'grid_5-items_5-2__middle-class-action-expansion-deck-203__pos-1-1.jpg',
@@ -18,47 +30,74 @@ const middleClassActionExpansionCards = [
 				x: 1,
 				y: 1,
 			},
+			physicalIndex: 1,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4, 3],
 			resources: ['money'],
 			keywords: [
 				'change',
+				'of',
 				'government',
 				'agenda',
+				'if',
 				'there',
 				'are',
+				'or',
 				'less',
 				'proposed',
 				'bills',
 				'discard',
 				'bill',
+				'by',
 				'another',
 				'player',
-				'then',
 				'you',
 				'may',
 				'both',
 				'propose',
-				'with',
+				'going',
+				'first',
+				'bt',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'expansion',
-		name: 'i e',
+		name: 'CHANGE OF GOVERNMENT AGENDA',
 		content:
-			"sf Si $\n' ry 4 .\na . a\n«——\nCHANGE OF\nGOVERNMENT AGENDA\nIf there are 3 or less\nproposed Bills, discard a Bill\nproposed by another player.\nThen, you may both Propose\nanother Bill, with you going first.\nBT a",
+			'CHANGE OF GOVERNMENT AGENDA\n' +
+			'If there are 3 or less\n' +
+			'proposed Bills, discard a Bill\n' +
+			'proposed by another player.\n' +
+			'Then, you may both Propose\n' +
+			'another Bill, with you going first.\n' +
+			'BT a',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-expansion-cards-grid-5-items-5-2-middle-class-action-expansion-deck-203-pos-2-1',
+		id: 'middle-class-action-expansion-protect-the-status-quo-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-expansion-cards/grid_5-items_5-2__middle-class-action-expansion-deck-203__pos-2-1.jpg',
 		backImage:
 			'fixtures/assets/decks-sorted/middle-class-action-expansion-cards/back__middle-class-action-expansion-deck-203.jpg',
 		rawText:
-			'(= = »\nom 32\n- 0 - A444 }\nEe ie\n~< — a ea a a\n‘s. 0 5 ab Or et\nPROTECT THE STATUS QUO\nChoose a Policy. For the rest\nof this round, no Bills may be\nproposed for that Policy. (Place\none of your Bill markers in its\ncurrent section as a reminder.)\nThen, get 1®.\nhe a',
+			'(= = »\n' +
+			'om 32\n' +
+			'- 0 - A444 }\n' +
+			'Ee ie\n' +
+			'~< — a ea a a\n' +
+			'‘s. 0 5 ab Or et\n' +
+			'PROTECT THE STATUS QUO\n' +
+			'Choose a Policy. For the rest\n' +
+			'of this round, no Bills may be\n' +
+			'proposed for that Policy. (Place\n' +
+			'one of your Bill markers in its\n' +
+			'current section as a reminder.)\n' +
+			'Then, get 1®.\n' +
+			'he a',
 		source: {
 			deck: 'middle-class-action-expansion-cards',
 			file: 'grid_5-items_5-2__middle-class-action-expansion-deck-203__pos-2-1.jpg',
@@ -66,6 +105,8 @@ const middleClassActionExpansionCards = [
 				x: 2,
 				y: 1,
 			},
+			physicalIndex: 2,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [32, 0, 444, 5, 1],
@@ -78,34 +119,58 @@ const middleClassActionExpansionCards = [
 				'policy',
 				'for',
 				'rest',
-				'this',
+				'of',
 				'round',
+				'no',
 				'bills',
 				'may',
+				'be',
 				'proposed',
-				'that',
 				'place',
 				'one',
-				'your',
 				'bill',
+				'markers',
+				'in',
+				'its',
+				'current',
+				'section',
+				'as',
+				'reminder',
+				'get',
+				'he',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'expansion',
-		name: 'om 32',
+		name: 'PROTECT THE STATUS QUO',
 		content:
-			'(= = »\nom 32\n- 0 - A444 }\nEe ie\n~< — a ea a a\n‘s. 0 5 ab Or et\nPROTECT THE STATUS QUO\nChoose a Policy. For the rest\nof this round, no Bills may be\nproposed for that Policy. (Place\none of your Bill markers in its\ncurrent section as a reminder.)\nThen, get 1®.\nhe a',
+			'PROTECT THE STATUS QUO\n' +
+			'Choose a Policy. For the rest\n' +
+			'of this round, no Bills may be\n' +
+			'proposed for that Policy. (Place\n' +
+			'one of your Bill markers in its\n' +
+			'current section as a reminder.)\n' +
+			'Then, get 1®.\n' +
+			'he a',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-expansion-cards-grid-5-items-5-2-middle-class-action-expansion-deck-203-pos-3-1',
+		id: 'middle-class-action-expansion-momentum-for-change-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-expansion-cards/grid_5-items_5-2__middle-class-action-expansion-deck-203__pos-3-1.jpg',
 		backImage:
 			'fixtures/assets/decks-sorted/middle-class-action-expansion-cards/back__middle-class-action-expansion-deck-203.jpg',
 		rawText:
-			'= \\\nMOMENTUM FOR CHANGE\nGet 1® for each Bill marker\nof yours on the Politics Table.\nThen, Propose a Bill.\nYou may not call for an\nImmediate Vote on this Bill.\nWe <a',
+			'= \\\n' +
+			'MOMENTUM FOR CHANGE\n' +
+			'Get 1® for each Bill marker\n' +
+			'of yours on the Politics Table.\n' +
+			'Then, Propose a Bill.\n' +
+			'You may not call for an\n' +
+			'Immediate Vote on this Bill.\n' +
+			'We <a',
 		source: {
 			deck: 'middle-class-action-expansion-cards',
 			file: 'grid_5-items_5-2__middle-class-action-expansion-deck-203__pos-3-1.jpg',
@@ -113,6 +178,8 @@ const middleClassActionExpansionCards = [
 				x: 3,
 				y: 1,
 			},
+			physicalIndex: 3,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [1],
@@ -125,17 +192,21 @@ const middleClassActionExpansionCards = [
 				'each',
 				'bill',
 				'marker',
+				'of',
 				'yours',
+				'on',
 				'the',
 				'politics',
 				'table',
-				'then',
 				'propose',
 				'you',
 				'may',
 				'not',
 				'call',
+				'an',
 				'immediate',
+				'vote',
+				'we',
 			],
 		},
 		kind: 'action',
@@ -143,26 +214,51 @@ const middleClassActionExpansionCards = [
 		category: 'expansion',
 		name: 'MOMENTUM FOR CHANGE',
 		content:
-			'= \\\nMOMENTUM FOR CHANGE\nGet 1® for each Bill marker\nof yours on the Politics Table.\nThen, Propose a Bill.\nYou may not call for an\nImmediate Vote on this Bill.\nWe <a',
+			'MOMENTUM FOR CHANGE\n' +
+			'Get 1® for each Bill marker\n' +
+			'of yours on the Politics Table.\n' +
+			'Then, Propose a Bill.\n' +
+			'You may not call for an\n' +
+			'Immediate Vote on this Bill.\n' +
+			'We <a',
 		stateEffects: [
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				target: 'bag',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'proposed-bill',
+					target: 'self',
+				},
+			},
 			{
 				type: 'policy',
 				action: 'propose',
-			},
-			{
-				type: 'vote',
-				action: 'immediate-vote',
+				immediateVoteAllowed: false,
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-expansion-cards-grid-5-items-5-2-middle-class-action-expansion-deck-203-pos-4-1',
+		id: 'middle-class-action-expansion-covid-19-stimulus-package-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-expansion-cards/grid_5-items_5-2__middle-class-action-expansion-deck-203__pos-4-1.jpg',
 		backImage:
 			'fixtures/assets/decks-sorted/middle-class-action-expansion-cards/back__middle-class-action-expansion-deck-203.jpg',
 		rawText:
-			'SS =. x 7 |\nim \\ ) =\n= a) —s |\n" COVID-19 .\nSTIMULUS PACKAGE\nGet 2¥ from the State for each\nemployed Worker you have in Public\nand Capitalist Class Companies and\n4¥ for each Company you own.\n4 5%\nis Se',
+			'SS =. x 7 |\n' +
+			'im \\ ) =\n' +
+			'= a) —s |\n' +
+			'" COVID-19 .\n' +
+			'STIMULUS PACKAGE\n' +
+			'Get 2¥ from the State for each\n' +
+			'employed Worker you have in Public\n' +
+			'and Capitalist Class Companies and\n' +
+			'4¥ for each Company you own.\n' +
+			'4 5%\n' +
+			'is Se',
 		source: {
 			deck: 'middle-class-action-expansion-cards',
 			file: 'grid_5-items_5-2__middle-class-action-expansion-deck-203__pos-4-1.jpg',
@@ -170,17 +266,18 @@ const middleClassActionExpansionCards = [
 				x: 4,
 				y: 1,
 			},
+			physicalIndex: 4,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [7, -19, 2, 4, 5],
 			money: [2, 4],
 			resources: ['money'],
 			keywords: [
-				'covid-',
+				'covid19',
 				'stimulus',
 				'package',
 				'get',
-				'from',
 				'the',
 				'state',
 				'for',
@@ -189,19 +286,30 @@ const middleClassActionExpansionCards = [
 				'worker',
 				'you',
 				'have',
+				'in',
 				'public',
 				'and',
 				'capitalist',
 				'class',
 				'companies',
+				'company',
+				'own',
+				'is',
+				'se',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'expansion',
-		name: 'SS =. x 7',
+		name: 'COVID-19 STIMULUS PACKAGE',
 		content:
-			'SS =. x 7 |\nim \\ ) =\n= a) —s |\n" COVID-19 .\nSTIMULUS PACKAGE\nGet 2¥ from the State for each\nemployed Worker you have in Public\nand Capitalist Class Companies and\n4¥ for each Company you own.\n4 5%\nis Se',
+			'COVID-19 STIMULUS PACKAGE\n' +
+			'Get 2¥ from the State for each\n' +
+			'employed Worker you have in Public\n' +
+			'and Capitalist Class Companies and\n' +
+			'4¥ for each Company you own.\n' +
+			'4 5%\n' +
+			'is Se',
 		stateEffects: [
 			{
 				type: 'money',
@@ -211,9 +319,10 @@ const middleClassActionExpansionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-expansion-cards-grid-5-items-5-2-middle-class-action-expansion-deck-203-pos-5-1',
+		id: 'middle-class-action-expansion-reveal-political-scandal-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-expansion-cards/grid_5-items_5-2__middle-class-action-expansion-deck-203__pos-5-1.jpg',
 		backImage:
@@ -226,18 +335,21 @@ const middleClassActionExpansionCards = [
 				x: 5,
 				y: 1,
 			},
+			physicalIndex: 5,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4, 2],
 			resources: ['influence'],
-			keywords: ['bee', 'see', 'ila', 'reveal', 'political', 'scandal', 'take', 'from', 'another', 'player'],
+			keywords: ['reveal', 'political', 'scandal', 'take', 'another', 'player', 'he', 'cu'],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'expansion',
-		name: 'bee See go',
-		content: '— 4, ila\nWh_cay\nREVEAL POLITICAL SCANDAL\nTake 2 @ from another player.\nhe Cu',
+		name: 'REVEAL POLITICAL SCANDAL',
+		content: 'REVEAL POLITICAL SCANDAL\nTake 2 @ from another player.\nhe Cu',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 ] satisfies MiddleClassActionExpansionCardsCard[];
 

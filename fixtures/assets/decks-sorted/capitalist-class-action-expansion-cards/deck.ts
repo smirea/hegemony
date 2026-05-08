@@ -4,13 +4,28 @@ interface CapitalistClassActionExpansionCardsCard extends ParsedActionCard {}
 
 const capitalistClassActionExpansionCards = [
 	{
-		id: 'capitalist-class-action-expansion-cards-grid-5-items-5-2-capitalist-class-action-expansion-deck-205-pos-1-1',
+		id: 'capitalist-class-action-expansion-protect-the-status-quo-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/capitalist-class-action-expansion-cards/grid_5-items_5-2__capitalist-class-action-expansion-deck-205__pos-1-1.jpg',
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-action-expansion-cards/back__capitalist-class-action-expansion-deck-205.jpg',
 		rawText:
-			'ie le Ny\n. ,\npoe = 5 eg rete\nRe ns pyc\n= 3 = a SS.\na a ==, = ee\n2 =a 1 2 ~~ a. ~\nJ —_ .\n¢ PROTECT THE STATUS QUO °-\nChoose a Policy. For the rest\nof this round, no Bills may be\nproposed for that Policy. (Place\none of your Bill markers in its\ncurrent section as a reminder.)\nThen, get 1®.\nak a',
+			'ie le Ny\n' +
+			'. ,\n' +
+			'poe = 5 eg rete\n' +
+			'Re ns pyc\n' +
+			'= 3 = a SS.\n' +
+			'a a ==, = ee\n' +
+			'2 =a 1 2 ~~ a. ~\n' +
+			'J —_ .\n' +
+			'¢ PROTECT THE STATUS QUO °-\n' +
+			'Choose a Policy. For the rest\n' +
+			'of this round, no Bills may be\n' +
+			'proposed for that Policy. (Place\n' +
+			'one of your Bill markers in its\n' +
+			'current section as a reminder.)\n' +
+			'Then, get 1®.\n' +
+			'ak a',
 		source: {
 			deck: 'capitalist-class-action-expansion-cards',
 			file: 'grid_5-items_5-2__capitalist-class-action-expansion-deck-205__pos-1-1.jpg',
@@ -18,13 +33,12 @@ const capitalistClassActionExpansionCards = [
 				x: 1,
 				y: 1,
 			},
+			physicalIndex: 1,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [5, 3, 2, 1],
 			keywords: [
-				'poe',
-				'rete',
-				'pyc',
 				'protect',
 				'the',
 				'status',
@@ -33,31 +47,64 @@ const capitalistClassActionExpansionCards = [
 				'policy',
 				'for',
 				'rest',
-				'this',
+				'of',
 				'round',
+				'no',
 				'bills',
 				'may',
+				'be',
 				'proposed',
-				'that',
 				'place',
+				'one',
+				'bill',
+				'markers',
+				'in',
+				'its',
+				'current',
+				'section',
+				'as',
+				'reminder',
+				'get',
+				'ak',
 			],
 		},
 		kind: 'action',
 		role: 'capitalist',
 		category: 'expansion',
-		name: 'ie le Ny',
+		name: 'PROTECT THE STATUS QUO',
 		content:
-			'. ,\npoe = 5 eg rete\nRe ns pyc\n= 3 = a SS.\na a ==, = ee\n2 =a 1 2 ~~ a. ~\nJ —_ .\n¢ PROTECT THE STATUS QUO °-\nChoose a Policy. For the rest\nof this round, no Bills may be\nproposed for that Policy. (Place\none of your Bill markers in its\ncurrent section as a reminder.)\nThen, get 1®.\nak a',
+			'PROTECT THE STATUS QUO\n' +
+			'Choose a Policy. For the rest\n' +
+			'of this round, no Bills may be\n' +
+			'proposed for that Policy. (Place\n' +
+			'one of your Bill markers in its\n' +
+			'current section as a reminder.)\n' +
+			'Then, get 1®.\n' +
+			'ak a',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'capitalist-class-action-expansion-cards-grid-5-items-5-2-capitalist-class-action-expansion-deck-205-pos-2-1',
+		id: 'capitalist-class-action-expansion-covid-19-vaccine-randd-funding-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/capitalist-class-action-expansion-cards/grid_5-items_5-2__capitalist-class-action-expansion-deck-205__pos-2-1.jpg',
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-action-expansion-cards/back__capitalist-class-action-expansion-deck-205.jpg',
 		rawText:
-			'A ae eo\neh es = =\nf 4 |\nJi BD 2\nf 5 7 a fiay SL eee r\n: . a ea =\na 4, Ns NOT j=. =\nPU. ae oe\n" COVID-19 VACCINE -\nR&D FUNDING\nGet 15¥ from the State\nfor each operational Healthcare\nCompany you own.\nLP er',
+			'A ae eo\n' +
+			'eh es = =\n' +
+			'f 4 |\n' +
+			'Ji BD 2\n' +
+			'f 5 7 a fiay SL eee r\n' +
+			': . a ea =\n' +
+			'a 4, Ns NOT j=. =\n' +
+			'PU. ae oe\n' +
+			'" COVID-19 VACCINE -\n' +
+			'R&D FUNDING\n' +
+			'Get 15¥ from the State\n' +
+			'for each operational Healthcare\n' +
+			'Company you own.\n' +
+			'LP er',
 		source: {
 			deck: 'capitalist-class-action-expansion-cards',
 			file: 'grid_5-items_5-2__capitalist-class-action-expansion-deck-205__pos-2-1.jpg',
@@ -65,20 +112,18 @@ const capitalistClassActionExpansionCards = [
 				x: 2,
 				y: 1,
 			},
+			physicalIndex: 2,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4, 2, 5, 7, -19, 15],
 			money: [15],
 			resources: ['healthcare', 'money'],
 			keywords: [
-				'fiay',
-				'eee',
-				'not',
-				'covid-',
+				'covid19',
 				'vaccine',
 				'funding',
 				'get',
-				'from',
 				'the',
 				'state',
 				'for',
@@ -88,14 +133,16 @@ const capitalistClassActionExpansionCards = [
 				'company',
 				'you',
 				'own',
+				'lp',
+				'er',
 			],
 		},
 		kind: 'action',
 		role: 'capitalist',
 		category: 'expansion',
-		name: 'A ae eo',
+		name: 'COVID-19 VACCINE - R&D FUNDING',
 		content:
-			'eh es = =\nf 4 |\nJi BD 2\nf 5 7 a fiay SL eee r\n: . a ea =\na 4, Ns NOT j=. =\nPU. ae oe\n" COVID-19 VACCINE -\nR&D FUNDING\nGet 15¥ from the State\nfor each operational Healthcare\nCompany you own.\nLP er',
+			'COVID-19 VACCINE - R&D FUNDING\nGet 15¥ from the State\nfor each operational Healthcare\nCompany you own.\nLP er',
 		stateEffects: [
 			{
 				type: 'money',
@@ -105,15 +152,27 @@ const capitalistClassActionExpansionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'capitalist-class-action-expansion-cards-grid-5-items-5-2-capitalist-class-action-expansion-deck-205-pos-3-1',
+		id: 'capitalist-class-action-expansion-change-of-government-agenda-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/capitalist-class-action-expansion-cards/grid_5-items_5-2__capitalist-class-action-expansion-deck-205__pos-3-1.jpg',
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-action-expansion-cards/back__capitalist-class-action-expansion-deck-205.jpg',
 		rawText:
-			't fe\nie,\nT ——e\n=e =a a\n- CHANGE OF "\nGOVERNMENT AGENDA\nIf there are 3 or less\nproposed Bills, discard a Bill\nproposed by another player.\nThen, you may both Propose\nanother Bill, with you going first.\nWe iy',
+			't fe\n' +
+			'ie,\n' +
+			'T ——e\n' +
+			'=e =a a\n' +
+			'- CHANGE OF "\n' +
+			'GOVERNMENT AGENDA\n' +
+			'If there are 3 or less\n' +
+			'proposed Bills, discard a Bill\n' +
+			'proposed by another player.\n' +
+			'Then, you may both Propose\n' +
+			'another Bill, with you going first.\n' +
+			'We iy',
 		source: {
 			deck: 'capitalist-class-action-expansion-cards',
 			file: 'grid_5-items_5-2__capitalist-class-action-expansion-deck-205__pos-3-1.jpg',
@@ -121,46 +180,71 @@ const capitalistClassActionExpansionCards = [
 				x: 3,
 				y: 1,
 			},
+			physicalIndex: 3,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [3],
 			keywords: [
 				'change',
+				'of',
 				'government',
 				'agenda',
+				'if',
 				'there',
 				'are',
+				'or',
 				'less',
 				'proposed',
 				'bills',
 				'discard',
 				'bill',
+				'by',
 				'another',
 				'player',
-				'then',
 				'you',
 				'may',
 				'both',
 				'propose',
-				'with',
+				'going',
+				'first',
+				'we',
+				'iy',
 			],
 		},
 		kind: 'action',
 		role: 'capitalist',
 		category: 'expansion',
-		name: 't fe',
+		name: 'CHANGE OF GOVERNMENT AGENDA',
 		content:
-			'ie,\nT ——e\n=e =a a\n- CHANGE OF "\nGOVERNMENT AGENDA\nIf there are 3 or less\nproposed Bills, discard a Bill\nproposed by another player.\nThen, you may both Propose\nanother Bill, with you going first.\nWe iy',
+			'CHANGE OF GOVERNMENT AGENDA\n' +
+			'If there are 3 or less\n' +
+			'proposed Bills, discard a Bill\n' +
+			'proposed by another player.\n' +
+			'Then, you may both Propose\n' +
+			'another Bill, with you going first.\n' +
+			'We iy',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'capitalist-class-action-expansion-cards-grid-5-items-5-2-capitalist-class-action-expansion-deck-205-pos-4-1',
+		id: 'capitalist-class-action-expansion-momentum-for-change-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/capitalist-class-action-expansion-cards/grid_5-items_5-2__capitalist-class-action-expansion-deck-205__pos-4-1.jpg',
 		backImage:
 			'fixtures/assets/decks-sorted/capitalist-class-action-expansion-cards/back__capitalist-class-action-expansion-deck-205.jpg',
 		rawText:
-			'—— = OB 0\nee vp fa gay\n. — ¥ hy =X i\nz-\\\n¢ MOMENTUM FOR CHANGE °\nGet 1® for each Bill marker\nof yours on the Politics Table.\nThen, Propose a Bill.\nYou may not call for an\nImmediate Vote on this Bill.\nSL <a',
+			'—— = OB 0\n' +
+			'ee vp fa gay\n' +
+			'. — ¥ hy =X i\n' +
+			'z-\\\n' +
+			'¢ MOMENTUM FOR CHANGE °\n' +
+			'Get 1® for each Bill marker\n' +
+			'of yours on the Politics Table.\n' +
+			'Then, Propose a Bill.\n' +
+			'You may not call for an\n' +
+			'Immediate Vote on this Bill.\n' +
+			'SL <a',
 		source: {
 			deck: 'capitalist-class-action-expansion-cards',
 			file: 'grid_5-items_5-2__capitalist-class-action-expansion-deck-205__pos-4-1.jpg',
@@ -168,12 +252,13 @@ const capitalistClassActionExpansionCards = [
 				x: 4,
 				y: 1,
 			},
+			physicalIndex: 4,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [0, 1],
 			resources: ['influence', 'money'],
 			keywords: [
-				'gay',
 				'momentum',
 				'for',
 				'change',
@@ -181,37 +266,57 @@ const capitalistClassActionExpansionCards = [
 				'each',
 				'bill',
 				'marker',
+				'of',
 				'yours',
+				'on',
 				'the',
 				'politics',
 				'table',
-				'then',
 				'propose',
 				'you',
 				'may',
 				'not',
 				'call',
+				'an',
+				'immediate',
+				'vote',
+				'sl',
 			],
 		},
 		kind: 'action',
 		role: 'capitalist',
 		category: 'expansion',
-		name: 'OB 0',
+		name: 'MOMENTUM FOR CHANGE',
 		content:
-			'—— = OB 0\nee vp fa gay\n. — ¥ hy =X i\nz-\\\n¢ MOMENTUM FOR CHANGE °\nGet 1® for each Bill marker\nof yours on the Politics Table.\nThen, Propose a Bill.\nYou may not call for an\nImmediate Vote on this Bill.\nSL <a',
+			'MOMENTUM FOR CHANGE\n' +
+			'Get 1® for each Bill marker\n' +
+			'of yours on the Politics Table.\n' +
+			'Then, Propose a Bill.\n' +
+			'You may not call for an\n' +
+			'Immediate Vote on this Bill.\n' +
+			'SL <a',
 		stateEffects: [
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				target: 'bag',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'proposed-bill',
+					target: 'self',
+				},
+			},
 			{
 				type: 'policy',
 				action: 'propose',
-			},
-			{
-				type: 'vote',
-				action: 'immediate-vote',
+				immediateVoteAllowed: false,
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'capitalist-class-action-expansion-cards-grid-5-items-5-2-capitalist-class-action-expansion-deck-205-pos-5-1',
+		id: 'capitalist-class-action-expansion-reveal-political-scandal-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/capitalist-class-action-expansion-cards/grid_5-items_5-2__capitalist-class-action-expansion-deck-205__pos-5-1.jpg',
 		backImage:
@@ -224,18 +329,21 @@ const capitalistClassActionExpansionCards = [
 				x: 5,
 				y: 1,
 			},
+			physicalIndex: 5,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2, 1],
 			resources: ['influence'],
-			keywords: ['reveal', 'political', 'scandal', 'take', 'from', 'another', 'player'],
+			keywords: ['reveal', 'political', 'scandal', 'take', 'another', 'player', 'a1', 'aa'],
 		},
 		kind: 'action',
 		role: 'capitalist',
 		category: 'expansion',
 		name: 'REVEAL POLITICAL SCANDAL',
-		content: '° REVEAL POLITICAL SCANDAL\nTake 2 @ from another player.\na1 aa',
+		content: 'REVEAL POLITICAL SCANDAL\nTake 2 @ from another player.\na1 aa',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 ] satisfies CapitalistClassActionExpansionCardsCard[];
 

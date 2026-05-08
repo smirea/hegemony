@@ -4,12 +4,21 @@ interface WorkingClassActionCardsCard extends ParsedActionCard {}
 
 const workingClassActionCards = [
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-1-1',
+		id: 'working-class-action-specialization-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-1-1.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'f }\nPi 24\nr\nSPECIALIZATION\nPlace a skilled Worker of your\nchoice from the Supply in\nthe Unemployed Workers area.\nThen, assign up to 3 Workers.\n7B /7C\n] 4',
+			'f }\n' +
+			'Pi 24\n' +
+			'r\n' +
+			'SPECIALIZATION\n' +
+			'Place a skilled Worker of your\n' +
+			'choice from the Supply in\n' +
+			'the Unemployed Workers area.\n' +
+			'Then, assign up to 3 Workers.\n' +
+			'7B /7C\n' +
+			'] 4',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-1-1.png',
@@ -17,6 +26,8 @@ const workingClassActionCards = [
 				x: 1,
 				y: 1,
 			},
+			physicalIndex: 1,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [24, 3, 7, 4],
@@ -26,25 +37,38 @@ const workingClassActionCards = [
 				'place',
 				'skilled',
 				'worker',
-				'your',
+				'of',
 				'choice',
-				'from',
 				'the',
 				'supply',
+				'in',
 				'unemployed',
 				'workers',
 				'area',
-				'then',
 				'assign',
+				'up',
+				'to',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
+		name: 'SPECIALIZATION',
 		content:
-			'f }\nPi 24\nr\nSPECIALIZATION\nPlace a skilled Worker of your\nchoice from the Supply in\nthe Unemployed Workers area.\nThen, assign up to 3 Workers.\n7B /7C\n] 4',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['7B', '7C'] }],
+			'SPECIALIZATION\n' +
+			'Place a skilled Worker of your\n' +
+			'choice from the Supply in\n' +
+			'the Unemployed Workers area.\n' +
+			'Then, assign up to 3 Workers.\n' +
+			'7B /7C\n' +
+			'] 4',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['7B', '7C'],
+			},
+		],
 		stateEffects: [
 			{
 				type: 'worker',
@@ -65,14 +89,24 @@ const workingClassActionCards = [
 				target: 'unemployed-workers',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-2-1',
+		id: 'working-class-action-specialization-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-2-1.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'f }\nPi 24\nr\nSPECIALIZATION\nPlace a skilled Worker of your\nchoice from the Supply in\nthe Unemployed Workers area.\nThen, assign up to 3 Workers.\n7B /7C\n] 4',
+			'f }\n' +
+			'Pi 24\n' +
+			'r\n' +
+			'SPECIALIZATION\n' +
+			'Place a skilled Worker of your\n' +
+			'choice from the Supply in\n' +
+			'the Unemployed Workers area.\n' +
+			'Then, assign up to 3 Workers.\n' +
+			'7B /7C\n' +
+			'] 4',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-2-1.png',
@@ -80,6 +114,8 @@ const workingClassActionCards = [
 				x: 2,
 				y: 1,
 			},
+			physicalIndex: 2,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [24, 3, 7, 4],
@@ -89,25 +125,38 @@ const workingClassActionCards = [
 				'place',
 				'skilled',
 				'worker',
-				'your',
+				'of',
 				'choice',
-				'from',
 				'the',
 				'supply',
+				'in',
 				'unemployed',
 				'workers',
 				'area',
-				'then',
 				'assign',
+				'up',
+				'to',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
+		name: 'SPECIALIZATION',
 		content:
-			'f }\nPi 24\nr\nSPECIALIZATION\nPlace a skilled Worker of your\nchoice from the Supply in\nthe Unemployed Workers area.\nThen, assign up to 3 Workers.\n7B /7C\n] 4',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['7B', '7C'] }],
+			'SPECIALIZATION\n' +
+			'Place a skilled Worker of your\n' +
+			'choice from the Supply in\n' +
+			'the Unemployed Workers area.\n' +
+			'Then, assign up to 3 Workers.\n' +
+			'7B /7C\n' +
+			'] 4',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['7B', '7C'],
+			},
+		],
 		stateEffects: [
 			{
 				type: 'worker',
@@ -128,9 +177,10 @@ const workingClassActionCards = [
 				target: 'unemployed-workers',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-3-1',
+		id: 'working-class-action-highlight-social-issues-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-3-1.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
@@ -142,27 +192,40 @@ const workingClassActionCards = [
 				x: 3,
 				y: 1,
 			},
+			physicalIndex: 3,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2, 3, 15, 4],
 			money: [15],
 			resources: ['money'],
-			keywords: ['reake', 'highlight', 'social', 'issues', 'buy', 'from', 'the', 'state', 'for'],
+			keywords: ['highlight', 'social', 'issues', 'buy', 'the', 'state', 'for'],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'g REAKE GS',
-		content: '; g REAKE GS\n: a: "%\nz 2\nHIGHLIGHT SOCIAL ISSUES\nBuy 3 @ from the State for 15 ¥.\n4',
+		name: 'HIGHLIGHT SOCIAL ISSUES',
+		content: 'HIGHLIGHT SOCIAL ISSUES\nBuy 3 @ from the State for 15 ¥.\n4',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-4-1',
+		id: 'working-class-action-cooperative-farm-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-4-1.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'——— lll s—‘(i‘é ee\nOPES ~S Exe ta\n~ id ine yy) 35\ne eee ~\nCOOPERATIVE FARM\nIf you have at least\n3 Unemployed Workers,\nbuild a Cooperative Farm\n(place it next to your board) and\nassign 3 of those Workers there.\n7 sy',
+			'——— lll s—‘(i‘é ee\n' +
+			'OPES ~S Exe ta\n' +
+			'~ id ine yy) 35\n' +
+			'e eee ~\n' +
+			'COOPERATIVE FARM\n' +
+			'If you have at least\n' +
+			'3 Unemployed Workers,\n' +
+			'build a Cooperative Farm\n' +
+			'(place it next to your board) and\n' +
+			'assign 3 of those Workers there.\n' +
+			'7 sy',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-4-1.png',
@@ -170,45 +233,67 @@ const workingClassActionCards = [
 				x: 4,
 				y: 1,
 			},
+			physicalIndex: 4,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [35, 3, 7],
 			keywords: [
-				'lll',
-				'opes',
-				'exe',
-				'ine',
-				'eee',
 				'cooperative',
 				'farm',
+				'if',
 				'you',
 				'have',
+				'at',
 				'least',
 				'unemployed',
 				'workers',
 				'build',
 				'place',
+				'it',
 				'next',
-				'your',
+				'to',
 				'board',
 				'and',
+				'assign',
+				'of',
+				'those',
+				'there',
+				'sy',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'lll s—‘(i‘é ee',
+		name: 'COOPERATIVE FARM',
 		content:
-			'——— lll s—‘(i‘é ee\nOPES ~S Exe ta\n~ id ine yy) 35\ne eee ~\nCOOPERATIVE FARM\nIf you have at least\n3 Unemployed Workers,\nbuild a Cooperative Farm\n(place it next to your board) and\nassign 3 of those Workers there.\n7 sy',
+			'COOPERATIVE FARM\n' +
+			'If you have at least\n' +
+			'3 Unemployed Workers,\n' +
+			'build a Cooperative Farm\n' +
+			'(place it next to your board) and\n' +
+			'assign 3 of those Workers there.\n' +
+			'7 sy',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-5-1',
+		id: 'working-class-action-cooperative-farm-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-5-1.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'——— lll s—‘(i‘é ee\nOPES ~S Exe ta\n~ id ine yy) 35\ne eee ~\nCOOPERATIVE FARM\nIf you have at least\n3 Unemployed Workers,\nbuild a Cooperative Farm\n(place it next to your board) and\nassign 3 of those Workers there.\n7 sy',
+			'——— lll s—‘(i‘é ee\n' +
+			'OPES ~S Exe ta\n' +
+			'~ id ine yy) 35\n' +
+			'e eee ~\n' +
+			'COOPERATIVE FARM\n' +
+			'If you have at least\n' +
+			'3 Unemployed Workers,\n' +
+			'build a Cooperative Farm\n' +
+			'(place it next to your board) and\n' +
+			'assign 3 of those Workers there.\n' +
+			'7 sy',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-5-1.png',
@@ -216,45 +301,67 @@ const workingClassActionCards = [
 				x: 5,
 				y: 1,
 			},
+			physicalIndex: 5,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [35, 3, 7],
 			keywords: [
-				'lll',
-				'opes',
-				'exe',
-				'ine',
-				'eee',
 				'cooperative',
 				'farm',
+				'if',
 				'you',
 				'have',
+				'at',
 				'least',
 				'unemployed',
 				'workers',
 				'build',
 				'place',
+				'it',
 				'next',
-				'your',
+				'to',
 				'board',
 				'and',
+				'assign',
+				'of',
+				'those',
+				'there',
+				'sy',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'lll s—‘(i‘é ee',
+		name: 'COOPERATIVE FARM',
 		content:
-			'——— lll s—‘(i‘é ee\nOPES ~S Exe ta\n~ id ine yy) 35\ne eee ~\nCOOPERATIVE FARM\nIf you have at least\n3 Unemployed Workers,\nbuild a Cooperative Farm\n(place it next to your board) and\nassign 3 of those Workers there.\n7 sy',
+			'COOPERATIVE FARM\n' +
+			'If you have at least\n' +
+			'3 Unemployed Workers,\n' +
+			'build a Cooperative Farm\n' +
+			'(place it next to your board) and\n' +
+			'assign 3 of those Workers there.\n' +
+			'7 sy',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-6-1',
+		id: 'working-class-action-healthcare-benefits-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-6-1.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'A\nie te\n5 N .\n> “bY\nHEALTHCARE BENEFITS\nBuy @ from the State,\nup to your Population, paying\nhalf the cost (rounded up).\na\nREQUIREMENT silly,\n9d',
+			'A\n' +
+			'ie te\n' +
+			'5 N .\n' +
+			'> “bY\n' +
+			'HEALTHCARE BENEFITS\n' +
+			'Buy @ from the State,\n' +
+			'up to your Population, paying\n' +
+			'half the cost (rounded up).\n' +
+			'a\n' +
+			'REQUIREMENT silly,\n' +
+			'9d',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-6-1.png',
@@ -262,6 +369,8 @@ const workingClassActionCards = [
 				x: 6,
 				y: 1,
 			},
+			physicalIndex: 6,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [5, 9],
@@ -270,10 +379,10 @@ const workingClassActionCards = [
 				'healthcare',
 				'benefits',
 				'buy',
-				'from',
 				'the',
 				'state',
-				'your',
+				'up',
+				'to',
 				'population',
 				'paying',
 				'half',
@@ -286,18 +395,35 @@ const workingClassActionCards = [
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
+		name: 'HEALTHCARE BENEFITS',
 		content:
-			'A\nie te\n5 N .\n> “bY\nHEALTHCARE BENEFITS\nBuy @ from the State,\nup to your Population, paying\nhalf the cost (rounded up).\na\nREQUIREMENT silly,\n9d',
+			'HEALTHCARE BENEFITS\n' +
+			'Buy @ from the State,\n' +
+			'up to your Population, paying\n' +
+			'half the cost (rounded up).\n' +
+			'a\n' +
+			'REQUIREMENT silly,\n' +
+			'9d',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-7-1',
+		id: 'working-class-action-healthcare-benefits-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-7-1.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'A\nie te\n5 N .\n> “bY\nHEALTHCARE BENEFITS\nBuy @ from the State,\nup to your Population, paying\nhalf the cost (rounded up).\na\nREQUIREMENT silly,\n9d',
+			'A\n' +
+			'ie te\n' +
+			'5 N .\n' +
+			'> “bY\n' +
+			'HEALTHCARE BENEFITS\n' +
+			'Buy @ from the State,\n' +
+			'up to your Population, paying\n' +
+			'half the cost (rounded up).\n' +
+			'a\n' +
+			'REQUIREMENT silly,\n' +
+			'9d',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-7-1.png',
@@ -305,6 +431,8 @@ const workingClassActionCards = [
 				x: 7,
 				y: 1,
 			},
+			physicalIndex: 7,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [5, 9],
@@ -313,10 +441,10 @@ const workingClassActionCards = [
 				'healthcare',
 				'benefits',
 				'buy',
-				'from',
 				'the',
 				'state',
-				'your',
+				'up',
+				'to',
 				'population',
 				'paying',
 				'half',
@@ -329,13 +457,20 @@ const workingClassActionCards = [
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
+		name: 'HEALTHCARE BENEFITS',
 		content:
-			'A\nie te\n5 N .\n> “bY\nHEALTHCARE BENEFITS\nBuy @ from the State,\nup to your Population, paying\nhalf the cost (rounded up).\na\nREQUIREMENT silly,\n9d',
+			'HEALTHCARE BENEFITS\n' +
+			'Buy @ from the State,\n' +
+			'up to your Population, paying\n' +
+			'half the cost (rounded up).\n' +
+			'a\n' +
+			'REQUIREMENT silly,\n' +
+			'9d',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-8-1',
+		id: 'working-class-action-healthcare-movement-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-8-1.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
@@ -348,6 +483,8 @@ const workingClassActionCards = [
 				x: 8,
 				y: 1,
 			},
+			physicalIndex: 8,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2, 7],
@@ -363,6 +500,7 @@ const workingClassActionCards = [
 				'add',
 				'voting',
 				'cubes',
+				'to',
 				'the',
 				'bag',
 			],
@@ -370,18 +508,18 @@ const workingClassActionCards = [
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'A YY ae',
-		content:
-			'_ A YY ae /\nHEALTHCARE MOVEMENT\nPropose a Bill for\nWelfare State - Healthcare.\nAdd 2 Voting cubes to the bag.\n7',
+		name: 'HEALTHCARE MOVEMENT',
+		content: 'HEALTHCARE MOVEMENT\nPropose a Bill for\nWelfare State - Healthcare.\nAdd 2 Voting cubes to the bag.\n7',
 		stateEffects: [
 			{
 				type: 'policy',
 				action: 'propose',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-1-2',
+		id: 'working-class-action-need-for-change-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-1-2.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
@@ -393,20 +531,23 @@ const workingClassActionCards = [
 				x: 1,
 				y: 2,
 			},
+			physicalIndex: 9,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [1, 2],
-			keywords: ['ein', 'sad', 'need', 'for', 'change', 'propose', 'bills'],
+			keywords: ['need', 'for', 'change', 'propose', 'bills'],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'ein 2',
-		content: '1 ein 2\n1 a © ie\n? A wy t\n| - iy\nol sad Re\nj A\nNEED FOR CHANGE\nPropose 2 Bills.',
+		name: 'NEED FOR CHANGE',
+		content: 'NEED FOR CHANGE\nPropose 2 Bills.',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-2-2',
+		id: 'working-class-action-need-for-change-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-2-2.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
@@ -418,20 +559,23 @@ const workingClassActionCards = [
 				x: 2,
 				y: 2,
 			},
+			physicalIndex: 10,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [1, 2],
-			keywords: ['ein', 'sad', 'need', 'for', 'change', 'propose', 'bills'],
+			keywords: ['need', 'for', 'change', 'propose', 'bills'],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'ein 2',
-		content: '1 ein 2\n1 a © ie\n? A wy t\n| - iy\nol sad Re\nj A\nNEED FOR CHANGE\nPropose 2 Bills.',
+		name: 'NEED FOR CHANGE',
+		content: 'NEED FOR CHANGE\nPropose 2 Bills.',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-3-2',
+		id: 'working-class-action-need-for-change-3',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-3-2.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
@@ -443,25 +587,40 @@ const workingClassActionCards = [
 				x: 3,
 				y: 2,
 			},
+			physicalIndex: 11,
+			copyIndex: 3,
 		},
 		parsed: {
 			numbers: [1, 2],
-			keywords: ['ein', 'sad', 'need', 'for', 'change', 'propose', 'bills'],
+			keywords: ['need', 'for', 'change', 'propose', 'bills'],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'ein es',
-		content: '1 ein es\n1 a © ie\n? A wy t\n| - Wy\nol sad Re\nj A\nNEED FOR CHANGE\nPropose 2 Bills.',
+		name: 'NEED FOR CHANGE',
+		content: 'NEED FOR CHANGE\nPropose 2 Bills.',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-4-2',
+		id: 'working-class-action-labor-market-deregulation-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-4-2.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'\'’ -\n= T,\nThe « art F Vi "\nant Se ee |\nLABOR MARKET\nDEREGULATION\nAssign any number of unemployed\nWorkers. If Ea is in effect,\nyou may also reassign any number\nof Workers already assigned\nto other Companies.\n2B/2c\n—',
+			"'’ -\n" +
+			'= T,\n' +
+			'The « art F Vi "\n' +
+			'ant Se ee |\n' +
+			'LABOR MARKET\n' +
+			'DEREGULATION\n' +
+			'Assign any number of unemployed\n' +
+			'Workers. If Ea is in effect,\n' +
+			'you may also reassign any number\n' +
+			'of Workers already assigned\n' +
+			'to other Companies.\n' +
+			'2B/2c\n' +
+			'—',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-4-2.png',
@@ -469,22 +628,26 @@ const workingClassActionCards = [
 				x: 4,
 				y: 2,
 			},
+			physicalIndex: 12,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2],
 			policies: ['2B', '2C'],
 			keywords: [
-				'the',
-				'art',
-				'ant',
 				'labor',
 				'market',
 				'deregulation',
 				'assign',
 				'any',
 				'number',
+				'of',
 				'unemployed',
 				'workers',
+				'if',
+				'ea',
+				'is',
+				'in',
 				'effect',
 				'you',
 				'may',
@@ -492,24 +655,53 @@ const workingClassActionCards = [
 				'reassign',
 				'already',
 				'assigned',
+				'to',
+				'other',
+				'companies',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
+		name: 'LABOR MARKET DEREGULATION',
 		content:
-			'\'’ -\n= T,\nThe « art F Vi "\nant Se ee |\nLABOR MARKET\nDEREGULATION\nAssign any number of unemployed\nWorkers. If Ea is in effect,\nyou may also reassign any number\nof Workers already assigned\nto other Companies.\n2B/2c\n—',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['2B', '2C'] }],
+			'LABOR MARKET DEREGULATION\n' +
+			'Assign any number of unemployed\n' +
+			'Workers. If Ea is in effect,\n' +
+			'you may also reassign any number\n' +
+			'of Workers already assigned\n' +
+			'to other Companies.\n' +
+			'2B/2c\n' +
+			'—',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['2B', '2C'],
+			},
+		],
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-5-2',
+		id: 'working-class-action-labor-market-deregulation-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-5-2.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'\'’ -\n= T,\nThe « art F Vi "\nant Se ee |\nLABOR MARKET\nDEREGULATION\nAssign any number of unemployed\nWorkers. If Ea is in effect,\nyou may also reassign any number\nof Workers already assigned\nto other Companies.\n2B/2c\n—',
+			"'’ -\n" +
+			'= T,\n' +
+			'The « art F Vi "\n' +
+			'ant Se ee |\n' +
+			'LABOR MARKET\n' +
+			'DEREGULATION\n' +
+			'Assign any number of unemployed\n' +
+			'Workers. If Ea is in effect,\n' +
+			'you may also reassign any number\n' +
+			'of Workers already assigned\n' +
+			'to other Companies.\n' +
+			'2B/2c\n' +
+			'—',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-5-2.png',
@@ -517,22 +709,26 @@ const workingClassActionCards = [
 				x: 5,
 				y: 2,
 			},
+			physicalIndex: 13,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [2],
 			policies: ['2B', '2C'],
 			keywords: [
-				'the',
-				'art',
-				'ant',
 				'labor',
 				'market',
 				'deregulation',
 				'assign',
 				'any',
 				'number',
+				'of',
 				'unemployed',
 				'workers',
+				'if',
+				'ea',
+				'is',
+				'in',
 				'effect',
 				'you',
 				'may',
@@ -540,24 +736,55 @@ const workingClassActionCards = [
 				'reassign',
 				'already',
 				'assigned',
+				'to',
+				'other',
+				'companies',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
+		name: 'LABOR MARKET DEREGULATION',
 		content:
-			'\'’ -\n= T,\nThe « art F Vi "\nant Se ee |\nLABOR MARKET\nDEREGULATION\nAssign any number of unemployed\nWorkers. If Ea is in effect,\nyou may also reassign any number\nof Workers already assigned\nto other Companies.\n2B/2c\n—',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['2B', '2C'] }],
+			'LABOR MARKET DEREGULATION\n' +
+			'Assign any number of unemployed\n' +
+			'Workers. If Ea is in effect,\n' +
+			'you may also reassign any number\n' +
+			'of Workers already assigned\n' +
+			'to other Companies.\n' +
+			'2B/2c\n' +
+			'—',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['2B', '2C'],
+			},
+		],
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-6-2',
+		id: 'working-class-action-migration-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-6-2.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'— —eeeC7O7"E\n= = iS i\ni tie 1 eT oT\na te y er\nyj ae ¥\n==. ~\nre Passports\nSS & wu | -\nMIGRATION\nIf you have at least 4 Unemployed\nWorkers, remove up to 2 of them.\nGet 5¥ for each Unskilled worker\nand 10¥ for each Skilled Worker\nremoved this way.\ni',
+			'— —eeeC7O7"E\n' +
+			'= = iS i\n' +
+			'i tie 1 eT oT\n' +
+			'a te y er\n' +
+			'yj ae ¥\n' +
+			'==. ~\n' +
+			're Passports\n' +
+			'SS & wu | -\n' +
+			'MIGRATION\n' +
+			'If you have at least 4 Unemployed\n' +
+			'Workers, remove up to 2 of them.\n' +
+			'Get 5¥ for each Unskilled worker\n' +
+			'and 10¥ for each Skilled Worker\n' +
+			'removed this way.\n' +
+			'i',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-6-2.png',
@@ -565,21 +792,26 @@ const workingClassActionCards = [
 				x: 6,
 				y: 2,
 			},
+			physicalIndex: 14,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [7, 1, 4, 2, 5, 10],
 			money: [5, 10],
 			resources: ['money'],
 			keywords: [
-				'tie',
-				'passports',
 				'migration',
+				'if',
 				'you',
 				'have',
+				'at',
 				'least',
 				'unemployed',
 				'workers',
 				'remove',
+				'up',
+				'to',
+				'of',
 				'them',
 				'get',
 				'for',
@@ -589,14 +821,21 @@ const workingClassActionCards = [
 				'and',
 				'skilled',
 				'removed',
+				'way',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'eeeC7O7"E',
+		name: 'MIGRATION',
 		content:
-			'— —eeeC7O7"E\n= = iS i\ni tie 1 eT oT\na te y er\nyj ae ¥\n==. ~\nre Passports\nSS & wu | -\nMIGRATION\nIf you have at least 4 Unemployed\nWorkers, remove up to 2 of them.\nGet 5¥ for each Unskilled worker\nand 10¥ for each Skilled Worker\nremoved this way.\ni',
+			'MIGRATION\n' +
+			'If you have at least 4 Unemployed\n' +
+			'Workers, remove up to 2 of them.\n' +
+			'Get 5¥ for each Unskilled worker\n' +
+			'and 10¥ for each Skilled Worker\n' +
+			'removed this way.\n' +
+			'i',
 		stateEffects: [
 			{
 				type: 'money',
@@ -606,14 +845,29 @@ const workingClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-7-2',
+		id: 'working-class-action-migration-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-7-2.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'— —eeeC7O7"E\n= = iS i\ni tie 1 eT oT\na te y er\nyj ae ¥\n==. ~\nre Passports\nSS & wu | -\nMIGRATION\nIf you have at least 4 Unemployed\nWorkers, remove up to 2 of them.\nGet 5¥ for each Unskilled worker\nand 10¥ for each Skilled Worker\nremoved this way.\ni',
+			'— —eeeC7O7"E\n' +
+			'= = iS i\n' +
+			'i tie 1 eT oT\n' +
+			'a te y er\n' +
+			'yj ae ¥\n' +
+			'==. ~\n' +
+			're Passports\n' +
+			'SS & wu | -\n' +
+			'MIGRATION\n' +
+			'If you have at least 4 Unemployed\n' +
+			'Workers, remove up to 2 of them.\n' +
+			'Get 5¥ for each Unskilled worker\n' +
+			'and 10¥ for each Skilled Worker\n' +
+			'removed this way.\n' +
+			'i',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-7-2.png',
@@ -621,21 +875,26 @@ const workingClassActionCards = [
 				x: 7,
 				y: 2,
 			},
+			physicalIndex: 15,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [7, 1, 4, 2, 5, 10],
 			money: [5, 10],
 			resources: ['money'],
 			keywords: [
-				'tie',
-				'passports',
 				'migration',
+				'if',
 				'you',
 				'have',
+				'at',
 				'least',
 				'unemployed',
 				'workers',
 				'remove',
+				'up',
+				'to',
+				'of',
 				'them',
 				'get',
 				'for',
@@ -645,14 +904,21 @@ const workingClassActionCards = [
 				'and',
 				'skilled',
 				'removed',
+				'way',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'eeeC7O7"E',
+		name: 'MIGRATION',
 		content:
-			'— —eeeC7O7"E\n= = iS i\ni tie 1 eT oT\na te y er\nyj ae ¥\n==. ~\nre Passports\nSS & wu | -\nMIGRATION\nIf you have at least 4 Unemployed\nWorkers, remove up to 2 of them.\nGet 5¥ for each Unskilled worker\nand 10¥ for each Skilled Worker\nremoved this way.\ni',
+			'MIGRATION\n' +
+			'If you have at least 4 Unemployed\n' +
+			'Workers, remove up to 2 of them.\n' +
+			'Get 5¥ for each Unskilled worker\n' +
+			'and 10¥ for each Skilled Worker\n' +
+			'removed this way.\n' +
+			'i',
 		stateEffects: [
 			{
 				type: 'money',
@@ -662,14 +928,24 @@ const workingClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-8-2',
+		id: 'working-class-action-workers-movement-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-8-2.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'’ Ss te ”\nae -— t\nEAD ahh! | GS |p Re\n(Lill ¢ > WORKERS + aw\n~~ Yd r- >\na P =\n‘ig ‘/*\nWORKERS MOVEMENT\nPropose a Bill for Labor Market.\nAdd 2 Voting cubes to the bag',
+			'’ Ss te ”\n' +
+			'ae -— t\n' +
+			'EAD ahh! | GS |p Re\n' +
+			'(Lill ¢ > WORKERS + aw\n' +
+			'~~ Yd r- >\n' +
+			'a P =\n' +
+			'‘ig ‘/*\n' +
+			'WORKERS MOVEMENT\n' +
+			'Propose a Bill for Labor Market.\n' +
+			'Add 2 Voting cubes to the bag',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-8-2.png',
@@ -677,14 +953,13 @@ const workingClassActionCards = [
 				x: 8,
 				y: 2,
 			},
+			physicalIndex: 16,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2],
 			resources: ['influence'],
 			keywords: [
-				'ead',
-				'ahh',
-				'lill',
 				'workers',
 				'movement',
 				'propose',
@@ -695,6 +970,7 @@ const workingClassActionCards = [
 				'add',
 				'voting',
 				'cubes',
+				'to',
 				'the',
 				'bag',
 			],
@@ -702,23 +978,30 @@ const workingClassActionCards = [
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Ss te',
-		content:
-			'’ Ss te ”\nae -— t\nEAD ahh! | GS |p Re\n(Lill ¢ > WORKERS + aw\n~~ Yd r- >\na P =\n‘ig ‘/*\nWORKERS MOVEMENT\nPropose a Bill for Labor Market.\nAdd 2 Voting cubes to the bag',
+		name: 'WORKERS MOVEMENT',
+		content: 'WORKERS MOVEMENT\nPropose a Bill for Labor Market.\nAdd 2 Voting cubes to the bag',
 		stateEffects: [
 			{
 				type: 'policy',
 				action: 'propose',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-1-3',
+		id: 'working-class-action-workplace-accident-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-1-3.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'~ i 4\nrm\nWORKPLACE ACCIDENT\nChoose an industry. Get 8¥ from\nanother player for each of their\nCompanies of that industry\nin which you have Workers.\nSO 7 7 7 4',
+			'~ i 4\n' +
+			'rm\n' +
+			'WORKPLACE ACCIDENT\n' +
+			'Choose an industry. Get 8¥ from\n' +
+			'another player for each of their\n' +
+			'Companies of that industry\n' +
+			'in which you have Workers.\n' +
+			'SO 7 7 7 4',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-1-3.png',
@@ -726,6 +1009,8 @@ const workingClassActionCards = [
 				x: 1,
 				y: 3,
 			},
+			physicalIndex: 17,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4, 8, 7],
@@ -735,28 +1020,35 @@ const workingClassActionCards = [
 				'workplace',
 				'accident',
 				'choose',
+				'an',
 				'industry',
 				'get',
-				'from',
 				'another',
 				'player',
 				'for',
 				'each',
+				'of',
 				'their',
 				'companies',
-				'that',
+				'in',
 				'which',
 				'you',
 				'have',
 				'workers',
+				'so',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'i 4',
+		name: 'WORKPLACE ACCIDENT',
 		content:
-			'~ i 4\nrm\nWORKPLACE ACCIDENT\nChoose an industry. Get 8¥ from\nanother player for each of their\nCompanies of that industry\nin which you have Workers.\nSO 7 7 7 4',
+			'WORKPLACE ACCIDENT\n' +
+			'Choose an industry. Get 8¥ from\n' +
+			'another player for each of their\n' +
+			'Companies of that industry\n' +
+			'in which you have Workers.\n' +
+			'SO 7 7 7 4',
 		stateEffects: [
 			{
 				type: 'money',
@@ -766,14 +1058,26 @@ const workingClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-2-3',
+		id: 'working-class-action-proletarians-of-the-world-unite-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-2-3.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'( 3 Fal > Pe\n%\noo y\nWo 5\nn a] < ;\naud : # bse ie\nJ\nPROLETARIANS\nOF THE WORLD, UNITE!\nAdd Voting cubes to the bag\nequal to your Population.\nSea eae',
+			'( 3 Fal > Pe\n' +
+			'%\n' +
+			'oo y\n' +
+			'Wo 5\n' +
+			'n a] < ;\n' +
+			'aud : # bse ie\n' +
+			'J\n' +
+			'PROLETARIANS\n' +
+			'OF THE WORLD, UNITE!\n' +
+			'Add Voting cubes to the bag\n' +
+			'equal to your Population.\n' +
+			'Sea eae',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-2-3.png',
@@ -781,24 +1085,24 @@ const workingClassActionCards = [
 				x: 2,
 				y: 3,
 			},
+			physicalIndex: 18,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [3, 5],
 			resources: ['influence'],
 			keywords: [
-				'fal',
-				'aud',
-				'bse',
 				'proletarians',
+				'of',
 				'the',
 				'world',
 				'unite',
 				'add',
 				'voting',
 				'cubes',
+				'to',
 				'bag',
 				'equal',
-				'your',
 				'population',
 				'sea',
 				'eae',
@@ -807,18 +1111,29 @@ const workingClassActionCards = [
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Fal > Pe',
-		content:
-			'( 3 Fal > Pe\n%\noo y\nWo 5\nn a] < ;\naud : # bse ie\nJ\nPROLETARIANS\nOF THE WORLD, UNITE!\nAdd Voting cubes to the bag\nequal to your Population.\nSea eae',
+		name: 'PROLETARIANS OF THE WORLD, UNITE!',
+		content: 'PROLETARIANS OF THE WORLD, UNITE!\nAdd Voting cubes to the bag\nequal to your Population.\nSea eae',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-3-3',
+		id: 'working-class-action-proletarians-of-the-world-unite-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-3-3.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'( 3 Fal > Pe\n%\noo y\nWo 5\nn a] < ;\naud : # bse ie\nJ\nPROLETARIANS\nOF THE WORLD, UNITE!\nAdd Voting cubes to the bag\nequal to your Population.\nSea eae',
+			'( 3 Fal > Pe\n' +
+			'%\n' +
+			'oo y\n' +
+			'Wo 5\n' +
+			'n a] < ;\n' +
+			'aud : # bse ie\n' +
+			'J\n' +
+			'PROLETARIANS\n' +
+			'OF THE WORLD, UNITE!\n' +
+			'Add Voting cubes to the bag\n' +
+			'equal to your Population.\n' +
+			'Sea eae',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-3-3.png',
@@ -826,24 +1141,24 @@ const workingClassActionCards = [
 				x: 3,
 				y: 3,
 			},
+			physicalIndex: 19,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [3, 5],
 			resources: ['influence'],
 			keywords: [
-				'fal',
-				'aud',
-				'bse',
 				'proletarians',
+				'of',
 				'the',
 				'world',
 				'unite',
 				'add',
 				'voting',
 				'cubes',
+				'to',
 				'bag',
 				'equal',
-				'your',
 				'population',
 				'sea',
 				'eae',
@@ -852,18 +1167,28 @@ const workingClassActionCards = [
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Fal > Pe',
-		content:
-			'( 3 Fal > Pe\n%\noo y\nWo 5\nn a] < ;\naud : # bse ie\nJ\nPROLETARIANS\nOF THE WORLD, UNITE!\nAdd Voting cubes to the bag\nequal to your Population.\nSea eae',
+		name: 'PROLETARIANS OF THE WORLD, UNITE!',
+		content: 'PROLETARIANS OF THE WORLD, UNITE!\nAdd Voting cubes to the bag\nequal to your Population.\nSea eae',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-4-3',
+		id: 'working-class-action-boost-domestic-tourism-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-4-3.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'-_\n=\n> +, bo Je .\nz =\n‘4\nBOOST DOMESTIC TOURISM\nBuy 0 from another player, up to\nyour Population, paying half the\ncost (rounded up). The other half\nis paid by the State.\na',
+			'-_\n' +
+			'=\n' +
+			'> +, bo Je .\n' +
+			'z =\n' +
+			'‘4\n' +
+			'BOOST DOMESTIC TOURISM\n' +
+			'Buy 0 from another player, up to\n' +
+			'your Population, paying half the\n' +
+			'cost (rounded up). The other half\n' +
+			'is paid by the State.\n' +
+			'a',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-4-3.png',
@@ -871,6 +1196,8 @@ const workingClassActionCards = [
 				x: 4,
 				y: 3,
 			},
+			physicalIndex: 20,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4, 0],
@@ -880,10 +1207,10 @@ const workingClassActionCards = [
 				'domestic',
 				'tourism',
 				'buy',
-				'from',
 				'another',
 				'player',
-				'your',
+				'up',
+				'to',
 				'population',
 				'paying',
 				'half',
@@ -891,25 +1218,42 @@ const workingClassActionCards = [
 				'cost',
 				'rounded',
 				'other',
+				'is',
 				'paid',
+				'by',
 				'state',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'bo Je',
+		name: 'BOOST DOMESTIC TOURISM',
 		content:
-			'-_\n=\n> +, bo Je .\nz =\n‘4\nBOOST DOMESTIC TOURISM\nBuy 0 from another player, up to\nyour Population, paying half the\ncost (rounded up). The other half\nis paid by the State.\na',
+			'BOOST DOMESTIC TOURISM\n' +
+			'Buy 0 from another player, up to\n' +
+			'your Population, paying half the\n' +
+			'cost (rounded up). The other half\n' +
+			'is paid by the State.\n' +
+			'a',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-5-3',
+		id: 'working-class-action-boost-domestic-tourism-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-5-3.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'-_\n=\n> +, bo Je .\nz =\n‘4\nBOOST DOMESTIC TOURISM\nBuy 0 from another player, up to\nyour Population, paying half the\ncost (rounded up). The other half\nis paid by the State.',
+			'-_\n' +
+			'=\n' +
+			'> +, bo Je .\n' +
+			'z =\n' +
+			'‘4\n' +
+			'BOOST DOMESTIC TOURISM\n' +
+			'Buy 0 from another player, up to\n' +
+			'your Population, paying half the\n' +
+			'cost (rounded up). The other half\n' +
+			'is paid by the State.',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-5-3.png',
@@ -917,6 +1261,8 @@ const workingClassActionCards = [
 				x: 5,
 				y: 3,
 			},
+			physicalIndex: 21,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [4, 0],
@@ -926,10 +1272,10 @@ const workingClassActionCards = [
 				'domestic',
 				'tourism',
 				'buy',
-				'from',
 				'another',
 				'player',
-				'your',
+				'up',
+				'to',
 				'population',
 				'paying',
 				'half',
@@ -937,25 +1283,42 @@ const workingClassActionCards = [
 				'cost',
 				'rounded',
 				'other',
+				'is',
 				'paid',
+				'by',
 				'state',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'bo Je',
+		name: 'BOOST DOMESTIC TOURISM',
 		content:
-			'-_\n=\n> +, bo Je .\nz =\n‘4\nBOOST DOMESTIC TOURISM\nBuy 0 from another player, up to\nyour Population, paying half the\ncost (rounded up). The other half\nis paid by the State.',
+			'BOOST DOMESTIC TOURISM\n' +
+			'Buy 0 from another player, up to\n' +
+			'your Population, paying half the\n' +
+			'cost (rounded up). The other half\n' +
+			'is paid by the State.',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-6-3',
+		id: 'working-class-action-public-opinion-polling-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-6-3.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'a :\n:\n: . , |\nPUBLIC OPINION POLLING\nPropose a Bill and reveal 5 Voting\ncubes from the bag. You may\nthen call for an Immediate Vote\nwithout spending @. If you do,\nuse those 5 cubes instead of\ndrawing new ones. If not. return\nthem to the bag.',
+			'a :\n' +
+			':\n' +
+			': . , |\n' +
+			'PUBLIC OPINION POLLING\n' +
+			'Propose a Bill and reveal 5 Voting\n' +
+			'cubes from the bag. You may\n' +
+			'then call for an Immediate Vote\n' +
+			'without spending @. If you do,\n' +
+			'use those 5 cubes instead of\n' +
+			'drawing new ones. If not. return\n' +
+			'them to the bag.',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-6-3.png',
@@ -963,6 +1326,8 @@ const workingClassActionCards = [
 				x: 6,
 				y: 3,
 			},
+			physicalIndex: 22,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [5],
@@ -977,23 +1342,45 @@ const workingClassActionCards = [
 				'reveal',
 				'voting',
 				'cubes',
-				'from',
 				'the',
 				'bag',
 				'you',
 				'may',
-				'then',
 				'call',
 				'for',
+				'an',
 				'immediate',
+				'vote',
+				'without',
+				'spending',
+				'if',
+				'do',
+				'use',
+				'those',
+				'instead',
+				'of',
+				'drawing',
+				'new',
+				'ones',
+				'not',
+				'return',
+				'them',
+				'to',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
+		name: 'PUBLIC OPINION POLLING',
 		content:
-			'a :\n:\n: . , |\nPUBLIC OPINION POLLING\nPropose a Bill and reveal 5 Voting\ncubes from the bag. You may\nthen call for an Immediate Vote\nwithout spending @. If you do,\nuse those 5 cubes instead of\ndrawing new ones. If not. return\nthem to the bag.',
+			'PUBLIC OPINION POLLING\n' +
+			'Propose a Bill and reveal 5 Voting\n' +
+			'cubes from the bag. You may\n' +
+			'then call for an Immediate Vote\n' +
+			'without spending @. If you do,\n' +
+			'use those 5 cubes instead of\n' +
+			'drawing new ones. If not. return\n' +
+			'them to the bag.',
 		stateEffects: [
 			{
 				type: 'policy',
@@ -1004,14 +1391,23 @@ const workingClassActionCards = [
 				action: 'immediate-vote',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-7-3',
+		id: 'working-class-action-student-movement-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-7-3.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'Li sb ||\nCp faa\na pees = Pp +e\nae le q |\nPid. i!\nSTUDENT MOVEMENT\nPropose a Bill for\nWelfare State - Education.\nAdd 2 Voting cubes to the bag.',
+			'Li sb ||\n' +
+			'Cp faa\n' +
+			'a pees = Pp +e\n' +
+			'ae le q |\n' +
+			'Pid. i!\n' +
+			'STUDENT MOVEMENT\n' +
+			'Propose a Bill for\n' +
+			'Welfare State - Education.\n' +
+			'Add 2 Voting cubes to the bag.',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-7-3.png',
@@ -1019,14 +1415,13 @@ const workingClassActionCards = [
 				x: 7,
 				y: 3,
 			},
+			physicalIndex: 23,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2],
 			resources: ['education', 'influence'],
 			keywords: [
-				'faa',
-				'pees',
-				'pid',
 				'student',
 				'movement',
 				'propose',
@@ -1038,6 +1433,7 @@ const workingClassActionCards = [
 				'add',
 				'voting',
 				'cubes',
+				'to',
 				'the',
 				'bag',
 			],
@@ -1045,23 +1441,36 @@ const workingClassActionCards = [
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Li sb',
-		content:
-			'Li sb ||\nCp faa\na pees = Pp +e\nae le q |\nPid. i!\nSTUDENT MOVEMENT\nPropose a Bill for\nWelfare State - Education.\nAdd 2 Voting cubes to the bag.',
+		name: 'STUDENT MOVEMENT',
+		content: 'STUDENT MOVEMENT\nPropose a Bill for\nWelfare State - Education.\nAdd 2 Voting cubes to the bag.',
 		stateEffects: [
 			{
 				type: 'policy',
 				action: 'propose',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-8-3',
+		id: 'working-class-action-supplemental-income-program-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-8-3.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'4 - ;\nty\nSa\n«4\n3\n2 = i\na Eee\nSUPPLEMENTAL INCOME\nPROGRAM\nGet 1¥ from the State for each\nof your employed Workers. You\nmay then buy Goods & Services.\n2B /2Cc nog\nne',
+			'4 - ;\n' +
+			'ty\n' +
+			'Sa\n' +
+			'«4\n' +
+			'3\n' +
+			'2 = i\n' +
+			'a Eee\n' +
+			'SUPPLEMENTAL INCOME\n' +
+			'PROGRAM\n' +
+			'Get 1¥ from the State for each\n' +
+			'of your employed Workers. You\n' +
+			'may then buy Goods & Services.\n' +
+			'2B /2Cc nog\n' +
+			'ne',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-8-3.png',
@@ -1069,6 +1478,8 @@ const workingClassActionCards = [
 				x: 8,
 				y: 3,
 			},
+			physicalIndex: 24,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4, 3, 2, 1],
@@ -1076,33 +1487,45 @@ const workingClassActionCards = [
 			policies: ['2B'],
 			resources: ['money'],
 			keywords: [
-				'eee',
 				'supplemental',
 				'income',
 				'program',
 				'get',
-				'from',
 				'the',
 				'state',
 				'for',
 				'each',
-				'your',
+				'of',
 				'employed',
 				'workers',
 				'you',
 				'may',
-				'then',
 				'buy',
 				'goods',
+				'services',
+				'cc',
+				'nog',
+				'ne',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
+		name: 'SUPPLEMENTAL INCOME PROGRAM',
 		content:
-			'4 - ;\nty\nSa\n«4\n3\n2 = i\na Eee\nSUPPLEMENTAL INCOME\nPROGRAM\nGet 1¥ from the State for each\nof your employed Workers. You\nmay then buy Goods & Services.\n2B /2Cc nog\nne',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['2B'] }],
+			'SUPPLEMENTAL INCOME PROGRAM\n' +
+			'Get 1¥ from the State for each\n' +
+			'of your employed Workers. You\n' +
+			'may then buy Goods & Services.\n' +
+			'2B /2Cc nog\n' +
+			'ne',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['2B'],
+			},
+		],
 		stateEffects: [
 			{
 				type: 'money',
@@ -1112,14 +1535,28 @@ const workingClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-1-4',
+		id: 'working-class-action-supplemental-income-program-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-1-4.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'q ho ;\nty\nSa\n«4\n3\n2 = i\na Eee\nSUPPLEMENTAL INCOME\nPROGRAM\nGet 1¥ from the State for each\nof your employed Workers. You\nmay then buy Goods & Services.\n2B /2Cc nog\nee',
+			'q ho ;\n' +
+			'ty\n' +
+			'Sa\n' +
+			'«4\n' +
+			'3\n' +
+			'2 = i\n' +
+			'a Eee\n' +
+			'SUPPLEMENTAL INCOME\n' +
+			'PROGRAM\n' +
+			'Get 1¥ from the State for each\n' +
+			'of your employed Workers. You\n' +
+			'may then buy Goods & Services.\n' +
+			'2B /2Cc nog\n' +
+			'ee',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-1-4.png',
@@ -1127,6 +1564,8 @@ const workingClassActionCards = [
 				x: 1,
 				y: 4,
 			},
+			physicalIndex: 25,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [4, 3, 2, 1],
@@ -1134,33 +1573,45 @@ const workingClassActionCards = [
 			policies: ['2B'],
 			resources: ['money'],
 			keywords: [
-				'eee',
 				'supplemental',
 				'income',
 				'program',
 				'get',
-				'from',
 				'the',
 				'state',
 				'for',
 				'each',
-				'your',
+				'of',
 				'employed',
 				'workers',
 				'you',
 				'may',
-				'then',
 				'buy',
 				'goods',
+				'services',
+				'cc',
+				'nog',
+				'ee',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'q ho',
+		name: 'SUPPLEMENTAL INCOME PROGRAM',
 		content:
-			'q ho ;\nty\nSa\n«4\n3\n2 = i\na Eee\nSUPPLEMENTAL INCOME\nPROGRAM\nGet 1¥ from the State for each\nof your employed Workers. You\nmay then buy Goods & Services.\n2B /2Cc nog\nee',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['2B'] }],
+			'SUPPLEMENTAL INCOME PROGRAM\n' +
+			'Get 1¥ from the State for each\n' +
+			'of your employed Workers. You\n' +
+			'may then buy Goods & Services.\n' +
+			'2B /2Cc nog\n' +
+			'ee',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['2B'],
+			},
+		],
 		stateEffects: [
 			{
 				type: 'money',
@@ -1170,14 +1621,29 @@ const workingClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-2-4',
+		id: 'working-class-action-extra-shift-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-2-4.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			"‘ |\n=\n. |\n“ =\n>\nj\n—\nEXTRA SHIFT\nChoose a Public Company. The State\npays the workers' wages and\nperforms a Production. You may\nthen Buy Goods or Services from the\nState of the type produced by that\nCompany, up to your Population.\nnc (",
+			'‘ |\n' +
+			'=\n' +
+			'. |\n' +
+			'“ =\n' +
+			'>\n' +
+			'j\n' +
+			'—\n' +
+			'EXTRA SHIFT\n' +
+			'Choose a Public Company. The State\n' +
+			"pays the workers' wages and\n" +
+			'performs a Production. You may\n' +
+			'then Buy Goods or Services from the\n' +
+			'State of the type produced by that\n' +
+			'Company, up to your Population.\n' +
+			'nc (',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-2-4.png',
@@ -1185,6 +1651,8 @@ const workingClassActionCards = [
 				x: 2,
 				y: 4,
 			},
+			physicalIndex: 26,
+			copyIndex: 1,
 		},
 		parsed: {
 			resources: ['money'],
@@ -1204,26 +1672,57 @@ const workingClassActionCards = [
 				'production',
 				'you',
 				'may',
-				'then',
 				'buy',
 				'goods',
+				'or',
+				'services',
+				'of',
+				'type',
+				'produced',
+				'by',
+				'up',
+				'to',
+				'population',
+				'nc',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
+		name: 'EXTRA SHIFT',
 		content:
-			"‘ |\n=\n. |\n“ =\n>\nj\n—\nEXTRA SHIFT\nChoose a Public Company. The State\npays the workers' wages and\nperforms a Production. You may\nthen Buy Goods or Services from the\nState of the type produced by that\nCompany, up to your Population.\nnc (",
+			'EXTRA SHIFT\n' +
+			'Choose a Public Company. The State\n' +
+			"pays the workers' wages and\n" +
+			'performs a Production. You may\n' +
+			'then Buy Goods or Services from the\n' +
+			'State of the type produced by that\n' +
+			'Company, up to your Population.\n' +
+			'nc (',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-3-4',
+		id: 'working-class-action-extra-shift-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-3-4.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			"‘ |\n=\n. |\n“ =\n>\nj\n—\nEXTRA SHIFT\nChoose a Public Company. The State\npays the workers' wages and\nperforms a Production. You may\nthen Buy Goods or Services from the\nState of the type produced by that\nCompany, up to your Population.\nnc (",
+			'‘ |\n' +
+			'=\n' +
+			'. |\n' +
+			'“ =\n' +
+			'>\n' +
+			'j\n' +
+			'—\n' +
+			'EXTRA SHIFT\n' +
+			'Choose a Public Company. The State\n' +
+			"pays the workers' wages and\n" +
+			'performs a Production. You may\n' +
+			'then Buy Goods or Services from the\n' +
+			'State of the type produced by that\n' +
+			'Company, up to your Population.\n' +
+			'nc (',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-3-4.png',
@@ -1231,6 +1730,8 @@ const workingClassActionCards = [
 				x: 3,
 				y: 4,
 			},
+			physicalIndex: 27,
+			copyIndex: 2,
 		},
 		parsed: {
 			resources: ['money'],
@@ -1250,26 +1751,53 @@ const workingClassActionCards = [
 				'production',
 				'you',
 				'may',
-				'then',
 				'buy',
 				'goods',
+				'or',
+				'services',
+				'of',
+				'type',
+				'produced',
+				'by',
+				'up',
+				'to',
+				'population',
+				'nc',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
+		name: 'EXTRA SHIFT',
 		content:
-			"‘ |\n=\n. |\n“ =\n>\nj\n—\nEXTRA SHIFT\nChoose a Public Company. The State\npays the workers' wages and\nperforms a Production. You may\nthen Buy Goods or Services from the\nState of the type produced by that\nCompany, up to your Population.\nnc (",
+			'EXTRA SHIFT\n' +
+			'Choose a Public Company. The State\n' +
+			"pays the workers' wages and\n" +
+			'performs a Production. You may\n' +
+			'then Buy Goods or Services from the\n' +
+			'State of the type produced by that\n' +
+			'Company, up to your Population.\n' +
+			'nc (',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-4-4',
+		id: 'working-class-action-affordable-housing-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-4-4.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'. 4\nF “\ni %\n*. ny \\\n: _ ) oa .\nAFFORDABLE HOUSING\nGive 20¥ to the Capitalist.\nGet 5.\nGive 10¥ to the Middle-Class.\nGet 3.\n- OS a”',
+			'. 4\n' +
+			'F “\n' +
+			'i %\n' +
+			'*. ny \\\n' +
+			': _ ) oa .\n' +
+			'AFFORDABLE HOUSING\n' +
+			'Give 20¥ to the Capitalist.\n' +
+			'Get 5.\n' +
+			'Give 10¥ to the Middle-Class.\n' +
+			'Get 3.\n' +
+			'- OS a”',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-4-4.png',
@@ -1277,23 +1805,25 @@ const workingClassActionCards = [
 				x: 4,
 				y: 4,
 			},
+			physicalIndex: 28,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4, 20, 5, 10, 3],
 			money: [20, 10],
 			resources: ['money'],
-			keywords: ['affordable', 'housing', 'give', 'the', 'capitalist', 'get', 'middle-class'],
+			keywords: ['affordable', 'housing', 'give', 'to', 'the', 'capitalist', 'get', 'middle', 'class', 'os'],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
-		content:
-			'. 4\nF “\ni %\n*. ny \\\n: _ ) oa .\nAFFORDABLE HOUSING\nGive 20¥ to the Capitalist.\nGet 5.\nGive 10¥ to the Middle-Class.\nGet 3.\n- OS a”',
+		name: 'AFFORDABLE HOUSING',
+		content: 'AFFORDABLE HOUSING\nGive 20¥ to the Capitalist.\nGet 5.\nGive 10¥ to the Middle-Class.\nGet 3.\n- OS a”',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-5-4',
+		id: 'working-class-action-immigration-reform-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-5-4.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
@@ -1305,31 +1835,42 @@ const workingClassActionCards = [
 				x: 5,
 				y: 4,
 			},
+			physicalIndex: 29,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2],
 			resources: ['influence'],
-			keywords: ['eet', 'immigration', 'reform', 'propose', 'bill', 'for', 'add', 'voting', 'cubes', 'the', 'bag'],
+			keywords: ['immigration', 'reform', 'propose', 'bill', 'for', 'add', 'voting', 'cubes', 'to', 'the', 'bag'],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'eet, ae',
-		content: 'é\nIMMIGRATION REFORM\nPropose a Bill for Immigration.\nAdd 2 Voting cubes to the bag.',
+		name: 'IMMIGRATION REFORM',
+		content: 'IMMIGRATION REFORM\nPropose a Bill for Immigration.\nAdd 2 Voting cubes to the bag.',
 		stateEffects: [
 			{
 				type: 'policy',
 				action: 'propose',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-6-4',
+		id: 'working-class-action-signing-bonus-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-6-4.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			"“ME =\n‘\nwren\n| SIGNING BONUS\nAssign up to 4 unemployed\nWorkers. For each Worker assigned\nto a Company this way, get 4¥\nfrom that Company's owner.\nng",
+			'“ME =\n' +
+			'‘\n' +
+			'wren\n' +
+			'| SIGNING BONUS\n' +
+			'Assign up to 4 unemployed\n' +
+			'Workers. For each Worker assigned\n' +
+			'to a Company this way, get 4¥\n' +
+			"from that Company's owner.\n" +
+			'ng',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-6-4.png',
@@ -1337,16 +1878,19 @@ const workingClassActionCards = [
 				x: 6,
 				y: 4,
 			},
+			physicalIndex: 30,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4],
 			money: [4],
 			resources: ['money'],
 			keywords: [
-				'wren',
 				'signing',
 				'bonus',
 				'assign',
+				'up',
+				'to',
 				'unemployed',
 				'workers',
 				'for',
@@ -1354,20 +1898,23 @@ const workingClassActionCards = [
 				'worker',
 				'assigned',
 				'company',
-				'this',
 				'way',
 				'get',
-				'from',
-				'that',
 				'owner',
+				'ng',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
+		name: 'SIGNING BONUS',
 		content:
-			"“ME =\n‘\nwren\n| SIGNING BONUS\nAssign up to 4 unemployed\nWorkers. For each Worker assigned\nto a Company this way, get 4¥\nfrom that Company's owner.\nng",
+			'SIGNING BONUS\n' +
+			'Assign up to 4 unemployed\n' +
+			'Workers. For each Worker assigned\n' +
+			'to a Company this way, get 4¥\n' +
+			"from that Company's owner.\n" +
+			'ng',
 		stateEffects: [
 			{
 				type: 'money',
@@ -1387,14 +1934,23 @@ const workingClassActionCards = [
 				target: 'company',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-7-4',
+		id: 'working-class-action-signing-bonus-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-7-4.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			"“ME =\n‘\nwren\n| SIGNING BONUS\nAssign up to 4 unemployed\nWorkers. For each Worker assigned\nto a Company this way, get 4¥\nfrom that Company's owner.\nng",
+			'“ME =\n' +
+			'‘\n' +
+			'wren\n' +
+			'| SIGNING BONUS\n' +
+			'Assign up to 4 unemployed\n' +
+			'Workers. For each Worker assigned\n' +
+			'to a Company this way, get 4¥\n' +
+			"from that Company's owner.\n" +
+			'ng',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-7-4.png',
@@ -1402,16 +1958,19 @@ const workingClassActionCards = [
 				x: 7,
 				y: 4,
 			},
+			physicalIndex: 31,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [4],
 			money: [4],
 			resources: ['money'],
 			keywords: [
-				'wren',
 				'signing',
 				'bonus',
 				'assign',
+				'up',
+				'to',
 				'unemployed',
 				'workers',
 				'for',
@@ -1419,20 +1978,23 @@ const workingClassActionCards = [
 				'worker',
 				'assigned',
 				'company',
-				'this',
 				'way',
 				'get',
-				'from',
-				'that',
 				'owner',
+				'ng',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
+		name: 'SIGNING BONUS',
 		content:
-			"“ME =\n‘\nwren\n| SIGNING BONUS\nAssign up to 4 unemployed\nWorkers. For each Worker assigned\nto a Company this way, get 4¥\nfrom that Company's owner.\nng",
+			'SIGNING BONUS\n' +
+			'Assign up to 4 unemployed\n' +
+			'Workers. For each Worker assigned\n' +
+			'to a Company this way, get 4¥\n' +
+			"from that Company's owner.\n" +
+			'ng',
 		stateEffects: [
 			{
 				type: 'money',
@@ -1452,14 +2014,26 @@ const workingClassActionCards = [
 				target: 'company',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-8-4',
+		id: 'working-class-action-general-strike-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-8-4.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'- x ee eA\n5. Sh aes\n“ = at\n| 7 . 7\n\\ !\n»,\nGENERAL STRIKE\nPerform a Strike. You may\nplace an additional Strike token\nfor each Trade Union you have.\n2B/2C\nng',
+			'- x ee eA\n' +
+			'5. Sh aes\n' +
+			'“ = at\n' +
+			'| 7 . 7\n' +
+			'\\ !\n' +
+			'»,\n' +
+			'GENERAL STRIKE\n' +
+			'Perform a Strike. You may\n' +
+			'place an additional Strike token\n' +
+			'for each Trade Union you have.\n' +
+			'2B/2C\n' +
+			'ng',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-8-4.png',
@@ -1467,18 +2041,20 @@ const workingClassActionCards = [
 				x: 8,
 				y: 4,
 			},
+			physicalIndex: 32,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [5, 7, 2],
 			policies: ['2B', '2C'],
 			keywords: [
-				'aes',
 				'general',
 				'strike',
 				'perform',
 				'you',
 				'may',
 				'place',
+				'an',
 				'additional',
 				'token',
 				'for',
@@ -1486,15 +2062,27 @@ const workingClassActionCards = [
 				'trade',
 				'union',
 				'have',
+				'ng',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'x ee eA',
+		name: 'GENERAL STRIKE',
 		content:
-			'- x ee eA\n5. Sh aes\n“ = at\n| 7 . 7\n\\ !\n»,\nGENERAL STRIKE\nPerform a Strike. You may\nplace an additional Strike token\nfor each Trade Union you have.\n2B/2C\nng',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['2B', '2C'] }],
+			'GENERAL STRIKE\n' +
+			'Perform a Strike. You may\n' +
+			'place an additional Strike token\n' +
+			'for each Trade Union you have.\n' +
+			'2B/2C\n' +
+			'ng',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['2B', '2C'],
+			},
+		],
 		stateEffects: [
 			{
 				type: 'company',
@@ -1502,14 +2090,24 @@ const workingClassActionCards = [
 				target: 'company',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-1-5',
+		id: 'working-class-action-fake-news-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-1-5.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'| Ps Ten\nZ a ae “d =\nSF, O SFENS SS ~\nry’ >. ae\nffl om ~ —ae a\nFAKE NEWS\nDraw 6 Voting cubes from\nthe bag. Remove up to 4 of them\nand return the rest to the bag.\nSc',
+			'| Ps Ten\n' +
+			'Z a ae “d =\n' +
+			'SF, O SFENS SS ~\n' +
+			'ry’ >. ae\n' +
+			'ffl om ~ —ae a\n' +
+			'FAKE NEWS\n' +
+			'Draw 6 Voting cubes from\n' +
+			'the bag. Remove up to 4 of them\n' +
+			'and return the rest to the bag.\n' +
+			'Sc',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-1-5.png',
@@ -1517,44 +2115,59 @@ const workingClassActionCards = [
 				x: 1,
 				y: 5,
 			},
+			physicalIndex: 33,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [6, 4],
 			resources: ['influence'],
 			keywords: [
-				'ten',
-				'sfens',
-				'ffl',
 				'fake',
 				'news',
 				'draw',
 				'voting',
 				'cubes',
-				'from',
 				'the',
 				'bag',
 				'remove',
+				'up',
+				'to',
+				'of',
 				'them',
 				'and',
 				'return',
 				'rest',
+				'sc',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Ps Ten',
+		name: 'FAKE NEWS',
 		content:
-			'| Ps Ten\nZ a ae “d =\nSF, O SFENS SS ~\nry’ >. ae\nffl om ~ —ae a\nFAKE NEWS\nDraw 6 Voting cubes from\nthe bag. Remove up to 4 of them\nand return the rest to the bag.\nSc',
+			'FAKE NEWS\nDraw 6 Voting cubes from\nthe bag. Remove up to 4 of them\nand return the rest to the bag.\nSc',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-2-5',
+		id: 'working-class-action-general-strike-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-2-5.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'. “ RoW aN\n~\n- ~ Si wr\ni ->\n, é ” o- a =\ni, 4 —_\n. \\ !\n| »,\nGENERAL STRIKE\nPerform a Strike. You may\nplace an additional Strike token\nfor each Trade Union you have.\n2B/2C',
+			'. “ RoW aN\n' +
+			'~\n' +
+			'- ~ Si wr\n' +
+			'i ->\n' +
+			', é ” o- a =\n' +
+			'i, 4 —_\n' +
+			'. \\ !\n' +
+			'| »,\n' +
+			'GENERAL STRIKE\n' +
+			'Perform a Strike. You may\n' +
+			'place an additional Strike token\n' +
+			'for each Trade Union you have.\n' +
+			'2B/2C',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-2-5.png',
@@ -1562,18 +2175,20 @@ const workingClassActionCards = [
 				x: 2,
 				y: 5,
 			},
+			physicalIndex: 34,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [4, 2],
 			policies: ['2B', '2C'],
 			keywords: [
-				'row',
 				'general',
 				'strike',
 				'perform',
 				'you',
 				'may',
 				'place',
+				'an',
 				'additional',
 				'token',
 				'for',
@@ -1586,10 +2201,16 @@ const workingClassActionCards = [
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'RoW aN',
+		name: 'GENERAL STRIKE',
 		content:
-			'. “ RoW aN\n~\n- ~ Si wr\ni ->\n, é ” o- a =\ni, 4 —_\n. \\ !\n| »,\nGENERAL STRIKE\nPerform a Strike. You may\nplace an additional Strike token\nfor each Trade Union you have.\n2B/2C',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['2B', '2C'] }],
+			'GENERAL STRIKE\nPerform a Strike. You may\nplace an additional Strike token\nfor each Trade Union you have.\n2B/2C',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['2B', '2C'],
+			},
+		],
 		stateEffects: [
 			{
 				type: 'company',
@@ -1597,14 +2218,26 @@ const workingClassActionCards = [
 				target: 'company',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-3-5',
+		id: 'working-class-action-state-scholarship-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-3-5.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'A\nat\n~ m : wn\n; aS) .\n@ ™ A\n’ ¥\n\\\n| a \\\nSTATE SCHOLARSHIP\nBuy from the State,\nup to your Population, paying\nhalf the cost (rounded up).',
+			'A\n' +
+			'at\n' +
+			'~ m : wn\n' +
+			'; aS) .\n' +
+			'@ ™ A\n' +
+			'’ ¥\n' +
+			'\\\n' +
+			'| a \\\n' +
+			'STATE SCHOLARSHIP\n' +
+			'Buy from the State,\n' +
+			'up to your Population, paying\n' +
+			'half the cost (rounded up).',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-3-5.png',
@@ -1612,38 +2245,39 @@ const workingClassActionCards = [
 				x: 3,
 				y: 5,
 			},
+			physicalIndex: 35,
+			copyIndex: 1,
 		},
 		parsed: {
 			resources: ['money'],
-			keywords: [
-				'state',
-				'scholarship',
-				'buy',
-				'from',
-				'the',
-				'your',
-				'population',
-				'paying',
-				'half',
-				'cost',
-				'rounded',
-			],
+			keywords: ['state', 'scholarship', 'buy', 'the', 'up', 'to', 'population', 'paying', 'half', 'cost', 'rounded'],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
-		content:
-			'A\nat\n~ m : wn\n; aS) .\n@ ™ A\n’ ¥\n\\\n| a \\\nSTATE SCHOLARSHIP\nBuy from the State,\nup to your Population, paying\nhalf the cost (rounded up).',
+		name: 'STATE SCHOLARSHIP',
+		content: 'STATE SCHOLARSHIP\nBuy from the State,\nup to your Population, paying\nhalf the cost (rounded up).',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-4-5',
+		id: 'working-class-action-state-scholarship-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-4-5.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'A\nat\n~ m : wn\n; aS) .\n@ ™ A\n’ ¥\n\\\n| a \\\nSTATE SCHOLARSHIP\nBuy from the State,\nup to your Population, paying\nhalf the cost (rounded up).',
+			'A\n' +
+			'at\n' +
+			'~ m : wn\n' +
+			'; aS) .\n' +
+			'@ ™ A\n' +
+			'’ ¥\n' +
+			'\\\n' +
+			'| a \\\n' +
+			'STATE SCHOLARSHIP\n' +
+			'Buy from the State,\n' +
+			'up to your Population, paying\n' +
+			'half the cost (rounded up).',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-4-5.png',
@@ -1651,38 +2285,43 @@ const workingClassActionCards = [
 				x: 4,
 				y: 5,
 			},
+			physicalIndex: 36,
+			copyIndex: 2,
 		},
 		parsed: {
 			resources: ['money'],
-			keywords: [
-				'state',
-				'scholarship',
-				'buy',
-				'from',
-				'the',
-				'your',
-				'population',
-				'paying',
-				'half',
-				'cost',
-				'rounded',
-			],
+			keywords: ['state', 'scholarship', 'buy', 'the', 'up', 'to', 'population', 'paying', 'half', 'cost', 'rounded'],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Working Class Actions',
-		content:
-			'A\nat\n~ m : wn\n; aS) .\n@ ™ A\n’ ¥\n\\\n| a \\\nSTATE SCHOLARSHIP\nBuy from the State,\nup to your Population, paying\nhalf the cost (rounded up).',
+		name: 'STATE SCHOLARSHIP',
+		content: 'STATE SCHOLARSHIP\nBuy from the State,\nup to your Population, paying\nhalf the cost (rounded up).',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-5-5',
+		id: 'working-class-action-radical-reforms-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-5-5.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			"Pike = MR | j\na ' 4 y ss q E .\npe ?. ¥\nhid “4 * ,\nim oe is\n. A ~\nys ; AZ’\n. ~~!\n. ye a ' Ne —\nRADICAL REFORMS\nPropose a Bill. You may place\nyour marker on any section (even\nif it's not next to the current one).\nYou may not call for an\nImmediate Vote on this Bill.\nSee",
+			'Pike = MR | j\n' +
+			"a ' 4 y ss q E .\n" +
+			'pe ?. ¥\n' +
+			'hid “4 * ,\n' +
+			'im oe is\n' +
+			'. A ~\n' +
+			'ys ; AZ’\n' +
+			'. ~~!\n' +
+			". ye a ' Ne —\n" +
+			'RADICAL REFORMS\n' +
+			'Propose a Bill. You may place\n' +
+			'your marker on any section (even\n' +
+			"if it's not next to the current one).\n" +
+			'You may not call for an\n' +
+			'Immediate Vote on this Bill.\n' +
+			'See',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-5-5.png',
@@ -1690,14 +2329,14 @@ const workingClassActionCards = [
 				x: 5,
 				y: 5,
 			},
+			physicalIndex: 37,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4],
 			money: [4],
 			resources: ['influence', 'money'],
 			keywords: [
-				'pike',
-				'hid',
 				'radical',
 				'reforms',
 				'propose',
@@ -1705,41 +2344,66 @@ const workingClassActionCards = [
 				'you',
 				'may',
 				'place',
-				'your',
 				'marker',
+				'on',
 				'any',
 				'section',
 				'even',
+				'if',
+				'it',
 				'not',
 				'next',
+				'to',
 				'the',
 				'current',
+				'one',
+				'call',
+				'for',
+				'an',
+				'immediate',
+				'vote',
+				'see',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'Pike = MR | j',
+		name: 'RADICAL REFORMS',
 		content:
-			"a ' 4 y ss q E .\npe ?. ¥\nhid “4 * ,\nim oe is\n. A ~\nys ; AZ’\n. ~~!\n. ye a ' Ne —\nRADICAL REFORMS\nPropose a Bill. You may place\nyour marker on any section (even\nif it's not next to the current one).\nYou may not call for an\nImmediate Vote on this Bill.\nSee",
+			'RADICAL REFORMS\n' +
+			'Propose a Bill. You may place\n' +
+			'your marker on any section (even\n' +
+			"if it's not next to the current one).\n" +
+			'You may not call for an\n' +
+			'Immediate Vote on this Bill.\n' +
+			'See',
 		stateEffects: [
 			{
 				type: 'policy',
 				action: 'propose',
-			},
-			{
-				type: 'vote',
-				action: 'immediate-vote',
+				placement: 'any-section',
+				immediateVoteAllowed: false,
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-6-5',
+		id: 'working-class-action-unemployment-benefits-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-6-5.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'et J cy] ” ?\nA\n) ’ \\ We |\n11) Pom\n- oa ca \\\nUNEMPLOYMENT BENEFITS\nGet 5¥ from the State for each\nof your unemployed Workers.\nYou may then Buy Goods\n& Services from the State\nsh',
+			'et J cy] ” ?\n' +
+			'A\n' +
+			') ’ \\ We |\n' +
+			'11) Pom\n' +
+			'- oa ca \\\n' +
+			'UNEMPLOYMENT BENEFITS\n' +
+			'Get 5¥ from the State for each\n' +
+			'of your unemployed Workers.\n' +
+			'You may then Buy Goods\n' +
+			'& Services from the State\n' +
+			'sh',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-6-5.png',
@@ -1747,38 +2411,43 @@ const workingClassActionCards = [
 				x: 6,
 				y: 5,
 			},
+			physicalIndex: 38,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [11, 5],
 			money: [5],
 			resources: ['money'],
 			keywords: [
-				'pom',
 				'unemployment',
 				'benefits',
 				'get',
-				'from',
 				'the',
 				'state',
 				'for',
 				'each',
-				'your',
+				'of',
 				'unemployed',
 				'workers',
 				'you',
 				'may',
-				'then',
 				'buy',
 				'goods',
 				'services',
+				'sh',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'et J cy] ”',
+		name: 'UNEMPLOYMENT BENEFITS',
 		content:
-			'et J cy] ” ?\nA\n) ’ \\ We |\n11) Pom\n- oa ca \\\nUNEMPLOYMENT BENEFITS\nGet 5¥ from the State for each\nof your unemployed Workers.\nYou may then Buy Goods\n& Services from the State\nsh',
+			'UNEMPLOYMENT BENEFITS\n' +
+			'Get 5¥ from the State for each\n' +
+			'of your unemployed Workers.\n' +
+			'You may then Buy Goods\n' +
+			'& Services from the State\n' +
+			'sh',
 		stateEffects: [
 			{
 				type: 'money',
@@ -1788,14 +2457,25 @@ const workingClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-7-5',
+		id: 'working-class-action-unemployment-benefits-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-7-5.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'et J cy] ” ?\nA\n) ’ \\ We |\n11) Pom\n- oa ca \\\nUNEMPLOYMENT BENEFITS\nGet 5¥ from the State for each\nof your unemployed Workers.\nYou may then Buy Goods\n& Services from the State\nsh',
+			'et J cy] ” ?\n' +
+			'A\n' +
+			') ’ \\ We |\n' +
+			'11) Pom\n' +
+			'- oa ca \\\n' +
+			'UNEMPLOYMENT BENEFITS\n' +
+			'Get 5¥ from the State for each\n' +
+			'of your unemployed Workers.\n' +
+			'You may then Buy Goods\n' +
+			'& Services from the State\n' +
+			'sh',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-7-5.png',
@@ -1803,38 +2483,43 @@ const workingClassActionCards = [
 				x: 7,
 				y: 5,
 			},
+			physicalIndex: 39,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [11, 5],
 			money: [5],
 			resources: ['money'],
 			keywords: [
-				'pom',
 				'unemployment',
 				'benefits',
 				'get',
-				'from',
 				'the',
 				'state',
 				'for',
 				'each',
-				'your',
+				'of',
 				'unemployed',
 				'workers',
 				'you',
 				'may',
-				'then',
 				'buy',
 				'goods',
 				'services',
+				'sh',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'et J cy] ”',
+		name: 'UNEMPLOYMENT BENEFITS',
 		content:
-			'et J cy] ” ?\nA\n) ’ \\ We |\n11) Pom\n- oa ca \\\nUNEMPLOYMENT BENEFITS\nGet 5¥ from the State for each\nof your unemployed Workers.\nYou may then Buy Goods\n& Services from the State\nsh',
+			'UNEMPLOYMENT BENEFITS\n' +
+			'Get 5¥ from the State for each\n' +
+			'of your unemployed Workers.\n' +
+			'You may then Buy Goods\n' +
+			'& Services from the State\n' +
+			'sh',
 		stateEffects: [
 			{
 				type: 'money',
@@ -1844,14 +2529,27 @@ const workingClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-cards-grid-40-items-8-5-working-class-actions-deck-174-pos-8-5',
+		id: 'working-class-action-interest-groups-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-cards/grid_40-items_8-5__working-class-actions-deck-174__pos-8-5.png',
 		backImage: 'fixtures/assets/decks-sorted/working-class-action-cards/back__working-class-actions-deck-174.jpg',
 		rawText:
-			'ae’ ee\n\\ Cee‘ a\n—\n| lab\niy! Pat kop / Fr\nate J < { “Tk\n<= =\nINTEREST GROUPS\nReveal Voting cubes from the bag\nuntil you reveal 3 opponents’\ncubes. Replace them with your\nVoting cubes and return all\nrevealed cubes to the bag.',
+			'ae’ ee\n' +
+			'\\ Cee‘ a\n' +
+			'—\n' +
+			'| lab\n' +
+			'iy! Pat kop / Fr\n' +
+			'ate J < { “Tk\n' +
+			'<= =\n' +
+			'INTEREST GROUPS\n' +
+			'Reveal Voting cubes from the bag\n' +
+			'until you reveal 3 opponents’\n' +
+			'cubes. Replace them with your\n' +
+			'Voting cubes and return all\n' +
+			'revealed cubes to the bag.',
 		source: {
 			deck: 'working-class-action-cards',
 			file: 'grid_40-items_8-5__working-class-actions-deck-174__pos-8-5.png',
@@ -1859,22 +2557,18 @@ const workingClassActionCards = [
 				x: 8,
 				y: 5,
 			},
+			physicalIndex: 40,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [3],
 			resources: ['influence'],
 			keywords: [
-				'cee',
-				'lab',
-				'pat',
-				'kop',
-				'ate',
 				'interest',
 				'groups',
 				'reveal',
 				'voting',
 				'cubes',
-				'from',
 				'the',
 				'bag',
 				'until',
@@ -1882,15 +2576,26 @@ const workingClassActionCards = [
 				'opponents',
 				'replace',
 				'them',
+				'and',
+				'return',
+				'all',
+				'revealed',
+				'to',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'base',
-		name: 'ae’ ee',
+		name: 'INTEREST GROUPS',
 		content:
-			'\\ Cee‘ a\n—\n| lab\niy! Pat kop / Fr\nate J < { “Tk\n<= =\nINTEREST GROUPS\nReveal Voting cubes from the bag\nuntil you reveal 3 opponents’\ncubes. Replace them with your\nVoting cubes and return all\nrevealed cubes to the bag.',
+			'INTEREST GROUPS\n' +
+			'Reveal Voting cubes from the bag\n' +
+			'until you reveal 3 opponents’\n' +
+			'cubes. Replace them with your\n' +
+			'Voting cubes and return all\n' +
+			'revealed cubes to the bag.',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 ] satisfies WorkingClassActionCardsCard[];
 

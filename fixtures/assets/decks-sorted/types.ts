@@ -107,7 +107,8 @@ export type StateEffectAmount =
 				| 'operational-company'
 				| 'trade-union'
 				| 'matching-policy'
-				| 'loan';
+				| 'loan'
+				| 'proposed-bill';
 			target?: TargetRole;
 	  };
 
@@ -141,6 +142,8 @@ export type StateEffect =
 			action: 'change' | 'propose' | 'score';
 			policy?: PolicyName;
 			value?: PolicyValue | PolicyString;
+			placement?: 'normal' | 'any-section';
+			immediateVoteAllowed?: boolean;
 			condition?: CardRequirement;
 	  }
 	| {
@@ -216,6 +219,7 @@ export interface ParsedActionCard extends DeckCardImage {
 	content: string;
 	requirements?: CardRequirement[];
 	stateEffects: StateEffect[];
+	stateEffectsCoverage: 'complete' | 'partial' | 'unparsed';
 	legitimacy?: LegitimacyChange[];
 }
 

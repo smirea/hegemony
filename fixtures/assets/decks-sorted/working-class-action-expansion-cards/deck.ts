@@ -4,13 +4,23 @@ interface WorkingClassActionExpansionCardsCard extends ParsedActionCard {}
 
 const workingClassActionExpansionCards = [
 	{
-		id: 'working-class-action-expansion-cards-grid-5-items-5-2-working-class-action-expansion-deck-202-pos-1-1',
+		id: 'working-class-action-expansion-rising-covid-19-cases-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-expansion-cards/grid_5-items_5-2__working-class-action-expansion-deck-202__pos-1-1.jpg',
 		backImage:
 			'fixtures/assets/decks-sorted/working-class-action-expansion-cards/back__working-class-action-expansion-deck-202.jpg',
 		rawText:
-			'+e eee,\nae aa /\ni : |\n* RISING COVID-19 CASES °\nGet & from the State, up to half\nof your Population (rounded up),\nwithout paying its cost. You may\nthen buy @ from any number\nof sources, up to your z\nPopulation from each. Qo\nAe ea',
+			'+e eee,\n' +
+			'ae aa /\n' +
+			'i : |\n' +
+			'* RISING COVID-19 CASES °\n' +
+			'Get & from the State, up to half\n' +
+			'of your Population (rounded up),\n' +
+			'without paying its cost. You may\n' +
+			'then buy @ from any number\n' +
+			'of sources, up to your z\n' +
+			'Population from each. Qo\n' +
+			'Ae ea',
 		source: {
 			deck: 'working-class-action-expansion-cards',
 			file: 'grid_5-items_5-2__working-class-action-expansion-deck-202__pos-1-1.jpg',
@@ -18,21 +28,23 @@ const workingClassActionExpansionCards = [
 				x: 1,
 				y: 1,
 			},
+			physicalIndex: 1,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [-19],
 			resources: ['money'],
 			keywords: [
-				'eee',
 				'rising',
-				'covid-',
+				'covid19',
 				'cases',
 				'get',
-				'from',
 				'the',
 				'state',
+				'up',
+				'to',
 				'half',
-				'your',
+				'of',
 				'population',
 				'rounded',
 				'without',
@@ -41,24 +53,48 @@ const workingClassActionExpansionCards = [
 				'cost',
 				'you',
 				'may',
+				'buy',
+				'any',
+				'number',
+				'sources',
+				'each',
+				'qo',
+				'ae',
+				'ea',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'expansion',
-		name: 'e eee',
+		name: 'RISING COVID-19 CASES',
 		content:
-			'+e eee,\nae aa /\ni : |\n* RISING COVID-19 CASES °\nGet & from the State, up to half\nof your Population (rounded up),\nwithout paying its cost. You may\nthen buy @ from any number\nof sources, up to your z\nPopulation from each. Qo\nAe ea',
+			'RISING COVID-19 CASES\n' +
+			'Get & from the State, up to half\n' +
+			'of your Population (rounded up),\n' +
+			'without paying its cost. You may\n' +
+			'then buy @ from any number\n' +
+			'of sources, up to your z\n' +
+			'Population from each. Qo\n' +
+			'Ae ea',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-expansion-cards-grid-5-items-5-2-working-class-action-expansion-deck-202-pos-2-1',
+		id: 'working-class-action-expansion-momentum-for-change-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-expansion-cards/grid_5-items_5-2__working-class-action-expansion-deck-202__pos-2-1.jpg',
 		backImage:
 			'fixtures/assets/decks-sorted/working-class-action-expansion-cards/back__working-class-action-expansion-deck-202.jpg',
 		rawText:
-			'——e ST ou te c abi\n=\n¢ MOMENTUM FOR CHANGE °\nGet 1® for each Bill marker\nof yours on the Politics Table.\nThen, Propose a Bill.\nYou may not call for an\nImmediate Vote on this Bill.\nte a',
+			'——e ST ou te c abi\n' +
+			'=\n' +
+			'¢ MOMENTUM FOR CHANGE °\n' +
+			'Get 1® for each Bill marker\n' +
+			'of yours on the Politics Table.\n' +
+			'Then, Propose a Bill.\n' +
+			'You may not call for an\n' +
+			'Immediate Vote on this Bill.\n' +
+			'te a',
 		source: {
 			deck: 'working-class-action-expansion-cards',
 			file: 'grid_5-items_5-2__working-class-action-expansion-deck-202__pos-2-1.jpg',
@@ -66,12 +102,13 @@ const workingClassActionExpansionCards = [
 				x: 2,
 				y: 1,
 			},
+			physicalIndex: 2,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [1],
 			resources: ['influence'],
 			keywords: [
-				'abi',
 				'momentum',
 				'for',
 				'change',
@@ -79,43 +116,78 @@ const workingClassActionExpansionCards = [
 				'each',
 				'bill',
 				'marker',
+				'of',
 				'yours',
+				'on',
 				'the',
 				'politics',
 				'table',
-				'then',
 				'propose',
 				'you',
 				'may',
 				'not',
 				'call',
+				'an',
+				'immediate',
+				'vote',
+				'te',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'expansion',
-		name: 'e ST ou te c abi',
+		name: 'MOMENTUM FOR CHANGE',
 		content:
-			'——e ST ou te c abi\n=\n¢ MOMENTUM FOR CHANGE °\nGet 1® for each Bill marker\nof yours on the Politics Table.\nThen, Propose a Bill.\nYou may not call for an\nImmediate Vote on this Bill.\nte a',
+			'MOMENTUM FOR CHANGE\n' +
+			'Get 1® for each Bill marker\n' +
+			'of yours on the Politics Table.\n' +
+			'Then, Propose a Bill.\n' +
+			'You may not call for an\n' +
+			'Immediate Vote on this Bill.\n' +
+			'te a',
 		stateEffects: [
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				target: 'bag',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'proposed-bill',
+					target: 'self',
+				},
+			},
 			{
 				type: 'policy',
 				action: 'propose',
-			},
-			{
-				type: 'vote',
-				action: 'immediate-vote',
+				immediateVoteAllowed: false,
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'working-class-action-expansion-cards-grid-5-items-5-2-working-class-action-expansion-deck-202-pos-3-1',
+		id: 'working-class-action-expansion-protect-the-status-quo-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-expansion-cards/grid_5-items_5-2__working-class-action-expansion-deck-202__pos-3-1.jpg',
 		backImage:
 			'fixtures/assets/decks-sorted/working-class-action-expansion-cards/back__working-class-action-expansion-deck-202.jpg',
 		rawText:
-			'( == B\ni i Bt tr Bee, :\nReeser\nhy Iitige eee\na om i Oe\nI =< = a ee\n=m ¢— Pa =\nat a _ A\n¢ PROTECT THE STATUS QUO °+\nChoose a Policy. For the rest\nof this round, no Bills may be\nproposed for that Policy. (Place\none of your Bill markers in its\ncurrent section as a reminder.)\nThen, get 1®.\nzL a',
+			'( == B\n' +
+			'i i Bt tr Bee, :\n' +
+			'Reeser\n' +
+			'hy Iitige eee\n' +
+			'a om i Oe\n' +
+			'I =< = a ee\n' +
+			'=m ¢— Pa =\n' +
+			'at a _ A\n' +
+			'¢ PROTECT THE STATUS QUO °+\n' +
+			'Choose a Policy. For the rest\n' +
+			'of this round, no Bills may be\n' +
+			'proposed for that Policy. (Place\n' +
+			'one of your Bill markers in its\n' +
+			'current section as a reminder.)\n' +
+			'Then, get 1®.\n' +
+			'zL a',
 		source: {
 			deck: 'working-class-action-expansion-cards',
 			file: 'grid_5-items_5-2__working-class-action-expansion-deck-202__pos-3-1.jpg',
@@ -123,14 +195,12 @@ const workingClassActionExpansionCards = [
 				x: 3,
 				y: 1,
 			},
+			physicalIndex: 3,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [1],
 			keywords: [
-				'bee',
-				'reeser',
-				'iitige',
-				'eee',
 				'protect',
 				'the',
 				'status',
@@ -139,30 +209,63 @@ const workingClassActionExpansionCards = [
 				'policy',
 				'for',
 				'rest',
-				'this',
+				'of',
 				'round',
+				'no',
 				'bills',
 				'may',
+				'be',
 				'proposed',
-				'that',
+				'place',
+				'one',
+				'bill',
+				'markers',
+				'in',
+				'its',
+				'current',
+				'section',
+				'as',
+				'reminder',
+				'get',
+				'zl',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'expansion',
-		name: 'Working Class Action Expansion',
+		name: 'PROTECT THE STATUS QUO',
 		content:
-			'( == B\ni i Bt tr Bee, :\nReeser\nhy Iitige eee\na om i Oe\nI =< = a ee\n=m ¢— Pa =\nat a _ A\n¢ PROTECT THE STATUS QUO °+\nChoose a Policy. For the rest\nof this round, no Bills may be\nproposed for that Policy. (Place\none of your Bill markers in its\ncurrent section as a reminder.)\nThen, get 1®.\nzL a',
+			'PROTECT THE STATUS QUO\n' +
+			'Choose a Policy. For the rest\n' +
+			'of this round, no Bills may be\n' +
+			'proposed for that Policy. (Place\n' +
+			'one of your Bill markers in its\n' +
+			'current section as a reminder.)\n' +
+			'Then, get 1®.\n' +
+			'zL a',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-expansion-cards-grid-5-items-5-2-working-class-action-expansion-deck-202-pos-4-1',
+		id: 'working-class-action-expansion-change-of-government-agenda-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-expansion-cards/grid_5-items_5-2__working-class-action-expansion-deck-202__pos-4-1.jpg',
 		backImage:
 			'fixtures/assets/decks-sorted/working-class-action-expansion-cards/back__working-class-action-expansion-deck-202.jpg',
 		rawText:
-			'i bs\nsf el $\n, g 4 °\nLa .: MM\nTee\nCHANGE OF\nGOVERNMENT AGENDA\nIf there are 3 or less\nproposed Bills, discard a Bill\nproposed by another player.\nThen, you may both Propose\nanother Bill, with you going first.\n4b <a',
+			'i bs\n' +
+			'sf el $\n' +
+			', g 4 °\n' +
+			'La .: MM\n' +
+			'Tee\n' +
+			'CHANGE OF\n' +
+			'GOVERNMENT AGENDA\n' +
+			'If there are 3 or less\n' +
+			'proposed Bills, discard a Bill\n' +
+			'proposed by another player.\n' +
+			'Then, you may both Propose\n' +
+			'another Bill, with you going first.\n' +
+			'4b <a',
 		source: {
 			deck: 'working-class-action-expansion-cards',
 			file: 'grid_5-items_5-2__working-class-action-expansion-deck-202__pos-4-1.jpg',
@@ -170,43 +273,62 @@ const workingClassActionExpansionCards = [
 				x: 4,
 				y: 1,
 			},
+			physicalIndex: 4,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4, 3],
 			policies: ['4B'],
 			resources: ['money'],
 			keywords: [
-				'tee',
 				'change',
+				'of',
 				'government',
 				'agenda',
+				'if',
 				'there',
 				'are',
+				'or',
 				'less',
 				'proposed',
 				'bills',
 				'discard',
 				'bill',
+				'by',
 				'another',
 				'player',
-				'then',
 				'you',
 				'may',
 				'both',
 				'propose',
+				'going',
+				'first',
 			],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'expansion',
-		name: 'i bs',
+		name: 'CHANGE OF GOVERNMENT AGENDA',
 		content:
-			'sf el $\n, g 4 °\nLa .: MM\nTee\nCHANGE OF\nGOVERNMENT AGENDA\nIf there are 3 or less\nproposed Bills, discard a Bill\nproposed by another player.\nThen, you may both Propose\nanother Bill, with you going first.\n4b <a',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['4B'] }],
+			'CHANGE OF GOVERNMENT AGENDA\n' +
+			'If there are 3 or less\n' +
+			'proposed Bills, discard a Bill\n' +
+			'proposed by another player.\n' +
+			'Then, you may both Propose\n' +
+			'another Bill, with you going first.\n' +
+			'4b <a',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['4B'],
+			},
+		],
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'working-class-action-expansion-cards-grid-5-items-5-2-working-class-action-expansion-deck-202-pos-5-1',
+		id: 'working-class-action-expansion-reveal-political-scandal-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/working-class-action-expansion-cards/grid_5-items_5-2__working-class-action-expansion-deck-202__pos-5-1.jpg',
 		backImage:
@@ -219,18 +341,21 @@ const workingClassActionExpansionCards = [
 				x: 5,
 				y: 1,
 			},
+			physicalIndex: 5,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2],
 			resources: ['influence'],
-			keywords: ['reveal', 'political', 'scandal', 'take', 'from', 'another', 'player'],
+			keywords: ['reveal', 'political', 'scandal', 'take', 'another', 'player', 'al'],
 		},
 		kind: 'action',
 		role: 'workingClass',
 		category: 'expansion',
 		name: 'REVEAL POLITICAL SCANDAL',
-		content: '¢ REVEAL POLITICAL SCANDAL °\nTake 2 @ from another player.\naL <a',
+		content: 'REVEAL POLITICAL SCANDAL\nTake 2 @ from another player.\naL <a',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 ] satisfies WorkingClassActionExpansionCardsCard[];
 

@@ -4,12 +4,26 @@ interface StateActionExpansionCardsCard extends ParsedActionCard {}
 
 const stateActionExpansionCards = [
 	{
-		id: 'state-action-expansion-cards-grid-5-items-5-2-state-action-expansion-deck-204-pos-1-1',
+		id: 'state-action-expansion-protect-the-status-quo-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/state-action-expansion-cards/grid_5-items_5-2__state-action-expansion-deck-204__pos-1-1.jpg',
 		backImage: 'fixtures/assets/decks-sorted/state-action-expansion-cards/back__state-action-expansion-deck-204.png',
 		rawText:
-			'(= ‘N\nY ; L==]5 oo\n: et ‘\nwt 9°. 3 =a\na\na (am (od eS aa\na! = A\nPROTECT THE STATUS QUO\nChoose a Policy. For the rest\nof this round, no Bills may be\nproposed for that Policy. (Place\none of your Bill markers in its\ncurrent section as a reminder.)\nThen, get 1®.\n‘ee aa',
+			'(= ‘N\n' +
+			'Y ; L==]5 oo\n' +
+			': et ‘\n' +
+			'wt 9°. 3 =a\n' +
+			'a\n' +
+			'a (am (od eS aa\n' +
+			'a! = A\n' +
+			'PROTECT THE STATUS QUO\n' +
+			'Choose a Policy. For the rest\n' +
+			'of this round, no Bills may be\n' +
+			'proposed for that Policy. (Place\n' +
+			'one of your Bill markers in its\n' +
+			'current section as a reminder.)\n' +
+			'Then, get 1®.\n' +
+			'‘ee aa',
 		source: {
 			deck: 'state-action-expansion-cards',
 			file: 'grid_5-items_5-2__state-action-expansion-deck-204__pos-1-1.jpg',
@@ -17,6 +31,8 @@ const stateActionExpansionCards = [
 				x: 1,
 				y: 1,
 			},
+			physicalIndex: 1,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [5, 9, 3, 1],
@@ -29,33 +45,61 @@ const stateActionExpansionCards = [
 				'policy',
 				'for',
 				'rest',
-				'this',
+				'of',
 				'round',
+				'no',
 				'bills',
 				'may',
+				'be',
 				'proposed',
-				'that',
 				'place',
 				'one',
-				'your',
 				'bill',
+				'markers',
+				'in',
+				'its',
+				'current',
+				'section',
+				'as',
+				'reminder',
+				'get',
+				'ee',
+				'aa',
 			],
 		},
 		kind: 'action',
 		role: 'state',
 		category: 'expansion',
-		name: 'State Action Expansion',
+		name: 'PROTECT THE STATUS QUO',
 		content:
-			'(= ‘N\nY ; L==]5 oo\n: et ‘\nwt 9°. 3 =a\na\na (am (od eS aa\na! = A\nPROTECT THE STATUS QUO\nChoose a Policy. For the rest\nof this round, no Bills may be\nproposed for that Policy. (Place\none of your Bill markers in its\ncurrent section as a reminder.)\nThen, get 1®.\n‘ee aa',
+			'PROTECT THE STATUS QUO\n' +
+			'Choose a Policy. For the rest\n' +
+			'of this round, no Bills may be\n' +
+			'proposed for that Policy. (Place\n' +
+			'one of your Bill markers in its\n' +
+			'current section as a reminder.)\n' +
+			'Then, get 1®.\n' +
+			'‘ee aa',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'state-action-expansion-cards-grid-5-items-5-2-state-action-expansion-deck-204-pos-2-1',
+		id: 'state-action-expansion-change-of-government-agenda-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/state-action-expansion-cards/grid_5-items_5-2__state-action-expansion-deck-204__pos-2-1.jpg',
 		backImage: 'fixtures/assets/decks-sorted/state-action-expansion-cards/back__state-action-expansion-deck-204.png',
 		rawText:
-			'< fe\ny~ Bu We\nLa * A\nCHANGE OF\nGOVERNMENT AGENDA\nIf there are 3 or less\nproposed Bills, discard a Bill\nproposed by another player.\nThen, you may both Propose\nanother Bill, with you going first.\nShe <4',
+			'< fe\n' +
+			'y~ Bu We\n' +
+			'La * A\n' +
+			'CHANGE OF\n' +
+			'GOVERNMENT AGENDA\n' +
+			'If there are 3 or less\n' +
+			'proposed Bills, discard a Bill\n' +
+			'proposed by another player.\n' +
+			'Then, you may both Propose\n' +
+			'another Bill, with you going first.\n' +
+			'She <4',
 		source: {
 			deck: 'state-action-expansion-cards',
 			file: 'grid_5-items_5-2__state-action-expansion-deck-204__pos-2-1.jpg',
@@ -63,40 +107,54 @@ const stateActionExpansionCards = [
 				x: 2,
 				y: 1,
 			},
+			physicalIndex: 2,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [3, 4],
 			keywords: [
 				'change',
+				'of',
 				'government',
 				'agenda',
+				'if',
 				'there',
 				'are',
+				'or',
 				'less',
 				'proposed',
 				'bills',
 				'discard',
 				'bill',
+				'by',
 				'another',
 				'player',
-				'then',
 				'you',
 				'may',
 				'both',
 				'propose',
-				'with',
+				'going',
+				'first',
+				'she',
 			],
 		},
 		kind: 'action',
 		role: 'state',
 		category: 'expansion',
-		name: 'State Action Expansion',
+		name: 'CHANGE OF GOVERNMENT AGENDA',
 		content:
-			'< fe\ny~ Bu We\nLa * A\nCHANGE OF\nGOVERNMENT AGENDA\nIf there are 3 or less\nproposed Bills, discard a Bill\nproposed by another player.\nThen, you may both Propose\nanother Bill, with you going first.\nShe <4',
+			'CHANGE OF GOVERNMENT AGENDA\n' +
+			'If there are 3 or less\n' +
+			'proposed Bills, discard a Bill\n' +
+			'proposed by another player.\n' +
+			'Then, you may both Propose\n' +
+			'another Bill, with you going first.\n' +
+			'She <4',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'state-action-expansion-cards-grid-5-items-5-2-state-action-expansion-deck-204-pos-3-1',
+		id: 'state-action-expansion-reveal-political-scandal-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/state-action-expansion-cards/grid_5-items_5-2__state-action-expansion-deck-204__pos-3-1.jpg',
 		backImage: 'fixtures/assets/decks-sorted/state-action-expansion-cards/back__state-action-expansion-deck-204.png',
@@ -108,26 +166,38 @@ const stateActionExpansionCards = [
 				x: 3,
 				y: 1,
 			},
+			physicalIndex: 3,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2],
 			resources: ['influence'],
-			keywords: ['cam', 'reveal', 'political', 'scandal', 'take', 'from', 'another', 'player'],
+			keywords: ['reveal', 'political', 'scandal', 'take', 'another', 'player', 'yk', 'aa'],
 		},
 		kind: 'action',
 		role: 'state',
 		category: 'expansion',
-		name: 'cam w',
-		content: '| = cam w\nREVEAL POLITICAL SCANDAL\nTake 2 @® from another player.\nYk aa',
+		name: 'REVEAL POLITICAL SCANDAL',
+		content: 'REVEAL POLITICAL SCANDAL\nTake 2 @® from another player.\nYk aa',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'state-action-expansion-cards-grid-5-items-5-2-state-action-expansion-deck-204-pos-4-1',
+		id: 'state-action-expansion-momentum-for-change-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/state-action-expansion-cards/grid_5-items_5-2__state-action-expansion-deck-204__pos-4-1.jpg',
 		backImage: 'fixtures/assets/decks-sorted/state-action-expansion-cards/back__state-action-expansion-deck-204.png',
 		rawText:
-			'= ae Y ni —a\n= = — : ‘ i \\ ead\n«=\nMOMENTUM FOR CHANGE\nGet 1® for each Bill marker\nof yours on the Politics Table.\nThen, Propose a Bill.\nYou may not call for an\nImmediate Vote on this Bill.\nVil aa',
+			'= ae Y ni —a\n' +
+			'= = — : ‘ i \\ ead\n' +
+			'«=\n' +
+			'MOMENTUM FOR CHANGE\n' +
+			'Get 1® for each Bill marker\n' +
+			'of yours on the Politics Table.\n' +
+			'Then, Propose a Bill.\n' +
+			'You may not call for an\n' +
+			'Immediate Vote on this Bill.\n' +
+			'Vil aa',
 		source: {
 			deck: 'state-action-expansion-cards',
 			file: 'grid_5-items_5-2__state-action-expansion-deck-204__pos-4-1.jpg',
@@ -135,12 +205,13 @@ const stateActionExpansionCards = [
 				x: 4,
 				y: 1,
 			},
+			physicalIndex: 4,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [1],
 			resources: ['influence'],
 			keywords: [
-				'ead',
 				'momentum',
 				'for',
 				'change',
@@ -148,42 +219,79 @@ const stateActionExpansionCards = [
 				'each',
 				'bill',
 				'marker',
+				'of',
 				'yours',
+				'on',
 				'the',
 				'politics',
 				'table',
-				'then',
 				'propose',
 				'you',
 				'may',
 				'not',
 				'call',
+				'an',
+				'immediate',
+				'vote',
+				'vil',
+				'aa',
 			],
 		},
 		kind: 'action',
 		role: 'state',
 		category: 'expansion',
-		name: 'ae Y ni —a',
+		name: 'MOMENTUM FOR CHANGE',
 		content:
-			'= ae Y ni —a\n= = — : ‘ i \\ ead\n«=\nMOMENTUM FOR CHANGE\nGet 1® for each Bill marker\nof yours on the Politics Table.\nThen, Propose a Bill.\nYou may not call for an\nImmediate Vote on this Bill.\nVil aa',
+			'MOMENTUM FOR CHANGE\n' +
+			'Get 1® for each Bill marker\n' +
+			'of yours on the Politics Table.\n' +
+			'Then, Propose a Bill.\n' +
+			'You may not call for an\n' +
+			'Immediate Vote on this Bill.\n' +
+			'Vil aa',
 		stateEffects: [
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				target: 'bag',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'proposed-bill',
+					target: 'self',
+				},
+			},
 			{
 				type: 'policy',
 				action: 'propose',
-			},
-			{
-				type: 'vote',
-				action: 'immediate-vote',
+				immediateVoteAllowed: false,
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'state-action-expansion-cards-grid-5-items-5-2-state-action-expansion-deck-204-pos-5-1',
+		id: 'state-action-expansion-covid-19-vaccination-program-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/state-action-expansion-cards/grid_5-items_5-2__state-action-expansion-deck-204__pos-5-1.jpg',
 		backImage: 'fixtures/assets/decks-sorted/state-action-expansion-cards/back__state-action-expansion-deck-204.png',
 		rawText:
-			'- re\n{ i ——+—\na mia \\ |\ni |\n) a\ney 5 e ee a. | = lh\nOe f aa e | S&S\nCOVID-19 VACCINATION\nPROGRAM\nBuy @& from the Foreign Market\nfor 5¥ each, up to your current capacity.\nThen Provide @ to a class, equal to its\nPopulation. For every 3% you provide,\nget @ to that class.\n-\no 6\nthe a',
+			'- re\n' +
+			'{ i ——+—\n' +
+			'a mia \\ |\n' +
+			'i |\n' +
+			') a\n' +
+			'ey 5 e ee a. | = lh\n' +
+			'Oe f aa e | S&S\n' +
+			'COVID-19 VACCINATION\n' +
+			'PROGRAM\n' +
+			'Buy @& from the Foreign Market\n' +
+			'for 5¥ each, up to your current capacity.\n' +
+			'Then Provide @ to a class, equal to its\n' +
+			'Population. For every 3% you provide,\n' +
+			'get @ to that class.\n' +
+			'-\n' +
+			'o 6\n' +
+			'the a',
 		source: {
 			deck: 'state-action-expansion-cards',
 			file: 'grid_5-items_5-2__state-action-expansion-deck-204__pos-5-1.jpg',
@@ -191,39 +299,53 @@ const stateActionExpansionCards = [
 				x: 5,
 				y: 1,
 			},
+			physicalIndex: 5,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [5, -19, 3, 6],
 			money: [5],
 			resources: ['money'],
 			keywords: [
-				'mia',
-				'covid-',
+				'covid19',
 				'vaccination',
 				'program',
 				'buy',
-				'from',
 				'the',
 				'foreign',
 				'market',
 				'for',
 				'each',
-				'your',
+				'up',
+				'to',
 				'current',
 				'capacity',
-				'then',
 				'provide',
 				'class',
 				'equal',
+				'its',
+				'population',
+				'every',
+				'you',
+				'get',
 			],
 		},
 		kind: 'action',
 		role: 'state',
 		category: 'expansion',
-		name: 'State Action Expansion',
+		name: 'COVID-19 VACCINATION PROGRAM',
 		content:
-			'- re\n{ i ——+—\na mia \\ |\ni |\n) a\ney 5 e ee a. | = lh\nOe f aa e | S&S\nCOVID-19 VACCINATION\nPROGRAM\nBuy @& from the Foreign Market\nfor 5¥ each, up to your current capacity.\nThen Provide @ to a class, equal to its\nPopulation. For every 3% you provide,\nget @ to that class.\n-\no 6\nthe a',
+			'COVID-19 VACCINATION PROGRAM\n' +
+			'Buy @& from the Foreign Market\n' +
+			'for 5¥ each, up to your current capacity.\n' +
+			'Then Provide @ to a class, equal to its\n' +
+			'Population. For every 3% you provide,\n' +
+			'get @ to that class.\n' +
+			'-\n' +
+			'o 6\n' +
+			'the a',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 ] satisfies StateActionExpansionCardsCard[];
 

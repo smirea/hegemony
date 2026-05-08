@@ -4,12 +4,21 @@ interface MiddleClassActionCardsCard extends ParsedActionCard {}
 
 const middleClassActionCards = [
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-1-1',
+		id: 'middle-class-action-healthcare-benefits-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-1-1.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'4g\na -\n—< =\npy ety . >\nHEALTHCARE BENEFITS\nBuy & from the State, up to your\nPopulation, paying half the cost\n(rounded up).\nREQUIREMENT\n—',
+			'4g\n' +
+			'a -\n' +
+			'—< =\n' +
+			'py ety . >\n' +
+			'HEALTHCARE BENEFITS\n' +
+			'Buy & from the State, up to your\n' +
+			'Population, paying half the cost\n' +
+			'(rounded up).\n' +
+			'REQUIREMENT\n' +
+			'—',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-1-1.png',
@@ -17,19 +26,20 @@ const middleClassActionCards = [
 				x: 1,
 				y: 1,
 			},
+			physicalIndex: 1,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4],
 			resources: ['healthcare', 'money'],
 			keywords: [
-				'ety',
 				'healthcare',
 				'benefits',
 				'buy',
-				'from',
 				'the',
 				'state',
-				'your',
+				'up',
+				'to',
 				'population',
 				'paying',
 				'half',
@@ -41,18 +51,29 @@ const middleClassActionCards = [
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Middle Class Actions',
+		name: 'HEALTHCARE BENEFITS',
 		content:
-			'4g\na -\n—< =\npy ety . >\nHEALTHCARE BENEFITS\nBuy & from the State, up to your\nPopulation, paying half the cost\n(rounded up).\nREQUIREMENT\n—',
+			'HEALTHCARE BENEFITS\n' +
+			'Buy & from the State, up to your\n' +
+			'Population, paying half the cost\n' +
+			'(rounded up).\n' +
+			'REQUIREMENT\n' +
+			'—',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-2-1',
+		id: 'middle-class-action-import-subsidy-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-2-1.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'<\nIMPORT SUBSIDY\nYou may Buy ¢ or 0 from the\nForeign Market, up to your Popu-\nlation, without paying any Tariffs.\n— a Z',
+			'<\n' +
+			'IMPORT SUBSIDY\n' +
+			'You may Buy ¢ or 0 from the\n' +
+			'Foreign Market, up to your Popu-\n' +
+			'lation, without paying any Tariffs.\n' +
+			'— a Z',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-2-1.png',
@@ -60,6 +81,8 @@ const middleClassActionCards = [
 				x: 2,
 				y: 1,
 			},
+			physicalIndex: 2,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [0],
@@ -70,11 +93,12 @@ const middleClassActionCards = [
 				'you',
 				'may',
 				'buy',
-				'from',
+				'or',
 				'the',
 				'foreign',
 				'market',
-				'your',
+				'up',
+				'to',
 				'popu',
 				'lation',
 				'without',
@@ -88,16 +112,26 @@ const middleClassActionCards = [
 		category: 'base',
 		name: 'IMPORT SUBSIDY',
 		content:
-			'<\nIMPORT SUBSIDY\nYou may Buy ¢ or 0 from the\nForeign Market, up to your Popu-\nlation, without paying any Tariffs.\n— a Z',
+			'IMPORT SUBSIDY\n' +
+			'You may Buy ¢ or 0 from the\n' +
+			'Foreign Market, up to your Popu-\n' +
+			'lation, without paying any Tariffs.\n' +
+			'— a Z',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-3-1',
+		id: 'middle-class-action-import-subsidy-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-3-1.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'¥\nIMPORT SUBSIDY\nYou may Buy ¢ or 0 from the\nForeign Market, up to your Popu-\nlation, without paying any Tariffs.\n— a Z',
+			'¥\n' +
+			'IMPORT SUBSIDY\n' +
+			'You may Buy ¢ or 0 from the\n' +
+			'Foreign Market, up to your Popu-\n' +
+			'lation, without paying any Tariffs.\n' +
+			'— a Z',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-3-1.png',
@@ -105,6 +139,8 @@ const middleClassActionCards = [
 				x: 3,
 				y: 1,
 			},
+			physicalIndex: 3,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [0],
@@ -115,11 +151,12 @@ const middleClassActionCards = [
 				'you',
 				'may',
 				'buy',
-				'from',
+				'or',
 				'the',
 				'foreign',
 				'market',
-				'your',
+				'up',
+				'to',
 				'popu',
 				'lation',
 				'without',
@@ -133,11 +170,16 @@ const middleClassActionCards = [
 		category: 'base',
 		name: 'IMPORT SUBSIDY',
 		content:
-			'¥\nIMPORT SUBSIDY\nYou may Buy ¢ or 0 from the\nForeign Market, up to your Popu-\nlation, without paying any Tariffs.\n— a Z',
+			'IMPORT SUBSIDY\n' +
+			'You may Buy ¢ or 0 from the\n' +
+			'Foreign Market, up to your Popu-\n' +
+			'lation, without paying any Tariffs.\n' +
+			'— a Z',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-4-1',
+		id: 'middle-class-action-small-business-grant-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-4-1.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
@@ -149,6 +191,8 @@ const middleClassActionCards = [
 				x: 4,
 				y: 1,
 			},
+			physicalIndex: 4,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2],
@@ -158,8 +202,8 @@ const middleClassActionCards = [
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'ee *t',
-		content: '> ee *t =\n¥ i mr? i\n‘ ae “a 2 _\nSMALL BUSINESS GRANT\nBuild a Company.\nThe State pays its cost.',
+		name: 'SMALL BUSINESS GRANT',
+		content: 'SMALL BUSINESS GRANT\nBuild a Company.\nThe State pays its cost.',
 		stateEffects: [
 			{
 				type: 'company',
@@ -167,9 +211,10 @@ const middleClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-5-1',
+		id: 'middle-class-action-small-business-grant-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-5-1.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
@@ -181,6 +226,8 @@ const middleClassActionCards = [
 				x: 5,
 				y: 1,
 			},
+			physicalIndex: 5,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [2],
@@ -190,8 +237,8 @@ const middleClassActionCards = [
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'ee *t',
-		content: '> ee *t =\n¥ i mr? i\n‘ ae “a 2 _\nSMALL BUSINESS GRANT\nBuild a Company.\nThe State pays its cost.',
+		name: 'SMALL BUSINESS GRANT',
+		content: 'SMALL BUSINESS GRANT\nBuild a Company.\nThe State pays its cost.',
 		stateEffects: [
 			{
 				type: 'company',
@@ -199,14 +246,21 @@ const middleClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-6-1',
+		id: 'middle-class-action-land-of-opportunity-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-6-1.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'\\\n* Oy us Fe ee\nLAND OF OPPORTUNITY\nBuild a Company using a skilled\nMiddle Class Worker of your\nchoice from the Supply.\n7B /7C',
+			'\\\n' +
+			'* Oy us Fe ee\n' +
+			'LAND OF OPPORTUNITY\n' +
+			'Build a Company using a skilled\n' +
+			'Middle Class Worker of your\n' +
+			'choice from the Supply.\n' +
+			'7B /7C',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-6-1.png',
@@ -214,12 +268,15 @@ const middleClassActionCards = [
 				x: 6,
 				y: 1,
 			},
+			physicalIndex: 6,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [7],
 			policies: ['7B', '7C'],
 			keywords: [
 				'land',
+				'of',
 				'opportunity',
 				'build',
 				'company',
@@ -228,9 +285,7 @@ const middleClassActionCards = [
 				'middle',
 				'class',
 				'worker',
-				'your',
 				'choice',
-				'from',
 				'the',
 				'supply',
 			],
@@ -238,10 +293,16 @@ const middleClassActionCards = [
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Oy us Fe ee',
+		name: 'LAND OF OPPORTUNITY',
 		content:
-			'\\\n* Oy us Fe ee\nLAND OF OPPORTUNITY\nBuild a Company using a skilled\nMiddle Class Worker of your\nchoice from the Supply.\n7B /7C',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['7B', '7C'] }],
+			'LAND OF OPPORTUNITY\nBuild a Company using a skilled\nMiddle Class Worker of your\nchoice from the Supply.\n7B /7C',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['7B', '7C'],
+			},
+		],
 		stateEffects: [
 			{
 				type: 'company',
@@ -249,14 +310,21 @@ const middleClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-7-1',
+		id: 'middle-class-action-land-of-opportunity-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-7-1.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'\\\n* Oy us Fe ee\nLAND OF OPPORTUNITY\nBuild a Company using a skilled\nMiddle Class Worker of your\nchoice from the Supply.\n7B /7C',
+			'\\\n' +
+			'* Oy us Fe ee\n' +
+			'LAND OF OPPORTUNITY\n' +
+			'Build a Company using a skilled\n' +
+			'Middle Class Worker of your\n' +
+			'choice from the Supply.\n' +
+			'7B /7C',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-7-1.png',
@@ -264,12 +332,15 @@ const middleClassActionCards = [
 				x: 7,
 				y: 1,
 			},
+			physicalIndex: 7,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [7],
 			policies: ['7B', '7C'],
 			keywords: [
 				'land',
+				'of',
 				'opportunity',
 				'build',
 				'company',
@@ -278,9 +349,7 @@ const middleClassActionCards = [
 				'middle',
 				'class',
 				'worker',
-				'your',
 				'choice',
-				'from',
 				'the',
 				'supply',
 			],
@@ -288,10 +357,16 @@ const middleClassActionCards = [
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Oy us Fe ee',
+		name: 'LAND OF OPPORTUNITY',
 		content:
-			'\\\n* Oy us Fe ee\nLAND OF OPPORTUNITY\nBuild a Company using a skilled\nMiddle Class Worker of your\nchoice from the Supply.\n7B /7C',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['7B', '7C'] }],
+			'LAND OF OPPORTUNITY\nBuild a Company using a skilled\nMiddle Class Worker of your\nchoice from the Supply.\n7B /7C',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['7B', '7C'],
+			},
+		],
 		stateEffects: [
 			{
 				type: 'company',
@@ -299,14 +374,24 @@ const middleClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-8-1',
+		id: 'middle-class-action-investment-opportunities-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-8-1.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'we | P oats . .\n“ & :\n“{ — ae\niy s a 5 :\n- y .\nINVESTMENT OPPORTUNITIES\nBuild a Company paying 8¥ less.\nSearch the Company deck for\na Company of your choice and\nbuild it paying 8¥V more.',
+			'we | P oats . .\n' +
+			'“ & :\n' +
+			'“{ — ae\n' +
+			'iy s a 5 :\n' +
+			'- y .\n' +
+			'INVESTMENT OPPORTUNITIES\n' +
+			'Build a Company paying 8¥ less.\n' +
+			'Search the Company deck for\n' +
+			'a Company of your choice and\n' +
+			'build it paying 8¥V more.',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-8-1.png',
@@ -314,13 +399,14 @@ const middleClassActionCards = [
 				x: 8,
 				y: 1,
 			},
+			physicalIndex: 8,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [5, 8],
 			money: [8],
 			resources: ['money'],
 			keywords: [
-				'oats',
 				'investment',
 				'opportunities',
 				'build',
@@ -331,18 +417,23 @@ const middleClassActionCards = [
 				'the',
 				'deck',
 				'for',
-				'your',
+				'of',
 				'choice',
 				'and',
+				'it',
 				'more',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'we | P oats .',
+		name: 'INVESTMENT OPPORTUNITIES',
 		content:
-			'we | P oats . .\n“ & :\n“{ — ae\niy s a 5 :\n- y .\nINVESTMENT OPPORTUNITIES\nBuild a Company paying 8¥ less.\nSearch the Company deck for\na Company of your choice and\nbuild it paying 8¥V more.',
+			'INVESTMENT OPPORTUNITIES\n' +
+			'Build a Company paying 8¥ less.\n' +
+			'Search the Company deck for\n' +
+			'a Company of your choice and\n' +
+			'build it paying 8¥V more.',
 		stateEffects: [
 			{
 				type: 'company',
@@ -350,14 +441,24 @@ const middleClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-1-2',
+		id: 'middle-class-action-investment-opportunities-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-1-2.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'we | Pots . .\n< & :\n{ — ae\ny s a 5 ;\n- y .\nINVESTMENT OPPORTUNITIES\nBuild a Company paying 8¥ less.\nSearch the Company deck for\na Company of your choice and\nbuild it paying 8¥ more.',
+			'we | Pots . .\n' +
+			'< & :\n' +
+			'{ — ae\n' +
+			'y s a 5 ;\n' +
+			'- y .\n' +
+			'INVESTMENT OPPORTUNITIES\n' +
+			'Build a Company paying 8¥ less.\n' +
+			'Search the Company deck for\n' +
+			'a Company of your choice and\n' +
+			'build it paying 8¥ more.',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-1-2.png',
@@ -365,13 +466,14 @@ const middleClassActionCards = [
 				x: 1,
 				y: 2,
 			},
+			physicalIndex: 9,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [5, 8],
 			money: [8],
 			resources: ['money'],
 			keywords: [
-				'pots',
 				'investment',
 				'opportunities',
 				'build',
@@ -382,18 +484,23 @@ const middleClassActionCards = [
 				'the',
 				'deck',
 				'for',
-				'your',
+				'of',
 				'choice',
 				'and',
+				'it',
 				'more',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'we | Pots .',
+		name: 'INVESTMENT OPPORTUNITIES',
 		content:
-			'we | Pots . .\n< & :\n{ — ae\ny s a 5 ;\n- y .\nINVESTMENT OPPORTUNITIES\nBuild a Company paying 8¥ less.\nSearch the Company deck for\na Company of your choice and\nbuild it paying 8¥ more.',
+			'INVESTMENT OPPORTUNITIES\n' +
+			'Build a Company paying 8¥ less.\n' +
+			'Search the Company deck for\n' +
+			'a Company of your choice and\n' +
+			'build it paying 8¥ more.',
 		stateEffects: [
 			{
 				type: 'company',
@@ -401,14 +508,27 @@ const middleClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-2-2',
+		id: 'middle-class-action-foreign-market-insight-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-2-2.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'X -\n* . 2 al\n, »\n3 *\nFOREIGN MARKET INSIGHT\nReveal the next Export card.\nYou may replace the current\nExport card with it. Then, Sell to\nthe Foreign Market and discard\nthe Export card that was not\nused. You may perform each\ntransaction up to 2 times.\n= - -',
+			'X -\n' +
+			'* . 2 al\n' +
+			', »\n' +
+			'3 *\n' +
+			'FOREIGN MARKET INSIGHT\n' +
+			'Reveal the next Export card.\n' +
+			'You may replace the current\n' +
+			'Export card with it. Then, Sell to\n' +
+			'the Foreign Market and discard\n' +
+			'the Export card that was not\n' +
+			'used. You may perform each\n' +
+			'transaction up to 2 times.\n' +
+			'= - -',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-2-2.png',
@@ -416,6 +536,8 @@ const middleClassActionCards = [
 				x: 2,
 				y: 2,
 			},
+			physicalIndex: 10,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2, 3],
@@ -432,20 +554,35 @@ const middleClassActionCards = [
 				'may',
 				'replace',
 				'current',
-				'with',
-				'then',
+				'it',
 				'sell',
+				'to',
 				'and',
 				'discard',
-				'that',
+				'was',
+				'not',
+				'used',
+				'perform',
+				'each',
+				'transaction',
+				'up',
+				'times',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'X -',
+		name: 'FOREIGN MARKET INSIGHT',
 		content:
-			'* . 2 al\n, »\n3 *\nFOREIGN MARKET INSIGHT\nReveal the next Export card.\nYou may replace the current\nExport card with it. Then, Sell to\nthe Foreign Market and discard\nthe Export card that was not\nused. You may perform each\ntransaction up to 2 times.\n= - -',
+			'FOREIGN MARKET INSIGHT\n' +
+			'Reveal the next Export card.\n' +
+			'You may replace the current\n' +
+			'Export card with it. Then, Sell to\n' +
+			'the Foreign Market and discard\n' +
+			'the Export card that was not\n' +
+			'used. You may perform each\n' +
+			'transaction up to 2 times.\n' +
+			'= - -',
 		stateEffects: [
 			{
 				type: 'resource',
@@ -462,14 +599,27 @@ const middleClassActionCards = [
 				target: 'foreign-market',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-3-2',
+		id: 'middle-class-action-foreign-market-insight-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-3-2.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'X -\n* . 2 al\n, »\n3 *\nFOREIGN MARKET INSIGHT\nReveal the next Export card.\nYou may replace the current\nExport card with it. Then, Sell to\nthe Foreign Market and discard\nthe Export card that was not\nused. You may perform each\ntransaction up to 2 times.\n= - -',
+			'X -\n' +
+			'* . 2 al\n' +
+			', »\n' +
+			'3 *\n' +
+			'FOREIGN MARKET INSIGHT\n' +
+			'Reveal the next Export card.\n' +
+			'You may replace the current\n' +
+			'Export card with it. Then, Sell to\n' +
+			'the Foreign Market and discard\n' +
+			'the Export card that was not\n' +
+			'used. You may perform each\n' +
+			'transaction up to 2 times.\n' +
+			'= - -',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-3-2.png',
@@ -477,6 +627,8 @@ const middleClassActionCards = [
 				x: 3,
 				y: 2,
 			},
+			physicalIndex: 11,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [2, 3],
@@ -493,20 +645,35 @@ const middleClassActionCards = [
 				'may',
 				'replace',
 				'current',
-				'with',
-				'then',
+				'it',
 				'sell',
+				'to',
 				'and',
 				'discard',
-				'that',
+				'was',
+				'not',
+				'used',
+				'perform',
+				'each',
+				'transaction',
+				'up',
+				'times',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'X -',
+		name: 'FOREIGN MARKET INSIGHT',
 		content:
-			'* . 2 al\n, »\n3 *\nFOREIGN MARKET INSIGHT\nReveal the next Export card.\nYou may replace the current\nExport card with it. Then, Sell to\nthe Foreign Market and discard\nthe Export card that was not\nused. You may perform each\ntransaction up to 2 times.\n= - -',
+			'FOREIGN MARKET INSIGHT\n' +
+			'Reveal the next Export card.\n' +
+			'You may replace the current\n' +
+			'Export card with it. Then, Sell to\n' +
+			'the Foreign Market and discard\n' +
+			'the Export card that was not\n' +
+			'used. You may perform each\n' +
+			'transaction up to 2 times.\n' +
+			'= - -',
 		stateEffects: [
 			{
 				type: 'resource',
@@ -523,14 +690,33 @@ const middleClassActionCards = [
 				target: 'foreign-market',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-4-2',
+		id: 'middle-class-action-employment-subsidy-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-4-2.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'Tm. f° heii\n= _ 7 =\nfe 4 | pete, " a\n"2 = a\nO _ ws ain 4 =\ni] > aay a\n1 @ e ¢& e\n‘ae — fh\n- —« _—\n| =\n- a ff ——<e ~~\nEMPLOYMENT SUBSIDY\nGet 5¥ from the State for each\nof your Companies with\na Working Class Worker in it.\nYou may then perform an Extra\nShift in one of those Companies.\n1A/1B /3\n— 4',
+			'Tm. f° heii\n' +
+			'= _ 7 =\n' +
+			'fe 4 | pete, " a\n' +
+			'"2 = a\n' +
+			'O _ ws ain 4 =\n' +
+			'i] > aay a\n' +
+			'1 @ e ¢& e\n' +
+			'‘ae — fh\n' +
+			'- —« _—\n' +
+			'| =\n' +
+			'- a ff ——<e ~~\n' +
+			'EMPLOYMENT SUBSIDY\n' +
+			'Get 5¥ from the State for each\n' +
+			'of your Companies with\n' +
+			'a Working Class Worker in it.\n' +
+			'You may then perform an Extra\n' +
+			'Shift in one of those Companies.\n' +
+			'1A/1B /3\n' +
+			'— 4',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-4-2.png',
@@ -538,6 +724,8 @@ const middleClassActionCards = [
 				x: 4,
 				y: 2,
 			},
+			physicalIndex: 12,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [7, 4, 2, 1, 5, 3],
@@ -545,33 +733,50 @@ const middleClassActionCards = [
 			policies: ['1A', '1B'],
 			resources: ['money'],
 			keywords: [
-				'heii',
-				'pete',
-				'ain',
-				'aay',
 				'employment',
 				'subsidy',
 				'get',
-				'from',
 				'the',
 				'state',
 				'for',
 				'each',
-				'your',
+				'of',
 				'companies',
-				'with',
 				'working',
 				'class',
 				'worker',
+				'in',
+				'it',
+				'you',
+				'may',
+				'perform',
+				'an',
+				'extra',
+				'shift',
+				'one',
+				'those',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Tm. f° heii',
+		name: 'EMPLOYMENT SUBSIDY',
 		content:
-			'= _ 7 =\nfe 4 | pete, " a\n"2 = a\nO _ ws ain 4 =\ni] > aay a\n1 @ e ¢& e\n‘ae — fh\n- —« _—\n| =\n- a ff ——<e ~~\nEMPLOYMENT SUBSIDY\nGet 5¥ from the State for each\nof your Companies with\na Working Class Worker in it.\nYou may then perform an Extra\nShift in one of those Companies.\n1A/1B /3\n— 4',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['1A', '1B'] }],
+			'EMPLOYMENT SUBSIDY\n' +
+			'Get 5¥ from the State for each\n' +
+			'of your Companies with\n' +
+			'a Working Class Worker in it.\n' +
+			'You may then perform an Extra\n' +
+			'Shift in one of those Companies.\n' +
+			'1A/1B /3\n' +
+			'— 4',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['1A', '1B'],
+			},
+		],
 		stateEffects: [
 			{
 				type: 'money',
@@ -581,14 +786,33 @@ const middleClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-5-2',
+		id: 'middle-class-action-employment-subsidy-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-5-2.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'Tm. Ff} ei\n= _ 7 =\nfe 4 | pete " a\n"2 i a\nO _ as ain 4 =\ni] To Garay a\n1 @ c ¢& e\n‘ae — fh\n- —« _—\n| =\n- a ft —— se ~~\nEMPLOYMENT SUBSIDY\nGet 5¥ from the State for each\nof your Companies with\na Working Class Worker in it.\nYou may then perform an Extra\nShift in one of those Companies.\n1A/1B /3\n— 4',
+			'Tm. Ff} ei\n' +
+			'= _ 7 =\n' +
+			'fe 4 | pete " a\n' +
+			'"2 i a\n' +
+			'O _ as ain 4 =\n' +
+			'i] To Garay a\n' +
+			'1 @ c ¢& e\n' +
+			'‘ae — fh\n' +
+			'- —« _—\n' +
+			'| =\n' +
+			'- a ft —— se ~~\n' +
+			'EMPLOYMENT SUBSIDY\n' +
+			'Get 5¥ from the State for each\n' +
+			'of your Companies with\n' +
+			'a Working Class Worker in it.\n' +
+			'You may then perform an Extra\n' +
+			'Shift in one of those Companies.\n' +
+			'1A/1B /3\n' +
+			'— 4',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-5-2.png',
@@ -596,6 +820,8 @@ const middleClassActionCards = [
 				x: 5,
 				y: 2,
 			},
+			physicalIndex: 13,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [7, 4, 2, 1, 5, 3],
@@ -603,33 +829,50 @@ const middleClassActionCards = [
 			policies: ['1A', '1B'],
 			resources: ['money'],
 			keywords: [
-				'pete',
-				'ain',
-				'garay',
 				'employment',
 				'subsidy',
 				'get',
-				'from',
 				'the',
 				'state',
 				'for',
 				'each',
-				'your',
+				'of',
 				'companies',
-				'with',
 				'working',
 				'class',
 				'worker',
+				'in',
+				'it',
 				'you',
+				'may',
+				'perform',
+				'an',
+				'extra',
+				'shift',
+				'one',
+				'those',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Tm. Ff} ei',
+		name: 'EMPLOYMENT SUBSIDY',
 		content:
-			'= _ 7 =\nfe 4 | pete " a\n"2 i a\nO _ as ain 4 =\ni] To Garay a\n1 @ c ¢& e\n‘ae — fh\n- —« _—\n| =\n- a ft —— se ~~\nEMPLOYMENT SUBSIDY\nGet 5¥ from the State for each\nof your Companies with\na Working Class Worker in it.\nYou may then perform an Extra\nShift in one of those Companies.\n1A/1B /3\n— 4',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['1A', '1B'] }],
+			'EMPLOYMENT SUBSIDY\n' +
+			'Get 5¥ from the State for each\n' +
+			'of your Companies with\n' +
+			'a Working Class Worker in it.\n' +
+			'You may then perform an Extra\n' +
+			'Shift in one of those Companies.\n' +
+			'1A/1B /3\n' +
+			'— 4',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['1A', '1B'],
+			},
+		],
 		stateEffects: [
 			{
 				type: 'money',
@@ -639,14 +882,27 @@ const middleClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-6-2',
+		id: 'middle-class-action-public-opinion-polling-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-6-2.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			': ae .\n3 Ree ;\n: a\n! _ i : aa\n,\nPUBLIC OPINION POLLING\nPropose a Bill and reveal 5 Voting\ncubes from the bag. You may then\ncall for an Immediate Vote without\nspending @. If you do, use those 5\ncubes instead of drawing new ones.\nIf not, return them to the bag.\n. 4',
+			': ae .\n' +
+			'3 Ree ;\n' +
+			': a\n' +
+			'! _ i : aa\n' +
+			',\n' +
+			'PUBLIC OPINION POLLING\n' +
+			'Propose a Bill and reveal 5 Voting\n' +
+			'cubes from the bag. You may then\n' +
+			'call for an Immediate Vote without\n' +
+			'spending @. If you do, use those 5\n' +
+			'cubes instead of drawing new ones.\n' +
+			'If not, return them to the bag.\n' +
+			'. 4',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-6-2.png',
@@ -654,12 +910,13 @@ const middleClassActionCards = [
 				x: 6,
 				y: 2,
 			},
+			physicalIndex: 14,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [3, 5, 4],
 			resources: ['influence'],
 			keywords: [
-				'ree',
 				'public',
 				'opinion',
 				'polling',
@@ -669,22 +926,45 @@ const middleClassActionCards = [
 				'reveal',
 				'voting',
 				'cubes',
-				'from',
 				'the',
 				'bag',
 				'you',
 				'may',
-				'then',
 				'call',
 				'for',
+				'an',
+				'immediate',
+				'vote',
+				'without',
+				'spending',
+				'if',
+				'do',
+				'use',
+				'those',
+				'instead',
+				'of',
+				'drawing',
+				'new',
+				'ones',
+				'not',
+				'return',
+				'them',
+				'to',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Middle Class Actions',
+		name: 'PUBLIC OPINION POLLING',
 		content:
-			': ae .\n3 Ree ;\n: a\n! _ i : aa\n,\nPUBLIC OPINION POLLING\nPropose a Bill and reveal 5 Voting\ncubes from the bag. You may then\ncall for an Immediate Vote without\nspending @. If you do, use those 5\ncubes instead of drawing new ones.\nIf not, return them to the bag.\n. 4',
+			'PUBLIC OPINION POLLING\n' +
+			'Propose a Bill and reveal 5 Voting\n' +
+			'cubes from the bag. You may then\n' +
+			'call for an Immediate Vote without\n' +
+			'spending @. If you do, use those 5\n' +
+			'cubes instead of drawing new ones.\n' +
+			'If not, return them to the bag.\n' +
+			'. 4',
 		stateEffects: [
 			{
 				type: 'policy',
@@ -695,14 +975,27 @@ const middleClassActionCards = [
 				action: 'immediate-vote',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-7-2',
+		id: 'middle-class-action-public-opinion-polling-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-7-2.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			': ae .\n3 Ree ;\n: a\n! _ i : aa\n,\nPUBLIC OPINION POLLING\nPropose a Bill and reveal 5 Voting\ncubes from the bag. You may then\ncall for an Immediate Vote without\nspending @. If you do, use those 5\ncubes instead of drawing new ones.\nIf not, return them to the bag.\n. 4',
+			': ae .\n' +
+			'3 Ree ;\n' +
+			': a\n' +
+			'! _ i : aa\n' +
+			',\n' +
+			'PUBLIC OPINION POLLING\n' +
+			'Propose a Bill and reveal 5 Voting\n' +
+			'cubes from the bag. You may then\n' +
+			'call for an Immediate Vote without\n' +
+			'spending @. If you do, use those 5\n' +
+			'cubes instead of drawing new ones.\n' +
+			'If not, return them to the bag.\n' +
+			'. 4',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-7-2.png',
@@ -710,12 +1003,13 @@ const middleClassActionCards = [
 				x: 7,
 				y: 2,
 			},
+			physicalIndex: 15,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [3, 5, 4],
 			resources: ['influence'],
 			keywords: [
-				'ree',
 				'public',
 				'opinion',
 				'polling',
@@ -725,22 +1019,45 @@ const middleClassActionCards = [
 				'reveal',
 				'voting',
 				'cubes',
-				'from',
 				'the',
 				'bag',
 				'you',
 				'may',
-				'then',
 				'call',
 				'for',
+				'an',
+				'immediate',
+				'vote',
+				'without',
+				'spending',
+				'if',
+				'do',
+				'use',
+				'those',
+				'instead',
+				'of',
+				'drawing',
+				'new',
+				'ones',
+				'not',
+				'return',
+				'them',
+				'to',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Middle Class Actions',
+		name: 'PUBLIC OPINION POLLING',
 		content:
-			': ae .\n3 Ree ;\n: a\n! _ i : aa\n,\nPUBLIC OPINION POLLING\nPropose a Bill and reveal 5 Voting\ncubes from the bag. You may then\ncall for an Immediate Vote without\nspending @. If you do, use those 5\ncubes instead of drawing new ones.\nIf not, return them to the bag.\n. 4',
+			'PUBLIC OPINION POLLING\n' +
+			'Propose a Bill and reveal 5 Voting\n' +
+			'cubes from the bag. You may then\n' +
+			'call for an Immediate Vote without\n' +
+			'spending @. If you do, use those 5\n' +
+			'cubes instead of drawing new ones.\n' +
+			'If not, return them to the bag.\n' +
+			'. 4',
 		stateEffects: [
 			{
 				type: 'policy',
@@ -751,14 +1068,29 @@ const middleClassActionCards = [
 				action: 'immediate-vote',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-8-2',
+		id: 'middle-class-action-migration-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-8-2.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'“ —__-— Sh\n2 =" i ”\nne WT a Te\nbe SRR pes\n— =\nay a\nPwecerte\na bs)\nMIGRATION\nIf you have at least 4 Unemployed\nWorkers, remove up to 2 of them.\nGet 5¥ for each Unskilled Worker\nand 10¥ for each Skilled Worker\nremoved this way.\nnn',
+			'“ —__-— Sh\n' +
+			'2 =" i ”\n' +
+			'ne WT a Te\n' +
+			'be SRR pes\n' +
+			'— =\n' +
+			'ay a\n' +
+			'Pwecerte\n' +
+			'a bs)\n' +
+			'MIGRATION\n' +
+			'If you have at least 4 Unemployed\n' +
+			'Workers, remove up to 2 of them.\n' +
+			'Get 5¥ for each Unskilled Worker\n' +
+			'and 10¥ for each Skilled Worker\n' +
+			'removed this way.\n' +
+			'nn',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-8-2.png',
@@ -766,22 +1098,26 @@ const middleClassActionCards = [
 				x: 8,
 				y: 2,
 			},
+			physicalIndex: 16,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2, 4, 5, 10],
 			money: [5, 10],
 			resources: ['money'],
 			keywords: [
-				'srr',
-				'pes',
-				'pwecerte',
 				'migration',
+				'if',
 				'you',
 				'have',
+				'at',
 				'least',
 				'unemployed',
 				'workers',
 				'remove',
+				'up',
+				'to',
+				'of',
 				'them',
 				'get',
 				'for',
@@ -790,14 +1126,23 @@ const middleClassActionCards = [
 				'worker',
 				'and',
 				'skilled',
+				'removed',
+				'way',
+				'nn',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Middle Class Actions',
+		name: 'MIGRATION',
 		content:
-			'“ —__-— Sh\n2 =" i ”\nne WT a Te\nbe SRR pes\n— =\nay a\nPwecerte\na bs)\nMIGRATION\nIf you have at least 4 Unemployed\nWorkers, remove up to 2 of them.\nGet 5¥ for each Unskilled Worker\nand 10¥ for each Skilled Worker\nremoved this way.\nnn',
+			'MIGRATION\n' +
+			'If you have at least 4 Unemployed\n' +
+			'Workers, remove up to 2 of them.\n' +
+			'Get 5¥ for each Unskilled Worker\n' +
+			'and 10¥ for each Skilled Worker\n' +
+			'removed this way.\n' +
+			'nn',
 		stateEffects: [
 			{
 				type: 'money',
@@ -807,14 +1152,29 @@ const middleClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-1-3',
+		id: 'middle-class-action-migration-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-1-3.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'“ —_--— Sh\n2 &" i ”\nae WT Te\nbe SRR pes\n— =\nay a\nPwecerte\na bs)\nMIGRATION\nIf you have at least 4 Unemployed\nWorkers, remove up to 2 of them.\nGet 5¥ for each Unskilled Worker\nand 10¥ for each Skilled Worker\nremoved this way.\nnn',
+			'“ —_--— Sh\n' +
+			'2 &" i ”\n' +
+			'ae WT Te\n' +
+			'be SRR pes\n' +
+			'— =\n' +
+			'ay a\n' +
+			'Pwecerte\n' +
+			'a bs)\n' +
+			'MIGRATION\n' +
+			'If you have at least 4 Unemployed\n' +
+			'Workers, remove up to 2 of them.\n' +
+			'Get 5¥ for each Unskilled Worker\n' +
+			'and 10¥ for each Skilled Worker\n' +
+			'removed this way.\n' +
+			'nn',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-1-3.png',
@@ -822,22 +1182,26 @@ const middleClassActionCards = [
 				x: 1,
 				y: 3,
 			},
+			physicalIndex: 17,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [2, 4, 5, 10],
 			money: [5, 10],
 			resources: ['money'],
 			keywords: [
-				'srr',
-				'pes',
-				'pwecerte',
 				'migration',
+				'if',
 				'you',
 				'have',
+				'at',
 				'least',
 				'unemployed',
 				'workers',
 				'remove',
+				'up',
+				'to',
+				'of',
 				'them',
 				'get',
 				'for',
@@ -846,14 +1210,23 @@ const middleClassActionCards = [
 				'worker',
 				'and',
 				'skilled',
+				'removed',
+				'way',
+				'nn',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Middle Class Actions',
+		name: 'MIGRATION',
 		content:
-			'“ —_--— Sh\n2 &" i ”\nae WT Te\nbe SRR pes\n— =\nay a\nPwecerte\na bs)\nMIGRATION\nIf you have at least 4 Unemployed\nWorkers, remove up to 2 of them.\nGet 5¥ for each Unskilled Worker\nand 10¥ for each Skilled Worker\nremoved this way.\nnn',
+			'MIGRATION\n' +
+			'If you have at least 4 Unemployed\n' +
+			'Workers, remove up to 2 of them.\n' +
+			'Get 5¥ for each Unskilled Worker\n' +
+			'and 10¥ for each Skilled Worker\n' +
+			'removed this way.\n' +
+			'nn',
 		stateEffects: [
 			{
 				type: 'money',
@@ -863,14 +1236,23 @@ const middleClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-2-3',
+		id: 'middle-class-action-fake-news-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-2-3.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'~* Bs Nnct + j = Se\nee 4 =\na, SS ae\nVE gx “Noe\nFAKE NEWS\nDraw 6 Voting cubes from\nthe bag. Remove up to 4 of them\nand return the rest to the bag.\n=',
+			'~* Bs Nnct + j = Se\n' +
+			'ee 4 =\n' +
+			'a, SS ae\n' +
+			'VE gx “Noe\n' +
+			'FAKE NEWS\n' +
+			'Draw 6 Voting cubes from\n' +
+			'the bag. Remove up to 4 of them\n' +
+			'and return the rest to the bag.\n' +
+			'=',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-2-3.png',
@@ -878,22 +1260,24 @@ const middleClassActionCards = [
 				x: 2,
 				y: 3,
 			},
+			physicalIndex: 18,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4, 6],
 			resources: ['influence'],
 			keywords: [
-				'nnct',
-				'noe',
 				'fake',
 				'news',
 				'draw',
 				'voting',
 				'cubes',
-				'from',
 				'the',
 				'bag',
 				'remove',
+				'up',
+				'to',
+				'of',
 				'them',
 				'and',
 				'return',
@@ -903,18 +1287,27 @@ const middleClassActionCards = [
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Bs Nnct + j = Se',
-		content:
-			'~* Bs Nnct + j = Se\nee 4 =\na, SS ae\nVE gx “Noe\nFAKE NEWS\nDraw 6 Voting cubes from\nthe bag. Remove up to 4 of them\nand return the rest to the bag.\n=',
+		name: 'FAKE NEWS',
+		content: 'FAKE NEWS\nDraw 6 Voting cubes from\nthe bag. Remove up to 4 of them\nand return the rest to the bag.\n=',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-3-3',
+		id: 'middle-class-action-specialization-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-3-3.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'nn\nJ\nSPECIALIZATION\nPlace a skilled Working Class Worker\nof your choice from the Supply in\nthe Unemployed Workers area. Then,\nassign up to 3 unemployed Working\nClass Workers to your Companies.\n7B/7C\na',
+			'nn\n' +
+			'J\n' +
+			'SPECIALIZATION\n' +
+			'Place a skilled Working Class Worker\n' +
+			'of your choice from the Supply in\n' +
+			'the Unemployed Workers area. Then,\n' +
+			'assign up to 3 unemployed Working\n' +
+			'Class Workers to your Companies.\n' +
+			'7B/7C\n' +
+			'a',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-3-3.png',
@@ -922,6 +1315,8 @@ const middleClassActionCards = [
 				x: 3,
 				y: 3,
 			},
+			physicalIndex: 19,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [3, 7],
@@ -933,26 +1328,40 @@ const middleClassActionCards = [
 				'working',
 				'class',
 				'worker',
-				'your',
+				'of',
 				'choice',
-				'from',
 				'the',
 				'supply',
+				'in',
 				'unemployed',
 				'workers',
 				'area',
-				'then',
 				'assign',
+				'up',
+				'to',
 				'companies',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Middle Class Actions',
+		name: 'SPECIALIZATION',
 		content:
-			'nn\nJ\nSPECIALIZATION\nPlace a skilled Working Class Worker\nof your choice from the Supply in\nthe Unemployed Workers area. Then,\nassign up to 3 unemployed Working\nClass Workers to your Companies.\n7B/7C\na',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['7B', '7C'] }],
+			'SPECIALIZATION\n' +
+			'Place a skilled Working Class Worker\n' +
+			'of your choice from the Supply in\n' +
+			'the Unemployed Workers area. Then,\n' +
+			'assign up to 3 unemployed Working\n' +
+			'Class Workers to your Companies.\n' +
+			'7B/7C\n' +
+			'a',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['7B', '7C'],
+			},
+		],
 		stateEffects: [
 			{
 				type: 'worker',
@@ -973,14 +1382,24 @@ const middleClassActionCards = [
 				target: 'unemployed-workers',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-4-3',
+		id: 'middle-class-action-specialization-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-4-3.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'nn\nJ\nSPECIALIZATION\nPlace a skilled Working Class Worker\nof your choice from the Supply in\nthe Unemployed Workers area. Then,\nassign up to 3 unemployed Working\nClass Workers to your Companies.\n7B/7C\na',
+			'nn\n' +
+			'J\n' +
+			'SPECIALIZATION\n' +
+			'Place a skilled Working Class Worker\n' +
+			'of your choice from the Supply in\n' +
+			'the Unemployed Workers area. Then,\n' +
+			'assign up to 3 unemployed Working\n' +
+			'Class Workers to your Companies.\n' +
+			'7B/7C\n' +
+			'a',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-4-3.png',
@@ -988,6 +1407,8 @@ const middleClassActionCards = [
 				x: 4,
 				y: 3,
 			},
+			physicalIndex: 20,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [3, 7],
@@ -999,26 +1420,40 @@ const middleClassActionCards = [
 				'working',
 				'class',
 				'worker',
-				'your',
+				'of',
 				'choice',
-				'from',
 				'the',
 				'supply',
+				'in',
 				'unemployed',
 				'workers',
 				'area',
-				'then',
 				'assign',
+				'up',
+				'to',
 				'companies',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Middle Class Actions',
+		name: 'SPECIALIZATION',
 		content:
-			'nn\nJ\nSPECIALIZATION\nPlace a skilled Working Class Worker\nof your choice from the Supply in\nthe Unemployed Workers area. Then,\nassign up to 3 unemployed Working\nClass Workers to your Companies.\n7B/7C\na',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['7B', '7C'] }],
+			'SPECIALIZATION\n' +
+			'Place a skilled Working Class Worker\n' +
+			'of your choice from the Supply in\n' +
+			'the Unemployed Workers area. Then,\n' +
+			'assign up to 3 unemployed Working\n' +
+			'Class Workers to your Companies.\n' +
+			'7B/7C\n' +
+			'a',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['7B', '7C'],
+			},
+		],
 		stateEffects: [
 			{
 				type: 'worker',
@@ -1039,14 +1474,27 @@ const middleClassActionCards = [
 				target: 'unemployed-workers',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-5-3',
+		id: 'middle-class-action-state-scholarship-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-5-3.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'q 7 on)! 3\naf 4\nyr, . a\nC *\n~ 9 «\n: \\\n& tN\n7, ,\nSTATE SCHOLARSHIP\nBuy from the State, up to your\nPopulation, paying half the cost\n(rounded up).\n_ id',
+			'q 7 on)! 3\n' +
+			'af 4\n' +
+			'yr, . a\n' +
+			'C *\n' +
+			'~ 9 «\n' +
+			': \\\n' +
+			'& tN\n' +
+			'7, ,\n' +
+			'STATE SCHOLARSHIP\n' +
+			'Buy from the State, up to your\n' +
+			'Population, paying half the cost\n' +
+			'(rounded up).\n' +
+			'_ id',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-5-3.png',
@@ -1054,6 +1502,8 @@ const middleClassActionCards = [
 				x: 5,
 				y: 3,
 			},
+			physicalIndex: 21,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [7, 3, 4, 9],
@@ -1063,26 +1513,27 @@ const middleClassActionCards = [
 				'state',
 				'scholarship',
 				'buy',
-				'from',
 				'the',
-				'your',
+				'up',
+				'to',
 				'population',
 				'paying',
 				'half',
 				'cost',
 				'rounded',
+				'id',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'q 7 on)! 3',
-		content:
-			'af 4\nyr, . a\nC *\n~ 9 «\n: \\\n& tN\n7, ,\nSTATE SCHOLARSHIP\nBuy from the State, up to your\nPopulation, paying half the cost\n(rounded up).\n_ id',
+		name: 'STATE SCHOLARSHIP',
+		content: 'STATE SCHOLARSHIP\nBuy from the State, up to your\nPopulation, paying half the cost\n(rounded up).\n_ id',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-6-3',
+		id: 'middle-class-action-highlight-social-issues-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-6-3.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
@@ -1094,22 +1545,25 @@ const middleClassActionCards = [
 				x: 6,
 				y: 3,
 			},
+			physicalIndex: 22,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [3, 15],
 			money: [15],
 			resources: ['money'],
-			keywords: ['highlight', 'social', 'issues', 'buy', 'from', 'the', 'state', 'for'],
+			keywords: ['highlight', 'social', 'issues', 'buy', 'the', 'state', 'for'],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
 		name: 'HIGHLIGHT SOCIAL ISSUES',
-		content: '- © *. "’\nHIGHLIGHT SOCIAL ISSUES\nBuy 3 @ from the State for 15¥.',
+		content: 'HIGHLIGHT SOCIAL ISSUES\nBuy 3 @ from the State for 15¥.',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-7-3',
+		id: 'middle-class-action-health-crisis-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-7-3.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
@@ -1122,28 +1576,46 @@ const middleClassActionCards = [
 				x: 7,
 				y: 3,
 			},
+			physicalIndex: 23,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [7, 5, 4, 6, 10, 3],
 			money: [7, 10, 3],
 			resources: ['healthcare', 'money'],
-			keywords: ['err', 'segl', 'health', 'crisis', 'sell', 'the', 'state', 'for', 'each'],
+			keywords: ['health', 'crisis', 'sell', 'up', 'to', 'the', 'state', 'for', 'each'],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Y 5',
-		content:
-			'7Y 5 ~*~\nPX 4 .\n“¢ a Se\n_*% ~~ & c\n= Err ~~ SEgl:\nHEALTH CRISIS\nSell up to 6\nto the State for 10¥ each.\n/3\ny',
+		name: 'HEALTH CRISIS',
+		content: 'HEALTH CRISIS\nSell up to 6\nto the State for 10¥ each.\n/3\ny',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-8-3',
+		id: 'middle-class-action-unemployment-initiative-program-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-8-3.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			"—_\nbs '\n= . )\nD b) € ~ -—_ ’ “ ~\ni ~~\n{Ma 4\na *f “aS\n/ + ane ea f y .\nUNEMPLOYMENT INITIATIVE |\nPROGRAM\nAssign up to 3 unemployed |\nWorking Class Workers to your\nCompanies. Get 5¥ from the\nState for each Worker assigned\nthis way. |\nREQUIREMENT\na”",
+			'—_\n' +
+			"bs '\n" +
+			'= . )\n' +
+			'D b) € ~ -—_ ’ “ ~\n' +
+			'i ~~\n' +
+			'{Ma 4\n' +
+			'a *f “aS\n' +
+			'/ + ane ea f y .\n' +
+			'UNEMPLOYMENT INITIATIVE |\n' +
+			'PROGRAM\n' +
+			'Assign up to 3 unemployed |\n' +
+			'Working Class Workers to your\n' +
+			'Companies. Get 5¥ from the\n' +
+			'State for each Worker assigned\n' +
+			'this way. |\n' +
+			'REQUIREMENT\n' +
+			'a”',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-8-3.png',
@@ -1151,38 +1623,49 @@ const middleClassActionCards = [
 				x: 8,
 				y: 3,
 			},
+			physicalIndex: 24,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4, 3, 5],
 			money: [5],
 			resources: ['money'],
 			keywords: [
-				'ane',
 				'unemployment',
 				'initiative',
 				'program',
 				'assign',
+				'up',
+				'to',
 				'unemployed',
 				'working',
 				'class',
 				'workers',
-				'your',
 				'companies',
 				'get',
-				'from',
 				'the',
 				'state',
 				'for',
 				'each',
 				'worker',
+				'assigned',
+				'way',
+				'requirement',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: "bs '",
+		name: 'UNEMPLOYMENT INITIATIVE PROGRAM',
 		content:
-			"—_\nbs '\n= . )\nD b) € ~ -—_ ’ “ ~\ni ~~\n{Ma 4\na *f “aS\n/ + ane ea f y .\nUNEMPLOYMENT INITIATIVE |\nPROGRAM\nAssign up to 3 unemployed |\nWorking Class Workers to your\nCompanies. Get 5¥ from the\nState for each Worker assigned\nthis way. |\nREQUIREMENT\na”",
+			'UNEMPLOYMENT INITIATIVE PROGRAM\n' +
+			'Assign up to 3 unemployed |\n' +
+			'Working Class Workers to your\n' +
+			'Companies. Get 5¥ from the\n' +
+			'State for each Worker assigned\n' +
+			'this way. |\n' +
+			'REQUIREMENT\n' +
+			'a”',
 		stateEffects: [
 			{
 				type: 'money',
@@ -1202,14 +1685,28 @@ const middleClassActionCards = [
 				target: 'company',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-1-4',
+		id: 'middle-class-action-higher-education-program-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-1-4.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'yj ue < a -\nea\nEs |\nf -\n| f ws\nI f P,) _— >\n7 2 eee\nc i ee h j —\na ee +\nky,\nHIGHER EDUCATION PROGRAM\nSell up to 6\nto the State for 10¥ each.\n/3',
+			'yj ue < a -\n' +
+			'ea\n' +
+			'Es |\n' +
+			'f -\n' +
+			'| f ws\n' +
+			'I f P,) _— >\n' +
+			'7 2 eee\n' +
+			'c i ee h j —\n' +
+			'a ee +\n' +
+			'ky,\n' +
+			'HIGHER EDUCATION PROGRAM\n' +
+			'Sell up to 6\n' +
+			'to the State for 10¥ each.\n' +
+			'/3',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-1-4.png',
@@ -1217,28 +1714,43 @@ const middleClassActionCards = [
 				x: 1,
 				y: 4,
 			},
+			physicalIndex: 25,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [7, 2, 6, 10, 3],
 			money: [10],
 			resources: ['education', 'money'],
-			keywords: ['eee', 'higher', 'education', 'program', 'sell', 'the', 'state', 'for', 'each'],
+			keywords: ['higher', 'education', 'program', 'sell', 'up', 'to', 'the', 'state', 'for', 'each'],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'yj ue < a -',
-		content:
-			'ea\nEs |\nf -\n| f ws\nI f P,) _— >\n7 2 eee\nc i ee h j —\na ee +\nky,\nHIGHER EDUCATION PROGRAM\nSell up to 6\nto the State for 10¥ each.\n/3',
+		name: 'HIGHER EDUCATION PROGRAM',
+		content: 'HIGHER EDUCATION PROGRAM\nSell up to 6\nto the State for 10¥ each.\n/3',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-2-4',
+		id: 'middle-class-action-voice-of-middle-class-workers-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-2-4.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'ae uv a\n— FUT » Da\ney" ti a A\nontla\nJo » =\nBt a WF\nVOICE OF MIDDLE CLASS\nWORKERS\nAdd Voting cubes to the bag\nequal to 2 plus the number\nof Public and Capitalist Class\nCompanies where your Workers\nare Employed.\ni',
+			'ae uv a\n' +
+			'— FUT » Da\n' +
+			'ey" ti a A\n' +
+			'ontla\n' +
+			'Jo » =\n' +
+			'Bt a WF\n' +
+			'VOICE OF MIDDLE CLASS\n' +
+			'WORKERS\n' +
+			'Add Voting cubes to the bag\n' +
+			'equal to 2 plus the number\n' +
+			'of Public and Capitalist Class\n' +
+			'Companies where your Workers\n' +
+			'are Employed.\n' +
+			'i',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-2-4.png',
@@ -1246,20 +1758,22 @@ const middleClassActionCards = [
 				x: 2,
 				y: 4,
 			},
+			physicalIndex: 26,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2],
 			resources: ['influence'],
 			keywords: [
-				'fut',
-				'ontla',
 				'voice',
+				'of',
 				'middle',
 				'class',
 				'workers',
 				'add',
 				'voting',
 				'cubes',
+				'to',
 				'the',
 				'bag',
 				'equal',
@@ -1269,18 +1783,28 @@ const middleClassActionCards = [
 				'and',
 				'capitalist',
 				'companies',
+				'where',
+				'are',
+				'employed',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'ae uv a',
+		name: 'VOICE OF MIDDLE CLASS WORKERS',
 		content:
-			'— FUT » Da\ney" ti a A\nontla\nJo » =\nBt a WF\nVOICE OF MIDDLE CLASS\nWORKERS\nAdd Voting cubes to the bag\nequal to 2 plus the number\nof Public and Capitalist Class\nCompanies where your Workers\nare Employed.\ni',
+			'VOICE OF MIDDLE CLASS WORKERS\n' +
+			'Add Voting cubes to the bag\n' +
+			'equal to 2 plus the number\n' +
+			'of Public and Capitalist Class\n' +
+			'Companies where your Workers\n' +
+			'are Employed.\n' +
+			'i',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-3-4',
+		id: 'middle-class-action-new-theme-park-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-3-4.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
@@ -1292,27 +1816,39 @@ const middleClassActionCards = [
 				x: 3,
 				y: 4,
 			},
+			physicalIndex: 27,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [6, 1],
 			money: [6],
 			resources: ['money'],
-			keywords: ['soa', 'new', 'theme', 'park', 'pay', 'per', 'population', 'gain', 'prosperity'],
+			keywords: ['new', 'theme', 'park', 'pay', 'per', 'population', 'gain', 'prosperity'],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Soa a Fe',
-		content: '— Soa a Fe\nG . ‘\nNEW THEME PARK\nPay 6¥ per Population.\nGain 1 Prosperity.\n—',
+		name: 'NEW THEME PARK',
+		content: 'NEW THEME PARK\nPay 6¥ per Population.\nGain 1 Prosperity.\n—',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-4-4',
+		id: 'middle-class-action-interest-groups-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-4-4.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			"||\n;\n' |\naA \\W -\nINTEREST GROUPS\nReveal Voting cubes from the bag\nuntil you reveal 3 opponents'\ncubes. Replace them with your\nVoting cubes and return all\nrevealed cubes to the bag.",
+			'||\n' +
+			';\n' +
+			"' |\n" +
+			'aA \\W -\n' +
+			'INTEREST GROUPS\n' +
+			'Reveal Voting cubes from the bag\n' +
+			"until you reveal 3 opponents'\n" +
+			'cubes. Replace them with your\n' +
+			'Voting cubes and return all\n' +
+			'revealed cubes to the bag.',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-4-4.png',
@@ -1320,6 +1856,8 @@ const middleClassActionCards = [
 				x: 4,
 				y: 4,
 			},
+			physicalIndex: 28,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [3],
@@ -1330,7 +1868,6 @@ const middleClassActionCards = [
 				'reveal',
 				'voting',
 				'cubes',
-				'from',
 				'the',
 				'bag',
 				'until',
@@ -1338,28 +1875,42 @@ const middleClassActionCards = [
 				'opponents',
 				'replace',
 				'them',
-				'with',
-				'your',
 				'and',
 				'return',
 				'all',
+				'revealed',
+				'to',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'aA \\W -',
+		name: 'INTEREST GROUPS',
 		content:
-			"||\n;\n' |\naA \\W -\nINTEREST GROUPS\nReveal Voting cubes from the bag\nuntil you reveal 3 opponents'\ncubes. Replace them with your\nVoting cubes and return all\nrevealed cubes to the bag.",
+			'INTEREST GROUPS\n' +
+			'Reveal Voting cubes from the bag\n' +
+			"until you reveal 3 opponents'\n" +
+			'cubes. Replace them with your\n' +
+			'Voting cubes and return all\n' +
+			'revealed cubes to the bag.',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-5-4',
+		id: 'middle-class-action-export-subsidy-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-5-4.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'4\n—\n| ey -§\nOlt a ll\nEXPORT SUBSIDY\nSell to the Foreign Market.\nFor every transaction you make,\nget 5¥ from the State.\nS',
+			'4\n' +
+			'—\n' +
+			'| ey -§\n' +
+			'Olt a ll\n' +
+			'EXPORT SUBSIDY\n' +
+			'Sell to the Foreign Market.\n' +
+			'For every transaction you make,\n' +
+			'get 5¥ from the State.\n' +
+			'S',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-5-4.png',
@@ -1367,16 +1918,18 @@ const middleClassActionCards = [
 				x: 5,
 				y: 4,
 			},
+			physicalIndex: 29,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4, 5],
 			money: [5],
 			resources: ['money'],
 			keywords: [
-				'olt',
 				'export',
 				'subsidy',
 				'sell',
+				'to',
 				'the',
 				'foreign',
 				'market',
@@ -1386,16 +1939,14 @@ const middleClassActionCards = [
 				'you',
 				'make',
 				'get',
-				'from',
 				'state',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'ey -',
-		content:
-			'4\n—\n| ey -§\nOlt a ll\nEXPORT SUBSIDY\nSell to the Foreign Market.\nFor every transaction you make,\nget 5¥ from the State.\nS',
+		name: 'EXPORT SUBSIDY',
+		content: 'EXPORT SUBSIDY\nSell to the Foreign Market.\nFor every transaction you make,\nget 5¥ from the State.\nS',
 		stateEffects: [
 			{
 				type: 'money',
@@ -1419,14 +1970,23 @@ const middleClassActionCards = [
 				target: 'foreign-market',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-6-4',
+		id: 'middle-class-action-export-subsidy-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-6-4.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'4\n—\n| ey -§\nOlt a ll\nEXPORT SUBSIDY\nSell to the Foreign Market.\nFor every transaction you make,\nget 5¥ from the State.\nS',
+			'4\n' +
+			'—\n' +
+			'| ey -§\n' +
+			'Olt a ll\n' +
+			'EXPORT SUBSIDY\n' +
+			'Sell to the Foreign Market.\n' +
+			'For every transaction you make,\n' +
+			'get 5¥ from the State.\n' +
+			'S',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-6-4.png',
@@ -1434,16 +1994,18 @@ const middleClassActionCards = [
 				x: 6,
 				y: 4,
 			},
+			physicalIndex: 30,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [4, 5],
 			money: [5],
 			resources: ['money'],
 			keywords: [
-				'olt',
 				'export',
 				'subsidy',
 				'sell',
+				'to',
 				'the',
 				'foreign',
 				'market',
@@ -1453,16 +2015,14 @@ const middleClassActionCards = [
 				'you',
 				'make',
 				'get',
-				'from',
 				'state',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'ey -',
-		content:
-			'4\n—\n| ey -§\nOlt a ll\nEXPORT SUBSIDY\nSell to the Foreign Market.\nFor every transaction you make,\nget 5¥ from the State.\nS',
+		name: 'EXPORT SUBSIDY',
+		content: 'EXPORT SUBSIDY\nSell to the Foreign Market.\nFor every transaction you make,\nget 5¥ from the State.\nS',
 		stateEffects: [
 			{
 				type: 'money',
@@ -1486,14 +2046,29 @@ const middleClassActionCards = [
 				target: 'foreign-market',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-7-4',
+		id: 'middle-class-action-migration-3',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-7-4.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'— ae"\n—_. & “\n——_ i Ee T\nee LOR yar\n=F <\nLa\n= gS\nea 1) Be == “\nMIGRATION\nIf you have at least 4 Unemployed\nWorkers, remove up to 2 of them.\nGet 5 ¥ for each Unskilled Worker\nand 10¥ for each Skilled Worker\nremoved this way.\n7',
+			'— ae"\n' +
+			'—_. & “\n' +
+			'——_ i Ee T\n' +
+			'ee LOR yar\n' +
+			'=F <\n' +
+			'La\n' +
+			'= gS\n' +
+			'ea 1) Be == “\n' +
+			'MIGRATION\n' +
+			'If you have at least 4 Unemployed\n' +
+			'Workers, remove up to 2 of them.\n' +
+			'Get 5 ¥ for each Unskilled Worker\n' +
+			'and 10¥ for each Skilled Worker\n' +
+			'removed this way.\n' +
+			'7',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-7-4.png',
@@ -1501,21 +2076,26 @@ const middleClassActionCards = [
 				x: 7,
 				y: 4,
 			},
+			physicalIndex: 31,
+			copyIndex: 3,
 		},
 		parsed: {
 			numbers: [1, 4, 2, 5, 10, 7],
 			money: [5, 10],
 			resources: ['money'],
 			keywords: [
-				'lor',
-				'yar',
 				'migration',
+				'if',
 				'you',
 				'have',
+				'at',
 				'least',
 				'unemployed',
 				'workers',
 				'remove',
+				'up',
+				'to',
+				'of',
 				'them',
 				'get',
 				'for',
@@ -1525,23 +2105,43 @@ const middleClassActionCards = [
 				'and',
 				'skilled',
 				'removed',
+				'way',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Middle Class Actions',
+		name: 'MIGRATION',
 		content:
-			'— ae"\n—_. & “\n——_ i Ee T\nee LOR yar\n=F <\nLa\n= gS\nea 1) Be == “\nMIGRATION\nIf you have at least 4 Unemployed\nWorkers, remove up to 2 of them.\nGet 5 ¥ for each Unskilled Worker\nand 10¥ for each Skilled Worker\nremoved this way.\n7',
+			'MIGRATION\n' +
+			'If you have at least 4 Unemployed\n' +
+			'Workers, remove up to 2 of them.\n' +
+			'Get 5 ¥ for each Unskilled Worker\n' +
+			'and 10¥ for each Skilled Worker\n' +
+			'removed this way.\n' +
+			'7',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-8-4',
+		id: 'middle-class-action-labor-market-deregulation-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-8-4.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			"' ry\n2 4\ns a : . ™ : of\ni. aa TOA Y\nLABOR MARKET\nDEREGULATION\nAssign any number of\nunemployed Workers. If [Ze is in\neffect, you may also reassign any\nnumber of Workers already\nassigned to other Companies.\n2B /2C\n.",
+			"' ry\n" +
+			'2 4\n' +
+			's a : . ™ : of\n' +
+			'i. aa TOA Y\n' +
+			'LABOR MARKET\n' +
+			'DEREGULATION\n' +
+			'Assign any number of\n' +
+			'unemployed Workers. If [Ze is in\n' +
+			'effect, you may also reassign any\n' +
+			'number of Workers already\n' +
+			'assigned to other Companies.\n' +
+			'2B /2C\n' +
+			'.',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-8-4.png',
@@ -1549,20 +2149,26 @@ const middleClassActionCards = [
 				x: 8,
 				y: 4,
 			},
+			physicalIndex: 32,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2, 4],
 			policies: ['2B', '2C'],
 			keywords: [
-				'toa',
 				'labor',
 				'market',
 				'deregulation',
 				'assign',
 				'any',
 				'number',
+				'of',
 				'unemployed',
 				'workers',
+				'if',
+				'ze',
+				'is',
+				'in',
 				'effect',
 				'you',
 				'may',
@@ -1570,6 +2176,7 @@ const middleClassActionCards = [
 				'reassign',
 				'already',
 				'assigned',
+				'to',
 				'other',
 				'companies',
 			],
@@ -1577,19 +2184,44 @@ const middleClassActionCards = [
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Middle Class Actions',
+		name: 'LABOR MARKET DEREGULATION',
 		content:
-			"' ry\n2 4\ns a : . ™ : of\ni. aa TOA Y\nLABOR MARKET\nDEREGULATION\nAssign any number of\nunemployed Workers. If [Ze is in\neffect, you may also reassign any\nnumber of Workers already\nassigned to other Companies.\n2B /2C\n.",
-		requirements: [{ type: 'policy', mode: 'any', policies: ['2B', '2C'] }],
+			'LABOR MARKET DEREGULATION\n' +
+			'Assign any number of\n' +
+			'unemployed Workers. If [Ze is in\n' +
+			'effect, you may also reassign any\n' +
+			'number of Workers already\n' +
+			'assigned to other Companies.\n' +
+			'2B /2C\n' +
+			'.',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['2B', '2C'],
+			},
+		],
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-1-5',
+		id: 'middle-class-action-personal-consumption-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-1-5.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'? a il\naed 7 at\n‘ Dy wn ?.\n: ; oy\n™ é\nPERSONAL CONSUMPTION\nBuy a good or service from\nany number of sources, up to\nyour Population from each.\nBuy a good or service from\na single source, up to twice\nyour Population.',
+			'? a il\n' +
+			'aed 7 at\n' +
+			'‘ Dy wn ?.\n' +
+			': ; oy\n' +
+			'™ é\n' +
+			'PERSONAL CONSUMPTION\n' +
+			'Buy a good or service from\n' +
+			'any number of sources, up to\n' +
+			'your Population from each.\n' +
+			'Buy a good or service from\n' +
+			'a single source, up to twice\n' +
+			'your Population.',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-1-5.png',
@@ -1597,21 +2229,24 @@ const middleClassActionCards = [
 				x: 1,
 				y: 5,
 			},
+			physicalIndex: 33,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [7],
 			keywords: [
-				'aed',
 				'personal',
 				'consumption',
 				'buy',
 				'good',
+				'or',
 				'service',
-				'from',
 				'any',
 				'number',
+				'of',
 				'sources',
-				'your',
+				'up',
+				'to',
 				'population',
 				'each',
 				'single',
@@ -1622,18 +2257,36 @@ const middleClassActionCards = [
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'a il',
+		name: 'PERSONAL CONSUMPTION',
 		content:
-			'? a il\naed 7 at\n‘ Dy wn ?.\n: ; oy\n™ é\nPERSONAL CONSUMPTION\nBuy a good or service from\nany number of sources, up to\nyour Population from each.\nBuy a good or service from\na single source, up to twice\nyour Population.',
+			'PERSONAL CONSUMPTION\n' +
+			'Buy a good or service from\n' +
+			'any number of sources, up to\n' +
+			'your Population from each.\n' +
+			'Buy a good or service from\n' +
+			'a single source, up to twice\n' +
+			'your Population.',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-2-5',
+		id: 'middle-class-action-personal-consumption-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-2-5.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'? mi ie\naed 7 at\n‘ Dy wn ?.\n: ; wy\n™ é\nPERSONAL CONSUMPTION\nBuy a good or service from\nany number of sources, up to\nyour Population from each.\nBuy a good or service from\na single source, up to twice\nyour Population.',
+			'? mi ie\n' +
+			'aed 7 at\n' +
+			'‘ Dy wn ?.\n' +
+			': ; wy\n' +
+			'™ é\n' +
+			'PERSONAL CONSUMPTION\n' +
+			'Buy a good or service from\n' +
+			'any number of sources, up to\n' +
+			'your Population from each.\n' +
+			'Buy a good or service from\n' +
+			'a single source, up to twice\n' +
+			'your Population.',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-2-5.png',
@@ -1641,21 +2294,24 @@ const middleClassActionCards = [
 				x: 2,
 				y: 5,
 			},
+			physicalIndex: 34,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [7],
 			keywords: [
-				'aed',
 				'personal',
 				'consumption',
 				'buy',
 				'good',
+				'or',
 				'service',
-				'from',
 				'any',
 				'number',
+				'of',
 				'sources',
-				'your',
+				'up',
+				'to',
 				'population',
 				'each',
 				'single',
@@ -1666,18 +2322,32 @@ const middleClassActionCards = [
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'mi ie',
+		name: 'PERSONAL CONSUMPTION',
 		content:
-			'? mi ie\naed 7 at\n‘ Dy wn ?.\n: ; wy\n™ é\nPERSONAL CONSUMPTION\nBuy a good or service from\nany number of sources, up to\nyour Population from each.\nBuy a good or service from\na single source, up to twice\nyour Population.',
+			'PERSONAL CONSUMPTION\n' +
+			'Buy a good or service from\n' +
+			'any number of sources, up to\n' +
+			'your Population from each.\n' +
+			'Buy a good or service from\n' +
+			'a single source, up to twice\n' +
+			'your Population.',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-3-5',
+		id: 'middle-class-action-immigration-reform-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-3-5.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'and > a\n——e |\na Ah. ie\nTe ; , ae af)\ni is ‘ neal\nIMMIGRATION REFORM\nPropose a Bill for Immigration.\nAdd 2 Voting cubes to the bag.',
+			'and > a\n' +
+			'——e |\n' +
+			'a Ah. ie\n' +
+			'Te ; , ae af)\n' +
+			'i is ‘ neal\n' +
+			'IMMIGRATION REFORM\n' +
+			'Propose a Bill for Immigration.\n' +
+			'Add 2 Voting cubes to the bag.',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-3-5.png',
@@ -1685,45 +2355,43 @@ const middleClassActionCards = [
 				x: 3,
 				y: 5,
 			},
+			physicalIndex: 35,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [2],
 			resources: ['influence'],
-			keywords: [
-				'and',
-				'neal',
-				'immigration',
-				'reform',
-				'propose',
-				'bill',
-				'for',
-				'add',
-				'voting',
-				'cubes',
-				'the',
-				'bag',
-			],
+			keywords: ['immigration', 'reform', 'propose', 'bill', 'for', 'add', 'voting', 'cubes', 'to', 'the', 'bag'],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'and > a',
-		content:
-			'——e |\na Ah. ie\nTe ; , ae af)\ni is ‘ neal\nIMMIGRATION REFORM\nPropose a Bill for Immigration.\nAdd 2 Voting cubes to the bag.',
+		name: 'IMMIGRATION REFORM',
+		content: 'IMMIGRATION REFORM\nPropose a Bill for Immigration.\nAdd 2 Voting cubes to the bag.',
 		stateEffects: [
 			{
 				type: 'policy',
 				action: 'propose',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-4-5',
+		id: 'middle-class-action-growing-business-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-4-5.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'I fe = be\n“ . _ y ¥ - ae i\n; ‘ J\nsn if a“ :\nGROWING BUSINESS\nBuild a Storage for free and place it\nbeneath your board, corresponding\nto a specific resource. You may then\nBuild a Company. If that Company\nproduces that resource, pay 4¥ less.',
+			'I fe = be\n' +
+			'“ . _ y ¥ - ae i\n' +
+			'; ‘ J\n' +
+			'sn if a“ :\n' +
+			'GROWING BUSINESS\n' +
+			'Build a Storage for free and place it\n' +
+			'beneath your board, corresponding\n' +
+			'to a specific resource. You may then\n' +
+			'Build a Company. If that Company\n' +
+			'produces that resource, pay 4¥ less.',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-4-5.png',
@@ -1731,6 +2399,8 @@ const middleClassActionCards = [
 				x: 4,
 				y: 5,
 			},
+			physicalIndex: 36,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4],
@@ -1745,24 +2415,33 @@ const middleClassActionCards = [
 				'free',
 				'and',
 				'place',
+				'it',
 				'beneath',
-				'your',
 				'board',
 				'corresponding',
+				'to',
 				'specific',
 				'resource',
 				'you',
 				'may',
-				'then',
 				'company',
+				'if',
+				'produces',
+				'pay',
+				'less',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'I fe = be',
+		name: 'GROWING BUSINESS',
 		content:
-			'“ . _ y ¥ - ae i\n; ‘ J\nsn if a“ :\nGROWING BUSINESS\nBuild a Storage for free and place it\nbeneath your board, corresponding\nto a specific resource. You may then\nBuild a Company. If that Company\nproduces that resource, pay 4¥ less.',
+			'GROWING BUSINESS\n' +
+			'Build a Storage for free and place it\n' +
+			'beneath your board, corresponding\n' +
+			'to a specific resource. You may then\n' +
+			'Build a Company. If that Company\n' +
+			'produces that resource, pay 4¥ less.',
 		stateEffects: [
 			{
 				type: 'company',
@@ -1770,14 +2449,24 @@ const middleClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-5-5',
+		id: 'middle-class-action-growing-business-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-5-5.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'I fe = be\n“ . _ y ¥ - ae i\n; ‘ J\nsn if a“ :\nGROWING BUSINESS\nBuild a Storage for free and place it\nbeneath your board, corresponding\nto a specific resource. You may then\nBuild a Company. If that Company\nproduces that resource, pay 4¥ less.',
+			'I fe = be\n' +
+			'“ . _ y ¥ - ae i\n' +
+			'; ‘ J\n' +
+			'sn if a“ :\n' +
+			'GROWING BUSINESS\n' +
+			'Build a Storage for free and place it\n' +
+			'beneath your board, corresponding\n' +
+			'to a specific resource. You may then\n' +
+			'Build a Company. If that Company\n' +
+			'produces that resource, pay 4¥ less.',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-5-5.png',
@@ -1785,6 +2474,8 @@ const middleClassActionCards = [
 				x: 5,
 				y: 5,
 			},
+			physicalIndex: 37,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [4],
@@ -1799,24 +2490,33 @@ const middleClassActionCards = [
 				'free',
 				'and',
 				'place',
+				'it',
 				'beneath',
-				'your',
 				'board',
 				'corresponding',
+				'to',
 				'specific',
 				'resource',
 				'you',
 				'may',
-				'then',
 				'company',
+				'if',
+				'produces',
+				'pay',
+				'less',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'I fe = be',
+		name: 'GROWING BUSINESS',
 		content:
-			'“ . _ y ¥ - ae i\n; ‘ J\nsn if a“ :\nGROWING BUSINESS\nBuild a Storage for free and place it\nbeneath your board, corresponding\nto a specific resource. You may then\nBuild a Company. If that Company\nproduces that resource, pay 4¥ less.',
+			'GROWING BUSINESS\n' +
+			'Build a Storage for free and place it\n' +
+			'beneath your board, corresponding\n' +
+			'to a specific resource. You may then\n' +
+			'Build a Company. If that Company\n' +
+			'produces that resource, pay 4¥ less.',
 		stateEffects: [
 			{
 				type: 'company',
@@ -1824,14 +2524,27 @@ const middleClassActionCards = [
 				target: 'self',
 			},
 		],
+		stateEffectsCoverage: 'partial',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-6-5',
+		id: 'middle-class-action-public-sector-overtime-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-6-5.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			"pe\n5 anf\n- <- ~ 4\neen L Se A\nPUBLIC SECTOR OVERTIME\nChoose an operational Public\nCompany. The State pays its\nWorkers' Wages and performs\na Production for that Company.\nYou may then Buy Goods or\nServices from the State of the type\nproduced by that Company,\nup to your Population.",
+			'pe\n' +
+			'5 anf\n' +
+			'- <- ~ 4\n' +
+			'een L Se A\n' +
+			'PUBLIC SECTOR OVERTIME\n' +
+			'Choose an operational Public\n' +
+			'Company. The State pays its\n' +
+			"Workers' Wages and performs\n" +
+			'a Production for that Company.\n' +
+			'You may then Buy Goods or\n' +
+			'Services from the State of the type\n' +
+			'produced by that Company,\n' +
+			'up to your Population.',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-6-5.png',
@@ -1839,17 +2552,18 @@ const middleClassActionCards = [
 				x: 6,
 				y: 5,
 			},
+			physicalIndex: 38,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [5, 4],
 			resources: ['money'],
 			keywords: [
-				'anf',
-				'een',
 				'public',
 				'sector',
 				'overtime',
 				'choose',
+				'an',
 				'operational',
 				'company',
 				'the',
@@ -1862,23 +2576,60 @@ const middleClassActionCards = [
 				'performs',
 				'production',
 				'for',
+				'you',
+				'may',
+				'buy',
+				'goods',
+				'or',
+				'services',
+				'of',
+				'type',
+				'produced',
+				'by',
+				'up',
+				'to',
+				'population',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Middle Class Actions',
+		name: 'PUBLIC SECTOR OVERTIME',
 		content:
-			"pe\n5 anf\n- <- ~ 4\neen L Se A\nPUBLIC SECTOR OVERTIME\nChoose an operational Public\nCompany. The State pays its\nWorkers' Wages and performs\na Production for that Company.\nYou may then Buy Goods or\nServices from the State of the type\nproduced by that Company,\nup to your Population.",
+			'PUBLIC SECTOR OVERTIME\n' +
+			'Choose an operational Public\n' +
+			'Company. The State pays its\n' +
+			"Workers' Wages and performs\n" +
+			'a Production for that Company.\n' +
+			'You may then Buy Goods or\n' +
+			'Services from the State of the type\n' +
+			'produced by that Company,\n' +
+			'up to your Population.',
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-7-5',
+		id: 'middle-class-action-supplemental-income-program-1',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-7-5.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'4} \\ > a >\nPy\n, m7\nat\n.\n3\na a a a\nSUPPLEMENTAL INCOME\nPROGRAM\nGet 2% from the State for each of\nyour employed Workers in Public\nand Capitalist Class Companies.\nYou may then Buy Goods\n& Services.\n2B /2C /5 ;\ny >',
+			'4} \\ > a >\n' +
+			'Py\n' +
+			', m7\n' +
+			'at\n' +
+			'.\n' +
+			'3\n' +
+			'a a a a\n' +
+			'SUPPLEMENTAL INCOME\n' +
+			'PROGRAM\n' +
+			'Get 2% from the State for each of\n' +
+			'your employed Workers in Public\n' +
+			'and Capitalist Class Companies.\n' +
+			'You may then Buy Goods\n' +
+			'& Services.\n' +
+			'2B /2C /5 ;\n' +
+			'y >',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-7-5.png',
@@ -1886,6 +2637,8 @@ const middleClassActionCards = [
 				x: 7,
 				y: 5,
 			},
+			physicalIndex: 39,
+			copyIndex: 1,
 		},
 		parsed: {
 			numbers: [4, 7, 3, 2, 5],
@@ -1895,38 +2648,71 @@ const middleClassActionCards = [
 				'income',
 				'program',
 				'get',
-				'from',
 				'the',
 				'state',
 				'for',
 				'each',
-				'your',
+				'of',
 				'employed',
 				'workers',
+				'in',
 				'public',
 				'and',
 				'capitalist',
 				'class',
 				'companies',
 				'you',
+				'may',
+				'buy',
+				'goods',
+				'services',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Middle Class Actions',
+		name: 'SUPPLEMENTAL INCOME PROGRAM',
 		content:
-			'4} \\ > a >\nPy\n, m7\nat\n.\n3\na a a a\nSUPPLEMENTAL INCOME\nPROGRAM\nGet 2% from the State for each of\nyour employed Workers in Public\nand Capitalist Class Companies.\nYou may then Buy Goods\n& Services.\n2B /2C /5 ;\ny >',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['2B', '2C'] }],
+			'SUPPLEMENTAL INCOME PROGRAM\n' +
+			'Get 2% from the State for each of\n' +
+			'your employed Workers in Public\n' +
+			'and Capitalist Class Companies.\n' +
+			'You may then Buy Goods\n' +
+			'& Services.\n' +
+			'2B /2C /5 ;\n' +
+			'y >',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['2B', '2C'],
+			},
+		],
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 	{
-		id: 'middle-class-action-cards-grid-40-items-8-5-middle-class-actions-deck-175-pos-8-5',
+		id: 'middle-class-action-supplemental-income-program-2',
 		frontImage:
 			'fixtures/assets/decks-sorted/middle-class-action-cards/grid_40-items_8-5__middle-class-actions-deck-175__pos-8-5.png',
 		backImage: 'fixtures/assets/decks-sorted/middle-class-action-cards/back__middle-class-actions-deck-175.jpg',
 		rawText:
-			'4} \\ > a >\nPy\n, m7\nat\n..\n3\na a a ae\nSUPPLEMENTAL INCOME\nPROGRAM\nGet 2% from the State for each of\nyour employed Workers in Public\nand Capitalist Class Companies.\nYou may then Buy Goods\n& Services.\n2B /2C /5 ;\ny >',
+			'4} \\ > a >\n' +
+			'Py\n' +
+			', m7\n' +
+			'at\n' +
+			'..\n' +
+			'3\n' +
+			'a a a ae\n' +
+			'SUPPLEMENTAL INCOME\n' +
+			'PROGRAM\n' +
+			'Get 2% from the State for each of\n' +
+			'your employed Workers in Public\n' +
+			'and Capitalist Class Companies.\n' +
+			'You may then Buy Goods\n' +
+			'& Services.\n' +
+			'2B /2C /5 ;\n' +
+			'y >',
 		source: {
 			deck: 'middle-class-action-cards',
 			file: 'grid_40-items_8-5__middle-class-actions-deck-175__pos-8-5.png',
@@ -1934,6 +2720,8 @@ const middleClassActionCards = [
 				x: 8,
 				y: 5,
 			},
+			physicalIndex: 40,
+			copyIndex: 2,
 		},
 		parsed: {
 			numbers: [4, 7, 3, 2, 5],
@@ -1943,30 +2731,48 @@ const middleClassActionCards = [
 				'income',
 				'program',
 				'get',
-				'from',
 				'the',
 				'state',
 				'for',
 				'each',
-				'your',
+				'of',
 				'employed',
 				'workers',
+				'in',
 				'public',
 				'and',
 				'capitalist',
 				'class',
 				'companies',
 				'you',
+				'may',
+				'buy',
+				'goods',
+				'services',
 			],
 		},
 		kind: 'action',
 		role: 'middleClass',
 		category: 'base',
-		name: 'Middle Class Actions',
+		name: 'SUPPLEMENTAL INCOME PROGRAM',
 		content:
-			'4} \\ > a >\nPy\n, m7\nat\n..\n3\na a a ae\nSUPPLEMENTAL INCOME\nPROGRAM\nGet 2% from the State for each of\nyour employed Workers in Public\nand Capitalist Class Companies.\nYou may then Buy Goods\n& Services.\n2B /2C /5 ;\ny >',
-		requirements: [{ type: 'policy', mode: 'any', policies: ['2B', '2C'] }],
+			'SUPPLEMENTAL INCOME PROGRAM\n' +
+			'Get 2% from the State for each of\n' +
+			'your employed Workers in Public\n' +
+			'and Capitalist Class Companies.\n' +
+			'You may then Buy Goods\n' +
+			'& Services.\n' +
+			'2B /2C /5 ;\n' +
+			'y >',
+		requirements: [
+			{
+				type: 'policy',
+				mode: 'any',
+				policies: ['2B', '2C'],
+			},
+		],
 		stateEffects: [],
+		stateEffectsCoverage: 'unparsed',
 	},
 ] satisfies MiddleClassActionCardsCard[];
 
