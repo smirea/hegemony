@@ -1,5 +1,7 @@
 # Deck Assets
 
+Deck image files have been moved into `fixtures/assets/decks-sorted`. This generated index is retained for source provenance: original deck IDs, Tabletop Simulator object references, grid dimensions, and board positions. The table links keep the original generated filenames and are not expected to resolve after sorting.
+
 Generated from the Tabletop Simulator Workshop save. Most decks in the save are unnamed, so this index preserves the best provenance the save exposes: source object path, GUID, board position, sheet grid, and contained card count.
 
 | Deck     | Files                                                             | Grid | Cards | Source                                                           | Position      |
