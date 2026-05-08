@@ -25,5 +25,13 @@
 		"useDefineForClassFields": true
 	},
 	"exclude": ["node_modules", "dist", "build"],
-	"include": ["client/src", "client/vite.config.ts", "server/src", "shared", "scripts", "packages"]
+	"include": [
+		"client/src",
+		"client/vite.config.ts",
+		"server/src",
+		"shared",
+		"scripts",
+		"packages",
+		"fixtures/assets/decks-sorted/**/*.ts"
+	]
 }

@@ -1,0 +1,601 @@
+import type { ParsedCompanyDeckCard } from '../types';
+
+interface PublicCompanyCardsCard extends ParsedCompanyDeckCard {}
+
+const publicCompanyCards = [
+	{
+		frontImage: 'fixtures/assets/decks-sorted/public-company-cards/single__national-public-broadcasting-deck-147.png',
+		backImage: 'fixtures/assets/decks-sorted/public-company-cards/back__public-company-deck-141.jpg',
+		rawText:
+			'University Hospital: healthcare company, cost 30, production 6, wages level1 25, level2 30, level3 35. Workers: healthcare workingClass/middleClass; unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+		source: {
+			deck: 'public-company-cards',
+			file: 'single__national-public-broadcasting-deck-147.png',
+		},
+		parsed: {
+			numbers: [30, 6, 1, 25, 2, 3, 35],
+			resources: ['healthcare', 'education', 'money'],
+			keywords: [
+				'university',
+				'hospital',
+				'healthcare',
+				'company',
+				'cost',
+				'production',
+				'wages',
+				'workers',
+				'workingclass',
+				'middleclass',
+				'unskilled',
+			],
+		},
+		kind: 'company',
+		id: 'public-university-hospital',
+		owner: 'state',
+		name: 'University Hospital',
+		industry: 'healthcare',
+		cost: 30,
+		production: 6,
+		wages: {
+			l1: 25,
+			l2: 30,
+			l3: 35,
+		},
+		workers: [
+			{
+				type: 'healthcare',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+		],
+	},
+	{
+		frontImage: 'fixtures/assets/decks-sorted/public-company-cards/single__public-hospital-deck-142.png',
+		backImage: 'fixtures/assets/decks-sorted/public-company-cards/back__public-company-deck-141.jpg',
+		rawText:
+			'University: education company, cost 30, production 6, wages level1 25, level2 30, level3 35. Workers: education workingClass/middleClass; unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+		source: {
+			deck: 'public-company-cards',
+			file: 'single__public-hospital-deck-142.png',
+		},
+		parsed: {
+			numbers: [30, 6, 1, 25, 2, 3, 35],
+			resources: ['education', 'money'],
+			keywords: [
+				'university',
+				'education',
+				'company',
+				'cost',
+				'production',
+				'wages',
+				'workers',
+				'workingclass',
+				'middleclass',
+				'unskilled',
+			],
+		},
+		kind: 'company',
+		id: 'public-university',
+		owner: 'state',
+		name: 'University',
+		industry: 'education',
+		cost: 30,
+		production: 6,
+		wages: {
+			l1: 25,
+			l2: 30,
+			l3: 35,
+		},
+		workers: [
+			{
+				type: 'education',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+		],
+	},
+	{
+		frontImage: 'fixtures/assets/decks-sorted/public-company-cards/single__public-hospital-deck-143.png',
+		backImage: 'fixtures/assets/decks-sorted/public-company-cards/back__public-company-deck-141.jpg',
+		rawText:
+			'College: education company, cost 25, production 5, wages level1 20, level2 25, level3 30. Workers: education workingClass/middleClass; unskilled workingClass/middleClass.',
+		source: {
+			deck: 'public-company-cards',
+			file: 'single__public-hospital-deck-143.png',
+		},
+		parsed: {
+			numbers: [25, 5, 1, 20, 2, 3, 30],
+			resources: ['education', 'money'],
+			keywords: [
+				'college',
+				'education',
+				'company',
+				'cost',
+				'production',
+				'wages',
+				'workers',
+				'workingclass',
+				'middleclass',
+				'unskilled',
+			],
+		},
+		kind: 'company',
+		id: 'public-college',
+		owner: 'state',
+		name: 'College',
+		industry: 'education',
+		cost: 25,
+		production: 5,
+		wages: {
+			l1: 20,
+			l2: 25,
+			l3: 30,
+		},
+		workers: [
+			{
+				type: 'education',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+		],
+	},
+	{
+		frontImage: 'fixtures/assets/decks-sorted/public-company-cards/single__public-hospital-deck-186.png',
+		backImage: 'fixtures/assets/decks-sorted/public-company-cards/back__public-company-deck-141.jpg',
+		rawText:
+			'Clinic: healthcare company, cost 25, production 4, wages level1 20, level2 25, level3 30. Workers: healthcare workingClass/middleClass; unskilled workingClass/middleClass.',
+		source: {
+			deck: 'public-company-cards',
+			file: 'single__public-hospital-deck-186.png',
+		},
+		parsed: {
+			numbers: [25, 4, 1, 20, 2, 3, 30],
+			resources: ['healthcare', 'money'],
+			keywords: [
+				'clinic',
+				'healthcare',
+				'company',
+				'cost',
+				'production',
+				'wages',
+				'workers',
+				'workingclass',
+				'middleclass',
+				'unskilled',
+			],
+		},
+		kind: 'company',
+		id: 'public-clinic',
+		owner: 'state',
+		name: 'Clinic',
+		industry: 'healthcare',
+		cost: 25,
+		production: 4,
+		wages: {
+			l1: 20,
+			l2: 25,
+			l3: 30,
+		},
+		workers: [
+			{
+				type: 'healthcare',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+		],
+	},
+	{
+		frontImage: 'fixtures/assets/decks-sorted/public-company-cards/single__public-university-deck-145.png',
+		backImage: 'fixtures/assets/decks-sorted/public-company-cards/back__public-company-deck-141.jpg',
+		rawText:
+			'Emergency Clinic: healthcare company, cost 20, production 3, wages level1 15, level2 20, level3 25. Workers: healthcare workingClass/middleClass; unskilled workingClass/middleClass.',
+		source: {
+			deck: 'public-company-cards',
+			file: 'single__public-university-deck-145.png',
+		},
+		parsed: {
+			numbers: [20, 3, 1, 15, 2, 25],
+			resources: ['healthcare', 'money'],
+			keywords: [
+				'emergency',
+				'clinic',
+				'healthcare',
+				'company',
+				'cost',
+				'production',
+				'wages',
+				'workers',
+				'workingclass',
+				'middleclass',
+				'unskilled',
+			],
+		},
+		kind: 'company',
+		id: 'public-emergency-clinic',
+		owner: 'state',
+		name: 'Emergency Clinic',
+		industry: 'healthcare',
+		cost: 20,
+		production: 3,
+		wages: {
+			l1: 15,
+			l2: 20,
+			l3: 25,
+		},
+		workers: [
+			{
+				type: 'healthcare',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+		],
+	},
+	{
+		frontImage: 'fixtures/assets/decks-sorted/public-company-cards/single__public-university-deck-146.png',
+		backImage: 'fixtures/assets/decks-sorted/public-company-cards/back__public-company-deck-141.jpg',
+		rawText:
+			'Library: education company, cost 20, production 3, wages level1 15, level2 20, level3 25. Workers: education workingClass/middleClass; unskilled workingClass/middleClass.',
+		source: {
+			deck: 'public-company-cards',
+			file: 'single__public-university-deck-146.png',
+		},
+		parsed: {
+			numbers: [20, 3, 1, 15, 2, 25],
+			resources: ['education', 'money'],
+			keywords: [
+				'library',
+				'education',
+				'company',
+				'cost',
+				'production',
+				'wages',
+				'workers',
+				'workingclass',
+				'middleclass',
+				'unskilled',
+			],
+		},
+		kind: 'company',
+		id: 'public-library',
+		owner: 'state',
+		name: 'Library',
+		industry: 'education',
+		cost: 20,
+		production: 3,
+		wages: {
+			l1: 15,
+			l2: 20,
+			l3: 25,
+		},
+		workers: [
+			{
+				type: 'education',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+		],
+	},
+	{
+		frontImage: 'fixtures/assets/decks-sorted/public-company-cards/single__public-university-deck-187.png',
+		backImage: 'fixtures/assets/decks-sorted/public-company-cards/back__public-company-deck-141.jpg',
+		rawText:
+			'University Hospital: healthcare company, cost 35, production 6, wages level1 35, level2 40, level3 45. Workers: healthcare workingClass/middleClass; unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+		source: {
+			deck: 'public-company-cards',
+			file: 'single__public-university-deck-187.png',
+		},
+		parsed: {
+			numbers: [35, 6, 1, 2, 40, 3, 45],
+			resources: ['healthcare', 'education', 'money'],
+			keywords: [
+				'university',
+				'hospital',
+				'healthcare',
+				'company',
+				'cost',
+				'production',
+				'wages',
+				'workers',
+				'workingclass',
+				'middleclass',
+				'unskilled',
+			],
+		},
+		kind: 'company',
+		id: 'public-university-hospital-2',
+		owner: 'state',
+		name: 'University Hospital',
+		industry: 'healthcare',
+		cost: 35,
+		production: 6,
+		wages: {
+			l1: 35,
+			l2: 40,
+			l3: 45,
+		},
+		workers: [
+			{
+				type: 'healthcare',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+		],
+	},
+	{
+		frontImage: 'fixtures/assets/decks-sorted/public-company-cards/single__regional-tv-station-deck-148.png',
+		backImage: 'fixtures/assets/decks-sorted/public-company-cards/back__public-company-deck-141.jpg',
+		rawText:
+			'University: education company, cost 35, production 6, wages level1 35, level2 40, level3 45. Workers: education workingClass/middleClass; unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+		source: {
+			deck: 'public-company-cards',
+			file: 'single__regional-tv-station-deck-148.png',
+		},
+		parsed: {
+			numbers: [35, 6, 1, 2, 40, 3, 45],
+			resources: ['education', 'money'],
+			keywords: [
+				'university',
+				'education',
+				'company',
+				'cost',
+				'production',
+				'wages',
+				'workers',
+				'workingclass',
+				'middleclass',
+				'unskilled',
+			],
+		},
+		kind: 'company',
+		id: 'public-university-2',
+		owner: 'state',
+		name: 'University',
+		industry: 'education',
+		cost: 35,
+		production: 6,
+		wages: {
+			l1: 35,
+			l2: 40,
+			l3: 45,
+		},
+		workers: [
+			{
+				type: 'education',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+		],
+	},
+	{
+		frontImage: 'fixtures/assets/decks-sorted/public-company-cards/single__regional-tv-station-deck-149.png',
+		backImage: 'fixtures/assets/decks-sorted/public-company-cards/back__public-company-deck-141.jpg',
+		rawText:
+			'College: education company, cost 30, production 5, wages level1 30, level2 35, level3 40. Workers: education workingClass/middleClass; unskilled workingClass/middleClass.',
+		source: {
+			deck: 'public-company-cards',
+			file: 'single__regional-tv-station-deck-149.png',
+		},
+		parsed: {
+			numbers: [30, 5, 1, 2, 35, 3, 40],
+			resources: ['education', 'money'],
+			keywords: [
+				'college',
+				'education',
+				'company',
+				'cost',
+				'production',
+				'wages',
+				'workers',
+				'workingclass',
+				'middleclass',
+				'unskilled',
+			],
+		},
+		kind: 'company',
+		id: 'public-college-2',
+		owner: 'state',
+		name: 'College',
+		industry: 'education',
+		cost: 30,
+		production: 5,
+		wages: {
+			l1: 30,
+			l2: 35,
+			l3: 40,
+		},
+		workers: [
+			{
+				type: 'education',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+		],
+	},
+	{
+		frontImage: 'fixtures/assets/decks-sorted/public-company-cards/single__regional-tv-station-deck-188.png',
+		backImage: 'fixtures/assets/decks-sorted/public-company-cards/back__public-company-deck-141.jpg',
+		rawText:
+			'Clinic: healthcare company, cost 30, production 4, wages level1 30, level2 35, level3 40. Workers: healthcare workingClass/middleClass; unskilled workingClass/middleClass.',
+		source: {
+			deck: 'public-company-cards',
+			file: 'single__regional-tv-station-deck-188.png',
+		},
+		parsed: {
+			numbers: [30, 4, 1, 2, 35, 3, 40],
+			resources: ['healthcare', 'money'],
+			keywords: [
+				'clinic',
+				'healthcare',
+				'company',
+				'cost',
+				'production',
+				'wages',
+				'workers',
+				'workingclass',
+				'middleclass',
+				'unskilled',
+			],
+		},
+		kind: 'company',
+		id: 'public-clinic-2',
+		owner: 'state',
+		name: 'Clinic',
+		industry: 'healthcare',
+		cost: 30,
+		production: 4,
+		wages: {
+			l1: 30,
+			l2: 35,
+			l3: 40,
+		},
+		workers: [
+			{
+				type: 'healthcare',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+		],
+	},
+	{
+		frontImage: 'fixtures/assets/decks-sorted/public-company-cards/single__technical-university-deck-144.png',
+		backImage: 'fixtures/assets/decks-sorted/public-company-cards/back__public-company-deck-141.jpg',
+		rawText:
+			'Regional TV Station: influence company, cost 25, production 3, wages level1 25, level2 30, level3 35. Workers: unskilled workingClass/middleClass.',
+		source: {
+			deck: 'public-company-cards',
+			file: 'single__technical-university-deck-144.png',
+		},
+		parsed: {
+			numbers: [25, 3, 1, 2, 30, 35],
+			resources: ['influence', 'money'],
+			keywords: [
+				'regional',
+				'station',
+				'influence',
+				'company',
+				'cost',
+				'production',
+				'wages',
+				'workers',
+				'unskilled',
+				'workingclass',
+				'middleclass',
+			],
+		},
+		kind: 'company',
+		id: 'public-regional-tv-station',
+		owner: 'state',
+		name: 'Regional TV Station',
+		industry: 'influence',
+		cost: 25,
+		production: 3,
+		wages: {
+			l1: 25,
+			l2: 30,
+			l3: 35,
+		},
+		workers: [
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+		],
+	},
+	{
+		frontImage: 'fixtures/assets/decks-sorted/public-company-cards/single__university-hospital-deck-141.png',
+		backImage: 'fixtures/assets/decks-sorted/public-company-cards/back__public-company-deck-141.jpg',
+		rawText:
+			'National TV Station: influence company, cost 45, production 5, wages level1 35, level2 40, level3 45. Workers: unskilled workingClass/middleClass; unskilled workingClass/middleClass.',
+		source: {
+			deck: 'public-company-cards',
+			file: 'single__university-hospital-deck-141.png',
+		},
+		parsed: {
+			numbers: [45, 5, 1, 35, 2, 40, 3],
+			resources: ['influence', 'money'],
+			keywords: [
+				'national',
+				'station',
+				'influence',
+				'company',
+				'cost',
+				'production',
+				'wages',
+				'workers',
+				'unskilled',
+				'workingclass',
+				'middleclass',
+			],
+		},
+		kind: 'company',
+		id: 'public-national-tv-station',
+		owner: 'state',
+		name: 'National TV Station',
+		industry: 'influence',
+		cost: 45,
+		production: 5,
+		wages: {
+			l1: 35,
+			l2: 40,
+			l3: 45,
+		},
+		workers: [
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+			{
+				type: 'unskilled',
+				roles: ['workingClass', 'middleClass'],
+			},
+		],
+	},
+] satisfies PublicCompanyCardsCard[];
+
+export default publicCompanyCards;

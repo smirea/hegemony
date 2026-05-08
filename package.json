@@ -17,7 +17,8 @@
 		"lint:types": "tsgo --noEmit",
 		"lint": "oxlint --fix && oxfmt",
 		"preview:client": "bun run --filter client preview",
-		"test": "vitest run"
+		"test": "vitest run",
+		"validate:deck-fixtures": "bun run scripts/validate-deck-fixtures.ts"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.11.4",

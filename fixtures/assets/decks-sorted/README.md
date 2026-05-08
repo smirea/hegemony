@@ -10,9 +10,12 @@ Filename prefixes:
 
 Run `scripts/split-deck-grids.ts` to crop every grid image into individual files next to its source sheet. Each folder should have at most one source `grid_...` image; extra sheets should be a separately named `*-expansion-cards` folder.
 
+Each deck folder has a `deck.ts` fixture file. The `rawText` field is OCR-derived unless the card is icon-only; company, business deal, immigration, and loan cards also include structured values from the rules/source data or visible card values. Action, event, and Automa effects keep a `raw` effect entry for the OCR text so later rule implementation can refine them without losing the source parse.
+
 Notes:
 
 - `middle-class-company-cards/grid_17-items_6-3__...` and `capitalist-class-company-cards/grid_28-items_6-5__...` use the visible/rules component counts; the generated source README understated those counts.
+- `export-cards/deck.ts` includes the visible icon transactions as `{ resource, amount, money }` rows; the OCR text is still preserved because the source cards are mostly icon-only.
 - `historical-event-expansion-cards` and the four `*-action-expansion-cards` folders were split out from base decks because they came from additional 5-card or historical event sheets, not the base component counts in `fixtures/rules/components.md`.
 - Duplicate source sheets were collapsed to one canonical copy: historical events keep deck 190, Automa events keep deck 212, Automa agenda keeps deck 209, Automa Capitalist action priority keeps deck 233, Automa spending influence keeps deck 243, and Working Class action expansion keeps deck 202.
 - Automa agenda backs were originally repeated as 5x4 back grids. They are represented by one cropped `back__automa-agendas-deck-209.jpg` image and should not be split.
