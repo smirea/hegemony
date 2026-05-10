@@ -126,7 +126,7 @@ export type StateEffect =
 			action: 'gain' | 'spend' | 'pay' | 'provide' | 'receive' | 'buy' | 'sell' | 'discard' | 'store';
 			resource: Resource | CompanyTradeableResource | 'any';
 			amount: StateEffectAmount;
-			target?: TargetRole | 'foreign-market' | 'market';
+			target?: TargetRole | 'foreign-market' | 'market' | 'supply';
 			source?: TargetRole | 'foreign-market' | 'bank' | 'supply';
 			condition?: CardRequirement;
 	  }
@@ -229,6 +229,14 @@ export type StateEffect =
 			action: 'move-revenue-to-capital' | 'spend';
 			amount: StateEffectAmount;
 			target?: Extract<RoleName, 'capitalist'> | 'self';
+			condition?: CardRequirement;
+	  }
+	| {
+			type: 'storage';
+			action: 'build' | 'increase-capacity';
+			resource?: Resource | CompanyTradeableResource | 'any';
+			amount?: StateEffectAmount;
+			target?: TargetRole;
 			condition?: CardRequirement;
 	  }
 	| {

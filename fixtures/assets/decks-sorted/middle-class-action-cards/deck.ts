@@ -293,8 +293,20 @@ const middleClassActionCards = [
 				action: 'build',
 				target: 'self',
 			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 1,
+					of: 'cost',
+				},
+				source: 'state',
+				target: 'supply',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-small-business-grant-2',
@@ -328,8 +340,20 @@ const middleClassActionCards = [
 				action: 'build',
 				target: 'self',
 			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 1,
+					of: 'cost',
+				},
+				source: 'state',
+				target: 'supply',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-land-of-opportunity-1',
@@ -392,8 +416,16 @@ const middleClassActionCards = [
 				action: 'build',
 				target: 'self',
 			},
+			{
+				type: 'worker',
+				action: 'add',
+				amount: 1,
+				workerType: 'any',
+				source: 'supply',
+				target: 'company',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-land-of-opportunity-2',
@@ -456,8 +488,16 @@ const middleClassActionCards = [
 				action: 'build',
 				target: 'self',
 			},
+			{
+				type: 'worker',
+				action: 'add',
+				amount: 1,
+				workerType: 'any',
+				source: 'supply',
+				target: 'company',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-investment-opportunities-1',
@@ -519,12 +559,49 @@ const middleClassActionCards = [
 			'build it paying 8¥V more.',
 		stateEffects: [
 			{
-				type: 'company',
-				action: 'build',
-				target: 'self',
+				type: 'choice',
+				options: ['Build a Company paying 8 money less'],
+				stateEffects: [
+					{
+						type: 'company',
+						action: 'build',
+						target: 'self',
+					},
+					{
+						type: 'money',
+						action: 'receive',
+						amount: 8,
+						source: 'supply',
+						target: 'self',
+					},
+				],
+			},
+			{
+				type: 'choice',
+				options: ['Search the Company deck and build a chosen Company paying 8 money more'],
+				stateEffects: [
+					{
+						type: 'card',
+						action: 'search',
+						amount: 1,
+						deck: 'middle-class-company-cards',
+					},
+					{
+						type: 'company',
+						action: 'build',
+						target: 'self',
+					},
+					{
+						type: 'money',
+						action: 'pay',
+						amount: 8,
+						source: 'self',
+						target: 'supply',
+					},
+				],
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-investment-opportunities-2',
@@ -586,12 +663,49 @@ const middleClassActionCards = [
 			'build it paying 8¥ more.',
 		stateEffects: [
 			{
-				type: 'company',
-				action: 'build',
-				target: 'self',
+				type: 'choice',
+				options: ['Build a Company paying 8 money less'],
+				stateEffects: [
+					{
+						type: 'company',
+						action: 'build',
+						target: 'self',
+					},
+					{
+						type: 'money',
+						action: 'receive',
+						amount: 8,
+						source: 'supply',
+						target: 'self',
+					},
+				],
+			},
+			{
+				type: 'choice',
+				options: ['Search the Company deck and build a chosen Company paying 8 money more'],
+				stateEffects: [
+					{
+						type: 'card',
+						action: 'search',
+						amount: 1,
+						deck: 'middle-class-company-cards',
+					},
+					{
+						type: 'company',
+						action: 'build',
+						target: 'self',
+					},
+					{
+						type: 'money',
+						action: 'pay',
+						amount: 8,
+						source: 'self',
+						target: 'supply',
+					},
+				],
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-foreign-market-insight-1',
@@ -668,21 +782,35 @@ const middleClassActionCards = [
 			'= - -',
 		stateEffects: [
 			{
-				type: 'resource',
-				action: 'sell',
-				resource: 'food',
-				amount: 'any',
-				target: 'foreign-market',
+				type: 'card',
+				action: 'reveal',
+				amount: 1,
+				deck: 'export-cards',
+			},
+			{
+				type: 'choice',
+				options: ['Replace the current Export card', 'Keep the current Export card'],
 			},
 			{
 				type: 'resource',
 				action: 'sell',
-				resource: 'luxury',
-				amount: 'any',
+				resource: 'any',
+				amount: {
+					type: 'per',
+					amount: 2,
+					per: 'available',
+				},
+				source: 'self',
 				target: 'foreign-market',
 			},
+			{
+				type: 'card',
+				action: 'discard',
+				amount: 1,
+				deck: 'export-cards',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-foreign-market-insight-2',
@@ -759,21 +887,35 @@ const middleClassActionCards = [
 			'= - -',
 		stateEffects: [
 			{
-				type: 'resource',
-				action: 'sell',
-				resource: 'food',
-				amount: 'any',
-				target: 'foreign-market',
+				type: 'card',
+				action: 'reveal',
+				amount: 1,
+				deck: 'export-cards',
+			},
+			{
+				type: 'choice',
+				options: ['Replace the current Export card', 'Keep the current Export card'],
 			},
 			{
 				type: 'resource',
 				action: 'sell',
-				resource: 'luxury',
-				amount: 'any',
+				resource: 'any',
+				amount: {
+					type: 'per',
+					amount: 2,
+					per: 'available',
+				},
+				source: 'self',
 				target: 'foreign-market',
 			},
+			{
+				type: 'card',
+				action: 'discard',
+				amount: 1,
+				deck: 'export-cards',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-employment-subsidy-1',
@@ -864,12 +1006,23 @@ const middleClassActionCards = [
 			{
 				type: 'money',
 				action: 'gain',
-				amount: 5,
+				amount: {
+					type: 'per',
+					amount: 5,
+					per: 'company',
+					target: 'self',
+				},
 				source: 'state',
 				target: 'self',
 			},
+			{
+				type: 'company',
+				action: 'produce',
+				amount: 1,
+				target: 'self',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-employment-subsidy-2',
@@ -960,12 +1113,23 @@ const middleClassActionCards = [
 			{
 				type: 'money',
 				action: 'gain',
-				amount: 5,
+				amount: {
+					type: 'per',
+					amount: 5,
+					per: 'company',
+					target: 'self',
+				},
 				source: 'state',
 				target: 'self',
 			},
+			{
+				type: 'company',
+				action: 'produce',
+				amount: 1,
+				target: 'self',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-public-opinion-polling-1',
@@ -1055,10 +1219,29 @@ const middleClassActionCards = [
 			},
 			{
 				type: 'vote',
-				action: 'immediate-vote',
+				action: 'reveal-cubes',
+				amount: 5,
+				target: 'bag',
+			},
+			{
+				type: 'choice',
+				options: ['Call an Immediate Vote with revealed cubes', 'Return revealed cubes to the bag'],
+				stateEffects: [
+					{
+						type: 'vote',
+						action: 'immediate-vote',
+						amount: 1,
+					},
+					{
+						type: 'vote',
+						action: 'return-cubes',
+						amount: 'all',
+						target: 'bag',
+					},
+				],
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-public-opinion-polling-2',
@@ -1148,10 +1331,29 @@ const middleClassActionCards = [
 			},
 			{
 				type: 'vote',
-				action: 'immediate-vote',
+				action: 'reveal-cubes',
+				amount: 5,
+				target: 'bag',
+			},
+			{
+				type: 'choice',
+				options: ['Call an Immediate Vote with revealed cubes', 'Return revealed cubes to the bag'],
+				stateEffects: [
+					{
+						type: 'vote',
+						action: 'immediate-vote',
+						amount: 1,
+					},
+					{
+						type: 'vote',
+						action: 'return-cubes',
+						amount: 'all',
+						target: 'bag',
+					},
+				],
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-migration-1',
@@ -1228,14 +1430,31 @@ const middleClassActionCards = [
 			'nn',
 		stateEffects: [
 			{
+				type: 'worker',
+				action: 'remove',
+				amount: {
+					type: 'up-to',
+					amount: 2,
+				},
+				workerType: 'any',
+				source: 'unemployed-workers',
+			},
+			{
 				type: 'money',
 				action: 'gain',
 				amount: 5,
 				source: 'supply',
 				target: 'self',
 			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-migration-2',
@@ -1312,14 +1531,31 @@ const middleClassActionCards = [
 			'nn',
 		stateEffects: [
 			{
+				type: 'worker',
+				action: 'remove',
+				amount: {
+					type: 'up-to',
+					amount: 2,
+				},
+				workerType: 'any',
+				source: 'unemployed-workers',
+			},
+			{
 				type: 'money',
 				action: 'gain',
 				amount: 5,
 				source: 'supply',
 				target: 'self',
 			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-fake-news-1',
@@ -1470,24 +1706,25 @@ const middleClassActionCards = [
 		stateEffects: [
 			{
 				type: 'worker',
-				action: 'assign',
-				amount: {
-					type: 'up-to',
-					amount: 3,
-				},
-				workerType: 'any',
-				target: 'company',
-			},
-			{
-				type: 'worker',
 				action: 'add',
 				amount: 1,
 				workerType: 'any',
 				source: 'supply',
 				target: 'unemployed-workers',
 			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: {
+					type: 'up-to',
+					amount: 3,
+				},
+				workerType: 'any',
+				source: 'unemployed-workers',
+				target: 'company',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-specialization-2',
@@ -1562,24 +1799,25 @@ const middleClassActionCards = [
 		stateEffects: [
 			{
 				type: 'worker',
-				action: 'assign',
-				amount: {
-					type: 'up-to',
-					amount: 3,
-				},
-				workerType: 'any',
-				target: 'company',
-			},
-			{
-				type: 'worker',
 				action: 'add',
 				amount: 1,
 				workerType: 'any',
 				source: 'supply',
 				target: 'unemployed-workers',
 			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: {
+					type: 'up-to',
+					amount: 3,
+				},
+				workerType: 'any',
+				source: 'unemployed-workers',
+				target: 'company',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-state-scholarship-1',
@@ -1837,13 +2075,6 @@ const middleClassActionCards = [
 			'a”',
 		stateEffects: [
 			{
-				type: 'money',
-				action: 'gain',
-				amount: 5,
-				source: 'state',
-				target: 'self',
-			},
-			{
 				type: 'worker',
 				action: 'assign',
 				amount: {
@@ -1851,10 +2082,23 @@ const middleClassActionCards = [
 					amount: 3,
 				},
 				workerType: 'any',
+				source: 'unemployed-workers',
 				target: 'company',
 			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: {
+					type: 'per',
+					amount: 5,
+					per: 'employed-worker',
+					target: 'self',
+				},
+				source: 'state',
+				target: 'self',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-higher-education-program-1',
@@ -2207,28 +2451,29 @@ const middleClassActionCards = [
 		content: 'EXPORT SUBSIDY\nSell to the Foreign Market.\nFor every transaction you make,\nget 5¥ from the State.\nS',
 		stateEffects: [
 			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'any',
+				amount: {
+					type: 'up-to',
+					amount: 'available',
+				},
+				source: 'self',
+				target: 'foreign-market',
+			},
+			{
 				type: 'money',
 				action: 'gain',
-				amount: 5,
+				amount: {
+					type: 'per',
+					amount: 5,
+					per: 'available',
+				},
 				source: 'state',
 				target: 'self',
 			},
-			{
-				type: 'resource',
-				action: 'sell',
-				resource: 'food',
-				amount: 'any',
-				target: 'foreign-market',
-			},
-			{
-				type: 'resource',
-				action: 'sell',
-				resource: 'luxury',
-				amount: 'any',
-				target: 'foreign-market',
-			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-export-subsidy-2',
@@ -2283,28 +2528,29 @@ const middleClassActionCards = [
 		content: 'EXPORT SUBSIDY\nSell to the Foreign Market.\nFor every transaction you make,\nget 5¥ from the State.\nS',
 		stateEffects: [
 			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'any',
+				amount: {
+					type: 'up-to',
+					amount: 'available',
+				},
+				source: 'self',
+				target: 'foreign-market',
+			},
+			{
 				type: 'money',
 				action: 'gain',
-				amount: 5,
+				amount: {
+					type: 'per',
+					amount: 5,
+					per: 'available',
+				},
 				source: 'state',
 				target: 'self',
 			},
-			{
-				type: 'resource',
-				action: 'sell',
-				resource: 'food',
-				amount: 'any',
-				target: 'foreign-market',
-			},
-			{
-				type: 'resource',
-				action: 'sell',
-				resource: 'luxury',
-				amount: 'any',
-				target: 'foreign-market',
-			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-migration-3',
@@ -2749,9 +2995,16 @@ const middleClassActionCards = [
 			{
 				type: 'policy',
 				action: 'propose',
+				policy: 'immigration',
+			},
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				amount: 2,
+				target: 'bag',
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-growing-business-1',
@@ -2821,12 +3074,25 @@ const middleClassActionCards = [
 			'produces that resource, pay 4¥ less.',
 		stateEffects: [
 			{
+				type: 'storage',
+				action: 'build',
+				resource: 'any',
+				target: 'self',
+			},
+			{
 				type: 'company',
 				action: 'build',
 				target: 'self',
 			},
+			{
+				type: 'money',
+				action: 'receive',
+				amount: 4,
+				source: 'supply',
+				target: 'self',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-growing-business-2',
@@ -2896,12 +3162,25 @@ const middleClassActionCards = [
 			'produces that resource, pay 4¥ less.',
 		stateEffects: [
 			{
+				type: 'storage',
+				action: 'build',
+				resource: 'any',
+				target: 'self',
+			},
+			{
 				type: 'company',
 				action: 'build',
 				target: 'self',
 			},
+			{
+				type: 'money',
+				action: 'receive',
+				amount: 4,
+				source: 'supply',
+				target: 'self',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-public-sector-overtime-1',

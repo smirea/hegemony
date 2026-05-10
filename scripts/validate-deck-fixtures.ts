@@ -358,8 +358,8 @@ function validateActionDeck(
 		if (!['complete', 'partial', 'unparsed'].includes(card.stateEffectsCoverage)) {
 			errors.push(`${folderName}: ${card.id} has invalid stateEffectsCoverage ${card.stateEffectsCoverage}`);
 		}
-		if (expected.category === 'base' && card.stateEffectsCoverage === 'unparsed') {
-			errors.push(`${folderName}: ${card.id} is still unparsed`);
+		if (expected.category === 'base' && card.stateEffectsCoverage !== 'complete') {
+			errors.push(`${folderName}: ${card.id} is not fully parsed`);
 		}
 		if (card.stateEffectsCoverage === 'unparsed' && card.stateEffects.length) {
 			errors.push(`${folderName}: ${card.id} has effects but is marked unparsed`);

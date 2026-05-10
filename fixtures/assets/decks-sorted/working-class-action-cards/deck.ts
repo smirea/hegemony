@@ -72,24 +72,25 @@ const workingClassActionCards = [
 		stateEffects: [
 			{
 				type: 'worker',
-				action: 'assign',
-				amount: {
-					type: 'up-to',
-					amount: 3,
-				},
-				workerType: 'any',
-				target: 'company',
-			},
-			{
-				type: 'worker',
 				action: 'add',
 				amount: 1,
 				workerType: 'any',
 				source: 'supply',
 				target: 'unemployed-workers',
 			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: {
+					type: 'up-to',
+					amount: 3,
+				},
+				workerType: 'any',
+				source: 'unemployed-workers',
+				target: 'company',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-specialization-2',
@@ -160,24 +161,25 @@ const workingClassActionCards = [
 		stateEffects: [
 			{
 				type: 'worker',
-				action: 'assign',
-				amount: {
-					type: 'up-to',
-					amount: 3,
-				},
-				workerType: 'any',
-				target: 'company',
-			},
-			{
-				type: 'worker',
 				action: 'add',
 				amount: 1,
 				workerType: 'any',
 				source: 'supply',
 				target: 'unemployed-workers',
 			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: {
+					type: 'up-to',
+					amount: 3,
+				},
+				workerType: 'any',
+				source: 'unemployed-workers',
+				target: 'company',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-highlight-social-issues-1',
@@ -610,9 +612,16 @@ const workingClassActionCards = [
 			{
 				type: 'policy',
 				action: 'propose',
+				policy: 'healthcare',
+			},
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				amount: 2,
+				target: 'bag',
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-need-for-change-1',
@@ -1005,14 +1014,31 @@ const workingClassActionCards = [
 			'i',
 		stateEffects: [
 			{
+				type: 'worker',
+				action: 'remove',
+				amount: {
+					type: 'up-to',
+					amount: 2,
+				},
+				workerType: 'any',
+				source: 'unemployed-workers',
+			},
+			{
 				type: 'money',
 				action: 'gain',
 				amount: 5,
 				source: 'supply',
 				target: 'self',
 			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-migration-2',
@@ -1088,14 +1114,31 @@ const workingClassActionCards = [
 			'i',
 		stateEffects: [
 			{
+				type: 'worker',
+				action: 'remove',
+				amount: {
+					type: 'up-to',
+					amount: 2,
+				},
+				workerType: 'any',
+				source: 'unemployed-workers',
+			},
+			{
 				type: 'money',
 				action: 'gain',
 				amount: 5,
 				source: 'supply',
 				target: 'self',
 			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-workers-movement-1',
@@ -1151,9 +1194,16 @@ const workingClassActionCards = [
 			{
 				type: 'policy',
 				action: 'propose',
+				policy: 'laborMarket',
+			},
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				amount: 2,
+				target: 'bag',
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-workplace-accident-1',
@@ -1218,14 +1268,23 @@ const workingClassActionCards = [
 			'SO 7 7 7 4',
 		stateEffects: [
 			{
+				type: 'choice',
+				options: ['Choose an industry'],
+			},
+			{
 				type: 'money',
-				action: 'gain',
-				amount: 8,
-				source: 'supply',
+				action: 'receive',
+				amount: {
+					type: 'per',
+					amount: 8,
+					per: 'company',
+					target: 'other',
+				},
+				source: 'other',
 				target: 'self',
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-proletarians-of-the-world-unite-1',
@@ -1653,10 +1712,29 @@ const workingClassActionCards = [
 			},
 			{
 				type: 'vote',
-				action: 'immediate-vote',
+				action: 'reveal-cubes',
+				amount: 5,
+				target: 'bag',
+			},
+			{
+				type: 'choice',
+				options: ['Call an Immediate Vote with revealed cubes', 'Return revealed cubes to the bag'],
+				stateEffects: [
+					{
+						type: 'vote',
+						action: 'immediate-vote',
+						amount: 1,
+					},
+					{
+						type: 'vote',
+						action: 'return-cubes',
+						amount: 'all',
+						target: 'bag',
+					},
+				],
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-student-movement-1',
@@ -1712,9 +1790,16 @@ const workingClassActionCards = [
 			{
 				type: 'policy',
 				action: 'propose',
+				policy: 'education',
+			},
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				amount: 2,
+				target: 'bag',
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-supplemental-income-program-1',
@@ -1795,12 +1880,28 @@ const workingClassActionCards = [
 			{
 				type: 'money',
 				action: 'gain',
-				amount: 1,
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'employed-worker',
+					target: 'self',
+				},
 				source: 'state',
 				target: 'self',
 			},
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'any',
+				amount: {
+					type: 'up-to',
+					amount: 'available',
+				},
+				source: 'any',
+				target: 'self',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-supplemental-income-program-2',
@@ -1881,12 +1982,28 @@ const workingClassActionCards = [
 			{
 				type: 'money',
 				action: 'gain',
-				amount: 1,
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'employed-worker',
+					target: 'self',
+				},
 				source: 'state',
 				target: 'self',
 			},
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'any',
+				amount: {
+					type: 'up-to',
+					amount: 'available',
+				},
+				source: 'any',
+				target: 'self',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-extra-shift-1',
@@ -2214,9 +2331,16 @@ const workingClassActionCards = [
 			{
 				type: 'policy',
 				action: 'propose',
+				policy: 'immigration',
+			},
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				amount: 2,
+				target: 'bag',
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-signing-bonus-1',
@@ -2279,13 +2403,6 @@ const workingClassActionCards = [
 			'ng',
 		stateEffects: [
 			{
-				type: 'money',
-				action: 'gain',
-				amount: 4,
-				source: 'supply',
-				target: 'self',
-			},
-			{
 				type: 'worker',
 				action: 'assign',
 				amount: {
@@ -2293,10 +2410,23 @@ const workingClassActionCards = [
 					amount: 4,
 				},
 				workerType: 'any',
+				source: 'unemployed-workers',
 				target: 'company',
 			},
+			{
+				type: 'money',
+				action: 'receive',
+				amount: {
+					type: 'per',
+					amount: 4,
+					per: 'employed-worker',
+					target: 'self',
+				},
+				source: 'other',
+				target: 'self',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-signing-bonus-2',
@@ -2359,13 +2489,6 @@ const workingClassActionCards = [
 			'ng',
 		stateEffects: [
 			{
-				type: 'money',
-				action: 'gain',
-				amount: 4,
-				source: 'supply',
-				target: 'self',
-			},
-			{
 				type: 'worker',
 				action: 'assign',
 				amount: {
@@ -2373,10 +2496,23 @@ const workingClassActionCards = [
 					amount: 4,
 				},
 				workerType: 'any',
+				source: 'unemployed-workers',
 				target: 'company',
 			},
+			{
+				type: 'money',
+				action: 'receive',
+				amount: {
+					type: 'per',
+					amount: 4,
+					per: 'employed-worker',
+					target: 'self',
+				},
+				source: 'other',
+				target: 'self',
+			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-general-strike-1',
@@ -2449,10 +2585,21 @@ const workingClassActionCards = [
 			{
 				type: 'company',
 				action: 'strike',
+				amount: 1,
+				target: 'company',
+			},
+			{
+				type: 'company',
+				action: 'strike',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'trade-union',
+				},
 				target: 'company',
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-fake-news-1',
@@ -2599,10 +2746,21 @@ const workingClassActionCards = [
 			{
 				type: 'company',
 				action: 'strike',
+				amount: 1,
+				target: 'company',
+			},
+			{
+				type: 'company',
+				action: 'strike',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'trade-union',
+				},
 				target: 'company',
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-state-scholarship-1',
@@ -2819,7 +2977,7 @@ const workingClassActionCards = [
 				immediateVoteAllowed: false,
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-unemployment-benefits-1',
@@ -2886,12 +3044,28 @@ const workingClassActionCards = [
 			{
 				type: 'money',
 				action: 'gain',
-				amount: 5,
+				amount: {
+					type: 'per',
+					amount: 5,
+					per: 'unemployed-worker',
+					target: 'self',
+				},
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'any',
+				amount: {
+					type: 'up-to',
+					amount: 'available',
+				},
 				source: 'state',
 				target: 'self',
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-unemployment-benefits-2',
@@ -2958,12 +3132,28 @@ const workingClassActionCards = [
 			{
 				type: 'money',
 				action: 'gain',
-				amount: 5,
+				amount: {
+					type: 'per',
+					amount: 5,
+					per: 'unemployed-worker',
+					target: 'self',
+				},
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'any',
+				amount: {
+					type: 'up-to',
+					amount: 'available',
+				},
 				source: 'state',
 				target: 'self',
 			},
 		],
-		stateEffectsCoverage: 'partial',
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-interest-groups-1',
