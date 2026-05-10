@@ -7,7 +7,6 @@ import type { ParsedImmigrationCard } from '../../../fixtures/assets/decks-sorte
 interface ImmigrationWorkerConfig {
 	type: ParsedImmigrationCard['workers']['workingClass']['type'];
 	worker: CompanyWorkerType;
-	distributionCount: number;
 }
 
 export interface ImmigrationCard {
@@ -45,7 +44,6 @@ export default immigrationCards;
 function workerConfig(worker: ParsedImmigrationCard['workers']['workingClass']): ImmigrationWorkerConfig {
 	return {
 		type: worker.type,
-		worker: worker.type === 'specialized' ? worker.industry! : 'unskilled',
-		distributionCount: worker.quantity,
+		worker: worker.worker,
 	};
 }

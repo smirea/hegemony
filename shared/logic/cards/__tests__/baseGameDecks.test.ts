@@ -54,6 +54,49 @@ describe('base game decks', () => {
 			expect(card.workingClass).toBe(card.workers.workingClass.worker);
 			expect(card.middleClass).toBe(card.workers.middleClass.worker);
 		}
+		for (const worker of ['food', 'healthcare', 'education', 'luxury', 'influence']) {
+			expect(workingSpecialized.filter(card => card.workingClass === worker)).toHaveLength(2);
+			expect(middleSpecialized.filter(card => card.middleClass === worker)).toHaveLength(3);
+		}
+	});
+
+	test('keeps setup metadata on company fixture cards', () => {
+		expect(
+			baseGameDecks.capitalistCompanies
+				.filter(card => card.setup?.starting)
+				.map(card => card.id)
+				.sort(),
+		).toEqual(['c-clinic-2', 'c-college-2', 'c-shopping-mall-2', 'c-supermarket-2']);
+		expect(
+			baseGameDecks.middleClassCompanies
+				.filter(card => card.setup?.starting)
+				.map(card => card.id)
+				.sort(),
+		).toEqual(['m-convenience-store-2', 'm-doctors-office-2']);
+		expect(
+			baseGameDecks.stateCompanies
+				.filter(card => card.setup?.starting && card.setup.playerCounts?.includes(2))
+				.map(card => card.id)
+				.sort(),
+		).toEqual(['s-public-hospital-1', 's-public-university-1', 's-regional-tv-station-1']);
+		expect(
+			baseGameDecks.stateCompanies
+				.filter(card => card.setup?.starting && card.setup.playerCounts?.includes(4))
+				.map(card => card.id)
+				.sort(),
+		).toEqual(['s-national-public-broadcasting-1', 's-technical-university-1', 's-university-hospital-1']);
+	});
+
+	test('keeps event card task and choice text normalized', () => {
+		const politicalScandal = baseGameDecks.eventCards.find(card => card.name === 'Political Scandal');
+		expect(politicalScandal?.task).toContain('provide up to 3 media influence');
+		expect(politicalScandal?.choices).toHaveLength(3);
+		for (const card of baseGameDecks.eventCards) {
+			expect(card.name).not.toBe('Base Events');
+			expect(card.task).toBeTruthy();
+			expect(card.noAction?.text).toBeTruthy();
+			expect(card.choices?.length).toBeGreaterThan(0);
+		}
 	});
 });
 

@@ -6,7 +6,13 @@ import path from 'node:path';
 
 import { capitalistCompanies, middleClassCompanies, stateCompanies } from '../shared/logic/cards/companyCards';
 
-import type { DeckCardImage, ParsedActionCard, ParsedCompanyDeckCard } from '../fixtures/assets/decks-sorted/types';
+import type {
+	DeckCardImage,
+	ParsedActionCard,
+	ParsedCompanyDeckCard,
+	ParsedEventCard,
+	ParsedImmigrationCard,
+} from '../fixtures/assets/decks-sorted/types';
 import type { CompanyCard } from '../shared/logic/types';
 
 const root = path.resolve('fixtures/assets/decks-sorted');
@@ -67,11 +73,36 @@ const companyFields = [
 	'wages',
 	'workers',
 ] as const;
+const expectedCompanySetup: Record<string, NonNullable<ParsedCompanyDeckCard['setup']>> = {
+	'c-clinic-2': { starting: true, setupWage: 'l2' },
+	'c-college-2': { starting: true, setupWage: 'l2' },
+	'c-shopping-mall-2': { starting: true, setupWage: 'l2' },
+	'c-supermarket-2': { starting: true, setupWage: 'l2' },
+	'm-convenience-store-2': { starting: true, setupWage: 'l2' },
+	'm-doctors-office-2': { starting: true, setupWage: 'l2' },
+	's-national-public-broadcasting-1': { starting: true, playerCounts: [3, 4], publicSectorRow: 1, setupWage: 'l2' },
+	's-public-hospital-1': { starting: true, playerCounts: [2], publicSectorRow: 1, setupWage: 'l2' },
+	's-public-hospital-2': { playerCounts: [2, 3, 4], publicSectorRow: 2 },
+	's-public-hospital-3': { playerCounts: [2, 3, 4], publicSectorRow: 3 },
+	's-public-university-1': { starting: true, playerCounts: [2], publicSectorRow: 1, setupWage: 'l2' },
+	's-public-university-2': { playerCounts: [2, 3, 4], publicSectorRow: 2 },
+	's-public-university-3': { playerCounts: [2, 3, 4], publicSectorRow: 3 },
+	's-regional-tv-station-1': { starting: true, playerCounts: [2], publicSectorRow: 1, setupWage: 'l2' },
+	's-regional-tv-station-2': { playerCounts: [2, 3, 4], publicSectorRow: 2 },
+	's-regional-tv-station-3': { playerCounts: [2, 3, 4], publicSectorRow: 3 },
+	's-technical-university-1': { starting: true, playerCounts: [3, 4], publicSectorRow: 1, setupWage: 'l2' },
+	's-university-hospital-1': { starting: true, playerCounts: [3, 4], publicSectorRow: 1, setupWage: 'l2' },
+};
 
 const errors: string[] = [];
 const folders = (await readdir(root, { withFileTypes: true })).filter(entry => entry.isDirectory());
+const folderNames = new Set(folders.map(folder => folder.name));
 let cardCount = 0;
 const seenIds = new Set<string>();
+
+for (const folderName of Object.keys(expectedCardCounts)) {
+	if (!folderNames.has(folderName)) errors.push(`${folderName}: missing base-game deck folder`);
+}
 
 for (const folder of folders) {
 	const folderPath = path.join(root, folder.name);
@@ -144,6 +175,8 @@ for (const folder of folders) {
 	const actionDeck = actionDecks[folder.name];
 	if (actionDeck) validateActionDeck(folder.name, deck as ParsedActionCard[], actionDeck);
 	if (folder.name === 'cooperative-farm-cards') validateCooperativeFarmDeck(deck as ParsedCompanyDeckCard[]);
+	if (folder.name === 'event-cards') validateEventDeck(deck as ParsedEventCard[]);
+	if (folder.name === 'immigration-cards') validateImmigrationDeck(deck as ParsedImmigrationCard[]);
 }
 
 if (errors.length) {
@@ -194,6 +227,12 @@ function validateCompanyDeck(folderName: string, deck: ParsedCompanyDeckCard[], 
 				);
 			}
 		}
+		const expectedSetup = expectedCompanySetup[sourceCard.id];
+		if (expectedSetup && JSON.stringify(parsedCard.setup) !== JSON.stringify(expectedSetup)) {
+			errors.push(
+				`${folderName}: ${sourceCard.id}.setup mismatch: expected ${JSON.stringify(expectedSetup)}, got ${JSON.stringify(parsedCard.setup)}`,
+			);
+		}
 	}
 }
 
@@ -219,6 +258,83 @@ function validateCooperativeFarmDeck(deck: ParsedCompanyDeckCard[]) {
 					`cooperative-farm-cards: ${card.id}.${field} mismatch: expected ${JSON.stringify(expectedValue)}, got ${JSON.stringify(actualValue)}`,
 				);
 			}
+		}
+	}
+}
+
+function validateEventDeck(deck: ParsedEventCard[]) {
+	const genericNames = new Set(['Base Events', 'Event Cards']);
+	for (const card of deck) {
+		if (card.kind !== 'event') errors.push(`event-cards: ${card.id} is not an event card`);
+		if (genericNames.has(card.name)) errors.push(`event-cards: ${card.id} still has generic event name`);
+		if (!/^[A-Z0-9][A-Za-z0-9 &'.,:!?/()-]+$/.test(card.name)) {
+			errors.push(`event-cards: ${card.id} has suspicious event name ${JSON.stringify(card.name)}`);
+		}
+		if (!card.content.startsWith(card.name))
+			errors.push(`event-cards: ${card.id} content does not start with its name`);
+		if (!card.task?.trim()) errors.push(`event-cards: ${card.id} is missing task`);
+		if (!card.choices?.length) errors.push(`event-cards: ${card.id} is missing choices`);
+		if (!card.noAction?.text.trim()) errors.push(`event-cards: ${card.id} is missing noAction text`);
+		if (card.stateEffectsCoverage && !['complete', 'partial', 'unparsed'].includes(card.stateEffectsCoverage)) {
+			errors.push(`event-cards: ${card.id} has invalid stateEffectsCoverage ${card.stateEffectsCoverage}`);
+		}
+		if (
+			card.stateEffectsCoverage === 'complete' &&
+			!card.stateEffects.length &&
+			!card.choices?.some(choice => choice.stateEffects?.length)
+		) {
+			errors.push(`event-cards: ${card.id} is marked complete without declarative effects`);
+		}
+	}
+}
+
+function validateImmigrationDeck(deck: ParsedImmigrationCard[]) {
+	const industryCounts = {
+		workingClass: new Map<string, number>(),
+		middleClass: new Map<string, number>(),
+	};
+	const specializedCounts = { workingClass: 0, middleClass: 0 };
+
+	for (const card of deck) {
+		for (const className of ['workingClass', 'middleClass'] as const) {
+			const worker = card.workers[className];
+			if ('quantity' in worker) errors.push(`immigration-cards: ${card.id}.${className} still uses quantity`);
+			if (worker.type === 'unskilled') {
+				if (worker.worker !== 'unskilled') {
+					errors.push(`immigration-cards: ${card.id}.${className} has unskilled type with ${worker.worker} worker`);
+				}
+				if (worker.industry) errors.push(`immigration-cards: ${card.id}.${className} has industry on unskilled worker`);
+			} else {
+				specializedCounts[className] += 1;
+				if (!worker.industry) errors.push(`immigration-cards: ${card.id}.${className} is missing industry`);
+				if (worker.worker !== worker.industry) {
+					errors.push(
+						`immigration-cards: ${card.id}.${className} worker/industry mismatch: ${worker.worker}/${worker.industry}`,
+					);
+				}
+				industryCounts[className].set(worker.worker, (industryCounts[className].get(worker.worker) ?? 0) + 1);
+			}
+		}
+	}
+
+	if (specializedCounts.workingClass !== 10) {
+		errors.push(
+			`immigration-cards: expected 10 Working Class specialized cards, got ${specializedCounts.workingClass}`,
+		);
+	}
+	if (specializedCounts.middleClass !== 15) {
+		errors.push(`immigration-cards: expected 15 Middle Class specialized cards, got ${specializedCounts.middleClass}`);
+	}
+	for (const industry of ['food', 'healthcare', 'education', 'luxury', 'influence']) {
+		if (industryCounts.workingClass.get(industry) !== 2) {
+			errors.push(
+				`immigration-cards: expected 2 Working Class ${industry} workers, got ${industryCounts.workingClass.get(industry) ?? 0}`,
+			);
+		}
+		if (industryCounts.middleClass.get(industry) !== 3) {
+			errors.push(
+				`immigration-cards: expected 3 Middle Class ${industry} workers, got ${industryCounts.middleClass.get(industry) ?? 0}`,
+			);
 		}
 	}
 }

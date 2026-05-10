@@ -240,6 +240,7 @@ export interface ParsedEventCard extends DeckCardImage {
 	};
 	requirements?: CardRequirement[];
 	stateEffects: StateEffect[];
+	stateEffectsCoverage?: 'complete' | 'partial' | 'unparsed';
 }
 
 export interface ParsedPoliticalAgendaCard extends DeckCardImage {
@@ -256,12 +257,12 @@ export interface ParsedImmigrationCard extends DeckCardImage {
 	workers: {
 		workingClass: {
 			type: 'unskilled' | 'specialized';
-			quantity: number;
+			worker: CompanyWorkerType;
 			industry?: Industry;
 		};
 		middleClass: {
 			type: 'unskilled' | 'specialized';
-			quantity: number;
+			worker: CompanyWorkerType;
 			industry?: Industry;
 		};
 	};
@@ -304,6 +305,12 @@ export interface ParsedCompanyDeckCard extends DeckCardImage, CompanyCard {
 	kind: 'company';
 	owner: Extract<RoleName, 'middleClass' | 'capitalist' | 'state'> | 'workingClass';
 	sourceType?: 'base' | 'public-company' | 'cooperative-farm' | 'expansion' | 'automa';
+	setup?: {
+		starting?: boolean;
+		playerCounts?: Array<2 | 3 | 4>;
+		publicSectorRow?: 1 | 2 | 3;
+		setupWage?: WageId;
+	};
 }
 
 export interface ParsedAutomaCard extends DeckCardImage {
