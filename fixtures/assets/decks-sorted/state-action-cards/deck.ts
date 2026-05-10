@@ -263,8 +263,28 @@ const stateActionCards = [
 		name: 'STEP FOR REPRESENTATION',
 		content:
 			'STEP FOR REPRESENTATION\nProvide 1 Personal @® and 2\nVoting cubes to a class. Get @ to\nthat class.\n45a\nO18',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'provide',
+				resource: 'influence',
+				amount: 1,
+				source: 'self',
+				target: 'any',
+			},
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				amount: 2,
+				target: 'any',
+			},
+			{
+				type: 'state:legitimacy-increment',
+				className: 'chosen',
+				value: 1,
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-immediate-response-1',
@@ -339,8 +359,15 @@ const stateActionCards = [
 				policies: ['5A'],
 			},
 		],
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'event',
+				action: 'perform',
+				amount: 2,
+				target: 'event',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-geopolitical-support-1',
@@ -382,8 +409,45 @@ const stateActionCards = [
 		category: 'base',
 		name: 'GEOPOLITICAL SUPPORT',
 		content: 'GEOPOLITICAL SUPPORT\nGet money based on the current\nForeign Trade Policy:\nV.1s¥\n3:):30¥\n:45¥7',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 15,
+				source: 'supply',
+				target: 'self',
+				condition: {
+					type: 'policy',
+					mode: 'any',
+					policies: ['6A'],
+				},
+			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 30,
+				source: 'supply',
+				target: 'self',
+				condition: {
+					type: 'policy',
+					mode: 'any',
+					policies: ['6B'],
+				},
+			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 45,
+				source: 'supply',
+				target: 'self',
+				condition: {
+					type: 'policy',
+					mode: 'any',
+					policies: ['6C'],
+				},
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-foreign-students-1',
@@ -468,8 +532,27 @@ const stateActionCards = [
 		category: 'base',
 		name: 'HEALTHCARE PROGRAM',
 		content: 'HEALTHCARE PROGRAM\nProvide to a class,\nequal to its Population.\nGeta @) for that class.\na',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'provide',
+				resource: 'healthcare',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'population',
+					target: 'chosen',
+				},
+				source: 'self',
+				target: 'any',
+			},
+			{
+				type: 'state:legitimacy-increment',
+				className: 'chosen',
+				value: 1,
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-medical-tourism-1',
@@ -645,8 +728,27 @@ const stateActionCards = [
 			'Look at the top 2 Event cards and,\n' +
 			'if able, place one on the board.\n' +
 			'Then, perform an Event Action.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'card',
+				action: 'reveal',
+				amount: 2,
+				deck: 'event-cards',
+			},
+			{
+				type: 'event',
+				action: 'place',
+				amount: 1,
+				target: 'board',
+			},
+			{
+				type: 'event',
+				action: 'perform',
+				amount: 1,
+				target: 'event',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-emergency-state-1',
@@ -716,8 +818,19 @@ const stateActionCards = [
 			'and move its marker\n' +
 			'to an adjacent section.\n' +
 			'bg',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'policy',
+				action: 'change',
+				placement: 'normal',
+				condition: {
+					type: 'proposed-bills',
+					count: 3,
+					operator: '>=',
+				},
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-foreign-investment-program-1',
@@ -803,8 +916,27 @@ const stateActionCards = [
 		category: 'base',
 		name: 'LITERACY PROGRAM',
 		content: 'LITERACY PROGRAM\nProvide to a class,\nequal to its Population.\nGeta 9) for that class.\nREQUIREMENT /',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'provide',
+				resource: 'education',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'population',
+					target: 'chosen',
+				},
+				source: 'self',
+				target: 'any',
+			},
+			{
+				type: 'state:legitimacy-increment',
+				className: 'chosen',
+				value: 1,
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-growth-in-tourism-1',
@@ -838,8 +970,30 @@ const stateActionCards = [
 		category: 'base',
 		name: 'GROWTH IN TOURISM',
 		content: 'GROWTH IN TOURISM\nThe State, the Middle Class and\nthe Capitalist Class get 15 each.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 15,
+				source: 'supply',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 15,
+				source: 'supply',
+				target: 'middleClass',
+			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 15,
+				source: 'supply',
+				target: 'capitalist',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-supplemental-income-program-1',
@@ -911,8 +1065,31 @@ const stateActionCards = [
 				policies: ['2B', '2C'],
 			},
 		],
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'money',
+				action: 'provide',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'employed-worker',
+					target: 'chosen',
+				},
+				source: 'self',
+				target: 'any',
+			},
+			{
+				type: 'state:legitimacy-increment',
+				className: 'chosen',
+				value: {
+					type: 'per',
+					amount: 1,
+					per: 'available',
+					target: 'chosen',
+				},
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-allowances-and-subsidies-1',
@@ -942,8 +1119,21 @@ const stateActionCards = [
 		category: 'base',
 		name: 'ALLOWANCES AND SUBSIDIES',
 		content: 'ALLOWANCES AND SUBSIDIES\nProvide 20¥ to a class.\nGeta @) for that class.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'money',
+				action: 'provide',
+				amount: 20,
+				source: 'self',
+				target: 'any',
+			},
+			{
+				type: 'state:legitimacy-increment',
+				className: 'chosen',
+				value: 1,
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-agenda-setting-1',
@@ -971,8 +1161,21 @@ const stateActionCards = [
 		category: 'base',
 		name: 'AGENDA-SETTING',
 		content: 'AGENDA-SETTING\nGet 1 Personal @ for each Policy\nthat matches your current\nPolitical Agenda.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'gain',
+				resource: 'influence',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'matching-policy',
+				},
+				source: 'supply',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-pressing-matters-1',
@@ -1163,8 +1366,26 @@ const stateActionCards = [
 		category: 'base',
 		name: 'PUBLIC SECTOR OVERTIME',
 		content: "PUBLIC SECTOR OVERTIME\nChoose one of your Companies.\nPay the Workers' Wages\nand perform a Production.",
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'produce',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'employed-worker',
+					target: 'self',
+				},
+				source: 'self',
+				target: 'other',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-construction-boom-1',
@@ -1192,8 +1413,30 @@ const stateActionCards = [
 		category: 'base',
 		name: 'CONSTRUCTION BOOM',
 		content: 'CONSTRUCTION BOOM\nThe State, the Working Class and\nthe Capitalist Class get 15‘¥ each.\né',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 15,
+				source: 'supply',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 15,
+				source: 'supply',
+				target: 'workingClass',
+			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 15,
+				source: 'supply',
+				target: 'capitalist',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-business-grants-1',
@@ -1237,8 +1480,21 @@ const stateActionCards = [
 		category: 'base',
 		name: 'BUSINESS GRANTS',
 		content: 'BUSINESS GRANTS\nProvide 5¥ to the Capitalist Class\nfor each of its Companies.\nO sii\nS',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'money',
+				action: 'provide',
+				amount: {
+					type: 'per',
+					amount: 5,
+					per: 'company',
+					target: 'capitalist',
+				},
+				source: 'self',
+				target: 'capitalist',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-higher-vat-1',
@@ -1267,8 +1523,26 @@ const stateActionCards = [
 		category: 'base',
 		name: 'HIGHER VAT',
 		content: 'HIGHER VAT\nEach player pays 15¥ to the State.\nThen, get 1) to 2 classes.\n6',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'money',
+				action: 'tax',
+				amount: 15,
+				source: 'all',
+				target: 'self',
+			},
+			{
+				type: 'state:legitimacy-increment',
+				className: 'chosen',
+				value: 1,
+			},
+			{
+				type: 'state:legitimacy-increment',
+				className: 'chosen',
+				value: 1,
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-nationalization-1',
@@ -1358,8 +1632,42 @@ const stateActionCards = [
 				policies: ['1A', '1B'],
 			},
 		],
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'transfer',
+				source: 'capitalist',
+				target: 'state',
+			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: {
+					type: 'up-to',
+					amount: 'available',
+				},
+				source: 'unemployed-workers',
+				target: 'company',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 1,
+					of: 'cost',
+				},
+				source: 'state',
+				target: 'capitalist',
+				condition: {
+					type: 'policy',
+					mode: 'any',
+					policies: ['1B'],
+				},
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-quantitative-easing-1',
@@ -1483,8 +1791,27 @@ const stateActionCards = [
 			'to the Private Sector).\n' +
 			'6\n' +
 			'i',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'transfer',
+				source: 'state',
+				target: 'capitalist',
+			},
+			{
+				type: 'money',
+				action: 'receive',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 1,
+					of: 'cost',
+				},
+				source: 'capitalist',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-foreign-financial-assistance-1',
@@ -1599,8 +1926,15 @@ const stateActionCards = [
 			'its Action twice (decisions made\n' +
 			'when performing the Action can\n' +
 			'be different the second time).',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'event',
+				action: 'perform',
+				amount: 2,
+				target: 'event',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-step-for-representation-2',
@@ -1651,8 +1985,28 @@ const stateActionCards = [
 		name: 'STEP FOR REPRESENTATION',
 		content:
 			'STEP FOR REPRESENTATION\nProvide 1 Personal @® and 2\nVoting cubes to a class. Get @ to\nthat class.\n45a\nO18',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'provide',
+				resource: 'influence',
+				amount: 1,
+				source: 'self',
+				target: 'any',
+			},
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				amount: 2,
+				target: 'any',
+			},
+			{
+				type: 'state:legitimacy-increment',
+				className: 'chosen',
+				value: 1,
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-public-sector-overtime-2',
@@ -1704,8 +2058,26 @@ const stateActionCards = [
 		category: 'base',
 		name: 'PUBLIC SECTOR OVERTIME',
 		content: "PUBLIC SECTOR OVERTIME\nChoose one of your Companies.\nPay the Workers' Wages\nand perform a Production.",
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'produce',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'employed-worker',
+					target: 'self',
+				},
+				source: 'self',
+				target: 'other',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-foreign-investment-program-2',
@@ -1772,8 +2144,26 @@ const stateActionCards = [
 		category: 'base',
 		name: 'HIGHER VAT',
 		content: 'HIGHER VAT\nEach player pays 15¥ to the State.\nThen, get 1) to 2 classes.\n6',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'money',
+				action: 'tax',
+				amount: 15,
+				source: 'all',
+				target: 'self',
+			},
+			{
+				type: 'state:legitimacy-increment',
+				className: 'chosen',
+				value: 1,
+			},
+			{
+				type: 'state:legitimacy-increment',
+				className: 'chosen',
+				value: 1,
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-shift-focus-2',
@@ -1901,8 +2291,21 @@ const stateActionCards = [
 		category: 'base',
 		name: 'AGENDA-SETTING',
 		content: 'AGENDA-SETTING\nGet 1 Personal @ for each Policy\nthat matches your current\nPolitical Agenda.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'gain',
+				resource: 'influence',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'matching-policy',
+				},
+				source: 'supply',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-a-matter-of-high-priority-2',
@@ -1959,8 +2362,27 @@ const stateActionCards = [
 			'Look at the top 2 Event cards and,\n' +
 			'if able, place one on the board.\n' +
 			'Then, perform an Event Action.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'card',
+				action: 'reveal',
+				amount: 2,
+				deck: 'event-cards',
+			},
+			{
+				type: 'event',
+				action: 'place',
+				amount: 1,
+				target: 'board',
+			},
+			{
+				type: 'event',
+				action: 'perform',
+				amount: 1,
+				target: 'event',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-allowances-and-subsidies-2',
@@ -1990,8 +2412,21 @@ const stateActionCards = [
 		category: 'base',
 		name: 'ALLOWANCES AND SUBSIDIES',
 		content: 'ALLOWANCES AND SUBSIDIES\nProvide 20¥ to a class.\nGeta @) for that class.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'money',
+				action: 'provide',
+				amount: 20,
+				source: 'self',
+				target: 'any',
+			},
+			{
+				type: 'state:legitimacy-increment',
+				className: 'chosen',
+				value: 1,
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'state-action-foreign-financial-assistance-2',
@@ -2147,8 +2582,45 @@ const stateActionCards = [
 		category: 'base',
 		name: 'GEOPOLITICAL SUPPORT',
 		content: 'GEOPOLITICAL SUPPORT\nGet money based on the current\nForeign Trade Policy:\n:15¥\n|: 30¥\n:45¥7',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 15,
+				source: 'supply',
+				target: 'self',
+				condition: {
+					type: 'policy',
+					mode: 'any',
+					policies: ['6A'],
+				},
+			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 30,
+				source: 'supply',
+				target: 'self',
+				condition: {
+					type: 'policy',
+					mode: 'any',
+					policies: ['6B'],
+				},
+			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 45,
+				source: 'supply',
+				target: 'self',
+				condition: {
+					type: 'policy',
+					mode: 'any',
+					policies: ['6C'],
+				},
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 ] satisfies StateActionCardsCard[];
 

@@ -37,8 +37,31 @@ const capitalistClassActionCards = [
 				policies: ['4A'],
 			},
 		],
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'healthcare',
+				amount: {
+					type: 'up-to',
+					amount: 9,
+				},
+				source: 'self',
+				target: 'state',
+			},
+			{
+				type: 'money',
+				action: 'receive',
+				amount: {
+					type: 'per',
+					amount: 10,
+					per: 'available',
+				},
+				source: 'state',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-higher-education-program-1',
@@ -68,8 +91,31 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'HIGHER EDUCATION PROGRAM',
 		content: 'HIGHER EDUCATION PROGRAM\nSell up to 9\nto the State for 10¥ each.\nZz\n/3',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'education',
+				amount: {
+					type: 'up-to',
+					amount: 9,
+				},
+				source: 'self',
+				target: 'state',
+			},
+			{
+				type: 'money',
+				action: 'receive',
+				amount: {
+					type: 'per',
+					amount: 10,
+					per: 'available',
+				},
+				source: 'state',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-push-political-agenda-1',
@@ -98,8 +144,24 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'PUSH POLITICAL AGENDA',
 		content: 'PUSH POLITICAL AGENDA\nPay 25¥ to Propose 2 Bills.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'money',
+				action: 'pay',
+				amount: 25,
+				source: 'self',
+				target: 'supply',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-foreign-recruitment-1',
@@ -262,8 +324,22 @@ const capitalistClassActionCards = [
 				policies: ['2B', '2C'],
 			},
 		],
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'adjust-wages',
+				target: 'company',
+				amount: 3,
+			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: 'all',
+				source: 'company',
+				target: 'company',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-global-branding-1',
@@ -388,8 +464,27 @@ const capitalistClassActionCards = [
 			'Voting cubes and return all\n' +
 			'revealed cubes to the bag.\n' +
 			'4',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'vote',
+				action: 'reveal-cubes',
+				amount: 3,
+				target: 'bag',
+			},
+			{
+				type: 'vote',
+				action: 'replace-cubes',
+				amount: 3,
+				target: 'bag',
+			},
+			{
+				type: 'vote',
+				action: 'return-cubes',
+				amount: 'all',
+				target: 'bag',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-offshore-companies-1',
@@ -417,8 +512,21 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'OFFSHORE COMPANIES',
 		content: 'OFFSHORE COMPANIES\nMove half of your Revenue\nto your Capital (rounded down).',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'capital',
+				action: 'move-revenue-to-capital',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 2,
+					of: 'revenue',
+					round: 'down',
+				},
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-foreign-market-insight-1',
@@ -691,8 +799,22 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'BUSINESS EXPANSION',
 		content: 'BUSINESS EXPANSION\nBuild 2 Companies.\nAdd an equal number of new\nCompanies to the Market.\n= 4',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'build',
+				amount: 2,
+				target: 'self',
+			},
+			{
+				type: 'card',
+				action: 'draw',
+				amount: 2,
+				deck: 'capitalist-company-market',
+				target: 'market',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-investment-opportunities-1',
@@ -817,8 +939,30 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'FAKE NEWS',
 		content: 'FAKE NEWS\nDraw 6 Voting cubes from\nthe bag. Remove up to 4 of them\nand return the rest to the bag.\n=',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'vote',
+				action: 'draw-cubes',
+				amount: 6,
+				target: 'bag',
+			},
+			{
+				type: 'vote',
+				action: 'remove-cubes',
+				amount: {
+					type: 'up-to',
+					amount: 4,
+				},
+				target: 'bag',
+			},
+			{
+				type: 'vote',
+				action: 'return-cubes',
+				amount: 'all',
+				target: 'bag',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-global-food-crisis-1',
@@ -949,8 +1093,41 @@ const capitalistClassActionCards = [
 			'The other half is paid by the State.\n' +
 			'sea\n' +
 			'a]',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'build',
+				industry: 'agriculture-or-luxury',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 2,
+					of: 'cost',
+					round: 'up',
+				},
+				source: 'self',
+				target: 'supply',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 2,
+					of: 'cost',
+					round: 'down',
+				},
+				source: 'state',
+				target: 'supply',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-bid-rigging-1',
@@ -980,8 +1157,39 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'BID RIGGING',
 		content: 'BID RIGGING\nSell up to 6 [)\nto the State for 10¥ each.\nThen, get 1 @\n4x\nOO\nBS',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'luxury',
+				amount: {
+					type: 'up-to',
+					amount: 6,
+				},
+				source: 'self',
+				target: 'state',
+			},
+			{
+				type: 'money',
+				action: 'receive',
+				amount: {
+					type: 'per',
+					amount: 10,
+					per: 'available',
+				},
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'resource',
+				action: 'gain',
+				resource: 'influence',
+				amount: 1,
+				source: 'supply',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-buy-private-island-1',
@@ -1010,8 +1218,28 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'BUY PRIVATE ISLAND',
 		content: 'BUY PRIVATE ISLAND\nPay 50¥ from your Capital\nto the State.\nGain 7.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'capital',
+				action: 'spend',
+				amount: 50,
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: 50,
+				source: 'self',
+				target: 'state',
+			},
+			{
+				type: 'victory-points',
+				action: 'gain',
+				amount: 7,
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-exit-strategy-1',
@@ -1039,8 +1267,25 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'EXIT STRATEGY',
 		content: 'EXIT STRATEGY\nSell one of your Companies\nwithout 2 for twice its cost.\nSD a',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'sell',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'receive',
+				amount: {
+					type: 'per',
+					amount: 2,
+					per: 'company',
+				},
+				source: 'supply',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-business-grants-1',
@@ -1279,8 +1524,26 @@ const capitalistClassActionCards = [
 		name: 'EXTRA SHIFT',
 		content:
 			'EXTRA SHIFT\nChoose one of your\nnon-automated Companies.\nPay the workers’ wages\nand perform a Production.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'produce',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'employed-worker',
+					target: 'self',
+				},
+				source: 'self',
+				target: 'other',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-taxed-enough-already-1',
@@ -1406,8 +1669,47 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'TECHNOLOGICAL PROGRESS',
 		content: 'TECHNOLOGICAL PROGRESS\nPay 20¥ to get a &&\nOR\nPay 45¥ to get 2 &&',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'choice',
+				options: ['Pay 20 money to get 1 automation token'],
+				stateEffects: [
+					{
+						type: 'money',
+						action: 'pay',
+						amount: 20,
+						source: 'self',
+						target: 'supply',
+					},
+					{
+						type: 'company',
+						action: 'add-automation',
+						amount: 1,
+						target: 'company',
+					},
+				],
+			},
+			{
+				type: 'choice',
+				options: ['Pay 45 money to get 2 automation tokens'],
+				stateEffects: [
+					{
+						type: 'money',
+						action: 'pay',
+						amount: 45,
+						source: 'self',
+						target: 'supply',
+					},
+					{
+						type: 'company',
+						action: 'add-automation',
+						amount: 2,
+						target: 'company',
+					},
+				],
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-trade-protectionism-lobby-1',
@@ -1479,8 +1781,43 @@ const capitalistClassActionCards = [
 			'Agricultural industry. If isin\n' +
 			'effect, also count the Companies\n' +
 			'in the Luxury industry.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				amount: {
+					type: 'per',
+					amount: 2,
+					per: 'company',
+					target: 'self',
+				},
+				target: 'bag',
+				condition: {
+					type: 'companies',
+					owner: 'self',
+					industry: 'food',
+					count: 1,
+					operator: '>=',
+				},
+			},
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				amount: {
+					type: 'per',
+					amount: 2,
+					per: 'company',
+					target: 'self',
+				},
+				target: 'bag',
+				condition: {
+					type: 'policy',
+					mode: 'any',
+					policies: ['6A'],
+				},
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-public-opinion-polling-1',
@@ -1649,8 +1986,22 @@ const capitalistClassActionCards = [
 				policies: ['2B', '2C'],
 			},
 		],
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'adjust-wages',
+				target: 'company',
+				amount: 3,
+			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: 'all',
+				source: 'company',
+				target: 'company',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-exit-strategy-2',
@@ -1678,8 +2029,25 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'EXIT STRATEGY',
 		content: 'EXIT STRATEGY\nSell one of your Companies\nwithout 2 for twice its cost.\nSg',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'sell',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'receive',
+				amount: {
+					type: 'per',
+					amount: 2,
+					per: 'company',
+				},
+				source: 'supply',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-technological-progress-2',
@@ -1708,8 +2076,47 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'TECHNOLOGICAL PROGRESS',
 		content: 'TECHNOLOGICAL PROGRESS\nPay 20¥ to get a &&\nOR\nPay 45¥ to get 2 &&',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'choice',
+				options: ['Pay 20 money to get 1 automation token'],
+				stateEffects: [
+					{
+						type: 'money',
+						action: 'pay',
+						amount: 20,
+						source: 'self',
+						target: 'supply',
+					},
+					{
+						type: 'company',
+						action: 'add-automation',
+						amount: 1,
+						target: 'company',
+					},
+				],
+			},
+			{
+				type: 'choice',
+				options: ['Pay 45 money to get 2 automation tokens'],
+				stateEffects: [
+					{
+						type: 'money',
+						action: 'pay',
+						amount: 45,
+						source: 'self',
+						target: 'supply',
+					},
+					{
+						type: 'company',
+						action: 'add-automation',
+						amount: 2,
+						target: 'company',
+					},
+				],
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-technological-progress-3',
@@ -1738,8 +2145,47 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'TECHNOLOGICAL PROGRESS',
 		content: 'TECHNOLOGICAL PROGRESS\nPay 20¥ to get a &&\nOR\nPay 45¥ to get 2 &&',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'choice',
+				options: ['Pay 20 money to get 1 automation token'],
+				stateEffects: [
+					{
+						type: 'money',
+						action: 'pay',
+						amount: 20,
+						source: 'self',
+						target: 'supply',
+					},
+					{
+						type: 'company',
+						action: 'add-automation',
+						amount: 1,
+						target: 'company',
+					},
+				],
+			},
+			{
+				type: 'choice',
+				options: ['Pay 45 money to get 2 automation tokens'],
+				stateEffects: [
+					{
+						type: 'money',
+						action: 'pay',
+						amount: 45,
+						source: 'self',
+						target: 'supply',
+					},
+					{
+						type: 'company',
+						action: 'add-automation',
+						amount: 2,
+						target: 'company',
+					},
+				],
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-foreign-recruitment-2',
@@ -1934,8 +2380,22 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'BUSINESS EXPANSION',
 		content: 'BUSINESS EXPANSION\nBuild 2 Companies.\nAdd an equal number of new\nCompanies to the Market.\nng',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'build',
+				amount: 2,
+				target: 'self',
+			},
+			{
+				type: 'card',
+				action: 'draw',
+				amount: 2,
+				deck: 'capitalist-company-market',
+				target: 'market',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-extra-shift-2',
@@ -1989,8 +2449,26 @@ const capitalistClassActionCards = [
 		name: 'EXTRA SHIFT',
 		content:
 			'EXTRA SHIFT\nChoose one of your\nnon-automated Companies.\nPay the workers’ wages\nand perform a Production.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'produce',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'employed-worker',
+					target: 'self',
+				},
+				source: 'self',
+				target: 'other',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'capitalist-class-action-foreign-market-insight-2',
@@ -2255,8 +2733,21 @@ const capitalistClassActionCards = [
 		category: 'base',
 		name: 'OFFSHORE COMPANIES',
 		content: 'OFFSHORE COMPANIES\nMove half of your Revenue\nto your Capital (rounded down).',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'capital',
+				action: 'move-revenue-to-capital',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 2,
+					of: 'revenue',
+					round: 'down',
+				},
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 ] satisfies CapitalistClassActionCardsCard[];
 

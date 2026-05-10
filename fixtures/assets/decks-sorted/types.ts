@@ -108,15 +108,23 @@ export type StateEffectAmount =
 				| 'trade-union'
 				| 'matching-policy'
 				| 'loan'
-				| 'proposed-bill';
-			target?: TargetRole;
+				| 'proposed-bill'
+				| 'available';
+			target?: TargetRole | 'chosen';
+	  }
+	| {
+			type: 'fraction';
+			numerator: number;
+			denominator: number;
+			of: 'cost' | 'population' | 'revenue';
+			round?: 'up' | 'down';
 	  };
 
 export type StateEffect =
 	| {
 			type: 'resource';
 			action: 'gain' | 'spend' | 'pay' | 'provide' | 'receive' | 'buy' | 'sell' | 'discard' | 'store';
-			resource: Resource | CompanyTradeableResource;
+			resource: Resource | CompanyTradeableResource | 'any';
 			amount: StateEffectAmount;
 			target?: TargetRole | 'foreign-market' | 'market';
 			source?: TargetRole | 'foreign-market' | 'bank' | 'supply';
@@ -126,7 +134,7 @@ export type StateEffect =
 			type: 'money';
 			action: 'gain' | 'spend' | 'pay' | 'provide' | 'receive' | 'take-loan' | 'repay-loan' | 'tax';
 			amount: StateEffectAmount;
-			target?: TargetRole;
+			target?: TargetRole | 'supply';
 			source?: TargetRole | 'bank' | 'supply';
 			condition?: CardRequirement;
 	  }
@@ -148,12 +156,12 @@ export type StateEffect =
 	  }
 	| {
 			type: 'state:legitimacy-increment';
-			className: PlayerClass;
+			className: PlayerClass | 'chosen';
 			value: StateEffectAmount;
 	  }
 	| {
 			type: 'state:legitimacy-decrement';
-			className: PlayerClass;
+			className: PlayerClass | 'chosen';
 			value: StateEffectAmount;
 	  }
 	| {
@@ -170,6 +178,7 @@ export type StateEffect =
 			action:
 				| 'build'
 				| 'sell'
+				| 'transfer'
 				| 'operate'
 				| 'produce'
 				| 'increase-production'
@@ -178,8 +187,9 @@ export type StateEffect =
 				| 'add-automation'
 				| 'remove-automation'
 				| 'strike';
-			industry?: Industry | 'any';
+			industry?: Industry | 'any' | 'agriculture-or-luxury';
 			target?: TargetRole | 'company' | 'market';
+			source?: TargetRole | 'company' | 'market';
 			amount?: StateEffectAmount;
 			condition?: CardRequirement;
 	  }
@@ -188,14 +198,44 @@ export type StateEffect =
 			action: 'draw' | 'discard' | 'reveal' | 'search' | 'shuffle' | 'play' | 'remove-from-game';
 			deck?: string;
 			amount?: StateEffectAmount;
-			target?: TargetRole;
+			target?: TargetRole | 'market';
 			condition?: CardRequirement;
 	  }
 	| {
 			type: 'vote';
-			action: 'add-cubes' | 'remove-cubes' | 'spend-influence' | 'immediate-vote' | 'change-result';
+			action:
+				| 'add-cubes'
+				| 'remove-cubes'
+				| 'spend-influence'
+				| 'immediate-vote'
+				| 'change-result'
+				| 'draw-cubes'
+				| 'reveal-cubes'
+				| 'replace-cubes'
+				| 'return-cubes';
 			target?: TargetRole | 'bag';
 			amount?: StateEffectAmount;
+			condition?: CardRequirement;
+	  }
+	| {
+			type: 'prosperity';
+			action: 'gain' | 'lose';
+			amount: StateEffectAmount;
+			target?: TargetRole;
+			condition?: CardRequirement;
+	  }
+	| {
+			type: 'capital';
+			action: 'move-revenue-to-capital' | 'spend';
+			amount: StateEffectAmount;
+			target?: Extract<RoleName, 'capitalist'> | 'self';
+			condition?: CardRequirement;
+	  }
+	| {
+			type: 'event';
+			action: 'perform' | 'place';
+			amount?: StateEffectAmount;
+			target?: 'event' | 'board';
 			condition?: CardRequirement;
 	  }
 	| {

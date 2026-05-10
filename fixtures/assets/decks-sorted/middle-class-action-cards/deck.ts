@@ -59,8 +59,33 @@ const middleClassActionCards = [
 			'(rounded up).\n' +
 			'REQUIREMENT\n' +
 			'—',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'healthcare',
+				amount: {
+					type: 'up-to',
+					amount: 'population',
+				},
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 2,
+					of: 'cost',
+					round: 'up',
+				},
+				source: 'self',
+				target: 'state',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-import-subsidy-1',
@@ -117,8 +142,37 @@ const middleClassActionCards = [
 			'Foreign Market, up to your Popu-\n' +
 			'lation, without paying any Tariffs.\n' +
 			'— a Z',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'choice',
+				options: ['Buy food or luxury from the Foreign Market without tariffs'],
+				stateEffects: [
+					{
+						type: 'resource',
+						action: 'buy',
+						resource: 'food',
+						amount: {
+							type: 'up-to',
+							amount: 'population',
+						},
+						source: 'foreign-market',
+						target: 'self',
+					},
+					{
+						type: 'resource',
+						action: 'buy',
+						resource: 'luxury',
+						amount: {
+							type: 'up-to',
+							amount: 'population',
+						},
+						source: 'foreign-market',
+						target: 'self',
+					},
+				],
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-import-subsidy-2',
@@ -175,8 +229,37 @@ const middleClassActionCards = [
 			'Foreign Market, up to your Popu-\n' +
 			'lation, without paying any Tariffs.\n' +
 			'— a Z',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'choice',
+				options: ['Buy food or luxury from the Foreign Market without tariffs'],
+				stateEffects: [
+					{
+						type: 'resource',
+						action: 'buy',
+						resource: 'food',
+						amount: {
+							type: 'up-to',
+							amount: 'population',
+						},
+						source: 'foreign-market',
+						target: 'self',
+					},
+					{
+						type: 'resource',
+						action: 'buy',
+						resource: 'luxury',
+						amount: {
+							type: 'up-to',
+							amount: 'population',
+						},
+						source: 'foreign-market',
+						target: 'self',
+					},
+				],
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-small-business-grant-1',
@@ -1289,8 +1372,30 @@ const middleClassActionCards = [
 		category: 'base',
 		name: 'FAKE NEWS',
 		content: 'FAKE NEWS\nDraw 6 Voting cubes from\nthe bag. Remove up to 4 of them\nand return the rest to the bag.\n=',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'vote',
+				action: 'draw-cubes',
+				amount: 6,
+				target: 'bag',
+			},
+			{
+				type: 'vote',
+				action: 'remove-cubes',
+				amount: {
+					type: 'up-to',
+					amount: 4,
+				},
+				target: 'bag',
+			},
+			{
+				type: 'vote',
+				action: 'return-cubes',
+				amount: 'all',
+				target: 'bag',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-specialization-1',
@@ -1529,8 +1634,33 @@ const middleClassActionCards = [
 		category: 'base',
 		name: 'STATE SCHOLARSHIP',
 		content: 'STATE SCHOLARSHIP\nBuy from the State, up to your\nPopulation, paying half the cost\n(rounded up).\n_ id',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'education',
+				amount: {
+					type: 'up-to',
+					amount: 'population',
+				},
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 2,
+					of: 'cost',
+					round: 'up',
+				},
+				source: 'self',
+				target: 'state',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-highlight-social-issues-1',
@@ -1559,8 +1689,24 @@ const middleClassActionCards = [
 		category: 'base',
 		name: 'HIGHLIGHT SOCIAL ISSUES',
 		content: 'HIGHLIGHT SOCIAL ISSUES\nBuy 3 @ from the State for 15¥.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'influence',
+				amount: 3,
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: 15,
+				source: 'self',
+				target: 'state',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-health-crisis-1',
@@ -1590,8 +1736,31 @@ const middleClassActionCards = [
 		category: 'base',
 		name: 'HEALTH CRISIS',
 		content: 'HEALTH CRISIS\nSell up to 6\nto the State for 10¥ each.\n/3\ny',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'healthcare',
+				amount: {
+					type: 'up-to',
+					amount: 6,
+				},
+				source: 'self',
+				target: 'state',
+			},
+			{
+				type: 'money',
+				action: 'receive',
+				amount: {
+					type: 'per',
+					amount: 10,
+					per: 'available',
+				},
+				source: 'state',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-unemployment-initiative-program-1',
@@ -1728,8 +1897,31 @@ const middleClassActionCards = [
 		category: 'base',
 		name: 'HIGHER EDUCATION PROGRAM',
 		content: 'HIGHER EDUCATION PROGRAM\nSell up to 6\nto the State for 10¥ each.\n/3',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'sell',
+				resource: 'education',
+				amount: {
+					type: 'up-to',
+					amount: 6,
+				},
+				source: 'self',
+				target: 'state',
+			},
+			{
+				type: 'money',
+				action: 'receive',
+				amount: {
+					type: 'per',
+					amount: 10,
+					per: 'available',
+				},
+				source: 'state',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-voice-of-middle-class-workers-1',
@@ -1800,8 +1992,37 @@ const middleClassActionCards = [
 			'Companies where your Workers\n' +
 			'are Employed.\n' +
 			'i',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				amount: 2,
+				target: 'bag',
+			},
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'company',
+					target: 'state',
+				},
+				target: 'bag',
+			},
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'company',
+					target: 'capitalist',
+				},
+				target: 'bag',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-new-theme-park-1',
@@ -1830,8 +2051,26 @@ const middleClassActionCards = [
 		category: 'base',
 		name: 'NEW THEME PARK',
 		content: 'NEW THEME PARK\nPay 6¥ per Population.\nGain 1 Prosperity.\n—',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'per',
+					amount: 6,
+					per: 'population',
+				},
+				source: 'self',
+				target: 'supply',
+			},
+			{
+				type: 'prosperity',
+				action: 'gain',
+				amount: 1,
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-interest-groups-1',
@@ -1893,8 +2132,27 @@ const middleClassActionCards = [
 			'cubes. Replace them with your\n' +
 			'Voting cubes and return all\n' +
 			'revealed cubes to the bag.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'vote',
+				action: 'reveal-cubes',
+				amount: 3,
+				target: 'bag',
+			},
+			{
+				type: 'vote',
+				action: 'replace-cubes',
+				amount: 3,
+				target: 'bag',
+			},
+			{
+				type: 'vote',
+				action: 'return-cubes',
+				amount: 'all',
+				target: 'bag',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-export-subsidy-1',
@@ -2120,8 +2378,33 @@ const middleClassActionCards = [
 			'and 10¥ for each Skilled Worker\n' +
 			'removed this way.\n' +
 			'7',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'worker',
+				action: 'remove',
+				amount: {
+					type: 'up-to',
+					amount: 2,
+				},
+				workerType: 'any',
+				source: 'unemployed-workers',
+			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 5,
+				source: 'supply',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: 10,
+				source: 'supply',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-labor-market-deregulation-1',
@@ -2201,8 +2484,30 @@ const middleClassActionCards = [
 				policies: ['2B', '2C'],
 			},
 		],
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: 'all',
+				workerType: 'any',
+				source: 'unemployed-workers',
+				target: 'company',
+			},
+			{
+				type: 'worker',
+				action: 'swap',
+				amount: 'all',
+				workerType: 'any',
+				source: 'company',
+				target: 'company',
+				condition: {
+					type: 'policy',
+					mode: 'any',
+					policies: ['2A'],
+				},
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-personal-consumption-1',
@@ -2266,8 +2571,44 @@ const middleClassActionCards = [
 			'Buy a good or service from\n' +
 			'a single source, up to twice\n' +
 			'your Population.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'choice',
+				options: ['Buy one good or service from any number of sources, up to Population from each'],
+				stateEffects: [
+					{
+						type: 'resource',
+						action: 'buy',
+						resource: 'any',
+						amount: {
+							type: 'up-to',
+							amount: 'population',
+						},
+						source: 'any',
+						target: 'self',
+					},
+				],
+			},
+			{
+				type: 'choice',
+				options: ['Buy one good or service from one source, up to twice Population'],
+				stateEffects: [
+					{
+						type: 'resource',
+						action: 'buy',
+						resource: 'any',
+						amount: {
+							type: 'per',
+							amount: 2,
+							per: 'population',
+						},
+						source: 'any',
+						target: 'self',
+					},
+				],
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-personal-consumption-2',
@@ -2331,8 +2672,44 @@ const middleClassActionCards = [
 			'Buy a good or service from\n' +
 			'a single source, up to twice\n' +
 			'your Population.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'choice',
+				options: ['Buy one good or service from any number of sources, up to Population from each'],
+				stateEffects: [
+					{
+						type: 'resource',
+						action: 'buy',
+						resource: 'any',
+						amount: {
+							type: 'up-to',
+							amount: 'population',
+						},
+						source: 'any',
+						target: 'self',
+					},
+				],
+			},
+			{
+				type: 'choice',
+				options: ['Buy one good or service from one source, up to twice Population'],
+				stateEffects: [
+					{
+						type: 'resource',
+						action: 'buy',
+						resource: 'any',
+						amount: {
+							type: 'per',
+							amount: 2,
+							per: 'population',
+						},
+						source: 'any',
+						target: 'self',
+					},
+				],
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-immigration-reform-1',
@@ -2605,8 +2982,37 @@ const middleClassActionCards = [
 			'Services from the State of the type\n' +
 			'produced by that Company,\n' +
 			'up to your Population.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'produce',
+				target: 'state',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'employed-worker',
+					target: 'state',
+				},
+				source: 'state',
+				target: 'other',
+			},
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'any',
+				amount: {
+					type: 'up-to',
+					amount: 'population',
+				},
+				source: 'state',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-supplemental-income-program-1',
@@ -2688,8 +3094,44 @@ const middleClassActionCards = [
 				policies: ['2B', '2C'],
 			},
 		],
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'money',
+				action: 'gain',
+				amount: {
+					type: 'per',
+					amount: 2,
+					per: 'employed-worker',
+					target: 'state',
+				},
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: {
+					type: 'per',
+					amount: 2,
+					per: 'employed-worker',
+					target: 'capitalist',
+				},
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'any',
+				amount: {
+					type: 'up-to',
+					amount: 'available',
+				},
+				source: 'any',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'middle-class-action-supplemental-income-program-2',
@@ -2771,8 +3213,44 @@ const middleClassActionCards = [
 				policies: ['2B', '2C'],
 			},
 		],
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'money',
+				action: 'gain',
+				amount: {
+					type: 'per',
+					amount: 2,
+					per: 'employed-worker',
+					target: 'state',
+				},
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'gain',
+				amount: {
+					type: 'per',
+					amount: 2,
+					per: 'employed-worker',
+					target: 'capitalist',
+				},
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'any',
+				amount: {
+					type: 'up-to',
+					amount: 'available',
+				},
+				source: 'any',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 ] satisfies MiddleClassActionCardsCard[];
 

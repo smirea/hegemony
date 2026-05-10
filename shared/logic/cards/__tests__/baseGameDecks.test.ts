@@ -60,6 +60,15 @@ describe('base game decks', () => {
 		}
 	});
 
+	test('keeps every base action card mapped to declarative state effects', () => {
+		for (const deck of Object.values(baseGameDecks.actionCardsByRole)) {
+			for (const card of deck) {
+				expect(card.stateEffectsCoverage).not.toBe('unparsed');
+				expect(card.stateEffects.length).toBeGreaterThan(0);
+			}
+		}
+	});
+
 	test('keeps setup metadata on company fixture cards', () => {
 		expect(
 			baseGameDecks.capitalistCompanies

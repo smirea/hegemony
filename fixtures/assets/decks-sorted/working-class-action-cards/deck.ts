@@ -206,8 +206,24 @@ const workingClassActionCards = [
 		category: 'base',
 		name: 'HIGHLIGHT SOCIAL ISSUES',
 		content: 'HIGHLIGHT SOCIAL ISSUES\nBuy 3 @ from the State for 15 ¥.\n4',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'influence',
+				amount: 3,
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: 15,
+				source: 'self',
+				target: 'state',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-cooperative-farm-1',
@@ -274,8 +290,23 @@ const workingClassActionCards = [
 			'(place it next to your board) and\n' +
 			'assign 3 of those Workers there.\n' +
 			'7 sy',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'build',
+				industry: 'food',
+				target: 'self',
+			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: 3,
+				workerType: 'unskilled',
+				source: 'unemployed-workers',
+				target: 'company',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-cooperative-farm-2',
@@ -342,8 +373,23 @@ const workingClassActionCards = [
 			'(place it next to your board) and\n' +
 			'assign 3 of those Workers there.\n' +
 			'7 sy',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'build',
+				industry: 'food',
+				target: 'self',
+			},
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: 3,
+				workerType: 'unskilled',
+				source: 'unemployed-workers',
+				target: 'company',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-healthcare-benefits-1',
@@ -404,8 +450,33 @@ const workingClassActionCards = [
 			'a\n' +
 			'REQUIREMENT silly,\n' +
 			'9d',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'healthcare',
+				amount: {
+					type: 'up-to',
+					amount: 'population',
+				},
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 2,
+					of: 'cost',
+					round: 'up',
+				},
+				source: 'self',
+				target: 'state',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-healthcare-benefits-2',
@@ -466,8 +537,33 @@ const workingClassActionCards = [
 			'a\n' +
 			'REQUIREMENT silly,\n' +
 			'9d',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'healthcare',
+				amount: {
+					type: 'up-to',
+					amount: 'population',
+				},
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 2,
+					of: 'cost',
+					round: 'up',
+				},
+				source: 'self',
+				target: 'state',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-healthcare-movement-1',
@@ -543,8 +639,17 @@ const workingClassActionCards = [
 		category: 'base',
 		name: 'NEED FOR CHANGE',
 		content: 'NEED FOR CHANGE\nPropose 2 Bills.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-need-for-change-2',
@@ -571,8 +676,17 @@ const workingClassActionCards = [
 		category: 'base',
 		name: 'NEED FOR CHANGE',
 		content: 'NEED FOR CHANGE\nPropose 2 Bills.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-need-for-change-3',
@@ -599,8 +713,17 @@ const workingClassActionCards = [
 		category: 'base',
 		name: 'NEED FOR CHANGE',
 		content: 'NEED FOR CHANGE\nPropose 2 Bills.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+			{
+				type: 'policy',
+				action: 'propose',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-labor-market-deregulation-1',
@@ -680,8 +803,30 @@ const workingClassActionCards = [
 				policies: ['2B', '2C'],
 			},
 		],
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: 'all',
+				workerType: 'any',
+				source: 'unemployed-workers',
+				target: 'company',
+			},
+			{
+				type: 'worker',
+				action: 'swap',
+				amount: 'all',
+				workerType: 'any',
+				source: 'company',
+				target: 'company',
+				condition: {
+					type: 'policy',
+					mode: 'any',
+					policies: ['2A'],
+				},
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-labor-market-deregulation-2',
@@ -761,8 +906,30 @@ const workingClassActionCards = [
 				policies: ['2B', '2C'],
 			},
 		],
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'worker',
+				action: 'assign',
+				amount: 'all',
+				workerType: 'any',
+				source: 'unemployed-workers',
+				target: 'company',
+			},
+			{
+				type: 'worker',
+				action: 'swap',
+				amount: 'all',
+				workerType: 'any',
+				source: 'company',
+				target: 'company',
+				condition: {
+					type: 'policy',
+					mode: 'any',
+					policies: ['2A'],
+				},
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-migration-1',
@@ -1113,8 +1280,19 @@ const workingClassActionCards = [
 		category: 'base',
 		name: 'PROLETARIANS OF THE WORLD, UNITE!',
 		content: 'PROLETARIANS OF THE WORLD, UNITE!\nAdd Voting cubes to the bag\nequal to your Population.\nSea eae',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'population',
+				},
+				target: 'bag',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-proletarians-of-the-world-unite-2',
@@ -1169,8 +1347,19 @@ const workingClassActionCards = [
 		category: 'base',
 		name: 'PROLETARIANS OF THE WORLD, UNITE!',
 		content: 'PROLETARIANS OF THE WORLD, UNITE!\nAdd Voting cubes to the bag\nequal to your Population.\nSea eae',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'vote',
+				action: 'add-cubes',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'population',
+				},
+				target: 'bag',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-boost-domestic-tourism-1',
@@ -1235,8 +1424,46 @@ const workingClassActionCards = [
 			'cost (rounded up). The other half\n' +
 			'is paid by the State.\n' +
 			'a',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'luxury',
+				amount: {
+					type: 'up-to',
+					amount: 'population',
+				},
+				source: 'other',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 2,
+					of: 'cost',
+					round: 'up',
+				},
+				source: 'self',
+				target: 'other',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 2,
+					of: 'cost',
+					round: 'down',
+				},
+				source: 'state',
+				target: 'other',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-boost-domestic-tourism-2',
@@ -1299,8 +1526,46 @@ const workingClassActionCards = [
 			'your Population, paying half the\n' +
 			'cost (rounded up). The other half\n' +
 			'is paid by the State.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'luxury',
+				amount: {
+					type: 'up-to',
+					amount: 'population',
+				},
+				source: 'other',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 2,
+					of: 'cost',
+					round: 'up',
+				},
+				source: 'self',
+				target: 'other',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 2,
+					of: 'cost',
+					round: 'down',
+				},
+				source: 'state',
+				target: 'other',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-public-opinion-polling-1',
@@ -1699,8 +1964,37 @@ const workingClassActionCards = [
 			'State of the type produced by that\n' +
 			'Company, up to your Population.\n' +
 			'nc (',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'produce',
+				target: 'state',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'employed-worker',
+					target: 'state',
+				},
+				source: 'state',
+				target: 'other',
+			},
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'any',
+				amount: {
+					type: 'up-to',
+					amount: 'population',
+				},
+				source: 'state',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-extra-shift-2',
@@ -1778,8 +2072,37 @@ const workingClassActionCards = [
 			'State of the type produced by that\n' +
 			'Company, up to your Population.\n' +
 			'nc (',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'company',
+				action: 'produce',
+				target: 'state',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'per',
+					amount: 1,
+					per: 'employed-worker',
+					target: 'state',
+				},
+				source: 'state',
+				target: 'other',
+			},
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'any',
+				amount: {
+					type: 'up-to',
+					amount: 'population',
+				},
+				source: 'state',
+				target: 'self',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-affordable-housing-1',
@@ -1819,8 +2142,47 @@ const workingClassActionCards = [
 		category: 'base',
 		name: 'AFFORDABLE HOUSING',
 		content: 'AFFORDABLE HOUSING\nGive 20¥ to the Capitalist.\nGet 5.\nGive 10¥ to the Middle-Class.\nGet 3.\n- OS a”',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'choice',
+				options: ['Pay Capitalist Class 20 money'],
+				stateEffects: [
+					{
+						type: 'money',
+						action: 'pay',
+						amount: 20,
+						source: 'self',
+						target: 'capitalist',
+					},
+					{
+						type: 'victory-points',
+						action: 'gain',
+						amount: 5,
+						target: 'self',
+					},
+				],
+			},
+			{
+				type: 'choice',
+				options: ['Pay Middle Class 10 money'],
+				stateEffects: [
+					{
+						type: 'money',
+						action: 'pay',
+						amount: 10,
+						source: 'self',
+						target: 'middleClass',
+					},
+					{
+						type: 'victory-points',
+						action: 'gain',
+						amount: 3,
+						target: 'self',
+					},
+				],
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-immigration-reform-1',
@@ -2146,8 +2508,30 @@ const workingClassActionCards = [
 		name: 'FAKE NEWS',
 		content:
 			'FAKE NEWS\nDraw 6 Voting cubes from\nthe bag. Remove up to 4 of them\nand return the rest to the bag.\nSc',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'vote',
+				action: 'draw-cubes',
+				amount: 6,
+				target: 'bag',
+			},
+			{
+				type: 'vote',
+				action: 'remove-cubes',
+				amount: {
+					type: 'up-to',
+					amount: 4,
+				},
+				target: 'bag',
+			},
+			{
+				type: 'vote',
+				action: 'return-cubes',
+				amount: 'all',
+				target: 'bag',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-general-strike-2',
@@ -2257,8 +2641,33 @@ const workingClassActionCards = [
 		category: 'base',
 		name: 'STATE SCHOLARSHIP',
 		content: 'STATE SCHOLARSHIP\nBuy from the State,\nup to your Population, paying\nhalf the cost (rounded up).',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'education',
+				amount: {
+					type: 'up-to',
+					amount: 'population',
+				},
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 2,
+					of: 'cost',
+					round: 'up',
+				},
+				source: 'self',
+				target: 'state',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-state-scholarship-2',
@@ -2297,8 +2706,33 @@ const workingClassActionCards = [
 		category: 'base',
 		name: 'STATE SCHOLARSHIP',
 		content: 'STATE SCHOLARSHIP\nBuy from the State,\nup to your Population, paying\nhalf the cost (rounded up).',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'resource',
+				action: 'buy',
+				resource: 'education',
+				amount: {
+					type: 'up-to',
+					amount: 'population',
+				},
+				source: 'state',
+				target: 'self',
+			},
+			{
+				type: 'money',
+				action: 'pay',
+				amount: {
+					type: 'fraction',
+					numerator: 1,
+					denominator: 2,
+					of: 'cost',
+					round: 'up',
+				},
+				source: 'self',
+				target: 'state',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 	{
 		id: 'working-class-action-radical-reforms-1',
@@ -2594,8 +3028,27 @@ const workingClassActionCards = [
 			'cubes. Replace them with your\n' +
 			'Voting cubes and return all\n' +
 			'revealed cubes to the bag.',
-		stateEffects: [],
-		stateEffectsCoverage: 'unparsed',
+		stateEffects: [
+			{
+				type: 'vote',
+				action: 'reveal-cubes',
+				amount: 3,
+				target: 'bag',
+			},
+			{
+				type: 'vote',
+				action: 'replace-cubes',
+				amount: 3,
+				target: 'bag',
+			},
+			{
+				type: 'vote',
+				action: 'return-cubes',
+				amount: 'all',
+				target: 'bag',
+			},
+		],
+		stateEffectsCoverage: 'complete',
 	},
 ] satisfies WorkingClassActionCardsCard[];
 
